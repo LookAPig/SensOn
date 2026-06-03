@@ -610,9 +610,6 @@
           {%- when 'see_what_people_think' -%}
             {%- render 'product-block-see-what-people-think', block: block -%}
 
-          {%- when 'customer_reviews' -%}
-            {%- render 'product-block-customer-reviews', block: block, section: section -%}
-
           {%- when 'share_buttons' -%}
             <share-button>
               <button class="h-stack gap-2 justify-{{ alignment }} share-buttons--native" hidden>
@@ -628,40 +625,38 @@
         {%- endcase -%}
       {%- endcapture -%}
 
-      {%- unless block.type == 'customer_review_item' -%}
-        {%- if allow_block_group and inside_block_group_context == false -%}
-          {%- assign inside_block_group_context = true -%}
-          <div class="product-info__block-group {{ block_group_class }}" data-group-type="{{ block_group_name }}">
-        {%- endif -%}
+      {%- if allow_block_group and inside_block_group_context == false -%}
+        {%- assign inside_block_group_context = true -%}
+        <div class="product-info__block-group {{ block_group_class }}" data-group-type="{{ block_group_name }}">
+      {%- endif -%}
 
-        {%- liquid
-          assign block_types_allowing_partial_rerender = 'sku,badges,price,payment_terms,volume_pricing,variant_picker,inventory,buy_buttons,pickup_availability,liquid' | split: ','
-          assign allow_partial_rerender = false
+      {%- liquid
+        assign block_types_allowing_partial_rerender = 'sku,badges,price,payment_terms,volume_pricing,variant_picker,inventory,buy_buttons,pickup_availability,liquid' | split: ','
+        assign allow_partial_rerender = false
 
-          if block_types_allowing_partial_rerender contains block.type
-            assign allow_partial_rerender = true
-          endif
-        -%}
+        if block_types_allowing_partial_rerender contains block.type
+          assign allow_partial_rerender = true
+        endif
+      -%}
 
-        <div
-          class="product-info__block-item"
-          data-block-id="{{ block.id }}"
-          data-block-type="{{ block.type | replace: '_', '-' }}"
-          {% if allow_partial_rerender %}
-            data-block-allow-rerender
-          {% endif %}
-          {% unless block.type == '@app' or block.type == 'accordion' %}
-            {{- block.shopify_attributes -}}
-          {% endunless %}
-        >
-          {{- block_content -}}
+      <div
+        class="product-info__block-item"
+        data-block-id="{{ block.id }}"
+        data-block-type="{{ block.type | replace: '_', '-' }}"
+        {% if allow_partial_rerender %}
+          data-block-allow-rerender
+        {% endif %}
+        {% unless block.type == '@app' or block.type == 'accordion' %}
+          {{- block.shopify_attributes -}}
+        {% endunless %}
+      >
+        {{- block_content -}}
+      </div>
+
+      {%- if inside_block_group_context and allow_block_group == false -%}
+        {%- assign inside_block_group_context = false -%}
         </div>
-
-        {%- if inside_block_group_context and allow_block_group == false -%}
-          {%- assign inside_block_group_context = false -%}
-          </div>
-        {%- endif -%}
-      {%- endunless -%}
+      {%- endif -%}
     {%- endfor -%}
 
     {%- if context == 'quick_buy' -%}
