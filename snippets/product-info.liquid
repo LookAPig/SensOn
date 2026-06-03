@@ -610,6 +610,9 @@
           {%- when 'see_what_people_think' -%}
             {%- render 'product-block-see-what-people-think', block: block -%}
 
+          {%- when 'reviews' -%}
+            {%- render block -%}
+
           {%- when 'share_buttons' -%}
             <share-button>
               <button class="h-stack gap-2 justify-{{ alignment }} share-buttons--native" hidden>
