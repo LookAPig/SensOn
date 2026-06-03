@@ -1,0 +1,449 @@
+{% doc %}
+  @prompt
+    This is one single section with a two-column layout.
+    
+    Left: one large image.
+    Right: title + a horizontal text tab switcher + bullet text.
+    
+    The tab switcher has 3 text tabs in one row:
+    
+    AI Mode (default active)
+    
+    Manual Mode
+    
+    Physical Buttons
+    
+    Only one tab can be active at a time.
+    
+    Active tab: white text + thin underline directly under the tab text
+    
+    Inactive tabs: gray text, no underline
+    
+    Clicking a tab switches:
+    
+    the image on the left
+    
+    the bullet text on the right
+    
+    Tabs are text-only (not buttons, not cards).
+    Background is black., The underline color is now adjustable; everything else remains the same., Do not create bullet points below each tab label; instead, include a short text description. Keep everything else unchanged., No, the description part should be in rich text format, while everything else remains the same.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-tab-section-{{ ai_gen_id }} {
+    display: block;
+    background-color: #000000;
+    width: 100%;
+  }
+
+  .ai-tab-container-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .ai-tab-image-column-{{ ai_gen_id }} {
+    position: relative;
+  }
+
+  .ai-tab-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .ai-tab-image-{{ ai_gen_id }}.active {
+    opacity: 1;
+    position: relative;
+  }
+
+  .ai-tab-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-tab-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  .ai-tab-content-column-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    color: #ffffff;
+  }
+
+  .ai-tab-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .ai-tab-switcher-{{ ai_gen_id }} {
+    display: flex;
+    gap: 40px;
+    border-bottom: 1px solid #333333;
+  }
+
+  .ai-tab-button-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    color: #666666;
+    font-size: {{ block.settings.tab_text_size }}px;
+    padding: 0 0 16px 0;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    font-family: inherit;
+  }
+
+  .ai-tab-button-{{ ai_gen_id }}.active {
+    color: #ffffff;
+  }
+
+  .ai-tab-button-{{ ai_gen_id }}.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: {{ block.settings.underline_color }};
+  }
+
+  .ai-tab-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_text_size }}px;
+    line-height: 1.6;
+    color: #cccccc;
+    display: none;
+  }
+
+  .ai-tab-description-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-tab-description-{{ ai_gen_id }} p {
+    margin: 0 0 16px 0;
+  }
+
+  .ai-tab-description-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-tab-description-{{ ai_gen_id }} ul,
+  .ai-tab-description-{{ ai_gen_id }} ol {
+    margin: 0 0 16px 0;
+    padding-left: 24px;
+  }
+
+  .ai-tab-description-{{ ai_gen_id }} li {
+    margin-bottom: 8px;
+  }
+
+  .ai-tab-description-{{ ai_gen_id }} strong {
+    font-weight: 600;
+  }
+
+  .ai-tab-description-{{ ai_gen_id }} em {
+    font-style: italic;
+  }
+
+  @media screen and (max-width: 999px) {
+    .ai-tab-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 60px 20px;
+    }
+
+    .ai-tab-switcher-{{ ai_gen_id }} {
+      gap: 24px;
+    }
+
+    .ai-tab-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-tab-button-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.tab_text_size }}px * 0.9);
+    }
+
+    .ai-tab-description-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.description_text_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<tab-switcher-{{ ai_gen_id }} class="ai-tab-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-tab-container-{{ ai_gen_id }}">
+    <div class="ai-tab-image-column-{{ ai_gen_id }}">
+      {% if block.settings.tab_1_image %}
+        <img
+          src="{{ block.settings.tab_1_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.tab_1_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.tab_1_image.width }}"
+          height="{{ block.settings.tab_1_image.height }}"
+          class="ai-tab-image-{{ ai_gen_id }} active"
+          data-tab="1"
+        >
+      {% else %}
+        <div class="ai-tab-image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.tab_2_image %}
+        <img
+          src="{{ block.settings.tab_2_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.tab_2_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.tab_2_image.width }}"
+          height="{{ block.settings.tab_2_image.height }}"
+          class="ai-tab-image-{{ ai_gen_id }}"
+          data-tab="2"
+        >
+      {% endif %}
+
+      {% if block.settings.tab_3_image %}
+        <img
+          src="{{ block.settings.tab_3_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.tab_3_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.tab_3_image.width }}"
+          height="{{ block.settings.tab_3_image.height }}"
+          class="ai-tab-image-{{ ai_gen_id }}"
+          data-tab="3"
+        >
+      {% endif %}
+    </div>
+
+    <div class="ai-tab-content-column-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-tab-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+
+      <div class="ai-tab-switcher-{{ ai_gen_id }}">
+        <button class="ai-tab-button-{{ ai_gen_id }} active" data-tab="1">
+          {{ block.settings.tab_1_label }}
+        </button>
+        <button class="ai-tab-button-{{ ai_gen_id }}" data-tab="2">
+          {{ block.settings.tab_2_label }}
+        </button>
+        <button class="ai-tab-button-{{ ai_gen_id }}" data-tab="3">
+          {{ block.settings.tab_3_label }}
+        </button>
+      </div>
+
+      {% if block.settings.tab_1_description != blank %}
+        <div class="ai-tab-description-{{ ai_gen_id }} active" data-tab="1">
+          {{ block.settings.tab_1_description }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.tab_2_description != blank %}
+        <div class="ai-tab-description-{{ ai_gen_id }}" data-tab="2">
+          {{ block.settings.tab_2_description }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.tab_3_description != blank %}
+        <div class="ai-tab-description-{{ ai_gen_id }}" data-tab="3">
+          {{ block.settings.tab_3_description }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</tab-switcher-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TabSwitcher{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.buttons = this.querySelectorAll('.ai-tab-button-{{ ai_gen_id }}');
+        this.images = this.querySelectorAll('.ai-tab-image-{{ ai_gen_id }}');
+        this.descriptions = this.querySelectorAll('.ai-tab-description-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.buttons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const tabId = button.getAttribute('data-tab');
+            this.switchTab(tabId);
+          });
+        });
+      }
+
+      switchTab(tabId) {
+        this.buttons.forEach((btn) => {
+          if (btn.getAttribute('data-tab') === tabId) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        this.images.forEach((img) => {
+          if (img.getAttribute('data-tab') === tabId) {
+            img.classList.add('active');
+          } else {
+            img.classList.remove('active');
+          }
+        });
+
+        this.descriptions.forEach((desc) => {
+          if (desc.getAttribute('data-tab') === tabId) {
+            desc.classList.add('active');
+          } else {
+            desc.classList.remove('active');
+          }
+        });
+      }
+    }
+
+    customElements.define('tab-switcher-{{ ai_gen_id }}', TabSwitcher{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Tab switcher section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Choose Your Mode"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "tab_text_size",
+      "label": "Tab text size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "description_text_size",
+      "label": "Description text size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "underline_color",
+      "label": "Active tab underline color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Tab 1 - AI Mode"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_label",
+      "label": "Tab label",
+      "default": "AI Mode"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_description",
+      "label": "Description",
+      "default": "<p>Intelligent adaptive responses that learn your preferences over time for a personalized experience.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2 - Manual Mode"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_label",
+      "label": "Tab label",
+      "default": "Manual Mode"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_description",
+      "label": "Description",
+      "default": "<p>Full control at your fingertips with the ability to customize every detail and make precision adjustments.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 3 - Physical Buttons"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_label",
+      "label": "Tab label",
+      "default": "Physical Buttons"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_description",
+      "label": "Description",
+      "default": "<p>Tactile feedback that's easy to use in any situation, with no screen required.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tab switcher section"
+    }
+  ]
+}
+{% endschema %}

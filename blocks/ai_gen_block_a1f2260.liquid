@@ -1,0 +1,679 @@
+{% doc %}
+  @prompt
+    I want a layout with a large image (with rounded corners) on the left and a content area on the right; the content area has a row of capsule tabs at the top (such as LEATHERLUXE / SPORTFLEX / CLOUDKNIT / SUPERKNIT). Clicking on a tab switches the title and text on the right, and the image on the left also changes accordingly (optional). The overall style should be minimalist and sophisticated. It should be mobile-friendly, the image size should be adjustable, and the entire section should have a title and a description.
+    
+    Female-POV Erotica
+    SensOn offers a curated library of immersive audio stories created for women, spanning a wide spectrum of desires and kinks. Designed to spark imagination and emotional connection, each experience is crafted with intention—featuring leading creators and an inclusive, LGBTQ+-friendly approach.
+    Be With Your Fantasy
+    Users engage in private, one-to-one voice conversations with AI-driven characters within each fantasy narrative. Interaction unfolds naturally inside the script as the story progresses, with long-term memory preserving continuity over time—shaping a deeply personal fantasy that evolves, adapts, and responds with every exchange.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-tabbed-content-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 60px 20px;
+  }
+
+  .ai-tabbed-content__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .ai-tabbed-content__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.section_title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 16px;
+    font-weight: 500;
+  }
+
+  .ai-tabbed-content__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.section_description_size }}px;
+    color: {{ block.settings.text_color }};
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .ai-tabbed-content__container-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .ai-tabbed-content__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-tabbed-content__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .ai-tabbed-content__image-{{ ai_gen_id }}.active {
+    opacity: 1;
+    position: relative;
+  }
+
+  .ai-tabbed-content__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: {{ block.settings.image_aspect_ratio }};
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-tabbed-content__image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  .ai-tabbed-content__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-tabbed-content__content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .ai-tabbed-content__tabs-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ai-tabbed-content__tab-{{ ai_gen_id }} {
+    padding: 12px 24px;
+    background-color: {{ block.settings.tab_background }};
+    color: {{ block.settings.tab_text_color }};
+    border: 1px solid {{ block.settings.tab_border_color }};
+    border-radius: 50px;
+    font-size: {{ block.settings.tab_font_size }}px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-tabbed-content__tab-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.tab_hover_background }};
+    color: {{ block.settings.tab_hover_text_color }};
+    border-color: {{ block.settings.tab_hover_border_color }};
+  }
+
+  .ai-tabbed-content__tab-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.tab_active_background }};
+    color: {{ block.settings.tab_active_text_color }};
+    border-color: {{ block.settings.tab_active_border_color }};
+  }
+
+  .ai-tabbed-content__panel-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-tabbed-content__panel-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-tabbed-content__panel-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.content_title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 20px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .ai-tabbed-content__panel-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.content_text_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-tabbed-content__container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .ai-tabbed-content__tabs-{{ ai_gen_id }} {
+      justify-content: center;
+    }
+
+    .ai-tabbed-content__panel-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.content_title_size }}px * 0.85);
+    }
+
+    .ai-tabbed-content__panel-text-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.content_text_size }}px * 0.9);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-tabbed-content-{{ ai_gen_id }} {
+      padding: 40px 16px;
+    }
+
+    .ai-tabbed-content__header-{{ ai_gen_id }} {
+      margin-bottom: 32px;
+    }
+
+    .ai-tabbed-content__title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.section_title_size }}px * 0.75);
+    }
+
+    .ai-tabbed-content__description-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.section_description_size }}px * 0.9);
+    }
+
+    .ai-tabbed-content__tab-{{ ai_gen_id }} {
+      padding: 10px 20px;
+      font-size: calc({{ block.settings.tab_font_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<tabbed-content-{{ ai_gen_id }} class="ai-tabbed-content-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.section_title != blank or block.settings.section_description != blank %}
+    <div class="ai-tabbed-content__header-{{ ai_gen_id }}">
+      {% if block.settings.section_title != blank %}
+        <h2 class="ai-tabbed-content__title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+      {% endif %}
+      {% if block.settings.section_description != blank %}
+        <div class="ai-tabbed-content__description-{{ ai_gen_id }}">{{ block.settings.section_description }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="ai-tabbed-content__container-{{ ai_gen_id }}">
+    <div class="ai-tabbed-content__image-wrapper-{{ ai_gen_id }}">
+      {% liquid
+        assign has_any_image = false
+        for i in (1..4)
+          assign image_key = 'tab_' | append: i | append: '_image'
+          if block.settings[image_key] != blank
+            assign has_any_image = true
+            break
+          endif
+        endfor
+      %}
+
+      {% if has_any_image %}
+        {% for i in (1..4) %}
+          {% liquid
+            assign enabled_key = 'tab_' | append: i | append: '_enabled'
+            assign image_key = 'tab_' | append: i | append: '_image'
+            assign tab_enabled = block.settings[enabled_key]
+            assign tab_image = block.settings[image_key]
+          %}
+
+          {% if tab_enabled and tab_image != blank %}
+            <img
+              src="{{ tab_image | image_url: width: 1200 }}"
+              alt="{{ tab_image.alt | escape }}"
+              loading="lazy"
+              width="{{ tab_image.width }}"
+              height="{{ tab_image.height }}"
+              class="ai-tabbed-content__image-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+              data-tab-index="{{ i }}"
+            >
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <div class="ai-tabbed-content__image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-tabbed-content__empty-state-{{ ai_gen_id }}">
+            Next, add images for each tab
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-tabbed-content__content-{{ ai_gen_id }}">
+      <div class="ai-tabbed-content__tabs-{{ ai_gen_id }}">
+        {% for i in (1..4) %}
+          {% liquid
+            assign enabled_key = 'tab_' | append: i | append: '_enabled'
+            assign label_key = 'tab_' | append: i | append: '_label'
+            assign tab_enabled = block.settings[enabled_key]
+            assign tab_label = block.settings[label_key]
+          %}
+
+          {% if tab_enabled %}
+            <button
+              class="ai-tabbed-content__tab-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+              data-tab-index="{{ i }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              role="tab"
+            >
+              {{ tab_label }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="ai-tabbed-content__panels-{{ ai_gen_id }}">
+        {% for i in (1..4) %}
+          {% liquid
+            assign enabled_key = 'tab_' | append: i | append: '_enabled'
+            assign title_key = 'tab_' | append: i | append: '_title'
+            assign text_key = 'tab_' | append: i | append: '_text'
+            assign tab_enabled = block.settings[enabled_key]
+            assign tab_title = block.settings[title_key]
+            assign tab_text = block.settings[text_key]
+          %}
+
+          {% if tab_enabled %}
+            <div
+              class="ai-tabbed-content__panel-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+              data-tab-index="{{ i }}"
+              role="tabpanel"
+            >
+              {% if tab_title != blank %}
+                <h3 class="ai-tabbed-content__panel-title-{{ ai_gen_id }}">{{ tab_title }}</h3>
+              {% endif %}
+              {% if tab_text != blank %}
+                <div class="ai-tabbed-content__panel-text-{{ ai_gen_id }}">{{ tab_text }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</tabbed-content-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TabbedContent{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.tabs = this.querySelectorAll('.ai-tabbed-content__tab-{{ ai_gen_id }}');
+        this.panels = this.querySelectorAll('.ai-tabbed-content__panel-{{ ai_gen_id }}');
+        this.images = this.querySelectorAll('.ai-tabbed-content__image-{{ ai_gen_id }}');
+        
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const tabIndex = tab.getAttribute('data-tab-index');
+            this.switchTab(tabIndex);
+          });
+        });
+      }
+
+      switchTab(index) {
+        this.tabs.forEach((tab) => {
+          const isActive = tab.getAttribute('data-tab-index') === index;
+          tab.classList.toggle('active', isActive);
+          tab.setAttribute('aria-selected', isActive);
+        });
+
+        this.panels.forEach((panel) => {
+          const isActive = panel.getAttribute('data-tab-index') === index;
+          panel.classList.toggle('active', isActive);
+        });
+
+        this.images.forEach((image) => {
+          const isActive = image.getAttribute('data-tab-index') === index;
+          image.classList.toggle('active', isActive);
+        });
+      }
+    }
+
+    customElements.define('tabbed-content-{{ ai_gen_id }}', TabbedContent{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Tabbed content with image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Female-POV Erotica"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Description",
+      "default": "<p>SensOn offers a curated library of immersive audio stories created for women, spanning a wide spectrum of desires and kinks. Designed to spark imagination and emotional connection, each experience is crafted with intention—featuring leading creators and an inclusive, LGBTQ+-friendly approach.</p>"
+    },
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "3/4",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "16/9",
+          "label": "Wide (16:9)"
+        }
+      ],
+      "default": "4/3"
+    },
+    {
+      "type": "header",
+      "content": "Tabs style"
+    },
+    {
+      "type": "range",
+      "id": "tab_font_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "tab_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tab_text_color",
+      "label": "Text color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "tab_border_color",
+      "label": "Border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_background",
+      "label": "Hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_text_color",
+      "label": "Hover text color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_border_color",
+      "label": "Hover border color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_background",
+      "label": "Active background",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text_color",
+      "label": "Active text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_border_color",
+      "label": "Active border color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "header",
+      "content": "Content style"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "range",
+      "id": "content_title_size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "content_text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Tab 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_1_enabled",
+      "label": "Enable tab 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_1_label",
+      "label": "Tab label",
+      "default": "LEATHERLUXE"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "tab_1_title",
+      "label": "Title",
+      "default": "Female-POV Erotica"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_text",
+      "label": "Text",
+      "default": "<p>SensOn offers a curated library of immersive audio stories created for women, spanning a wide spectrum of desires and kinks. Designed to spark imagination and emotional connection, each experience is crafted with intention—featuring leading creators and an inclusive, LGBTQ+-friendly approach.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_2_enabled",
+      "label": "Enable tab 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_2_label",
+      "label": "Tab label",
+      "default": "SPORTFLEX"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "tab_2_title",
+      "label": "Title",
+      "default": "Be With Your Fantasy"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_text",
+      "label": "Text",
+      "default": "<p>Users engage in private, one-to-one voice conversations with AI-driven characters within each fantasy narrative. Interaction unfolds naturally inside the script as the story progresses, with long-term memory preserving continuity over time—shaping a deeply personal fantasy that evolves, adapts, and responds with every exchange.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_3_enabled",
+      "label": "Enable tab 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_3_label",
+      "label": "Tab label",
+      "default": "CLOUDKNIT"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "tab_3_title",
+      "label": "Title",
+      "default": "Immersive Experience"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_text",
+      "label": "Text",
+      "default": "<p>Discover a new dimension of storytelling where your choices matter and every conversation shapes your unique journey.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_4_enabled",
+      "label": "Enable tab 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_4_label",
+      "label": "Tab label",
+      "default": "SUPERKNIT"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "tab_4_title",
+      "label": "Title",
+      "default": "Your Story, Your Way"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_text",
+      "label": "Text",
+      "default": "<p>Experience personalized narratives that adapt to your preferences and create lasting memories through meaningful interactions.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tabbed content with image"
+    }
+  ]
+}
+{% endschema %}

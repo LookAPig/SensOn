@@ -1,0 +1,86 @@
+{%- liquid
+  assign pfc_bg = block.settings.background_color | default: '#ffffff'
+  assign pfc_radius = block.settings.border_radius | default: 16
+  assign pfc_has_card = false
+  for i in (1..4)
+    assign pfc_text_key = 'text_' | append: i
+    if block.settings[pfc_text_key] != blank
+      assign pfc_has_card = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if pfc_has_card -%}
+  <style>
+    #pfc-{{ block.id }} {
+      --pfc-bg: {{ pfc_bg }};
+      --pfc-radius: {{ pfc_radius }}px;
+      {% if block.settings.mt != blank %}
+        margin-top: {{ block.settings.mt | times: 0.25 }}rem;
+      {% endif %}
+      {% if block.settings.mb != blank %}
+        margin-bottom: {{ block.settings.mb | times: 0.25 }}rem;
+      {% endif %}
+    }
+
+    .pfc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;   /* 移动端间距 8px */
+      width: 100%;
+    }
+
+    .pfc-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: var(--pfc-bg);
+      border-radius: var(--pfc-radius);
+      padding: 8px 8px;
+      min-height: 48px;
+      box-sizing: border-box;
+    }
+
+    .pfc-card__text {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1;
+      color: #111;
+      word-break: break-word;
+      white-space: pre-line;
+    }
+
+    @media (min-width: 768px) {
+      .pfc-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;   /* PC端间距改为 6px */
+      }
+      .pfc-card {
+        padding: 10px 6px;
+      }
+      .pfc-card__text {
+        font-size: 15px;
+        line-height: 1;
+      }
+    }
+  </style>
+  
+  
+
+  <div id="pfc-{{ block.id }}" class="product-feature-cards">
+    <div class="pfc-grid">
+      {%- for i in (1..4) -%}
+        {%- assign pfc_text_key = 'text_' | append: i -%}
+        {%- assign pfc_text = block.settings[pfc_text_key] -%}
+        {%- if pfc_text != blank -%}
+          <div class="pfc-card">
+            <div class="pfc-card__text">{{ pfc_text | newline_to_br }}</div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

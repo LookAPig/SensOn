@@ -1,0 +1,781 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-app-intro-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 20px;
+    /* padding-bottom: 0; */
+    margin: 0 auto;
+        margin-top: 60px;
+    {% if block.settings.background_image %}
+      background-image: url('{{ block.settings.background_image | image_url: width: 2000 }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    {% else %}
+      background-color: {{ block.settings.background_color }};
+    {% endif %}
+  }
+
+  .ai-app-intro-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .ai-app-intro-left-column-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    min-height: 100%;
+  }
+
+  .ai-app-intro-text-area-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+  }
+
+  .ai-app-intro-text-module-{{ ai_gen_id }} {
+    border-bottom: 1px solid {{ block.settings.divider_color }};
+    padding-bottom: 10px;
+  }
+
+  .ai-app-intro-text-module-{{ ai_gen_id }}:last-child {
+    border-bottom: none;
+  }
+
+  .ai-app-intro-module-header-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 16px;
+  }
+
+  .ai-app-intro-module-header-{{ ai_gen_id }}:hover .ai-app-intro-module-title-{{ ai_gen_id }} {
+    color: {{ block.settings.title_hover_color }};
+  }
+
+  .ai-app-intro-module-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  .ai-app-intro-arrow-icon-{{ ai_gen_id }} {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    color: {{ block.settings.arrow_color }};
+  }
+
+  .ai-app-intro-arrow-icon-{{ ai_gen_id }}.active {
+    transform: rotate(180deg);
+  }
+
+  .ai-app-intro-module-body-{{ ai_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.4s ease;
+    color: {{ block.settings.body_color }};
+    font-size: {{ block.settings.body_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-app-intro-module-body-{{ ai_gen_id }}.active {
+    max-height: 500px;
+    margin-top: 16px;
+  }
+
+  .ai-app-intro-download-section-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* align-items: center; */
+    padding-top: 40px;
+    border-top: 1px solid {{ block.settings.divider_color }};
+    margin-top: auto;
+  }
+
+  .ai-app-intro-download-icons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 16px;
+    /* align-items: center; */
+    flex-wrap: wrap;
+    /* justify-content: center; */
+  }
+
+  .ai-app-intro-download-link-{{ ai_gen_id }} {
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .ai-app-intro-download-link-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    opacity: 0.8;
+  }
+
+  .ai-app-intro-download-link-{{ ai_gen_id }} img {
+    height: {{ block.settings.store_icon_height }}px;
+    width: auto;
+    display: block;
+  }
+
+  .ai-app-intro-download-text-{{ ai_gen_id }} {
+    color: {{ block.settings.download_text_color }};
+    font-size: {{ block.settings.download_text_size }}px;
+    text-align: left;
+  }
+
+  .ai-app-intro-image-area-{{ ai_gen_id }} {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%
+  }
+
+  .ai-app-intro-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    max-width: {{ block.settings.image_max_width }}px;
+    aspect-ratio: {{ block.settings.image_aspect_ratio }};
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    box-shadow: {{ block.settings.image_shadow }};
+  }
+
+  .ai-app-intro-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .section-header h2{
+    font-size: 42px
+  }
+  .ai-app-intro-image-{{ ai_gen_id }}.active {
+    opacity: 1;
+  }
+
+  .ai-app-intro-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-app-intro-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-app-intro-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .ai-app-intro-image-area-{{ ai_gen_id }} {
+      position: relative;
+      top: 0;
+      order: -1;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-app-intro-{{ ai_gen_id }} {
+      padding: 0px 16px;
+      /* padding-bottom: 0 */
+    }
+
+    .ai-app-intro-module-title-{{ ai_gen_id }} {
+      font-size: 14px
+    }
+
+    .ai-app-intro-module-body-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.body_size }}px * 0.9);
+    }
+
+    .ai-app-intro-download-icons-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 12px;
+      width: max-content;
+    }
+
+     .ai-app-intro-left-column-{{ ai_gen_id }} {
+        gap: 0px;
+      }
+        .ai-app-intro-{{ ai_gen_id }} {
+    
+        margin-top: 20px;
+   
+  }
+    .ai-app-intro-text-area-{{ ai_gen_id }} {
+   
+    gap: 10px;
+  }
+  }
+
+  .app-intro-video-wrapper{
+    /* height: 100%; */
+  }
+{% endstyle %}
+
+<app-intro-section-{{ ai_gen_id }}
+  class="ai-app-intro-{{ ai_gen_id }} ai-app-intro-wrapper"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-app-intro-container-{{ ai_gen_id }}">
+    <div class="ai-app-intro-image-area-{{ ai_gen_id }}">
+      <div class="ai-app-intro-image-wrapper-{{ ai_gen_id }}">
+        {% for i in (1..3) %}
+          {% liquid
+            assign image_key = 'module_' | append: i | append: '_image'
+            assign video_key = 'module_' | append: i | append: '_video'
+            assign image = block.settings[image_key]
+            assign video = block.settings[video_key]
+          %}
+
+          {% if video %}
+                  {%
+                    render 'media',
+                    media: video,
+                    playsinline: true,
+                    autoplay: true,
+                    loop: true,
+                    muted: true,
+                    controls: false,
+                    preload: true,
+                    show_play_button: false,
+                    class_name: "app-intro-video",
+                    class_name_wrapper: "app-intro-video-wrapper"
+                  %}
+          {% elsif image %}
+            <img
+              src="{{ image | image_url: width: 800 }}"
+              alt="{{ image.alt | escape }}"
+              loading="lazy"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+              class="ai-app-intro-image-{{ ai_gen_id }} {% if i == 1 %}active{% endif %}"
+              data-image="{{ i }}"
+            >
+          {% else %}
+            <div
+              class="ai-app-intro-image-placeholder-{{ ai_gen_id }} ai-app-intro-image-{{ ai_gen_id }} "
+              data-image="{{ i }}"
+            >
+              {{ 'product-apparel-1' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="ai-app-intro-left-column-{{ ai_gen_id }}">
+      <div class="ai-app-intro-text-area-{{ ai_gen_id }}">
+        {% for i in (1..3) %}
+          {% liquid
+            assign title_key = 'module_' | append: i | append: '_title'
+            assign body_key = 'module_' | append: i | append: '_body'
+            assign title = block.settings[title_key]
+            assign body = block.settings[body_key]
+          %}
+
+          {% if title != blank %}
+
+          <div class="ai-app-intro-text-module-{{ ai_gen_id }}" data-module="{{ i }}">
+            <div class="ai-app-intro-module-header-{{ ai_gen_id }}">
+              <h3 class="ai-app-intro-module-title-{{ ai_gen_id }}">{{ title }}</h3>
+              <svg
+                class="ai-app-intro-arrow-icon-{{ ai_gen_id }} "
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="ai-app-intro-module-body-{{ ai_gen_id }} ">
+              {{ body }}
+            </div>
+          </div>
+          {%  endif %}
+        {% endfor %}
+      </div>
+
+      <div class="ai-app-intro-download-section-{{ ai_gen_id }}">
+        {% if block.settings.download_text != blank %}
+          <div class="ai-app-intro-download-text-{{ ai_gen_id }}">
+            {{ block.settings.download_text }}
+          </div>
+        {% endif %}
+
+        <div class="ai-app-intro-download-icons-{{ ai_gen_id }}">
+          {% if block.settings.app_store_icon or block.settings.app_store_link != blank %}
+            {% if block.settings.app_store_link != blank %}
+              <a
+                href="{{ block.settings.app_store_link }}"
+                class="ai-app-intro-download-link-{{ ai_gen_id }}"
+                target="_blank"
+                rel="noopener"
+              >
+            {% else %}
+              <div class="ai-app-intro-download-link-{{ ai_gen_id }}">
+            {% endif %}
+            {% if block.settings.app_store_icon %}
+              <img
+                src="{{ block.settings.app_store_icon | image_url: height: 120 }}"
+                alt="Download on the App Store"
+                loading="lazy"
+              >
+            {% else %}
+              {%- render 'icon' with 'apple_download', width: 120 -%}
+            {% endif %}
+            {% if block.settings.app_store_link != blank %}
+              </a>
+            {% else %}
+              </div>
+            {% endif %}
+          {% else %}
+            <div style="background-image: linear-gradient(90deg, {{ block.settings.icon_start_color |default:'transparent'}}, {{ block.settings.icon_end_color |default:'transparent'}});border-radius: 4px;">
+              {%- render 'icon' with 'apple_download', width: 120 -%}
+            </div>
+          {% endif %}
+
+          {% if block.settings.google_play_icon or block.settings.google_play_link != blank %}
+            {% if block.settings.google_play_link != blank %}
+              <a
+                href="{{ block.settings.google_play_link }}"
+                class="ai-app-intro-download-link-{{ ai_gen_id }}"
+                target="_blank"
+                rel="noopener"
+              >
+            {% else %}
+              <div class="ai-app-intro-download-link-{{ ai_gen_id }}">
+            {% endif %}
+            {% if block.settings.google_play_icon %}
+              <img
+                src="{{ block.settings.google_play_icon | image_url: height: 120 }}"
+                alt="Get it on Google Play"
+                loading="lazy"
+              >
+            {% else %}
+              <svg
+                width="135"
+                height="40"
+                viewBox="0 0 135 40"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="135" height="40" rx="5" fill="#000000"/>
+                <text x="67.5" y="25" font-family="Arial" font-size="12" fill="#ffffff" text-anchor="middle">Google Play</text>
+              </svg>
+            {% endif %}
+            {% if block.settings.google_play_link != blank %}
+              </a>
+            {% else %}
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</app-intro-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AppIntroSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.modules = this.querySelectorAll('.ai-app-intro-text-module-{{ ai_gen_id }}');
+        this.images = this.querySelectorAll('.ai-app-intro-image-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.modules.forEach((module) => {
+          const header = module.querySelector('.ai-app-intro-module-header-{{ ai_gen_id }}');
+          const body = module.querySelector('.ai-app-intro-module-body-{{ ai_gen_id }}');
+          const arrow = module.querySelector('.ai-app-intro-arrow-icon-{{ ai_gen_id }}');
+          const moduleIndex = module.getAttribute('data-module');
+
+          header.addEventListener('click', () => {
+            const isActive = body.classList.contains('active');
+
+            if (!isActive) {
+              this.modules.forEach((m) => {
+                m.querySelector('.ai-app-intro-module-body-{{ ai_gen_id }}').classList.remove('active');
+                m.querySelector('.ai-app-intro-arrow-icon-{{ ai_gen_id }}').classList.remove('active');
+              });
+
+              body.classList.add('active');
+              arrow.classList.add('active');
+
+              this.images.forEach((img) => {
+                img.classList.remove('active');
+              });
+
+              const targetImage = this.querySelector('[data-image="' + moduleIndex + '"]');
+              if (targetImage) {
+                targetImage.classList.add('active');
+              }
+            }else{
+             this.modules.forEach((m) => {
+                m.querySelector('.ai-app-intro-module-body-{{ ai_gen_id }}').classList.remove('active');
+                m.querySelector('.ai-app-intro-arrow-icon-{{ ai_gen_id }}').classList.remove('active');
+              });
+
+              this.images.forEach((img) => {
+                img.classList.remove('active');
+              });
+
+              const targetImage = this.querySelector('[data-image="1"]');
+              if (targetImage) {
+                targetImage.classList.add('active');
+              }
+            }
+
+          });
+        });
+      }
+    }
+
+    customElements.define('app-intro-section-{{ ai_gen_id }}', AppIntroSection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "首页 App Introduction",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Module 1"
+    },
+    {
+      "type": "text",
+      "id": "module_1_title",
+      "label": "Title",
+      "default": "Easy to Use"
+    },
+    {
+      "type": "richtext",
+      "id": "module_1_body",
+      "label": "Description",
+      "default": "<p>Our intuitive interface makes it simple to navigate and use all features. Get started in minutes with our streamlined onboarding process.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "module_1_image",
+      "label": "App screenshot"
+    },
+    {
+      "type": "video",
+      "id": "module_1_video",
+      "label": "Video 1"
+    },
+    {
+      "type": "header",
+      "content": "Module 2"
+    },
+    {
+      "type": "text",
+      "id": "module_2_title",
+      "label": "Title",
+      "default": "Powerful Features"
+    },
+    {
+      "type": "richtext",
+      "id": "module_2_body",
+      "label": "Description",
+      "default": "<p>Access advanced tools and features designed to boost your productivity. Customize your experience to match your workflow perfectly.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "module_2_image",
+      "label": "App screenshot"
+    },
+     {
+      "type": "video",
+      "id": "module_2_video",
+      "label": "Video 2"
+    },
+    {
+      "type": "header",
+      "content": "Module 3"
+    },
+    {
+      "type": "text",
+      "id": "module_3_title",
+      "label": "Title",
+      "default": "Secure & Reliable"
+    },
+    {
+      "type": "richtext",
+      "id": "module_3_body",
+      "label": "Description",
+      "default": "<p>Your data is protected with enterprise-grade security. Enjoy 99.9% uptime and automatic backups for peace of mind.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "module_3_image",
+      "label": "App screenshot"
+    },
+     {
+      "type": "video",
+      "id": "module_3_video",
+      "label": "Video 3"
+    },
+    {
+      "type": "header",
+      "content": "Text style"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "title_hover_color",
+      "label": "Title hover color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Image style"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "label": "Maximum width",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "9/16",
+          "label": "Vertical (9:16)"
+        },
+        {
+          "value": "3/4",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "1/1",
+          "label": "Square (1:1)"
+        }
+      ],
+      "default": "9/16"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "image_shadow",
+      "label": "Shadow",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "0 4px 12px rgba(0,0,0,0.1)",
+          "label": "Light"
+        },
+        {
+          "value": "0 8px 24px rgba(0,0,0,0.15)",
+          "label": "Medium"
+        },
+        {
+          "value": "0 12px 32px rgba(0,0,0,0.2)",
+          "label": "Strong"
+        }
+      ],
+      "default": "0 8px 24px rgba(0,0,0,0.15)"
+    },
+    {
+      "type": "header",
+      "content": "Download section"
+    },
+    {
+      "type": "richtext",
+      "id": "download_text",
+      "label": "Description",
+      "default": "<p>Available on the App Store and Google Play</p>"
+    },
+    {
+      "type": "range",
+      "id": "download_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "icon_start_color",
+      "label": "下载按钮渐变开始颜色",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "icon_end_color",
+      "label": "下载按钮渐变结束颜色",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "download_text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "url",
+      "id": "app_store_link",
+      "label": "App Store link"
+    },
+    {
+      "type": "image_picker",
+      "id": "app_store_icon",
+      "label": "App Store icon"
+    },
+    {
+      "type": "url",
+      "id": "google_play_link",
+      "label": "Google Play link"
+    },
+    {
+      "type": "image_picker",
+      "id": "google_play_icon",
+      "label": "Google Play icon"
+    },
+    {
+      "type": "range",
+      "id": "store_icon_height",
+      "label": "Icon height",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "首页 App introduction"
+    }
+  ]
+}
+{% endschema %}

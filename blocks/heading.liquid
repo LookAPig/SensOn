@@ -1,0 +1,175 @@
+{%- if block.settings.text != blank -%}
+  <div
+    class="custom-responsive-heading custom-responsive-heading-{{ block.id }}"
+    style="
+      --pc-font-size: {{ block.settings.pc_font_size }}px;
+      --h5-font-size: {{ block.settings.h5_font_size }}px;
+      --pc-line-height: {{ block.settings.pc_line_height }};
+      --h5-line-height: {{ block.settings.h5_line_height }};
+    "
+  >
+    {%- assign tag = block.settings.html_tag -%}
+    <{{ tag }} class="heading {{ block.settings.heading_size }}">
+      {{- block.settings.text | newline_to_br -}}
+    </{{ tag }}>
+  </div>
+{%- endif -%}
+
+<style>
+  .custom-responsive-heading-{{ block.id }} .heading {
+    font-size: var(--pc-font-size) !important;
+    line-height: var(--pc-line-height) !important;
+    margin: 0;  /* 去除默认边距，避免布局异常 */
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-responsive-heading-{{ block.id }} .heading {
+      font-size: var(--h5-font-size) !important;
+      line-height: var(--h5-line-height) !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Heading",
+  "tag": null,
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:global.text.text",
+      "default": "Heading",
+      "info": "支持换行，直接按回车键即可分段"
+    },
+    {
+      "type": "range",
+      "id": "pc_font_size",
+      "label": "PC Font Size",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "h5_font_size",
+      "label": "H5 Font Size",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 23
+    },
+    {
+      "type": "range",
+      "id": "pc_line_height",
+      "label": "PC Line Height",
+      "min": 0.8,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.2
+    },
+    {
+      "type": "range",
+      "id": "h5_line_height",
+      "label": "H5 Line Height",
+      "min": 0.8,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.2
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:global.text.size",
+      "options": [
+        {
+          "value": "display-xl",
+          "label": "Display XL"
+        },
+        {
+          "value": "display-l",
+          "label": "Display L"
+        },
+        {
+          "value": "display-m",
+          "label": "Display M"
+        },
+        {
+          "value": "h1",
+          "label": "XX-Large"
+        },
+        {
+          "value": "h2",
+          "label": "X-Large"
+        },
+        {
+          "value": "h3",
+          "label": "Large"
+        },
+        {
+          "value": "h4",
+          "label": "Medium"
+        },
+        {
+          "value": "h5",
+          "label": "Small"
+        },
+        {
+          "value": "h6",
+          "label": "X-Small"
+        },
+        {
+          "value": "h7",
+          "label": "XX-Small"
+        }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "select",
+      "id": "html_tag",
+      "label": "t:blocks.heading.html_tag",
+      "info": "t:blocks.heading.html_tag_info",
+      "options": [
+        {
+          "value": "p",
+          "label": "Paragraph"
+        },
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "p"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.heading.name"
+    }
+  ]
+}
+{% endschema %}

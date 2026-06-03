@@ -1,0 +1,559 @@
+{% liquid
+  assign desktop_hq_url = ''
+  assign desktop_lq_url = ''
+  assign mobile_hq_url = ''
+  assign mobile_lq_url = ''
+
+  if section.settings.desktop_video != blank
+    for source in section.settings.desktop_video.sources
+      if source.mime_type == 'video/mp4'
+        assign desktop_hq_url = source.url
+        break
+      endif
+    endfor
+    if desktop_hq_url == '' and section.settings.desktop_video.sources.size > 0
+      assign desktop_hq_url = section.settings.desktop_video.sources.first.url
+    endif
+  endif
+
+  if section.settings.desktop_video_low != blank
+    for source in section.settings.desktop_video_low.sources
+      if source.mime_type == 'video/mp4'
+        assign desktop_lq_url = source.url
+        break
+      endif
+    endfor
+    if desktop_lq_url == '' and section.settings.desktop_video_low.sources.size > 0
+      assign desktop_lq_url = section.settings.desktop_video_low.sources.first.url
+    endif
+  endif
+
+  if section.settings.mobile_video != blank
+    for source in section.settings.mobile_video.sources
+      if source.mime_type == 'video/mp4'
+        assign mobile_hq_url = source.url
+        break
+      endif
+    endfor
+    if mobile_hq_url == '' and section.settings.mobile_video.sources.size > 0
+      assign mobile_hq_url = section.settings.mobile_video.sources.first.url
+    endif
+  endif
+
+  if section.settings.mobile_video_low != blank
+    for source in section.settings.mobile_video_low.sources
+      if source.mime_type == 'video/mp4'
+        assign mobile_lq_url = source.url
+        break
+      endif
+    endfor
+    if mobile_lq_url == '' and section.settings.mobile_video_low.sources.size > 0
+      assign mobile_lq_url = section.settings.mobile_video_low.sources.first.url
+    endif
+  endif
+
+  assign mobile_hq_final = mobile_hq_url
+  if mobile_hq_final == blank
+    assign mobile_hq_final = desktop_hq_url
+  endif
+%}
+<style>
+  #video-{{ section.id }} {
+    position: relative;
+    background-color: transparent;
+  }
+
+  #video-{{ section.id }} .hero-media {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  }
+
+  #video-{{ section.id }} .hero-media .desktop-media {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  #video-{{ section.id }} .hero-media .mobile-media {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  #video-{{ section.id }} .hero-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    z-index: 3;
+    align-items: center;
+  }
+
+  #video-{{ section.id }} .vediohero-title {
+    color: #FFF;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 0 0 16px;
+        text-align: center;
+  }
+.video_desc {
+    font-size: 16px;
+    text-align: center;
+}
+  #video-{{ section.id }} .video_btns {
+       text-align: center;
+    margin-top: 32px;
+  }
+
+    .btn_wj {
+        background: #f287ec;
+        padding: 14px 40px;
+        font-size: 18px;
+        border-radius: 50px;
+        text-transform: capitalize;
+        color: #1a1a1a;
+            line-height: 1;
+    }
+
+
+  .hero-p1 {
+    color: #FFF;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.32px;
+    margin-bottom: 14px;
+  }
+
+  .hero-p2 {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.16px;
+  }
+
+  .vediohero-title span {
+    display: block;
+  }
+
+  .video-banner:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(102, 102, 102, 0.00) 0%, rgba(0, 0, 0, 0.07) 100%);
+    backdrop-filter: blur(6.65px);
+    -webkit-backdrop-filter: blur(6.65px);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 60%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60%, black 100%);
+    height: 353px;
+    background-size: cover;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+
+  /* Poster图片始终显示直到视频加载 */
+  #video-{{ section.id }} .hero-media .poster-image {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    z-index: 1;
+    transition: opacity 0.8s ease;
+    display: block !important;
+  }
+
+  #video-{{ section.id }} .hero-media .poster-image.hidden {
+    opacity: 0;
+    z-index: 0;
+  }
+  
+  /* 确保video在poster下方 */
+  #video-{{ section.id }} .hero-media video {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  @media (max-width: 768px) {
+    .video-banner:after {
+      height: 230px;
+    }
+
+    #video-{{ section.id }} .hero-media .desktop-media {
+      display: none;
+    }
+
+    .vediohero-title span {
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    #video-{{ section.id }} .hero-media .mobile-media {
+      display: block;
+    }
+
+    #video-{{ section.id }} .vediohero-title {
+      font-size: 24px;
+    }
+
+    #video-{{ section.id }} .hero-subtitle {
+      max-width: 85%;
+    }
+
+    .hero-p1 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    #video-{{ section.id }} .hero-inner {
+      padding-bottom: 35px;
+      z-index: 1;
+    }
+
+    .btn_wj {
+        font-size: 15px;
+    }
+  .video_desc {
+    font-size: 14px;
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+  }
+</style>
+
+<section id="video-{{ section.id }}" class="video-banner" data-section-id="{{ section.id }}" allow-transparent-header>
+  <div class="hero-media">
+    <!-- PC端 -->
+    <div class="desktop-media">
+      {% if section.settings.poster != blank %}
+        {%- capture sizes -%}
+          (max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px
+        {%- endcapture -%}
+        {{ section.settings.poster | image_url: width: 1920 | image_tag: 
+          class: 'poster-image',
+          alt: section.settings.title, 
+          loading: 'eager', 
+          fetchpriority: 'high',
+          sizes: sizes,
+          widths: '800,1200,1600,1920'
+        }}
+      {% endif %}
+
+      {% if desktop_hq_url != blank %}
+        <video 
+          id="desktop-video-{{ section.id }}"
+          muted 
+          playsinline 
+          loop
+          preload="none"
+          poster="{{ section.settings.poster | img_url: '1920x' }}"
+          data-video-src="{{ desktop_hq_url }}"
+          {% if section.settings.enable_low_quality_preview and desktop_lq_url != blank %}
+          data-hq-src="{{ desktop_hq_url }}"
+          {% endif %}
+        >
+          {% if section.settings.enable_low_quality_preview and desktop_lq_url != blank %}
+            <source src="{{ desktop_lq_url }}" type="video/mp4">
+          {% endif %}
+        </video>
+      {% endif %}
+    </div>
+
+    <!-- 移动端 -->
+    <div class="mobile-media">
+      {% if section.settings.mobile_poster != blank %}
+        {%- capture mobile_sizes -%}
+          (max-width: 768px) 100vw, 1200px
+        {%- endcapture -%}
+        {{ section.settings.mobile_poster | image_url: width: 1200 | image_tag: 
+          class: 'poster-image',
+          alt: section.settings.title, 
+          loading: 'eager', 
+          fetchpriority: 'high',
+          sizes: mobile_sizes,
+          widths: '400,600,768'
+        }}
+      {% elsif section.settings.poster != blank %}
+        {%- capture mobile_sizes -%}
+          (max-width: 768px) 100vw, 768px
+        {%- endcapture -%}
+        {{ section.settings.poster | image_url: width: 1200 | image_tag: 
+          class: 'poster-image',
+          alt: section.settings.title, 
+          loading: 'eager', 
+          fetchpriority: 'high',
+          sizes: mobile_sizes,
+          widths: '400,600,768'
+        }}
+      {% endif %}
+
+      {% if mobile_hq_url != blank %}
+        <video 
+          id="mobile-video-{{ section.id }}"
+          muted 
+          playsinline 
+          loop
+          preload="none"
+          poster="{{ section.settings.mobile_poster | default: section.settings.poster | img_url: '768x' }}"
+          data-video-src="{{ mobile_hq_url }}"
+          {% if section.settings.enable_low_quality_preview and mobile_lq_url != blank %}
+          data-hq-src="{{ mobile_hq_url }}"
+          {% endif %}
+        >
+          {% if section.settings.enable_low_quality_preview and mobile_lq_url != blank %}
+            <source src="{{ mobile_lq_url }}" type="video/mp4">
+          {% endif %}
+        </video>
+      {% elsif desktop_hq_url != blank %}
+        <video 
+          id="mobile-video-fallback-{{ section.id }}"
+          muted 
+          playsinline 
+          loop
+          preload="none"
+          poster="{{ section.settings.poster | img_url: '1200x' }}"
+          data-video-src="{{ desktop_hq_url }}"
+        >
+        </video>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-inner">
+    <div class="page-width">
+      {% if section.settings.title != blank %}
+        <h2 class="vediohero-title h0 space-thin wow fadeInUp" data-wow-delay=".1s">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+      <div class="video_desc">{{ section.settings.desc }}</div>
+      <div class="video_btns">
+        {% if section.settings.button != blank %}
+          <a class="hero-cta btn_wj wow fadeInUp" href="{{ section.settings.cta_link | default: '#' }}" role="button" data-wow-delay=".2s">{{ section.settings.button }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+  const desktopVideo = document.getElementById('desktop-video-' + sectionId);
+  const mobileVideo = document.getElementById('mobile-video-' + sectionId) || document.getElementById('mobile-video-fallback-' + sectionId);
+  const enableLowQualityPreview = {{ section.settings.enable_low_quality_preview | json }};
+  
+  // 判断是否移动端
+  const isMobile = window.innerWidth <= 768;
+  const activeVideo = isMobile ? mobileVideo : desktopVideo;
+  
+  if (!activeVideo) return;
+
+  function hidePoster() {
+    const posterImages = document.querySelectorAll('#video-' + sectionId + ' .poster-image');
+    posterImages.forEach(img => {
+      img.classList.add('hidden');
+    });
+  }
+
+  function onVideoLoaded() {
+    activeVideo.classList.add('loaded');
+    // 延迟隐藏poster，确保视频已经开始播放
+    setTimeout(hidePoster, 300);
+  }
+
+  // 加载高质量视频（如果启用了低质量预览）
+  function loadHighQualityVideo() {
+    const hqSrc = activeVideo.getAttribute('data-hq-src');
+    if (hqSrc && enableLowQualityPreview) {
+      // 创建临时video来预加载高质量版本
+      const tempVideo = document.createElement('video');
+      tempVideo.src = hqSrc;
+      tempVideo.preload = 'auto';
+      
+      tempVideo.addEventListener('canplaythrough', () => {
+        // 高质量视频加载完成，替换源
+        const currentTime = activeVideo.currentTime;
+        const newSource = document.createElement('source');
+        newSource.src = hqSrc;
+        newSource.type = 'video/mp4';
+        
+        activeVideo.innerHTML = '';
+        activeVideo.appendChild(newSource);
+        activeVideo.load();
+        activeVideo.currentTime = currentTime;
+        activeVideo.play();
+      }, { once: true });
+    }
+  }
+
+  // 开始加载视频
+  function loadVideo() {
+    const videoSrc = activeVideo.getAttribute('data-video-src');
+    if (enableLowQualityPreview && activeVideo.querySelector('source')) {
+      activeVideo.load();
+    } else if (videoSrc) {
+      const source = document.createElement('source');
+      source.src = videoSrc;
+      source.type = 'video/mp4';
+      activeVideo.appendChild(source);
+      activeVideo.load();
+    } else return;
+
+    activeVideo.addEventListener('loadeddata', () => {
+      
+      // 尝试播放视频
+      const playPromise = activeVideo.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          onVideoLoaded();
+          
+          // 如果启用了低质量预览，开始加载高质量版本
+          if (enableLowQualityPreview) {
+            setTimeout(loadHighQualityVideo, 2000);
+          }
+        }).catch(() => {
+          onVideoLoaded();
+          document.addEventListener('touchstart', function playOnTouch() {
+            activeVideo.play().catch(function(){});
+            document.removeEventListener('touchstart', playOnTouch);
+          }, { once: true });
+        });
+      }
+    }, { once: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(loadVideo, 100));
+  } else {
+    setTimeout(loadVideo, 100);
+  }
+
+  // 页面可见性变化时的处理
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      activeVideo.pause();
+    } else if (activeVideo.classList.contains('loaded')) {
+      activeVideo.play();
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Video Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+   
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main title"
+    },
+    {
+      "type": "text",
+      "id": "desc",
+      "label": "desc"
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+   
+    {
+      "type": "header",
+      "content": "Performance Optimization"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_low_quality_preview",
+      "label": "Enable low quality preview",
+      "info": "Load low quality video first for fast display, then auto-switch to high quality version",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Desktop Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Background image / Video poster",
+      "info": "Important: This image will display immediately, please use optimized image"
+    },
+    {
+      "type": "video",
+      "id": "desktop_video",
+      "label": "Desktop video (high quality)",
+      "info": "Upload or select from Shopify Files. Uses MP4 source from the file."
+    },
+    {
+      "type": "video",
+      "id": "desktop_video_low",
+      "label": "Desktop low quality preview (optional)",
+      "info": "Smaller MP4 for fast first paint; required if you use low quality preview on desktop."
+    },
+    {
+      "type": "header",
+      "content": "Mobile Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_poster",
+      "label": "Mobile background image / Video poster"
+    },
+    {
+      "type": "video",
+      "id": "mobile_video",
+      "label": "Mobile video (high quality)",
+      "info": "Optional. If empty, the desktop video is used on mobile."
+    },
+    {
+      "type": "video",
+      "id": "mobile_video_low",
+      "label": "Mobile low quality preview (optional)",
+      "info": "Optional smaller MP4 for mobile when low quality preview is enabled."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Banner"
+    }
+  ]
+}
+{% endschema %}

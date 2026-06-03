@@ -1,0 +1,598 @@
+{%- if section.blocks.size > 0 -%}
+  <style>
+    #shopify-section-{{ section.id }} {
+      background-color: #fff;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: clip;
+    }
+
+    #shopify-section-{{ section.id }} * {
+      box-sizing: border-box;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-scroll-track {
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-container {
+      padding: 30px 0;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-header {
+      padding: 0 16px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-label {
+      font-size: 14px;
+      line-height: 1.2;
+      color: #000;
+      margin: 0;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-title {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.2;
+      color: #000;
+      margin: 0;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-mobile-layout {
+      display: block;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-carousel {
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-padding-left: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-carousel-track {
+      display: flex;
+      gap: 16px;
+      padding: 0 16px;
+      width: max-content;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-carousel-track::after {
+      content: '';
+      width: 1px;
+      flex-shrink: 0;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-card {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      scroll-snap-align: start;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-card-img-wrapper {
+      width: 320px;
+      height: 320px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: #000;
+      margin: 0;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-card-line {
+      width: 80px;
+      height: 2px;
+      background-color: #f287ec;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-card-desc {
+      font-size: 14px;
+      line-height: 1.2;
+      color: #000;
+      margin: 0;
+    }
+
+    #shopify-section-{{ section.id }} .ifi-pc-layout {
+      display: none;
+    }
+
+    @media (min-width: 1000px) {
+      #shopify-section-{{ section.id }} .ifi-scroll-track {
+        height: 300vh;
+        position: relative;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container {
+        padding: clamp(40px, 5vh, 100px) 100px;
+        position: sticky;
+        top: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: safe center;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-header {
+        padding: 0;
+        gap: 16px;
+        margin: 0 auto 48px;
+        max-width: 1400px;
+        width: 100%;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-label {
+        font-size: 16px;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-title {
+        font-size: 32px;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-mobile-layout {
+        display: none;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-pc-layout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        gap: 80px;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-pc-left {
+        display: flex;
+        flex-direction: column;
+        gap: 64px;
+        justify-content: flex-end;
+        align-self: stretch;
+        flex: 1;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-item {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        cursor: pointer;
+        padding: 12px 0;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-line-wrapper {
+        width: 2px;
+        background-color: #c3c3be;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-line-active {
+        width: 100%;
+        background-color: #f287ec;
+        height: 100%;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.4s ease;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-line-active {
+        transform: scaleY(1);
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-title {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.1;
+        color: #565656;
+        margin: 0;
+        transition: color 0.3s ease;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-title {
+        color: #000;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-desc-wrapper {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.4s ease;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-desc-wrapper {
+        grid-template-rows: 1fr;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-desc {
+        font-size: 16px;
+        line-height: 1.4;
+        color: #000;
+        margin: 0;
+        overflow: hidden;
+        opacity: 0;
+        padding-top: 0;
+        transition: opacity 0.3s ease, padding-top 0.4s ease;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-desc {
+        opacity: 1;
+        padding-top: 24px;
+        transition: opacity 0.4s ease 0.1s, padding-top 0.4s ease;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-pc-right {
+        flex: 0 0 clamp(280px, 30vw, 420px);
+        width: clamp(280px, 30vw, 420px);
+        aspect-ratio: 1 / 1;
+        height: auto;
+        background-color: #f5f5f5;
+        position: relative;
+        overflow: hidden;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-pc-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 0;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-pc-img.is-active {
+        opacity: 1;
+        z-index: 1;
+      }
+    }
+  </style>
+
+  <section id="pdp-intelligence-intimacy" class="pdp-intelligence-intimacy" data-section-id="{{ section.id }}">
+    <div class="ifi-scroll-track">
+      <div class="ifi-container">
+
+        <div class="ifi-header">
+          {%- if section.settings.label != blank -%}
+            <p class="ifi-label">{{ section.settings.label | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="ifi-title">{{ section.settings.heading | escape }}</h2>
+          {%- endif -%}
+        </div>
+
+        <!-- Mobile Carousel -->
+        <div class="ifi-mobile-layout">
+          <div class="ifi-carousel">
+            <div class="ifi-carousel-track">
+              {%- for block in section.blocks -%}
+                {%- if block.type != 'item' -%}{%- continue -%}{%- endif -%}
+                {%- assign m_alt = block.settings.title | strip | escape -%}
+                <div class="ifi-card" {{ block.shopify_attributes }}>
+                  <div class="ifi-card-img-wrapper">
+                    {%- if block.settings.image_mobile != blank -%}
+                      {{
+                        block.settings.image_mobile
+                        | image_url: width: 640
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '320, 480, 640',
+                          sizes: '320px',
+                          alt: m_alt
+                      }}
+                    {%- elsif block.settings.image_desktop != blank -%}
+                      {{
+                        block.settings.image_desktop
+                        | image_url: width: 640
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '320, 480, 640',
+                          sizes: '320px',
+                          alt: m_alt
+                      }}
+                    {%- endif -%}
+                  </div>
+                  <div class="ifi-card-content">
+                    <div class="ifi-card-top">
+                      {%- if block.settings.title != blank -%}
+                        <h3 class="ifi-card-title">{{ block.settings.title | escape }}</h3>
+                      {%- endif -%}
+                      <div class="ifi-card-line"></div>
+                    </div>
+                    {%- if block.settings.desc_short != blank -%}
+                      <p class="ifi-card-desc">{{ block.settings.desc_short | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+
+        <!-- PC Accordion Layout -->
+        <div class="ifi-pc-layout">
+          <div class="ifi-pc-left">
+            {%- for block in section.blocks -%}
+              {%- if block.type != 'item' -%}{%- continue -%}{%- endif -%}
+              <div
+                class="ifi-accordion-item{% if forloop.first %} is-active{% endif %}"
+                data-index="{{ forloop.index0 }}"
+                {{ block.shopify_attributes }}
+              >
+                <div class="ifi-accordion-line-wrapper">
+                  <div class="ifi-accordion-line-active"></div>
+                </div>
+                <div class="ifi-accordion-content">
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="ifi-accordion-title">{{ block.settings.title | escape }}</h3>
+                  {%- endif -%}
+                  <div class="ifi-accordion-desc-wrapper">
+                    {%- if block.settings.desc_long != blank -%}
+                      <p class="ifi-accordion-desc">{{ block.settings.desc_long | escape | newline_to_br }}</p>
+                    {%- elsif block.settings.desc_short != blank -%}
+                      <p class="ifi-accordion-desc">{{ block.settings.desc_short | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div class="ifi-pc-right">
+            {%- for block in section.blocks -%}
+              {%- if block.type != 'item' -%}{%- continue -%}{%- endif -%}
+              {%- assign pc_img = block.settings.image_desktop -%}
+              {%- if pc_img == blank -%}{%- assign pc_img = block.settings.image_mobile -%}{%- endif -%}
+              {%- if pc_img != blank -%}
+                {%- if forloop.first -%}
+                  {{
+                    pc_img
+                    | image_url: width: 840
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'ifi-pc-img is-active',
+                      widths: '420, 630, 840',
+                      sizes: '(min-width: 1000px) clamp(280px, 30vw, 420px), 0px',
+                      alt: ''
+                  }}
+                {%- else -%}
+                  {{
+                    pc_img
+                    | image_url: width: 840
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'ifi-pc-img',
+                      widths: '420, 630, 840',
+                      sizes: '(min-width: 1000px) clamp(280px, 30vw, 420px), 0px',
+                      alt: ''
+                  }}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.querySelector('.pdp-intelligence-intimacy[data-section-id="{{ section.id }}"]');
+      if (!root) return;
+
+      var items = root.querySelectorAll('.ifi-accordion-item');
+      var imgs  = root.querySelectorAll('.ifi-pc-img');
+      var container = root.querySelector('.ifi-container');
+      var isClicking = false;
+      var clickTimeout = null;
+
+      function getOffsets() {
+        var header = document.querySelector('.shopify-section--header');
+        var headerH = header ? header.offsetHeight : 0;
+        var nav = document.getElementById('pdp-sticky-nav-section');
+        var navH = nav ? nav.offsetHeight : 64;
+        var bar = document.getElementById('sticky-bar-pc');
+        var barH = bar ? bar.offsetHeight : 74;
+        return { headerH: headerH, navH: navH, barH: barH };
+      }
+
+      function updateStickyLayout() {
+        if (window.innerWidth < 1000) {
+          container.style.height = '';
+          container.style.minHeight = '';
+          container.style.top = '';
+          return;
+        }
+        var o = getOffsets();
+        var available = window.innerHeight - o.headerH - o.navH - o.barH;
+        container.style.height = available + 'px';
+        container.style.minHeight = available + 'px';
+        container.style.top = (o.headerH + o.navH) + 'px';
+      }
+
+      function setActive(index) {
+        items.forEach(function (el, i) {
+          el.classList.toggle('is-active', i === index);
+        });
+        imgs.forEach(function (el, i) {
+          el.classList.toggle('is-active', i === index);
+        });
+      }
+
+      window.addEventListener('resize', updateStickyLayout);
+      updateStickyLayout();
+
+      window.addEventListener('scroll', function () {
+        if (window.innerWidth < 1000 || isClicking) return;
+        var o = getOffsets();
+        var rect = root.getBoundingClientRect();
+        var scrolled = (o.headerH + o.navH) - rect.top;
+        var trackDist = root.offsetHeight - container.offsetHeight;
+        if (trackDist <= 0) return;
+        scrolled = Math.max(0, Math.min(scrolled, trackDist));
+        var progress = scrolled / trackDist;
+        var index = Math.min(Math.floor(progress * items.length), items.length - 1);
+        setActive(index);
+      });
+
+      items.forEach(function (item, i) {
+        item.addEventListener('click', function () {
+          if (window.innerWidth < 1000) return;
+          var o = getOffsets();
+          var trackDist = root.offsetHeight - container.offsetHeight;
+          if (trackDist <= 0) { setActive(i); return; }
+          var targetProgress = (i + 0.5) / items.length;
+          var sectionTop = window.scrollY + root.getBoundingClientRect().top;
+          var stickyStart = sectionTop - (o.headerH + o.navH);
+          isClicking = true;
+          setActive(i);
+          window.scrollTo({ top: stickyStart + targetProgress * trackDist, behavior: 'smooth' });
+          if (clickTimeout) clearTimeout(clickTimeout);
+          clickTimeout = setTimeout(function () { isClicking = false; }, 800);
+        });
+      });
+
+      document.addEventListener('shopify:section:load', function (e) {
+        if (e.detail && e.detail.sectionId === '{{ section.id }}') {
+          updateStickyLayout();
+        }
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PDP Intelligence Intimacy",
+  "tag": "section",
+  "class": "section-pdp-intelligence-intimacy",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "label",
+      "default": "SOFTWARE EXPERIENCE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "heading",
+      "default": "Intelligence for Intimacy"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "title",
+          "default": "title"
+        },
+        {
+          "type": "textarea",
+          "id": "desc_short",
+          "label": "desc short"
+        },
+        {
+          "type": "textarea",
+          "id": "desc_long",
+          "label": "desc long"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "image mobile"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_desktop",
+          "label": "image desktop"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PDP Intelligence Intimacy",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "title": "Stories Made for Your Mood",
+            "desc_short": "Slip into stories that match your mood, your pace, and your fantasies.",
+            "desc_long": "Slip into audio stories designed to meet you where you are—soft and slow, playful and teasing, or deeper and more intense. With a wide range of characters, tones, and fantasies to explore, every session can feel a little more like exactly what you're craving."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "Talk to Your AI, Not Just Hear It",
+            "desc_short": "Don't just listen. Talk, text, and shape the experience as it unfolds.",
+            "desc_long": "Don't just listen. Talk, text, and shape the experience as it unfolds."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "It Remembers You",
+            "desc_short": "Your AI remembers what you like, so each time feels more familiar and more personal.",
+            "desc_long": "Your AI remembers what you like, so each time feels more familiar and more personal."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

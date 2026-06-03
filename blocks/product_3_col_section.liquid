@@ -1,0 +1,1144 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-tech-features-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_mobile }}px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-tech-features-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_desktop }}px 40px;
+    }
+  }
+
+  .ai-tech-features__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ai-tech-features__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-tech-features__header-{{ ai_gen_id }} {
+      margin-bottom: 70px;
+    }
+  }
+
+  .ai-tech-features__subheading-{{ ai_gen_id }} {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: {{ block.settings.accent_color }};
+    margin-bottom: 16px;
+    font-weight: 600;
+    display: inline-block;
+    padding: 6px 16px;
+    background: {{ block.settings.accent_color }}1a;
+    border-radius: 20px;
+  }
+
+  .ai-tech-features__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size_mobile }}px;
+    line-height: 1.1;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 16px 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-tech-features__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+      letter-spacing: -1px;
+    }
+  }
+
+  .ai-tech-features__intro-{{ ai_gen_id }} {
+    font-size: {{ block.settings.intro_size_mobile }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.85;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-tech-features__intro-{{ ai_gen_id }} {
+      font-size: {{ block.settings.intro_size_desktop }}px;
+    }
+  }
+
+  .ai-tech-features__grid-{{ ai_gen_id }} {
+    display: grid;
+    gap: {{ block.settings.feature_gap_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-tech-features__grid-{{ ai_gen_id }} {
+      gap: {{ block.settings.feature_gap_desktop }}px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .ai-tech-features__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .ai-tech-feature-{{ ai_gen_id }} {
+    position: relative;
+    background: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    border: 1px solid {{ block.settings.card_border_color }};
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+
+  .ai-tech-feature-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, {{ block.settings.accent_color }}, {{ block.settings.accent_secondary }});
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .ai-tech-feature-{{ ai_gen_id }}:hover {
+    /* transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: {{ block.settings.accent_color }}40; */
+  }
+
+  .ai-tech-feature-{{ ai_gen_id }}:hover::before {
+    opacity: 1;
+  }
+
+  .ai-tech-feature__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ block.settings.image_aspect_ratio }};
+    overflow: hidden;
+    background: linear-gradient(135deg, {{ block.settings.image_gradient_start }}, {{ block.settings.image_gradient_end }});
+  }
+
+  .ai-tech-feature__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .ai-tech-feature-{{ ai_gen_id }}:hover .ai-tech-feature__image-{{ ai_gen_id }} {
+    /* transform: scale(1.05); */
+  }
+
+  .ai-tech-feature__image-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .ai-tech-feature-{{ ai_gen_id }}:hover .ai-tech-feature__image-overlay-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .ai-tech-feature__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-tech-feature__image-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.2;
+  }
+
+  .ai-tech-feature__badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: {{ block.settings.badge_background }};
+    color: {{ block.settings.badge_text_color }};
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+  }
+
+  .ai-tech-feature__content-{{ ai_gen_id }} {
+    padding: {{ block.settings.content_padding_mobile }}px;
+    position: relative;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-tech-feature__content-{{ ai_gen_id }} {
+      padding: {{ block.settings.content_padding_desktop }}px;
+    }
+  }
+
+  .ai-tech-feature__icon-wrapper-{{ ai_gen_id }} {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, {{ block.settings.accent_color }}20, {{ block.settings.accent_secondary }}20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    transition: transform 0.4s ease;
+    overflow: hidden;
+  }
+
+  .ai-tech-feature-{{ ai_gen_id }}:hover .ai-tech-feature__icon-wrapper-{{ ai_gen_id }} {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .ai-tech-feature__icon-{{ ai_gen_id }} {
+    width: 24px;
+    height: 24px;
+    color: {{ block.settings.accent_color }};
+  }
+
+  .ai-tech-feature__icon-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8px;
+  }
+
+  .ai-tech-feature__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.feature_title_size_mobile }}px;
+    line-height: 1.3;
+    color: {{ block.settings.feature_title_color }};
+    margin: 0 0 14px 0;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-tech-feature__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.feature_title_size_desktop }}px;
+    }
+  }
+
+  .ai-tech-feature__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.feature_text_size_mobile }}px;
+    line-height: 1.7;
+    color: {{ block.settings.feature_text_color }};
+    margin: 0 0 20px 0;
+    opacity: 0.9;
+    
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-tech-feature__description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.feature_text_size_desktop }}px;
+    }
+  }
+
+  .ai-tech-feature__list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ai-tech-feature__list-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: {{ block.settings.feature_text_size_mobile }}px;
+    line-height: 1.6;
+    color: {{ block.settings.feature_text_color }};
+    opacity: 0.85;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-tech-feature__list-item-{{ ai_gen_id }} {
+      font-size: {{ block.settings.feature_text_size_desktop }}px;
+    }
+  }
+
+  .ai-tech-feature__list-item-{{ ai_gen_id }}:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-tech-feature__check-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, {{ block.settings.accent_color }}, {{ block.settings.accent_secondary }});
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .ai-tech-feature__check-icon-{{ ai_gen_id }} {
+    width: 10px;
+    height: 10px;
+    color: #ffffff;
+  }
+
+  .ai-tech-feature__cta-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    color: {{ block.settings.accent_color }};
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s ease;
+  }
+
+  .ai-tech-feature-{{ ai_gen_id }}:hover .ai-tech-feature__cta-{{ ai_gen_id }} {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .ai-tech-feature__cta-arrow-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-tech-feature__cta-{{ ai_gen_id }}:hover .ai-tech-feature__cta-arrow-{{ ai_gen_id }} {
+    transform: translateX(4px);
+  }
+
+  .ai-tech-feature__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    font-size: 11px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+  }
+
+  .ai-tech-feature--full-width-{{ ai_gen_id }} {
+    grid-column: 1 / -1;
+  }
+
+  @media screen and (min-width: 990px) {
+    .ai-tech-feature--full-width-{{ ai_gen_id }} .ai-tech-feature__content-{{ ai_gen_id }} {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+  }
+{% endstyle %}
+
+<tech-features-{{ ai_gen_id }} class="ai-tech-features-{{ ai_gen_id }} ai-tech-features-section" {{ block.shopify_attributes }}>
+  <div class="ai-tech-features__container-{{ ai_gen_id }}">
+    {% if block.settings.subheading != blank or block.settings.heading != blank or block.settings.intro != blank %}
+      <div class="ai-tech-features__header-{{ ai_gen_id }}">
+        {% if block.settings.subheading != blank %}
+          <div class="ai-tech-features__subheading-{{ ai_gen_id }}">
+            {{ block.settings.subheading }}
+          </div>
+        {% endif %}
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-tech-features__heading-{{ ai_gen_id }}">
+            {{ block.settings.heading }}
+          </h2>
+        {% endif %}
+        {% if block.settings.intro != blank %}
+          <div class="ai-tech-features__intro-{{ ai_gen_id }}">
+            {{ block.settings.intro }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-tech-features__grid-{{ ai_gen_id }}">
+      {% for i in (1..5) %}
+        {% liquid
+          assign feature_enabled_key = 'feature_' | append: i | append: '_enabled'
+          assign feature_image_key = 'feature_' | append: i | append: '_image'
+          assign feature_show_icon_key = 'feature_' | append: i | append: '_show_icon'
+          assign feature_icon_key = 'feature_' | append: i | append: '_icon'
+          assign feature_badge_key = 'feature_' | append: i | append: '_badge'
+          assign feature_title_key = 'feature_' | append: i | append: '_title'
+          assign feature_description_key = 'feature_' | append: i | append: '_description'
+          assign feature_list_key = 'feature_' | append: i | append: '_list'
+          assign feature_full_width_key = 'feature_' | append: i | append: '_full_width'
+
+          assign feature_enabled = block.settings[feature_enabled_key]
+          assign feature_image = block.settings[feature_image_key]
+          assign feature_show_icon = block.settings[feature_show_icon_key]
+          assign feature_icon = block.settings[feature_icon_key]
+          assign feature_badge = block.settings[feature_badge_key]
+          assign feature_title = block.settings[feature_title_key]
+          assign feature_description = block.settings[feature_description_key]
+          assign feature_list = block.settings[feature_list_key]
+          assign feature_full_width = block.settings[feature_full_width_key]
+        %}
+
+        {% if feature_enabled %}
+          <div class="ai-tech-feature-{{ ai_gen_id }} {% if feature_full_width %}ai-tech-feature--full-width-{{ ai_gen_id }}{% endif %}" data-feature-index="{{ i }}">
+            <div class="ai-tech-feature__image-wrapper-{{ ai_gen_id }}">
+              {% if feature_image %}
+                <img
+                  src="{{ feature_image | image_url: width: 1400 }}"
+                  alt="{{ feature_image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ feature_image.width }}"
+                  height="{{ feature_image.height }}"
+                  class="ai-tech-feature__image-{{ ai_gen_id }}"
+                >
+                <div class="ai-tech-feature__image-overlay-{{ ai_gen_id }}"></div>
+              {% else %}
+                <div class="ai-tech-feature__image-placeholder-{{ ai_gen_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                  <div class="ai-tech-feature__empty-state-{{ ai_gen_id }}">
+                    Add feature image
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if feature_badge != blank %}
+                <div class="ai-tech-feature__badge-{{ ai_gen_id }}">
+                  {{ feature_badge }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="ai-tech-feature__content-{{ ai_gen_id }}">
+              <div>
+                {% if feature_show_icon %}
+                  <div class="ai-tech-feature__icon-wrapper-{{ ai_gen_id }}">
+                    {% if feature_icon %}
+                      <img
+                        src="{{ feature_icon | image_url: width: 100 }}"
+                        alt="{{ feature_title | escape }}"
+                        loading="lazy"
+                        width="48"
+                        height="48"
+                        class="ai-tech-feature__icon-image-{{ ai_gen_id }}"
+                      >
+                    {% else %}
+                      <svg class="ai-tech-feature__icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 6v6l4 2"></path>
+                      </svg>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if feature_title != blank %}
+                  <h3 class="ai-tech-feature__title-{{ ai_gen_id }}">
+                    {{ feature_title }}
+                  </h3>
+                {% endif %}
+
+                {% if feature_description != blank %}
+                  <div class="ai-tech-feature__description-{{ ai_gen_id }}" style="{% if feature_list == blank %}margin-bottom: 0{% endif %}">
+                    {{ feature_description }}
+                  </div>
+                {% endif %}
+              </div>
+
+              {% if feature_list != blank %}
+                {% assign list_items = feature_list | split: '|' %}
+                <ul class="ai-tech-feature__list-{{ ai_gen_id }}">
+                  {% for item in list_items %}
+                    {% assign trimmed_item = item | strip %}
+                    {% if trimmed_item != blank %}
+                      <li class="ai-tech-feature__list-item-{{ ai_gen_id }}">
+                        <span class="ai-tech-feature__check-{{ ai_gen_id }}">
+                          <svg class="ai-tech-feature__check-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </span>
+                        <span>{{ trimmed_item }}</span>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</tech-features-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TechFeatures{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupInteractions();
+        this.setupAccessibility();
+      }
+
+      setupInteractions() {
+        const features = this.querySelectorAll('.ai-tech-feature-{{ ai_gen_id }}');
+        
+        features.forEach((feature) => {
+          feature.addEventListener('mouseenter', () => {
+            this.handleFeatureHover(feature);
+          });
+
+          feature.addEventListener('mouseleave', () => {
+            this.handleFeatureLeave(feature);
+          });
+        });
+      }
+
+      handleFeatureHover(feature) {
+        const icon = feature.querySelector('.ai-tech-feature__icon-wrapper-{{ ai_gen_id }}');
+        if (icon) {
+          icon.style.transform = 'scale(1.1) rotate(5deg)';
+        }
+      }
+
+      handleFeatureLeave(feature) {
+        const icon = feature.querySelector('.ai-tech-feature__icon-wrapper-{{ ai_gen_id }}');
+        if (icon) {
+          icon.style.transform = '';
+        }
+      }
+
+      setupAccessibility() {
+        const features = this.querySelectorAll('.ai-tech-feature-{{ ai_gen_id }}');
+        features.forEach((feature, index) => {
+          feature.setAttribute('role', 'article');
+          feature.setAttribute('aria-label', `Feature ${index + 1}`);
+          feature.setAttribute('tabindex', '0');
+        });
+      }
+    }
+
+    customElements.define('tech-features-{{ ai_gen_id }}', TechFeatures{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hardware features",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Hardware"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bionic Reality"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction text",
+      "default": "<p>Experience the future of intimate technology with precision-engineered hardware designed for your body.</p>"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (desktop)",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "intro_size_mobile",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Intro size (mobile)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "intro_size_desktop",
+      "min": 15,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Intro size (desktop)",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 900,
+      "max": 1800,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding (mobile)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "min": 60,
+      "max": 240,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding (desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "feature_gap_mobile",
+      "min": 15,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Feature spacing (mobile)",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "feature_gap_desktop",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Feature spacing (desktop)",
+      "default": 35
+    },
+    {
+      "type": "header",
+      "content": "Feature cards"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "21 / 9",
+          "label": "21:9 (Ultra wide)"
+        },
+        {
+          "value": "16 / 9",
+          "label": "16:9 (Landscape)"
+        },
+        {
+          "value": "4 / 3",
+          "label": "4:3"
+        },
+        {
+          "value": "3 / 2",
+          "label": "3:2"
+        }
+      ],
+      "default": "16 / 9"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Content padding (mobile)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "content_padding_desktop",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Content padding (desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size_mobile",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Feature title size (mobile)",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size_desktop",
+      "min": 20,
+      "max": 44,
+      "step": 2,
+      "unit": "px",
+      "label": "Feature title size (desktop)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size_mobile",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Feature text size (mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size_desktop",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Feature text size (desktop)",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#f287ec"
+    },
+    {
+      "type": "color",
+      "id": "accent_secondary",
+      "label": "Accent secondary",
+      "default": "#a855f7"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#2a2a2a"
+    },
+    {
+      "type": "color",
+      "id": "feature_title_color",
+      "label": "Feature title",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Feature text",
+      "default": "#b0b0b0"
+    },
+    {
+      "type": "color",
+      "id": "image_gradient_start",
+      "label": "Image gradient start",
+      "default": "#2a2a2a"
+    },
+    {
+      "type": "color",
+      "id": "image_gradient_end",
+      "label": "Image gradient end",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#ffffff20"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Feature 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_1_enabled",
+      "label": "Enable feature 1",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_1_full_width",
+      "label": "Full width layout",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_1_show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_1_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_badge",
+      "label": "Badge text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_1_title",
+      "label": "Title",
+      "default": "Bionic Reality"
+    },
+    {
+      "type": "richtext",
+      "id": "feature_1_description",
+      "label": "Description",
+      "default": "<p>The SensOn device V1 reproduces the complexity of real human touch, delivering triple stimulation across the clitoris, vagina, and nipples in perfect synchrony.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_1_list",
+      "label": "List items",
+      "info": "Separate each item with a | character",
+      "default": "Clitoral stimulator uses precise air pressure to recreate natural suction|Vaginal stimulator replicates lifelike thrust and pressure, engaging the U G A trio of pleasure points|Nipple stimulator applies rhythmic kneading that envelops the body in warmth"
+    },
+    {
+      "type": "header",
+      "content": "Feature 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_2_enabled",
+      "label": "Enable feature 2",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_2_full_width",
+      "label": "Full width layout",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_2_show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_2_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_badge",
+      "label": "Badge text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_2_title",
+      "label": "Title",
+      "default": "Hands-Free Freedom"
+    },
+    {
+      "type": "richtext",
+      "id": "feature_2_description",
+      "label": "Description",
+      "default": "<p>S1's ergonomic, adjustable form fits naturally between the thighs. Once positioned, it holds securely without the need for hands, allowing full relaxation and complete immersion in the experience.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_2_list",
+      "label": "List items",
+      "info": "Separate each item with a | character"
+    },
+    {
+      "type": "header",
+      "content": "Feature 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_3_enabled",
+      "label": "Enable feature 3",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_3_full_width",
+      "label": "Full width layout",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_3_show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_3_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_badge",
+      "label": "Badge text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_3_title",
+      "label": "Title",
+      "default": "Sensory Intelligence"
+    },
+    {
+      "type": "richtext",
+      "id": "feature_3_description",
+      "label": "Description",
+      "default": "<p>An advanced sensor system captures intentional thigh squeezing during use, translating subtle changes in pressure and rhythm into immediate response.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_3_list",
+      "label": "List items",
+      "info": "Separate each item with a | character"
+    },
+    {
+      "type": "header",
+      "content": "Feature 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_4_enabled",
+      "label": "Enable feature 4",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_4_full_width",
+      "label": "Full width layout",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_4_show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_4_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "feature_4_badge",
+      "label": "Badge text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_4_title",
+      "label": "Title",
+      "default": "Modular Design"
+    },
+    {
+      "type": "richtext",
+      "id": "feature_4_description",
+      "label": "Description",
+      "default": "<p>Each component is fully detachable and customizable. Users can freely combine the clitoral stimulator, vaginal stimulator, and nipple stimulator to suit a wide range of preferences.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_4_list",
+      "label": "List items",
+      "info": "Separate each item with a | character"
+    },
+    {
+      "type": "header",
+      "content": "Feature 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_5_enabled",
+      "label": "Enable feature 5",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_5_full_width",
+      "label": "Full width layout",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_5_show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_5_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "feature_5_badge",
+      "label": "Badge text",
+      "default": "Premium"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "feature_5_title",
+      "label": "Title",
+      "default": "Every Detail Considered"
+    },
+    {
+      "type": "richtext",
+      "id": "feature_5_description",
+      "label": "Description",
+      "default": "<p>Premium materials and thoughtful engineering come together in every aspect of the device.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "feature_5_list",
+      "label": "List items",
+      "info": "Separate each item with a | character",
+      "default": "A wireless charging and storage case keeps the device powered, protected, and discreet|Made with FDA-compliant, body-safe silicone to ensure lasting comfort and safety with every use|Waterproof to IPX6 for easy cleaning and flexibility in different settings|Dual connectivity through Bluetooth and Wi-Fi enables seamless control and updates from the SensOn.AI app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "产品页1行3列功能介绍"
+    }
+  ]
+}
+{% endschema %}

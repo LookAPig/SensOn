@@ -1,0 +1,477 @@
+<section class="custom-swiper-outer section-spacing">
+  <div class="custom-swiper-title-wrapper">
+    {% if section.settings.title %}
+      <h3>{{ section.settings.title }}</h3>
+    {% endif %}
+    {% if section.settings.subtitle %}
+      <p>{{ section.settings.subtitle }}</p>
+    {% endif %}
+  </div>
+  <section class="custom-swiper-wrapper">
+    <section class="custom-swiper-section">
+      <div class="swiper custom-swiper">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide" data-index="{{ forloop.index0 }}">
+              <div>
+                {% if block.settings.image %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 1600 }}"
+                    alt="{{ block.settings.image.alt | escape }}"
+                    loading="lazy"
+                  >
+                {% endif %}
+
+                {% if block.settings.video != blank %}
+                  <video
+                    class="swiper-item-video js-swiper-item-video"
+                    src="{{ block.settings.video }}"
+                    preload="auto"
+                    loop
+                    playsinline
+                  ></video>
+                  <div class="swiper-item-play js-swiper-item-play">
+                    {% comment %} 播放 {% endcomment %}
+                    <svg class="svg-play" fill="#fff" viewBox="0 0 24 24" width="30" height="30">
+                      <path  d="M8 5v14l11-7z"></path>
+                    </svg>
+                    {% comment %} 暂停 {% endcomment %}
+                    <svg class="svg-pause" fill="#fff" viewBox="0 0 24 24" width="30" height="30">
+                      <path  d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
+                    </svg>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.name != blank %}
+                  <div class="swiper-item-name">{{ block.settings.name }}</div>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- 控件 -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </section>
+  </section>
+</section>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+  defer
+></script>
+
+<script>
+  function initCustomSwiper(scope = document) {
+  scope.querySelectorAll('.custom-swiper').forEach(swiperEl => {
+
+    // 防止重复初始化
+    if (swiperEl.swiper) {
+      swiperEl.swiper.destroy(true, true);
+    }
+
+    const slideIns = new Swiper(swiperEl, {
+      slidesPerView: 'auto',
+      loop: false,
+      centeredSlides: true,
+      watchOverflow: true,
+      initialSlide: 2,
+
+      navigation: {
+        nextEl: swiperEl.parentNode.querySelector('.swiper-button-next'),
+        prevEl: swiperEl.parentNode.querySelector('.swiper-button-prev')
+      },
+
+      breakpoints: {
+        768: {
+          slidesPerView: 'auto',
+          spaceBetween: 20
+        },
+        1024: {
+          slidesPerView: 'auto',
+          spaceBetween: 20
+        }
+      }
+    });
+
+    let currentVideo;
+
+    swiperEl.querySelectorAll('.swiper-slide').forEach(slide => {
+      slide.addEventListener('click', (e) => {
+        const index = parseInt(slide.dataset.index);
+
+        if (!slide.querySelector('a') || e.target.tagName !== 'A') {
+          slideIns.slideTo(index);
+
+          if (currentVideo) {
+            currentVideo.pause();
+            currentVideo.currentTime = 0;
+            currentVideo.classList.remove("active");
+          }
+        }
+      });
+
+      const playEl = slide.querySelector(".js-swiper-item-play");
+      const videoEl = slide.querySelector(".js-swiper-item-video");
+
+      if (playEl && videoEl) {
+        playEl.addEventListener("click", (e) => {
+          e.stopPropagation();
+
+          if (!playEl.classList.contains('active')) {
+            videoEl.play();
+            videoEl.classList.add("active");
+            currentVideo = videoEl;
+          } else {
+            videoEl.pause();
+            videoEl.currentTime = 0;
+            videoEl.classList.remove("active");
+          }
+
+          playEl.classList.toggle("active");
+        });
+      }
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initCustomSwiper();
+});
+
+if (window.Shopify && Shopify.designMode) {
+
+  // section 被重新渲染
+  document.addEventListener('shopify:section:load', (e) => {
+    initCustomSwiper(e.target);
+  });
+
+  // section 删除
+  document.addEventListener('shopify:section:unload', (e) => {
+    e.target.querySelectorAll('.custom-swiper').forEach(el => {
+      if (el.swiper) {
+        el.swiper.destroy(true, true);
+      }
+    });
+  });
+
+  // block 选中时自动切到对应 slide（可选）
+  document.addEventListener('shopify:block:select', (e) => {
+    const slide = e.target.closest('.swiper-slide');
+    if (!slide) return;
+
+    const swiperEl = slide.closest('.custom-swiper');
+    if (!swiperEl || !swiperEl.swiper) return;
+
+    swiperEl.swiper.slideTo(parseInt(slide.dataset.index));
+  });
+
+}
+</script>
+
+<style>
+     .custom-swiper-outer {
+       width: 100%;
+       overflow-x: hidden;
+       {% comment %} padding: 80px 0; {% endcomment %}
+     }
+
+     .custom-swiper-wrapper {
+       max-width: 1400px;
+       margin: 0 auto;
+       position: relative;
+     }
+     .custom-swiper-section img,
+     .custom-swiper-section .swiper-slide > div {
+       width: 100%;
+       display: block;
+       border-radius: 12px;
+       position: relative;
+       overflow: hidden
+     }
+     .custom-swiper-section .swiper-slide > div {
+       width: 66%;
+       aspect-ratio: inherit;
+       transition: width 0.15s ease-in-out;
+     }
+
+     .custom-swiper-section h3 {
+       margin-top: 12px;
+       text-align: center;
+     }
+     .custom-swiper-section {
+       max-width: 1000px;
+       margin: 0 auto;
+       max-height: 510px;
+     }
+     .custom-swiper-section .swiper {
+       overflow: visible;
+     }
+     .custom-swiper-section .swiper-slide {
+       width: 320px;
+       aspect-ratio: 3 / 4; /* 宽 : 高 = 3 : 4 */
+       height: auto;
+       flex-shrink: 0;
+       flex-grow: 0;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+     }
+
+     .custom-swiper-section .swiper-slide.swiper-slide-prev > div,
+     .custom-swiper-section .swiper-slide.swiper-slide-next > div {
+       width: 80%;
+     }
+     .custom-swiper-section .swiper-slide.swiper-slide-active > div {
+       width: 100%;
+     }
+
+     .custom-swiper-section .swiper-button-prev,
+     .custom-swiper-section .swiper-button-next {
+       --tw-text-opacity: 1;
+       color: rgb(236 72 153 / var(--tw-text-opacity, 1));
+       backdrop-filter: blur(4px);
+       background-color: rgba(255, 255, 255, 0.2);
+       width: 48px;
+       height: 48px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       border-radius: 50%;
+       box-shadow:
+         rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+         rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+         rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+         rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
+     }
+     .custom-swiper-section .swiper-button-prev::after,
+     .custom-swiper-section .swiper-button-next::after {
+       font-size: 14px;
+     }
+
+
+     .swiper-item-name {
+       position: absolute;
+       color: #fff;
+       bottom: 20px;
+       width: 100%;
+       text-align: center;
+       transition: scale 0.15s ease-in-out;
+     }
+     .custom-swiper-section .swiper-slide.swiper-slide-active .swiper-item-name{
+       transform: scale(1.5);
+     }
+
+     .swiper-item-video {
+       position: absolute;
+       width: 100%;
+       height: 100%;
+       top: 0;
+       left: 0;
+       opacity: 0;
+     }
+     .swiper-item-video.active {
+       opacity: 1;
+     }
+
+     .swiper-item-play {
+       position: absolute;
+       background-color: rgb(242 135 236 / 0.9);
+       bottom: 48px;
+       width: 64px;
+       height: 64px;
+       left: 50%;
+       margin-left: -32px;
+       border-radius: 50%;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       cursor: pointer;
+       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+     }
+
+     .swiper-item-play:hover {
+       background-color: rgb(242 135 236);
+       transform: scaleX(1.1) scaleY(1.1)
+     }
+
+     .swiper-item-play .svg-pause {
+       display: none;
+     }
+
+     .swiper-item-play.active .svg-play {
+       display: none;
+     }
+     .swiper-item-play.active .svg-pause {
+       display: block;
+
+     }
+     .swiper-item-play.active {
+       animation: play 1.5s ease-in-out infinite;
+     }
+
+     .custom-swiper-section .swiper-slide .swiper-item-play {
+       display: none;
+     }
+     .custom-swiper-section .swiper-slide.swiper-slide-active .swiper-item-play {
+       display: flex;
+     }
+
+     @media (max-width: 768px) {
+       .custom-swiper-section .swiper-slide {
+         width: 240px;
+       }
+       .custom-swiper-section .swiper-button-prev::after,
+       .custom-swiper-section .swiper-button-next::after {
+         font-size: 12px;
+       }
+       .custom-swiper-section .swiper-button-prev,
+       .custom-swiper-section .swiper-button-next {
+         width: 40px;
+         height: 40px;
+       }
+     }
+
+     @keyframes play {
+       0%,
+       100% {
+         box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
+       }
+
+       50% {
+         box-shadow: 0 0 0 10px rgba(168, 85, 247, 0);
+       }
+     }
+
+.custom-swiper-title-wrapper{
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.custom-swiper-title-wrapper h3{
+  font-size: {{ section.settings.title_size | default: 24 }}px;
+  color: {{ section.settings.title_color | default: '#000' }};
+  margin: 0 0 10px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.custom-swiper-title-wrapper p{
+  font-size: {{ section.settings.subtitle_size | default: 16 }}px;
+  color: {{ section.settings.subtitle_color | default: '#666' }};
+  margin: 0;
+  line-height: 1.5;
+  padding: 0 10px;
+}
+
+@media screen and (max-width: 750px) {
+  .custom-swiper-title-wrapper h3{
+    font-size: {{ section.settings.title_size_mobile | default: section.settings.title_size }}px;
+  }
+  .custom-swiper-title-wrapper p{
+    font-size: {{ section.settings.subtitle_size_mobile | default: section.settings.subtitle_size }}px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Custom Swiper",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "标题文本设置"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "主标题"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题"
+    },
+    {
+      "type": "header",
+      "content": "标题颜色设置"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "主标题",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "副标题",
+      "default": "#ccc"
+    },
+    {
+      "type": "header",
+      "content": "标题大小设置"
+    },
+    {
+      "type": "number",
+      "id": "title_size",
+      "label": "主标题",
+      "default": 32
+    },
+    {
+      "type": "number",
+      "id": "subtitle_size",
+      "label": "副标题",
+      "default": 24
+    },
+    {
+      "type": "number",
+      "id": "title_size_mobile",
+      "label": "主标题移动端",
+      "default": 32
+    },
+    {
+      "type": "number",
+      "id": "subtitle_size_mobile",
+      "label": "副标题移动端",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片"
+        },
+        {
+          "type": "url",
+          "id": "video",
+          "label": "视频"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "名称文本"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Swiper",
+      "blocks": [{ "type": "slide" }, { "type": "slide" }, { "type": "slide" }]
+    }
+  ]
+}
+{% endschema %}

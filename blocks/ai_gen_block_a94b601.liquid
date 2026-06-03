@@ -1,0 +1,550 @@
+{% doc %}
+  @prompt
+    The left side features a title, a bulleted list of key points, and a CTA button, while the right side displays a character/scene image and an overlay information card (UI overlay). The button color should be adjustable and support gradients. The overall style is tech-oriented, sophisticated, and understated. Image size and height are adjustable.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-tech-split-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding }}px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-tech-split-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .ai-tech-split-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ai-tech-split-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-tech-split-list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ai-tech-split-list-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-tech-split-bullet-{{ ai_gen_id }} {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: {{ block.settings.bullet_color }};
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .ai-tech-split-cta-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    {% if block.settings.button_gradient != blank %}
+      background: {{ block.settings.button_gradient }};
+    {% else %}
+      background-color: {{ block.settings.button_color }};
+    {% endif %}
+    color: {{ block.settings.button_text_color }};
+  }
+
+  .ai-tech-split-cta-{{ ai_gen_id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-tech-split-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+  }
+
+  .ai-tech-split-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .ai-tech-split-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #e5e5e5;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-tech-split-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    opacity: 0.3;
+  }
+
+  .ai-tech-split-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-tech-split-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: {{ block.settings.overlay_position_bottom }}px;
+    right: {{ block.settings.overlay_position_right }}px;
+    background-color: {{ block.settings.overlay_bg_color }};
+    backdrop-filter: blur(10px);
+    padding: 20px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    max-width: 280px;
+  }
+
+  .ai-tech-split-overlay-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.overlay_title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.overlay_text_color }};
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .ai-tech-split-overlay-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.overlay_text_size }}px;
+    color: {{ block.settings.overlay_text_color }};
+    margin: 0;
+    line-height: 1.5;
+    opacity: 0.9;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-tech-split-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .ai-tech-split-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-tech-split-image-wrapper-{{ ai_gen_id }} {
+      height: {{ block.settings.image_height | times: 0.7 }}px;
+    }
+
+    .ai-tech-split-overlay-{{ ai_gen_id }} {
+      bottom: 20px;
+      right: 20px;
+      max-width: 220px;
+      padding: 16px 20px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-tech-split-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding | times: 0.6 }}px 16px;
+    }
+
+    .ai-tech-split-overlay-{{ ai_gen_id }} {
+      position: static;
+      max-width: 100%;
+      margin-top: 16px;
+    }
+  }
+{% endstyle %}
+
+<tech-split-section-{{ ai_gen_id }}
+  class="ai-tech-split-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-tech-split-container-{{ ai_gen_id }}">
+    <div class="ai-tech-split-content-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-tech-split-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+
+      {% if block.settings.point_1 != blank or block.settings.point_2 != blank or block.settings.point_3 != blank or block.settings.point_4 != blank or block.settings.point_5 != blank %}
+        <ul class="ai-tech-split-list-{{ ai_gen_id }}">
+          {% if block.settings.point_1 != blank %}
+            <li class="ai-tech-split-list-item-{{ ai_gen_id }}">
+              <span class="ai-tech-split-bullet-{{ ai_gen_id }}"></span>
+              <span>{{ block.settings.point_1 }}</span>
+            </li>
+          {% endif %}
+          {% if block.settings.point_2 != blank %}
+            <li class="ai-tech-split-list-item-{{ ai_gen_id }}">
+              <span class="ai-tech-split-bullet-{{ ai_gen_id }}"></span>
+              <span>{{ block.settings.point_2 }}</span>
+            </li>
+          {% endif %}
+          {% if block.settings.point_3 != blank %}
+            <li class="ai-tech-split-list-item-{{ ai_gen_id }}">
+              <span class="ai-tech-split-bullet-{{ ai_gen_id }}"></span>
+              <span>{{ block.settings.point_3 }}</span>
+            </li>
+          {% endif %}
+          {% if block.settings.point_4 != blank %}
+            <li class="ai-tech-split-list-item-{{ ai_gen_id }}">
+              <span class="ai-tech-split-bullet-{{ ai_gen_id }}"></span>
+              <span>{{ block.settings.point_4 }}</span>
+            </li>
+          {% endif %}
+          {% if block.settings.point_5 != blank %}
+            <li class="ai-tech-split-list-item-{{ ai_gen_id }}">
+              <span class="ai-tech-split-bullet-{{ ai_gen_id }}"></span>
+              <span>{{ block.settings.point_5 }}</span>
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
+
+      {% if block.settings.cta_text != blank %}
+        <a
+          href="{{ block.settings.cta_link }}"
+          class="ai-tech-split-cta-{{ ai_gen_id }}"
+        >
+          {{ block.settings.cta_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="ai-tech-split-image-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.image %}
+        <img
+          src="{{ block.settings.image | image_url: width: 1400 }}"
+          alt="{{ block.settings.image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.image.width }}"
+          height="{{ block.settings.image.height }}"
+          class="ai-tech-split-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-tech-split-image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-tech-split-empty-state-{{ ai_gen_id }}">
+            Next, add an image
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.show_overlay %}
+        <div class="ai-tech-split-overlay-{{ ai_gen_id }}">
+          {% if block.settings.overlay_title != blank %}
+            <h3 class="ai-tech-split-overlay-title-{{ ai_gen_id }}">{{ block.settings.overlay_title }}</h3>
+          {% endif %}
+          {% if block.settings.overlay_text != blank %}
+            <p class="ai-tech-split-overlay-text-{{ ai_gen_id }}">{{ block.settings.overlay_text }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</tech-split-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TechSplitSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('tech-split-section-{{ ai_gen_id }}', TechSplitSection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Tech split section",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Left content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Advanced Technology Solutions"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "text",
+      "id": "point_1",
+      "label": "Key point 1",
+      "default": "Enterprise-grade security and compliance"
+    },
+    {
+      "type": "text",
+      "id": "point_2",
+      "label": "Key point 2",
+      "default": "Real-time data synchronization across platforms"
+    },
+    {
+      "type": "text",
+      "id": "point_3",
+      "label": "Key point 3",
+      "default": "AI-powered analytics and insights"
+    },
+    {
+      "type": "text",
+      "id": "point_4",
+      "label": "Key point 4",
+      "default": "Seamless integration with existing systems"
+    },
+    {
+      "type": "text",
+      "id": "point_5",
+      "label": "Key point 5"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "bullet_color",
+      "label": "Bullet color",
+      "default": "#4a90e2"
+    },
+    {
+      "type": "header",
+      "content": "CTA button"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#4a90e2"
+    },
+    {
+      "type": "color_background",
+      "id": "button_gradient",
+      "label": "Button gradient"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Right image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height",
+      "min": 300,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "header",
+      "content": "Overlay card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Show overlay card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "overlay_title",
+      "label": "Overlay title",
+      "default": "99.9% Uptime"
+    },
+    {
+      "type": "textarea",
+      "id": "overlay_text",
+      "label": "Overlay text",
+      "default": "Trusted by over 10,000 businesses worldwide"
+    },
+    {
+      "type": "range",
+      "id": "overlay_title_size",
+      "label": "Overlay title size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "overlay_text_size",
+      "label": "Overlay text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "overlay_bg_color",
+      "label": "Overlay background",
+      "default": "rgba(255, 255, 255, 0.95)"
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Overlay text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "overlay_position_bottom",
+      "label": "Overlay position from bottom",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "overlay_position_right",
+      "label": "Overlay position from right",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tech split section"
+    }
+  ]
+}
+{% endschema %}

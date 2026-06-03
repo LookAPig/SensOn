@@ -1,0 +1,634 @@
+{% doc %}
+  @prompt
+    We need a custom Shopify 2.0 section with a full-width “hero background” image that fills the entire section (background-size: cover, background-position: center). On top of the background, place a content container aligned to the right side (right-aligned text panel, no separate image element). The content panel includes: a large H2 title, a short subtitle/intro line, then multiple text blocks with bold subheadings and paragraphs. Add a dark overlay over the background (or a subtle gradient overlay from left→right) to ensure the right-side text is readable while keeping the background visible.
+    
+    Mobile behavior:
+    On mobile, the text panel should become centered (or full-width) with padding, and the background remains cover. Use stronger overlay on mobile for readability. Reduce font sizes and maintain comfortable line-height. No overflow, no text touching edges.
+    
+    Theme Editor settings:
+    
+    Background image (desktop) + optional background image (mobile)
+    
+    Overlay type (solid / gradient) + opacity slider
+    
+    Content alignment (right / center)
+    
+    Max content width (e.g., 520–680px)
+    
+    Title, subtitle, and repeatable text blocks (heading + paragraph)
+    
+    Optional CTA button (text + link), Our Future
+    SensOn is not a one-product idea. It’s a new platform for female pleasure—designed to evolve.
+    In the near future, you’ll see:
+    Create your own fantasies—Freely
+     Write your own scenes, shape your own pacing, and build stories that fit you exactly. You can also bring in familiar characters you already love from other platforms—so your cyber crush doesn’t stay on a screen. It becomes a lover you can truly feel and touch.
+    Next-generation robotics, made for warmth—not coldness
+     Not a cold, mechanical humanoid. We’re building a handsome, ultra-lightweight machine lover designed specifically for women—one that can do more than sex. It can hold you, hug you, and lull you to sleep. A partner engineered for intimacy, presence, and comfort—made to feel real in the ways that matter most.
+    Femtech, with women at the center
+     We believe in the significance of femtech—its purpose, its dignity, and its urgency. And we want to build this future with more women contributors across the technology world: engineers, researchers, designers, creators, and founders. Together, we will explore what pleasure technology can become—more advanced, more human, and more worthy of women.帮我把文案写上
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-hero-section-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .ai-hero-background-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .ai-hero-background-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .ai-hero-background-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-hero-background-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 600px;
+  }
+
+  .ai-hero-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    {% if block.settings.overlay_type == 'solid' %}
+      background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity }});
+    {% elsif block.settings.overlay_type == 'gradient' %}
+      background: linear-gradient(to right, rgba(0, 0, 0, {{ block.settings.overlay_opacity }}), rgba(0, 0, 0, 0));
+    {% endif %}
+  }
+
+  .ai-hero-container-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    padding: 60px 40px;
+    display: flex;
+    {% if block.settings.content_alignment == 'right' %}
+      justify-content: flex-end;
+    {% else %}
+      justify-content: center;
+    {% endif %}
+  }
+
+  .ai-hero-content-{{ ai_gen_id }} {
+    max-width: {{ block.settings.content_max_width }}px;
+    width: 100%;
+    color: {{ block.settings.text_color }};
+    {% if block.settings.content_alignment == 'center' %}
+      text-align: center;
+    {% else %}
+      text-align: left;
+    {% endif %}
+  }
+
+  .ai-hero-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    line-height: 1.2;
+    margin: 0 0 16px 0;
+    color: {{ block.settings.text_color }};
+    font-weight: 700;
+  }
+
+  .ai-hero-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    line-height: 1.5;
+    margin: 0 0 32px 0;
+    color: {{ block.settings.text_color }};
+    opacity: 0.9;
+  }
+
+  .ai-hero-text-blocks-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .ai-hero-text-block-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ai-hero-text-block-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.block_heading_size }}px;
+    font-weight: 700;
+    margin: 0;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-hero-text-block-paragraph-{{ ai_gen_id }} {
+    font-size: {{ block.settings.block_text_size }}px;
+    line-height: 1.6;
+    margin: 0;
+    color: {{ block.settings.text_color }};
+    opacity: 0.9;
+  }
+
+  .ai-hero-cta-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .ai-hero-cta-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-hero-section-{{ ai_gen_id }} {
+      min-height: 400px;
+    }
+
+    .ai-hero-container-{{ ai_gen_id }} {
+      padding: 40px 20px;
+      justify-content: center;
+    }
+
+    .ai-hero-content-{{ ai_gen_id }} {
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .ai-hero-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.7 }}px;
+      margin-bottom: 12px;
+    }
+
+    .ai-hero-subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size | times: 0.85 }}px;
+      margin-bottom: 24px;
+    }
+
+    .ai-hero-text-block-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.block_heading_size | times: 0.85 }}px;
+    }
+
+    .ai-hero-text-block-paragraph-{{ ai_gen_id }} {
+      font-size: {{ block.settings.block_text_size | times: 0.9 }}px;
+    }
+
+    .ai-hero-text-blocks-{{ ai_gen_id }} {
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .ai-hero-cta-{{ ai_gen_id }} {
+      padding: 14px 28px;
+      font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
+    }
+
+    .ai-hero-overlay-{{ ai_gen_id }} {
+      {% if block.settings.overlay_type == 'solid' %}
+        background-color: rgba(0, 0, 0, {{ block.settings.mobile_overlay_opacity }});
+      {% elsif block.settings.overlay_type == 'gradient' %}
+        background: linear-gradient(to bottom, rgba(0, 0, 0, {{ block.settings.mobile_overlay_opacity }}), rgba(0, 0, 0, {{ block.settings.mobile_overlay_opacity | times: 0.5 }}));
+      {% endif %}
+    }
+
+    .ai-hero-background-{{ ai_gen_id }} img.desktop-only {
+      display: none;
+    }
+
+    .ai-hero-background-{{ ai_gen_id }} img.mobile-only {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-hero-background-{{ ai_gen_id }} img.mobile-only {
+      display: none;
+    }
+
+    .ai-hero-background-{{ ai_gen_id }} img.desktop-only {
+      display: block;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-hero-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-hero-background-{{ ai_gen_id }}">
+    {% if block.settings.background_image %}
+      <img
+        src="{{ block.settings.background_image | image_url: width: 2000 }}"
+        alt="{{ block.settings.background_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.background_image.width }}"
+        height="{{ block.settings.background_image.height }}"
+        class="desktop-only"
+      >
+    {% else %}
+      <div class="ai-hero-background-placeholder-{{ ai_gen_id }}">
+        {{ 'hero-apparel-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.background_image_mobile %}
+      <img
+        src="{{ block.settings.background_image_mobile | image_url: width: 1000 }}"
+        alt="{{ block.settings.background_image_mobile.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.background_image_mobile.width }}"
+        height="{{ block.settings.background_image_mobile.height }}"
+        class="mobile-only"
+      >
+    {% elsif block.settings.background_image %}
+      <img
+        src="{{ block.settings.background_image | image_url: width: 1000 }}"
+        alt="{{ block.settings.background_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.background_image.width }}"
+        height="{{ block.settings.background_image.height }}"
+        class="mobile-only"
+      >
+    {% endif %}
+  </div>
+
+  <div class="ai-hero-overlay-{{ ai_gen_id }}"></div>
+
+  <div class="ai-hero-container-{{ ai_gen_id }}">
+    <div class="ai-hero-content-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-hero-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+
+      {% if block.settings.subtitle != blank %}
+        <div class="ai-hero-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+      {% endif %}
+
+      <div class="ai-hero-text-blocks-{{ ai_gen_id }}">
+        {% if block.settings.text_block_1_heading != blank or block.settings.text_block_1_text != blank %}
+          <div class="ai-hero-text-block-{{ ai_gen_id }}">
+            {% if block.settings.text_block_1_heading != blank %}
+              <h3 class="ai-hero-text-block-heading-{{ ai_gen_id }}">{{ block.settings.text_block_1_heading }}</h3>
+            {% endif %}
+            {% if block.settings.text_block_1_text != blank %}
+              <div class="ai-hero-text-block-paragraph-{{ ai_gen_id }}">{{ block.settings.text_block_1_text }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if block.settings.text_block_2_heading != blank or block.settings.text_block_2_text != blank %}
+          <div class="ai-hero-text-block-{{ ai_gen_id }}">
+            {% if block.settings.text_block_2_heading != blank %}
+              <h3 class="ai-hero-text-block-heading-{{ ai_gen_id }}">{{ block.settings.text_block_2_heading }}</h3>
+            {% endif %}
+            {% if block.settings.text_block_2_text != blank %}
+              <div class="ai-hero-text-block-paragraph-{{ ai_gen_id }}">{{ block.settings.text_block_2_text }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if block.settings.text_block_3_heading != blank or block.settings.text_block_3_text != blank %}
+          <div class="ai-hero-text-block-{{ ai_gen_id }}">
+            {% if block.settings.text_block_3_heading != blank %}
+              <h3 class="ai-hero-text-block-heading-{{ ai_gen_id }}">{{ block.settings.text_block_3_heading }}</h3>
+            {% endif %}
+            {% if block.settings.text_block_3_text != blank %}
+              <div class="ai-hero-text-block-paragraph-{{ ai_gen_id }}">{{ block.settings.text_block_3_text }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if block.settings.text_block_4_heading != blank or block.settings.text_block_4_text != blank %}
+          <div class="ai-hero-text-block-{{ ai_gen_id }}">
+            {% if block.settings.text_block_4_heading != blank %}
+              <h3 class="ai-hero-text-block-heading-{{ ai_gen_id }}">{{ block.settings.text_block_4_heading }}</h3>
+            {% endif %}
+            {% if block.settings.text_block_4_text != blank %}
+              <div class="ai-hero-text-block-paragraph-{{ ai_gen_id }}">{{ block.settings.text_block_4_text }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if block.settings.button_text != blank %}
+        <a href="{{ block.settings.button_link }}" class="ai-hero-cta-{{ ai_gen_id }}">
+          {{ block.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero with content panel",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Desktop background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Mobile background image"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "select",
+      "id": "overlay_type",
+      "label": "Overlay type",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "gradient"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Desktop overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.4
+    },
+    {
+      "type": "range",
+      "id": "mobile_overlay_opacity",
+      "label": "Mobile overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.6
+    },
+    {
+      "type": "header",
+      "content": "Content layout"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Max content width",
+      "min": 400,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Future"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "SensOn is not a one-product idea. It's a new platform for female pleasure—designed to evolve."
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Text block 1"
+    },
+    {
+      "type": "text",
+      "id": "text_block_1_heading",
+      "label": "Heading",
+      "default": "Create your own fantasies—Freely"
+    },
+    {
+      "type": "textarea",
+      "id": "text_block_1_text",
+      "label": "Text",
+      "default": "Write your own scenes, shape your own pacing, and build stories that fit you exactly. You can also bring in familiar characters you already love from other platforms—so your cyber crush doesn't stay on a screen. It becomes a lover you can truly feel and touch."
+    },
+    {
+      "type": "header",
+      "content": "Text block 2"
+    },
+    {
+      "type": "text",
+      "id": "text_block_2_heading",
+      "label": "Heading",
+      "default": "Next-generation robotics, made for warmth—not coldness"
+    },
+    {
+      "type": "textarea",
+      "id": "text_block_2_text",
+      "label": "Text",
+      "default": "Not a cold, mechanical humanoid. We're building a handsome, ultra-lightweight machine lover designed specifically for women—one that can do more than sex. It can hold you, hug you, and lull you to sleep. A partner engineered for intimacy, presence, and comfort—made to feel real in the ways that matter most."
+    },
+    {
+      "type": "header",
+      "content": "Text block 3"
+    },
+    {
+      "type": "text",
+      "id": "text_block_3_heading",
+      "label": "Heading",
+      "default": "Femtech, with women at the center"
+    },
+    {
+      "type": "textarea",
+      "id": "text_block_3_text",
+      "label": "Text",
+      "default": "We believe in the significance of femtech—its purpose, its dignity, and its urgency. And we want to build this future with more women contributors across the technology world: engineers, researchers, designers, creators, and founders. Together, we will explore what pleasure technology can become—more advanced, more human, and more worthy of women."
+    },
+    {
+      "type": "header",
+      "content": "Text block 4"
+    },
+    {
+      "type": "text",
+      "id": "text_block_4_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text_block_4_text",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Text block style"
+    },
+    {
+      "type": "range",
+      "id": "block_heading_size",
+      "label": "Heading size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "block_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Call to action button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#321e1e"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero with content panel"
+    }
+  ]
+}
+{% endschema %}

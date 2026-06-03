@@ -1,0 +1,668 @@
+{% doc %}
+  @prompt
+    We need a custom Shopify 2.0 section designed as a manifesto / core values block. The section should have a full black background with centered layout. At the top, there will be a large main heading (e.g. “Our Core Truths”) and a short subtitle or supporting text underneath. In the middle, there should be one large centered horizontal image with a fixed max-width and generous spacing around it. Below the image, add a bold secondary headline and a paragraph of body text aligned to the same width as the image. The entire section must be fully responsive (image scales properly on mobile, text wraps cleanly, spacing remains balanced). In the Theme Editor, we need configurable fields for: main heading, subtitle, top description text, main image upload, bottom headline, bottom paragraph, and an optional CTA button with editable text and link (with toggle on/off).
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-manifesto-{{ ai_gen_id }} {
+    display: block;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_mobile }}px 20px;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-manifesto-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_desktop }}px 40px;
+    }
+  }
+
+  .ai-manifesto-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.content_max_width }}px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ai-manifesto-header-{{ ai_gen_id }} {
+    margin-bottom: {{ block.settings.header_spacing_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-manifesto-header-{{ ai_gen_id }} {
+      margin-bottom: {{ block.settings.header_spacing_desktop }}px;
+    }
+  }
+
+  .ai-manifesto-heading-{{ ai_gen_id }} {
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size_mobile }}px;
+    margin: 0 0 {{ block.settings.subtitle_spacing }}px 0;
+    line-height: 1.1;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-manifesto-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+    }
+  }
+
+  .ai-manifesto-subtitle-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.subtitle_size_mobile }}px;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-manifesto-subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size_desktop }}px;
+    }
+  }
+
+  .ai-manifesto-description-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.description_size_mobile }}px;
+    margin: {{ block.settings.description_spacing }}px 0 0 0;
+    line-height: 1.6;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-manifesto-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_size_desktop }}px;
+    }
+  }
+
+  .ai-manifesto-image-wrapper-{{ ai_gen_id }} {
+    margin: {{ block.settings.image_spacing_mobile }}px 0;
+    max-width: {{ block.settings.image_max_width }}px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-manifesto-image-wrapper-{{ ai_gen_id }} {
+      margin: {{ block.settings.image_spacing_desktop }}px auto;
+    }
+  }
+
+  .ai-manifesto-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-manifesto-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: #2a2a2a;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-manifesto-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+  }
+
+  .ai-manifesto-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-manifesto-bottom-content-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.bottom_content_spacing_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-manifesto-bottom-content-{{ ai_gen_id }} {
+      margin-top: {{ block.settings.bottom_content_spacing_desktop }}px;
+    }
+  }
+
+  .ai-manifesto-bottom-headline-{{ ai_gen_id }} {
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.bottom_headline_size_mobile }}px;
+    margin: 0 0 {{ block.settings.bottom_text_spacing }}px 0;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-manifesto-bottom-headline-{{ ai_gen_id }} {
+      font-size: {{ block.settings.bottom_headline_size_desktop }}px;
+    }
+  }
+
+  .ai-manifesto-bottom-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.bottom_text_size_mobile }}px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-manifesto-bottom-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.bottom_text_size_desktop }}px;
+    }
+  }
+
+  .ai-manifesto-cta-wrapper-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.cta_spacing }}px;
+  }
+
+  .ai-manifesto-cta-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .ai-manifesto-cta-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+{% endstyle %}
+
+<div class="ai-manifesto-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-manifesto-container-{{ ai_gen_id }}">
+    <div class="ai-manifesto-header-{{ ai_gen_id }}">
+      {% if block.settings.main_heading != blank %}
+        <h2 class="ai-manifesto-heading-{{ ai_gen_id }}">{{ block.settings.main_heading }}</h2>
+      {% endif %}
+
+      {% if block.settings.subtitle != blank %}
+        <div class="ai-manifesto-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+      {% endif %}
+
+      {% if block.settings.top_description != blank %}
+        <div class="ai-manifesto-description-{{ ai_gen_id }}">{{ block.settings.top_description }}</div>
+      {% endif %}
+    </div>
+
+    <div class="ai-manifesto-image-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.main_image %}
+        <img
+          src="{{ block.settings.main_image | image_url: width: 2000 }}"
+          alt="{{ block.settings.main_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.main_image.width }}"
+          height="{{ block.settings.main_image.height }}"
+          class="ai-manifesto-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-manifesto-image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-manifesto-empty-state-{{ ai_gen_id }}">
+            Next, add an image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-manifesto-bottom-content-{{ ai_gen_id }}">
+      {% if block.settings.bottom_headline != blank %}
+        <h3 class="ai-manifesto-bottom-headline-{{ ai_gen_id }}">{{ block.settings.bottom_headline }}</h3>
+      {% endif %}
+
+      {% if block.settings.bottom_paragraph != blank %}
+        <div class="ai-manifesto-bottom-text-{{ ai_gen_id }}">{{ block.settings.bottom_paragraph }}</div>
+      {% endif %}
+
+      {% if block.settings.show_cta and block.settings.cta_text != blank %}
+        <div class="ai-manifesto-cta-wrapper-{{ ai_gen_id }}">
+          <a
+            href="{{ block.settings.cta_link }}"
+            class="ai-manifesto-cta-button-{{ ai_gen_id }}"
+          >
+            {{ block.settings.cta_text }}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Manifesto",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 1000
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "min": 40,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding (desktop)",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Main heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "main_heading",
+      "label": "Heading",
+      "default": "Our Core Truths"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 32,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Heading size (desktop)",
+      "default": 56
+    },
+    {
+      "type": "header",
+      "content": "Subtitle"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "What we believe in"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size (mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_desktop",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Subtitle size (desktop)",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subtitle_spacing",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Spacing below heading",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Top description"
+    },
+    {
+      "type": "richtext",
+      "id": "top_description",
+      "label": "Description text",
+      "default": "<p>These principles guide everything we do and shape our vision for the future.</p>"
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size (mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "description_size_desktop",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size (desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_spacing",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Spacing above description",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_mobile",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Header bottom spacing (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_desktop",
+      "min": 30,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Header bottom spacing (desktop)",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Main image"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Image max width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "image_spacing_mobile",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Image spacing (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "image_spacing_desktop",
+      "min": 30,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Image spacing (desktop)",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Bottom content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "bottom_headline",
+      "label": "Bottom headline",
+      "default": "Built on integrity"
+    },
+    {
+      "type": "range",
+      "id": "bottom_headline_size_mobile",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom headline size (mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "bottom_headline_size_desktop",
+      "min": 24,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom headline size (desktop)",
+      "default": 36
+    },
+    {
+      "type": "richtext",
+      "id": "bottom_paragraph",
+      "label": "Bottom paragraph",
+      "default": "<p>We are committed to transparency, authenticity, and creating meaningful connections with our community. Every decision we make reflects our dedication to these values.</p>"
+    },
+    {
+      "type": "range",
+      "id": "bottom_text_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom text size (mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "bottom_text_size_desktop",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom text size (desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "bottom_text_spacing",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Spacing below headline",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "bottom_content_spacing_mobile",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom content spacing (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "bottom_content_spacing_desktop",
+      "min": 30,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Bottom content spacing (desktop)",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "cta_spacing",
+      "min": 15,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Button top spacing",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Button vertical padding",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Button horizontal padding",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Manifesto"
+    }
+  ]
+}
+{% endschema %}

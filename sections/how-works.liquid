@@ -1,0 +1,332 @@
+{%- if section.blocks.size > 0 -%}
+  <style>
+    #shopify-section-{{ section.id }} {
+      width: 100%;
+      background-color: #fff;
+      box-sizing: border-box;
+    }
+
+    #shopify-section-{{ section.id }} * {
+      box-sizing: border-box;
+    }
+
+    #shopify-section-{{ section.id }} .sf-container {
+      padding: 30px 0;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    #shopify-section-{{ section.id }} .sf-section-title {
+      margin: 0 0 24px 0;
+      padding: 0 16px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.2;
+      color: #000;
+    }
+
+    #shopify-section-{{ section.id }} .sf-carousel {
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-padding-left: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .sf-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .sf-track {
+      display: flex;
+      gap: 16px;
+      padding: 0 16px;
+      width: max-content;
+    }
+
+    #shopify-section-{{ section.id }} .sf-track::after {
+      content: '';
+      width: 1px;
+      flex-shrink: 0;
+    }
+
+    #shopify-section-{{ section.id }} .sf-card {
+      width: 296px;
+      flex-shrink: 0;
+      position: relative;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    #shopify-section-{{ section.id }} .sf-card-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #f5f5f5;
+    }
+
+    #shopify-section-{{ section.id }} .sf-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .sf-card-content {
+      padding: 16px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .sf-card-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: #000;
+      text-align: left;
+    }
+
+    #shopify-section-{{ section.id }} .sf-card-desc {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: #000;
+      text-align: left;
+    }
+
+    #shopify-section-{{ section.id }} .sf-card-desc p {
+      margin: 0;
+    }
+
+    #shopify-section-{{ section.id }} .sf-pagination {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px 0 16px;
+    }
+
+    #shopify-section-{{ section.id }} .sf-dot {
+      height: 2px;
+      width: 12px;
+      background: #d9d9d9;
+      transition: all 0.3s ease;
+    }
+
+    #shopify-section-{{ section.id }} .sf-dot.is-active {
+      width: 40px;
+      background: #f287ec;
+    }
+
+    @media (min-width: 1000px) {
+      #shopify-section-{{ section.id }} .sf-container {
+        padding: 80px 100px;
+      }
+
+      #shopify-section-{{ section.id }} .sf-carousel {
+        overflow: visible;
+        scroll-snap-type: none;
+        padding: 0;
+      }
+
+      #shopify-section-{{ section.id }} .sf-section-title {
+        font-size: 32px;
+        padding: 0;
+        margin: 0 0 32px 0;
+      }
+
+      #shopify-section-{{ section.id }} .sf-track {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+        padding: 0;
+        width: 100%;
+      }
+
+      #shopify-section-{{ section.id }} .sf-track::after {
+        display: none;
+      }
+
+      #shopify-section-{{ section.id }} .sf-card {
+        width: 100%;
+        height: auto;
+        scroll-snap-align: none;
+      }
+
+      #shopify-section-{{ section.id }} .sf-card-title {
+        font-size: 24px;
+      }
+
+      #shopify-section-{{ section.id }} .sf-card-desc {
+        font-size: 16px;
+        margin-bottom: 0;
+      }
+
+      #shopify-section-{{ section.id }} .sf-card-content {
+        padding: 24px 0 0 0;
+        gap: 16px;
+      }
+
+      #shopify-section-{{ section.id }} .sf-pagination {
+        display: none;
+      }
+    }
+  </style>
+
+  <section id="pdp-senson-features" class="pdp-senson-features" data-section-id="{{ section.id }}">
+    <div class="sf-container">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="sf-section-title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+
+      <div class="sf-carousel" data-sf-carousel>
+        <div class="sf-track">
+          {%- for block in section.blocks -%}
+            {%- if block.type != 'feature' -%}{%- continue -%}{%- endif -%}
+            {%- assign sf_alt = block.settings.title | strip | escape -%}
+            <div class="sf-card" {{ block.shopify_attributes }}>
+              <div class="sf-card-img">
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 600
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '296, 400, 600',
+                      sizes: '(min-width: 1000px) 33vw, 296px',
+                      alt: sf_alt
+                  }}
+                {%- endif -%}
+              </div>
+              <div class="sf-card-content">
+                {%- if block.settings.title != blank -%}
+                  <p class="sf-card-title">{{ block.settings.title | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.description != blank -%}
+                  <div class="sf-card-desc">
+                    <p>{{ block.settings.description | escape }}</p>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- if section.blocks.size > 1 -%}
+        <div class="sf-pagination" data-sf-pagination>
+          {%- for block in section.blocks -%}
+            {%- if block.type != 'feature' -%}{%- continue -%}{%- endif -%}
+            <div class="sf-dot{% if forloop.first %} is-active{% endif %}" aria-hidden="true"></div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.querySelector('.pdp-senson-features[data-section-id="{{ section.id }}"]');
+      if (!root) return;
+
+      var carousel = root.querySelector('[data-sf-carousel]');
+      var dots = root.querySelectorAll('[data-sf-pagination] .sf-dot');
+      var cards = root.querySelectorAll('.sf-card');
+      var currentIndex = 0;
+
+      if (!carousel || dots.length === 0 || cards.length === 0) return;
+
+      carousel.addEventListener('scroll', function () {
+        if (window.innerWidth >= 1000) return;
+
+        var scrollLeft = carousel.scrollLeft;
+        var cardWidth = cards[0].offsetWidth + 16;
+        var index = Math.round(scrollLeft / cardWidth);
+
+        if (index >= 0 && index < cards.length && index !== currentIndex) {
+          currentIndex = index;
+          dots.forEach(function (dot, i) {
+            dot.classList.toggle('is-active', i === currentIndex);
+          });
+        }
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "features card",
+  "tag": "section",
+  "class": "section-pdp-senson-features",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "How to Use"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "features card",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Preparing",
+            "description": "Download the SensOn app, turn on Bluetooth, then open the case and take the devices out."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Using",
+            "description": "Insert the vaginal stimulator, adjust the clitoral head for a snug fit, and place the nipple stimulators on the nipples."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Playing",
+            "description": "Insert the vaginal stimulator, adjust the clitoral head for a snug fit, and place the nipple stimulators on the nipples."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

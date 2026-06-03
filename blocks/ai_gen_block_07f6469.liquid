@@ -1,0 +1,624 @@
+{% doc %}
+  @prompt
+    Specifications
+    Material: FDA-compliant, body-safe silicone
+    Weight: 700 g (entire product)
+    Charging: USB-C rechargeable
+    Water Resistance: IPX6 (resistant to strong water splashes; easy to clean)
+    Noise Level: ~55 dB (quiet, comparable to soft conversation)
+    Usage: Up to 90 minutes (at highest intensity)
+    Connectivity: Bluetooth & Wi-Fi enabled  I need this presented in a table format, with all data replaceable and editable, mobile-friendly, and with a clean and elegant design., The table style is not visually appealing and lacks a title. Please change it. 把这个spec做成一个有背景图衬底，然后spec表格是毛玻璃效果
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-spec-table-container-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 60px 20px;
+    min-height: 500px;
+    overflow: hidden;
+  }
+
+  .ai-spec-table-background-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .ai-spec-table-background-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-spec-table-background-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, {{ block.settings.fallback_gradient_start }} 0%, {{ block.settings.fallback_gradient_end }} 100%);
+  }
+
+  .ai-spec-table-background-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.1;
+  }
+
+  .ai-spec-table-content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 2;
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-spec-table-title-{{ ai_gen_id }} {
+    text-align: {{ block.settings.title_alignment }};
+    margin-bottom: 40px;
+    color: {{ block.settings.title_color }};
+    font-size: {{ block.settings.title_size }}px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .ai-spec-table-wrapper-{{ ai_gen_id }} {
+    background: {{ block.settings.glass_background }};
+    backdrop-filter: blur({{ block.settings.glass_blur }}px);
+    -webkit-backdrop-filter: blur({{ block.settings.glass_blur }}px);
+    border-radius: {{ block.settings.border_radius }}px;
+    border: {{ block.settings.glass_border_width }}px solid {{ block.settings.glass_border_color }};
+    padding: {{ block.settings.table_padding }}px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+  }
+
+  .ai-spec-table-{{ ai_gen_id }} {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .ai-spec-table-{{ ai_gen_id }} tr {
+    border-bottom: 1px solid {{ block.settings.row_border_color }};
+  }
+
+  .ai-spec-table-{{ ai_gen_id }} tr:last-child {
+    border-bottom: none;
+  }
+
+  .ai-spec-table-{{ ai_gen_id }} td {
+    padding: {{ block.settings.cell_padding }}px;
+    vertical-align: middle;
+  }
+
+  .ai-spec-table-{{ ai_gen_id }} td:first-child {
+    font-weight: 600;
+    color: {{ block.settings.label_color }};
+    font-size: {{ block.settings.label_font_size }}px;
+    width: {{ block.settings.label_column_width }}%;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-spec-table-{{ ai_gen_id }} td:last-child {
+    color: {{ block.settings.value_color }};
+    font-size: {{ block.settings.value_font_size }}px;
+    text-align: {{ block.settings.value_alignment }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-spec-table-container-{{ ai_gen_id }} {
+      padding: 40px 15px;
+    }
+
+    .ai-spec-table-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.7);
+      margin-bottom: 30px;
+    }
+
+    .ai-spec-table-wrapper-{{ ai_gen_id }} {
+      padding: {{ block.settings.table_padding | times: 0.6 }}px;
+    }
+
+    .ai-spec-table-{{ ai_gen_id }} td {
+      padding: {{ block.settings.cell_padding | times: 0.7 }}px;
+      display: block;
+      width: 100%;
+    }
+
+    .ai-spec-table-{{ ai_gen_id }} td:first-child {
+      font-size: {{ block.settings.label_font_size | times: 0.9 }}px;
+      padding-bottom: 8px;
+      width: 100%;
+    }
+
+    .ai-spec-table-{{ ai_gen_id }} td:last-child {
+      font-size: {{ block.settings.value_font_size | times: 0.9 }}px;
+      padding-top: 0;
+      text-align: left;
+    }
+  }
+{% endstyle %}
+
+<product-specifications-{{ ai_gen_id }}
+  class="ai-spec-table-container-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-spec-table-background-{{ ai_gen_id }}">
+    {% if block.settings.background_image %}
+      <img
+        src="{{ block.settings.background_image | image_url: width: 2000 }}"
+        alt="{{ block.settings.background_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.background_image.width }}"
+        height="{{ block.settings.background_image.height }}"
+      >
+    {% else %}
+      <div class="ai-spec-table-background-placeholder-{{ ai_gen_id }}">
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="ai-spec-table-content-{{ ai_gen_id }}">
+    {% if block.settings.title != blank %}
+      <h2 class="ai-spec-table-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+    {% endif %}
+
+    <div class="ai-spec-table-wrapper-{{ ai_gen_id }}">
+      <table class="ai-spec-table-{{ ai_gen_id }}">
+        <tbody>
+          {% if block.settings.spec_1_label != blank %}
+            <tr>
+              <td>{{ block.settings.spec_1_label }}</td>
+              <td>{{ block.settings.spec_1_value }}</td>
+            </tr>
+          {% endif %}
+
+          {% if block.settings.spec_2_label != blank %}
+            <tr>
+              <td>{{ block.settings.spec_2_label }}</td>
+              <td>{{ block.settings.spec_2_value }}</td>
+            </tr>
+          {% endif %}
+
+          {% if block.settings.spec_3_label != blank %}
+            <tr>
+              <td>{{ block.settings.spec_3_label }}</td>
+              <td>{{ block.settings.spec_3_value }}</td>
+            </tr>
+          {% endif %}
+
+          {% if block.settings.spec_4_label != blank %}
+            <tr>
+              <td>{{ block.settings.spec_4_label }}</td>
+              <td>{{ block.settings.spec_4_value }}</td>
+            </tr>
+          {% endif %}
+
+          {% if block.settings.spec_5_label != blank %}
+            <tr>
+              <td>{{ block.settings.spec_5_label }}</td>
+              <td>{{ block.settings.spec_5_value }}</td>
+            </tr>
+          {% endif %}
+
+          {% if block.settings.spec_6_label != blank %}
+            <tr>
+              <td>{{ block.settings.spec_6_label }}</td>
+              <td>{{ block.settings.spec_6_value }}</td>
+            </tr>
+          {% endif %}
+
+          {% if block.settings.spec_7_label != blank %}
+            <tr>
+              <td>{{ block.settings.spec_7_label }}</td>
+              <td>{{ block.settings.spec_7_value }}</td>
+            </tr>
+          {% endif %}
+
+          {% if block.settings.spec_8_label != blank %}
+            <tr>
+              <td>{{ block.settings.spec_8_label }}</td>
+              <td>{{ block.settings.spec_8_value }}</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</product-specifications-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductSpecifications{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.adjustBackgroundPosition();
+        window.addEventListener('resize', () => this.adjustBackgroundPosition());
+      }
+
+      adjustBackgroundPosition() {
+        const background = this.querySelector('.ai-spec-table-background-{{ ai_gen_id }}');
+        if (background) {
+          const img = background.querySelector('img');
+          if (img) {
+            img.style.objectPosition = 'center';
+          }
+        }
+      }
+    }
+
+    customElements.define('product-specifications-{{ ai_gen_id }}', ProductSpecifications{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product specifications",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Specifications"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "color",
+      "id": "fallback_gradient_start",
+      "label": "Gradient start",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "fallback_gradient_end",
+      "label": "Gradient end",
+      "default": "#52572e"
+    },
+    {
+      "type": "header",
+      "content": "Glass effect"
+    },
+    {
+      "type": "color",
+      "id": "glass_background",
+      "label": "Glass background",
+      "default": "rgba(255, 255, 255, 0.1)"
+    },
+    {
+      "type": "range",
+      "id": "glass_blur",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Blur intensity",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "glass_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "glass_border_color",
+      "label": "Border color",
+      "default": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 0.5,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0.2
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Table layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "table_padding",
+      "min": 20,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Table padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "cell_padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Cell padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "label_column_width",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "label": "Label column width",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Text style"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Label font size",
+      "default": 13
+    },
+    {
+      "type": "color",
+      "id": "value_color",
+      "label": "Value color",
+      "default": "rgba(255, 255, 255, 0.85)"
+    },
+    {
+      "type": "range",
+      "id": "value_font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Value font size",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "value_alignment",
+      "label": "Value alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "color",
+      "id": "row_border_color",
+      "label": "Row border color",
+      "default": "rgba(255, 255, 255, 0.15)"
+    },
+    {
+      "type": "header",
+      "content": "Specification 1"
+    },
+    {
+      "type": "text",
+      "id": "spec_1_label",
+      "label": "Label",
+      "default": "Material"
+    },
+    {
+      "type": "text",
+      "id": "spec_1_value",
+      "label": "Value",
+      "default": "FDA-compliant, body-safe silicone"
+    },
+    {
+      "type": "header",
+      "content": "Specification 2"
+    },
+    {
+      "type": "text",
+      "id": "spec_2_label",
+      "label": "Label",
+      "default": "Weight"
+    },
+    {
+      "type": "text",
+      "id": "spec_2_value",
+      "label": "Value",
+      "default": "700 g (entire product)"
+    },
+    {
+      "type": "header",
+      "content": "Specification 3"
+    },
+    {
+      "type": "text",
+      "id": "spec_3_label",
+      "label": "Label",
+      "default": "Charging"
+    },
+    {
+      "type": "text",
+      "id": "spec_3_value",
+      "label": "Value",
+      "default": "USB-C rechargeable"
+    },
+    {
+      "type": "header",
+      "content": "Specification 4"
+    },
+    {
+      "type": "text",
+      "id": "spec_4_label",
+      "label": "Label",
+      "default": "Water Resistance"
+    },
+    {
+      "type": "text",
+      "id": "spec_4_value",
+      "label": "Value",
+      "default": "IPX6 (resistant to strong water splashes)"
+    },
+    {
+      "type": "header",
+      "content": "Specification 5"
+    },
+    {
+      "type": "text",
+      "id": "spec_5_label",
+      "label": "Label",
+      "default": "Noise Level"
+    },
+    {
+      "type": "text",
+      "id": "spec_5_value",
+      "label": "Value",
+      "default": "~55 dB (quiet, comparable to soft conversation)"
+    },
+    {
+      "type": "header",
+      "content": "Specification 6"
+    },
+    {
+      "type": "text",
+      "id": "spec_6_label",
+      "label": "Label",
+      "default": "Usage"
+    },
+    {
+      "type": "text",
+      "id": "spec_6_value",
+      "label": "Value",
+      "default": "Up to 90 minutes (at highest intensity)"
+    },
+    {
+      "type": "header",
+      "content": "Specification 7"
+    },
+    {
+      "type": "text",
+      "id": "spec_7_label",
+      "label": "Label",
+      "default": "Connectivity"
+    },
+    {
+      "type": "text",
+      "id": "spec_7_value",
+      "label": "Value",
+      "default": "Bluetooth & Wi-Fi enabled"
+    },
+    {
+      "type": "header",
+      "content": "Specification 8"
+    },
+    {
+      "type": "text",
+      "id": "spec_8_label",
+      "label": "Label"
+    },
+    {
+      "type": "text",
+      "id": "spec_8_value",
+      "label": "Value"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product specifications"
+    }
+  ]
+}
+{% endschema %}

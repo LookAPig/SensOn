@@ -1,0 +1,1372 @@
+{% doc %}
+  @prompt
+    Goal
+    
+    Create a scroll-driven step section where the left side auto-highlights steps based on scroll position, similar to WHOOP’s “How it works”.
+    
+    Desktop Layout
+    
+    Two columns:
+    
+    Left: Step indicator (sticky)
+    
+    Right: Step content (vertical scroll)
+    
+    Left Column (Steps)
+    
+    Sticky while this section is in view
+    
+    Shows a vertical list of step titles
+    
+    Automatically updates active state on scroll
+    
+    No click interaction required
+    
+    Active step:
+    
+    Highlighted text
+    
+    Vertical indicator line
+    
+    Inactive steps:
+    
+    Reduced opacity
+    
+    Right Column (Content)
+    
+    Vertical list of step sections
+    
+    Each step contains:
+    
+    Headline
+    
+    Description
+    
+    Image or video
+    
+    Each step section height ~80–100vh (recommended)
+    
+    Scroll Behavior
+    
+    Use IntersectionObserver (or equivalent)
+    
+    When a step’s content enters the viewport center (≈40–60%):
+    
+    Mark that step as active
+    
+    Update left-side highlight
+    
+    Optional: fade / slight translate animation on first enter
+    
+    Mobile
+    
+    Disable left sticky column
+    
+    Stack steps vertically (title + content)
+    
+    Keep simple scroll-in animations
+    
+    Shopify / CMS
+    
+    Build as a reusable Shopify Section
+    
+    Steps as repeatable blocks
+    
+    Editable fields per step:
+    
+    Step title
+    
+    Headline
+    
+    Description
+    
+    Image / video
+    
+    Order configurable in admin
+    
+    Important Notes
+    
+    ❌ No tabs
+    
+    ❌ No click-only interaction
+    
+    ✅ Scroll-driven state only
+    
+    ✅ Left side is a progress indicator, not navigation, Auto-Play Behavior (Core)
+    
+    Steps auto-advance on a timer:
+    
+    Default interval: 7s (acceptable range 5–10s)
+    
+    Loop back to Step 1 after last step
+    
+    When step changes:
+    
+    Left active step highlight updates
+    
+    Right content (image/video + text) updates
+    
+    Use a simple transition (fade / slight slide) Everything else remains unchanged, and the font should be consistent with the font used in the theme application., Goal
+    
+    Build a “How it works” section where the left step progress automatically advances every ~5–10 seconds (no user interaction needed). The right content updates in sync.
+    
+    Desktop Layout
+    
+    Two columns:
+    
+    Left: Step list + progress indicator (sticky)
+    
+    Right: Media + copy for the active step
+    
+    Auto-Play Behavior (Core)
+    
+    Steps auto-advance on a timer:
+    
+    Default interval: 7s (acceptable range 5–10s)
+    
+    Loop back to Step 1 after last step
+    
+    When step changes:
+    
+    Left active step highlight updates
+    
+    Right content (image/video + text) updates
+    
+    Use a simple transition (fade / slight slide)
+    
+    Left Column (No Interaction)
+    
+    No click, no hover required
+    
+    Shows step titles vertically
+    
+    Active step:
+    
+    Highlighted
+    
+    Animated progress line/bar that fills during the interval
+    
+    Inactive steps:
+    
+    Reduced opacity
+    
+    When progress completes → advance to next step
+    
+    Optional (Nice-to-have, not required)
+    
+    Pause auto-play when:
+    
+    Section not in viewport (use IntersectionObserver)
+    
+    User has prefers-reduced-motion: reduce
+    
+    Resume when back in view
+    
+    Mobile
+    
+    Simplify to a vertical stack or swipe carousel
+    
+    Auto-advance can remain, but keep animations minimal
+    
+    Shopify / CMS
+    
+    Build as a reusable Shopify Section
+    
+    Steps as repeatable blocks
+    
+    Editable fields per step:
+    
+    Step title
+    
+    Headline
+    
+    Description
+    
+    Image / video
+    
+    Global settings:
+    
+    Autoplay on/off
+    
+    Interval (seconds)
+    
+    Important Notes
+    
+    This is timer-driven autoplay, not tabs, not scroll-driven.
+    
+    Left side is a progress indicator, not navigation., Goal
+    
+    Create a “How it works” section where steps auto-advance every 5–10s with a progress bar, and users can click step titles to jump to a specific step. Colors must be configurable (progress bar + entire section theme).
+    
+    Desktop Layout
+    
+    Two columns:
+    
+    Left: Step titles + progress indicator (sticky)
+    
+    Right: Active step content (headline, description, image/video)
+    
+    Core Interaction Logic
+    1) Autoplay (default ON)
+    
+    Interval setting: 5–10 seconds (default 7s)
+    
+    Progress bar fills during the interval
+    
+    When progress completes → advance to next step
+    
+    Loop after last step
+    
+    2) Click-to-Jump (left titles)
+    
+    Clicking a step title immediately activates that step and updates right content
+    
+    On click:
+    
+    Reset progress bar to 0 and restart timer for the selected step
+    
+    Optional setting: “Resume autoplay after click” (default ON)
+    
+    3) Pause/Resume Rules (recommended)
+    
+    Pause autoplay when section is out of viewport (IntersectionObserver)
+    
+    Respect prefers-reduced-motion: reduce (disable autoplay / minimize animation)
+    
+    Visual Behavior
+    
+    Step change transition: fade or subtle slide (300–600ms)
+    
+    Active step styling:
+    
+    Highlighted text
+    
+    Progress indicator visible/animated
+    
+    Inactive steps:
+    
+    Reduced opacity
+    
+    Shopify / CMS Structure
+    
+    Build as a reusable Shopify Section with repeatable Step blocks.
+    
+    Step block fields
+    
+    Step title (left)
+    
+    Headline (right)
+    
+    Description (right)
+    
+    Image or video (right)
+    
+    Global section settings (must-have)
+    
+    Autoplay toggle (on/off)
+    
+    Interval (seconds)
+    
+    Loop toggle (on/off)
+    
+    Color Customization (must-have)
+    
+    Provide Shopify theme settings to control:
+    
+    Section-level colors
+    
+    Background color
+    
+    Primary text color
+    
+    Secondary text color (inactive steps / body copy)
+    
+    Progress indicator colors
+    
+    Progress bar color (active fill)
+    
+    Progress track color (inactive track)
+    
+    Optional:
+    
+    Border/indicator line color
+    
+    Card/media overlay color (if used)
+    
+    Implementation suggestion:
+    
+    Use CSS variables set from section settings (e.g. --bg, --text, --muted, --progress, --track)
+    
+    Mobile
+    
+    Stack vertically or use a simple carousel
+    
+    Click/tap still works
+    
+    Autoplay optional (can inherit desktop setting)
+    
+    Notes
+    
+    This is autoplay-first but clickable.
+    
+    Avoid building as tabs only; it must include the timer + progress fill behavior., Expected
+    
+    On mobile, the progress indicator should be a thin line:
+    
+    A track line (background line) is always visible
+    
+    A fill line sits on top and grows in width
+    
+    It should not become a solid block/rectangle 其他保持不变
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-how-it-works-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 60px 20px;
+    background-color: {{ block.settings.section_background }};
+    color: {{ block.settings.primary_text_color }};
+  }
+
+  .ai-how-it-works-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .ai-how-it-works-nav-{{ ai_gen_id }} {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .ai-how-it-works-nav-item-{{ ai_gen_id }} {
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+  }
+
+  .ai-how-it-works-nav-item-{{ ai_gen_id }}.inactive {
+    opacity: {{ block.settings.inactive_opacity | divided_by: 100.0 }};
+  }
+
+  .ai-how-it-works-nav-item-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .ai-how-it-works-nav-item-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: {{ block.settings.progress_track_color }};
+    border-radius: 2px;
+  }
+
+  .ai-how-it-works-progress-bar-{{ ai_gen_id }} {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 0;
+    background-color: {{ block.settings.progress_bar_color }};
+    border-radius: 2px;
+    transition: height 0.3s ease;
+  }
+
+  .ai-how-it-works-nav-item-{{ ai_gen_id }}.active .ai-how-it-works-progress-bar-{{ ai_gen_id }} {
+    animation: ai-how-it-works-fill-{{ ai_gen_id }} var(--ai-how-it-works-duration-{{ ai_gen_id }}) linear forwards;
+  }
+
+  .ai-how-it-works-nav-item-{{ ai_gen_id }}.active.paused .ai-how-it-works-progress-bar-{{ ai_gen_id }} {
+    animation-play-state: paused;
+  }
+
+  @keyframes ai-how-it-works-fill-{{ ai_gen_id }} {
+    from {
+      height: 0;
+    }
+    to {
+      height: 100%;
+    }
+  }
+
+  .ai-how-it-works-nav-item-{{ ai_gen_id }}.completed::before {
+    background-color: {{ block.settings.progress_bar_color }};
+  }
+
+  .ai-how-it-works-nav-item-{{ ai_gen_id }}.completed .ai-how-it-works-progress-bar-{{ ai_gen_id }} {
+    height: 100%;
+    animation: none;
+  }
+
+  .ai-how-it-works-nav-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.nav_font_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.primary_text_color }};
+    margin: 0;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+  }
+
+  .ai-how-it-works-nav-item-{{ ai_gen_id }}.active .ai-how-it-works-nav-title-{{ ai_gen_id }} {
+    color: {{ block.settings.active_text_color }};
+  }
+
+  .ai-how-it-works-content-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    min-height: 500px;
+  }
+
+  .ai-how-it-works-step-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+  }
+
+  .ai-how-it-works-step-{{ ai_gen_id }}.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: relative;
+  }
+
+  .ai-how-it-works-step-content-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .ai-how-it-works-step-text-{{ ai_gen_id }} {
+    max-width: 600px;
+  }
+
+  .ai-how-it-works-step-headline-{{ ai_gen_id }} {
+    font-size: {{ block.settings.headline_font_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.primary_text_color }};
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .ai-how-it-works-step-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_font_size }}px;
+    color: {{ block.settings.secondary_text_color }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ai-how-it-works-step-media-{{ ai_gen_id }} {
+    width: 100%;
+    border-radius: {{ block.settings.media_border_radius }}px;
+    overflow: hidden;
+    background-color: {{ block.settings.media_background }};
+  }
+
+  .ai-how-it-works-step-media-{{ ai_gen_id }} img,
+  .ai-how-it-works-step-media-{{ ai_gen_id }} video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ai-how-it-works-media-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: {{ block.settings.media_background }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.media_border_radius }}px;
+  }
+
+  .ai-how-it-works-media-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    opacity: 0.3;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-how-it-works-nav-item-{{ ai_gen_id }}.active .ai-how-it-works-progress-bar-{{ ai_gen_id }} {
+      animation: none;
+      height: 100%;
+    }
+
+    .ai-how-it-works-step-{{ ai_gen_id }} {
+      transition: opacity 0.2s ease, visibility 0.2s;
+      transform: none;
+    }
+
+    .ai-how-it-works-step-{{ ai_gen_id }}.active {
+      transform: none;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-how-it-works-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .ai-how-it-works-nav-{{ ai_gen_id }} {
+      position: relative;
+      top: auto;
+      flex-direction: row;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ai-how-it-works-nav-item-{{ ai_gen_id }} {
+      padding-left: 0;
+      padding-bottom: 16px;
+      min-width: fit-content;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .ai-how-it-works-nav-item-{{ ai_gen_id }}::before {
+      left: 0;
+      right: 0;
+      top: auto;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+    }
+
+    .ai-how-it-works-progress-bar-{{ ai_gen_id }} {
+      left: 0;
+      top: auto;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+    }
+
+    .ai-how-it-works-nav-item-{{ ai_gen_id }}.active .ai-how-it-works-progress-bar-{{ ai_gen_id }} {
+      animation: ai-how-it-works-fill-horizontal-{{ ai_gen_id }} var(--ai-how-it-works-duration-{{ ai_gen_id }}) linear forwards;
+    }
+
+    @keyframes ai-how-it-works-fill-horizontal-{{ ai_gen_id }} {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    .ai-how-it-works-nav-item-{{ ai_gen_id }}.completed::before {
+      background-color: {{ block.settings.progress_bar_color }};
+    }
+
+    .ai-how-it-works-nav-item-{{ ai_gen_id }}.completed .ai-how-it-works-progress-bar-{{ ai_gen_id }} {
+      width: 100%;
+      animation: none;
+    }
+
+    .ai-how-it-works-content-wrapper-{{ ai_gen_id }} {
+      min-height: 400px;
+    }
+
+    .ai-how-it-works-step-content-{{ ai_gen_id }} {
+      gap: 24px;
+    }
+
+    .ai-how-it-works-step-headline-{{ ai_gen_id }} {
+      font-size: {{ block.settings.headline_font_size | times: 0.75 }}px;
+    }
+
+    .ai-how-it-works-step-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_font_size | times: 0.9 }}px;
+    }
+
+    .ai-how-it-works-nav-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.nav_font_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<how-it-works-{{ ai_gen_id }} 
+  class="ai-how-it-works-{{ ai_gen_id }}" 
+  data-autoplay="{{ block.settings.autoplay_enabled }}"
+  data-interval="{{ block.settings.autoplay_interval }}"
+  data-loop="{{ block.settings.loop_enabled }}"
+  data-resume-after-click="{{ block.settings.resume_after_click }}"
+  data-pause-out-of-view="{{ block.settings.pause_out_of_view }}"
+  data-pause-reduced-motion="{{ block.settings.pause_reduced_motion }}"
+  style="--ai-how-it-works-duration-{{ ai_gen_id }}: {{ block.settings.autoplay_interval }}s;"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-how-it-works-container-{{ ai_gen_id }}">
+    <nav class="ai-how-it-works-nav-{{ ai_gen_id }}">
+      {% if block.settings.step_1_enabled %}
+        <div class="ai-how-it-works-nav-item-{{ ai_gen_id }}" data-step-index="0">
+          <div class="ai-how-it-works-progress-bar-{{ ai_gen_id }}"></div>
+          <h3 class="ai-how-it-works-nav-title-{{ ai_gen_id }}">{{ block.settings.step_1_nav_title }}</h3>
+        </div>
+      {% endif %}
+      {% if block.settings.step_2_enabled %}
+        <div class="ai-how-it-works-nav-item-{{ ai_gen_id }}" data-step-index="1">
+          <div class="ai-how-it-works-progress-bar-{{ ai_gen_id }}"></div>
+          <h3 class="ai-how-it-works-nav-title-{{ ai_gen_id }}">{{ block.settings.step_2_nav_title }}</h3>
+        </div>
+      {% endif %}
+      {% if block.settings.step_3_enabled %}
+        <div class="ai-how-it-works-nav-item-{{ ai_gen_id }}" data-step-index="2">
+          <div class="ai-how-it-works-progress-bar-{{ ai_gen_id }}"></div>
+          <h3 class="ai-how-it-works-nav-title-{{ ai_gen_id }}">{{ block.settings.step_3_nav_title }}</h3>
+        </div>
+      {% endif %}
+      {% if block.settings.step_4_enabled %}
+        <div class="ai-how-it-works-nav-item-{{ ai_gen_id }}" data-step-index="3">
+          <div class="ai-how-it-works-progress-bar-{{ ai_gen_id }}"></div>
+          <h3 class="ai-how-it-works-nav-title-{{ ai_gen_id }}">{{ block.settings.step_4_nav_title }}</h3>
+        </div>
+      {% endif %}
+      {% if block.settings.step_5_enabled %}
+        <div class="ai-how-it-works-nav-item-{{ ai_gen_id }}" data-step-index="4">
+          <div class="ai-how-it-works-progress-bar-{{ ai_gen_id }}"></div>
+          <h3 class="ai-how-it-works-nav-title-{{ ai_gen_id }}">{{ block.settings.step_5_nav_title }}</h3>
+        </div>
+      {% endif %}
+    </nav>
+
+    <div class="ai-how-it-works-content-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.step_1_enabled %}
+        <div class="ai-how-it-works-step-{{ ai_gen_id }}" data-step-index="0">
+          <div class="ai-how-it-works-step-content-{{ ai_gen_id }}">
+            <div class="ai-how-it-works-step-text-{{ ai_gen_id }}">
+              {% if block.settings.step_1_headline != blank %}
+                <h2 class="ai-how-it-works-step-headline-{{ ai_gen_id }}">{{ block.settings.step_1_headline }}</h2>
+              {% endif %}
+              {% if block.settings.step_1_description != blank %}
+                <div class="ai-how-it-works-step-description-{{ ai_gen_id }}">{{ block.settings.step_1_description }}</div>
+              {% endif %}
+            </div>
+            <div class="ai-how-it-works-step-media-{{ ai_gen_id }}">
+              {% if block.settings.step_1_video != blank %}
+                <video
+                  src="{{ block.settings.step_1_video.sources[1].url }}"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  width="{{ block.settings.step_1_video.sources[1].width }}"
+                  height="{{ block.settings.step_1_video.sources[1].height }}"
+                ></video>
+              {% elsif block.settings.step_1_image != blank %}
+                <img
+                  src="{{ block.settings.step_1_image | image_url: width: 1200 }}"
+                  alt="{{ block.settings.step_1_image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.step_1_image.width }}"
+                  height="{{ block.settings.step_1_image.height }}"
+                >
+              {% else %}
+                <div class="ai-how-it-works-media-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.step_2_enabled %}
+        <div class="ai-how-it-works-step-{{ ai_gen_id }}" data-step-index="1">
+          <div class="ai-how-it-works-step-content-{{ ai_gen_id }}">
+            <div class="ai-how-it-works-step-text-{{ ai_gen_id }}">
+              {% if block.settings.step_2_headline != blank %}
+                <h2 class="ai-how-it-works-step-headline-{{ ai_gen_id }}">{{ block.settings.step_2_headline }}</h2>
+              {% endif %}
+              {% if block.settings.step_2_description != blank %}
+                <div class="ai-how-it-works-step-description-{{ ai_gen_id }}">{{ block.settings.step_2_description }}</div>
+              {% endif %}
+            </div>
+            <div class="ai-how-it-works-step-media-{{ ai_gen_id }}">
+              {% if block.settings.step_2_video != blank %}
+                <video
+                  src="{{ block.settings.step_2_video.sources[1].url }}"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  width="{{ block.settings.step_2_video.sources[1].width }}"
+                  height="{{ block.settings.step_2_video.sources[1].height }}"
+                ></video>
+              {% elsif block.settings.step_2_image != blank %}
+                <img
+                  src="{{ block.settings.step_2_image | image_url: width: 1200 }}"
+                  alt="{{ block.settings.step_2_image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.step_2_image.width }}"
+                  height="{{ block.settings.step_2_image.height }}"
+                >
+              {% else %}
+                <div class="ai-how-it-works-media-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.step_3_enabled %}
+        <div class="ai-how-it-works-step-{{ ai_gen_id }}" data-step-index="2">
+          <div class="ai-how-it-works-step-content-{{ ai_gen_id }}">
+            <div class="ai-how-it-works-step-text-{{ ai_gen_id }}">
+              {% if block.settings.step_3_headline != blank %}
+                <h2 class="ai-how-it-works-step-headline-{{ ai_gen_id }}">{{ block.settings.step_3_headline }}</h2>
+              {% endif %}
+              {% if block.settings.step_3_description != blank %}
+                <div class="ai-how-it-works-step-description-{{ ai_gen_id }}">{{ block.settings.step_3_description }}</div>
+              {% endif %}
+            </div>
+            <div class="ai-how-it-works-step-media-{{ ai_gen_id }}">
+              {% if block.settings.step_3_video != blank %}
+                <video
+                  src="{{ block.settings.step_3_video.sources[1].url }}"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  width="{{ block.settings.step_3_video.sources[1].width }}"
+                  height="{{ block.settings.step_3_video.sources[1].height }}"
+                ></video>
+              {% elsif block.settings.step_3_image != blank %}
+                <img
+                  src="{{ block.settings.step_3_image | image_url: width: 1200 }}"
+                  alt="{{ block.settings.step_3_image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.step_3_image.width }}"
+                  height="{{ block.settings.step_3_image.height }}"
+                >
+              {% else %}
+                <div class="ai-how-it-works-media-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.step_4_enabled %}
+        <div class="ai-how-it-works-step-{{ ai_gen_id }}" data-step-index="3">
+          <div class="ai-how-it-works-step-content-{{ ai_gen_id }}">
+            <div class="ai-how-it-works-step-text-{{ ai_gen_id }}">
+              {% if block.settings.step_4_headline != blank %}
+                <h2 class="ai-how-it-works-step-headline-{{ ai_gen_id }}">{{ block.settings.step_4_headline }}</h2>
+              {% endif %}
+              {% if block.settings.step_4_description != blank %}
+                <div class="ai-how-it-works-step-description-{{ ai_gen_id }}">{{ block.settings.step_4_description }}</div>
+              {% endif %}
+            </div>
+            <div class="ai-how-it-works-step-media-{{ ai_gen_id }}">
+              {% if block.settings.step_4_video != blank %}
+                <video
+                  src="{{ block.settings.step_4_video.sources[1].url }}"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  width="{{ block.settings.step_4_video.sources[1].width }}"
+                  height="{{ block.settings.step_4_video.sources[1].height }}"
+                ></video>
+              {% elsif block.settings.step_4_image != blank %}
+                <img
+                  src="{{ block.settings.step_4_image | image_url: width: 1200 }}"
+                  alt="{{ block.settings.step_4_image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.step_4_image.width }}"
+                  height="{{ block.settings.step_4_image.height }}"
+                >
+              {% else %}
+                <div class="ai-how-it-works-media-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.step_5_enabled %}
+        <div class="ai-how-it-works-step-{{ ai_gen_id }}" data-step-index="4">
+          <div class="ai-how-it-works-step-content-{{ ai_gen_id }}">
+            <div class="ai-how-it-works-step-text-{{ ai_gen_id }}">
+              {% if block.settings.step_5_headline != blank %}
+                <h2 class="ai-how-it-works-step-headline-{{ ai_gen_id }}">{{ block.settings.step_5_headline }}</h2>
+              {% endif %}
+              {% if block.settings.step_5_description != blank %}
+                <div class="ai-how-it-works-step-description-{{ ai_gen_id }}">{{ block.settings.step_5_description }}</div>
+              {% endif %}
+            </div>
+            <div class="ai-how-it-works-step-media-{{ ai_gen_id }}">
+              {% if block.settings.step_5_video != blank %}
+                <video
+                  src="{{ block.settings.step_5_video.sources[1].url }}"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  width="{{ block.settings.step_5_video.sources[1].width }}"
+                  height="{{ block.settings.step_5_video.sources[1].height }}"
+                ></video>
+              {% elsif block.settings.step_5_image != blank %}
+                <img
+                  src="{{ block.settings.step_5_image | image_url: width: 1200 }}"
+                  alt="{{ block.settings.step_5_image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.step_5_image.width }}"
+                  height="{{ block.settings.step_5_image.height }}"
+                >
+              {% else %}
+                <div class="ai-how-it-works-media-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</how-it-works-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class HowItWorks{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.steps = [];
+        this.navItems = [];
+        this.activeIndex = 0;
+        this.autoplayTimer = null;
+        this.autoplayInterval = 7000;
+        this.autoplayEnabled = true;
+        this.loopEnabled = true;
+        this.resumeAfterClick = true;
+        this.pauseOutOfView = true;
+        this.pauseReducedMotion = true;
+        this.isInView = false;
+        this.observer = null;
+        this.prefersReducedMotion = false;
+        this.userInteracted = false;
+      }
+
+      connectedCallback() {
+        this.steps = Array.from(this.querySelectorAll('.ai-how-it-works-step-{{ ai_gen_id }}'));
+        this.navItems = Array.from(this.querySelectorAll('.ai-how-it-works-nav-item-{{ ai_gen_id }}'));
+        
+        if (this.steps.length === 0) return;
+
+        this.autoplayEnabled = this.getAttribute('data-autoplay') === 'true';
+        this.loopEnabled = this.getAttribute('data-loop') === 'true';
+        this.resumeAfterClick = this.getAttribute('data-resume-after-click') === 'true';
+        this.pauseOutOfView = this.getAttribute('data-pause-out-of-view') === 'true';
+        this.pauseReducedMotion = this.getAttribute('data-pause-reduced-motion') === 'true';
+        
+        const intervalAttr = this.getAttribute('data-interval');
+        if (intervalAttr) {
+          this.autoplayInterval = parseInt(intervalAttr) * 1000;
+        }
+
+        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        this.setupClickHandlers();
+        this.setActiveStep(0);
+
+        if (this.autoplayEnabled) {
+          if (this.pauseOutOfView) {
+            this.setupIntersectionObserver();
+          } else {
+            this.startAutoplay();
+          }
+        }
+      }
+
+      setupClickHandlers() {
+        this.navItems.forEach((item, index) => {
+          item.addEventListener('click', () => {
+            this.userInteracted = true;
+            const stepIndex = parseInt(item.dataset.stepIndex);
+            this.stopAutoplay();
+            this.setActiveStep(stepIndex);
+            
+            if (this.resumeAfterClick && this.autoplayEnabled) {
+              this.startAutoplay();
+            }
+          });
+        });
+      }
+
+      setupIntersectionObserver() {
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            this.isInView = entry.isIntersecting;
+            if (this.isInView) {
+              this.startAutoplay();
+            } else {
+              this.stopAutoplay();
+            }
+          });
+        }, {
+          threshold: 0.2
+        });
+
+        this.observer.observe(this);
+      }
+
+      startAutoplay() {
+        if (!this.autoplayEnabled) return;
+        if (this.pauseReducedMotion && this.prefersReducedMotion) return;
+        if (this.autoplayTimer) return;
+
+        this.autoplayTimer = setInterval(() => {
+          let nextIndex = this.activeIndex + 1;
+          
+          if (nextIndex >= this.steps.length) {
+            if (this.loopEnabled) {
+              nextIndex = 0;
+            } else {
+              this.stopAutoplay();
+              return;
+            }
+          }
+          
+          this.setActiveStep(nextIndex);
+        }, this.autoplayInterval);
+      }
+
+      stopAutoplay() {
+        if (this.autoplayTimer) {
+          clearInterval(this.autoplayTimer);
+          this.autoplayTimer = null;
+        }
+      }
+
+      setActiveStep(index) {
+        this.steps.forEach((step, i) => {
+          if (i === index) {
+            step.classList.add('active');
+          } else {
+            step.classList.remove('active');
+          }
+        });
+
+        this.navItems.forEach((item, i) => {
+          const itemIndex = parseInt(item.dataset.stepIndex);
+          
+          if (itemIndex === index) {
+            item.classList.add('active');
+            item.classList.remove('inactive', 'completed');
+            const progressBar = item.querySelector('.ai-how-it-works-progress-bar-{{ ai_gen_id }}');
+            if (progressBar) {
+              progressBar.style.animation = 'none';
+              void progressBar.offsetWidth;
+              progressBar.style.animation = null;
+            }
+          } else if (itemIndex < index) {
+            item.classList.add('completed');
+            item.classList.remove('active', 'inactive');
+          } else {
+            item.classList.add('inactive');
+            item.classList.remove('active', 'completed');
+          }
+        });
+
+        this.activeIndex = index;
+      }
+
+      disconnectedCallback() {
+        this.stopAutoplay();
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+      }
+    }
+
+    customElements.define('how-it-works-{{ ai_gen_id }}', HowItWorks{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "How it works",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_enabled",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "min": 5,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Interval",
+      "default": 7
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_enabled",
+      "label": "Loop after last step",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "resume_after_click",
+      "label": "Resume autoplay after click",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_out_of_view",
+      "label": "Pause when out of view",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_reduced_motion",
+      "label": "Pause for reduced motion",
+      "info": "Respects user accessibility preferences",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "primary_text_color",
+      "label": "Primary text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "secondary_text_color",
+      "label": "Secondary text",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "active_text_color",
+      "label": "Active step text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Progress indicator"
+    },
+    {
+      "type": "color",
+      "id": "progress_bar_color",
+      "label": "Progress bar",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "progress_track_color",
+      "label": "Progress track",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "range",
+      "id": "nav_font_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "inactive_opacity",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Inactive opacity",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Step content"
+    },
+    {
+      "type": "range",
+      "id": "headline_font_size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Headline size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "color",
+      "id": "media_background",
+      "label": "Background",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "range",
+      "id": "media_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Step 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "step_1_enabled",
+      "label": "Enable step 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "step_1_nav_title",
+      "label": "Navigation title",
+      "default": "Wear it"
+    },
+    {
+      "type": "text",
+      "id": "step_1_headline",
+      "label": "Headline",
+      "default": "Wear the device 24/7"
+    },
+    {
+      "type": "richtext",
+      "id": "step_1_description",
+      "label": "Description",
+      "default": "<p>Track your health metrics continuously with our comfortable, lightweight design that you'll forget you're wearing.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "step_1_video",
+      "label": "Video"
+    },
+    {
+      "type": "header",
+      "content": "Step 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "step_2_enabled",
+      "label": "Enable step 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "step_2_nav_title",
+      "label": "Navigation title",
+      "default": "Track it"
+    },
+    {
+      "type": "text",
+      "id": "step_2_headline",
+      "label": "Headline",
+      "default": "Automatic data collection"
+    },
+    {
+      "type": "richtext",
+      "id": "step_2_description",
+      "label": "Description",
+      "default": "<p>Your device captures sleep, strain, recovery, and more without any manual input required.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "step_2_video",
+      "label": "Video"
+    },
+    {
+      "type": "header",
+      "content": "Step 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "step_3_enabled",
+      "label": "Enable step 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "step_3_nav_title",
+      "label": "Navigation title",
+      "default": "Understand it"
+    },
+    {
+      "type": "text",
+      "id": "step_3_headline",
+      "label": "Headline",
+      "default": "Get personalized insights"
+    },
+    {
+      "type": "richtext",
+      "id": "step_3_description",
+      "label": "Description",
+      "default": "<p>Receive daily recommendations based on your unique data to optimize your performance and recovery.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "step_3_video",
+      "label": "Video"
+    },
+    {
+      "type": "header",
+      "content": "Step 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "step_4_enabled",
+      "label": "Enable step 4",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "step_4_nav_title",
+      "label": "Navigation title",
+      "default": "Step 4"
+    },
+    {
+      "type": "text",
+      "id": "step_4_headline",
+      "label": "Headline",
+      "default": "Step 4 headline"
+    },
+    {
+      "type": "richtext",
+      "id": "step_4_description",
+      "label": "Description",
+      "default": "<p>Describe this step in detail.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "step_4_video",
+      "label": "Video"
+    },
+    {
+      "type": "header",
+      "content": "Step 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "step_5_enabled",
+      "label": "Enable step 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "step_5_nav_title",
+      "label": "Navigation title",
+      "default": "Step 5"
+    },
+    {
+      "type": "text",
+      "id": "step_5_headline",
+      "label": "Headline",
+      "default": "Step 5 headline"
+    },
+    {
+      "type": "richtext",
+      "id": "step_5_description",
+      "label": "Description",
+      "default": "<p>Describe this step in detail.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "step_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "step_5_video",
+      "label": "Video"
+    }
+  ],
+  "presets": [
+    {
+      "name": "How it works"
+    }
+  ]
+}
+{% endschema %}

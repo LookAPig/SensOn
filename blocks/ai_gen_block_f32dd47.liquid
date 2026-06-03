@@ -1,0 +1,375 @@
+{% doc %}
+  @prompt
+    words and vedio
+{% enddoc %}
+
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-words-video-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    background: #000;
+  }
+
+  .ai-words-video-container-{{ ai_gen_id }} {
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 1230px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 75px 0 75px;
+  }
+
+  .ai-words-video-text-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 1180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ai-words-video-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 {{ block.settings.text_spacing }}px;
+    line-height: 1.12;
+    font-weight: 700;
+    max-width: 760px;
+  }
+
+  .ai-words-video-heading-{{ ai_gen_id }} p {
+    margin: 0;
+  }
+
+  .ai-words-video-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.15;
+    max-width: 1120px;
+    margin: 0 auto 28px;
+  }
+
+  .ai-words-video-description-{{ ai_gen_id }} p {
+    margin: 0;
+  }
+
+  .ai-words-video-media-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 1230px;
+    position: relative;
+    border-radius: {{ block.settings.video_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-words-video-video-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: {{ block.settings.video_border_radius }}px;
+  }
+
+  .ai-words-video-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 16 / 7.2;
+    background-color: #6f6f6f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.video_border_radius }}px;
+    position: relative;
+  }
+
+  .ai-words-video-placeholder-{{ ai_gen_id }} svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.3;
+  }
+
+  .ai-words-video-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-words-video-container-{{ ai_gen_id }} {
+      width: 100%;
+      max-width: none;
+      padding: 30px 18px 30px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .ai-words-video-text-{{ ai_gen_id }} {
+      display: contents;
+    }
+
+    .ai-words-video-heading-{{ ai_gen_id }} {
+      order: 1;
+      font-size: 24px;
+      line-height: 1.18;
+      margin: 0 0 24px;
+      max-width: 100%;
+      text-align: left;
+    }
+
+    .ai-words-video-media-{{ ai_gen_id }} {
+      order: 2;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 0 18px;
+    }
+
+    .ai-words-video-placeholder-{{ ai_gen_id }} {
+      aspect-ratio: 1.55 / 1;
+      background-color: #6f6f6f;
+    }
+
+    .ai-words-video-description-{{ ai_gen_id }} {
+      order: 3;
+      font-size: 15px;
+      line-height: 1.22;
+      max-width: 100%;
+      margin: 0;
+      text-align: left;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-words-video-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-words-video-container-{{ ai_gen_id }}">
+
+    <div class="ai-words-video-text-{{ ai_gen_id }}">
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-words-video-heading-{{ ai_gen_id }}">
+          {{ block.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if block.settings.description != blank %}
+        <div class="ai-words-video-description-{{ ai_gen_id }}">
+          {{ block.settings.description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-words-video-media-{{ ai_gen_id }}">
+      {% if block.settings.video != blank %}
+        {% assign video_class = "ai-words-video-video-" | append: ai_gen_id %}
+        {{ block.settings.video | video_tag: autoplay: block.settings.autoplay, loop: block.settings.loop, controls: block.settings.show_controls, muted: block.settings.muted, class: video_class }}
+      {% else %}
+        <div class="ai-words-video-placeholder-{{ ai_gen_id }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+
+          <div class="ai-words-video-empty-state-{{ ai_gen_id }}">
+            Next, add a video
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Words and video",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "row",
+          "label": "Text left, video right"
+        },
+        {
+          "value": "row-reverse",
+          "label": "Video left, text right"
+        },
+        {
+          "value": "column",
+          "label": "Text top, video bottom"
+        },
+        {
+          "value": "column-reverse",
+          "label": "Video top, text bottom"
+        }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between text and video",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85
+    },
+    {
+      "type": "header",
+      "content": "Text content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Discover our story</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Watch this video to learn more about our brand, our mission, and what makes us unique.</p>"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "text_spacing",
+      "label": "Spacing below heading",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "muted",
+      "label": "Muted",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_controls",
+      "label": "Show controls",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "video_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Words and video"
+    }
+  ]
+}
+{% endschema %}

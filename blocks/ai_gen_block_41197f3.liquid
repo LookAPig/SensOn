@@ -1,0 +1,878 @@
+{% doc %}
+  @prompt
+    Overview
+    SensOn delivers the first AI-powered pleasure experience created for women. It combines bionic stimulation through the S1 device with a premium erotica platform to create cinematic intimacy that users can truly feel.
+    Through the SensOn.AI app, users pair the device to access female-focused, LGBTQ+-inclusive erotic audio and engage in real-time voice interaction with story characters. As the experience unfolds, the hardware responds in sync with both content and conversation—delivering a fully immersive, hands-free experience that remains entirely under the user’s control. 
+    SensOn is not just an intimate product. It is an AI lover you can feel and touch.
+    Please help me create a section with the content described above. It needs to be customizable and designed in the style of Whoop – very techy but also feminine.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-senson-overview-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_mobile }}px 20px;
+    background: {{ block.settings.background_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-senson-overview-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_desktop }}px 40px;
+    }
+  }
+
+  .ai-senson-overview__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-senson-overview__grid-{{ ai_gen_id }} {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .ai-senson-overview__grid-{{ ai_gen_id }} {
+      grid-template-columns: {% if block.settings.layout == 'image_left' %}1fr 1.2fr{% else %}1.2fr 1fr{% endif %};
+      gap: 60px;
+    }
+  }
+
+  .ai-senson-overview__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    {% if block.settings.layout == 'image_left' %}
+      order: 1;
+    {% else %}
+      order: 2;
+    {% endif %}
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-senson-overview__image-wrapper-{{ ai_gen_id }} {
+      order: 1;
+    }
+  }
+
+  .ai-senson-overview__image-container-{{ ai_gen_id }} {
+    position: relative;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+  }
+
+  .ai-senson-overview__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-senson-overview__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background: {{ block.settings.placeholder_bg }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-senson-overview__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-senson-overview__accent-circle-{{ ai_gen_id }} {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: {{ block.settings.accent_color }};
+    opacity: {{ block.settings.accent_opacity }};
+    filter: blur(60px);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .ai-senson-overview__accent-circle--top-{{ ai_gen_id }} {
+    top: -100px;
+    right: -50px;
+  }
+
+  .ai-senson-overview__accent-circle--bottom-{{ ai_gen_id }} {
+    bottom: -100px;
+    left: -50px;
+  }
+
+  .ai-senson-overview__content-{{ ai_gen_id }} {
+    {% if block.settings.layout == 'image_left' %}
+      order: 2;
+    {% else %}
+      order: 1;
+    {% endif %}
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-senson-overview__content-{{ ai_gen_id }} {
+      order: 2;
+    }
+  }
+
+  .ai-senson-overview__eyebrow-{{ ai_gen_id }} {
+    display: inline-block;
+    font-size: {{ block.settings.eyebrow_size }}px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: {{ block.settings.eyebrow_color }};
+    margin-bottom: 16px;
+    padding: 8px 16px;
+    background: {{ block.settings.eyebrow_bg }};
+    border-radius: 20px;
+    border: 1px solid {{ block.settings.eyebrow_border }};
+  }
+
+  .ai-senson-overview__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size_mobile }}px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 24px 0;
+    letter-spacing: -0.02em;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-senson-overview__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+    }
+  }
+
+  .ai-senson-overview__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size_mobile }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 32px 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-senson-overview__description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size_desktop }}px;
+    }
+  }
+
+  .ai-senson-overview__features-{{ ai_gen_id }} {
+    display: grid;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .ai-senson-overview__feature-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .ai-senson-overview__feature-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: {{ block.settings.feature_icon_bg }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .ai-senson-overview__feature-icon-{{ ai_gen_id }} svg {
+    width: 14px;
+    height: 14px;
+    stroke: {{ block.settings.feature_icon_color }};
+    stroke-width: 2.5;
+  }
+
+  .ai-senson-overview__feature-text-{{ ai_gen_id }} {
+    flex: 1;
+    font-size: {{ block.settings.feature_text_size }}px;
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-senson-overview__cta-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background: {{ block.settings.button_bg }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: 2px solid {{ block.settings.button_border_color }};
+  }
+
+  .ai-senson-overview__cta-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.button_hover_bg }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+    transform: translateY(-2px);
+  }
+
+  .ai-senson-overview__cta-icon-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-senson-overview__cta-{{ ai_gen_id }}:hover .ai-senson-overview__cta-icon-{{ ai_gen_id }} {
+    transform: translateX(4px);
+  }
+
+  .ai-senson-overview__stats-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid {{ block.settings.divider_color }};
+  }
+
+  .ai-senson-overview__stat-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-senson-overview__stat-value-{{ ai_gen_id }} {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ block.settings.stat_value_color }};
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .ai-senson-overview__stat-label-{{ ai_gen_id }} {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: {{ block.settings.stat_label_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-senson-overview__stats-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+{% endstyle %}
+
+<senson-overview-{{ ai_gen_id }} class="ai-senson-overview-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.show_accent_circles %}
+    <div class="ai-senson-overview__accent-circle-{{ ai_gen_id }} ai-senson-overview__accent-circle--top-{{ ai_gen_id }}"></div>
+    <div class="ai-senson-overview__accent-circle-{{ ai_gen_id }} ai-senson-overview__accent-circle--bottom-{{ ai_gen_id }}"></div>
+  {% endif %}
+
+  <div class="ai-senson-overview__container-{{ ai_gen_id }}">
+    <div class="ai-senson-overview__grid-{{ ai_gen_id }}">
+      <div class="ai-senson-overview__image-wrapper-{{ ai_gen_id }}">
+        <div class="ai-senson-overview__image-container-{{ ai_gen_id }}">
+          {% if block.settings.image %}
+            <img
+              src="{{ block.settings.image | image_url: width: 1200 }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              class="ai-senson-overview__image-{{ ai_gen_id }}"
+              loading="lazy"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+            >
+          {% else %}
+            <div class="ai-senson-overview__image-placeholder-{{ ai_gen_id }}">
+              {{ 'product-1' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="ai-senson-overview__content-{{ ai_gen_id }}">
+        {% if block.settings.eyebrow != blank %}
+          <div class="ai-senson-overview__eyebrow-{{ ai_gen_id }}">
+            {{ block.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-senson-overview__heading-{{ ai_gen_id }}">
+            {{ block.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if block.settings.description != blank %}
+          <div class="ai-senson-overview__description-{{ ai_gen_id }}">
+            {{ block.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.show_features %}
+          <div class="ai-senson-overview__features-{{ ai_gen_id }}">
+            {% if block.settings.feature_1 != blank %}
+              <div class="ai-senson-overview__feature-{{ ai_gen_id }}">
+                <div class="ai-senson-overview__feature-icon-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="ai-senson-overview__feature-text-{{ ai_gen_id }}">
+                  {{ block.settings.feature_1 }}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if block.settings.feature_2 != blank %}
+              <div class="ai-senson-overview__feature-{{ ai_gen_id }}">
+                <div class="ai-senson-overview__feature-icon-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="ai-senson-overview__feature-text-{{ ai_gen_id }}">
+                  {{ block.settings.feature_2 }}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if block.settings.feature_3 != blank %}
+              <div class="ai-senson-overview__feature-{{ ai_gen_id }}">
+                <div class="ai-senson-overview__feature-icon-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="ai-senson-overview__feature-text-{{ ai_gen_id }}">
+                  {{ block.settings.feature_3 }}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if block.settings.feature_4 != blank %}
+              <div class="ai-senson-overview__feature-{{ ai_gen_id }}">
+                <div class="ai-senson-overview__feature-icon-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="ai-senson-overview__feature-text-{{ ai_gen_id }}">
+                  {{ block.settings.feature_4 }}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if block.settings.button_label != blank %}
+          <a href="{{ block.settings.button_link }}" class="ai-senson-overview__cta-{{ ai_gen_id }}">
+            {{ block.settings.button_label }}
+            <svg class="ai-senson-overview__cta-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if block.settings.show_stats %}
+          <div class="ai-senson-overview__stats-{{ ai_gen_id }}">
+            {% if block.settings.stat_1_value != blank %}
+              <div class="ai-senson-overview__stat-{{ ai_gen_id }}">
+                <span class="ai-senson-overview__stat-value-{{ ai_gen_id }}">{{ block.settings.stat_1_value }}</span>
+                <span class="ai-senson-overview__stat-label-{{ ai_gen_id }}">{{ block.settings.stat_1_label }}</span>
+              </div>
+            {% endif %}
+
+            {% if block.settings.stat_2_value != blank %}
+              <div class="ai-senson-overview__stat-{{ ai_gen_id }}">
+                <span class="ai-senson-overview__stat-value-{{ ai_gen_id }}">{{ block.settings.stat_2_value }}</span>
+                <span class="ai-senson-overview__stat-label-{{ ai_gen_id }}">{{ block.settings.stat_2_label }}</span>
+              </div>
+            {% endif %}
+
+            {% if block.settings.stat_3_value != blank %}
+              <div class="ai-senson-overview__stat-{{ ai_gen_id }}">
+                <span class="ai-senson-overview__stat-value-{{ ai_gen_id }}">{{ block.settings.stat_3_value }}</span>
+                <span class="ai-senson-overview__stat-label-{{ ai_gen_id }}">{{ block.settings.stat_3_label }}</span>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</senson-overview-{{ ai_gen_id }}>
+
+<script>
+(function() {
+  class SensonOverview{{ ai_gen_id }} extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.init();
+    }
+
+    init() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      const elements = this.querySelectorAll('.ai-senson-overview__content-{{ ai_gen_id }}, .ai-senson-overview__image-wrapper-{{ ai_gen_id }}');
+      elements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+    }
+  }
+
+  customElements.define('senson-overview-{{ ai_gen_id }}', SensonOverview{{ ai_gen_id }});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SensOn overview",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "image_left",
+          "label": "Left"
+        },
+        {
+          "value": "image_right",
+          "label": "Right"
+        }
+      ],
+      "default": "image_right"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "min": 40,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop padding",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "AI-Powered Intimacy"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The First AI Lover You Can Feel"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>SensOn delivers the first AI-powered pleasure experience created for women. It combines bionic stimulation through the S1 device with a premium erotica platform to create cinematic intimacy that users can truly feel.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show features",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "feature_1",
+      "label": "Feature 1",
+      "default": "Bionic stimulation synced with premium erotica"
+    },
+    {
+      "type": "text",
+      "id": "feature_2",
+      "label": "Feature 2",
+      "default": "Real-time voice interaction with story characters"
+    },
+    {
+      "type": "text",
+      "id": "feature_3",
+      "label": "Feature 3",
+      "default": "Female-focused, LGBTQ+-inclusive content"
+    },
+    {
+      "type": "text",
+      "id": "feature_4",
+      "label": "Feature 4",
+      "default": "Fully immersive, hands-free experience"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button text",
+      "default": "Explore SensOn"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Statistics"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show statistics",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "stat_1_value",
+      "label": "Stat 1 value",
+      "default": "100%"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "AI-Powered"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_value",
+      "label": "Stat 2 value",
+      "default": "24/7"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Available"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_value",
+      "label": "Stat 3 value",
+      "default": "∞"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Possibilities"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#faf4f0"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow text",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_bg",
+      "label": "Eyebrow background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_border",
+      "label": "Eyebrow border",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_bg",
+      "label": "Feature icon background",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_color",
+      "label": "Feature icon",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider",
+      "default": "#e0d5cc"
+    },
+    {
+      "type": "color",
+      "id": "stat_value_color",
+      "label": "Stat value",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "stat_label_color",
+      "label": "Stat label",
+      "default": "#8a7a6f"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_bg",
+      "label": "Placeholder background",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "header",
+      "content": "Accent effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_accent_circles",
+      "label": "Show accent circles",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#f287ec"
+    },
+    {
+      "type": "range",
+      "id": "accent_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Accent opacity",
+      "default": 0.3
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Background",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Hover background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border",
+      "default": "#321e1e"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow size",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size mobile",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size desktop",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size desktop",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Feature text size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button text size",
+      "default": 13
+    }
+  ],
+  "presets": [
+    {
+      "name": "SensOn overview"
+    }
+  ]
+}
+{% endschema %}

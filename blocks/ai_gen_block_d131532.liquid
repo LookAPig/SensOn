@@ -1,0 +1,840 @@
+{% doc %}
+  @prompt
+    I need a section with the title: Lifelike pleasure you can interact with
+    Copy: SensOn combines cutting-edge AI and bionic engineering to deliver hands-free, real-time motion synchronized to your content—designed to stimulate every sensitive zone and create a truly lifelike experience. Each AI character comes with a distinct personality and responds differently to your voice and pressure-sensor feedback from your body, bringing you the essence of real sex: the element of surprise.
+    
+    Below are three main selling points, the content is as follows. Each selling point needs an image. The three main selling points need to be displayed in one row, mobile-friendly. Please make the section look high-end and emotional, suitable for women's intimate products.  The style should be similar to the Whoop website.
+    
+    Bionic Reality
+    The SensOn device V1 reproduces the complexity of real human touch, delivering triple stimulation across the clitoris, vagina, and nipples in perfect synchrony.
+    - Pleasure air technology uses pulsating air pressure to mimic natural suction for a deeper, more lifelike sensation.
+    - The Vaginal Stimulator delivers lifelike thrusting with dynamic rhythm and pressure, engaging the U-G-A trio of pleasure points.
+    - The Nipple Stimulators deliver surround-style stimulation — an enveloping fit that hugs and wraps the nipple with rhythmic kneading.
+    Material: Dynamic video montage of the three devices
+    
+    Hands-Free Freedom
+    S1's ergonomic, adjustable form fits naturally between the thighs. Once positioned, it holds securely without the need for hands.
+    Material: Not yet decided
+    
+    Modular Design
+    Each component is fully detachable and customizable. Users can freely combine the clitoral stimulator, vaginal stimulator, and nipple stimulator to suit a wide range of preferences, kinks, and sexual orientations.
+    [Image]
+    
+    Sensory Intelligence
+    Advanced sensors detect intentional thigh squeezes and translate subtle pressure and rhythm changes into real-time AI responses—continuously adjusting stimulation for a natural, intuitive feedback loop.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-lifelike-pleasure-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_mobile }}px 20px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-lifelike-pleasure-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_desktop }}px 40px;
+    }
+  }
+
+  .ai-lifelike-pleasure-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-lifelike-pleasure-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-lifelike-pleasure-header-{{ ai_gen_id }} {
+      margin-bottom: 60px;
+    }
+  }
+
+  .ai-lifelike-pleasure-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size_mobile }}px;
+    line-height: 1.1;
+    margin: 0 0 20px;
+    color: {{ block.settings.text_color }};
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-lifelike-pleasure-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size_desktop }}px;
+      margin-bottom: 24px;
+    }
+  }
+
+  .ai-lifelike-pleasure-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size_mobile }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    opacity: 0.85;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-lifelike-pleasure-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_size_desktop }}px;
+      line-height: 1.7;
+    }
+  }
+
+  .ai-lifelike-pleasure-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-lifelike-pleasure-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+      gap: {{ block.settings.grid_gap }}px;
+    }
+  }
+
+  .ai-lifelike-pleasure-card-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .ai-lifelike-pleasure-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ block.settings.image_aspect_ratio }};
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    background-color: {{ block.settings.image_placeholder_bg }};
+  }
+
+  .ai-lifelike-pleasure-image-wrapper-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-lifelike-pleasure-image-wrapper-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+
+  .ai-lifelike-pleasure-card-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-lifelike-pleasure-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_size_mobile }}px;
+    line-height: 1.2;
+    margin: 0;
+    color: {{ block.settings.text_color }};
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-lifelike-pleasure-card-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.card_title_size_desktop }}px;
+    }
+  }
+
+  .ai-lifelike-pleasure-card-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_description_size_mobile }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-lifelike-pleasure-card-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.card_description_size_desktop }}px;
+      line-height: 1.7;
+    }
+  }
+
+  .ai-lifelike-pleasure-card-list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ai-lifelike-pleasure-card-list-{{ ai_gen_id }} li {
+    font-size: {{ block.settings.list_item_size_mobile }}px;
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+    opacity: 0.75;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-lifelike-pleasure-card-list-{{ ai_gen_id }} li {
+      font-size: {{ block.settings.list_item_size_desktop }}px;
+    }
+  }
+
+  .ai-lifelike-pleasure-card-list-{{ ai_gen_id }} li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: {{ block.settings.text_color }};
+    opacity: 0.5;
+  }
+
+  .ai-lifelike-pleasure-card-note-{{ ai_gen_id }} {
+    font-size: {{ block.settings.note_size_mobile }}px;
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+    margin: 4px 0 0;
+    font-style: italic;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-lifelike-pleasure-card-note-{{ ai_gen_id }} {
+      font-size: {{ block.settings.note_size_desktop }}px;
+    }
+  }
+{% endstyle %}
+
+<lifelike-pleasure-{{ ai_gen_id }} class="ai-lifelike-pleasure-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-lifelike-pleasure-container-{{ ai_gen_id }}">
+    <div class="ai-lifelike-pleasure-header-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-lifelike-pleasure-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+      {% if block.settings.description != blank %}
+        <div class="ai-lifelike-pleasure-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+      {% endif %}
+    </div>
+
+    <div class="ai-lifelike-pleasure-grid-{{ ai_gen_id }}">
+      {% if block.settings.card_1_enabled %}
+        <div class="ai-lifelike-pleasure-card-{{ ai_gen_id }}">
+          <div class="ai-lifelike-pleasure-image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.card_1_image %}
+              <img
+                src="{{ block.settings.card_1_image | image_url: width: 800 }}"
+                alt="{{ block.settings.card_1_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.card_1_image.width }}"
+                height="{{ block.settings.card_1_image.height }}"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+          <div class="ai-lifelike-pleasure-card-content-{{ ai_gen_id }}">
+            {% if block.settings.card_1_title != blank %}
+              <h3 class="ai-lifelike-pleasure-card-title-{{ ai_gen_id }}">{{ block.settings.card_1_title }}</h3>
+            {% endif %}
+            {% if block.settings.card_1_description != blank %}
+              <div class="ai-lifelike-pleasure-card-description-{{ ai_gen_id }}">{{ block.settings.card_1_description }}</div>
+            {% endif %}
+            {% if block.settings.card_1_list != blank %}
+              <ul class="ai-lifelike-pleasure-card-list-{{ ai_gen_id }}">
+                {% assign list_items = block.settings.card_1_list | newline_to_br | split: '<br />' %}
+                {% for item in list_items %}
+                  {% assign trimmed_item = item | strip %}
+                  {% if trimmed_item != blank %}
+                    <li>{{ trimmed_item }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if block.settings.card_1_note != blank %}
+              <p class="ai-lifelike-pleasure-card-note-{{ ai_gen_id }}">{{ block.settings.card_1_note }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.card_2_enabled %}
+        <div class="ai-lifelike-pleasure-card-{{ ai_gen_id }}">
+          <div class="ai-lifelike-pleasure-image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.card_2_image %}
+              <img
+                src="{{ block.settings.card_2_image | image_url: width: 800 }}"
+                alt="{{ block.settings.card_2_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.card_2_image.width }}"
+                height="{{ block.settings.card_2_image.height }}"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+          <div class="ai-lifelike-pleasure-card-content-{{ ai_gen_id }}">
+            {% if block.settings.card_2_title != blank %}
+              <h3 class="ai-lifelike-pleasure-card-title-{{ ai_gen_id }}">{{ block.settings.card_2_title }}</h3>
+            {% endif %}
+            {% if block.settings.card_2_description != blank %}
+              <div class="ai-lifelike-pleasure-card-description-{{ ai_gen_id }}">{{ block.settings.card_2_description }}</div>
+            {% endif %}
+            {% if block.settings.card_2_list != blank %}
+              <ul class="ai-lifelike-pleasure-card-list-{{ ai_gen_id }}">
+                {% assign list_items = block.settings.card_2_list | newline_to_br | split: '<br />' %}
+                {% for item in list_items %}
+                  {% assign trimmed_item = item | strip %}
+                  {% if trimmed_item != blank %}
+                    <li>{{ trimmed_item }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if block.settings.card_2_note != blank %}
+              <p class="ai-lifelike-pleasure-card-note-{{ ai_gen_id }}">{{ block.settings.card_2_note }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.card_3_enabled %}
+        <div class="ai-lifelike-pleasure-card-{{ ai_gen_id }}">
+          <div class="ai-lifelike-pleasure-image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.card_3_image %}
+              <img
+                src="{{ block.settings.card_3_image | image_url: width: 800 }}"
+                alt="{{ block.settings.card_3_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.card_3_image.width }}"
+                height="{{ block.settings.card_3_image.height }}"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+          <div class="ai-lifelike-pleasure-card-content-{{ ai_gen_id }}">
+            {% if block.settings.card_3_title != blank %}
+              <h3 class="ai-lifelike-pleasure-card-title-{{ ai_gen_id }}">{{ block.settings.card_3_title }}</h3>
+            {% endif %}
+            {% if block.settings.card_3_description != blank %}
+              <div class="ai-lifelike-pleasure-card-description-{{ ai_gen_id }}">{{ block.settings.card_3_description }}</div>
+            {% endif %}
+            {% if block.settings.card_3_list != blank %}
+              <ul class="ai-lifelike-pleasure-card-list-{{ ai_gen_id }}">
+                {% assign list_items = block.settings.card_3_list | newline_to_br | split: '<br />' %}
+                {% for item in list_items %}
+                  {% assign trimmed_item = item | strip %}
+                  {% if trimmed_item != blank %}
+                    <li>{{ trimmed_item }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if block.settings.card_3_note != blank %}
+              <p class="ai-lifelike-pleasure-card-note-{{ ai_gen_id }}">{{ block.settings.card_3_note }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.card_4_enabled %}
+        <div class="ai-lifelike-pleasure-card-{{ ai_gen_id }}">
+          <div class="ai-lifelike-pleasure-image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.card_4_image %}
+              <img
+                src="{{ block.settings.card_4_image | image_url: width: 800 }}"
+                alt="{{ block.settings.card_4_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.card_4_image.width }}"
+                height="{{ block.settings.card_4_image.height }}"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+          <div class="ai-lifelike-pleasure-card-content-{{ ai_gen_id }}">
+            {% if block.settings.card_4_title != blank %}
+              <h3 class="ai-lifelike-pleasure-card-title-{{ ai_gen_id }}">{{ block.settings.card_4_title }}</h3>
+            {% endif %}
+            {% if block.settings.card_4_description != blank %}
+              <div class="ai-lifelike-pleasure-card-description-{{ ai_gen_id }}">{{ block.settings.card_4_description }}</div>
+            {% endif %}
+            {% if block.settings.card_4_list != blank %}
+              <ul class="ai-lifelike-pleasure-card-list-{{ ai_gen_id }}">
+                {% assign list_items = block.settings.card_4_list | newline_to_br | split: '<br />' %}
+                {% for item in list_items %}
+                  {% assign trimmed_item = item | strip %}
+                  {% if trimmed_item != blank %}
+                    <li>{{ trimmed_item }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if block.settings.card_4_note != blank %}
+              <p class="ai-lifelike-pleasure-card-note-{{ ai_gen_id }}">{{ block.settings.card_4_note }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</lifelike-pleasure-{{ ai_gen_id }}>
+
+<script>
+(function() {
+  class LifelikePleasure{{ ai_gen_id }} extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.style.display = 'block';
+    }
+  }
+
+  customElements.define('lifelike-pleasure-{{ ai_gen_id }}', LifelikePleasure{{ ai_gen_id }});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Product features",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Lifelike pleasure you can interact with"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "SensOn combines cutting-edge AI and bionic engineering to deliver hands-free, real-time motion synchronized to your content—designed to stimulate every sensitive zone and create a truly lifelike experience."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "default": 1400
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 20,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "label": "Section padding mobile",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "label": "Section padding desktop",
+      "min": 40,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "image_placeholder_bg",
+      "label": "Image placeholder background",
+      "default": "#faf4f0"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title size mobile",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Title size desktop",
+      "min": 32,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "label": "Description size mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "description_size_desktop",
+      "label": "Description size desktop",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_mobile",
+      "label": "Card title size mobile",
+      "min": 18,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_desktop",
+      "label": "Card title size desktop",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "card_description_size_mobile",
+      "label": "Card description mobile",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_description_size_desktop",
+      "label": "Card description desktop",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "list_item_size_mobile",
+      "label": "List item size mobile",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "list_item_size_desktop",
+      "label": "List item size desktop",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "note_size_mobile",
+      "label": "Note size mobile",
+      "min": 10,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "note_size_desktop",
+      "label": "Note size desktop",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Image style"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Wide (16:9)"
+        },
+        {
+          "value": "3 / 4",
+          "label": "Portrait (3:4)"
+        }
+      ],
+      "default": "4 / 3"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Card 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_1_enabled",
+      "label": "Enable card 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "card_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Title",
+      "default": "Bionic Reality"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_description",
+      "label": "Description",
+      "default": "The SensOn device V1 reproduces the complexity of real human touch, delivering triple stimulation across the clitoris, vagina, and nipples in perfect synchrony."
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_list",
+      "label": "List items",
+      "info": "Enter each item on a new line",
+      "default": "Pleasure air technology uses pulsating air pressure to mimic natural suction for a deeper, more lifelike sensation.\nThe Vaginal Stimulator delivers lifelike thrusting with dynamic rhythm and pressure, engaging the U-G-A trio of pleasure points.\nThe Nipple Stimulators deliver surround-style stimulation — an enveloping fit that hugs and wraps the nipple with rhythmic kneading."
+    },
+    {
+      "type": "text",
+      "id": "card_1_note",
+      "label": "Note"
+    },
+    {
+      "type": "header",
+      "content": "Card 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_2_enabled",
+      "label": "Enable card 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "card_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Title",
+      "default": "Hands-Free Freedom"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_description",
+      "label": "Description",
+      "default": "S1's ergonomic, adjustable form fits naturally between the thighs. Once positioned, it holds securely without the need for hands."
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_list",
+      "label": "List items",
+      "info": "Enter each item on a new line"
+    },
+    {
+      "type": "text",
+      "id": "card_2_note",
+      "label": "Note"
+    },
+    {
+      "type": "header",
+      "content": "Card 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_3_enabled",
+      "label": "Enable card 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "card_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Title",
+      "default": "Modular Design"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_description",
+      "label": "Description",
+      "default": "Each component is fully detachable and customizable. Users can freely combine the clitoral stimulator, vaginal stimulator, and nipple stimulator to suit a wide range of preferences, kinks, and sexual orientations."
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_list",
+      "label": "List items",
+      "info": "Enter each item on a new line"
+    },
+    {
+      "type": "text",
+      "id": "card_3_note",
+      "label": "Note"
+    },
+    {
+      "type": "header",
+      "content": "Card 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_4_enabled",
+      "label": "Enable card 4",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "card_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_4_title",
+      "label": "Title",
+      "default": "Sensory Intelligence"
+    },
+    {
+      "type": "textarea",
+      "id": "card_4_description",
+      "label": "Description",
+      "default": "Advanced sensors detect intentional thigh squeezes and translate subtle pressure and rhythm changes into real-time AI responses—continuously adjusting stimulation for a natural, intuitive feedback loop."
+    },
+    {
+      "type": "textarea",
+      "id": "card_4_list",
+      "label": "List items",
+      "info": "Enter each item on a new line"
+    },
+    {
+      "type": "text",
+      "id": "card_4_note",
+      "label": "Note"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product features"
+    }
+  ]
+}
+{% endschema %}

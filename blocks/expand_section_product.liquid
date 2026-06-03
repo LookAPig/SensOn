@@ -1,0 +1,820 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+    .ai-expanding-cards-{{ ai_gen_id }} {
+      display: block;
+      width: 100%;
+      padding: {{ block.settings.section_padding_mobile }}px 20px;
+
+      /* padding-bottom: 0; */
+
+      background-color: {{ block.settings.section_bg_color }}
+    }
+
+    @media screen and (min-width: 750px) {
+      .ai-expanding-cards-{{ ai_gen_id }} {
+        padding: {{ block.settings.section_padding_desktop }}px 40px;
+          /* padding-bottom: 0; */
+      }
+    }
+
+    .ai-expanding-cards-container-{{ ai_gen_id }} {
+      max-width: {{ block.settings.max_width }}px;
+      margin: 0 auto;
+    }
+
+    .ai-expanding-cards-header-{{ ai_gen_id }} {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .ai-expanding-cards-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_mobile }}px;
+      color: {{ block.settings.heading_color }};
+      margin: 0 0 12px;
+      font-weight: 600;
+    }
+
+    @media screen and (min-width: 750px) {
+      .ai-expanding-cards-heading-{{ ai_gen_id }} {
+        font-size: {{ block.settings.heading_size_desktop }}px;
+      }
+    }
+
+    .ai-expanding-cards-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size }}px;
+      color: {{ block.settings.subheading_color }};
+      margin: 0;
+    }
+
+    .ai-expanding-cards-wrapper-{{ ai_gen_id }} {
+      display: flex;
+      gap: {{ block.settings.card_gap }}px;
+      height: {{ block.settings.card_height_mobile }}px;
+      position: relative;
+
+    }
+
+    @media screen and (min-width: 990px) {
+      .ai-expanding-cards-wrapper-{{ ai_gen_id }} {
+        height: {{ block.settings.card_height_desktop }}px;
+      }
+    }
+
+    .ai-expanding-card-{{ ai_gen_id }} {
+      flex: 0 0 {{ block.settings.collapsed_width }}px;
+     /* height: 100%; */
+      border-radius: {{ block.settings.card_border_radius }}px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .ai-expanding-card-{{ ai_gen_id }} .ai-expanding-card-box{
+      position: relative;
+     height: 100%;
+     border-radius: {{ block.settings.card_border_radius }}px;
+    }
+
+
+
+    .ai-expanding-card-{{ ai_gen_id }}.active {
+      flex: 1;
+    }
+   .ai-expanding-card-{{ ai_gen_id }}.active .ai-expanding-card-box{
+      flex: 1;
+   }
+
+   .ai-expanding-card-background-{{ ai_gen_id }} {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* background-color: {{ block.settings.card_background }}; */
+   }
+
+   .ai-expanding-card-image-{{ ai_gen_id }} {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ai-expanding-card-{{ ai_gen_id }}.active .ai-expanding-card-image-{{ ai_gen_id }} {
+      /* transform: scale(1.05); */
+    }
+
+    .ai-expanding-card-image-placeholder-{{ ai_gen_id }} {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, {{ block.settings.card_background }} 0%, {{ block.settings.image_background }} 100%);
+    }
+
+    .ai-expanding-card-image-placeholder-{{ ai_gen_id }} svg {
+      width: 40%;
+      height: 40%;
+      opacity: 0.2;
+    }
+
+    .ai-expanding-card-overlay-{{ ai_gen_id }} {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, {{ block.settings.overlay_opacity }}) 100%); */
+      transition: opacity 0.6s ease;
+    }
+
+    .ai-expanding-card-{{ ai_gen_id }}:not(.active) .ai-expanding-card-overlay-{{ ai_gen_id }} {
+      opacity: 0.7;
+    }
+
+    .ai-expanding-card-content-{{ ai_gen_id }} {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: {{ block.settings.card_padding }}px;
+      color: {{ block.settings.card_text_color }};
+      z-index: 2;
+    }
+
+    .ai-expanding-card-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.card_title_size_mobile }}px;
+      font-weight: 600;
+      margin: 0 0 12px;
+      transition: font-size 0.3s ease;
+    }
+
+    @media screen and (min-width: 990px) {
+      .ai-expanding-card-title-{{ ai_gen_id }} {
+        font-size: {{ block.settings.card_title_size_desktop }}px;
+      }
+    }
+
+    .ai-expanding-card-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.card_description_size }}px;
+      line-height: 1.6;
+      margin: 0;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.4s ease 0.2s, max-height 0.4s ease 0.2s;
+    }
+
+    .ai-expanding-card-{{ ai_gen_id }}.active .ai-expanding-card-description-{{ ai_gen_id }} {
+      opacity: 1;
+      max-height: 200px;
+    }
+
+    .ai-expading-card-desc{
+      display: none
+    }
+
+
+      @media screen and (max-width: 768px) {
+        .ai-expanding-card-{{ ai_gen_id }}  .ai-expanding-card-box{
+
+         max-height: 200px;
+         overflow: hidden;
+         aspect-ratio: 21 / 10;
+         width: 100%;
+      }
+      }
+    @media screen and (max-width: 989px) {
+        .ai-expading-card-desc{
+          display: block;
+        }
+         .ai-expading-card-desc > p,
+         .ai-expading-card-desc > h3 {
+      margin-top: 10px;
+    }
+
+     .ai-expading-card-desc > h3{
+      color: {{ block.settings.text_color_mobile }};
+     }
+      .ai-expading-card-desc > p{
+      color: {{ block.settings.text_desc_color_mobile }};
+     }
+
+
+        [class^="ai-expanding-card-content-"],
+        [class^="ai-expanding-card-overlay-"]{
+          display: none;
+        }
+      .ai-expanding-cards-wrapper-{{ ai_gen_id }} {
+        flex-direction: column;
+        height: auto;
+        gap: {{ block.settings.card_gap }}px;
+        gap: 40px;
+      }
+
+      .ai-expanding-card-{{ ai_gen_id }} {
+        flex: 0 0 auto;
+        /* height: 300px; */
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius:0;
+      }
+      .ai-expanding-card-{{ ai_gen_id }}  .ai-expanding-card-box{
+         /* height: 300px;
+         overflow: hidden; */
+         max-height: 300px;
+         overflow: hidden;
+         aspect-ratio: 21 / 10;
+         width: 100%;
+      }
+
+      .ai-expanding-card-{{ ai_gen_id }}.active  {
+        /* height: 400px; */
+      }
+        .ai-expanding-card-{{ ai_gen_id }}.active .ai-expanding-card-box{
+           /* height: 400px; */
+        }
+
+      .ai-expanding-card-description-{{ ai_gen_id }} {
+        opacity: 1;
+        max-height: 200px;
+      }
+    }
+
+    /* 小屏幕 */
+    @media screen and (max-width: 989px) {
+       .ai-expanding-cards-wrapper-{{ ai_gen_id }} {
+         flex-direction: column;
+         height: auto;
+         gap: {{ block.settings.card_gap }}px;
+         gap: 40px;
+       }
+
+       .ai-expanding-card-{{ ai_gen_id }} {
+         flex: none;
+         max-height: {{ block.settings.card_height_mobile }}px;
+         width: 100%;
+         cursor: default;
+       }
+
+    /* ❗取消 active 的高度变化 */
+    .ai-expanding-card-{{ ai_gen_id }}.active {
+      height: {{ block.settings.card_height_mobile }}px;
+    }
+
+    /* 描述始终显示 */
+    .ai-expanding-card-description-{{ ai_gen_id }} {
+      opacity: 1;
+      max-height: none;
+    }
+
+    /* 取消图片缩放动画 */
+    .ai-expanding-card-image-{{ ai_gen_id }} {
+      transform: none !important;
+    }
+
+    /* 遮罩统一 */
+    .ai-expanding-card-overlay-{{ ai_gen_id }} {
+      opacity: 1 !important;
+    }
+  }
+
+  .ai-expanding-card-box .product-expanding-video-wrapper{
+    height: 100%
+  }
+{% endstyle %}
+
+<expanding-feature-cards-{{ ai_gen_id }}
+  class="ai-expanding-cards-{{ ai_gen_id }} ai-expanding-cards-section"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-expanding-cards-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank or block.settings.subheading != blank %}
+      <div class="ai-expanding-cards-header-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-expanding-cards-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.subheading != blank %}
+          <p class="ai-expanding-cards-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-expanding-cards-wrapper-{{ ai_gen_id }}">
+      {% for i in (1..4) %}
+        {% liquid
+          assign image_key = 'card_' | append: i | append: '_image'
+          assign video_key = 'card_' | append: i | append: '_video'
+          assign title_key = 'card_' | append: i | append: '_title'
+          assign description_key = 'card_' | append: i | append: '_description'
+
+          assign card_image = block.settings[image_key]
+          assign card_video = block.settings[video_key]
+          assign card_title = block.settings[title_key]
+          assign card_description = block.settings[description_key]
+        %}
+
+        {% if card_description != blank %}
+          <div
+            class="ai-expanding-card-{{ ai_gen_id }}{% if forloop.first %} active{% endif %}"
+            data-card-index="{{ forloop.index }}"
+          >
+            <div class="ai-expanding-card-box">
+              <div class="ai-expanding-card-background-{{ ai_gen_id }}">
+                {% if card_video %}
+                  {%
+                    render 'media',
+                    media: card_video,
+                    playsinline: true,
+                    autoplay: true,
+                    loop: true,
+                    muted: true,
+                    controls: false,
+                    preload: true,
+                    show_play_button: false,
+                    class_name: "product-expanding-video",
+                    class_name_wrapper: "product-expanding-video-wrapper"
+                  %}
+                {% elsif card_image %}
+                  <img
+                    src="{{ card_image | image_url: width: 1200 }}"
+                    alt="{{ card_image.alt | escape }}"
+                    loading="lazy"
+                    width="{{ card_image.width }}"
+                    height="{{ card_image.height }}"
+                    class="ai-expanding-card-image-{{ ai_gen_id }}"
+                  >
+                {% else %}
+                  <div class="ai-expanding-card-image-placeholder-{{ ai_gen_id }}">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="ai-expanding-card-overlay-{{ ai_gen_id }}"></div>
+
+              <div class="ai-expanding-card-content-{{ ai_gen_id }}">
+                {% if card_title != blank %}
+                  <h3 class="ai-expanding-card-title-{{ ai_gen_id }}">{{ card_title }}</h3>
+                {% endif %}
+                {% if card_description != blank %}
+                  <p class="ai-expanding-card-description-{{ ai_gen_id }}">{{ card_description }}</p>
+                {% endif %}
+              </div>
+            </div>
+            <div class="ai-expading-card-desc">
+              {% if card_title != blank %}
+                <h3 class="ai-expanding-card-title-{{ ai_gen_id }}">{{ card_title }}</h3>
+              {% endif %}
+              {% if card_description != blank %}
+                <p class="ai-expanding-card-description-{{ ai_gen_id }}">{{ card_description }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</expanding-feature-cards-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ExpandingFeatureCards{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.cards = [];
+        this.activeIndex = 0;
+      }
+
+      connectedCallback() {
+        this.cards = Array.from(this.querySelectorAll('.ai-expanding-card-{{ ai_gen_id }}'));
+
+        this.handleResize();
+        window.addEventListener('resize', () => this.handleResize());
+      }
+
+      handleResize() {
+        const isMobile = window.matchMedia('(max-width: 989px)').matches;
+
+        if (isMobile) {
+          this.cards.forEach(card => card.classList.remove('active'));
+        } else {
+          if (!this.cards.some(c => c.classList.contains('active'))) {
+            this.cards[0]?.classList.add('active');
+          }
+        }
+
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+
+        
+
+
+
+        this.cards.forEach((card, index) => {
+          card.addEventListener('mouseenter', () => {
+              
+            this.activateCard(index);
+          });
+
+          card.addEventListener('click', () => {
+            this.activateCard(index);
+          });
+
+          card.addEventListener('focus', () => {
+            this.activateCard(index);
+          });
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('role', 'button');
+          card.setAttribute('aria-label', `Feature card ${index + 1}`);
+        });
+
+
+        this.cards[0].setAttribute('aria-pressed', 'true');
+      }
+
+      activateCard(index) {
+        if (this.activeIndex === index) return;
+ const isMobile = window.matchMedia('(max-width: 989px)').matches;
+         console.log("isMobile",isMobile);
+
+        // 移动端不绑定交互
+  if (isMobile) return;
+
+        this.cards.forEach((card, i) => {
+          if (i === index) {
+            card.classList.add('active');
+            card.setAttribute('aria-pressed', 'true');
+          } else {
+            card.classList.remove('active');
+            card.setAttribute('aria-pressed', 'false');
+          }
+        });
+
+        this.activeIndex = index;
+      }
+    }
+
+    customElements.define('expanding-feature-cards-{{ ai_gen_id }}', ExpandingFeatureCards{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Expanding feature cards",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Power for Every Moment"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Discover our innovative product features"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (mobile)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (desktop)",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Card 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "card_1_video",
+      "label": "Video"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "card_1_title",
+      "label": "Title",
+      "default": "Fast Charging"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_description",
+      "label": "Description",
+      "default": "Power up your devices in record time with our advanced charging technology that delivers optimal performance."
+    },
+    {
+      "type": "header",
+      "content": "Card 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "card_2_video",
+      "label": "Video"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "card_2_title",
+      "label": "Title",
+      "default": "Long Battery Life"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_description",
+      "label": "Description",
+      "default": "Extended battery capacity keeps you powered throughout the day without worrying about running out of charge."
+    },
+    {
+      "type": "header",
+      "content": "Card 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "card_3_video",
+      "label": "Video"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "card_3_title",
+      "label": "Title",
+      "default": "Compact Design"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_description",
+      "label": "Description",
+      "default": "Sleek and portable design fits perfectly in your pocket or bag, making it ideal for travel and daily use."
+    },
+    {
+      "type": "header",
+      "content": "Card 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "card_4_video",
+      "label": "Video"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "card_4_title",
+      "label": "Title",
+      "default": "Universal Compatibility"
+    },
+
+    {
+      "type": "textarea",
+      "id": "card_4_description",
+      "label": "Description",
+      "default": "Works seamlessly with all your favorite devices and platforms for maximum convenience and flexibility."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "模块背景",
+      "default": "#000"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding (desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "min": 300,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "label": "Card height (mobile)",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "card_height_desktop",
+      "min": 400,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Card height (desktop)",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "collapsed_width",
+      "min": 60,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Collapsed card width",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "image_background",
+      "label": "Image placeholder background",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Content padding",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Overlay opacity",
+      "default": 0.6
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color_mobile",
+      "label": "移动端标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_desc_color_mobile",
+      "label": "移动端描述颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_mobile",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size (mobile)",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_desktop",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size (desktop)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "card_description_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "产品页 expanding"
+    }
+  ]
+}
+{% endschema %}

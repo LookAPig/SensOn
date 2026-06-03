@@ -1,0 +1,550 @@
+{%- liquid
+  assign tab_creator = block.settings.tab_creator_label | default: 'Creator Review'
+  assign tab_how = block.settings.tab_how_label | default: 'How to Use'
+  assign tab_specs = block.settings.tab_specs_label | default: 'Specifications'
+  assign tab_tech = block.settings.tab_tech_label | default: 'Tech'
+
+  assign color_tab_pink = block.settings.color_tab_pink | default: '#e91ead'
+  assign color_tab_bar_bg = block.settings.color_tab_bar_bg | default: '#fde8ef'
+  assign color_tab_active_bg = block.settings.color_tab_active_bg | default: '#ffffff'
+  assign color_tab_card_bg = block.settings.color_tab_card_bg | default: '#fdf7f9'
+  assign color_tab_step_bg = block.settings.color_tab_step_bg | default: '#e91ead'
+
+  assign color_tab_text_inactive = block.settings.color_tab_text_inactive | default: color_tab_pink
+  assign color_tab_text_active = block.settings.color_tab_text_active | default: color_tab_pink
+-%}
+
+<div id="pdp-wh-{{ block.id }}" class="pdp-info-tabs" {{ block.shopify_attributes }}>
+  <style>
+    #pdp-wh-{{ block.id }} {
+      --pdp-tab-pink: {{ color_tab_pink }};
+      --pdp-tab-bar-bg: {{ color_tab_bar_bg }};
+      --pdp-tab-active-bg: {{ color_tab_active_bg }};
+      --pdp-tab-card-bg: {{ color_tab_card_bg }};
+      --pdp-tab-step-bg: {{ color_tab_step_bg }};
+      --pdp-tab-text-inactive: {{ color_tab_text_inactive }};
+      --pdp-tab-text-active: {{ color_tab_text_active }};
+      width: 100%;
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    #pdp-wh-{{ block.id }} * {
+      box-sizing: border-box;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-info-tabs__bar {
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      padding: 4px;
+      background: var(--pdp-tab-bar-bg);
+      border-radius: 100px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: thin;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
+      flex: 0 0 125px;
+      min-width: 0;
+      appearance: none;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 10px 8px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--pdp-tab-text-inactive);
+      text-align: center;
+      border-radius: 100px;
+      transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+      hyphens: auto;
+      word-break: break-word;
+      white-space: normal;
+    }
+
+    @media screen and (min-width: 750px) {
+      #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
+        font-size: 14px;
+        flex: 0 0 125px;
+      }
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-info-tabs__tab[aria-selected='true'] {
+      background: var(--pdp-tab-active-bg);
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.08);
+      color: var(--pdp-tab-text-active);
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-info-tabs__panel[hidden] {
+      display: none !important;
+    }
+
+    /* Creator Review */
+    #pdp-wh-{{ block.id }} .pdp-creator-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-card {
+      background: var(--pdp-tab-card-bg);
+      border-radius: 12px;
+      padding: 20px 18px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-quote {
+      margin: 0 0 20px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 14px;
+      line-height: 1.45;
+      color: #000;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-quote::before {
+      content: '\201C';
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-quote::after {
+      content: '\201D';
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-avatar {
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #e8e8e8;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-name {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      line-height: 1.2;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-credentials {
+      margin: 0;
+      font-size: 10px;
+      line-height: 1.35;
+      color: #666;
+    }
+
+    /* How to Use and Tech共用步骤样式 */
+    #pdp-wh-{{ block.id }} .pdp-how-panel,
+    #pdp-wh-{{ block.id }} .pdp-tech-panel {
+      background: var(--pdp-tab-card-bg);
+      border-radius: 12px;
+      padding: 20px 18px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-how-heading,
+    #pdp-wh-{{ block.id }} .pdp-tech-heading {
+      margin: 0 0 18px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      line-height: 1.2;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-steps-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-step-num {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--pdp-tab-step-bg);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-step-body {
+      min-width: 0;
+      padding-top: 2px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-step-title {
+      margin: 0 0 4px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #000;
+      line-height: 1.3;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-step-desc {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.3;
+      color: #333;
+    }
+
+    /* Specifications 富文本样式 */
+    #pdp-wh-{{ block.id }} .pdp-plain-panel {
+      background: var(--pdp-tab-card-bg);
+      border-radius: 12px;
+      padding: 20px 18px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-plain-text {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-plain-text p {
+      margin: 0 0 1em;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-plain-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-plain-text strong {
+      font-weight: 700;
+      color: #000;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-plain-placeholder {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #999;
+    }
+
+    /* 移动端 */
+    @media (max-width: 768px) {
+      #pdp-wh-{{ block.id }} .pdp-info-tabs__bar {
+        gap: 6px;
+        padding: 4px;
+        justify-content: flex-start;
+      }
+      #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
+        flex: 0 0 80px;
+        font-size: 12px;
+        padding: 8px 6px;
+        line-height: 1.2;
+      }
+    }
+  </style>
+
+  <div class="pdp-info-tabs__bar" role="tablist" aria-label="Product information">
+    <button
+      type="button"
+      class="pdp-info-tabs__tab"
+      role="tab"
+      aria-selected="true"
+      data-pdp-info-tab="{{ block.id }}"
+      data-index="0"
+    >
+      {{ tab_creator | escape }}
+    </button>
+    <button
+      type="button"
+      class="pdp-info-tabs__tab"
+      role="tab"
+      aria-selected="false"
+      data-pdp-info-tab="{{ block.id }}"
+      data-index="1"
+    >
+      {{ tab_how | escape }}
+    </button>
+    <button
+      type="button"
+      class="pdp-info-tabs__tab"
+      role="tab"
+      aria-selected="false"
+      data-pdp-info-tab="{{ block.id }}"
+      data-index="2"
+    >
+      {{ tab_specs | escape }}
+    </button>
+    <button
+      type="button"
+      class="pdp-info-tabs__tab"
+      role="tab"
+      aria-selected="false"
+      data-pdp-info-tab="{{ block.id }}"
+      data-index="3"
+    >
+      {{ tab_tech | escape }}
+    </button>
+  </div>
+
+  <div class="pdp-info-tabs__panels">
+    {%- comment -%} Tab 0: Creator Review {%- endcomment -%}
+    <div
+      class="pdp-info-tabs__panel"
+      role="tabpanel"
+      data-pdp-info-panel="{{ block.id }}"
+      data-index="0"
+    >
+      {%- liquid
+        assign creator_2_has_content = false
+        if block.settings.creator_2_quote != blank
+          assign creator_2_has_content = true
+        elsif block.settings.creator_2_avatar != blank
+          assign creator_2_has_content = true
+        elsif block.settings.creator_2_name != blank
+          assign creator_2_has_content = true
+        elsif block.settings.creator_2_credentials != blank
+          assign creator_2_has_content = true
+        endif
+      -%}
+      <div class="pdp-creator-stack">
+        <div class="pdp-creator-card">
+          {%- if block.settings.creator_quote != blank -%}
+            <p class="pdp-creator-quote">{{ block.settings.creator_quote | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.creator_avatar != blank
+            or block.settings.creator_name != blank
+            or block.settings.creator_credentials != blank
+          -%}
+            <div class="pdp-creator-author">
+              {%- if block.settings.creator_avatar != blank -%}
+                <div class="pdp-creator-avatar">
+                  {{
+                    block.settings.creator_avatar
+                    | image_url: width: 112
+                    | image_tag: loading: 'lazy', widths: '56, 112', sizes: '56px', alt: block.settings.creator_name
+                  }}
+                </div>
+              {%- endif -%}
+              <div>
+                {%- if block.settings.creator_name != blank -%}
+                  <p class="pdp-creator-name">{{ block.settings.creator_name | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.creator_credentials != blank -%}
+                  <p class="pdp-creator-credentials">{{ block.settings.creator_credentials | escape }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if creator_2_has_content -%}
+          <div class="pdp-creator-card">
+            {%- if block.settings.creator_2_quote != blank -%}
+              <p class="pdp-creator-quote">{{ block.settings.creator_2_quote | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.creator_2_avatar != blank
+              or block.settings.creator_2_name != blank
+              or block.settings.creator_2_credentials != blank
+            -%}
+              <div class="pdp-creator-author">
+                {%- if block.settings.creator_2_avatar != blank -%}
+                  <div class="pdp-creator-avatar">
+                    {{
+                      block.settings.creator_2_avatar
+                      | image_url: width: 112
+                      | image_tag: loading: 'lazy', widths: '56, 112', sizes: '56px', alt: block.settings.creator_2_name
+                    }}
+                  </div>
+                {%- endif -%}
+                <div>
+                  {%- if block.settings.creator_2_name != blank -%}
+                    <p class="pdp-creator-name">{{ block.settings.creator_2_name | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.creator_2_credentials != blank -%}
+                    <p class="pdp-creator-credentials">{{ block.settings.creator_2_credentials | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Tab 1: How to Use {%- endcomment -%}
+    <div
+      class="pdp-info-tabs__panel"
+      role="tabpanel"
+      data-pdp-info-panel="{{ block.id }}"
+      data-index="1"
+      hidden
+    >
+      <div class="pdp-how-panel">
+        {%- if block.settings.how_heading != blank -%}
+          <h3 class="pdp-how-heading">{{ block.settings.how_heading | escape }}</h3>
+        {%- endif -%}
+        <ol class="pdp-steps-list">
+          {%- for i in (1..5) -%}
+            {%- liquid
+              case i
+                when 1
+                  assign step_title = block.settings.how_step_1_title
+                  assign step_desc = block.settings.how_step_1_desc
+                when 2
+                  assign step_title = block.settings.how_step_2_title
+                  assign step_desc = block.settings.how_step_2_desc
+                when 3
+                  assign step_title = block.settings.how_step_3_title
+                  assign step_desc = block.settings.how_step_3_desc
+                when 4
+                  assign step_title = block.settings.how_step_4_title
+                  assign step_desc = block.settings.how_step_4_desc
+                when 5
+                  assign step_title = block.settings.how_step_5_title
+                  assign step_desc = block.settings.how_step_5_desc
+              endcase
+            %}
+            <li class="pdp-step-item">
+              <span class="pdp-step-num" aria-hidden="true">{{ i }}</span>
+              <div class="pdp-step-body">
+                <p class="pdp-step-title">
+                  {%- if step_title != blank -%}
+                    {{ step_title | escape }}
+                  {%- else -%}
+                    Step {{ i }}
+                  {%- endif -%}
+                </p>
+                <p class="pdp-step-desc">
+                  {%- if step_desc != blank -%}
+                    {{ step_desc | escape }}
+                  {%- else -%}
+                    Description coming soon.
+                  {%- endif -%}
+                </p>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    </div>
+
+    {%- comment -%} Tab 2: Specifications (Rich text) {%- endcomment -%}
+    <div
+      class="pdp-info-tabs__panel"
+      role="tabpanel"
+      data-pdp-info-panel="{{ block.id }}"
+      data-index="2"
+      hidden
+    >
+      <div class="pdp-plain-panel">
+        {%- if block.settings.specs_content != blank -%}
+          <div class="pdp-plain-text">
+            {{ block.settings.specs_content }}
+          </div>
+        {%- else -%}
+          <p class="pdp-plain-placeholder">{{ tab_specs | escape }} — content coming soon.</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Tab 3: Tech (3 steps) {%- endcomment -%}
+    <div
+      class="pdp-info-tabs__panel"
+      role="tabpanel"
+      data-pdp-info-panel="{{ block.id }}"
+      data-index="3"
+      hidden
+    >
+      <div class="pdp-tech-panel">
+        {%- if block.settings.tech_heading != blank -%}
+          <h3 class="pdp-tech-heading">{{ block.settings.tech_heading | escape }}</h3>
+        {%- endif -%}
+        <ol class="pdp-steps-list">
+          {%- for i in (1..3) -%}
+            {%- liquid
+              case i
+                when 1
+                  assign step_title = block.settings.tech_step_1_title
+                  assign step_desc = block.settings.tech_step_1_desc
+                when 2
+                  assign step_title = block.settings.tech_step_2_title
+                  assign step_desc = block.settings.tech_step_2_desc
+                when 3
+                  assign step_title = block.settings.tech_step_3_title
+                  assign step_desc = block.settings.tech_step_3_desc
+              endcase
+            %}
+            <li class="pdp-step-item">
+              <span class="pdp-step-num" aria-hidden="true">{{ i }}</span>
+              <div class="pdp-step-body">
+                <p class="pdp-step-title">
+                  {%- if step_title != blank -%}
+                    {{ step_title | escape }}
+                  {%- else -%}
+                    Step {{ i }}
+                  {%- endif -%}
+                </p>
+                <p class="pdp-step-desc">
+                  {%- if step_desc != blank -%}
+                    {{ step_desc | escape }}
+                  {%- else -%}
+                    Description coming soon.
+                  {%- endif -%}
+                </p>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var id = '{{ block.id }}';
+      var root = document.getElementById('pdp-wh-' + id);
+      if (!root) return;
+
+      var tabs = root.querySelectorAll('[data-pdp-info-tab="' + id + '"]');
+      var panels = root.querySelectorAll('[data-pdp-info-panel="' + id + '"]');
+
+      function setTab(idx) {
+        tabs.forEach(function (t) {
+          var i = parseInt(t.getAttribute('data-index'), 10);
+          t.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+        });
+        panels.forEach(function (p) {
+          var i = parseInt(p.getAttribute('data-index'), 10);
+          p.hidden = i !== idx;
+        });
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          setTab(parseInt(tab.getAttribute('data-index'), 10) || 0);
+        });
+      });
+    })();
+  </script>
+</div>

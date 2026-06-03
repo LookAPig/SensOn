@@ -1,0 +1,308 @@
+{% doc %}
+  @prompt
+    I want to create a section with a list of logos, 8 logos in total, that is mobile-friendly and allows for image replacement., It can accommodate 8 slots, but only 5 logos are displayed, and the logo positions are adjusted automatically., Columns on tablet at least 5 , There should be 5 logos in a row.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% liquid
+  assign logo_count = 0
+  for i in (1..8)
+    assign logo_key = 'logo_' | append: i
+    assign logo = block.settings[logo_key]
+    if logo
+      assign logo_count = logo_count | plus: 1
+    endif
+  endfor
+%}
+
+{% style %}
+  .ai-logo-list-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 40px 20px;
+  }
+
+  .ai-logo-list-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-logo-list-heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin: 0 0 40px;
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-logo-list-grid-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: {{ block.settings.logo_spacing }}px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-logo-list-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ block.settings.logo_padding }}px;
+    background-color: {{ block.settings.logo_background }};
+    border-radius: {{ block.settings.logo_border_radius }}px;
+    transition: transform 0.3s ease;
+    flex: 0 0 calc((100% - ({{ block.settings.logo_spacing }}px * 4)) / 5);
+    max-width: calc((100% - ({{ block.settings.logo_spacing }}px * 4)) / 5);
+  }
+
+  .ai-logo-list-item-{{ ai_gen_id }}:hover {
+    transform: scale(1.05);
+  }
+
+  .ai-logo-list-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    max-height: {{ block.settings.logo_max_height }}px;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-logo-list-item-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - ({{ block.settings.logo_spacing }}px * ({{ block.settings.columns_tablet }} - 1))) / {{ block.settings.columns_tablet }});
+      max-width: calc((100% - ({{ block.settings.logo_spacing }}px * ({{ block.settings.columns_tablet }} - 1))) / {{ block.settings.columns_tablet }});
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-logo-list-{{ ai_gen_id }} {
+      padding: 30px 15px;
+    }
+
+    .ai-logo-list-heading-{{ ai_gen_id }} {
+      margin-bottom: 30px;
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    }
+
+    .ai-logo-list-grid-{{ ai_gen_id }} {
+      gap: {{ block.settings.logo_spacing | times: 0.75 }}px;
+    }
+
+    .ai-logo-list-item-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - ({{ block.settings.logo_spacing | times: 0.75 }}px * ({{ block.settings.columns_mobile }} - 1))) / {{ block.settings.columns_mobile }});
+      max-width: calc((100% - ({{ block.settings.logo_spacing | times: 0.75 }}px * ({{ block.settings.columns_mobile }} - 1))) / {{ block.settings.columns_mobile }});
+    }
+  }
+{% endstyle %}
+
+<logo-list-{{ ai_gen_id }} class="ai-logo-list-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-logo-list-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-logo-list-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="ai-logo-list-grid-{{ ai_gen_id }}">
+      {% for i in (1..8) %}
+        {% liquid
+          assign logo_key = 'logo_' | append: i
+          assign logo = block.settings[logo_key]
+        %}
+
+        {% if logo %}
+          <div class="ai-logo-list-item-{{ ai_gen_id }}">
+            <img
+              src="{{ logo | image_url: width: 400 }}"
+              alt="{{ logo.alt | escape }}"
+              loading="lazy"
+              width="{{ logo.width }}"
+              height="{{ logo.height }}"
+              class="ai-logo-list-image-{{ ai_gen_id }}"
+            >
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</logo-list-{{ ai_gen_id }}>
+
+{% schema %}
+{
+  "name": "Logo list",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trusted by leading brands"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "header",
+      "content": "Logos"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_1",
+      "label": "Logo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_2",
+      "label": "Logo 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_3",
+      "label": "Logo 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_4",
+      "label": "Logo 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_5",
+      "label": "Logo 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_6",
+      "label": "Logo 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_7",
+      "label": "Logo 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_8",
+      "label": "Logo 8"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "columns_tablet",
+      "label": "Columns on tablet",
+      "options": [
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
+      ],
+      "default": "5"
+    },
+    {
+      "type": "range",
+      "id": "logo_spacing",
+      "label": "Logo spacing",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Logo style"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_height",
+      "label": "Maximum height",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "logo_padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "logo_background",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "logo_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo list"
+    }
+  ]
+}
+{% endschema %}
