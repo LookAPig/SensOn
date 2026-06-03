@@ -1,0 +1,237 @@
+{%- liquid
+  assign cr_bid = block.id
+  assign cr_title = block.settings.title | default: 'WHAT CUSTOMERS SAY'
+  assign cr_bg = block.settings.background_color | default: '#f5f0eb'
+  assign cr_accent = block.settings.accent_color | default: '#e91ead'
+  assign cr_border = block.settings.tag_border_color | default: '#3e3a36'
+  assign cr_count = 0
+
+  for i in (1..6)
+    assign cr_tag_key = 'tag_' | append: i
+    assign cr_review_key = 'review_' | append: i
+    assign cr_tag = block.settings[cr_tag_key]
+    assign cr_review = block.settings[cr_review_key]
+
+    if cr_tag != blank and cr_review != blank
+      assign cr_count = cr_count | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if cr_count > 0 -%}
+  <div
+    id="pdp-cr-{{ cr_bid }}"
+    class="pdp-customer-reviews"
+    data-cr-root
+    {{ block.shopify_attributes }}
+  >
+    <style>
+      #pdp-cr-{{ cr_bid }} {
+        --pdp-cr-bg: {{ cr_bg }};
+        --pdp-cr-accent: {{ cr_accent }};
+        --pdp-cr-border: {{ cr_border }};
+        width: 100%;
+        background-color: var(--pdp-cr-bg);
+        padding: 48px 24px 56px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      #pdp-cr-{{ cr_bid }} * {
+        box-sizing: border-box;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__title {
+        margin: 0 0 40px;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(22px, 3vw, 32px);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #000;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panels {
+        margin-bottom: 40px;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel[hidden] {
+        display: none !important;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__quote {
+        margin: 0;
+        font-size: clamp(18px, 2.2vw, 26px);
+        font-weight: 700;
+        line-height: 1.35;
+        color: #000;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__quote::before {
+        content: '\201C';
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__quote::after {
+        content: '\201D';
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__author {
+        font-weight: 700;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tags {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag {
+        appearance: none;
+        border: 1.5px solid var(--pdp-cr-border);
+        background: transparent;
+        color: #000;
+        cursor: pointer;
+        padding: 10px 22px;
+        border-radius: 100px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.2;
+        transition: border-color 0.2s ease, color 0.2s ease;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag[aria-selected='true'] {
+        border-color: var(--pdp-cr-accent);
+        color: var(--pdp-cr-accent);
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag:focus-visible {
+        outline: 2px solid var(--pdp-cr-accent);
+        outline-offset: 2px;
+      }
+
+      @media screen and (max-width: 749px) {
+        #pdp-cr-{{ cr_bid }} {
+          padding: 36px 16px 44px;
+        }
+
+        #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__title {
+          margin-bottom: 28px;
+        }
+
+        #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panels {
+          margin-bottom: 28px;
+        }
+
+        #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag {
+          padding: 8px 16px;
+          font-size: 13px;
+        }
+      }
+    </style>
+
+    {%- if cr_title != blank -%}
+      <h2 class="pdp-customer-reviews__title">{{ cr_title | escape }}</h2>
+    {%- endif -%}
+
+    <div class="pdp-customer-reviews__panels">
+      {%- assign cr_idx = 0 -%}
+      {%- for i in (1..6) -%}
+        {%- liquid
+          assign cr_tag_key = 'tag_' | append: i
+          assign cr_review_key = 'review_' | append: i
+          assign cr_author_key = 'author_' | append: i
+          assign cr_tag = block.settings[cr_tag_key]
+          assign cr_review = block.settings[cr_review_key]
+          assign cr_author = block.settings[cr_author_key]
+        -%}
+        {%- if cr_tag != blank and cr_review != blank -%}
+          <div
+            class="pdp-customer-reviews__panel"
+            data-cr-panel
+            data-cr-index="{{ cr_idx }}"
+            role="tabpanel"
+            id="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
+            aria-labelledby="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
+            {% unless cr_idx == 0 %}
+              hidden
+            {% endunless %}
+          >
+            <p class="pdp-customer-reviews__quote">
+              {{- cr_review | escape -}}
+              {%- if cr_author != blank -%}
+                <span class="pdp-customer-reviews__author"> — {{ cr_author | escape }}</span>
+              {%- endif -%}
+            </p>
+          </div>
+          {%- assign cr_idx = cr_idx | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="pdp-customer-reviews__tags" role="tablist" aria-label="{{ cr_title | escape }}">
+      {%- assign cr_idx = 0 -%}
+      {%- for i in (1..6) -%}
+        {%- liquid
+          assign cr_tag_key = 'tag_' | append: i
+          assign cr_review_key = 'review_' | append: i
+          assign cr_tag = block.settings[cr_tag_key]
+          assign cr_review = block.settings[cr_review_key]
+        -%}
+        {%- if cr_tag != blank and cr_review != blank -%}
+          <button
+            type="button"
+            class="pdp-customer-reviews__tag"
+            data-cr-tab
+            data-cr-index="{{ cr_idx }}"
+            role="tab"
+            id="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
+            aria-controls="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
+            aria-selected="{% if cr_idx == 0 %}true{% else %}false{% endif %}"
+          >
+            {{ cr_tag | escape }}
+          </button>
+          {%- assign cr_idx = cr_idx | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('pdp-cr-{{ cr_bid }}');
+      if (!root) return;
+
+      var tabs = root.querySelectorAll('[data-cr-tab]');
+      var panels = root.querySelectorAll('[data-cr-panel]');
+
+      function activateTab(index) {
+        tabs.forEach(function (tab) {
+          var isActive = tab.getAttribute('data-cr-index') === String(index);
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        panels.forEach(function (panel) {
+          var isActive = panel.getAttribute('data-cr-index') === String(index);
+          panel.hidden = !isActive;
+        });
+      }
+
+      root.addEventListener('click', function (event) {
+        var tab = event.target.closest('[data-cr-tab]');
+        if (!tab || !root.contains(tab)) return;
+
+        activateTab(tab.getAttribute('data-cr-index'));
+      });
+    })();
+  </script>
+{%- endif -%}
