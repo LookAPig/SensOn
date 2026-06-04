@@ -1,1 +1,250 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"color_scheme":"scheme-2","show_title":true,"content_width":"md"}},"image_with_text_overlay_nzNPrD":{"type":"image-with-text-overlay","blocks":{"subheading_V6BtEn":{"type":"subheading","disabled":true,"settings":{"text":""},"blocks":{}},"heading_3e6hPH":{"type":"heading","settings":{"text":"<strong>Intimate Revolution<\/strong>","pc_font_size":42,"h5_font_size":23,"pc_line_height":1.2,"h5_line_height":1.2,"heading_size":"h4","html_tag":"p","indent":"none","highlight_effect":"default","highlight_accent_color":"#000000","highlight_text_color":""},"blocks":{}},"heading_Ve3bVF":{"type":"heading","name":"t:blocks.heading.name","settings":{"text":"Empower your audience with the future of AI companionship. Join our elite partner network and turn your influence into sustainable growth.","pc_font_size":16,"h5_font_size":14,"pc_line_height":1.2,"h5_line_height":1,"heading_size":"h3","html_tag":"p","indent":"none","highlight_effect":"default","highlight_accent_color":"","highlight_text_color":""},"blocks":{}},"button_group_BneMXH":{"type":"button-group","name":"t:blocks.button_group.name","settings":{},"blocks":{"button_aadB4d":{"type":"button","settings":{"text":"Apply","url":"https:\/\/app.impact.com\/advertiser-advertiser-info\/Sensa-Something-Inc.brand","open_in_new_tab":false,"style":"solid","background":"","text_color":"#321e1e"},"blocks":{}}},"block_order":["button_aadB4d"]},"liquid_rGyYWm":{"type":"liquid","name":"t:blocks.liquid.name","settings":{"liquid":"<div class=\"banner_bottoms\">\n<p>Earn up to 15% commission on every sale<\/p>\n<p>Long-term recurring subscription share<\/p>\n<\/div>"},"blocks":{}}},"block_order":["subheading_V6BtEn","heading_3e6hPH","heading_Ve3bVF","button_group_BneMXH","liquid_rGyYWm"],"custom_css":[".button__content {padding: 11px 71px; font-size: 18px; text-transform: capitalize; line-height: 1;}","@media (max-width: 768px) {.button__content {font-size: 14px; }}"],"name":"t:sections.image_with_text_overlay.name","settings":{"color_scheme":"scheme-7","allow_transparent_header":false,"image_size":"fill","image":"shopify:\/\/shop_images\/5970x3000-pc-min.jpg","overlay_color":"#000000","overlay_opacity":20,"enable_sticky_content":false,"content_width":"md","desktop_text_position":"sm:place-self-center","mobile_text_position":"place-self-center"}},"core_value_proposition_h9T4Xa":{"type":"core-value-proposition","blocks":{"feature_KRmPGW":{"type":"feature","settings":{"icon":"shopify:\/\/shop_images\/Group_1363527277.svg","title":"High-Performance Earnings","description":"With a premium $229 AOV and a 20% commission rate, you earn $45.80 on every single sale. No caps, no limits."}},"feature_rkM7xY":{"type":"feature","settings":{"icon":"shopify:\/\/shop_images\/Group_1363527276.svg","title":"Lifetime Recurring Income","description":"Our 365-day cookie window and recurring commission model mean you get paid for every repeat purchase your referrals make."}},"feature_VaHAa9":{"type":"feature","settings":{"icon":"shopify:\/\/shop_images\/Group_1363527275.svg","title":"Live The Loop","description":"Join a community of creators who believe in pleasure without compromise. Share products you love and build income that lasts."}}},"block_order":["feature_KRmPGW","feature_rkM7xY","feature_VaHAa9"],"name":"Core value proposition","settings":{"heading":"Core Value Proposition","image":"shopify:\/\/shop_images\/2026-01-21_15.29.17.png","background_color":"#000000"}},"pleasure_9mpipF":{"type":"Pleasure","blocks":{"card_ibKK8y":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/1800X2400-001-pc-min_7d0a9966-3476-4380-a92d-c23daa522e58.jpg","title":"Tech & AI Innovators","description":"For creators passionate about AI algorithms, future-tech, and cutting-edge hardware synchronization.","text_position":"bottom"}},"card_wPGUeQ":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/1800X2400-003-pc-min_080b7734-d832-4a70-87b5-ebdd71d69fba.webp","title":"Wellness & Intimacy Educators","description":"For experts who advocate for self-care, sexual wellness, and healthy modern relationships.","text_position":"bottom"}},"card_GQnaYK":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/1800X2400-002-pc-min_e0fe5ba8-e843-434c-87a5-1acdac277bf6.webp","title":"Futuristic Lifestyle Influencers","description":"For visionaries who showcase high-end, aesthetic living and tech-driven romantic experiences.","text_position":"bottom"}}},"block_order":["card_ibKK8y","card_wPGUeQ","card_GQnaYK"],"custom_css":["@media screen and (max-width: 768px) {.limit-width {padding-right: 0; }}"],"name":"Creator Personas","settings":{"heading":"Creator Personas"}},"step_list_VJWCKE":{"type":"step-list","blocks":{"step_CzURFd":{"type":"step","settings":{"step_label":"1.Sign Up","icon":"shopify:\/\/shop_images\/Group_1363527269.svg","title":"Join the Community","description":"Apply via Impact.com.We review within 24h."}},"step_9q3t4q":{"type":"step","settings":{"step_label":"2.Share","icon":"shopify:\/\/shop_images\/Group_1363527270_1.svg","title":"Promote Your Way","description":"Access unique links and high-converting assets."}},"step_Lpwf9D":{"type":"step","settings":{"step_label":"3.Earn","icon":"shopify:\/\/shop_images\/Group_1363527271.svg","title":"Get Paid Monthly","description":"15% commission + recurring rewards."}}},"block_order":["step_CzURFd","step_9q3t4q","step_Lpwf9D"],"name":"How it works","settings":{"heading":"How it Works","subtitle":"Follow these simple steps","accent_color":"#f287ec"}}},"order":["main","image_with_text_overlay_nzNPrD","core_value_proposition_h9T4Xa","pleasure_9mpipF","step_list_VJWCKE"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-2",
+        "show_title": true,
+        "content_width": "md"
+      }
+    },
+    "image_with_text_overlay_nzNPrD": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_V6BtEn": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "text": ""
+          },
+          "blocks": {}
+        },
+        "heading_3e6hPH": {
+          "type": "heading",
+          "settings": {
+            "text": "<strong>Intimate Revolution</strong>",
+            "pc_font_size": 42,
+            "h5_font_size": 23,
+            "pc_line_height": 1.2,
+            "h5_line_height": 1.2,
+            "heading_size": "h4",
+            "html_tag": "p"
+          },
+          "blocks": {}
+        },
+        "heading_Ve3bVF": {
+          "type": "heading",
+          "name": "t:blocks.heading.name",
+          "settings": {
+            "text": "Empower your audience with the future of AI companionship. Join our elite partner network and turn your influence into sustainable growth.",
+            "pc_font_size": 16,
+            "h5_font_size": 14,
+            "pc_line_height": 1.2,
+            "h5_line_height": 1,
+            "heading_size": "h3",
+            "html_tag": "p"
+          },
+          "blocks": {}
+        },
+        "button_group_BneMXH": {
+          "type": "button-group",
+          "name": "t:blocks.button_group.name",
+          "settings": {},
+          "blocks": {
+            "button_aadB4d": {
+              "type": "button",
+              "settings": {
+                "text": "Apply",
+                "url": "https://app.impact.com/advertiser-advertiser-info/Sensa-Something-Inc.brand",
+                "open_in_new_tab": false,
+                "style": "solid",
+                "background": "",
+                "text_color": "#321e1e"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "button_aadB4d"
+          ]
+        },
+        "liquid_rGyYWm": {
+          "type": "liquid",
+          "name": "t:blocks.liquid.name",
+          "settings": {
+            "liquid": "<div class=\"banner_bottoms\">\n<p>Earn up to 15% commission on every sale</p>\n<p>Long-term recurring subscription share</p>\n</div>"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "subheading_V6BtEn",
+        "heading_3e6hPH",
+        "heading_Ve3bVF",
+        "button_group_BneMXH",
+        "liquid_rGyYWm"
+      ],
+      "custom_css": [
+        ".button__content {padding: 11px 71px; font-size: 18px; text-transform: capitalize; line-height: 1;}",
+        "@media (max-width: 768px) {.button__content {font-size: 14px; }}"
+      ],
+      "name": "t:sections.image_with_text_overlay.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "allow_transparent_header": false,
+        "image_size": "fill",
+        "image": "shopify://shop_images/5970x3000-pc-min.jpg",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "enable_sticky_content": false,
+        "content_width": "md",
+        "desktop_text_position": "sm:place-self-center",
+        "mobile_text_position": "place-self-center"
+      }
+    },
+    "core_value_proposition_h9T4Xa": {
+      "type": "core-value-proposition",
+      "blocks": {
+        "feature_KRmPGW": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1363527277.svg",
+            "title": "High-Performance Earnings",
+            "description": "With a premium $229 AOV and a 20% commission rate, you earn $45.80 on every single sale. No caps, no limits."
+          }
+        },
+        "feature_rkM7xY": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1363527276.svg",
+            "title": "Lifetime Recurring Income",
+            "description": "Our 365-day cookie window and recurring commission model mean you get paid for every repeat purchase your referrals make."
+          }
+        },
+        "feature_VaHAa9": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1363527275.svg",
+            "title": "Live The Loop",
+            "description": "Join a community of creators who believe in pleasure without compromise. Share products you love and build income that lasts."
+          }
+        }
+      },
+      "block_order": [
+        "feature_KRmPGW",
+        "feature_rkM7xY",
+        "feature_VaHAa9"
+      ],
+      "name": "Core value proposition",
+      "settings": {
+        "heading": "Creator Partnership Opportunity",
+        "image": "shopify://shop_images/2026-01-21_15.29.17.png",
+        "background_color": "#000000"
+      }
+    },
+    "pleasure_9mpipF": {
+      "type": "Pleasure",
+      "blocks": {
+        "card_ibKK8y": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/1800X2400-001-pc-min_7d0a9966-3476-4380-a92d-c23daa522e58.jpg",
+            "title": "Tech & AI Innovators",
+            "description": "For creators passionate about AI algorithms, future-tech, and cutting-edge hardware synchronization.",
+            "text_position": "bottom"
+          }
+        },
+        "card_wPGUeQ": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/1800X2400-003-pc-min_080b7734-d832-4a70-87b5-ebdd71d69fba.webp",
+            "title": "Wellness & Intimacy Educators",
+            "description": "For experts who advocate for self-care, sexual wellness, and healthy modern relationships.",
+            "text_position": "bottom"
+          }
+        },
+        "card_GQnaYK": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/1800X2400-002-pc-min_e0fe5ba8-e843-434c-87a5-1acdac277bf6.webp",
+            "title": "Futuristic Lifestyle Influencers",
+            "description": "For visionaries who showcase high-end, aesthetic living and tech-driven romantic experiences.",
+            "text_position": "bottom"
+          }
+        }
+      },
+      "block_order": [
+        "card_ibKK8y",
+        "card_wPGUeQ",
+        "card_GQnaYK"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 768px) {.limit-width {padding-right: 0; }}"
+      ],
+      "name": "Creator Personas",
+      "settings": {
+        "heading": "Multi-Persona Collaborations"
+      }
+    },
+    "step_list_VJWCKE": {
+      "type": "step-list",
+      "blocks": {
+        "step_CzURFd": {
+          "type": "step",
+          "settings": {
+            "step_label": "1.Sign Up",
+            "icon": "shopify://shop_images/Group_1363527269.svg",
+            "title": "Join the Community",
+            "description": "Apply via Impact.com.We review within 24h."
+          }
+        },
+        "step_9q3t4q": {
+          "type": "step",
+          "settings": {
+            "step_label": "2.Share",
+            "icon": "shopify://shop_images/Group_1363527270_1.svg",
+            "title": "Promote Your Way",
+            "description": "Access unique links and high-converting assets."
+          }
+        },
+        "step_Lpwf9D": {
+          "type": "step",
+          "settings": {
+            "step_label": "3.Earn",
+            "icon": "shopify://shop_images/Group_1363527271.svg",
+            "title": "Get Paid Monthly",
+            "description": "15% commission + recurring rewards."
+          }
+        }
+      },
+      "block_order": [
+        "step_CzURFd",
+        "step_9q3t4q",
+        "step_Lpwf9D"
+      ],
+      "name": "How it works",
+      "settings": {
+        "heading": "How it Works",
+        "subtitle": "Follow these simple steps",
+        "accent_color": "#f287ec"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_nzNPrD",
+    "core_value_proposition_h9T4Xa",
+    "pleasure_9mpipF",
+    "step_list_VJWCKE"
+  ]
+}
