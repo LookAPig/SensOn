@@ -3,19 +3,31 @@
   assign cr_title = block.settings.title | default: 'WHAT CUSTOMERS SAY'
   assign cr_bg = block.settings.background_color | default: '#f5f0eb'
   assign cr_accent = block.settings.accent_color | default: '#e91ead'
-  assign cr_border = block.settings.tag_border_color | default: '#3e3a36'
+  assign cr_border = block.settings.tag_border_color | default: '#c8c4c0'
+  assign cr_items = block.settings.reviews_json | parse_json
   assign cr_count = 0
 
-  for i in (1..6)
-    assign cr_tag_key = 'tag_' | append: i
-    assign cr_review_key = 'review_' | append: i
-    assign cr_tag = block.settings[cr_tag_key]
-    assign cr_review = block.settings[cr_review_key]
+  if cr_items != blank and cr_items.size > 0
+    for item in cr_items
+      assign cr_label_check = item.label | default: item.tag
+      assign cr_quote_check = item.quote | default: item.review | default: item.content
 
-    if cr_tag != blank and cr_review != blank
-      assign cr_count = cr_count | plus: 1
-    endif
-  endfor
+      if cr_label_check != blank and cr_quote_check != blank
+        assign cr_count = cr_count | plus: 1
+      endif
+    endfor
+  else
+    for i in (1..6)
+      assign cr_tag_key = 'tag_' | append: i
+      assign cr_review_key = 'review_' | append: i
+      assign cr_tag = block.settings[cr_tag_key]
+      assign cr_review = block.settings[cr_review_key]
+
+      if cr_tag != blank and cr_review != blank
+        assign cr_count = cr_count | plus: 1
+      endif
+    endfor
+  endif
 -%}
 
 {%- if cr_count > 0 -%}
@@ -30,6 +42,7 @@
         --pdp-cr-bg: {{ cr_bg }};
         --pdp-cr-accent: {{ cr_accent }};
         --pdp-cr-border: {{ cr_border }};
+        --pdp-cr-accent-soft: color-mix(in srgb, var(--pdp-cr-accent) 14%, #fff);
         width: 100%;
         background-color: var(--pdp-cr-bg);
         padding: 48px 24px 56px;
@@ -42,32 +55,43 @@
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__title {
-        margin: 0 0 40px;
+        margin: 0 0 32px;
         font-family: Georgia, 'Times New Roman', serif;
-        font-size: clamp(22px, 3vw, 32px);
-        font-weight: 400;
-        line-height: 1.2;
-        letter-spacing: 0.04em;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #000;
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panels {
-        margin-bottom: 40px;
+        display: grid;
+        grid-template: 1fr / 1fr;
+        margin: 0 auto 36px;
+        max-width: 900px;
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel {
-        max-width: 900px;
+        grid-area: 1 / 1;
+        width: 100%;
         margin: 0 auto;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        pointer-events: none;
       }
 
-      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel[hidden] {
-        display: none !important;
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel.is-active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__quote {
         margin: 0;
-        font-size: clamp(18px, 2.2vw, 26px);
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: clamp(20px, 2.4vw, 28px);
         font-weight: 700;
         line-height: 1.35;
         color: #000;
@@ -97,21 +121,23 @@
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag {
         appearance: none;
-        border: 1.5px solid var(--pdp-cr-border);
+        border: 1px solid var(--pdp-cr-border);
         background: transparent;
         color: #000;
         cursor: pointer;
         padding: 10px 22px;
         border-radius: 100px;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         font-size: 14px;
         font-weight: 500;
         line-height: 1.2;
-        transition: border-color 0.2s ease, color 0.2s ease;
+        transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag[aria-selected='true'] {
         border-color: var(--pdp-cr-accent);
         color: var(--pdp-cr-accent);
+        background-color: var(--pdp-cr-accent-soft);
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag:focus-visible {
@@ -125,7 +151,7 @@
         }
 
         #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__title {
-          margin-bottom: 28px;
+          margin-bottom: 24px;
         }
 
         #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panels {
@@ -145,64 +171,115 @@
 
     <div class="pdp-customer-reviews__panels">
       {%- assign cr_idx = 0 -%}
-      {%- for i in (1..6) -%}
-        {%- liquid
-          assign cr_tag_key = 'tag_' | append: i
-          assign cr_review_key = 'review_' | append: i
-          assign cr_author_key = 'author_' | append: i
-          assign cr_tag = block.settings[cr_tag_key]
-          assign cr_review = block.settings[cr_review_key]
-          assign cr_author = block.settings[cr_author_key]
-        -%}
-        {%- if cr_tag != blank and cr_review != blank -%}
-          <div
-            class="pdp-customer-reviews__panel"
-            data-cr-panel
-            data-cr-index="{{ cr_idx }}"
-            role="tabpanel"
-            id="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
-            aria-labelledby="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
-            {% unless cr_idx == 0 %}
-              hidden
-            {% endunless %}
-          >
-            <p class="pdp-customer-reviews__quote">
-              {{- cr_review | escape -}}
-              {%- if cr_author != blank -%}
-                <span class="pdp-customer-reviews__author"> — {{ cr_author | escape }}</span>
-              {%- endif -%}
-            </p>
-          </div>
-          {%- assign cr_idx = cr_idx | plus: 1 -%}
-        {%- endif -%}
-      {%- endfor -%}
+      {%- if cr_items != blank and cr_items.size > 0 -%}
+        {%- for item in cr_items -%}
+          {%- assign cr_label = item.label | default: item.tag -%}
+          {%- assign cr_quote = item.quote | default: item.review | default: item.content -%}
+          {%- assign cr_author = item.author -%}
+          {%- if cr_label != blank and cr_quote != blank -%}
+            <div
+              class="pdp-customer-reviews__panel{% if cr_idx == 0 %} is-active{% endif %}"
+              data-cr-panel
+              data-cr-index="{{ cr_idx }}"
+              role="tabpanel"
+              id="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
+              aria-labelledby="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
+              {% unless cr_idx == 0 %}
+                aria-hidden="true"
+              {% endunless %}
+            >
+              <p class="pdp-customer-reviews__quote">
+                {{- cr_quote | escape -}}
+                {%- if cr_author != blank -%}
+                  <span class="pdp-customer-reviews__author"> — {{ cr_author | escape }}</span>
+                {%- endif -%}
+              </p>
+            </div>
+            {%- assign cr_idx = cr_idx | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..6) -%}
+          {%- liquid
+            assign cr_tag_key = 'tag_' | append: i
+            assign cr_review_key = 'review_' | append: i
+            assign cr_author_key = 'author_' | append: i
+            assign cr_label = block.settings[cr_tag_key]
+            assign cr_quote = block.settings[cr_review_key]
+            assign cr_author = block.settings[cr_author_key]
+          -%}
+          {%- if cr_label != blank and cr_quote != blank -%}
+            <div
+              class="pdp-customer-reviews__panel{% if cr_idx == 0 %} is-active{% endif %}"
+              data-cr-panel
+              data-cr-index="{{ cr_idx }}"
+              role="tabpanel"
+              id="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
+              aria-labelledby="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
+              {% unless cr_idx == 0 %}
+                aria-hidden="true"
+              {% endunless %}
+            >
+              <p class="pdp-customer-reviews__quote">
+                {{- cr_quote | escape -}}
+                {%- if cr_author != blank -%}
+                  <span class="pdp-customer-reviews__author"> — {{ cr_author | escape }}</span>
+                {%- endif -%}
+              </p>
+            </div>
+            {%- assign cr_idx = cr_idx | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
 
     <div class="pdp-customer-reviews__tags" role="tablist" aria-label="{{ cr_title | escape }}">
       {%- assign cr_idx = 0 -%}
-      {%- for i in (1..6) -%}
-        {%- liquid
-          assign cr_tag_key = 'tag_' | append: i
-          assign cr_review_key = 'review_' | append: i
-          assign cr_tag = block.settings[cr_tag_key]
-          assign cr_review = block.settings[cr_review_key]
-        -%}
-        {%- if cr_tag != blank and cr_review != blank -%}
-          <button
-            type="button"
-            class="pdp-customer-reviews__tag"
-            data-cr-tab
-            data-cr-index="{{ cr_idx }}"
-            role="tab"
-            id="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
-            aria-controls="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
-            aria-selected="{% if cr_idx == 0 %}true{% else %}false{% endif %}"
-          >
-            {{ cr_tag | escape }}
-          </button>
-          {%- assign cr_idx = cr_idx | plus: 1 -%}
-        {%- endif -%}
-      {%- endfor -%}
+      {%- if cr_items != blank and cr_items.size > 0 -%}
+        {%- for item in cr_items -%}
+          {%- assign cr_label = item.label | default: item.tag -%}
+          {%- assign cr_quote = item.quote | default: item.review | default: item.content -%}
+          {%- if cr_label != blank and cr_quote != blank -%}
+            <button
+              type="button"
+              class="pdp-customer-reviews__tag"
+              data-cr-tab
+              data-cr-index="{{ cr_idx }}"
+              role="tab"
+              id="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
+              aria-controls="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
+              aria-selected="{% if cr_idx == 0 %}true{% else %}false{% endif %}"
+            >
+              {{ cr_label | escape }}
+            </button>
+            {%- assign cr_idx = cr_idx | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..6) -%}
+          {%- liquid
+            assign cr_tag_key = 'tag_' | append: i
+            assign cr_review_key = 'review_' | append: i
+            assign cr_label = block.settings[cr_tag_key]
+            assign cr_quote = block.settings[cr_review_key]
+          -%}
+          {%- if cr_label != blank and cr_quote != blank -%}
+            <button
+              type="button"
+              class="pdp-customer-reviews__tag"
+              data-cr-tab
+              data-cr-index="{{ cr_idx }}"
+              role="tab"
+              id="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
+              aria-controls="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
+              aria-selected="{% if cr_idx == 0 %}true{% else %}false{% endif %}"
+            >
+              {{ cr_label | escape }}
+            </button>
+            {%- assign cr_idx = cr_idx | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 
@@ -215,14 +292,17 @@
       var panels = root.querySelectorAll('[data-cr-panel]');
 
       function activateTab(index) {
+        var indexStr = String(index);
+
         tabs.forEach(function (tab) {
-          var isActive = tab.getAttribute('data-cr-index') === String(index);
+          var isActive = tab.getAttribute('data-cr-index') === indexStr;
           tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
 
         panels.forEach(function (panel) {
-          var isActive = panel.getAttribute('data-cr-index') === String(index);
-          panel.hidden = !isActive;
+          var isActive = panel.getAttribute('data-cr-index') === indexStr;
+          panel.classList.toggle('is-active', isActive);
+          panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
         });
       }
 
