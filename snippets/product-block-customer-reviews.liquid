@@ -4,18 +4,12 @@
   assign cr_bg = block.settings.background_color | default: '#f5f0eb'
   assign cr_accent = block.settings.accent_color | default: '#e91ead'
   assign cr_border = block.settings.tag_border_color | default: '#c8c4c0'
-  assign cr_items = block.settings.reviews_json | parse_json
+  assign cr_json_raw = block.settings.reviews_json | strip
+  assign cr_has_json = false
   assign cr_count = 0
 
-  if cr_items != blank and cr_items.size > 0
-    for item in cr_items
-      assign cr_label_check = item.label | default: item.tag
-      assign cr_quote_check = item.quote | default: item.review | default: item.content
-
-      if cr_label_check != blank and cr_quote_check != blank
-        assign cr_count = cr_count | plus: 1
-      endif
-    endfor
+  if cr_json_raw != blank
+    assign cr_has_json = true
   else
     for i in (1..6)
       assign cr_tag_key = 'tag_' | append: i
@@ -30,11 +24,12 @@
   endif
 -%}
 
-{%- if cr_count > 0 -%}
+{%- if cr_has_json or cr_count > 0 -%}
   <div
     id="pdp-cr-{{ cr_bid }}"
     class="pdp-customer-reviews"
     data-cr-root
+    data-cr-block-id="{{ cr_bid }}"
     {{ block.shopify_attributes }}
   >
     <style>
@@ -169,36 +164,13 @@
       <h2 class="pdp-customer-reviews__title">{{ cr_title | escape }}</h2>
     {%- endif -%}
 
-    <div class="pdp-customer-reviews__panels">
-      {%- assign cr_idx = 0 -%}
-      {%- if cr_items != blank and cr_items.size > 0 -%}
-        {%- for item in cr_items -%}
-          {%- assign cr_label = item.label | default: item.tag -%}
-          {%- assign cr_quote = item.quote | default: item.review | default: item.content -%}
-          {%- assign cr_author = item.author -%}
-          {%- if cr_label != blank and cr_quote != blank -%}
-            <div
-              class="pdp-customer-reviews__panel{% if cr_idx == 0 %} is-active{% endif %}"
-              data-cr-panel
-              data-cr-index="{{ cr_idx }}"
-              role="tabpanel"
-              id="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
-              aria-labelledby="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
-              {% unless cr_idx == 0 %}
-                aria-hidden="true"
-              {% endunless %}
-            >
-              <p class="pdp-customer-reviews__quote">
-                {{- cr_quote | escape -}}
-                {%- if cr_author != blank -%}
-                  <span class="pdp-customer-reviews__author"> — {{ cr_author | escape }}</span>
-                {%- endif -%}
-              </p>
-            </div>
-            {%- assign cr_idx = cr_idx | plus: 1 -%}
-          {%- endif -%}
-        {%- endfor -%}
-      {%- else -%}
+    {%- if cr_has_json -%}
+      <script type="application/json" data-cr-json>{{ cr_json_raw }}</script>
+      <div class="pdp-customer-reviews__panels" data-cr-panels></div>
+      <div class="pdp-customer-reviews__tags" data-cr-tags role="tablist" aria-label="{{ cr_title | escape }}"></div>
+    {%- else -%}
+      <div class="pdp-customer-reviews__panels">
+        {%- assign cr_idx = 0 -%}
         {%- for i in (1..6) -%}
           {%- liquid
             assign cr_tag_key = 'tag_' | append: i
@@ -230,32 +202,10 @@
             {%- assign cr_idx = cr_idx | plus: 1 -%}
           {%- endif -%}
         {%- endfor -%}
-      {%- endif -%}
-    </div>
+      </div>
 
-    <div class="pdp-customer-reviews__tags" role="tablist" aria-label="{{ cr_title | escape }}">
-      {%- assign cr_idx = 0 -%}
-      {%- if cr_items != blank and cr_items.size > 0 -%}
-        {%- for item in cr_items -%}
-          {%- assign cr_label = item.label | default: item.tag -%}
-          {%- assign cr_quote = item.quote | default: item.review | default: item.content -%}
-          {%- if cr_label != blank and cr_quote != blank -%}
-            <button
-              type="button"
-              class="pdp-customer-reviews__tag"
-              data-cr-tab
-              data-cr-index="{{ cr_idx }}"
-              role="tab"
-              id="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
-              aria-controls="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
-              aria-selected="{% if cr_idx == 0 %}true{% else %}false{% endif %}"
-            >
-              {{ cr_label | escape }}
-            </button>
-            {%- assign cr_idx = cr_idx | plus: 1 -%}
-          {%- endif -%}
-        {%- endfor -%}
-      {%- else -%}
+      <div class="pdp-customer-reviews__tags" role="tablist" aria-label="{{ cr_title | escape }}">
+        {%- assign cr_idx = 0 -%}
         {%- for i in (1..6) -%}
           {%- liquid
             assign cr_tag_key = 'tag_' | append: i
@@ -279,38 +229,150 @@
             {%- assign cr_idx = cr_idx | plus: 1 -%}
           {%- endif -%}
         {%- endfor -%}
-      {%- endif -%}
-    </div>
+      </div>
+    {%- endif -%}
   </div>
 
   <script>
     (function () {
-      var root = document.getElementById('pdp-cr-{{ cr_bid }}');
-      if (!root) return;
+      function escapeHtml(text) {
+        return String(text)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
 
-      var tabs = root.querySelectorAll('[data-cr-tab]');
-      var panels = root.querySelectorAll('[data-cr-panel]');
+      function normalizeReviewItem(raw) {
+        if (!raw || typeof raw !== "object") return null;
 
-      function activateTab(index) {
-        var indexStr = String(index);
+        var label = raw.label || raw.tag || "";
+        var quote = raw.quote || raw.review || raw.content || "";
+        var author = raw.author || "";
 
-        tabs.forEach(function (tab) {
-          var isActive = tab.getAttribute('data-cr-index') === indexStr;
-          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
+        if (!label || !quote) return null;
 
-        panels.forEach(function (panel) {
-          var isActive = panel.getAttribute('data-cr-index') === indexStr;
-          panel.classList.toggle('is-active', isActive);
-          panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        return { label: label, quote: quote, author: author };
+      }
+
+      function bindTabSwitch(root) {
+        var tabs = root.querySelectorAll("[data-cr-tab]");
+        var panels = root.querySelectorAll("[data-cr-panel]");
+
+        function activateTab(index) {
+          var indexStr = String(index);
+
+          tabs.forEach(function (tab) {
+            var isActive = tab.getAttribute("data-cr-index") === indexStr;
+            tab.setAttribute("aria-selected", isActive ? "true" : "false");
+          });
+
+          panels.forEach(function (panel) {
+            var isActive = panel.getAttribute("data-cr-index") === indexStr;
+            panel.classList.toggle("is-active", isActive);
+            panel.setAttribute("aria-hidden", isActive ? "false" : "true");
+          });
+        }
+
+        root.addEventListener("click", function (event) {
+          var tab = event.target.closest("[data-cr-tab]");
+          if (!tab || !root.contains(tab)) return;
+
+          activateTab(tab.getAttribute("data-cr-index"));
         });
       }
 
-      root.addEventListener('click', function (event) {
-        var tab = event.target.closest('[data-cr-tab]');
-        if (!tab || !root.contains(tab)) return;
+      function renderFromJson(root) {
+        var dataEl = root.querySelector("[data-cr-json]");
+        var panelsEl = root.querySelector("[data-cr-panels]");
+        var tagsEl = root.querySelector("[data-cr-tags]");
+        var blockId = root.getAttribute("data-cr-block-id");
 
-        activateTab(tab.getAttribute('data-cr-index'));
+        if (!dataEl || !panelsEl || !tagsEl || !blockId) return;
+
+        var items;
+
+        try {
+          items = JSON.parse(dataEl.textContent.trim());
+        } catch (error) {
+          console.warn("[pdp-customer-reviews] Invalid JSON:", error);
+          return;
+        }
+
+        if (!Array.isArray(items)) {
+          console.warn("[pdp-customer-reviews] JSON must be an array.");
+          return;
+        }
+
+        items = items.map(normalizeReviewItem).filter(Boolean);
+
+        if (!items.length) return;
+
+        panelsEl.innerHTML = "";
+        tagsEl.innerHTML = "";
+
+        items.forEach(function (item, index) {
+          var panel = document.createElement("div");
+          panel.className = "pdp-customer-reviews__panel" + (index === 0 ? " is-active" : "");
+          panel.setAttribute("data-cr-panel", "");
+          panel.setAttribute("data-cr-index", String(index));
+          panel.setAttribute("role", "tabpanel");
+          panel.id = "pdp-cr-panel-" + blockId + "-" + index;
+          panel.setAttribute("aria-labelledby", "pdp-cr-tab-" + blockId + "-" + index);
+          panel.setAttribute("aria-hidden", index === 0 ? "false" : "true");
+
+          var quoteHtml = escapeHtml(item.quote);
+
+          if (item.author) {
+            quoteHtml += '<span class="pdp-customer-reviews__author"> — ' + escapeHtml(item.author) + "</span>";
+          }
+
+          panel.innerHTML = '<p class="pdp-customer-reviews__quote">' + quoteHtml + "</p>";
+          panelsEl.appendChild(panel);
+
+          var tab = document.createElement("button");
+          tab.type = "button";
+          tab.className = "pdp-customer-reviews__tag";
+          tab.setAttribute("data-cr-tab", "");
+          tab.setAttribute("data-cr-index", String(index));
+          tab.setAttribute("role", "tab");
+          tab.id = "pdp-cr-tab-" + blockId + "-" + index;
+          tab.setAttribute("aria-controls", panel.id);
+          tab.setAttribute("aria-selected", index === 0 ? "true" : "false");
+          tab.textContent = item.label;
+          tagsEl.appendChild(tab);
+        });
+
+        bindTabSwitch(root);
+      }
+
+      function initCustomerReviews(root) {
+        if (!root || root.getAttribute("data-cr-initialized") === "true") return;
+
+        if (root.querySelector("[data-cr-json]")) {
+          renderFromJson(root);
+        } else {
+          bindTabSwitch(root);
+        }
+
+        root.setAttribute("data-cr-initialized", "true");
+      }
+
+      function initAll(scope) {
+        var container = scope || document;
+        container.querySelectorAll("[data-cr-root]").forEach(initCustomerReviews);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+          initAll();
+        });
+      } else {
+        initAll();
+      }
+
+      document.addEventListener("shopify:section:load", function (event) {
+        initAll(event.target);
       });
     })();
   </script>
