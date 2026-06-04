@@ -30,7 +30,7 @@
       "settings": {
         "color_scheme": "",
         "enable_sticky": true,
-        "show_on_homepage_only": true,
+        "show_on_homepage_only": false,
         "scroll_speed": 20,
         "pause_on_hover": false
       }
