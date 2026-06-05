@@ -679,6 +679,7 @@
       "blocks": {
         "heading_LCcRW3": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "<p><strong>US vs Traditional</strong></p>",
             "heading_custom": false,
@@ -845,7 +846,7 @@
         "background_color": "#ffffff",
         "background_gradient": "",
         "border_color": "#757575",
-        "margin_top": 0,
+        "margin_top": 52,
         "margin_bottom": 0,
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
