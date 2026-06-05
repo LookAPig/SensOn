@@ -150,23 +150,24 @@
 
     .comparison-table-wrapper-{{ section.id }} {
       padding-top: {{ heading_image_size_mobile | divided_by: 2 }}px;
-      overflow-x: scroll;
-      scrollbar-width: none;
+      overflow-x: auto;
+      scrollbar-width: thin;
       margin-left: -{{ padding_horizontal_mobile }}rem;
       margin-right: -{{ padding_horizontal_mobile }}rem;
     }
     .comparison-table-inner-{{ section.id }} {
-      min-width: 724px;
+      /* 移除固定最小宽度，让内容自然撑开 */
       padding-left: {{ padding_horizontal_mobile }}rem;
       padding-right: {{ padding_horizontal_mobile }}rem;
-    }
-    .comparison-table-wrapper-{{ section.id }}::-webkit-scrollbar {
-      display: none;
+      display: inline-block;
+      min-width: 100%;
     }
     .comparison-table-{{ section.id }} {
       padding-bottom: 25px;
-      padding-right: 25px;
+      /* 移除右侧固定 padding-right，避免额外空白 */
       margin-top: {{ table_mt_mobile }}px;
+      display: inline-block;
+      min-width: 100%;
     }
 
     .comparison-item-{{ section.id }} {
@@ -405,13 +406,17 @@
         padding-top: {{ heading_image_size | divided_by: 2 }}px;
         margin-left: 0rem;
         margin-right: 0rem;
+        overflow-x: visible;
       }
       .comparison-table-inner-{{ section.id }} {
         padding-left: 0rem;
         padding-right: 0rem;
+        display: block;
       }
       .comparison-table-{{ section.id }} {
         margin-top: {{ table_mt }}px;
+        padding-right: 0;
+        display: block;
       }
       .comparison-item-heading-image-{{ section.id }} {
         margin-top: calc(-{{ heading_image_size | divided_by: 2 }}px - {{ column_heading_padding_vertical }}px);
