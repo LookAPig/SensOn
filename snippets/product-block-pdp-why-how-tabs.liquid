@@ -12,6 +12,7 @@
 
   assign color_tab_text_inactive = block.settings.color_tab_text_inactive | default: color_tab_pink
   assign color_tab_text_active = block.settings.color_tab_text_active | default: color_tab_pink
+  assign specs_json_raw = block.settings.specs_json | strip
 -%}
 
 <div id="pdp-wh-{{ block.id }}" class="pdp-info-tabs" {{ block.shopify_attributes }}>
@@ -225,13 +226,7 @@
     #pdp-wh-{{ block.id }} .pdp-specs-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px 40px;
-    }
-
-    #pdp-wh-{{ block.id }} .pdp-specs-col {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      gap: 20px 40px;
     }
 
     #pdp-wh-{{ block.id }} .pdp-spec-item {
@@ -471,7 +466,7 @@
       </div>
     </div>
 
-    {%- comment -%} Tab 2: Specifications (两列) {%- endcomment -%}
+    {%- comment -%} Tab 2: Specifications (JSON 两列) {%- endcomment -%}
     <div
       class="pdp-info-tabs__panel"
       role="tabpanel"
@@ -479,113 +474,10 @@
       data-index="2"
       hidden
     >
-      {%- liquid
-        assign specs_has_content = false
-        for i in (1..4)
-          case i
-            when 1
-              assign spec_label = block.settings.specs_left_1_label
-              assign spec_value = block.settings.specs_left_1_value
-            when 2
-              assign spec_label = block.settings.specs_left_2_label
-              assign spec_value = block.settings.specs_left_2_value
-            when 3
-              assign spec_label = block.settings.specs_left_3_label
-              assign spec_value = block.settings.specs_left_3_value
-            when 4
-              assign spec_label = block.settings.specs_left_4_label
-              assign spec_value = block.settings.specs_left_4_value
-          endcase
-          if spec_label != blank or spec_value != blank
-            assign specs_has_content = true
-          endif
-        endfor
-        unless specs_has_content
-          for i in (1..4)
-            case i
-              when 1
-                assign spec_label = block.settings.specs_right_1_label
-                assign spec_value = block.settings.specs_right_1_value
-              when 2
-                assign spec_label = block.settings.specs_right_2_label
-                assign spec_value = block.settings.specs_right_2_value
-              when 3
-                assign spec_label = block.settings.specs_right_3_label
-                assign spec_value = block.settings.specs_right_3_value
-              when 4
-                assign spec_label = block.settings.specs_right_4_label
-                assign spec_value = block.settings.specs_right_4_value
-            endcase
-            if spec_label != blank or spec_value != blank
-              assign specs_has_content = true
-            endif
-          endfor
-        endunless
-      -%}
       <div class="pdp-specs-panel">
-        {%- if specs_has_content -%}
-          <div class="pdp-specs-grid">
-            <div class="pdp-specs-col">
-              {%- for i in (1..4) -%}
-                {%- liquid
-                  case i
-                    when 1
-                      assign spec_label = block.settings.specs_left_1_label
-                      assign spec_value = block.settings.specs_left_1_value
-                    when 2
-                      assign spec_label = block.settings.specs_left_2_label
-                      assign spec_value = block.settings.specs_left_2_value
-                    when 3
-                      assign spec_label = block.settings.specs_left_3_label
-                      assign spec_value = block.settings.specs_left_3_value
-                    when 4
-                      assign spec_label = block.settings.specs_left_4_label
-                      assign spec_value = block.settings.specs_left_4_value
-                  endcase
-                -%}
-                {%- if spec_label != blank or spec_value != blank -%}
-                  <div class="pdp-spec-item">
-                    {%- if spec_label != blank -%}
-                      <p class="pdp-spec-label">{{ spec_label | escape }}</p>
-                    {%- endif -%}
-                    {%- if spec_value != blank -%}
-                      <p class="pdp-spec-value">{{ spec_value | escape }}</p>
-                    {%- endif -%}
-                  </div>
-                {%- endif -%}
-              {%- endfor -%}
-            </div>
-            <div class="pdp-specs-col">
-              {%- for i in (1..4) -%}
-                {%- liquid
-                  case i
-                    when 1
-                      assign spec_label = block.settings.specs_right_1_label
-                      assign spec_value = block.settings.specs_right_1_value
-                    when 2
-                      assign spec_label = block.settings.specs_right_2_label
-                      assign spec_value = block.settings.specs_right_2_value
-                    when 3
-                      assign spec_label = block.settings.specs_right_3_label
-                      assign spec_value = block.settings.specs_right_3_value
-                    when 4
-                      assign spec_label = block.settings.specs_right_4_label
-                      assign spec_value = block.settings.specs_right_4_value
-                  endcase
-                -%}
-                {%- if spec_label != blank or spec_value != blank -%}
-                  <div class="pdp-spec-item">
-                    {%- if spec_label != blank -%}
-                      <p class="pdp-spec-label">{{ spec_label | escape }}</p>
-                    {%- endif -%}
-                    {%- if spec_value != blank -%}
-                      <p class="pdp-spec-value">{{ spec_value | escape }}</p>
-                    {%- endif -%}
-                  </div>
-                {%- endif -%}
-              {%- endfor -%}
-            </div>
-          </div>
+        {%- if specs_json_raw != blank -%}
+          <script type="application/json" data-pdp-specs-json>{{ specs_json_raw }}</script>
+          <div class="pdp-specs-grid" data-pdp-specs-grid></div>
         {%- else -%}
           <p class="pdp-specs-placeholder">{{ tab_specs | escape }} — content coming soon.</p>
         {%- endif -%}
@@ -646,29 +538,94 @@
 
   <script>
     (function () {
-      var id = '{{ block.id }}';
-      var root = document.getElementById('pdp-wh-' + id);
+      var id = "{{ block.id }}";
+      var root = document.getElementById("pdp-wh-" + id);
       if (!root) return;
 
       var tabs = root.querySelectorAll('[data-pdp-info-tab="' + id + '"]');
       var panels = root.querySelectorAll('[data-pdp-info-panel="' + id + '"]');
 
+      function escapeHtml(text) {
+        return String(text)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function normalizeSpecItem(raw) {
+        if (!raw || typeof raw !== "object") return null;
+
+        var label = raw.label || raw.name || "";
+        var value = raw.value || raw.text || "";
+
+        if (!label && !value) return null;
+
+        return { label: label, value: value };
+      }
+
+      function renderSpecsGrid() {
+        var jsonEl = root.querySelector("[data-pdp-specs-json]");
+        var gridEl = root.querySelector("[data-pdp-specs-grid]");
+        if (!jsonEl || !gridEl) return;
+
+        var items;
+
+        try {
+          items = JSON.parse(jsonEl.textContent.trim());
+        } catch (error) {
+          console.warn("[pdp-info-tabs] Invalid specs JSON:", error);
+          return;
+        }
+
+        if (!Array.isArray(items)) {
+          console.warn("[pdp-info-tabs] Specifications JSON must be an array.");
+          return;
+        }
+
+        items = items.map(normalizeSpecItem).filter(Boolean);
+
+        if (!items.length) return;
+
+        gridEl.innerHTML = "";
+
+        items.forEach(function (item) {
+          var specItem = document.createElement("div");
+          specItem.className = "pdp-spec-item";
+
+          var html = "";
+
+          if (item.label) {
+            html += '<p class="pdp-spec-label">' + escapeHtml(item.label) + "</p>";
+          }
+
+          if (item.value) {
+            html += '<p class="pdp-spec-value">' + escapeHtml(item.value) + "</p>";
+          }
+
+          specItem.innerHTML = html;
+          gridEl.appendChild(specItem);
+        });
+      }
+
       function setTab(idx) {
         tabs.forEach(function (t) {
-          var i = parseInt(t.getAttribute('data-index'), 10);
-          t.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+          var i = parseInt(t.getAttribute("data-index"), 10);
+          t.setAttribute("aria-selected", i === idx ? "true" : "false");
         });
         panels.forEach(function (p) {
-          var i = parseInt(p.getAttribute('data-index'), 10);
+          var i = parseInt(p.getAttribute("data-index"), 10);
           p.hidden = i !== idx;
         });
       }
 
       tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () {
-          setTab(parseInt(tab.getAttribute('data-index'), 10) || 0);
+        tab.addEventListener("click", function () {
+          setTab(parseInt(tab.getAttribute("data-index"), 10) || 0);
         });
       });
+
+      renderSpecsGrid();
     })();
   </script>
 </div>
