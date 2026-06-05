@@ -16,32 +16,27 @@
 <style>
   #shopify-section-{{ section.id }} {
     --article-podcast-image-ratio: {{ section.settings.image_column_width }}%;
-    --section-split-grid-template-columns: minmax(0, var(--article-podcast-image-ratio)) minmax(0, calc(100% - var(--article-podcast-image-ratio)));
-  }
-
-  #shopify-section-{{ section.id }} .article_podcast_section {
     --article-podcast-nav-gap: 1rem;
     --article-podcast-content-gap: 2.5rem;
     --article-podcast-nav-icon-size: 2.25rem;
+    --article-podcast-play-button-size: 4.5rem;
+    --article-podcast-mobile-hero-ratio: 1.1;
   }
 
-  #shopify-section-{{ section.id }} .article_podcast_section .section-split {
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_layout {
+    display: grid;
     align-items: stretch;
-  }
-
-  #shopify-section-{{ section.id }} .article_podcast_section .section-split__column--image {
-    min-height: 50vh;
   }
 
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero {
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: inherit;
     overflow: hidden;
   }
 
-  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero img {
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero img,
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero svg {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -55,7 +50,6 @@
     width: 100%;
     max-width: {{ section.settings.content_max_width }}px;
     margin-inline: auto;
-    padding-block: clamp(2rem, 4vw, 3.5rem);
   }
 
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav {
@@ -137,7 +131,7 @@
 
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video video-media,
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video .play-button {
-    --play-button-size: 4.5rem;
+    --play-button-size: var(--article-podcast-play-button-size);
   }
 
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video video-media::part(play-button),
@@ -182,50 +176,183 @@
     line-height: 1.15;
   }
 
-  @media screen and (min-width: 1000px) {
-    #shopify-section-{{ section.id }} .article_podcast_section .section-split__column--image {
-      min-height: calc(100dvh - var(--sticky-area-height, 0px));
-      position: sticky;
-      top: var(--sticky-area-height, 0px);
-      align-self: start;
+  @media screen and (max-width: 999px) {
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_layout {
+      grid-template-areas:
+        "nav"
+        "hero"
+        "content";
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav {
+      grid-area: nav;
+      padding: 1.25rem var(--container-gutter) 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero_col {
+      grid-area: hero;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero {
+      aspect-ratio: var(--article-podcast-mobile-hero-ratio);
+      min-height: auto;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_content_col {
+      grid-area: content;
+      padding: 0 var(--container-gutter) 2.5rem;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_content_col:not(:has(.article_podcast_video)) {
+      padding-top: 1.75rem;
     }
 
     #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_content {
-      min-height: calc(100dvh - var(--sticky-area-height, 0px));
-      padding-block: clamp(2.5rem, 5vw, 4rem);
+      gap: 1.75rem;
+      max-width: none;
+      margin-inline: 0;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video {
+      position: relative;
+      z-index: 2;
+      margin-top: calc(var(--article-podcast-play-button-size) * -0.55);
+      margin-bottom: 0.25rem;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video video-media::part(play-button),
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video .play-button {
+      background: rgb(var(--background));
+      border: 1px solid rgb(var(--text-color));
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__pill {
+      padding: 0.5rem 0.875rem;
+      font-size: 0.625rem;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__link {
+      font-size: 0.625rem;
+      gap: 0.5rem;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__icon {
+      width: 2rem;
+      height: 2rem;
     }
   }
 
-  @media screen and (max-width: 699px) {
+  @media screen and (max-width: 399px) {
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__label {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__pill .article_podcast_nav__label {
+      display: inline;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_layout {
+      grid-template-columns: minmax(0, var(--article-podcast-image-ratio)) minmax(0, calc(100% - var(--article-podcast-image-ratio)));
+      grid-template-areas:
+        "hero nav"
+        "hero content";
+      min-height: calc(100dvh - var(--sticky-area-height, 0px));
+    }
+
     #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav {
-      grid-template-columns: 1fr;
-      justify-items: center;
-      text-align: center;
+      grid-area: nav;
+      align-self: start;
+      padding: clamp(2.5rem, 5vw, 4rem) var(--container-gutter) 0;
+      max-width: {{ section.settings.content_max_width }}px;
+      width: 100%;
+      margin-inline: auto;
     }
 
-    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__prev,
-    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__next {
-      justify-self: center;
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero_col {
+      grid-area: hero;
+      position: sticky;
+      top: var(--sticky-area-height, 0px);
+      align-self: start;
+      min-height: calc(100dvh - var(--sticky-area-height, 0px));
     }
 
-    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__prev {
-      order: 1;
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero {
+      min-height: inherit;
     }
 
-    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__center {
-      order: 0;
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_content_col {
+      grid-area: content;
+      padding: 2rem var(--container-gutter) clamp(2.5rem, 5vw, 4rem);
+      min-height: 0;
     }
 
-    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__next {
-      order: 2;
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_content {
+      padding-block: 0;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video {
+      margin-top: 0;
+      margin-bottom: 0;
     }
   }
 </style>
 
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
   <div class="article_podcast_section">
-    <div class="section-split md:min-h-fill">
-      <div class="section-split__column section-split__column--image section-split__column--flushed">
+    <div class="article_podcast_layout">
+      {%- if section.settings.show_navigation -%}
+        <nav class="article_podcast_nav" aria-label="{{ section.settings.navigation_aria_label }}">
+          <div class="article_podcast_nav__prev">
+            {%- if blog.previous_article -%}
+              <a href="{{ blog.previous_article.url }}" class="article_podcast_nav__link">
+                <span class="article_podcast_nav__icon" aria-hidden="true">
+                  {%- render 'icon' with 'arrow-left' -%}
+                </span>
+                <span class="article_podcast_nav__label">{{ section.settings.prev_label }}</span>
+              </a>
+            {%- else -%}
+              <span class="article_podcast_nav__link is-disabled" aria-disabled="true">
+                <span class="article_podcast_nav__icon" aria-hidden="true">
+                  {%- render 'icon' with 'arrow-left' -%}
+                </span>
+                <span class="article_podcast_nav__label">{{ section.settings.prev_label }}</span>
+              </span>
+            {%- endif -%}
+          </div>
+
+          <div class="article_podcast_nav__center">
+            <a href="{{ blog.url }}" class="article_podcast_nav__pill">
+              <span class="article_podcast_nav__icon" aria-hidden="true">
+                {%- render 'icon' with 'arrow-left' -%}
+              </span>
+              <span class="article_podcast_nav__label">{{ section.settings.all_episodes_label }}</span>
+            </a>
+          </div>
+
+          <div class="article_podcast_nav__next">
+            {%- if blog.next_article -%}
+              <a href="{{ blog.next_article.url }}" class="article_podcast_nav__link">
+                <span class="article_podcast_nav__label">{{ section.settings.next_label }}</span>
+                <span class="article_podcast_nav__icon" aria-hidden="true">
+                  {%- render 'icon' with 'arrow-right' -%}
+                </span>
+              </a>
+            {%- else -%}
+              <span class="article_podcast_nav__link is-disabled" aria-disabled="true">
+                <span class="article_podcast_nav__label">{{ section.settings.next_label }}</span>
+                <span class="article_podcast_nav__icon" aria-hidden="true">
+                  {%- render 'icon' with 'arrow-right' -%}
+                </span>
+              </span>
+            {%- endif -%}
+          </div>
+        </nav>
+      {%- endif -%}
+
+      <div class="article_podcast_hero_col">
         <div class="article_podcast_hero">
           {%- if hero_image != blank -%}
             {{- hero_image | image_url: width: hero_image.width | image_tag: sizes: '(max-width: 999px) 100vw, 40vw', widths: '400,600,800,1000,1200,1400,1600,1800,2000', alt: article.title -}}
@@ -235,57 +362,8 @@
         </div>
       </div>
 
-      <div class="section-split__column align-self-stretch">
+      <div class="article_podcast_content_col">
         <div class="article_podcast_content">
-          {%- if section.settings.show_navigation -%}
-            <nav class="article_podcast_nav" aria-label="{{ section.settings.navigation_aria_label }}">
-              <div class="article_podcast_nav__prev">
-                {%- if blog.previous_article -%}
-                  <a href="{{ blog.previous_article.url }}" class="article_podcast_nav__link">
-                    <span class="article_podcast_nav__icon" aria-hidden="true">
-                      {%- render 'icon' with 'arrow-left' -%}
-                    </span>
-                    <span>{{ section.settings.prev_label }}</span>
-                  </a>
-                {%- else -%}
-                  <span class="article_podcast_nav__link is-disabled" aria-disabled="true">
-                    <span class="article_podcast_nav__icon" aria-hidden="true">
-                      {%- render 'icon' with 'arrow-left' -%}
-                    </span>
-                    <span>{{ section.settings.prev_label }}</span>
-                  </span>
-                {%- endif -%}
-              </div>
-
-              <div class="article_podcast_nav__center">
-                <a href="{{ blog.url }}" class="article_podcast_nav__pill">
-                  <span class="article_podcast_nav__icon" aria-hidden="true">
-                    {%- render 'icon' with 'arrow-left' -%}
-                  </span>
-                  <span>{{ section.settings.all_episodes_label }}</span>
-                </a>
-              </div>
-
-              <div class="article_podcast_nav__next">
-                {%- if blog.next_article -%}
-                  <a href="{{ blog.next_article.url }}" class="article_podcast_nav__link">
-                    <span>{{ section.settings.next_label }}</span>
-                    <span class="article_podcast_nav__icon" aria-hidden="true">
-                      {%- render 'icon' with 'arrow-right' -%}
-                    </span>
-                  </a>
-                {%- else -%}
-                  <span class="article_podcast_nav__link is-disabled" aria-disabled="true">
-                    <span>{{ section.settings.next_label }}</span>
-                    <span class="article_podcast_nav__icon" aria-hidden="true">
-                      {%- render 'icon' with 'arrow-right' -%}
-                    </span>
-                  </span>
-                {%- endif -%}
-              </div>
-            </nav>
-          {%- endif -%}
-
           {%- if has_video -%}
             <div class="article_podcast_video">
               {%- if article_video != blank -%}
