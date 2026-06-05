@@ -1,0 +1,494 @@
+{%- liquid
+  assign hero_image = article.metafields.custom.secondary_image | default: article.image
+  assign article_video = article.metafields.custom.video.value
+  assign external_video = article.metafields.custom.external_video_url.value
+  assign episode_label = article.metafields.custom.episode_label.value
+
+  assign has_video = false
+  if article_video != blank or external_video != blank
+    assign has_video = true
+  endif
+
+  assign reading_time = article.content | strip_html | split: ' ' | size | times: 1.0 | divided_by: 250 | ceil
+  assign video_id = 'podcast-video-' | append: section.id
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --article-podcast-image-ratio: {{ section.settings.image_column_width }}%;
+    --section-split-grid-template-columns: minmax(0, var(--article-podcast-image-ratio)) minmax(0, calc(100% - var(--article-podcast-image-ratio)));
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section {
+    --article-podcast-nav-gap: 1rem;
+    --article-podcast-content-gap: 2.5rem;
+    --article-podcast-nav-icon-size: 2.25rem;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .section-split {
+    align-items: stretch;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .section-split__column--image {
+    min-height: 50vh;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--article-podcast-content-gap);
+    width: 100%;
+    max-width: {{ section.settings.content_max_width }}px;
+    margin-inline: auto;
+    padding-block: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--article-podcast-nav-gap);
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__prev {
+    justify-self: start;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__center {
+    justify-self: center;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__next {
+    justify-self: end;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    color: inherit;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__link:hover {
+    opacity: 0.65;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__link.is-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__icon {
+    display: inline-grid;
+    place-items: center;
+    width: var(--article-podcast-nav-icon-size);
+    height: var(--article-podcast-nav-icon-size);
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    text-decoration: none;
+    color: inherit;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__pill:hover {
+    background: rgb(var(--text-color));
+    color: rgb(var(--background));
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video video-media,
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video .play-button {
+    --play-button-size: 4.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video video-media::part(play-button),
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video .play-button {
+    width: var(--play-button-size);
+    height: var(--play-button-size);
+    background: transparent;
+    border: 1px solid currentColor;
+    backdrop-filter: none;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video video-media {
+    display: block;
+    width: var(--play-button-size);
+    aspect-ratio: 1;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_video video-media[loaded] {
+    width: 100%;
+    max-width: 32rem;
+    aspect-ratio: 16 / 9;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    font-size: var(--text-sm);
+    color: rgb(var(--text-color) / 0.7);
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_episode_type {
+    margin: 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_title {
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .article_podcast_section .section-split__column--image {
+      min-height: calc(100dvh - var(--sticky-area-height, 0px));
+      position: sticky;
+      top: var(--sticky-area-height, 0px);
+      align-self: start;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_content {
+      min-height: calc(100dvh - var(--sticky-area-height, 0px));
+      padding-block: clamp(2.5rem, 5vw, 4rem);
+    }
+  }
+
+  @media screen and (max-width: 699px) {
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__prev,
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__next {
+      justify-self: center;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__prev {
+      order: 1;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__center {
+      order: 0;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_nav__next {
+      order: 2;
+    }
+  }
+</style>
+
+<div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
+  <div class="article_podcast_section">
+    <div class="section-split md:min-h-fill">
+      <div class="section-split__column section-split__column--image section-split__column--flushed">
+        <div class="article_podcast_hero">
+          {%- if hero_image != blank -%}
+            {{- hero_image | image_url: width: hero_image.width | image_tag: sizes: '(max-width: 999px) 100vw, 40vw', widths: '400,600,800,1000,1200,1400,1600,1800,2000', alt: article.title -}}
+          {%- else -%}
+            {{- 'lifestyle-1' | placeholder_svg_tag: 'size-full' -}}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="section-split__column align-self-stretch">
+        <div class="article_podcast_content">
+          {%- if section.settings.show_navigation -%}
+            <nav class="article_podcast_nav" aria-label="{{ section.settings.navigation_aria_label }}">
+              <div class="article_podcast_nav__prev">
+                {%- if blog.previous_article -%}
+                  <a href="{{ blog.previous_article.url }}" class="article_podcast_nav__link">
+                    <span class="article_podcast_nav__icon" aria-hidden="true">
+                      {%- render 'icon' with 'arrow-left' -%}
+                    </span>
+                    <span>{{ section.settings.prev_label }}</span>
+                  </a>
+                {%- else -%}
+                  <span class="article_podcast_nav__link is-disabled" aria-disabled="true">
+                    <span class="article_podcast_nav__icon" aria-hidden="true">
+                      {%- render 'icon' with 'arrow-left' -%}
+                    </span>
+                    <span>{{ section.settings.prev_label }}</span>
+                  </span>
+                {%- endif -%}
+              </div>
+
+              <div class="article_podcast_nav__center">
+                <a href="{{ blog.url }}" class="article_podcast_nav__pill">
+                  <span class="article_podcast_nav__icon" aria-hidden="true">
+                    {%- render 'icon' with 'arrow-left' -%}
+                  </span>
+                  <span>{{ section.settings.all_episodes_label }}</span>
+                </a>
+              </div>
+
+              <div class="article_podcast_nav__next">
+                {%- if blog.next_article -%}
+                  <a href="{{ blog.next_article.url }}" class="article_podcast_nav__link">
+                    <span>{{ section.settings.next_label }}</span>
+                    <span class="article_podcast_nav__icon" aria-hidden="true">
+                      {%- render 'icon' with 'arrow-right' -%}
+                    </span>
+                  </a>
+                {%- else -%}
+                  <span class="article_podcast_nav__link is-disabled" aria-disabled="true">
+                    <span>{{ section.settings.next_label }}</span>
+                    <span class="article_podcast_nav__icon" aria-hidden="true">
+                      {%- render 'icon' with 'arrow-right' -%}
+                    </span>
+                  </span>
+                {%- endif -%}
+              </div>
+            </nav>
+          {%- endif -%}
+
+          {%- if has_video -%}
+            <div class="article_podcast_video">
+              {%- if article_video != blank -%}
+                {%- render 'media' with article_video, id: video_id, preload: section.index <= 3, autoplay: false, controls: true, playsinline: true, show_play_button: true -%}
+              {%- elsif external_video != blank -%}
+                <video-media id="{{ video_id }}" host="{{ external_video.type }}" show-play-button>
+                  {%- if hero_image != blank -%}
+                    {{- hero_image | image_url: width: 1200 | image_tag: sizes: '100vw', widths: '400,600,800,1000,1200' -}}
+                  {%- else -%}
+                    {{- 'hero-apparel-1' | placeholder_svg_tag: 'size-full' -}}
+                  {%- endif -%}
+
+                  <template>
+                    {%- if external_video.type == 'youtube' -%}
+                      <iframe src="https://www.youtube.com/embed/{{ external_video.id }}?playsinline=1&enablejsapi=1&rel=0&modestbranding=1&origin={{ 'https://' | append: request.host | url_encode }}" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe>
+                    {%- elsif external_video.type == 'vimeo' -%}
+                      <iframe src="https://player.vimeo.com/video/{{ external_video.id }}?autopause=1&transparent=0&responsive=1&portrait=0&title=0&byline=0&color={{ settings.text_color | remove_first: '#' }}" allow="autoplay; encrypted-media;" allowfullscreen="allowfullscreen"></iframe>
+                    {%- endif -%}
+                  </template>
+                </video-media>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          <div class="v-stack gap-4 sm:gap-6">
+            {%- if section.settings.show_category -%}
+              {%- liquid
+                assign category_text = episode_label
+
+                if category_text == blank and article.tags.size > 0
+                  assign category_text = article.tags.first
+                endif
+              -%}
+
+              {%- if category_text != blank -%}
+                <p class="subheading article_podcast_episode_type">{{ category_text }}</p>
+              {%- endif -%}
+            {%- endif -%}
+
+            <h1 class="{{ section.settings.heading_size }} article_podcast_title">{{ article.title }}</h1>
+
+            {%- if section.settings.show_date or section.settings.show_reading_time -%}
+              <div class="article_podcast_meta">
+                {%- if section.settings.show_date -%}
+                  <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'abbreviated_date' }}</time>
+                {%- endif -%}
+
+                {%- if section.settings.show_date and section.settings.show_reading_time -%}
+                  <span aria-hidden="true">·</span>
+                {%- endif -%}
+
+                {%- if section.settings.show_reading_time -%}
+                  <span>{{ 'blog.post.reading_time' | t: time: reading_time }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="prose">
+            {{- article.content -}}
+          </div>
+
+          {%- if section.settings.show_share_buttons -%}
+            {%- assign excerpt = article.excerpt | strip_html -%}
+
+            <div class="h-stack gap-6">
+              <span class="uppercase">{{- 'general.social.share' | t -}}</span>
+              {%- render 'share-buttons', url: article.url, title: article.title, description: excerpt -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "播客文章",
+  "class": "shopify-section--main-article-podcast",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "image_column_width",
+      "label": "左侧图片列宽度",
+      "min": 30,
+      "max": 55,
+      "step": 1,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "右侧内容最大宽度",
+      "min": 480,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 680
+    },
+    {
+      "type": "header",
+      "content": "文章导航"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "显示文章切换导航",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "navigation_aria_label",
+      "label": "导航无障碍标签",
+      "default": "文章导航"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "上一篇按钮文案",
+      "default": "Prev"
+    },
+    {
+      "type": "text",
+      "id": "all_episodes_label",
+      "label": "全部文章按钮文案",
+      "default": "All Episodes"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "下一篇按钮文案",
+      "default": "Next"
+    },
+    {
+      "type": "header",
+      "content": "文章信息"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:global.text.size",
+      "options": [
+        {
+          "value": "display-l",
+          "label": "Display L"
+        },
+        {
+          "value": "display-m",
+          "label": "Display M"
+        },
+        {
+          "value": "h1",
+          "label": "XX-Large"
+        },
+        {
+          "value": "h2",
+          "label": "X-Large"
+        },
+        {
+          "value": "h3",
+          "label": "Large"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category",
+      "label": "t:global.blog.show_category",
+      "info": "优先读取文章 metafield custom.episode_label，否则使用第一个标签",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:global.blog.show_date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reading_time",
+      "label": "t:global.blog.show_reading_time",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "t:sections.main_article.show_share_buttons",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "视频 Metafield",
+      "info": "为文章配置 custom.video（Shopify 视频）或 custom.external_video_url（YouTube/Vimeo）后，视频模块会自动显示"
+    }
+  ]
+}
+{% endschema %}
