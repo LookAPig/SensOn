@@ -861,6 +861,17 @@
         "lazy": true
       }
     },
+    "custom_liquid_ET7DEq": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom_liquid.name",
+      "settings": {
+        "color_scheme": "",
+        "liquid": "<div\n\tclass=\"yotpo yotpo-pictures-widget\"\n\tdata-gallery-id=\"69fc5df4c818fb7d7e46e582\">\n</div>",
+        "text_alignment": "left",
+        "add_vertical_spacing": true,
+        "add_horizontal_spacing": true
+      }
+    },
     "1777538267162d7a7c": {
       "type": "apps",
       "blocks": {
@@ -949,6 +960,7 @@
     "scroll_images_baNjt4",
     "scroll_images_TjAexy",
     "ss_comparison_table_22_Uhm4pg",
+    "custom_liquid_ET7DEq",
     "1777538267162d7a7c",
     "how_works_aErNkp"
   ]
