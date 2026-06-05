@@ -176,6 +176,69 @@
     line-height: 1.15;
   }
 
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_share {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    width: 100%;
+    margin-block-start: 0.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_share__label {
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--text-color) / 0.65);
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_share .share-buttons {
+    gap: 1.25rem;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_share .share-buttons a {
+    display: inline-flex;
+    color: inherit;
+    transition: opacity 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_share .share-buttons a:hover {
+    opacity: 0.65;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_comments {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+    padding-block-start: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_comments__heading {
+    margin: 0;
+    font-size: var(--text-h3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_comments__note {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: rgb(var(--text-color) / 0.65);
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_comments .fieldset {
+    gap: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_comments .fieldset-row {
+    gap: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_comments .button {
+    width: 100%;
+  }
+
   @media screen and (max-width: 999px) {
     #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_layout {
       grid-template-areas:
@@ -430,12 +493,65 @@
             {{- article.content -}}
           </div>
 
-          {%- if section.settings.show_share_buttons -%}
+          {%- if section.settings.show_social_share -%}
             {%- assign excerpt = article.excerpt | strip_html -%}
-
-            <div class="h-stack gap-6">
-              <span class="uppercase">{{- 'general.social.share' | t -}}</span>
+            {%- capture podcast_share_buttons -%}
               {%- render 'share-buttons', url: article.url, title: article.title, description: excerpt -%}
+            {%- endcapture -%}
+
+            {%- if podcast_share_buttons != blank -%}
+              <div class="article_podcast_share">
+                <span class="article_podcast_share__label">{{ section.settings.share_label }}</span>
+                {{- podcast_share_buttons -}}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+
+          {%- if section.settings.show_comment_form and article.comments_enabled? -%}
+            <div id="comments" class="article_podcast_comments">
+              <h2 class="article_podcast_comments__heading">{{ section.settings.comment_heading }}</h2>
+
+              {%- form 'new_comment', article, class: 'form' -%}
+                {%- if form.posted_successfully? -%}
+                  {%- capture content -%}
+                    {%- if blog.moderated? -%}
+                      {{- 'blog.comments.comment_sent' | t -}}
+                    {%- else -%}
+                      {{- 'blog.comments.comment_published' | t -}}
+                    {%- endif -%}
+                  {%- endcapture -%}
+                  {%- render 'banner', status: 'success', content: content -%}
+
+                {%- else -%}
+                  {%- if form.errors -%}
+                    {%- assign content = form.errors | default_errors -%}
+                    {%- render 'banner', status: 'error', content: content -%}
+                  {%- endif -%}
+                {%- endif -%}
+
+                <div class="fieldset">
+                  <div class="fieldset-row">
+                    {%- liquid
+                      assign label = 'blog.comments.name' | t
+                      render 'input', type: 'text', name: 'comment[author]', label: label, value: customer.name, required: true, autocomplete: 'name'
+
+                      assign label = 'blog.comments.email' | t
+                      render 'input', type: 'email', name: 'comment[email]', label: label, value: customer.email, required: true, autocomplete: 'email'
+                    -%}
+                  </div>
+
+                  {%- assign label = 'blog.comments.message' | t -%}
+                  {%- render 'input', name: 'comment[body]', label: label, multiline: 9, required: true -%}
+                </div>
+
+                {%- if blog.moderated? -%}
+                  <p class="article_podcast_comments__note">{{ 'blog.comments.moderated' | t }}</p>
+                {%- endif -%}
+
+                <div class="prose">{{- 'shopify.online_store.spam_detection.disclaimer_html' | t -}}</div>
+
+                {%- render 'button', type: 'submit', content: section.settings.comment_submit_label, stretch: true -%}
+              {%- endform -%}
             </div>
           {%- endif -%}
         </div>
@@ -562,10 +678,43 @@
       "default": true
     },
     {
+      "type": "header",
+      "content": "底部功能"
+    },
+    {
       "type": "checkbox",
-      "id": "show_share_buttons",
-      "label": "t:sections.main_article.show_share_buttons",
+      "id": "show_social_share",
+      "label": "显示社媒分享",
+      "info": "固定显示 Facebook、X、Email；TikTok、Instagram 需在主题社媒设置中配置后显示",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "share_label",
+      "label": "分享标签文案",
+      "default": "Share:",
+      "visible_if": "{{ section.settings.show_social_share }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comment_form",
+      "label": "显示留言表单",
+      "info": "需在 Shopify 后台为对应 Blog 开启评论功能",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "comment_heading",
+      "label": "留言标题",
+      "default": "Leave a Comment",
+      "visible_if": "{{ section.settings.show_comment_form }}"
+    },
+    {
+      "type": "text",
+      "id": "comment_submit_label",
+      "label": "提交按钮文案",
+      "default": "Post Comment",
+      "visible_if": "{{ section.settings.show_comment_form }}"
     },
     {
       "type": "header",

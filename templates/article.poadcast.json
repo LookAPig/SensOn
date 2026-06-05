@@ -24,7 +24,11 @@
         "show_category": true,
         "show_date": true,
         "show_reading_time": true,
-        "show_share_buttons": false
+        "show_social_share": true,
+        "share_label": "Share:",
+        "show_comment_form": true,
+        "comment_heading": "Leave a Comment",
+        "comment_submit_label": "Post Comment"
       }
     }
   },
