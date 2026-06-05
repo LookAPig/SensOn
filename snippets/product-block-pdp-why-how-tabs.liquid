@@ -308,75 +308,87 @@
   </div>
 
   <div class="pdp-info-tabs__panels">
-    {%- comment -%} Tab 0: Creator Review (up to 8 cards) {%- endcomment -%}
+    {%- comment -%} Tab 0: Creator Review {%- endcomment -%}
     <div
       class="pdp-info-tabs__panel"
       role="tabpanel"
       data-pdp-info-panel="{{ block.id }}"
       data-index="0"
     >
+      {%- liquid
+        assign creator_2_has_content = false
+        if block.settings.creator_2_quote != blank
+          assign creator_2_has_content = true
+        elsif block.settings.creator_2_avatar != blank
+          assign creator_2_has_content = true
+        elsif block.settings.creator_2_name != blank
+          assign creator_2_has_content = true
+        elsif block.settings.creator_2_credentials != blank
+          assign creator_2_has_content = true
+        endif
+      -%}
       <div class="pdp-creator-stack">
-        {%- for card_index in (1..8) -%}
-          {%- liquid
-            if card_index == 1
-              assign card_quote_key = 'creator_quote'
-              assign card_avatar_key = 'creator_avatar'
-              assign card_name_key = 'creator_name'
-              assign card_credentials_key = 'creator_credentials'
-            else
-              assign card_suffix = card_index | append: ''
-              assign card_quote_key = 'creator_' | append: card_suffix | append: '_quote'
-              assign card_avatar_key = 'creator_' | append: card_suffix | append: '_avatar'
-              assign card_name_key = 'creator_' | append: card_suffix | append: '_name'
-              assign card_credentials_key = 'creator_' | append: card_suffix | append: '_credentials'
-            endif
-
-            assign card_quote = block.settings[card_quote_key]
-            assign card_avatar = block.settings[card_avatar_key]
-            assign card_name = block.settings[card_name_key]
-            assign card_credentials = block.settings[card_credentials_key]
-
-            assign card_has_content = false
-            if card_quote != blank
-              assign card_has_content = true
-            elsif card_avatar != blank
-              assign card_has_content = true
-            elsif card_name != blank
-              assign card_has_content = true
-            elsif card_credentials != blank
-              assign card_has_content = true
-            endif
+        <div class="pdp-creator-card">
+          {%- if block.settings.creator_quote != blank -%}
+            <p class="pdp-creator-quote">{{ block.settings.creator_quote | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.creator_avatar != blank
+            or block.settings.creator_name != blank
+            or block.settings.creator_credentials != blank
           -%}
-
-          {%- if card_has_content -%}
-            <div class="pdp-creator-card">
-              {%- if card_quote != blank -%}
-                <p class="pdp-creator-quote">{{ card_quote | escape }}</p>
-              {%- endif -%}
-              {%- if card_avatar != blank or card_name != blank or card_credentials != blank -%}
-                <div class="pdp-creator-author">
-                  {%- if card_avatar != blank -%}
-                    <div class="pdp-creator-avatar">
-                      {{
-                        card_avatar
-                        | image_url: width: 112
-                        | image_tag: loading: 'lazy', widths: '56, 112', sizes: '56px', alt: card_name
-                      }}
-                    </div>
-                  {%- endif -%}
-                  <div>
-                    {%- if card_name != blank -%}
-                      <p class="pdp-creator-name">{{ card_name | escape }}</p>
-                    {%- endif -%}
-                    {%- if card_credentials != blank -%}
-                      <p class="pdp-creator-credentials">{{ card_credentials | escape }}</p>
-                    {%- endif -%}
-                  </div>
+            <div class="pdp-creator-author">
+              {%- if block.settings.creator_avatar != blank -%}
+                <div class="pdp-creator-avatar">
+                  {{
+                    block.settings.creator_avatar
+                    | image_url: width: 112
+                    | image_tag: loading: 'lazy', widths: '56, 112', sizes: '56px', alt: block.settings.creator_name
+                  }}
                 </div>
               {%- endif -%}
+              <div>
+                {%- if block.settings.creator_name != blank -%}
+                  <p class="pdp-creator-name">{{ block.settings.creator_name | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.creator_credentials != blank -%}
+                  <p class="pdp-creator-credentials">{{ block.settings.creator_credentials | escape }}</p>
+                {%- endif -%}
+              </div>
             </div>
           {%- endif -%}
-        {%- endfor -%}
+        </div>
+
+        {%- if creator_2_has_content -%}
+          <div class="pdp-creator-card">
+            {%- if block.settings.creator_2_quote != blank -%}
+              <p class="pdp-creator-quote">{{ block.settings.creator_2_quote | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.creator_2_avatar != blank
+              or block.settings.creator_2_name != blank
+              or block.settings.creator_2_credentials != blank
+            -%}
+              <div class="pdp-creator-author">
+                {%- if block.settings.creator_2_avatar != blank -%}
+                  <div class="pdp-creator-avatar">
+                    {{
+                      block.settings.creator_2_avatar
+                      | image_url: width: 112
+                      | image_tag: loading: 'lazy', widths: '56, 112', sizes: '56px', alt: block.settings.creator_2_name
+                    }}
+                  </div>
+                {%- endif -%}
+                <div>
+                  {%- if block.settings.creator_2_name != blank -%}
+                    <p class="pdp-creator-name">{{ block.settings.creator_2_name | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.creator_2_credentials != blank -%}
+                    <p class="pdp-creator-credentials">{{ block.settings.creator_2_credentials | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </div>
     </div>
 
