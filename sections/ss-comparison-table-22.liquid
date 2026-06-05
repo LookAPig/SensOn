@@ -437,10 +437,11 @@
     }
   }
 
-  /* ========== 自定义覆盖：其他列宽度翻倍 + 第一列右边距减半 ========== */
+  /* ========== 自定义覆盖：桌面端其他列宽440px，移动端保持220px + 第一列右边距减半 ========== */
+  /* 移动端基础（屏幕宽度 < 1024px） */
   .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child),
   .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child) {
-    width: 440px !important;
+    width: 220px !important;   /* 移动端恢复原宽度，避免过宽 */
   }
   .comparison-grid-{{ section.id }} {
     gap: 0 !important;
@@ -455,6 +456,7 @@
     margin-right: 12.5px;
   }
 
+  /* 桌面端覆盖（≥1024px） */
   @media(min-width: 1024px) {
     .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child),
     .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child) {
@@ -559,190 +561,187 @@
   </style>
 {% endif %}
 
-<!-- 添加固定 id 用于导航跳转 -->
-<div id="senson-edge-section">
-  <div class="section-{{ section.id }} comparison-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
-    <div class="section-{{ section.id }}-settings">
-      {% for block in section.blocks %}
-        {% case block.type %}
-          {% when 'heading' %}
-            {% if block.settings.heading != blank %}
-              <div class="comparison-heading-{{ block.id }}">
-                {{ block.settings.heading }}
-              </div>  
-            {% endif %}
-          {% when 'text' %}
-            {% if block.settings.text != blank %}
-              <div class="comparison-text-{{ block.id }}">
-                {{ block.settings.text }}
-              </div>  
-            {% endif %}
-        {% endcase %}
-      {% endfor %}
-     
-      <div class="comparison-table-wrapper-{{ section.id }}">
-        <div class="comparison-table-inner-{{ section.id }}">
-          <div class="comparison-table-{{ section.id }}">
-            <div class="comparison-grid-{{ section.id }} comparison-grid-header-{{ section.id }}">
-              <div class="comparison-item-{{ section.id }}"></div>
-              {% if first_heading != blank %}
-                <div class="comparison-item-{{ section.id }} active">
-                  <{% if first_heading_url != blank %}a href="{{ first_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">               
-                    {% if first_heading_image != blank %}
-                      {{ first_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                    {% else %}
-                      {{ 'image' | placeholder_svg_tag }}
-                    {% endif %}   
-                  </{% if first_heading_url != blank %}a{% else %}div{% endif %}>  
-                  {% if use_background_image %}
-                    <div class="comparison-item-bg-image-{{ section.id }}">
-                      <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g opacity="0.5">
-                          <path d="M0 99.9993H4.54V71.0927L0 67.8621V99.9993Z" fill="url(#paint0_linear_106_198-{{ section.id }})"/>
-                          <!-- 此处省略冗长的 svg 内容，保持原样即可 -->
-                        </g>
-                        <defs>
-                          <linearGradient id="paint0_linear_106_198-{{ section.id }}" x1="2.27" y1="67.8621" x2="2.27" y2="99.9993" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#9DB324"/>
-                            <stop offset="1" stop-color="#9DB324" stop-opacity="0"/>
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                    </div>
-                  {% endif %}
-                  <{% if first_heading_url != blank %}a{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ first_heading }}</{% if first_heading_url != blank %}a{% else %}h3{% endif %}>                  
-                </div>
-              {% endif %}
-              {% if table_columns > 1 and second_heading != blank %}
-                <div class="comparison-item-{{ section.id }}">   
-                  <{% if second_heading_url != blank %}a href="{{ second_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">                     
-                    {% if second_heading_image != blank %}
-                      {{ second_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                    {% else %}
-                      {{ 'image' | placeholder_svg_tag }}
-                    {% endif %}    
-                  </{% if second_heading_url != blank %}a{% else %}div{% endif %}>   
-                  {% if use_background_image %}
-                    <div class="comparison-item-bg-image-{{ section.id }}">
-                      <!-- 与上面类似的 svg，使用 section.id 动态区分 -->
-                    </div>
-                  {% endif %}        
-                  <{% if second_heading_url != blank %}a{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ second_heading }}</{% if second_heading_url != blank %}a{% else %}h3{% endif %}>                  
-                </div>
-              {% endif %}
-              {% if table_columns > 2 and third_heading != blank %}
-                <div class="comparison-item-{{ section.id }}">
-                  <{% if third_heading_url != blank %}a href="{{ third_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">                
-                    {% if third_heading_image != blank %}
-                      {{ third_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                    {% else %}
-                      {{ 'image' | placeholder_svg_tag }}
-                    {% endif %}  
-                  </{% if third_heading_url != blank %}a{% else %}div{% endif %}> 
-                  {% if use_background_image %}
-                    <div class="comparison-item-bg-image-{{ section.id }}">
-                      <!-- 对应的 svg -->
-                    </div>
-                  {% endif %} 
-                  <{% if third_heading_url != blank %}a{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ third_heading }}</{% if third_heading_url != blank %}a{% else %}h3{% endif %}>
-                </div>
-              {% endif %}
-            </div>
-
-            {% for block in section.blocks %}
-              {% if block.type == 'table_row' %}
-                <div class="comparison-grid-{{ section.id }} comparison-grid-rows-{{ section.id }}">
-                  <div class="comparison-item-{{ section.id }}">
-                    <h3>{{ block.settings.row_heading }}</h3>
+<div class="section-{{ section.id }} comparison-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+  <div class="section-{{ section.id }}-settings">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'heading' %}
+          {% if block.settings.heading != blank %}
+            <div class="comparison-heading-{{ block.id }}">
+              {{ block.settings.heading }}
+            </div>  
+          {% endif %}
+        {% when 'text' %}
+          {% if block.settings.text != blank %}
+            <div class="comparison-text-{{ block.id }}">
+              {{ block.settings.text }}
+            </div>  
+          {% endif %}
+      {% endcase %}
+    {% endfor %}
+   
+    <div class="comparison-table-wrapper-{{ section.id }}">
+      <div class="comparison-table-inner-{{ section.id }}">
+        <div class="comparison-table-{{ section.id }}">
+          <div class="comparison-grid-{{ section.id }} comparison-grid-header-{{ section.id }}">
+            <div class="comparison-item-{{ section.id }}"></div>
+            {% if first_heading != blank %}
+              <div class="comparison-item-{{ section.id }} active">
+                <{% if first_heading_url != blank %}a href="{{ first_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">               
+                  {% if first_heading_image != blank %}
+                    {{ first_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}   
+                </{% if first_heading_url != blank %}a{% else %}div{% endif %}>  
+                {% if use_background_image %}
+                  <div class="comparison-item-bg-image-{{ section.id }}">
+                    <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g opacity="0.5">
+                        <path d="M0 99.9993H4.54V71.0927L0 67.8621V99.9993Z" fill="url(#paint0_linear_106_198-{{ section.id }})"/>
+                        <!-- 此处可保留原有 svg 内容，为了简洁已省略 -->
+                      </g>
+                      <defs>
+                        <linearGradient id="paint0_linear_106_198-{{ section.id }}" x1="2.27" y1="67.8621" x2="2.27" y2="99.9993" gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#9DB324"/>
+                          <stop offset="1" stop-color="#9DB324" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
                   </div>
-                  {% if first_heading != blank or first_heading_image != blank %}
-                    <div class="comparison-item-{{ section.id }} active">
-                      {% if block.settings.first_column_image != blank or block.settings.first_column_icon != "none" %}
-                        <div class="comparison-value-icon-{{ section.id }}">
-                          {% if block.settings.first_column_image != blank %}
-                            {{ block.settings.first_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                          {% else %}
-                            {% if block.settings.first_column_icon == "check" %}
-                              {% if value_icon_check != blank %}
-                                <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
-                              {% else %}
-                                <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
-                              {% endif %}
-                            {% elsif block.settings.first_column_icon == "cross" %}
-                              {% if value_icon_cross != blank %}
-                                <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
-                              {% else %}
-                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
-                              {% endif %}
-                            {% endif %}
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                      {% if block.settings.first_column != blank %}
-                        <p class="comparison-value-{{ section.id }}">{{ block.settings.first_column }}</p>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                  {% if table_columns > 1 and second_heading != blank or second_heading_image != blank %}
-                    <div class="comparison-item-{{ section.id }}">
-                      {% if block.settings.second_column_image != blank or block.settings.second_column_icon != "none" %}
-                        <div class="comparison-value-icon-{{ section.id }}">
-                          {% if block.settings.second_column_image != blank %}
-                            {{ block.settings.second_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                          {% else %}
-                            {% if block.settings.second_column_icon == "check" %}
-                              {% if value_icon_check != blank %}
-                                <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
-                              {% else %}
-                                <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
-                              {% endif %}
-                            {% elsif block.settings.second_column_icon == "cross" %}
-                              {% if value_icon_cross != blank %}
-                                <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
-                              {% else %}
-                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
-                              {% endif %}
-                            {% endif %}
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                      {% if block.settings.second_column != blank %}
-                        <p class="comparison-value-{{ section.id }}">{{ block.settings.second_column }}</p>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                  {% if table_columns > 2 and third_heading != blank or third_heading_image != blank %}
-                    <div class="comparison-item-{{ section.id }}">
-                      {% if block.settings.third_column_image != blank or block.settings.third_column_icon != "none" %}
-                        <div class="comparison-value-icon-{{ section.id }}">
-                          {% if block.settings.third_column_image != blank %}
-                            {{ block.settings.third_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                          {% else %}
-                            {% if block.settings.third_column_icon == "check" %}
-                              {% if value_icon_check != blank %}
-                                <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
-                              {% else %}
-                                <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
-                              {% endif %}
-                            {% elsif block.settings.third_column_icon == "cross" %}
-                              {% if value_icon_cross != blank %}
-                                <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
-                              {% else %}
-                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
-                              {% endif %}
-                            {% endif %}
-                          {% endif %}
-                        </div>
-                      {% endif %}
-                      {% if block.settings.third_column != blank %}
-                        <p class="comparison-value-{{ section.id }}">{{ block.settings.third_column }}</p>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                </div>
-              {% endif %}
-            {% endfor %}
+                {% endif %}
+                <{% if first_heading_url != blank %}a{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ first_heading }}</{% if first_heading_url != blank %}a{% else %}h3{% endif %}>                  
+              </div>
+            {% endif %}
+            {% if table_columns > 1 and second_heading != blank %}
+              <div class="comparison-item-{{ section.id }}">   
+                <{% if second_heading_url != blank %}a href="{{ second_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">                     
+                  {% if second_heading_image != blank %}
+                    {{ second_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}    
+                </{% if second_heading_url != blank %}a{% else %}div{% endif %}>   
+                {% if use_background_image %}
+                  <div class="comparison-item-bg-image-{{ section.id }}">
+                    <!-- 对应的 svg -->
+                  </div>
+                {% endif %}        
+                <{% if second_heading_url != blank %}a{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ second_heading }}</{% if second_heading_url != blank %}a{% else %}h3{% endif %}>                  
+              </div>
+            {% endif %}
+            {% if table_columns > 2 and third_heading != blank %}
+              <div class="comparison-item-{{ section.id }}">
+                <{% if third_heading_url != blank %}a href="{{ third_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">                
+                  {% if third_heading_image != blank %}
+                    {{ third_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {% endif %}  
+                </{% if third_heading_url != blank %}a{% else %}div{% endif %}> 
+                {% if use_background_image %}
+                  <div class="comparison-item-bg-image-{{ section.id }}">
+                    <!-- 对应的 svg -->
+                  </div>
+                {% endif %} 
+                <{% if third_heading_url != blank %}a{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ third_heading }}</{% if third_heading_url != blank %}a{% else %}h3{% endif %}>
+              </div>
+            {% endif %}
           </div>
+
+          {% for block in section.blocks %}
+            {% if block.type == 'table_row' %}
+              <div class="comparison-grid-{{ section.id }} comparison-grid-rows-{{ section.id }}">
+                <div class="comparison-item-{{ section.id }}">
+                  <h3>{{ block.settings.row_heading }}</h3>
+                </div>
+                {% if first_heading != blank or first_heading_image != blank %}
+                  <div class="comparison-item-{{ section.id }} active">
+                    {% if block.settings.first_column_image != blank or block.settings.first_column_icon != "none" %}
+                      <div class="comparison-value-icon-{{ section.id }}">
+                        {% if block.settings.first_column_image != blank %}
+                          {{ block.settings.first_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                        {% else %}
+                          {% if block.settings.first_column_icon == "check" %}
+                            {% if value_icon_check != blank %}
+                              <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
+                            {% else %}
+                              <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
+                            {% endif %}
+                          {% elsif block.settings.first_column_icon == "cross" %}
+                            {% if value_icon_cross != blank %}
+                              <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
+                            {% else %}
+                              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
+                            {% endif %}
+                          {% endif %}
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.first_column != blank %}
+                      <p class="comparison-value-{{ section.id }}">{{ block.settings.first_column }}</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if table_columns > 1 and second_heading != blank or second_heading_image != blank %}
+                  <div class="comparison-item-{{ section.id }}">
+                    {% if block.settings.second_column_image != blank or block.settings.second_column_icon != "none" %}
+                      <div class="comparison-value-icon-{{ section.id }}">
+                        {% if block.settings.second_column_image != blank %}
+                          {{ block.settings.second_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                        {% else %}
+                          {% if block.settings.second_column_icon == "check" %}
+                            {% if value_icon_check != blank %}
+                              <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
+                            {% else %}
+                              <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
+                            {% endif %}
+                          {% elsif block.settings.second_column_icon == "cross" %}
+                            {% if value_icon_cross != blank %}
+                              <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
+                            {% else %}
+                              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
+                            {% endif %}
+                          {% endif %}
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.second_column != blank %}
+                      <p class="comparison-value-{{ section.id }}">{{ block.settings.second_column }}</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if table_columns > 2 and third_heading != blank or third_heading_image != blank %}
+                  <div class="comparison-item-{{ section.id }}">
+                    {% if block.settings.third_column_image != blank or block.settings.third_column_icon != "none" %}
+                      <div class="comparison-value-icon-{{ section.id }}">
+                        {% if block.settings.third_column_image != blank %}
+                          {{ block.settings.third_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                        {% else %}
+                          {% if block.settings.third_column_icon == "check" %}
+                            {% if value_icon_check != blank %}
+                              <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
+                            {% else %}
+                              <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
+                            {% endif %}
+                          {% elsif block.settings.third_column_icon == "cross" %}
+                            {% if value_icon_cross != blank %}
+                              <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
+                            {% else %}
+                              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
+                            {% endif %}
+                          {% endif %}
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.third_column != blank %}
+                      <p class="comparison-value-{{ section.id }}">{{ block.settings.third_column }}</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
