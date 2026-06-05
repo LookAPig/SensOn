@@ -674,6 +674,192 @@
         "heading": "Engineered for Sensation"
       }
     },
+    "ss_comparison_table_22_Uhm4pg": {
+      "type": "ss-comparison-table-22",
+      "blocks": {
+        "heading_LCcRW3": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p><strong>US vs Traditional</strong></p>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 22,
+            "heading_size_mobile": 20,
+            "heading_height": 100,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#121212"
+          }
+        },
+        "text_jzp8kU": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Not overhyped or overpriced. Just the best vibes one can get.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 18,
+            "text_size_mobile": 16,
+            "text_height": 90,
+            "text_mt": 0,
+            "text_mt_mobile": 0,
+            "text_color": "#121212"
+          }
+        },
+        "table_row_UQcyJE": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Triple Stim",
+            "first_column": "3 in 1, hands-free, story-adaptive",
+            "first_column_icon": "none",
+            "second_column": "Single motor, no coordination",
+            "second_column_icon": "none",
+            "third_column": "",
+            "third_column_icon": "none"
+          }
+        },
+        "table_row_wUGCqE": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Audio Sync",
+            "first_column": "Low-latency, voice-to-pulse",
+            "first_column_icon": "none",
+            "second_column": "No audio response",
+            "second_column_icon": "none",
+            "third_column": "",
+            "third_column_icon": "cross"
+          }
+        },
+        "table_row_4YfA3r": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Orgasm Quality",
+            "first_column": "Deeper, more intenseorgasms",
+            "first_column_icon": "none",
+            "second_column": "Monotonous, numbing",
+            "second_column_icon": "none",
+            "third_column": "",
+            "third_column_icon": "cross"
+          }
+        },
+        "table_row_abMwfE": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Sensation Type",
+            "first_column": "Touch-free, adaptive pulses",
+            "first_column_icon": "none",
+            "second_column": "Direct vibration only",
+            "second_column_icon": "none",
+            "third_column": "",
+            "third_column_icon": "cross"
+          }
+        },
+        "table_row_iDxGyh": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Discreet Design",
+            "first_column": "",
+            "first_column_icon": "check",
+            "second_column": "",
+            "second_column_icon": "cross",
+            "third_column": "",
+            "third_column_icon": "cross"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LCcRW3",
+        "text_jzp8kU",
+        "table_row_UQcyJE",
+        "table_row_wUGCqE",
+        "table_row_4YfA3r",
+        "table_row_abMwfE",
+        "table_row_iDxGyh"
+      ],
+      "name": "US vs Traditional ",
+      "settings": {
+        "content_max_width": 40,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "table_columns": 2,
+        "table_radius": 20,
+        "table_mt": 0,
+        "table_mt_mobile": 0,
+        "table_column_border_thickness": 2,
+        "first_heading": "SensOn S1",
+        "first_heading_image": "shopify://shop_images/20260312-095836_1.png",
+        "first_heading_url": "",
+        "second_heading": "Traditional",
+        "second_heading_image": "shopify://shop_images/20260603-165846.png",
+        "second_heading_url": "",
+        "third_heading": "Other 2",
+        "third_heading_url": "",
+        "heading_image_size": 100,
+        "heading_image_size_mobile": 100,
+        "heading_image_radius": 0,
+        "heading_image_border_thickness": 0,
+        "use_background_image": false,
+        "column_heading_custom": false,
+        "column_heading_font": "cabin_n4",
+        "column_heading_size": 18,
+        "column_heading_size_mobile": 15,
+        "column_heading_height": 150,
+        "column_heading_align": "center",
+        "column_heading_align_mobile": "center",
+        "column_heading_padding_horizontal": 0,
+        "column_heading_padding_horizontal_mobile": 0,
+        "column_heading_padding_vertical": 0,
+        "column_heading_padding_vertical_mobile": 8,
+        "row_padding_horizontal": 0,
+        "row_padding_horizontal_mobile": 0,
+        "row_padding_vertical": 24,
+        "row_padding_vertical_mobile": 24,
+        "row_border_thickness": 1,
+        "row_heading_custom": false,
+        "row_heading_font": "assistant_n4",
+        "row_heading_size": 18,
+        "row_heading_size_mobile": 15,
+        "row_heading_height": 150,
+        "value_custom": false,
+        "value_font": "assistant_n4",
+        "value_size": 18,
+        "value_size_mobile": 15,
+        "value_height": 150,
+        "value_icon_size": 24,
+        "value_icon_size_mobile": 24,
+        "column_heading_active_color": "#121212",
+        "value_active_color": "#f187eb",
+        "table_column_active_bg_color": "#fff5ff",
+        "table_bg_image_active_color": "#fff5ff",
+        "table_column_active_border_color": "#f187eb",
+        "column_heading_color": "#121212",
+        "value_color": "#757575",
+        "table_column_bg_color": "#ffffff",
+        "table_bg_image_color": "#c7c7c7",
+        "table_column_border_color": "#757575",
+        "heading_image_border_color": "#121212",
+        "row_heading_color": "#121212",
+        "row_heading_border_color": "#121212",
+        "value_icon_active_color": "#6cb324",
+        "value_icon_color": "#ff1616",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#757575",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
     "1777538267162d7a7c": {
       "type": "apps",
       "blocks": {
@@ -750,229 +936,6 @@
       "settings": {
         "heading": "How to Use"
       }
-    },
-    "ss_comparison_table_22_Uhm4pg": {
-      "type": "ss-comparison-table-22",
-      "blocks": {
-        "heading_LCcRW3": {
-          "type": "heading",
-          "disabled": true,
-          "settings": {
-            "heading": "<p><strong>US vs Traditional</strong></p>",
-            "heading_custom": false,
-            "heading_font": "josefin_sans_n4",
-            "heading_size": 22,
-            "heading_size_mobile": 20,
-            "heading_height": 100,
-            "heading_mt": 0,
-            "heading_mt_mobile": 0,
-            "heading_color": "#121212"
-          }
-        },
-        "text_jzp8kU": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "<p>Not overhyped or overpriced. Just the best vibes one can get.</p>",
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
-            "text_size": 18,
-            "text_size_mobile": 16,
-            "text_height": 90,
-            "text_mt": 0,
-            "text_mt_mobile": 0,
-            "text_color": "#121212"
-          }
-        },
-        "table_row_UQcyJE": {
-          "type": "table_row",
-          "settings": {
-            "row_heading": "Triple Stim",
-            "first_column": "3 in 1, hands-free, story-adaptive",
-            "first_column_icon": "none",
-            "second_column": "Single motor, no coordination",
-            "second_column_icon": "none",
-            "third_column": "",
-            "third_column_icon": "none",
-            "fourth_column": "",
-            "fourth_column_icon": "cross",
-            "fifth_column": "",
-            "fifth_column_icon": "cross",
-            "sixth_column": "",
-            "sixth_column_icon": "cross"
-          }
-        },
-        "table_row_wUGCqE": {
-          "type": "table_row",
-          "settings": {
-            "row_heading": "Audio Sync",
-            "first_column": "Low-latency, voice-to-pulse",
-            "first_column_icon": "none",
-            "second_column": "No audio response",
-            "second_column_icon": "none",
-            "third_column": "",
-            "third_column_icon": "cross",
-            "fourth_column": "",
-            "fourth_column_icon": "cross",
-            "fifth_column": "",
-            "fifth_column_icon": "cross",
-            "sixth_column": "",
-            "sixth_column_icon": "cross"
-          }
-        },
-        "table_row_4YfA3r": {
-          "type": "table_row",
-          "settings": {
-            "row_heading": "Orgasm Quality",
-            "first_column": "Deeper, more intenseorgasms",
-            "first_column_icon": "none",
-            "second_column": "Monotonous, numbing",
-            "second_column_icon": "none",
-            "third_column": "",
-            "third_column_icon": "cross",
-            "fourth_column": "",
-            "fourth_column_icon": "cross",
-            "fifth_column": "",
-            "fifth_column_icon": "cross",
-            "sixth_column": "",
-            "sixth_column_icon": "cross"
-          }
-        },
-        "table_row_abMwfE": {
-          "type": "table_row",
-          "settings": {
-            "row_heading": "Sensation Type",
-            "first_column": "Touch-free, adaptive pulses",
-            "first_column_icon": "none",
-            "second_column": "Direct vibration only",
-            "second_column_icon": "none",
-            "third_column": "",
-            "third_column_icon": "cross",
-            "fourth_column": "",
-            "fourth_column_icon": "cross",
-            "fifth_column": "",
-            "fifth_column_icon": "cross",
-            "sixth_column": "",
-            "sixth_column_icon": "cross"
-          }
-        },
-        "table_row_iDxGyh": {
-          "type": "table_row",
-          "settings": {
-            "row_heading": "Discreet Design",
-            "first_column": "",
-            "first_column_icon": "check",
-            "second_column": "",
-            "second_column_icon": "cross",
-            "third_column": "",
-            "third_column_icon": "cross",
-            "fourth_column": "",
-            "fourth_column_icon": "cross",
-            "fifth_column": "",
-            "fifth_column_icon": "cross",
-            "sixth_column": "",
-            "sixth_column_icon": "cross"
-          }
-        }
-      },
-      "block_order": [
-        "heading_LCcRW3",
-        "text_jzp8kU",
-        "table_row_UQcyJE",
-        "table_row_wUGCqE",
-        "table_row_4YfA3r",
-        "table_row_abMwfE",
-        "table_row_iDxGyh"
-      ],
-      "name": "US vs Traditional ",
-      "settings": {
-        "content_max_width": 40,
-        "content_align": "left",
-        "content_align_mobile": "left",
-        "table_columns": 2,
-        "table_radius": 20,
-        "table_mt": 0,
-        "table_mt_mobile": 0,
-        "table_column_border_thickness": 2,
-        "first_heading": "SensOn S1",
-        "first_heading_image": "shopify://shop_images/20260312-095836_1.png",
-        "first_heading_url": "",
-        "second_heading": "Traditional",
-        "second_heading_image": "shopify://shop_images/20260603-165846.png",
-        "second_heading_url": "",
-        "third_heading": "Other 2",
-        "third_heading_url": "",
-        "fourth_heading": "Other 3",
-        "fourth_heading_url": "",
-        "fifth_heading": "Other 4",
-        "fifth_heading_url": "",
-        "sixth_heading": "Other 5",
-        "sixth_heading_url": "",
-        "heading_image_size": 100,
-        "heading_image_size_mobile": 100,
-        "heading_image_radius": 0,
-        "heading_image_border_thickness": 0,
-        "use_background_image": false,
-        "column_heading_custom": false,
-        "column_heading_font": "assistant_n4",
-        "column_heading_size": 18,
-        "column_heading_size_mobile": 15,
-        "column_heading_height": 150,
-        "column_heading_align": "center",
-        "column_heading_align_mobile": "center",
-        "column_heading_padding_horizontal": 0,
-        "column_heading_padding_horizontal_mobile": 0,
-        "column_heading_padding_vertical": 0,
-        "column_heading_padding_vertical_mobile": 8,
-        "row_padding_horizontal": 4,
-        "row_padding_horizontal_mobile": 4,
-        "row_padding_vertical": 24,
-        "row_padding_vertical_mobile": 24,
-        "row_border_thickness": 1,
-        "row_heading_custom": false,
-        "row_heading_font": "assistant_n4",
-        "row_heading_size": 18,
-        "row_heading_size_mobile": 15,
-        "row_heading_height": 150,
-        "value_custom": false,
-        "value_font": "assistant_n4",
-        "value_size": 18,
-        "value_size_mobile": 15,
-        "value_height": 150,
-        "value_icon_size": 24,
-        "value_icon_size_mobile": 24,
-        "column_heading_active_color": "#121212",
-        "value_active_color": "#f187eb",
-        "table_column_active_bg_color": "#fff5ff",
-        "table_bg_image_active_color": "#fff5ff",
-        "table_column_active_border_color": "#f187eb",
-        "column_heading_color": "#121212",
-        "value_color": "#757575",
-        "table_column_bg_color": "#ffffff",
-        "table_bg_image_color": "#c7c7c7",
-        "table_column_border_color": "#757575",
-        "heading_image_border_color": "#121212",
-        "row_heading_color": "#121212",
-        "row_heading_border_color": "#121212",
-        "value_icon_active_color": "#6cb324",
-        "value_icon_color": "#ff1616",
-        "background_color": "#ffffff",
-        "background_gradient": "",
-        "border_color": "#757575",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "margin_horizontal": 0,
-        "margin_horizontal_mobile": 0,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "padding_horizontal": 5,
-        "padding_horizontal_mobile": 1.5,
-        "full_width": false,
-        "content_width": 1200,
-        "border_thickness": 0,
-        "section_radius": 0,
-        "lazy": true
-      }
     }
   },
   "order": [
@@ -984,8 +947,8 @@
     "user_saying_jXxM9p",
     "scroll_images_baNjt4",
     "scroll_images_TjAexy",
+    "ss_comparison_table_22_Uhm4pg",
     "1777538267162d7a7c",
-    "how_works_aErNkp",
-    "ss_comparison_table_22_Uhm4pg"
+    "how_works_aErNkp"
   ]
 }
