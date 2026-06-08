@@ -123,7 +123,7 @@
         "text_VcpKPp": {
           "type": "text",
           "settings": {
-            "text": "<p>Where bionic innovation meets the soul of AI. Hands-free and fully immersed, 500+ virtual companions whisper in your ear. Whether driving the story forward or responding to your voice and breath, the device syncs in real-time, blurring the line between imagination and reality. Engineered from a female perspective with triple-zone sensory resonance, this is your ultimate, hyper-personalized audio escape.</p><ul><li>Available now on the App Store. Web version expected to launch in mid-July.</li><li>Includes 7-Day Free Trial (Plans from $9.99/mo after)</li></ul>"
+            "text": "<p>Where bionic innovation meets the soul of AI. Fully hands-free, the device syncs in real-time with your voice, breath, and interactive stories. Engineered from a female perspective with triple-zone sensory resonance, it brings 500+ virtual companions directly to your ear.<br/>📱 App Store: Available now | Web: Coming mid-July. <br/>🎁 Bonus: Includes 7-Day Free Trial (Plans from $9.99/mo after)</p>"
           }
         },
         "icons_with_text_ANpmKR": {
@@ -197,6 +197,7 @@
         },
         "image_UHJ7Gd": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/img_v3_02128_f7aa180e-3b89-474f-a9db-9a107582a0cg.png",
             "alignment": "left",
@@ -239,11 +240,11 @@
             "creator_quote": "SensOn is not just a chat bot online that you chat to and fall in love with and it's also not just a vibrator it's mixed between the two!!",
             "creator_avatar": "shopify://shop_images/channels4_profile.jpg",
             "creator_name": "Dr. Tara",
-            "creator_credentials": "Sex and relationship expert, Tenured professor, Author, TV host, 7.36M Subscribers",
-            "creator_2_quote": "Girls!! I’m LIVING for this kind of technological revolution!!SensOn S1 redefines women's experience. It is an AI-powered intimate moment experience that syncs immersive audio erotica with real-time hardware response. BOUT TIME!!",
+            "creator_credentials": "Sex and relationship expert, Tenured professor, Author, TV host",
+            "creator_2_quote": "Clinically, female satisfaction requires multi-zone mind-body resonance. SensOn is a breakthrough: syncing AI audio with physical stimulation to activate clitoral, vaginal, breast pathways, engaging cortex and body for deeply immersive complete experience.",
             "creator_2_avatar": "shopify://shop_images/f794041b-7bc1-49bb-a7f4-de4b7a7421e3.png",
-            "creator_2_name": "Dr. Vivi",
-            "creator_2_credentials": "OB/GYN, Bestselling author , Sex educator, 11.3M Subscribers",
+            "creator_2_name": "Dr. Emily Sterling",
+            "creator_2_credentials": "Clinical Sexologist & Bestselling Author",
             "how_heading": "Simple 5-Step Process",
             "how_step_1_title": "Download, prepare and power on",
             "how_step_1_desc": "Download the SensOn App and turn on Bluetooth. Open the Charging Case and remove the components. Then press and hold the Core power button to turn on. The device enters standby mode.",
@@ -432,25 +433,11 @@
     "user_saying_jXxM9p": {
       "type": "user-saying",
       "blocks": {
-        "creator_slide_H7JpkX": {
-          "type": "creator_slide",
-          "disabled": true,
-          "settings": {
-            "tags": "AI-assisted\nIntense orgasm\nLong lasting",
-            "quote": "",
-            "avatar": "shopify://shop_images/channels4_profile.jpg",
-            "creator_name": "Dr. Tara",
-            "creator_desc": "sex and relationship expert, tenured professor, author, TV host",
-            "creator_subs": "7.33M Subscribers",
-            "profile_url": "",
-            "video_aspect_ratio": "3-4"
-          }
-        },
         "creator_slide_jVtThp": {
           "type": "creator_slide",
           "settings": {
             "tags": "AI-assisted\nIntense orgasm\nLong lasting",
-            "quote": "<p><em>“Girls!! I’m LIVING for this kind of technological revolution!!</em></p><p><em>SensOn S1 redefines women's experience. It is an AI-powered intimate moment experience that syncs immersive audio erotica with real-time hardware response. BOUT TIME!!”</em></p>",
+            "quote": "<p><em>“Girls!! I’m LIVING for this tech revolution!! SensOn is AI intimate experience syncing audio erotica with hardware response. BOUT TIME!!”</em></p>",
             "avatar": "shopify://shop_images/channels4_profile_1.jpg",
             "creator_name": "Lilly Singh",
             "creator_desc": "Actress, Self-Growth Nerd, Goofball",
@@ -464,8 +451,8 @@
         "creator_slide_WHVR3q": {
           "type": "creator_slide",
           "settings": {
-            "tags": "Pleasure-Built AI\nWomen-First Science\nArousal-Pattern Sync",
-            "quote": "<p><em>\"This is the first time I've seen AI built for pleasure, designed entirely around women's arousal patterns.\"</em></p>",
+            "tags": "Pleasure-Built AI\nWomen-First Science",
+            "quote": "<p><em>\"IT redefines women's experience. This is the first time I've seen AI built for pleasure, designed entirely around women's arousal patterns.\"</em></p>",
             "avatar": "shopify://shop_images/20260528-180022.jpg",
             "creator_name": "jamesjoseph",
             "creator_desc": "LA-based actor，Live show host",
@@ -476,29 +463,29 @@
             "video_aspect_ratio": "3-4"
           }
         },
-        "creator_slide_kpcnax": {
+        "creator_slide_exrhef": {
           "type": "creator_slide",
           "settings": {
-            "tags": "AI-Enhanced Atmosphere\nImmersive Sync \nLady-Centric",
-            "quote": "<p><em>“This might be the most futuristic thing that I have ever unboxed. It's Senson, designed completely for women, with software and hardware built together. This isn't a chatbot — it's the first AI-driven sensory experience that you can directly and physically enjoy.”</em></p>",
-            "avatar": "shopify://shop_images/img_v3_02128_8cb8096b-f8a2-40e1-859d-522a7130ba5g.jpg",
-            "creator_name": "vvaishnavi04",
-            "creator_desc": "Artist，AI enthusiast，Fashion lover",
-            "creator_subs": "694K Subscribers",
+            "tags": "real-time interaction\nModular multi-zone",
+            "quote": "<p><em>“All accessories are magnetic, like grown‑up Lego. Connect to the app, pick your content, and the character responds to you in real time!”</em></p>",
+            "avatar": "shopify://shop_images/20260525-162849.jpg",
+            "creator_name": "misskaterinar",
+            "creator_desc": "Female-focused creator",
+            "creator_subs": "21K Subscribers",
             "profile_url": "",
-            "video": "shopify://files/videos/file_v3_00128_db51e244-e376-48a8-b2ea-3003020570eg.mp4",
-            "video_cover": "shopify://shop_images/vvaishnavi04.jpg",
+            "video": "shopify://files/videos/file_v3_00128_9c5d571a-2656-4d04-861a-21317756cf6g.mp4",
+            "video_cover": "shopify://shop_images/kat.jpg",
             "video_aspect_ratio": "3-4"
           }
         },
         "creator_slide_Dzbpkt": {
           "type": "creator_slide",
           "settings": {
-            "tags": "AI Immersion Sync\nInstant Story \nTri-Sense Response",
-            "quote": "<p><em>“This is an AI fantasy software that you can actually feel. The device pairs with a premium AI character app which has synched hardware which responds to the story that you're listening to in real time.”</em></p>",
+            "tags": "Instant Story \nTri-Sense Response",
+            "quote": "<p><em>“This is an AI fantasy software that you can actually feel. The device pairs with a premium AI character app which has synched hardware.”</em></p>",
             "avatar": "shopify://shop_images/img_v3_02128_39fd11d1-6996-4767-97bc-14bbed1b4adg.jpg",
             "creator_name": "jkiillem",
-            "creator_desc": "Dancer，Performer，LGBTQ+ Creator，Multi-platform creative business presence",
+            "creator_desc": "Performer，LGBTQ+ Creator",
             "creator_subs": "150K Subscribers",
             "profile_url": "",
             "video": "shopify://files/videos/file_v3_00128_26b6c7c2-7a56-42f1-a05c-81bb7b995feg.mp4",
@@ -509,11 +496,11 @@
         "creator_slide_g8grbA": {
           "type": "creator_slide",
           "settings": {
-            "tags": "World-First AI\nLady-Centric\nViral Must-Try",
-            "quote": "<p><em>\"One of the world's FIRST AI intimate experiences. Ladies, would you try this? Unbox with us!\" </em></p>",
+            "tags": "World-First AI\nLady-Centric",
+            "quote": "<p><em>\"SensOn S1: One of the world's FIRST AI intimate experiences that redefines pleasure. Ladies, would you try this? Unbox with usand see!\" </em></p>",
             "avatar": "shopify://shop_images/20260528-180029.jpg",
             "creator_name": "theinnovatorwives",
-            "creator_desc": "Female Entrepreneurs，Leo couple，Polyamorous Union",
+            "creator_desc": "Female Entrepreneurs，Leo couple",
             "creator_subs": "80K Subscribers",
             "profile_url": "",
             "video": "shopify://files/videos/First the teaser, now we have The Goods! 😮 from @senson_official one of the worlds FIRST AI int.mp4",
@@ -521,29 +508,14 @@
             "video_aspect_ratio": "3-4"
           }
         },
-        "creator_slide_exrhef": {
-          "type": "creator_slide",
-          "settings": {
-            "tags": "real-time interaction\nModular multi-zone \nApp-connected",
-            "quote": "<p><em>“This is the first AI native intimate device for women from Senson. Inside you have the core clitoral vaginal and nipple stimulators all magnetic like grown woman Lego connect to the app pick your content and the character responds to you in real time！！”</em></p>",
-            "avatar": "shopify://shop_images/20260525-162849.jpg",
-            "creator_name": "misskaterinar",
-            "creator_desc": "Comedy skits，Female-focused content creator",
-            "creator_subs": "21K Subscribers",
-            "profile_url": "",
-            "video": "shopify://files/videos/file_v3_00128_9c5d571a-2656-4d04-861a-21317756cf6g.mp4",
-            "video_cover": "shopify://shop_images/kat.jpg",
-            "video_aspect_ratio": "3-4"
-          }
-        },
         "creator_slide_XRnUxa": {
           "type": "creator_slide",
           "settings": {
-            "tags": "Mom’s Reward\nAI Mind-Reader\nSmarter Climax",
-            "quote": "<p><em>\"Sometimes moms deserve a little AI-assisted relaxation too.The more you use it, the better it understands what you like.\"</em></p>",
+            "tags": "AI Mind-Reader\nSmarter Climax",
+            "quote": "<p><em>\"Sometimes moms deserve a little SensOnAI-assisted relaxation too. The more you use it, the better it understands what you like.\"</em></p>",
             "avatar": "shopify://shop_images/20260528-175842.jpg",
             "creator_name": "felecia.monique",
-            "creator_desc": "Single mom，Fashion enthusiast，Beauty & lifestyle content creator",
+            "creator_desc": "Beauty & lifestyle content creator",
             "creator_subs": "44K Subscribers",
             "profile_url": "",
             "video": "shopify://files/videos/Single mom life means I do everything… bills, kids, work, content… so yes, sometimes mama deserv.mp4",
@@ -551,11 +523,26 @@
             "video_aspect_ratio": "3-4"
           }
         },
+        "creator_slide_kpcnax": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "AI-Enhanced Atmosphere\nImmersive Sync",
+            "quote": "<p><em>“This might be the most futuristic thing I've unboxed — not a chatbot, but the first AI-driven sensory experience you can physically enjoy.”</em></p>",
+            "avatar": "shopify://shop_images/img_v3_02128_8cb8096b-f8a2-40e1-859d-522a7130ba5g.jpg",
+            "creator_name": "vvaishnavi04",
+            "creator_desc": "AI enthusiast，Fashion lover",
+            "creator_subs": "694K Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/file_v3_00128_db51e244-e376-48a8-b2ea-3003020570eg.mp4",
+            "video_cover": "shopify://shop_images/vvaishnavi04.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
         "creator_slide_7GVnpL": {
           "type": "creator_slide",
           "settings": {
-            "tags": "AI-Powered \nImmersive Interactive\nReal-Time Voice",
-            "quote": "<p><em>“You can interact with a fantasy that you have just by lying down… it knows what to do, creates an immersive experience.This is a physical and auditory experience so you can actually have real time voice interaction with characters of your fantasy and the device will sync with the storyline”</em></p>",
+            "tags": "Immersive Interactive\nReal-Time Voice",
+            "quote": "<p><em>“Lie down with your fantasy — it knows what to do, creating immersive physical and auditory experience with real-time voice interaction as device syncs with story.“</em></p>",
             "avatar": "shopify://shop_images/nadyneluchon.jpg",
             "creator_name": "nadyneluchon",
             "creator_desc": "Content creator，fashion enthusiast",
@@ -568,14 +555,13 @@
         }
       },
       "block_order": [
-        "creator_slide_H7JpkX",
         "creator_slide_jVtThp",
         "creator_slide_WHVR3q",
-        "creator_slide_kpcnax",
+        "creator_slide_exrhef",
         "creator_slide_Dzbpkt",
         "creator_slide_g8grbA",
-        "creator_slide_exrhef",
         "creator_slide_XRnUxa",
+        "creator_slide_kpcnax",
         "creator_slide_7GVnpL"
       ],
       "name": "creator-buzz-slider",
