@@ -1,1 +1,130 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"color_scheme":"scheme-2","show_title":true,"content_width":"md"}},"image_with_text_overlay_nzNPrD":{"type":"image-with-text-overlay","blocks":{"subheading_V6BtEn":{"type":"subheading","disabled":true,"settings":{"text":""},"blocks":{}},"heading_3e6hPH":{"type":"heading","settings":{"text":"Your Space.\nYour Perfect Rhythm.","pc_font_size":32,"h5_font_size":25,"pc_line_height":1.2,"h5_line_height":1.2,"heading_size":"h4","html_tag":"p"},"blocks":{}},"heading_Ve3bVF":{"type":"heading","name":"t:blocks.heading.name","settings":{"text":"Meet the AI-powered companion designed to align with your senses and elevate your personal evening sanctuary.","pc_font_size":18,"h5_font_size":12,"pc_line_height":1.2,"h5_line_height":1,"heading_size":"h3","html_tag":"p"},"blocks":{}},"button_group_BneMXH":{"type":"button-group","name":"t:blocks.button_group.name","settings":{},"blocks":{"button_aadB4d":{"type":"button","settings":{"text":"Unlock Your Experience","url":"shopify:\/\/products\/senson-s1-wellness-companion","open_in_new_tab":false,"style":"solid","background":"","text_color":"#321e1e"},"blocks":{}}},"block_order":["button_aadB4d"]},"liquid_rGyYWm":{"type":"liquid","name":"t:blocks.liquid.name","disabled":true,"settings":{"liquid":"<div class=\"banner_bottoms\">\n<p>Earn up to 15% commission on every sale<\/p>\n<p>Long-term recurring subscription share<\/p>\n<\/div>"},"blocks":{}}},"block_order":["subheading_V6BtEn","heading_3e6hPH","heading_Ve3bVF","button_group_BneMXH","liquid_rGyYWm"],"name":"t:sections.image_with_text_overlay.name","settings":{"color_scheme":"scheme-7","allow_transparent_header":false,"image_size":"fill","image":"shopify:\/\/shop_images\/pc.jpg","mobile_image":"shopify:\/\/shop_images\/h5.jpg","overlay_color":"#000000","overlay_opacity":20,"enable_sticky_content":false,"content_width":"md","desktop_text_position":"sm:place-self-center","mobile_text_position":"place-self-center"}}},"order":["main","image_with_text_overlay_nzNPrD"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-2",
+        "show_title": true,
+        "content_width": "md"
+      }
+    },
+    "image_with_text_overlay_nzNPrD": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_V6BtEn": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "text": ""
+          },
+          "blocks": {}
+        },
+        "heading_3e6hPH": {
+          "type": "heading",
+          "settings": {
+            "text": "Your Space.\nYour Perfect Rhythm.",
+            "pc_font_size": 32,
+            "h5_font_size": 25,
+            "pc_line_height": 1.2,
+            "h5_line_height": 1.2,
+            "heading_size": "h4",
+            "html_tag": "p"
+          },
+          "blocks": {}
+        },
+        "heading_Ve3bVF": {
+          "type": "heading",
+          "name": "t:blocks.heading.name",
+          "settings": {
+            "text": "Meet the AI-powered companion designed to align with your senses and elevate your personal evening sanctuary.",
+            "pc_font_size": 18,
+            "h5_font_size": 12,
+            "pc_line_height": 1.2,
+            "h5_line_height": 1,
+            "heading_size": "h3",
+            "html_tag": "p"
+          },
+          "blocks": {}
+        },
+        "button_group_BneMXH": {
+          "type": "button-group",
+          "name": "t:blocks.button_group.name",
+          "settings": {},
+          "blocks": {
+            "button_aadB4d": {
+              "type": "button",
+              "settings": {
+                "text": "Unlock Your Experience",
+                "url": "shopify://products/senson-s1-wellness-companion",
+                "open_in_new_tab": false,
+                "style": "solid",
+                "background": "",
+                "text_color": "#321e1e"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "button_aadB4d"
+          ]
+        },
+        "liquid_rGyYWm": {
+          "type": "liquid",
+          "name": "t:blocks.liquid.name",
+          "disabled": true,
+          "settings": {
+            "liquid": "<div class=\"banner_bottoms\">\n<p>Earn up to 15% commission on every sale</p>\n<p>Long-term recurring subscription share</p>\n</div>"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "subheading_V6BtEn",
+        "heading_3e6hPH",
+        "heading_Ve3bVF",
+        "button_group_BneMXH",
+        "liquid_rGyYWm"
+      ],
+      "name": "t:sections.image_with_text_overlay.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "allow_transparent_header": false,
+        "image_size": "fill",
+        "image": "shopify://shop_images/pc.jpg",
+        "mobile_image": "shopify://shop_images/h5.jpg",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "enable_sticky_content": false,
+        "content_width": "md",
+        "desktop_text_position": "sm:place-self-center",
+        "mobile_text_position": "place-self-center"
+      }
+    },
+    "custom_liquid_LPXRCe": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom_liquid.name",
+      "settings": {
+        "color_scheme": "",
+        "liquid": "{% render 'url-params-forwarder', init: true, selector: '.button' %}",
+        "text_alignment": "left",
+        "add_vertical_spacing": true,
+        "add_horizontal_spacing": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_nzNPrD",
+    "custom_liquid_LPXRCe"
+  ]
+}
