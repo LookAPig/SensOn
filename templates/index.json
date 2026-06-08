@@ -384,24 +384,12 @@
     "reviews_49wHXX": {
       "type": "reviews",
       "blocks": {
-        "testimonial_tbPMH4": {
-          "type": "testimonial",
-          "disabled": true,
-          "settings": {
-            "comment": "<p>Share what creators said about your product.</p>",
-            "stars": 5,
-            "avatar": "shopify://shop_images/channels4_profile.jpg",
-            "creator_name": "Dr. Tara",
-            "creator_desc": "sex and relationship expert, tenured professor, author, TV host",
-            "creator_subs": "7.33M Subscribers"
-          }
-        },
         "testimonial_LyiQeD": {
           "type": "testimonial",
           "settings": {
             "cover": "shopify://shop_images/01_3d08d2d1-de5c-4855-89e0-7335f38087f1.jpg",
             "video": "shopify://files/videos/ea34a6af4103371d4ec3ea635775ed4d.mp4",
-            "comment": "<p><em>SensOn S1 redefines women's experience. It is an AI-powered intimate moment experience that syncs immersive audio erotica with real-time hardware response. BOUT TIME!!</em></p>",
+            "comment": "<p><em>“Girls!! I’m LIVING for this kind of technological revolution!!SensOn is an AI-powered intimate moment experience that syncs immersive audio erotica with real-time hardware response. BOUT TIME!!”</em></p>",
             "stars": 5,
             "avatar": "shopify://shop_images/541f1750-8091-4b44-b68c-6c61224991dc.png",
             "creator_name": "Lilly Singh",
@@ -414,7 +402,7 @@
           "settings": {
             "cover": "shopify://shop_images/02_17fe275b-19d7-4399-bc48-8cd7b6a6ff19.jpg",
             "video": "shopify://files/videos/snaptik.monster_d6b968db_57f3_499c_9f4c_c508470bffbf.mp4",
-            "comment": "<p><em>\"This is the first time I've seen AI built for pleasure, designed entirely around women's arousal patterns.\"</em></p>",
+            "comment": "<p><em>\"SensOn S1 redefines women's experience. This is the first time I've seen AI built for pleasure, designed entirely around women's arousal patterns.\"</em></p>",
             "stars": 5,
             "avatar": "shopify://shop_images/20260528-180022.jpg",
             "creator_name": "jamesjoseph",
@@ -489,7 +477,6 @@
         }
       },
       "block_order": [
-        "testimonial_tbPMH4",
         "testimonial_LyiQeD",
         "testimonial_yn4fjr",
         "testimonial_yrVtLm",
