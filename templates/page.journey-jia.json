@@ -112,6 +112,7 @@
     },
     "custom_liquid_LPXRCe": {
       "type": "custom-liquid",
+      "custom_css": [],
       "name": "t:sections.custom_liquid.name",
       "settings": {
         "color_scheme": "",
