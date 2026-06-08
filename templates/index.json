@@ -474,6 +474,19 @@
             "creator_desc": "Beauty & lifestyle content creator",
             "creator_subs": "44K Subscribers"
           }
+        },
+        "testimonial_QrNbYf": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/6_2_4.jpg",
+            "video": "shopify://files/videos/6月2日 (4)-1 (1) (1).mp4",
+            "comment": "<p><em>“You can interact with a fantasy that you have just by lying down… it knows what to do, creates an immersive experience.This is a physical and auditory experience so you can actually have real time voice interaction with characters of your fantasy and the device will sync with the storyline”</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/nadyneluchon.jpg",
+            "creator_name": "nadyneluchon",
+            "creator_desc": "Content creator，fashion enthusiast",
+            "creator_subs": "84K Subscribers"
+          }
         }
       },
       "block_order": [
@@ -483,7 +496,8 @@
         "testimonial_FTcrGb",
         "testimonial_Vzm4HY",
         "testimonial_fqkBNz",
-        "testimonial_a9RQHa"
+        "testimonial_a9RQHa",
+        "testimonial_QrNbYf"
       ],
       "name": "what are creators saying",
       "settings": {
