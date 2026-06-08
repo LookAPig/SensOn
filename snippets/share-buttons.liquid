@@ -3,7 +3,8 @@
 SHARE BUTTONS
 ----------------------------------------------------------------------------------------------------------------------
 
-Generate share buttons for Twitter, Facebook, Pinterest and email
+Generate share buttons for Facebook, X, Email, TikTok and Instagram.
+TikTok / Instagram links are read from theme social media settings.
 
 ********************************************
 Supported variables
@@ -14,40 +15,43 @@ Supported variables
 * description: the description of the content to share for Pinterest. It is truncated automatically to 200 characters
 {%- endcomment -%}
 
-{%- assign url = request.origin | append: url -%}
+{%- assign share_url = request.origin | append: url -%}
 
 <ul class="share-buttons unstyled-list" role="list">
   <li class="share-buttons__item branding-colors--facebook">
-    {%- capture share_url -%}https://www.facebook.com/sharer.php?u={{ url }}{%- endcapture -%}
-    <a href="{{ share_url }}" aria-label="{{ 'general.social.share_on' | t: social_media: 'Facebook' }}" target="_blank">
+    {%- capture facebook_share_url -%}https://www.facebook.com/sharer.php?u={{ share_url }}{%- endcapture -%}
+    <a href="{{ facebook_share_url }}" aria-label="{{ 'general.social.share_on' | t: social_media: 'Facebook' }}" target="_blank" rel="noopener">
       {%- render 'icon' with 'facebook' -%}
     </a>
   </li>
 
   <li class="share-buttons__item branding-colors--twitter">
-    {%- capture share_url -%}https://twitter.com/share?{% if title != blank %}text={{ title | url_param_escape }}&{% endif %}url={{ url }}{%- endcapture -%}
-    <a href="{{ share_url }}" aria-label="{{ 'general.social.share_on' | t: social_media: 'Twitter' }}" target="_blank">
+    {%- capture twitter_share_url -%}https://twitter.com/share?{% if title != blank %}text={{ title | url_param_escape }}&{% endif %}url={{ share_url }}{%- endcapture -%}
+    <a href="{{ twitter_share_url }}" aria-label="{{ 'general.social.share_on' | t: social_media: 'X' }}" target="_blank" rel="noopener">
       {%- render 'icon' with 'twitter' -%}
     </a>
   </li>
 
   <li class="share-buttons__item branding-colors--email">
-    {%- capture share_url -%}mailto:?&subject={{ title | escape }}&body={{ url }}{%- endcapture -%}
-    <a href="{{ share_url }}" aria-label="{{ 'general.social.share_email' | t }}" target="_blank">
+    {%- capture email_share_url -%}mailto:?&subject={{ title | escape }}&body={{ share_url }}{%- endcapture -%}
+    <a href="{{ email_share_url }}" aria-label="{{ 'general.social.share_email' | t }}" target="_blank" rel="noopener">
       {%- render 'icon' with 'email-social' -%}
     </a>
   </li>
 
-  {%- comment -%} --- 新增项放在最后 --- {%- endcomment -%}
-  <li class="share-buttons__item branding-colors--tiktok">
-    <a href="https://www.tiktok.com/@senson_official" target="_blank">
-      {%- render 'icon' with 'tiktok' -%}
-    </a>
-  </li>
+  {%- if settings.social_tiktok != blank or shop.brand.metafields.social_links.tiktok != blank -%}
+    <li class="share-buttons__item branding-colors--tiktok">
+      <a href="{{ settings.social_tiktok | default: shop.brand.metafields.social_links.tiktok }}" aria-label="{{ 'general.social.follow_on' | t: social_media: 'TikTok' }}" target="_blank" rel="noopener">
+        {%- render 'icon' with 'tiktok' -%}
+      </a>
+    </li>
+  {%- endif -%}
 
-  <li class="share-buttons__item branding-colors--instagram">
-    <a href="https://www.instagram.com/senson_official/" target="_blank">
-      {%- render 'icon' with 'instagram' -%}
-    </a>
-  </li>
+  {%- if settings.social_instagram != blank or shop.brand.metafields.social_links.instagram != blank -%}
+    <li class="share-buttons__item branding-colors--instagram">
+      <a href="{{ settings.social_instagram | default: shop.brand.metafields.social_links.instagram }}" aria-label="{{ 'general.social.follow_on' | t: social_media: 'Instagram' }}" target="_blank" rel="noopener">
+        {%- render 'icon' with 'instagram' -%}
+      </a>
+    </li>
+  {%- endif -%}
 </ul>

@@ -255,7 +255,6 @@
             "how_step_4_desc": "Place the Nipple Stimulators on the nipples.Use the clasp to adjust tension for a secure, comfortable fit.",
             "how_step_5_title": "Connect and play",
             "how_step_5_desc": "Follow the on-screen steps to connect via Bluetooth.Choose your erotic audio and start. During the experience, you can interact with AI characters anytime by voice or text.",
-            "specs_content": "<p><strong>Materials:</strong> FDA-grade, REACH-compliant body-safe silicone & ABS <br/><strong>Waterproof Rating: </strong>IPX6 (Splash-proof; do not submerge) <br/><strong>Connectivity:</strong> Bluetooth <br/><strong>Battery Life:</strong> Up to 90 mins (at max intensity) <br/><strong>Charging: </strong>USB-C (Charging case included) <br/><strong>Charging Time:</strong> ~2 hours <br/><strong>Noise Level:</strong> &lt;55 dB (Whisper-quiet) <br/><strong>Weight:</strong> Unit: 513g (Includes 2x Nipple Stimulators, 56g) | Total: 891g</p>",
             "tech_heading": "",
             "tech_step_1_title": "Real-Time Audio Decoding",
             "tech_step_1_desc": "Driven by a low-latency connection, SensOn S1 instantly decodes companion app audio and AI voices, seamlessly transforming sound frequencies into perfectly synchronized physical responses.",
@@ -861,6 +860,17 @@
         "lazy": true
       }
     },
+    "custom_liquid_ET7DEq": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom_liquid.name",
+      "settings": {
+        "color_scheme": "",
+        "liquid": "<div\n\tclass=\"yotpo yotpo-pictures-widget\"\n\tdata-gallery-id=\"69fc5df4c818fb7d7e46e582\">\n</div>",
+        "text_alignment": "left",
+        "add_vertical_spacing": true,
+        "add_horizontal_spacing": true
+      }
+    },
     "1777538267162d7a7c": {
       "type": "apps",
       "blocks": {
@@ -949,6 +959,7 @@
     "scroll_images_baNjt4",
     "scroll_images_TjAexy",
     "ss_comparison_table_22_Uhm4pg",
+    "custom_liquid_ET7DEq",
     "1777538267162d7a7c",
     "how_works_aErNkp"
   ]

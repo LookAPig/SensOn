@@ -12,6 +12,7 @@
 
   assign color_tab_text_inactive = block.settings.color_tab_text_inactive | default: color_tab_pink
   assign color_tab_text_active = block.settings.color_tab_text_active | default: color_tab_pink
+  assign specs_json_raw = block.settings.specs_json | strip
 -%}
 
 <div id="pdp-wh-{{ block.id }}" class="pdp-info-tabs" {{ block.shopify_attributes }}>
@@ -215,33 +216,40 @@
       color: #333;
     }
 
-    /* Specifications 富文本样式 */
-    #pdp-wh-{{ block.id }} .pdp-plain-panel {
+    /* Specifications 两列布局 */
+    #pdp-wh-{{ block.id }} .pdp-specs-panel {
       background: var(--pdp-tab-card-bg);
       border-radius: 12px;
       padding: 20px 18px;
     }
 
-    #pdp-wh-{{ block.id }} .pdp-plain-text {
-      font-size: 14px;
-      line-height: 1.5;
+    #pdp-wh-{{ block.id }} .pdp-specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 40px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-spec-item {
+      min-width: 0;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-spec-label {
+      margin: 0 0 4px;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.35;
       color: #333;
     }
 
-    #pdp-wh-{{ block.id }} .pdp-plain-text p {
-      margin: 0 0 1em;
-    }
-
-    #pdp-wh-{{ block.id }} .pdp-plain-text p:last-child {
-      margin-bottom: 0;
-    }
-
-    #pdp-wh-{{ block.id }} .pdp-plain-text strong {
+    #pdp-wh-{{ block.id }} .pdp-spec-value {
+      margin: 0;
+      font-size: 16px;
       font-weight: 700;
+      line-height: 1.35;
       color: #000;
     }
 
-    #pdp-wh-{{ block.id }} .pdp-plain-placeholder {
+    #pdp-wh-{{ block.id }} .pdp-specs-placeholder {
       margin: 0;
       font-size: 14px;
       line-height: 1.5;
@@ -260,6 +268,15 @@
         font-size: 12px;
         padding: 8px 6px;
         line-height: 1.2;
+      }
+
+      #pdp-wh-{{ block.id }} .pdp-specs-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      #pdp-wh-{{ block.id }} .pdp-spec-value {
+        font-size: 15px;
       }
     }
   </style>
@@ -449,7 +466,7 @@
       </div>
     </div>
 
-    {%- comment -%} Tab 2: Specifications (Rich text) {%- endcomment -%}
+    {%- comment -%} Tab 2: Specifications (JSON 两列) {%- endcomment -%}
     <div
       class="pdp-info-tabs__panel"
       role="tabpanel"
@@ -457,13 +474,12 @@
       data-index="2"
       hidden
     >
-      <div class="pdp-plain-panel">
-        {%- if block.settings.specs_content != blank -%}
-          <div class="pdp-plain-text">
-            {{ block.settings.specs_content }}
-          </div>
+      <div class="pdp-specs-panel">
+        {%- if specs_json_raw != blank -%}
+          <script type="application/json" data-pdp-specs-json>{{ specs_json_raw }}</script>
+          <div class="pdp-specs-grid" data-pdp-specs-grid></div>
         {%- else -%}
-          <p class="pdp-plain-placeholder">{{ tab_specs | escape }} — content coming soon.</p>
+          <p class="pdp-specs-placeholder">{{ tab_specs | escape }} — content coming soon.</p>
         {%- endif -%}
       </div>
     </div>
@@ -522,29 +538,94 @@
 
   <script>
     (function () {
-      var id = '{{ block.id }}';
-      var root = document.getElementById('pdp-wh-' + id);
+      var id = "{{ block.id }}";
+      var root = document.getElementById("pdp-wh-" + id);
       if (!root) return;
 
       var tabs = root.querySelectorAll('[data-pdp-info-tab="' + id + '"]');
       var panels = root.querySelectorAll('[data-pdp-info-panel="' + id + '"]');
 
+      function escapeHtml(text) {
+        return String(text)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function normalizeSpecItem(raw) {
+        if (!raw || typeof raw !== "object") return null;
+
+        var label = raw.label || raw.name || "";
+        var value = raw.value || raw.text || "";
+
+        if (!label && !value) return null;
+
+        return { label: label, value: value };
+      }
+
+      function renderSpecsGrid() {
+        var jsonEl = root.querySelector("[data-pdp-specs-json]");
+        var gridEl = root.querySelector("[data-pdp-specs-grid]");
+        if (!jsonEl || !gridEl) return;
+
+        var items;
+
+        try {
+          items = JSON.parse(jsonEl.textContent.trim());
+        } catch (error) {
+          console.warn("[pdp-info-tabs] Invalid specs JSON:", error);
+          return;
+        }
+
+        if (!Array.isArray(items)) {
+          console.warn("[pdp-info-tabs] Specifications JSON must be an array.");
+          return;
+        }
+
+        items = items.map(normalizeSpecItem).filter(Boolean);
+
+        if (!items.length) return;
+
+        gridEl.innerHTML = "";
+
+        items.forEach(function (item) {
+          var specItem = document.createElement("div");
+          specItem.className = "pdp-spec-item";
+
+          var html = "";
+
+          if (item.label) {
+            html += '<p class="pdp-spec-label">' + escapeHtml(item.label) + "</p>";
+          }
+
+          if (item.value) {
+            html += '<p class="pdp-spec-value">' + escapeHtml(item.value) + "</p>";
+          }
+
+          specItem.innerHTML = html;
+          gridEl.appendChild(specItem);
+        });
+      }
+
       function setTab(idx) {
         tabs.forEach(function (t) {
-          var i = parseInt(t.getAttribute('data-index'), 10);
-          t.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+          var i = parseInt(t.getAttribute("data-index"), 10);
+          t.setAttribute("aria-selected", i === idx ? "true" : "false");
         });
         panels.forEach(function (p) {
-          var i = parseInt(p.getAttribute('data-index'), 10);
+          var i = parseInt(p.getAttribute("data-index"), 10);
           p.hidden = i !== idx;
         });
       }
 
       tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () {
-          setTab(parseInt(tab.getAttribute('data-index'), 10) || 0);
+        tab.addEventListener("click", function () {
+          setTab(parseInt(tab.getAttribute("data-index"), 10) || 0);
         });
       });
+
+      renderSpecsGrid();
     })();
   </script>
 </div>

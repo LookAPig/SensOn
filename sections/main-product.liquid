@@ -2167,10 +2167,15 @@
       "content": "Specifications"
     },
     {
-  "type": "richtext",
-  "id": "specs_content",
-  "label": "Content (rich text, supports bold, lists, etc.)",
-  "default": "<p>Write your specifications here. You can use <strong>bold</strong> and other formatting.</p>"
+      "type": "paragraph",
+      "content": "JSON array of objects with label and value. Items render in a two-column grid, left to right, top to bottom."
+    },
+    {
+      "type": "textarea",
+      "id": "specs_json",
+      "label": "Specifications JSON",
+      "info": "Example: [{\"label\":\"Materials\",\"value\":\"Medical-grade silicone\"}]",
+      "default": "[{\"label\":\"Materials\",\"value\":\"FDA-grade, REACH-compliant body-safe silicone & ABS\"},{\"label\":\"Waterproof Rating\",\"value\":\"IPX6 (Splash-proof; do not submerge)\"},{\"label\":\"Battery Life\",\"value\":\"Up to 90 mins (at max intensity)\"},{\"label\":\"Connectivity\",\"value\":\"Bluetooth\"},{\"label\":\"Charging\",\"value\":\"USB-C (Charging case included)\"},{\"label\":\"Noise Level\",\"value\":\"<55 dB (Whisper-quiet)\"},{\"label\":\"Charging Time\",\"value\":\"~2 hours\"},{\"label\":\"Weight\",\"value\":\"Unit: 513g (Includes 2x Nipple Stimulators, 56g) | Total: 891g\"}]"
     },
    {
   "type": "header",
