@@ -1,0 +1,183 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+URL PARAMS FORWARDER
+----------------------------------------------------------------------------------------------------------------------
+
+读取当前页面 URL 参数，并在点击指定按钮跳转时拼接到目标地址。
+
+********************************************
+用法一：渲染时拼接链接（服务端）
+********************************************
+
+<a href="{% render 'url-params-forwarder', href: product.url %}">购买</a>
+
+仅转发指定参数：
+<a href="{% render 'url-params-forwarder', href: '/pages/about', param_keys: 'utm_source,utm_medium,utm_campaign' %}">关于我们</a>
+
+********************************************
+用法二：在组件中配置 JS，按选择器激活（客户端）
+********************************************
+
+自动读取当前页面全部 URL 参数，点击时拼接到目标地址；当前页面无参数则不拼接。
+
+在 Custom Liquid 等组件中引入，传入要监听的 class 或 id 选择器：
+
+{% render 'url-params-forwarder', init: true, selector: '.my-buy-button' %}
+
+多个按钮（逗号分隔多个选择器）：
+{% render 'url-params-forwarder', init: true, selector: '.btn-primary, #checkout-cta' %}
+
+HTML 示例（按钮本身不需要额外属性）：
+<a href="/products/foo" class="my-buy-button">立即购买</a>
+
+********************************************
+Supported variables
+********************************************
+
+* href: 目标地址；传入时仅输出拼接后的 URL 字符串
+* init: 设为 true 时输出点击监听脚本
+* selector: CSS 选择器（class / id / 组合），init 时必填
+* param_keys: 可选，逗号分隔的参数白名单；默认留空，自动转发当前页面全部参数
+{%- endcomment -%}
+
+{%- liquid
+  assign keys_filter = param_keys | default: '' | split: ','
+  assign filtered_query = ''
+
+  if request.query_string != blank
+    assign query_pairs = request.query_string | split: '&'
+
+    for pair in query_pairs
+      assign key_value = pair | split: '='
+      assign param_key = key_value[0]
+      assign include_param = false
+
+      if param_keys == blank
+        assign include_param = true
+      else
+        for allowed_key in keys_filter
+          assign trimmed_key = allowed_key | strip
+
+          if param_key == trimmed_key
+            assign include_param = true
+            break
+          endif
+        endfor
+      endif
+
+      if include_param
+        if filtered_query == blank
+          assign filtered_query = pair
+        else
+          assign filtered_query = filtered_query | append: '&' | append: pair
+        endif
+      endif
+    endfor
+  endif
+-%}
+
+{%- if href != blank -%}
+  {%- if filtered_query != blank -%}
+    {%- if href contains '?' -%}
+      {{- href | append: '&' | append: filtered_query -}}
+    {%- else -%}
+      {{- href | append: '?' | append: filtered_query -}}
+    {%- endif -%}
+  {%- else -%}
+    {{- href -}}
+  {%- endif -%}
+{%- elsif init and selector != blank -%}
+  <script>
+    (() => {
+      window.__urlParamsForwarderConfigs = window.__urlParamsForwarderConfigs || [];
+
+      const config = {
+        selector: {{ selector | json }},
+        paramKeys: {{ param_keys | default: '' | json }}
+      };
+
+      const isDuplicate = window.__urlParamsForwarderConfigs.some(
+        (item) => item.selector === config.selector && item.paramKeys === config.paramKeys
+      );
+
+      if (isDuplicate) {
+        return;
+      }
+
+      window.__urlParamsForwarderConfigs.push(config);
+
+      const parseAllowedKeys = (paramKeys) => {
+        if (!paramKeys) {
+          return null;
+        }
+
+        const keys = paramKeys.split(",").map((key) => key.trim()).filter(Boolean);
+
+        return keys.length ? keys : null;
+      };
+
+      const mergeParams = (targetUrl, sourceParams, allowedKeys) => {
+        sourceParams.forEach((value, key) => {
+          if (allowedKeys && !allowedKeys.includes(key)) {
+            return;
+          }
+
+          if (!targetUrl.searchParams.has(key)) {
+            targetUrl.searchParams.set(key, value);
+          }
+        });
+      };
+
+      const getNavigationLink = (element) => {
+        if (element.matches("a[href]")) {
+          return element;
+        }
+
+        return element.querySelector("a[href]");
+      };
+
+      const handleClick = (event) => {
+        if (event.defaultPrevented) {
+          return;
+        }
+
+        const sourceParams = new URLSearchParams(window.location.search);
+
+        if (!sourceParams.toString()) {
+          return;
+        }
+
+        for (const item of window.__urlParamsForwarderConfigs) {
+          const matchedElement = event.target.closest(item.selector);
+
+          if (!matchedElement) {
+            continue;
+          }
+
+          const link = getNavigationLink(matchedElement);
+
+          if (!link || !link.href) {
+            continue;
+          }
+
+          const targetUrl = new URL(link.href, window.location.origin);
+          const allowedKeys = parseAllowedKeys(item.paramKeys);
+
+          mergeParams(targetUrl, sourceParams, allowedKeys);
+
+          if (targetUrl.toString() !== link.href) {
+            event.preventDefault();
+            window.location.assign(targetUrl.toString());
+          }
+
+          return;
+        }
+      };
+
+      if (!window.__urlParamsForwarderClickBound) {
+        window.__urlParamsForwarderClickBound = true;
+        document.addEventListener("click", handleClick);
+      }
+    })();
+  </script>
+{%- endif -%}
