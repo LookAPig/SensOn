@@ -1,1 +1,919 @@
-{"sections":{"slideshow_VhiARW":{"type":"slideshow","blocks":{"slideshow_video_slide_rPcwgT":{"type":"_slideshow-video-slide","name":"t:sections.slideshow.blocks.video.name","settings":{"color_scheme":"scheme-7","video":"shopify:\/\/files\/videos\/飞书20260509-145631.mp4","mobile_video":"shopify:\/\/files\/videos\/飞书20260509-145631.mp4","slide_link":"","content_max_width":1000,"mobile_content_position":"place-self-center","desktop_content_position":"sm:place-self-center","overlay_color":"#000000","overlay_opacity":35},"blocks":{"heading_pzpjnr":{"type":"heading","settings":{"text":"Intimacy, Reimagined By AI.","pc_font_size":42,"h5_font_size":24,"pc_line_height":1.6,"h5_line_height":1.6,"heading_size":"h3","html_tag":"h1"},"blocks":{}},"heading_FnyGEn":{"type":"heading","name":"t:blocks.heading.name","settings":{"text":"Personalized intimacy powered by hardware-software synchronization and 500+ AI companions.","pc_font_size":16,"h5_font_size":12,"pc_line_height":1,"h5_line_height":1.2,"heading_size":"h6","html_tag":"p"},"blocks":{}},"button_group_4BW96B":{"type":"button-group","name":"t:blocks.button_group.name","settings":{},"blocks":{"button_zQjxBc":{"type":"button","settings":{"text":"shop Now","url":"shopify:\/\/products\/senson-s1-wellness-companion","open_in_new_tab":false,"style":"solid","background":"","text_color":"#030305"},"blocks":{}}},"block_order":["button_zQjxBc"]},"heading_Px3MLb":{"type":"heading","name":"t:blocks.heading.name","disabled":true,"settings":{"text":"Designed For Privacy. Delivered In Discrete, Plain Packaging.","pc_font_size":40,"h5_font_size":23,"pc_line_height":1.2,"h5_line_height":1.2,"heading_size":"h7","html_tag":"p"},"blocks":{}}},"block_order":["heading_pzpjnr","heading_FnyGEn","button_group_4BW96B","heading_Px3MLb"]},"slideshow-controls":{"type":"_slideshow-controls","static":true,"settings":{"controls_style":"line","controls_color":"#ffffff"},"blocks":{}}},"block_order":["slideshow_video_slide_rPcwgT"],"disabled":true,"custom_css":[".button__content {font-size: 18px; text-transform: capitalize; line-height: 1;}","@media (max-width: 768px) {.button__content {font-size: 14px; padding: 10px 30px; line-height: 1; text-transform: capitalize; }}"],"name":"t:sections.slideshow.name","settings":{"allow_transparent_header":true,"image_size":"fill","transition_type":"fade","autoplay":false,"pause_auto_rotate_on_hover":false,"cycle_speed":6,"background":"#000000"}},"video_banner_kFXcBf":{"type":"video-banner","name":"Video Banner","settings":{"title":"Intimacy, Reimagined By AI.","desc":"Personalized intimacy powered by hardware-software synchronization and 500+ AI companions.","button":"Shop with Pride","cta_link":"shopify:\/\/products\/senson-s1-wellness-companion","enable_low_quality_preview":true,"poster":"shopify:\/\/shop_images\/20260509-165316.jpg","desktop_video":"shopify:\/\/files\/videos\/飞书20260509-145631.mp4","mobile_poster":"shopify:\/\/shop_images\/20260509-165322.jpg","mobile_video":"shopify:\/\/files\/videos\/飞书20260509-170251.mp4"}},"blocks_bczp4h":{"type":"_blocks","blocks":{"ai_gen_block_9709507_eWn7WP":{"type":"ai_gen_block_9709507","settings":{"max_width":950,"padding_vertical":75,"padding_vertical_mobile":30,"gap":30,"gap_mobile":10,"icon_text_gap":5,"background_color":"#000000","icon_color":"#ff69b4","text_color":"#ffffff","icon_size":25,"icon_size_mobile":20,"icon_stroke_width":1.5,"text_size":16,"text_size_mobile":11,"text_weight":500,"letter_spacing":0.5,"benefit_1_icon":"globe","benefit_1_text":"Designed For Privacy","benefit_2_icon":"shield","benefit_2_text":"1 Year Warranty","benefit_3_icon":"package","benefit_3_text":"Discreet Packaging","benefit_4_icon":"award","benefit_4_text":"Medical-Grade Material"},"blocks":{}},"section-header":{"type":"_section-header","disabled":true,"static":true,"settings":{"class":"","subheading":"","title":"Header","content":"<p>Use this content to share information about your store and products.<\/p>","button_text":"","button_link":"","button_style":"outline","text_alignment":"left","heading_size":"h5","title_icon":"none","show_scrolling_title":false},"blocks":{}}},"block_order":["ai_gen_block_9709507_eWn7WP"],"custom_css":["div {font-family: MabryPro-Regular;}"],"name":"Benefit bar","settings":{"color_scheme":"scheme-7","add_vertical_spacing":false,"add_horizontal_spacing":false}},"pleasure_WwiyAN":{"type":"Pleasure","blocks":{"card_eGagNR":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/Find_Your_Frequency.jpg","title":"Find Your Frequency","description":"Select a voice or story to match your mood.","text_position":"top"}},"card_t7CXDX":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/Direct_The_Fantasy.jpg","title":"Direct The Fantasy","description":"Speak, listen, and evolve. It responds to you in real time.","text_position":"top"}},"card_H3r3Fk":{"type":"card","settings":{"image":"shopify:\/\/shop_images\/Direct_The_Fantasy_1.jpg","title":"Live The Loop","description":"Sensory flow that moves with every breath.","text_position":"top"}}},"block_order":["card_eGagNR","card_t7CXDX","card_H3r3Fk"],"name":"Pleasure","settings":{"heading":"Pleasure, Reimagined."}},"1776998100547faea5":{"type":"_blocks","blocks":{"ai_gen_block_f32dd47_XwQGDd":{"type":"ai_gen_block_f32dd47","settings":{"layout":"column","alignment":"center","gap":40,"desktop_width_percent":80,"heading":"<p>                    Listen, Interact, <\/p><p>And Feel The Hardware Move In Sync<\/p>","description":"<p>SensOn connects advanced AI directly to your hardware, creating a fully immersive experience. Explore audio erotica, chat with 500+ AI companions, and feel the device respond in real time to the story and conversation. Your AI lover controls the device - just lie back and let the experience unfold.<\/p>","heading_size":42,"text_size":16,"text_spacing":16,"heading_color":"#ffffff","text_color":"#ffffff","video":"shopify:\/\/files\/videos\/产品图.mp4","autoplay":true,"loop":true,"muted":true,"show_controls":false,"video_border_radius":0},"blocks":{}},"section-header":{"type":"_section-header","static":true,"settings":{"class":"","subheading":"","title":"","content":"","button_text":"","button_link":"","button_style":"outline","text_alignment":"center","heading_size":"h3","title_icon":"none","show_scrolling_title":false},"blocks":{}}},"block_order":["ai_gen_block_f32dd47_XwQGDd"],"custom_css":["p {font-family: MabryPro-Regular;}"],"settings":{"color_scheme":"scheme-7","add_vertical_spacing":false,"add_horizontal_spacing":false}},"blocks_WJG6Bc":{"type":"_blocks","blocks":{"app_introduction_section_g3dgAB":{"type":"app_introduction_section","name":"首页 App introduction","settings":{"background_color":"#000000","divider_color":"#f0f0f0","desktop_width_percent":100,"module_1_title":"Immersive Sensory Space","module_1_body":"<p>High-fidelity, 3D spatial audio that brings every whisper and breath to life,blurring the line between fantasy and reality.<\/p>","module_1_image":"shopify:\/\/shop_images\/app-1.jpg","module_1_video":"shopify:\/\/files\/videos\/app-1.mp4","module_2_title":"A Spectrum Of Desires","module_2_body":"<p>Explore an inclusive library of female-POV erotica,<br\/>spanning from gentle romance to your deepest,boldest kinks.<\/p>","module_2_image":"shopify:\/\/shop_images\/app-2_e238853b-d8b4-41cf-8381-ff98bcb927da.jpg","module_3_title":"Be With Your Fantasy","module_3_body":"<p>Engage with Al characters that remember your<br\/>preferences and evolve,creating a unique connection that deepens over time.<\/p>","module_3_image":"shopify:\/\/shop_images\/app-3_9525c4f9-e37b-47b2-b9ea-fa13939fa719.jpg","title_size":22,"title_color":"#ffffff","title_hover_color":"#ffffff","arrow_color":"#ffffff","body_size":13,"body_color":"#ffffff","image_max_width":400,"image_aspect_ratio":"9\/16","image_border_radius":12,"image_shadow":"none","download_text":"<p>Available now on the App Store. Web version expected to launch in mid-July.<\/p>","download_text_size":12,"icon_start_color":"#f287ec","icon_end_color":"#9458ff","download_text_color":"#ffffff","app_store_link":"https:\/\/apps.apple.com\/us\/app\/senson\/id6755462239","app_store_icon":"shopify:\/\/shop_images\/20260421-180331.png","google_play_link":"","store_icon_height":40},"blocks":{}},"section-header":{"type":"_section-header","static":true,"settings":{"class":"","subheading":"","title":"Your App, Your Rhythm","content":"","button_text":"","button_link":"","button_style":"solid","text_alignment":"center","heading_size":"h4","title_icon":"none","show_scrolling_title":false},"blocks":{}}},"block_order":["app_introduction_section_g3dgAB"],"custom_css":["@media (max-width: 768px) {.section-header h2 {font-size: 24px; text-align: left; }}"],"name":"App introduction","settings":{"color_scheme":"scheme-7","add_vertical_spacing":true,"add_horizontal_spacing":true}},"reviews_49wHXX":{"type":"reviews","blocks":{"testimonial_tbPMH4":{"type":"testimonial","disabled":true,"settings":{"comment":"<p>Share what creators said about your product.<\/p>","stars":5,"avatar":"shopify:\/\/shop_images\/channels4_profile.jpg","creator_name":"Dr. Tara","creator_desc":"sex and relationship expert, tenured professor, author, TV host","creator_subs":"7.33M Subscribers"}},"testimonial_LyiQeD":{"type":"testimonial","settings":{"cover":"shopify:\/\/shop_images\/01_3d08d2d1-de5c-4855-89e0-7335f38087f1.jpg","video":"shopify:\/\/files\/videos\/ea34a6af4103371d4ec3ea635775ed4d.mp4","comment":"<p><em>SensOn S1 redefines women's experience. It is an AI-powered intimate moment experience that syncs immersive audio erotica with real-time hardware response. BOUT TIME!!<\/em><\/p>","stars":5,"avatar":"shopify:\/\/shop_images\/541f1750-8091-4b44-b68c-6c61224991dc.png","creator_name":"Lilly Singh","creator_desc":"Actress, Self-Growth Nerd","creator_subs":"14.2M Subscribers"}},"testimonial_yn4fjr":{"type":"testimonial","settings":{"cover":"shopify:\/\/shop_images\/02_17fe275b-19d7-4399-bc48-8cd7b6a6ff19.jpg","video":"shopify:\/\/files\/videos\/snaptik.monster_d6b968db_57f3_499c_9f4c_c508470bffbf.mp4","comment":"<p><em>\"This is the first time I've seen AI built for pleasure, designed entirely around women's arousal patterns.\"<\/em><\/p>","stars":5,"avatar":"shopify:\/\/shop_images\/20260528-180022.jpg","creator_name":"jamesjoseph","creator_desc":"LA-based actor，Live show host","creator_subs":"1.5M Subscribers"}},"testimonial_fqkBNz":{"type":"testimonial","settings":{"cover":"shopify:\/\/shop_images\/vvaishnavi04.jpg","video":"shopify:\/\/files\/videos\/file_v3_00128_db51e244-e376-48a8-b2ea-3003020570eg.mp4","comment":"<p><em>“This might be the most futuristic thing that I have ever unboxed. It's Senson, designed completely for women, with software and hardware built together. This isn't a chatbot — it's the first AI-driven sensory experience that you can directly and physically enjoy.”<\/em><\/p>","stars":5,"avatar":"shopify:\/\/shop_images\/img_v3_02128_8cb8096b-f8a2-40e1-859d-522a7130ba5g.jpg","creator_name":"vvaishnavi04","creator_desc":"Artist，AI enthusiast，Fashion lover","creator_subs":"694K Subscribers"}},"testimonial_FTcrGb":{"type":"testimonial","settings":{"cover":"shopify:\/\/shop_images\/jkiillem.jpg","video":"shopify:\/\/files\/videos\/file_v3_00128_26b6c7c2-7a56-42f1-a05c-81bb7b995feg.mp4","comment":"<p><em>“This is an AI fantasy software that you can actually feel. The device pairs with a premium AI character app which has synched hardware which responds to the story that you're listening to in real time.”<\/em><\/p>","stars":5,"avatar":"shopify:\/\/shop_images\/img_v3_02128_39fd11d1-6996-4767-97bc-14bbed1b4adg.jpg","creator_name":"jkiillem","creator_desc":"Dancer，Performer，LGBTQ+ Creator","creator_subs":"150K Subscribers"}},"testimonial_Vzm4HY":{"type":"testimonial","settings":{"cover":"shopify:\/\/shop_images\/03_c9455c7b-bffe-4cb2-89a6-f7842b77b78a.jpg","video":"shopify:\/\/files\/videos\/First the teaser, now we have The Goods! 😮 from @senson_official one of the worlds FIRST AI int.mp4","comment":"<p><em>\"One of the world's FIRST AI intimate experiences. Ladies, would you try this? Unbox with us!\" <\/em><\/p>","stars":5,"avatar":"shopify:\/\/shop_images\/20260528-180029.jpg","creator_name":"theinnovatorwives","creator_desc":"Female Entrepreneurs，Leo couple，Polyamorous Union","creator_subs":"80K Subscribers"}},"testimonial_yrVtLm":{"type":"testimonial","settings":{"cover":"shopify:\/\/shop_images\/kat.jpg","video":"shopify:\/\/files\/videos\/file_v3_00128_9c5d571a-2656-4d04-861a-21317756cf6g.mp4","comment":"<p><em>“This is the first AI native intimate device for women from Senson. Inside you have the core clitoral vaginal and nipple stimulators all magnetic like grown woman Lego connect to the app pick your content and the character responds to you in real time！！”<\/em><\/p>","stars":5,"avatar":"shopify:\/\/shop_images\/20260525-162849.jpg","creator_name":"misskaterinar","creator_desc":"Comedy skits，Female-focused content creator","creator_subs":"21K Subscribers"}},"testimonial_a9RQHa":{"type":"testimonial","settings":{"cover":"shopify:\/\/shop_images\/04.jpg","video":"shopify:\/\/files\/videos\/Single mom life means I do everything… bills, kids, work, content… so yes, sometimes mama deserv.mp4","comment":"<p><em>\"Sometimes moms deserve a little AI-assisted relaxation too.The more you use it, the better it understands what you like.\"<\/em><\/p>","stars":5,"avatar":"shopify:\/\/shop_images\/20260528-175842.jpg","creator_name":"felecia.monique","creator_desc":"Single mom，Beauty & lifestyle content creator","creator_subs":"44K Subscribers"}}},"block_order":["testimonial_tbPMH4","testimonial_LyiQeD","testimonial_yn4fjr","testimonial_fqkBNz","testimonial_FTcrGb","testimonial_Vzm4HY","testimonial_yrVtLm","testimonial_a9RQHa"],"name":"what are creators saying","settings":{"heading":"What Creators Are Saying","show_stars":false}},"quize_dBPiQp":{"type":"quize","blocks":{"quize_result_6HgCEk":{"type":"quize_result","disabled":true,"settings":{"result_img_dom_gentle":"shopify:\/\/shop_images\/2b4cc21b595d7d2540eeb735dcfeb6be.png","result_title_dom_gentle":"Gentle Dominant","result_desc_dom_gentle":"<ul><li>You love guiding with soft commands, gentle touches, and deep care, letting your partner open up fully in a safe, cherished space.<\/li><li><strong>#tags you may like : <\/strong>#Lovers #Guided Masturbation #Stepfamily #Body worship #Teacher\/student #Blindfold #Romance #Praise #Brat <\/li><li><strong>Finn\/Elena<\/strong> is right here waiting for you.<\/li><\/ul>","result_img_dom_rough":"shopify:\/\/shop_images\/1_e66b178b-0ba0-4038-af7e-e9ce7a03837d.png","result_title_dom_rough":"Cherished Partner","result_desc_dom_rough":"<ul><li>You crave being held tenderly, whispered sweet praises, and slowly teased until you melt— the warmer the emotion, the stronger the thrill.<\/li><li><strong>#tags you may like : <\/strong>#DDLG #Blindfold #Office #Stepfamily #Masturbation #Boss\/Employee #Fingering #Loving #Sweet #Fingering #Nipple play<\/li><li><strong>Cove\/Ava<\/strong> is right here waiting for you.<\/li><\/ul>","result_img_dom_training":"shopify:\/\/shop_images\/2_72f7924b-2414-4c93-9f35-5c208d03d619.png","result_title_dom_training":"Tender Harmony","result_desc_dom_training":"<ul><li>No fixed roles—just mutual gentle exploration, deep kisses, and slow connection where love and desire blend seamlessly.<\/li><li><strong>#tags you may like :<\/strong> #Boyfriend #Married #Penetration #Bedroom #Handjob #Oral #Gentle #Romance #Nipple play<\/li><li><strong>Hanson\/Eartha <\/strong>is right here waiting for you.<\/li><\/ul>","result_img_sub_gentle":"shopify:\/\/shop_images\/3_9ebdad86-0038-4e3e-aff9-d03f51fd132b.png","result_title_sub_gentle":"Intense Possessor","result_desc_sub_gentle":"<ul><li>You thrive on firm grips, raw possession, and intense collisions, pushing your partner to the edge of pain and pleasure.<\/li><li><strong>#tags you may like : <\/strong>#Spanking #Strangers #Pegging #Hospital #Mirror #Enemies #Forced climax #Punishment #Angry sex #Strap<\/li><li><strong>Ethan Carter\/Emily <\/strong>is right here waiting for you.<\/li><\/ul>","result_img_sub_rough":"shopify:\/\/shop_images\/4_a2f06929-480c-411f-bf9f-556c2c4204f5.png","result_title_sub_rough":"Wild Surrenderer","result_desc_sub_rough":"<ul><li>You long to be roughly handled, fiercely taken, and driven to lose control—the wilder it gets, the deeper your release.<\/li><li><strong>#tags you may like :<\/strong> #Cheating  #Jealousy #Force #Enemies #Prison #Exes #Degradation #Bondage #Spanking #Forced climax #Anal #Finish inside #Angry sex #Blowjob<\/li><li><strong>Greg\/Helena<\/strong> is right here waiting for you.<\/li><\/ul>","result_img_sub_training":"shopify:\/\/shop_images\/5.png","result_title_sub_training":"Fierce Collision","result_desc_sub_training":"<ul><li>You clash together—tearing, conquering, raw bodies colliding—no one stays on top forever, just pure, explosive highs.<\/li><li><strong>#tags you may like : <\/strong>#Blowjob<strong> <\/strong>#In Public #Shower #Werewolf #Enemies #Dead dove #Double penetration #Anal #Riding #Spitting #Possessive<\/li><li><strong>Eric\/Carmen<\/strong> is right here waiting for you.<\/li><\/ul>","result_img_equal_gentle":"shopify:\/\/shop_images\/6.png","result_title_equal_gentle":"Patient Guide","result_desc_equal_gentle":"<ul><li>You enjoy shaping your partner step by step with rules, tasks, rewards, and corrections—each act of obedience deepens your control.<\/li><li><strong>#tags you may like :<\/strong> #Edging #Exes #Boyfriend #Outdoors #Phone sex #Face Sitting #Guided Masturbation #Bondage #Desperate<\/li><li><strong>Anthony\/Shelly<\/strong> is right here waiting for you.<\/li><\/ul>","result_img_equal_rough":"shopify:\/\/shop_images\/7.png","result_title_equal_rough":"Molded Lover","result_desc_equal_rough":"<ul><li>You love being given rules, checked on, and gently corrected—finding belonging and arousal in structure and discipline.<\/li><li><strong>#tags you may like : <\/strong>#Workplace #Vampire #Car #Boss\/Employee #Teacher\/student #Brat #Punishment #Bondage #Blindfold #Riding #Fingering #Teasing<\/li><li><strong>Aurelio\/Dr. Evelyn Reed<\/strong> is right here waiting for you.<\/li><\/ul>","result_img_equal_training":"shopify:\/\/shop_images\/8.png","result_title_equal_training":"Shared Explorer","result_desc_equal_training":"<ul><li>You create rules together, train each other, reward and correct mutually—turning discipline into a shared, intimate adventure.<\/li><li><strong>#tags you may like :<\/strong> #Roommates #Fingering #Friends with benefits #Hotel #Possessive #Best friend’s brother #Blindfold #Finish inside #Teasing<\/li><li><strong>Alex Rivière\/Zara Vance<\/strong> is right here waiting for you.<\/li><\/ul>"}},"item_tfy7WF":{"type":"item","settings":{"question":"What hits you the moment someone suddenly blindfolds you \/ covers your eyes?","answer_1":"Instantly wet — the unknown just turns me on","mode1":"Sub","score_1":2,"option_1":"Gentle","option_score_1":0,"answer_2":"A little nervous… but honestly more excited","mode_2":"Dom","score_2":1,"option_2":"Rough","option_score_2":0,"answer_3":"Actually feel safe — Just take care of me gently","mode_3":"Equal","score_3":1,"option_3":"Training","option_score_3":0,"answer_4":"Not really into it — losing sight makes me uneasy","mode_4":"Dom","score_4":1,"option_4":"Rough","option_score_4":0,"answer_5":"Immediately want to flip it and blindfold them instead","mode_5":"Dom","score_5":2,"option_5":"Rough","option_score_5":0}},"item_LfHHWR":{"type":"item","settings":{"question":"During sex, what’s the name or pet name you secretly crave hearing from your partner the most?","answer_1":"Bad girl \/ Good girl","mode1":"Sub","score_1":1,"option_1":"Gentle","option_score_1":0,"answer_2":"Queen \/ Your Majesty","mode_2":"Dom","score_2":1,"option_2":"Rough","option_score_2":0,"answer_3":"Baby \/ My love","mode_3":"Equal","score_3":0,"option_3":"Training","option_score_3":0,"answer_4":"Slut \/ Little whore \/ My little slave","mode_4":"Sub","score_4":2,"option_4":"Gentle","option_score_4":0,"answer_5":"Master \/ Boss","mode_5":"Dom","score_5":2,"option_5":"Rough","option_score_5":0}},"item_xC4FBD":{"type":"item","name":"Item 3","settings":{"question":"What do you most want to say\/hear when you or your partner starts undressing?","answer_1":"“Take it off one piece at a time, slowly—I want to enjoy every second of this”","mode1":"Equal","score_1":0,"option_1":"Training","option_score_1":1,"answer_2":"“Strip completely, get on your knees, hands behind your back and wait for me”","mode_2":"Equal","score_2":0,"option_2":"Training","option_score_2":2,"answer_3":"“Baby, no rush—take your time, one piece at a time”","mode_3":"Sub","score_3":0,"option_3":"Gentle","option_score_3":1,"answer_4":"“Undressing too slowly... do you need me to help you with that?”","mode_4":"Dom","score_4":0,"option_4":"Rough","option_score_4":1,"answer_5":"“Hurry up, or I’m just gonna rip it off you”","mode_5":"Dom","score_5":0,"option_5":"Rough","option_score_5":2}},"item_KjbDcW":{"type":"item","name":"Item 4","settings":{"question":"What’s the hottest, most intense scene playing in your fantasy right now?","answer_1":"Being tied up completely, unable to move at all, just letting them tease and play with me however they want","mode1":"Sub","score_1":1,"option_1":"Gentle","option_score_1":0,"answer_2":"Having them tied down on the bed, making them beg when they want to climax","mode_2":"Dom","score_2":2,"option_2":"Rough","option_score_2":0,"answer_3":"Candlelight, rose petals scattered everywhere, slow, deep, and totally wrapped-up-in-each-other sex","mode_3":"Equal","score_3":1,"option_3":"Training","option_score_3":0,"answer_4":"Getting taken hard from behind, hair yanked back, no holding back at all","mode_4":"Sub","score_4":2,"option_4":"Gentle","option_score_4":0,"answer_5":"Both of us going down on each other, taking our time, slowly pushing each other right to the edge of coming","mode_5":"Dom","score_5":1,"option_5":"Rough","option_score_5":0}},"item_Fd7XmK":{"type":"item","name":"Item 5","settings":{"question":"What’s the naughtiest little whisper you secretly crave hearing from your partner in a public place?","answer_1":"“Go to the bathroom right now, take off your panties\/underwear and send me a pic”","mode1":"Sub","score_1":2,"option_1":"Gentle","option_score_1":0,"answer_2":"“Hold it in—don’t squeeze your thighs. I know you’re already soaked”","mode_2":"Sub","score_2":1,"option_2":"Gentle","option_score_2":0,"answer_3":"“Baby, let’s get home so I can take really good care of you, okay?”","mode_3":"Equal","score_3":1,"option_3":"Training","option_score_3":0,"answer_4":"“There are people around… not here”","mode_4":"Dom","score_4":1,"option_4":"Rough","option_score_4":0,"answer_5":"“That person over there is watching, but I can’t help it—please”","mode_5":"Dom","score_5":2,"option_5":"Rough","option_score_5":0}},"item_4KaCpU":{"type":"item","name":"Item 6","settings":{"question":"What kind of stimulation turns you on the most—either giving or receiving?","answer_1":"Hard pinching, twisting, and tugging","mode1":"Dom","score_1":0,"option_1":"Rough","option_score_1":1,"answer_2":"Using toys or tools to keep teasing and building it up over and over","mode_2":"Equal","score_2":0,"option_2":"Training","option_score_2":2,"answer_3":"Soft licking, gentle biting, and warm breath blowing across sensitive spots","mode_3":"Sub","score_3":0,"option_3":"Gentle","option_score_3":1,"answer_4":"Getting \/ giving really hard spanks or slaps","mode_4":"Dom","score_4":0,"option_4":"Rough","option_score_4":2,"answer_5":"Slow circles with the tongue, dragging it out for as long as possible to drive them crazy","mode_5":"Equal","score_5":0,"option_5":"Training","option_score_5":1}},"item_iMtNPJ":{"type":"item","name":"Item 7","settings":{"question":"When your partner’s going down on you and their tongue is right there, which line would make you lose it the most?","answer_1":"“Don’t move—I’m not stopping until you squirt \/ come all over my face”","mode1":"Sub","score_1":2,"option_1":"Gentle","option_score_1":0,"answer_2":"“Baby, you taste so fucking sweet… I can’t stop”","mode_2":"Equal","score_2":1,"option_2":"Training","option_score_2":0,"answer_3":"“Feeling that good already? You’re squeezing my tongue so tight”","mode_3":"Sub","score_3":1,"option_3":"Gentle","option_score_3":0,"answer_4":"“Master, am I making you feel good? Tell me how you like it”","mode_4":"Dom","score_4":1,"option_4":"Rough","option_score_4":0,"answer_5":"“Please come in my mouth—I’m begging you to finish on my tongue”","mode_5":"Dom","score_5":2,"option_5":"Rough","option_score_5":0}},"item_9Y4cMC":{"type":"item","name":"Item8","settings":{"question":"Right at that the edge, the split-second before you\/your partner come—what’s the one thing you most want to say\/hear?","answer_1":"“Baby, come with me—let’s finish together, I love you so much”","mode1":"Sub","score_1":0,"option_1":"Gentle","option_score_1":2,"answer_2":"“Don’t come yet—hold it until I count to three”","mode_2":"Equal","score_2":0,"option_2":"Training","option_score_2":1,"answer_3":"“Let it out — let everyone know you’re getting fucked so good”","mode_3":"Dom","score_3":0,"option_3":"Rough","option_score_3":1,"answer_4":"“Eyes rolling back already? Am I fucking you that good?”","mode_4":"Dom","score_4":0,"option_4":"Rough","option_score_4":2,"answer_5":"“Beg me—tell me you want me to come inside you \/ make you climax”","mode_5":"Equal","score_5":0,"option_5":"Training","option_score_5":2}},"item_8QM3Dz":{"type":"item","name":"Item 9","settings":{"question":"What’s your favorite way to climax\/make your partner climax?","answer_1":"Being forced into a rough, overwhelming orgasm—crying and shaking while it hits","mode1":"Dom","score_1":0,"option_1":"Rough","option_score_1":2,"answer_2":"Slowly building up under tight control until the climax finally breaks through","mode_2":"Equal","score_2":0,"option_2":"Training","option_score_2":1,"answer_3":"Staring into each other’s eyes, coming together in perfect, synced harmony","mode_3":"Sub","score_3":0,"option_3":"Gentle","option_score_3":2,"answer_4":"Getting fucked so hard you come with your legs giving out, barely able to stand afterward","mode_4":"Dom","score_4":0,"option_4":"Rough","option_score_4":1,"answer_5":"Edged for ages, pushed right to the brink of breaking, then finally allowed to explode","mode_5":"Equal","score_5":0,"option_5":"Training","option_score_5":2}},"item_aaGHgf":{"type":"item","name":"Item 10","settings":{"question":"After everything, you're both spent and just wrapped up in each other's arms drifting off… what words do you most wanna say\/hear?","answer_1":"“You were so good for me tonight… your Master\/Mistress is really pleased”","mode1":"Equal","score_1":0,"option_1":"Training","option_score_1":1,"answer_2":"“Look at you, all cried out and messy… so fucking cute. Next time I’ll go even harder”","mode_2":"Dom","score_2":0,"option_2":"Rough","option_score_2":1,"answer_3":"“Admit it—the rougher I am, the harder you come, right?”","mode_3":"Dom","score_3":0,"option_3":"Rough","option_score_3":2,"answer_4":"“Have you said thank you to Daddy\/Mommy yet?”","mode_4":"Equal","score_4":0,"option_4":"Training","option_score_4":2,"answer_5":"“Just stay like this… holding you feels so good. I love you”","mode_5":"Sub","score_5":0,"option_5":"Gentle","option_score_5":1}}},"block_order":["quize_result_6HgCEk","item_tfy7WF","item_LfHHWR","item_xC4FBD","item_KjbDcW","item_Fd7XmK","item_4KaCpU","item_iMtNPJ","item_9Y4cMC","item_8QM3Dz","item_aaGHgf"],"custom_css":[".quize-left {font-family: var(--font-heading-family);}","@media (max-width: 768px) {.quize-left h2 {font-size: 24px; }}"],"name":"Custom Quize","settings":{"bg":"shopify:\/\/shop_images\/Section_2.png","title":"Find Your Personal Resonance","subtitle":"Answer 10 quick questions to unlock your custom pleasure profile and curated erotica recommendations."}},"newsletter_mBFWeB":{"type":"newsletter","custom_css":["h2.h4 {font-size: 42px;}","@media (max-width: 768px) {h2.h4 {font-size: 20px; }}"],"name":"t:sections.newsletter.name","settings":{"color_scheme":"scheme-7","image_position":"background","image_size":"md","add_image_spacing":false,"icon":"none","title":"Join Us Unlock & Extra 💲10 Off","heading_tag":"h4","button_text":"Subscribe","privacy_policy_text":"By signing up, you agree with our privacy policy.","overlay_color":"#000000","overlay_opacity":0}}},"order":["slideshow_VhiARW","video_banner_kFXcBf","blocks_bczp4h","pleasure_WwiyAN","1776998100547faea5","blocks_WJG6Bc","reviews_49wHXX","quize_dBPiQp","newsletter_mBFWeB"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_VhiARW": {
+      "type": "slideshow",
+      "blocks": {
+        "slideshow_video_slide_rPcwgT": {
+          "type": "_slideshow-video-slide",
+          "name": "t:sections.slideshow.blocks.video.name",
+          "settings": {
+            "color_scheme": "scheme-7",
+            "video": "shopify://files/videos/飞书20260509-145631.mp4",
+            "mobile_video": "shopify://files/videos/飞书20260509-145631.mp4",
+            "slide_link": "",
+            "content_max_width": 1000,
+            "mobile_content_position": "place-self-center",
+            "desktop_content_position": "sm:place-self-center",
+            "overlay_color": "#000000",
+            "overlay_opacity": 35
+          },
+          "blocks": {
+            "heading_pzpjnr": {
+              "type": "heading",
+              "settings": {
+                "text": "Intimacy, Reimagined By AI.",
+                "pc_font_size": 42,
+                "h5_font_size": 24,
+                "pc_line_height": 1.6,
+                "h5_line_height": 1.6,
+                "heading_size": "h3",
+                "html_tag": "h1"
+              },
+              "blocks": {}
+            },
+            "heading_FnyGEn": {
+              "type": "heading",
+              "name": "t:blocks.heading.name",
+              "settings": {
+                "text": "Personalized intimacy powered by hardware-software synchronization and 500+ AI companions.",
+                "pc_font_size": 16,
+                "h5_font_size": 12,
+                "pc_line_height": 1,
+                "h5_line_height": 1.2,
+                "heading_size": "h6",
+                "html_tag": "p"
+              },
+              "blocks": {}
+            },
+            "button_group_4BW96B": {
+              "type": "button-group",
+              "name": "t:blocks.button_group.name",
+              "settings": {},
+              "blocks": {
+                "button_zQjxBc": {
+                  "type": "button",
+                  "settings": {
+                    "text": "shop Now",
+                    "url": "shopify://products/senson-s1-wellness-companion",
+                    "open_in_new_tab": false,
+                    "style": "solid",
+                    "background": "",
+                    "text_color": "#030305"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "button_zQjxBc"
+              ]
+            },
+            "heading_Px3MLb": {
+              "type": "heading",
+              "name": "t:blocks.heading.name",
+              "disabled": true,
+              "settings": {
+                "text": "Designed For Privacy. Delivered In Discrete, Plain Packaging.",
+                "pc_font_size": 40,
+                "h5_font_size": 23,
+                "pc_line_height": 1.2,
+                "h5_line_height": 1.2,
+                "heading_size": "h7",
+                "html_tag": "p"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading_pzpjnr",
+            "heading_FnyGEn",
+            "button_group_4BW96B",
+            "heading_Px3MLb"
+          ]
+        },
+        "slideshow-controls": {
+          "type": "_slideshow-controls",
+          "static": true,
+          "settings": {
+            "controls_style": "line",
+            "controls_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "slideshow_video_slide_rPcwgT"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".button__content {font-size: 18px; text-transform: capitalize; line-height: 1;}",
+        "@media (max-width: 768px) {.button__content {font-size: 14px; padding: 10px 30px; line-height: 1; text-transform: capitalize; }}"
+      ],
+      "name": "t:sections.slideshow.name",
+      "settings": {
+        "allow_transparent_header": true,
+        "image_size": "fill",
+        "transition_type": "fade",
+        "autoplay": false,
+        "pause_auto_rotate_on_hover": false,
+        "cycle_speed": 6,
+        "background": "#000000"
+      }
+    },
+    "video_banner_kFXcBf": {
+      "type": "video-banner",
+      "name": "Video Banner",
+      "settings": {
+        "title": "Intimacy, Reimagined By AI.",
+        "desc": "Personalized intimacy powered by hardware-software synchronization and 500+ AI companions.",
+        "button": "Shop with Pride",
+        "cta_link": "shopify://products/senson-s1-wellness-companion",
+        "enable_low_quality_preview": true,
+        "poster": "shopify://shop_images/20260509-165316.jpg",
+        "desktop_video": "shopify://files/videos/飞书20260509-145631.mp4",
+        "mobile_poster": "shopify://shop_images/20260509-165322.jpg",
+        "mobile_video": "shopify://files/videos/飞书20260509-170251.mp4"
+      }
+    },
+    "blocks_bczp4h": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_9709507_eWn7WP": {
+          "type": "ai_gen_block_9709507",
+          "settings": {
+            "max_width": 950,
+            "padding_vertical": 75,
+            "padding_vertical_mobile": 30,
+            "gap": 30,
+            "gap_mobile": 10,
+            "icon_text_gap": 5,
+            "background_color": "#000000",
+            "icon_color": "#ff69b4",
+            "text_color": "#ffffff",
+            "icon_size": 25,
+            "icon_size_mobile": 20,
+            "icon_stroke_width": 1.5,
+            "text_size": 16,
+            "text_size_mobile": 11,
+            "text_weight": 500,
+            "letter_spacing": 0.5,
+            "benefit_1_icon": "globe",
+            "benefit_1_text": "Designed For Privacy",
+            "benefit_2_icon": "shield",
+            "benefit_2_text": "1 Year Warranty",
+            "benefit_3_icon": "package",
+            "benefit_3_text": "Discreet Packaging",
+            "benefit_4_icon": "award",
+            "benefit_4_text": "Medical-Grade Material"
+          },
+          "blocks": {}
+        },
+        "section-header": {
+          "type": "_section-header",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "class": "",
+            "subheading": "",
+            "title": "Header",
+            "content": "<p>Use this content to share information about your store and products.</p>",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "left",
+            "heading_size": "h5",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_9709507_eWn7WP"
+      ],
+      "custom_css": [
+        "div {font-family: MabryPro-Regular;}"
+      ],
+      "name": "Benefit bar",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "add_vertical_spacing": false,
+        "add_horizontal_spacing": false
+      }
+    },
+    "pleasure_WwiyAN": {
+      "type": "Pleasure",
+      "blocks": {
+        "card_eGagNR": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Find_Your_Frequency.jpg",
+            "title": "Find Your Frequency",
+            "description": "Select a voice or story to match your mood.",
+            "text_position": "top"
+          }
+        },
+        "card_t7CXDX": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Direct_The_Fantasy.jpg",
+            "title": "Direct The Fantasy",
+            "description": "Speak, listen, and evolve. It responds to you in real time.",
+            "text_position": "top"
+          }
+        },
+        "card_H3r3Fk": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Direct_The_Fantasy_1.jpg",
+            "title": "Live The Loop",
+            "description": "Sensory flow that moves with every breath.",
+            "text_position": "top"
+          }
+        }
+      },
+      "block_order": [
+        "card_eGagNR",
+        "card_t7CXDX",
+        "card_H3r3Fk"
+      ],
+      "name": "Pleasure",
+      "settings": {
+        "heading": "Pleasure, Reimagined."
+      }
+    },
+    "1776998100547faea5": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f32dd47_XwQGDd": {
+          "type": "ai_gen_block_f32dd47",
+          "settings": {
+            "layout": "column",
+            "alignment": "center",
+            "gap": 40,
+            "desktop_width_percent": 80,
+            "heading": "<p>                    Listen, Interact, </p><p>And Feel The Hardware Move In Sync</p>",
+            "description": "<p>SensOn connects advanced AI directly to your hardware, creating a fully immersive experience. Explore audio erotica, chat with 500+ AI companions, and feel the device respond in real time to the story and conversation. Your AI lover controls the device - just lie back and let the experience unfold.</p>",
+            "heading_size": 42,
+            "text_size": 16,
+            "text_spacing": 16,
+            "heading_color": "#ffffff",
+            "text_color": "#ffffff",
+            "video": "shopify://files/videos/产品图.mp4",
+            "autoplay": true,
+            "loop": true,
+            "muted": true,
+            "show_controls": false,
+            "video_border_radius": 0
+          },
+          "blocks": {}
+        },
+        "section-header": {
+          "type": "_section-header",
+          "static": true,
+          "settings": {
+            "class": "",
+            "subheading": "",
+            "title": "",
+            "content": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "center",
+            "heading_size": "h3",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f32dd47_XwQGDd"
+      ],
+      "custom_css": [
+        "p {font-family: MabryPro-Regular;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-7",
+        "add_vertical_spacing": false,
+        "add_horizontal_spacing": false
+      }
+    },
+    "blocks_WJG6Bc": {
+      "type": "_blocks",
+      "blocks": {
+        "app_introduction_section_g3dgAB": {
+          "type": "app_introduction_section",
+          "name": "首页 App introduction",
+          "settings": {
+            "background_color": "#000000",
+            "divider_color": "#f0f0f0",
+            "desktop_width_percent": 100,
+            "module_1_title": "Immersive Sensory Space",
+            "module_1_body": "<p>High-fidelity, 3D spatial audio that brings every whisper and breath to life,blurring the line between fantasy and reality.</p>",
+            "module_1_image": "shopify://shop_images/app-1.jpg",
+            "module_1_video": "shopify://files/videos/app-1.mp4",
+            "module_2_title": "A Spectrum Of Desires",
+            "module_2_body": "<p>Explore an inclusive library of female-POV erotica,<br/>spanning from gentle romance to your deepest,boldest kinks.</p>",
+            "module_2_image": "shopify://shop_images/app-2_e238853b-d8b4-41cf-8381-ff98bcb927da.jpg",
+            "module_3_title": "Be With Your Fantasy",
+            "module_3_body": "<p>Engage with Al characters that remember your<br/>preferences and evolve,creating a unique connection that deepens over time.</p>",
+            "module_3_image": "shopify://shop_images/app-3_9525c4f9-e37b-47b2-b9ea-fa13939fa719.jpg",
+            "title_size": 22,
+            "title_color": "#ffffff",
+            "title_hover_color": "#ffffff",
+            "arrow_color": "#ffffff",
+            "body_size": 13,
+            "body_color": "#ffffff",
+            "image_max_width": 400,
+            "image_aspect_ratio": "9/16",
+            "image_border_radius": 12,
+            "image_shadow": "none",
+            "download_text": "<p>Available now on the App Store. Web version expected to launch in mid-July.</p>",
+            "download_text_size": 12,
+            "icon_start_color": "#f287ec",
+            "icon_end_color": "#9458ff",
+            "download_text_color": "#ffffff",
+            "app_store_link": "https://apps.apple.com/us/app/senson/id6755462239",
+            "app_store_icon": "shopify://shop_images/20260421-180331.png",
+            "google_play_link": "",
+            "store_icon_height": 40
+          },
+          "blocks": {}
+        },
+        "section-header": {
+          "type": "_section-header",
+          "static": true,
+          "settings": {
+            "class": "",
+            "subheading": "",
+            "title": "Your App, Your Rhythm",
+            "content": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "solid",
+            "text_alignment": "center",
+            "heading_size": "h4",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "app_introduction_section_g3dgAB"
+      ],
+      "custom_css": [
+        "@media (max-width: 768px) {.section-header h2 {font-size: 24px; text-align: left; }}"
+      ],
+      "name": "App introduction",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "add_vertical_spacing": true,
+        "add_horizontal_spacing": true
+      }
+    },
+    "reviews_49wHXX": {
+      "type": "reviews",
+      "blocks": {
+        "testimonial_tbPMH4": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "comment": "<p>Share what creators said about your product.</p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/channels4_profile.jpg",
+            "creator_name": "Dr. Tara",
+            "creator_desc": "sex and relationship expert, tenured professor, author, TV host",
+            "creator_subs": "7.33M Subscribers"
+          }
+        },
+        "testimonial_LyiQeD": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/01_3d08d2d1-de5c-4855-89e0-7335f38087f1.jpg",
+            "video": "shopify://files/videos/ea34a6af4103371d4ec3ea635775ed4d.mp4",
+            "comment": "<p><em>SensOn S1 redefines women's experience. It is an AI-powered intimate moment experience that syncs immersive audio erotica with real-time hardware response. BOUT TIME!!</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/541f1750-8091-4b44-b68c-6c61224991dc.png",
+            "creator_name": "Lilly Singh",
+            "creator_desc": "Actress, Self-Growth Nerd",
+            "creator_subs": "14.2M Subscribers"
+          }
+        },
+        "testimonial_yn4fjr": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/02_17fe275b-19d7-4399-bc48-8cd7b6a6ff19.jpg",
+            "video": "shopify://files/videos/snaptik.monster_d6b968db_57f3_499c_9f4c_c508470bffbf.mp4",
+            "comment": "<p><em>\"This is the first time I've seen AI built for pleasure, designed entirely around women's arousal patterns.\"</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/20260528-180022.jpg",
+            "creator_name": "jamesjoseph",
+            "creator_desc": "LA-based actor，Live show host",
+            "creator_subs": "1.5M Subscribers"
+          }
+        },
+        "testimonial_yrVtLm": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/kat.jpg",
+            "video": "shopify://files/videos/file_v3_00128_9c5d571a-2656-4d04-861a-21317756cf6g.mp4",
+            "comment": "<p><em>“This is the first AI native intimate device for women from Senson. Inside you have the core clitoral vaginal and nipple stimulators all magnetic like grown woman Lego connect to the app pick your content and the character responds to you in real time！！”</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/20260525-162849.jpg",
+            "creator_name": "misskaterinar",
+            "creator_desc": "Comedy skits，Female-focused content creator",
+            "creator_subs": "21K Subscribers"
+          }
+        },
+        "testimonial_FTcrGb": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/jkiillem.jpg",
+            "video": "shopify://files/videos/file_v3_00128_26b6c7c2-7a56-42f1-a05c-81bb7b995feg.mp4",
+            "comment": "<p><em>“This is an AI fantasy software that you can actually feel. The device pairs with a premium AI character app which has synched hardware which responds to the story that you're listening to in real time.”</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/img_v3_02128_39fd11d1-6996-4767-97bc-14bbed1b4adg.jpg",
+            "creator_name": "jkiillem",
+            "creator_desc": "Dancer，Performer，LGBTQ+ Creator",
+            "creator_subs": "150K Subscribers"
+          }
+        },
+        "testimonial_Vzm4HY": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/03_c9455c7b-bffe-4cb2-89a6-f7842b77b78a.jpg",
+            "video": "shopify://files/videos/First the teaser, now we have The Goods! 😮 from @senson_official one of the worlds FIRST AI int.mp4",
+            "comment": "<p><em>\"One of the world's FIRST AI intimate experiences. Ladies, would you try this? Unbox with us!\" </em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/20260528-180029.jpg",
+            "creator_name": "theinnovatorwives",
+            "creator_desc": "Female Entrepreneurs，Leo couple，Polyamorous Union",
+            "creator_subs": "80K Subscribers"
+          }
+        },
+        "testimonial_fqkBNz": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/vvaishnavi04.jpg",
+            "video": "shopify://files/videos/file_v3_00128_db51e244-e376-48a8-b2ea-3003020570eg.mp4",
+            "comment": "<p><em>“This might be the most futuristic thing that I have ever unboxed. It's Senson, designed completely for women, with software and hardware built together. This isn't a chatbot — it's the first AI-driven sensory experience that you can directly and physically enjoy.”</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/img_v3_02128_8cb8096b-f8a2-40e1-859d-522a7130ba5g.jpg",
+            "creator_name": "vvaishnavi04",
+            "creator_desc": "Artist，AI enthusiast，Fashion lover",
+            "creator_subs": "694K Subscribers"
+          }
+        },
+        "testimonial_a9RQHa": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/04.jpg",
+            "video": "shopify://files/videos/Single mom life means I do everything… bills, kids, work, content… so yes, sometimes mama deserv.mp4",
+            "comment": "<p><em>\"Sometimes moms deserve a little AI-assisted relaxation too.The more you use it, the better it understands what you like.\"</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/20260528-175842.jpg",
+            "creator_name": "felecia.monique",
+            "creator_desc": "Single mom，Beauty & lifestyle content creator",
+            "creator_subs": "44K Subscribers"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_tbPMH4",
+        "testimonial_LyiQeD",
+        "testimonial_yn4fjr",
+        "testimonial_yrVtLm",
+        "testimonial_FTcrGb",
+        "testimonial_Vzm4HY",
+        "testimonial_fqkBNz",
+        "testimonial_a9RQHa"
+      ],
+      "name": "what are creators saying",
+      "settings": {
+        "heading": "What Creators Are Saying",
+        "show_stars": false
+      }
+    },
+    "quize_dBPiQp": {
+      "type": "quize",
+      "blocks": {
+        "quize_result_6HgCEk": {
+          "type": "quize_result",
+          "disabled": true,
+          "settings": {
+            "result_img_dom_gentle": "shopify://shop_images/2b4cc21b595d7d2540eeb735dcfeb6be.png",
+            "result_title_dom_gentle": "Gentle Dominant",
+            "result_desc_dom_gentle": "<ul><li>You love guiding with soft commands, gentle touches, and deep care, letting your partner open up fully in a safe, cherished space.</li><li><strong>#tags you may like : </strong>#Lovers #Guided Masturbation #Stepfamily #Body worship #Teacher/student #Blindfold #Romance #Praise #Brat </li><li><strong>Finn/Elena</strong> is right here waiting for you.</li></ul>",
+            "result_img_dom_rough": "shopify://shop_images/1_e66b178b-0ba0-4038-af7e-e9ce7a03837d.png",
+            "result_title_dom_rough": "Cherished Partner",
+            "result_desc_dom_rough": "<ul><li>You crave being held tenderly, whispered sweet praises, and slowly teased until you melt— the warmer the emotion, the stronger the thrill.</li><li><strong>#tags you may like : </strong>#DDLG #Blindfold #Office #Stepfamily #Masturbation #Boss/Employee #Fingering #Loving #Sweet #Fingering #Nipple play</li><li><strong>Cove/Ava</strong> is right here waiting for you.</li></ul>",
+            "result_img_dom_training": "shopify://shop_images/2_72f7924b-2414-4c93-9f35-5c208d03d619.png",
+            "result_title_dom_training": "Tender Harmony",
+            "result_desc_dom_training": "<ul><li>No fixed roles—just mutual gentle exploration, deep kisses, and slow connection where love and desire blend seamlessly.</li><li><strong>#tags you may like :</strong> #Boyfriend #Married #Penetration #Bedroom #Handjob #Oral #Gentle #Romance #Nipple play</li><li><strong>Hanson/Eartha </strong>is right here waiting for you.</li></ul>",
+            "result_img_sub_gentle": "shopify://shop_images/3_9ebdad86-0038-4e3e-aff9-d03f51fd132b.png",
+            "result_title_sub_gentle": "Intense Possessor",
+            "result_desc_sub_gentle": "<ul><li>You thrive on firm grips, raw possession, and intense collisions, pushing your partner to the edge of pain and pleasure.</li><li><strong>#tags you may like : </strong>#Spanking #Strangers #Pegging #Hospital #Mirror #Enemies #Forced climax #Punishment #Angry sex #Strap</li><li><strong>Ethan Carter/Emily </strong>is right here waiting for you.</li></ul>",
+            "result_img_sub_rough": "shopify://shop_images/4_a2f06929-480c-411f-bf9f-556c2c4204f5.png",
+            "result_title_sub_rough": "Wild Surrenderer",
+            "result_desc_sub_rough": "<ul><li>You long to be roughly handled, fiercely taken, and driven to lose control—the wilder it gets, the deeper your release.</li><li><strong>#tags you may like :</strong> #Cheating  #Jealousy #Force #Enemies #Prison #Exes #Degradation #Bondage #Spanking #Forced climax #Anal #Finish inside #Angry sex #Blowjob</li><li><strong>Greg/Helena</strong> is right here waiting for you.</li></ul>",
+            "result_img_sub_training": "shopify://shop_images/5.png",
+            "result_title_sub_training": "Fierce Collision",
+            "result_desc_sub_training": "<ul><li>You clash together—tearing, conquering, raw bodies colliding—no one stays on top forever, just pure, explosive highs.</li><li><strong>#tags you may like : </strong>#Blowjob<strong> </strong>#In Public #Shower #Werewolf #Enemies #Dead dove #Double penetration #Anal #Riding #Spitting #Possessive</li><li><strong>Eric/Carmen</strong> is right here waiting for you.</li></ul>",
+            "result_img_equal_gentle": "shopify://shop_images/6.png",
+            "result_title_equal_gentle": "Patient Guide",
+            "result_desc_equal_gentle": "<ul><li>You enjoy shaping your partner step by step with rules, tasks, rewards, and corrections—each act of obedience deepens your control.</li><li><strong>#tags you may like :</strong> #Edging #Exes #Boyfriend #Outdoors #Phone sex #Face Sitting #Guided Masturbation #Bondage #Desperate</li><li><strong>Anthony/Shelly</strong> is right here waiting for you.</li></ul>",
+            "result_img_equal_rough": "shopify://shop_images/7.png",
+            "result_title_equal_rough": "Molded Lover",
+            "result_desc_equal_rough": "<ul><li>You love being given rules, checked on, and gently corrected—finding belonging and arousal in structure and discipline.</li><li><strong>#tags you may like : </strong>#Workplace #Vampire #Car #Boss/Employee #Teacher/student #Brat #Punishment #Bondage #Blindfold #Riding #Fingering #Teasing</li><li><strong>Aurelio/Dr. Evelyn Reed</strong> is right here waiting for you.</li></ul>",
+            "result_img_equal_training": "shopify://shop_images/8.png",
+            "result_title_equal_training": "Shared Explorer",
+            "result_desc_equal_training": "<ul><li>You create rules together, train each other, reward and correct mutually—turning discipline into a shared, intimate adventure.</li><li><strong>#tags you may like :</strong> #Roommates #Fingering #Friends with benefits #Hotel #Possessive #Best friend’s brother #Blindfold #Finish inside #Teasing</li><li><strong>Alex Rivière/Zara Vance</strong> is right here waiting for you.</li></ul>"
+          }
+        },
+        "item_tfy7WF": {
+          "type": "item",
+          "settings": {
+            "question": "What hits you the moment someone suddenly blindfolds you / covers your eyes?",
+            "answer_1": "Instantly wet — the unknown just turns me on",
+            "mode1": "Sub",
+            "score_1": 2,
+            "option_1": "Gentle",
+            "option_score_1": 0,
+            "answer_2": "A little nervous… but honestly more excited",
+            "mode_2": "Dom",
+            "score_2": 1,
+            "option_2": "Rough",
+            "option_score_2": 0,
+            "answer_3": "Actually feel safe — Just take care of me gently",
+            "mode_3": "Equal",
+            "score_3": 1,
+            "option_3": "Training",
+            "option_score_3": 0,
+            "answer_4": "Not really into it — losing sight makes me uneasy",
+            "mode_4": "Dom",
+            "score_4": 1,
+            "option_4": "Rough",
+            "option_score_4": 0,
+            "answer_5": "Immediately want to flip it and blindfold them instead",
+            "mode_5": "Dom",
+            "score_5": 2,
+            "option_5": "Rough",
+            "option_score_5": 0
+          }
+        },
+        "item_LfHHWR": {
+          "type": "item",
+          "settings": {
+            "question": "During sex, what’s the name or pet name you secretly crave hearing from your partner the most?",
+            "answer_1": "Bad girl / Good girl",
+            "mode1": "Sub",
+            "score_1": 1,
+            "option_1": "Gentle",
+            "option_score_1": 0,
+            "answer_2": "Queen / Your Majesty",
+            "mode_2": "Dom",
+            "score_2": 1,
+            "option_2": "Rough",
+            "option_score_2": 0,
+            "answer_3": "Baby / My love",
+            "mode_3": "Equal",
+            "score_3": 0,
+            "option_3": "Training",
+            "option_score_3": 0,
+            "answer_4": "Slut / Little whore / My little slave",
+            "mode_4": "Sub",
+            "score_4": 2,
+            "option_4": "Gentle",
+            "option_score_4": 0,
+            "answer_5": "Master / Boss",
+            "mode_5": "Dom",
+            "score_5": 2,
+            "option_5": "Rough",
+            "option_score_5": 0
+          }
+        },
+        "item_xC4FBD": {
+          "type": "item",
+          "name": "Item 3",
+          "settings": {
+            "question": "What do you most want to say/hear when you or your partner starts undressing?",
+            "answer_1": "“Take it off one piece at a time, slowly—I want to enjoy every second of this”",
+            "mode1": "Equal",
+            "score_1": 0,
+            "option_1": "Training",
+            "option_score_1": 1,
+            "answer_2": "“Strip completely, get on your knees, hands behind your back and wait for me”",
+            "mode_2": "Equal",
+            "score_2": 0,
+            "option_2": "Training",
+            "option_score_2": 2,
+            "answer_3": "“Baby, no rush—take your time, one piece at a time”",
+            "mode_3": "Sub",
+            "score_3": 0,
+            "option_3": "Gentle",
+            "option_score_3": 1,
+            "answer_4": "“Undressing too slowly... do you need me to help you with that?”",
+            "mode_4": "Dom",
+            "score_4": 0,
+            "option_4": "Rough",
+            "option_score_4": 1,
+            "answer_5": "“Hurry up, or I’m just gonna rip it off you”",
+            "mode_5": "Dom",
+            "score_5": 0,
+            "option_5": "Rough",
+            "option_score_5": 2
+          }
+        },
+        "item_KjbDcW": {
+          "type": "item",
+          "name": "Item 4",
+          "settings": {
+            "question": "What’s the hottest, most intense scene playing in your fantasy right now?",
+            "answer_1": "Being tied up completely, unable to move at all, just letting them tease and play with me however they want",
+            "mode1": "Sub",
+            "score_1": 1,
+            "option_1": "Gentle",
+            "option_score_1": 0,
+            "answer_2": "Having them tied down on the bed, making them beg when they want to climax",
+            "mode_2": "Dom",
+            "score_2": 2,
+            "option_2": "Rough",
+            "option_score_2": 0,
+            "answer_3": "Candlelight, rose petals scattered everywhere, slow, deep, and totally wrapped-up-in-each-other sex",
+            "mode_3": "Equal",
+            "score_3": 1,
+            "option_3": "Training",
+            "option_score_3": 0,
+            "answer_4": "Getting taken hard from behind, hair yanked back, no holding back at all",
+            "mode_4": "Sub",
+            "score_4": 2,
+            "option_4": "Gentle",
+            "option_score_4": 0,
+            "answer_5": "Both of us going down on each other, taking our time, slowly pushing each other right to the edge of coming",
+            "mode_5": "Dom",
+            "score_5": 1,
+            "option_5": "Rough",
+            "option_score_5": 0
+          }
+        },
+        "item_Fd7XmK": {
+          "type": "item",
+          "name": "Item 5",
+          "settings": {
+            "question": "What’s the naughtiest little whisper you secretly crave hearing from your partner in a public place?",
+            "answer_1": "“Go to the bathroom right now, take off your panties/underwear and send me a pic”",
+            "mode1": "Sub",
+            "score_1": 2,
+            "option_1": "Gentle",
+            "option_score_1": 0,
+            "answer_2": "“Hold it in—don’t squeeze your thighs. I know you’re already soaked”",
+            "mode_2": "Sub",
+            "score_2": 1,
+            "option_2": "Gentle",
+            "option_score_2": 0,
+            "answer_3": "“Baby, let’s get home so I can take really good care of you, okay?”",
+            "mode_3": "Equal",
+            "score_3": 1,
+            "option_3": "Training",
+            "option_score_3": 0,
+            "answer_4": "“There are people around… not here”",
+            "mode_4": "Dom",
+            "score_4": 1,
+            "option_4": "Rough",
+            "option_score_4": 0,
+            "answer_5": "“That person over there is watching, but I can’t help it—please”",
+            "mode_5": "Dom",
+            "score_5": 2,
+            "option_5": "Rough",
+            "option_score_5": 0
+          }
+        },
+        "item_4KaCpU": {
+          "type": "item",
+          "name": "Item 6",
+          "settings": {
+            "question": "What kind of stimulation turns you on the most—either giving or receiving?",
+            "answer_1": "Hard pinching, twisting, and tugging",
+            "mode1": "Dom",
+            "score_1": 0,
+            "option_1": "Rough",
+            "option_score_1": 1,
+            "answer_2": "Using toys or tools to keep teasing and building it up over and over",
+            "mode_2": "Equal",
+            "score_2": 0,
+            "option_2": "Training",
+            "option_score_2": 2,
+            "answer_3": "Soft licking, gentle biting, and warm breath blowing across sensitive spots",
+            "mode_3": "Sub",
+            "score_3": 0,
+            "option_3": "Gentle",
+            "option_score_3": 1,
+            "answer_4": "Getting / giving really hard spanks or slaps",
+            "mode_4": "Dom",
+            "score_4": 0,
+            "option_4": "Rough",
+            "option_score_4": 2,
+            "answer_5": "Slow circles with the tongue, dragging it out for as long as possible to drive them crazy",
+            "mode_5": "Equal",
+            "score_5": 0,
+            "option_5": "Training",
+            "option_score_5": 1
+          }
+        },
+        "item_iMtNPJ": {
+          "type": "item",
+          "name": "Item 7",
+          "settings": {
+            "question": "When your partner’s going down on you and their tongue is right there, which line would make you lose it the most?",
+            "answer_1": "“Don’t move—I’m not stopping until you squirt / come all over my face”",
+            "mode1": "Sub",
+            "score_1": 2,
+            "option_1": "Gentle",
+            "option_score_1": 0,
+            "answer_2": "“Baby, you taste so fucking sweet… I can’t stop”",
+            "mode_2": "Equal",
+            "score_2": 1,
+            "option_2": "Training",
+            "option_score_2": 0,
+            "answer_3": "“Feeling that good already? You’re squeezing my tongue so tight”",
+            "mode_3": "Sub",
+            "score_3": 1,
+            "option_3": "Gentle",
+            "option_score_3": 0,
+            "answer_4": "“Master, am I making you feel good? Tell me how you like it”",
+            "mode_4": "Dom",
+            "score_4": 1,
+            "option_4": "Rough",
+            "option_score_4": 0,
+            "answer_5": "“Please come in my mouth—I’m begging you to finish on my tongue”",
+            "mode_5": "Dom",
+            "score_5": 2,
+            "option_5": "Rough",
+            "option_score_5": 0
+          }
+        },
+        "item_9Y4cMC": {
+          "type": "item",
+          "name": "Item8",
+          "settings": {
+            "question": "Right at that the edge, the split-second before you/your partner come—what’s the one thing you most want to say/hear?",
+            "answer_1": "“Baby, come with me—let’s finish together, I love you so much”",
+            "mode1": "Sub",
+            "score_1": 0,
+            "option_1": "Gentle",
+            "option_score_1": 2,
+            "answer_2": "“Don’t come yet—hold it until I count to three”",
+            "mode_2": "Equal",
+            "score_2": 0,
+            "option_2": "Training",
+            "option_score_2": 1,
+            "answer_3": "“Let it out — let everyone know you’re getting fucked so good”",
+            "mode_3": "Dom",
+            "score_3": 0,
+            "option_3": "Rough",
+            "option_score_3": 1,
+            "answer_4": "“Eyes rolling back already? Am I fucking you that good?”",
+            "mode_4": "Dom",
+            "score_4": 0,
+            "option_4": "Rough",
+            "option_score_4": 2,
+            "answer_5": "“Beg me—tell me you want me to come inside you / make you climax”",
+            "mode_5": "Equal",
+            "score_5": 0,
+            "option_5": "Training",
+            "option_score_5": 2
+          }
+        },
+        "item_8QM3Dz": {
+          "type": "item",
+          "name": "Item 9",
+          "settings": {
+            "question": "What’s your favorite way to climax/make your partner climax?",
+            "answer_1": "Being forced into a rough, overwhelming orgasm—crying and shaking while it hits",
+            "mode1": "Dom",
+            "score_1": 0,
+            "option_1": "Rough",
+            "option_score_1": 2,
+            "answer_2": "Slowly building up under tight control until the climax finally breaks through",
+            "mode_2": "Equal",
+            "score_2": 0,
+            "option_2": "Training",
+            "option_score_2": 1,
+            "answer_3": "Staring into each other’s eyes, coming together in perfect, synced harmony",
+            "mode_3": "Sub",
+            "score_3": 0,
+            "option_3": "Gentle",
+            "option_score_3": 2,
+            "answer_4": "Getting fucked so hard you come with your legs giving out, barely able to stand afterward",
+            "mode_4": "Dom",
+            "score_4": 0,
+            "option_4": "Rough",
+            "option_score_4": 1,
+            "answer_5": "Edged for ages, pushed right to the brink of breaking, then finally allowed to explode",
+            "mode_5": "Equal",
+            "score_5": 0,
+            "option_5": "Training",
+            "option_score_5": 2
+          }
+        },
+        "item_aaGHgf": {
+          "type": "item",
+          "name": "Item 10",
+          "settings": {
+            "question": "After everything, you're both spent and just wrapped up in each other's arms drifting off… what words do you most wanna say/hear?",
+            "answer_1": "“You were so good for me tonight… your Master/Mistress is really pleased”",
+            "mode1": "Equal",
+            "score_1": 0,
+            "option_1": "Training",
+            "option_score_1": 1,
+            "answer_2": "“Look at you, all cried out and messy… so fucking cute. Next time I’ll go even harder”",
+            "mode_2": "Dom",
+            "score_2": 0,
+            "option_2": "Rough",
+            "option_score_2": 1,
+            "answer_3": "“Admit it—the rougher I am, the harder you come, right?”",
+            "mode_3": "Dom",
+            "score_3": 0,
+            "option_3": "Rough",
+            "option_score_3": 2,
+            "answer_4": "“Have you said thank you to Daddy/Mommy yet?”",
+            "mode_4": "Equal",
+            "score_4": 0,
+            "option_4": "Training",
+            "option_score_4": 2,
+            "answer_5": "“Just stay like this… holding you feels so good. I love you”",
+            "mode_5": "Sub",
+            "score_5": 0,
+            "option_5": "Gentle",
+            "option_score_5": 1
+          }
+        }
+      },
+      "block_order": [
+        "quize_result_6HgCEk",
+        "item_tfy7WF",
+        "item_LfHHWR",
+        "item_xC4FBD",
+        "item_KjbDcW",
+        "item_Fd7XmK",
+        "item_4KaCpU",
+        "item_iMtNPJ",
+        "item_9Y4cMC",
+        "item_8QM3Dz",
+        "item_aaGHgf"
+      ],
+      "custom_css": [
+        ".quize-left {font-family: var(--font-heading-family);}",
+        "@media (max-width: 768px) {.quize-left h2 {font-size: 24px; }}"
+      ],
+      "name": "Custom Quize",
+      "settings": {
+        "bg": "shopify://shop_images/Section_2.png",
+        "title": "Find Your Personal Resonance",
+        "subtitle": "Answer 10 quick questions to unlock your custom pleasure profile and curated erotica recommendations."
+      }
+    },
+    "newsletter_mBFWeB": {
+      "type": "newsletter",
+      "custom_css": [
+        "h2.h4 {font-size: 42px;}",
+        "@media (max-width: 768px) {h2.h4 {font-size: 20px; }}"
+      ],
+      "name": "t:sections.newsletter.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "image_position": "background",
+        "image_size": "md",
+        "add_image_spacing": false,
+        "icon": "none",
+        "title": "Join Us Unlock & Extra 💲10 Off",
+        "heading_tag": "h4",
+        "button_text": "Subscribe",
+        "privacy_policy_text": "By signing up, you agree with our privacy policy.",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    }
+  },
+  "order": [
+    "slideshow_VhiARW",
+    "video_banner_kFXcBf",
+    "blocks_bczp4h",
+    "pleasure_WwiyAN",
+    "1776998100547faea5",
+    "blocks_WJG6Bc",
+    "reviews_49wHXX",
+    "quize_dBPiQp",
+    "newsletter_mBFWeB"
+  ]
+}
