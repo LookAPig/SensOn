@@ -101,8 +101,12 @@
       padding: 20px 18px;
     }
 
+    #pdp-wh-{{ block.id }} .pdp-creator-quote:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
     #pdp-wh-{{ block.id }} .pdp-creator-quote {
-      margin: 0 0 20px;
+      margin: 0;
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 14px;
       line-height: 1.45;
@@ -121,6 +125,84 @@
       display: flex;
       align-items: center;
       gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin-bottom: 20px;
+      border: 2px solid #4a9eff;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__poster {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: #000;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video.is-playing .pdp-creator-video__poster {
+      display: none;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__play-btn {
+      position: relative;
+      z-index: 3;
+      width: 56px;
+      height: 56px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgb(80 80 80 / 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__play-btn svg {
+      width: 22px;
+      height: 22px;
+      margin-left: 3px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__host {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__host video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video.is-playing .pdp-creator-video__host {
+      z-index: 2;
     }
 
     #pdp-wh-{{ block.id }} .pdp-creator-avatar {
@@ -377,9 +459,6 @@
       -%}
       <div class="pdp-creator-stack">
         <div class="pdp-creator-card">
-          {%- if block.settings.creator_quote != blank -%}
-            <p class="pdp-creator-quote">{{ block.settings.creator_quote | escape }}</p>
-          {%- endif -%}
           {%- if block.settings.creator_avatar != blank
             or block.settings.creator_name != blank
             or block.settings.creator_credentials != blank
@@ -403,6 +482,56 @@
                 {%- endif -%}
               </div>
             </div>
+          {%- endif -%}
+
+          {%- if block.settings.creator_video != blank -%}
+            <div class="pdp-creator-video" data-pdp-creator-video tabindex="0" role="group" aria-label="{% if block.settings.creator_name != blank %}{{ block.settings.creator_name | escape }} — {% endif %}Video">
+              <div class="pdp-creator-video__poster" data-pdp-creator-video-poster>
+                {%- if block.settings.creator_video_cover != blank -%}
+                  {{
+                    block.settings.creator_video_cover
+                    | image_url: width: 900
+                    | image_tag:
+                      class: 'pdp-creator-video__cover',
+                      loading: 'lazy',
+                      widths: '400, 600, 900',
+                      sizes: '100vw',
+                      alt: block.settings.creator_name | default: 'Video' | escape
+                  }}
+                {%- elsif block.settings.creator_video.preview_image != blank -%}
+                  {{
+                    block.settings.creator_video.preview_image
+                    | image_url: width: 900
+                    | image_tag:
+                      class: 'pdp-creator-video__cover',
+                      loading: 'lazy',
+                      widths: '400, 600, 900',
+                      sizes: '100vw',
+                      alt: block.settings.creator_name | default: 'Video' | escape
+                  }}
+                {%- endif -%}
+                <button type="button" class="pdp-creator-video__play-btn" aria-label="Play video" tabindex="-1">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="pdp-creator-video__host">
+                {{
+                  block.settings.creator_video
+                  | video_tag:
+                    playsinline: true,
+                    controls: false,
+                    preload: 'none',
+                    muted: false,
+                    loop: false
+                }}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if block.settings.creator_quote != blank -%}
+            <p class="pdp-creator-quote">{{ block.settings.creator_quote | escape }}</p>
           {%- endif -%}
         </div>
 
@@ -656,6 +785,39 @@
         });
       });
 
+      function setupCreatorVideos() {
+        root.querySelectorAll("[data-pdp-creator-video]").forEach(function (wrap) {
+          if (wrap.dataset.pdpCreatorVideoBound === "1") return;
+          wrap.dataset.pdpCreatorVideoBound = "1";
+
+          var poster = wrap.querySelector("[data-pdp-creator-video-poster]");
+          var video = wrap.querySelector("video");
+          if (!poster || !video) return;
+
+          function playVideo() {
+            if (wrap.classList.contains("is-playing")) return;
+            wrap.classList.add("is-playing");
+            video.controls = true;
+            var playPromise = video.play();
+            if (playPromise && playPromise.catch) {
+              playPromise.catch(function () {});
+            }
+          }
+
+          poster.addEventListener("click", function (event) {
+            event.preventDefault();
+            playVideo();
+          });
+
+          wrap.addEventListener("keydown", function (event) {
+            if (event.key !== "Enter" && event.key !== " ") return;
+            event.preventDefault();
+            playVideo();
+          });
+        });
+      }
+
+      setupCreatorVideos();
       renderSpecsGrid();
     })();
   </script>
