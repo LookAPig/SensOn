@@ -99,6 +99,13 @@
     else
       assign loading_attribute = "eager"
     endif
+
+    assign table_row_count = 0
+    for block in section.blocks
+      if block.type == "table_row"
+        assign table_row_count = table_row_count | plus: 1
+      endif
+    endfor
   -%}
 
   {%- style -%}
@@ -106,7 +113,7 @@
     {{ row_heading_font | font_face: font_display: 'swap' }}
     {{ value_font | font_face: font_display: 'swap' }}
 
-    .section-{{ section.id }} {
+    #senson-edge-section .section-{{ section.id }} {
       border-top: solid {{ border_color }} {{ border_thickness }}px;
       border-bottom: solid {{ border_color }} {{ border_thickness }}px;
       margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
@@ -117,7 +124,7 @@
       overflow: visible;
     }
 
-    .section-{{ section.id }}-settings {
+    #senson-edge-section .section-{{ section.id }}-settings {
       margin: 0 auto;
       padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
       padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
@@ -125,67 +132,64 @@
       padding-right: {{ padding_horizontal_mobile }}rem;
     }
 
-    .comparison-table-wrapper-{{ section.id }} {
+    #senson-edge-section .comparison-table-wrapper-{{ section.id }} {
       margin-top: {{ table_mt_mobile }}px;
       width: 100%;
       margin-left: {% if content_align_mobile == 'center' %}auto{% else %}0{% endif %};
       margin-right: {% if content_align_mobile == 'center' %}auto{% else %}0{% endif %};
     }
 
-    .comparison-table-inner-{{ section.id }} {
+    #senson-edge-section .comparison-table-inner-{{ section.id }},
+    #senson-edge-section .comparison-table-{{ section.id }} {
       width: 100%;
     }
 
-    .comparison-table-{{ section.id }} {
+    #senson-edge-section .comparison-columns-{{ section.id }} {
+      display: grid;
+      grid-template-columns: repeat({{ table_columns }}, minmax(0, 1fr));
+      grid-template-rows: auto repeat({{ table_row_count }}, minmax(64px, auto));
+      column-gap: 12px;
       width: 100%;
+      padding-top: {{ heading_image_size_mobile | times: 42 | divided_by: 100 | round: 0 }}px;
+      overflow: visible;
     }
 
-    .comparison-columns-{{ section.id }} {
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-    }
-
-    .comparison-column-{{ section.id }} {
-      flex: 1;
+    #senson-edge-section .comparison-column-{{ section.id }} {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: 1 / -1;
       min-width: 0;
-      max-width: 440px;
-      padding-top: {{ heading_image_size_mobile | divided_by: 2 }}px;
     }
 
-    .comparison-column-card-{{ section.id }} {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      border-radius: {{ table_radius }}px;
-      overflow: hidden;
+    #senson-edge-section .comparison-column-card-{{ section.id }} {
+      display: contents;
     }
 
-    .comparison-column-header-{{ section.id }} {
+    #senson-edge-section .comparison-column-header-{{ section.id }} {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
-      min-height: 88px;
-      padding: {{ column_heading_padding_vertical_mobile }}px {{ column_heading_padding_horizontal_mobile }}px 20px;
+      min-height: 72px;
+      padding: {{ heading_image_size_mobile | times: 28 | divided_by: 100 | round: 0 }}px {{ column_heading_padding_horizontal_mobile }}px {{ column_heading_padding_vertical_mobile | plus: 16 }}px;
+      border-radius: {{ table_radius }}px {{ table_radius }}px 0 0;
+      background-color: {{ table_bg_image_color }};
+      overflow: visible;
+    }
+
+    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-column-header-{{ section.id }} {
+      background: linear-gradient(180deg, {{ table_column_active_border_color }} 0%, #c77dff 55%, #9b6fd0 100%);
+    }
+
+    #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-column-header-{{ section.id }} {
       background-color: {{ table_bg_image_color }};
     }
 
-    .comparison-column-{{ section.id }}.active .comparison-column-header-{{ section.id }} {
-      background: linear-gradient(90deg, {{ table_bg_image_active_color }} 0%, {{ table_column_active_border_color }} 45%, #9b6fd0 100%);
-    }
-
-    .comparison-column-{{ section.id }}:not(.active) .comparison-column-header-{{ section.id }} {
-      background-color: {{ table_bg_image_color }};
-    }
-
-    .comparison-column-heading-{{ section.id }} {
+    #senson-edge-section .comparison-column-heading-{{ section.id }} {
       position: relative;
       z-index: 2;
-      margin: 12px 0 0;
+      margin: 0;
       width: 100%;
       font-size: {{ column_heading_size_mobile }}px;
       color: {{ column_heading_color }};
@@ -194,75 +198,87 @@
       font-weight: 700;
     }
 
-    .comparison-column-{{ section.id }}.active .comparison-column-heading-{{ section.id }} {
+    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-column-heading-{{ section.id }} {
       color: #ffffff;
     }
 
-    .comparison-item-heading-image-{{ section.id }} {
-      display: block;
-      position: relative;
-      z-index: 3;
-      margin-top: calc(-{{ heading_image_size_mobile | divided_by: 2 }}px - {{ column_heading_padding_vertical_mobile }}px);
-      border: {{ heading_image_border_thickness }}px solid {{ heading_image_border_color }};
-      border-radius: {{ heading_image_radius }}px;
+    #senson-edge-section .comparison-column-image-{{ section.id }} {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      z-index: 4;
+      display: flex;
+      justify-content: center;
       width: 100%;
-      max-width: {{ heading_image_size_mobile }}px;
-      overflow: hidden;
-      aspect-ratio: 1/1;
+      transform: translate(-50%, -42%);
+      pointer-events: none;
     }
 
-    .comparison-item-heading-image-{{ section.id }} img,
-    .comparison-item-heading-image-{{ section.id }} svg {
+    #senson-edge-section .comparison-item-heading-image-{{ section.id }} {
+      display: block;
+      flex-shrink: 0;
+      border: {{ heading_image_border_thickness }}px solid {{ heading_image_border_color }};
+      border-radius: {{ heading_image_radius }}px;
+      width: {{ heading_image_size_mobile }}px;
+      overflow: hidden;
+      pointer-events: auto;
+    }
+
+    #senson-edge-section .comparison-item-heading-image-{{ section.id }} img,
+    #senson-edge-section .comparison-item-heading-image-{{ section.id }} svg {
       display: block;
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: contain;
     }
 
-    .comparison-item-heading-image-{{ section.id }} svg {
+    #senson-edge-section .comparison-item-heading-image-{{ section.id }} svg {
       background-color: #afafaf;
     }
 
-    .comparison-column-body-{{ section.id }} {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background-color: {{ table_column_bg_color }};
+    #senson-edge-section .comparison-column-body-{{ section.id }} {
+      display: contents;
     }
 
-    .comparison-column-{{ section.id }}.active .comparison-column-body-{{ section.id }} {
-      background: linear-gradient(180deg, {{ table_column_active_bg_color }} 0%, #ffffff 100%);
-    }
-
-    .comparison-column-{{ section.id }}:not(.active) .comparison-column-body-{{ section.id }} {
-      background-color: {{ table_column_bg_color }};
-    }
-
-    .comparison-column-row-{{ section.id }} {
+    #senson-edge-section .comparison-column-row-{{ section.id }} {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 72px;
       padding: {{ row_padding_vertical_mobile }}px {{ row_padding_horizontal_mobile }}px;
       text-align: center;
+      background-color: {{ table_column_bg_color }};
     }
 
-    .comparison-value-{{ section.id }} {
+    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-column-row-{{ section.id }} {
+      background-color: {{ table_column_bg_color }};
+    }
+
+    #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-column-row-{{ section.id }} {
+      background-color: {{ table_column_bg_color }};
+    }
+
+    #senson-edge-section .comparison-column-{{ section.id }} .comparison-column-row-{{ section.id }}:last-child {
+      border-radius: 0 0 {{ table_radius }}px {{ table_radius }}px;
+    }
+
+    #senson-edge-section .comparison-value-{{ section.id }} {
       margin: 0;
       font-size: {{ value_size_mobile }}px;
       color: {{ value_color }};
       line-height: {{ value_height }}%;
       text-align: center;
       font-weight: 400;
+      word-break: break-word;
+      max-width: 100%;
     }
 
-    .comparison-column-{{ section.id }}.active .comparison-value-{{ section.id }} {
+    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-value-{{ section.id }} {
       color: {{ row_heading_color }};
       font-weight: 700;
     }
 
-    .comparison-value-icon-{{ section.id }} {
+    #senson-edge-section .comparison-value-icon-{{ section.id }} {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -270,35 +286,35 @@
       height: {{ value_icon_size_mobile }}px;
     }
 
-    .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross {
-      width: calc({{ value_icon_size_mobile }}px + 8px);
-      height: calc({{ value_icon_size_mobile }}px + 8px);
+    #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross {
+      width: calc({{ value_icon_size_mobile }}px + 10px);
+      height: calc({{ value_icon_size_mobile }}px + 10px);
       border: 1.5px solid {{ value_icon_color }};
       border-radius: 50%;
     }
 
-    .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross svg {
-      width: calc({{ value_icon_size_mobile }}px - 6px);
-      height: calc({{ value_icon_size_mobile }}px - 6px);
+    #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross svg {
+      width: calc({{ value_icon_size_mobile }}px - 8px);
+      height: calc({{ value_icon_size_mobile }}px - 8px);
     }
 
-    .comparison-value-icon-{{ section.id }} img,
-    .comparison-value-icon-{{ section.id }} svg {
+    #senson-edge-section .comparison-value-icon-{{ section.id }} img,
+    #senson-edge-section .comparison-value-icon-{{ section.id }} svg {
       display: block;
       width: 100%;
       height: 100%;
     }
 
-    .comparison-value-icon-{{ section.id }} svg path {
+    #senson-edge-section .comparison-value-icon-{{ section.id }} svg path {
       fill: {{ value_icon_color }};
     }
 
-    .comparison-column-{{ section.id }}.active .comparison-value-icon-{{ section.id }} svg path {
+    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-value-icon-{{ section.id }} svg path {
       fill: {{ value_icon_active_color }};
     }
 
     @media (min-width: 1024px) {
-      .section-{{ section.id }} {
+      #senson-edge-section .section-{{ section.id }} {
         margin-top: {{ margin_top }}px;
         margin-bottom: {{ margin_bottom }}px;
         margin-left: {{ margin_horizontal }}rem;
@@ -306,65 +322,60 @@
         border-radius: {{ section_radius }}px;
       }
 
-      .section-{{ section.id }}-settings {
+      #senson-edge-section .section-{{ section.id }}-settings {
         padding-top: {{ padding_top }}px;
         padding-bottom: {{ padding_bottom }}px;
         padding-left: {{ padding_horizontal }}rem;
         padding-right: {{ padding_horizontal }}rem;
       }
 
-      .comparison-table-wrapper-{{ section.id }} {
+      #senson-edge-section .comparison-table-wrapper-{{ section.id }} {
         margin-top: {{ table_mt }}px;
-        max-width: {{ content_max_width }}%;
+        width: min(100%, max(560px, {{ content_width | times: content_max_width | divided_by: 100 }}px));
         margin-left: {% if content_align == 'center' %}auto{% else %}0{% endif %};
         margin-right: {% if content_align == 'center' %}auto{% else %}0{% endif %};
       }
 
-      .comparison-columns-{{ section.id }} {
-        gap: 20px;
+      #senson-edge-section .comparison-columns-{{ section.id }} {
+        column-gap: 20px;
+        padding-top: {{ heading_image_size | times: 42 | divided_by: 100 | round: 0 }}px;
       }
 
-      .comparison-column-{{ section.id }} {
-        padding-top: {{ heading_image_size | divided_by: 2 }}px;
+      #senson-edge-section .comparison-column-header-{{ section.id }} {
+        min-height: 88px;
+        padding: {{ heading_image_size | times: 28 | divided_by: 100 | round: 0 }}px {{ column_heading_padding_horizontal }}px {{ column_heading_padding_vertical | plus: 20 }}px;
       }
 
-      .comparison-column-header-{{ section.id }} {
-        min-height: 110px;
-        padding: {{ column_heading_padding_vertical }}px {{ column_heading_padding_horizontal }}px 24px;
-      }
-
-      .comparison-column-heading-{{ section.id }} {
+      #senson-edge-section .comparison-column-heading-{{ section.id }} {
         font-size: {{ column_heading_size }}px;
         text-align: {{ column_heading_align }};
       }
 
-      .comparison-item-heading-image-{{ section.id }} {
-        margin-top: calc(-{{ heading_image_size | divided_by: 2 }}px - {{ column_heading_padding_vertical }}px);
-        max-width: {{ heading_image_size }}px;
+      #senson-edge-section .comparison-item-heading-image-{{ section.id }} {
+        width: {{ heading_image_size }}px;
       }
 
-      .comparison-column-row-{{ section.id }} {
-        min-height: 88px;
+      #senson-edge-section .comparison-column-row-{{ section.id }} {
         padding: {{ row_padding_vertical }}px {{ row_padding_horizontal }}px;
       }
 
-      .comparison-value-{{ section.id }} {
+      #senson-edge-section .comparison-value-{{ section.id }} {
         font-size: {{ value_size }}px;
       }
 
-      .comparison-value-icon-{{ section.id }} {
+      #senson-edge-section .comparison-value-icon-{{ section.id }} {
         width: {{ value_icon_size }}px;
         height: {{ value_icon_size }}px;
       }
 
-      .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross {
-        width: calc({{ value_icon_size }}px + 8px);
-        height: calc({{ value_icon_size }}px + 8px);
+      #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross {
+        width: calc({{ value_icon_size }}px + 10px);
+        height: calc({{ value_icon_size }}px + 10px);
       }
 
-      .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross svg {
-        width: calc({{ value_icon_size }}px - 6px);
-        height: calc({{ value_icon_size }}px - 6px);
+      #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross svg {
+        width: calc({{ value_icon_size }}px - 8px);
+        height: calc({{ value_icon_size }}px - 8px);
       }
     }
   {%- endstyle -%}
@@ -520,13 +531,15 @@
                 <div class="comparison-column-{{ section.id }} active">
                   <div class="comparison-column-card-{{ section.id }}">
                     <div class="comparison-column-header-{{ section.id }}">
-                      <{% if first_heading_url != blank %}a href="{{ first_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">
-                        {% if first_heading_image != blank %}
-                          {{ first_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                        {% else %}
-                          {{ "image" | placeholder_svg_tag }}
-                        {% endif %}
-                      </{% if first_heading_url != blank %}a{% else %}div{% endif %}>
+                      <div class="comparison-column-image-{{ section.id }}">
+                        <{% if first_heading_url != blank %}a href="{{ first_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">
+                          {% if first_heading_image != blank %}
+                            {{ first_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                          {% else %}
+                            {{ "image" | placeholder_svg_tag }}
+                          {% endif %}
+                        </{% if first_heading_url != blank %}a{% else %}div{% endif %}>
+                      </div>
                       {% if first_heading != blank %}
                         <{% if first_heading_url != blank %}a href="{{ first_heading_url }}"{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ first_heading }}</{% if first_heading_url != blank %}a{% else %}h3{% endif %}>
                       {% endif %}
@@ -569,13 +582,15 @@
                 <div class="comparison-column-{{ section.id }}">
                   <div class="comparison-column-card-{{ section.id }}">
                     <div class="comparison-column-header-{{ section.id }}">
-                      <{% if second_heading_url != blank %}a href="{{ second_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">
-                        {% if second_heading_image != blank %}
-                          {{ second_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                        {% else %}
-                          {{ "image" | placeholder_svg_tag }}
-                        {% endif %}
-                      </{% if second_heading_url != blank %}a{% else %}div{% endif %}>
+                      <div class="comparison-column-image-{{ section.id }}">
+                        <{% if second_heading_url != blank %}a href="{{ second_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">
+                          {% if second_heading_image != blank %}
+                            {{ second_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                          {% else %}
+                            {{ "image" | placeholder_svg_tag }}
+                          {% endif %}
+                        </{% if second_heading_url != blank %}a{% else %}div{% endif %}>
+                      </div>
                       {% if second_heading != blank %}
                         <{% if second_heading_url != blank %}a href="{{ second_heading_url }}"{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ second_heading }}</{% if second_heading_url != blank %}a{% else %}h3{% endif %}>
                       {% endif %}
@@ -618,13 +633,15 @@
                 <div class="comparison-column-{{ section.id }}">
                   <div class="comparison-column-card-{{ section.id }}">
                     <div class="comparison-column-header-{{ section.id }}">
-                      <{% if third_heading_url != blank %}a href="{{ third_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">
-                        {% if third_heading_image != blank %}
-                          {{ third_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                        {% else %}
-                          {{ "image" | placeholder_svg_tag }}
-                        {% endif %}
-                      </{% if third_heading_url != blank %}a{% else %}div{% endif %}>
+                      <div class="comparison-column-image-{{ section.id }}">
+                        <{% if third_heading_url != blank %}a href="{{ third_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">
+                          {% if third_heading_image != blank %}
+                            {{ third_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                          {% else %}
+                            {{ "image" | placeholder_svg_tag }}
+                          {% endif %}
+                        </{% if third_heading_url != blank %}a{% else %}div{% endif %}>
+                      </div>
                       {% if third_heading != blank %}
                         <{% if third_heading_url != blank %}a href="{{ third_heading_url }}"{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ third_heading }}</{% if third_heading_url != blank %}a{% else %}h3{% endif %}>
                       {% endif %}
