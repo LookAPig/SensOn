@@ -38,16 +38,16 @@
       align-items: stretch;
       gap: 8px;
       padding: 4px;
+      width: 100%;
       background: var(--pdp-tab-bar-bg);
       border-radius: 100px;
       margin-bottom: 16px;
-      overflow-x: auto;
+      overflow: hidden;
       flex-wrap: nowrap;
-      scrollbar-width: thin;
     }
 
     #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
-      flex: 0 0 125px;
+      flex: 1 1 0;
       min-width: 0;
       appearance: none;
       border: none;
@@ -62,15 +62,9 @@
       border-radius: 100px;
       transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
       hyphens: auto;
+      overflow-wrap: break-word;
       word-break: break-word;
       white-space: normal;
-    }
-
-    @media screen and (min-width: 750px) {
-      #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
-        font-size: 14px;
-        flex: 0 0 125px;
-      }
     }
 
     #pdp-wh-{{ block.id }} .pdp-info-tabs__tab[aria-selected='true'] {
@@ -259,15 +253,15 @@
     /* 移动端 */
     @media (max-width: 768px) {
       #pdp-wh-{{ block.id }} .pdp-info-tabs__bar {
-        gap: 6px;
+        gap: 4px;
         padding: 4px;
-        justify-content: flex-start;
       }
+
       #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
-        flex: 0 0 80px;
-        font-size: 12px;
-        padding: 8px 6px;
-        line-height: 1.2;
+        flex: 1 1 0;
+        font-size: 11px;
+        padding: 8px 4px;
+        line-height: 1.15;
       }
 
       #pdp-wh-{{ block.id }} .pdp-specs-grid {
