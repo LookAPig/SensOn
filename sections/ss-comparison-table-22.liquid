@@ -93,27 +93,16 @@
     assign value_icon_active_color = section.settings.value_icon_active_color
     assign value_icon_check = section.settings.value_icon_check
     assign value_icon_cross = section.settings.value_icon_cross
-
-    if lazy
-      assign loading_attribute = "lazy"
-    else
-      assign loading_attribute = "eager"
-    endif
-
-    assign table_row_count = 0
-    for block in section.blocks
-      if block.type == "table_row"
-        assign table_row_count = table_row_count | plus: 1
-      endif
-    endfor
   -%}
 
   {%- style -%}
+    {{ heading_font | font_face: font_display: 'swap' }}
+    {{ text_font | font_face: font_display: 'swap' }}
     {{ column_heading_font | font_face: font_display: 'swap' }}
     {{ row_heading_font | font_face: font_display: 'swap' }}
     {{ value_font | font_face: font_display: 'swap' }}
-
-    #senson-edge-section .section-{{ section.id }} {
+    
+    .section-{{ section.id }} {
       border-top: solid {{ border_color }} {{ border_thickness }}px;
       border-bottom: solid {{ border_color }} {{ border_thickness }}px;
       margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
@@ -121,10 +110,10 @@
       margin-left: {{ margin_horizontal_mobile }}rem;
       margin-right: {{ margin_horizontal_mobile }}rem;
       border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
-      overflow: visible;
+      overflow: hidden;
     }
-
-    #senson-edge-section .section-{{ section.id }}-settings {
+    
+    .section-{{ section.id }}-settings {
       margin: 0 auto;
       padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
       padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
@@ -132,250 +121,372 @@
       padding-right: {{ padding_horizontal_mobile }}rem;
     }
 
-    #senson-edge-section .comparison-table-wrapper-{{ section.id }} {
-      margin-top: {{ table_mt_mobile }}px;
-      width: 100%;
-      margin-left: {% if content_align_mobile == 'center' %}auto{% else %}0{% endif %};
-      margin-right: {% if content_align_mobile == 'center' %}auto{% else %}0{% endif %};
+    .comparison-heading-{{ section.id }} {
+      text-align: {{ content_align_mobile }};
+    }
+    .comparison-heading-{{ section.id }} * {
+      margin: 0;
+      font-size: {{ heading_size_mobile }}px;
+      color: {{ heading_color }};
+      line-height: {{ heading_height }}%;
     }
 
-    #senson-edge-section .comparison-table-inner-{{ section.id }},
-    #senson-edge-section .comparison-table-{{ section.id }} {
-      width: 100%;
+    .comparison-text-{{ section.id }} {
+      margin-top: {{ text_mt_mobile }}px;
+      text-align: {{ content_align_mobile }};
+    }
+    .comparison-text-{{ section.id }} * {
+      margin: 0;
+      font-size: {{ text_size_mobile }}px;
+      color: {{ text_color }};
+      line-height: {{ text_height }}%;
     }
 
-    #senson-edge-section .comparison-columns-{{ section.id }} {
-      display: grid;
-      grid-template-columns: repeat({{ table_columns }}, minmax(0, 1fr));
-      grid-template-rows: auto repeat({{ table_row_count }}, minmax(64px, auto));
-      column-gap: 12px;
-      width: 100%;
-      padding-top: {{ heading_image_size_mobile | times: 42 | divided_by: 100 | round: 0 }}px;
-      overflow: visible;
-    }
-
-    #senson-edge-section .comparison-column-{{ section.id }} {
-      display: grid;
-      grid-template-rows: subgrid;
-      grid-row: 1 / -1;
-      min-width: 0;
-    }
-
-    #senson-edge-section .comparison-column-card-{{ section.id }} {
-      display: contents;
-    }
-
-    #senson-edge-section .comparison-column-header-{{ section.id }} {
-      position: relative;
+    .comparison-grid-{{ section.id }} {
       display: flex;
+      gap: 25px;
+    }
+
+    .comparison-table-wrapper-{{ section.id }} {
+      padding-top: {{ heading_image_size_mobile | divided_by: 2 }}px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      margin-left: -{{ padding_horizontal_mobile }}rem;
+      margin-right: -{{ padding_horizontal_mobile }}rem;
+    }
+    .comparison-table-inner-{{ section.id }} {
+      /* 移除固定最小宽度，让内容自然撑开 */
+      padding-left: {{ padding_horizontal_mobile }}rem;
+      padding-right: {{ padding_horizontal_mobile }}rem;
+      display: inline-block;
+      min-width: 100%;
+    }
+    .comparison-table-{{ section.id }} {
+      padding-bottom: 25px;
+      /* 移除右侧固定 padding-right，避免额外空白 */
+      margin-top: {{ table_mt_mobile }}px;
+      display: inline-block;
+      min-width: 100%;
+    }
+
+    .comparison-item-{{ section.id }} {
+      position: relative;
+      display: flex !important;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
-      min-height: 72px;
-      padding: {{ heading_image_size_mobile | times: 28 | divided_by: 100 | round: 0 }}px {{ column_heading_padding_horizontal_mobile }}px {{ column_heading_padding_vertical_mobile | plus: 16 }}px;
-      border-radius: {{ table_radius }}px {{ table_radius }}px 0 0;
-      background-color: {{ table_bg_image_color }};
-      overflow: visible;
+      justify-content: center;
     }
 
-    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-column-header-{{ section.id }} {
-      background: linear-gradient(180deg, {{ table_column_active_border_color }} 0%, #c77dff 55%, #9b6fd0 100%);
+    .comparison-item-bg-image-{{ section.id }} {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-top-left-radius: {{ table_radius }}px;
+      border-top-right-radius: {{ table_radius }}px;
+      overflow: hidden;
+    }
+    .comparison-item-bg-image-{{ section.id }} img,
+    .comparison-item-bg-image-{{ section.id }} svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .comparison-{{ section.id }} .comparison-item-{{ section.id }} .comparison-item-bg-image-{{ section.id }} svg defs linearGradient stop {
+      stop-color: {{ table_bg_image_color }} !important;
+    }
+    .comparison-{{ section.id }} .comparison-item-{{ section.id }}.active .comparison-item-bg-image-{{ section.id }} svg defs linearGradient stop {
+      stop-color: {{ table_bg_image_active_color }} !important;
     }
 
-    #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-column-header-{{ section.id }} {
-      background-color: {{ table_bg_image_color }};
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:first-child:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0%;
+      width: 70%;
+      height: {{ row_border_thickness }}px;
+      background-color: {{ row_heading_border_color }};
+      mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 57%, rgba(0, 0, 0, 0) 100%);
     }
 
-    #senson-edge-section .comparison-column-heading-{{ section.id }} {
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }} {
+      padding: {{ column_heading_padding_vertical_mobile }}px {{ column_heading_padding_horizontal_mobile }}px;  
+    }
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child) {
+      border-top: {{ table_column_border_thickness }}px solid {{ table_column_border_color }};
+      border-left: {{ table_column_border_thickness }}px solid {{ table_column_border_color }};
+      border-right: {{ table_column_border_thickness }}px solid {{ table_column_border_color }};
+    }
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child).active {
+      border-top: {{ table_column_border_thickness }}px solid {{ table_column_active_border_color }};
+      border-left: {{ table_column_border_thickness }}px solid {{ table_column_active_border_color }};
+      border-right: {{ table_column_border_thickness }}px solid {{ table_column_active_border_color }};
+    }
+
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child) {
+      border-left: {{ table_column_border_thickness }}px solid {{ table_column_border_color }};
+      border-right: {{ table_column_border_thickness }}px solid {{ table_column_border_color }};
+    }
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child).active {  
+      border-left: {{ table_column_border_thickness }}px solid {{ table_column_active_border_color }};
+      border-right: {{ table_column_border_thickness }}px solid {{ table_column_active_border_color }};
+    }
+    .comparison-grid-rows-{{ section.id }}:last-child .comparison-item-{{ section.id }}:not(:first-child) {
+      border-left: {{ table_column_border_thickness }}px solid {{ table_column_border_color }};
+      border-right: {{ table_column_border_thickness }}px solid {{ table_column_border_color }};
+      border-bottom: {{ table_column_border_thickness }}px solid {{ table_column_border_color }};
+    }
+    .comparison-grid-rows-{{ section.id }}:last-child .comparison-item-{{ section.id }}:not(:first-child).active {  
+      border-left: {{ table_column_border_thickness }}px solid {{ table_column_active_border_color }};
+      border-right: {{ table_column_border_thickness }}px solid {{ table_column_active_border_color }};
+      border-bottom: {{ table_column_border_thickness }}px solid {{ table_column_active_border_color }};
+    }
+
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child),
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child) {
+      background-color: {{ table_column_bg_color }};
+    }
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}.active {
+      background-color: {{ table_column_active_bg_color }};    
+    }
+
+    .comparison-grid-rows-{{ section.id }}:not(:last-child) .comparison-item-{{ section.id }}:not(:first-child):after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: {{ row_border_thickness }}px;
+      background-color: {{ table_column_border_color }};
+    }
+    .comparison-grid-rows-{{ section.id }}:not(:last-child) .comparison-item-{{ section.id }}.active:after {
+      background-color: {{ table_column_active_border_color }};
+    }
+
+    .comparison-grid-header-{{ section.id }} .comparison-column-heading-{{ section.id }} {
+      margin: 16px 0 0 0;
+      width: 100%;
       position: relative;
       z-index: 2;
-      margin: 0;
-      width: 100%;
       font-size: {{ column_heading_size_mobile }}px;
       color: {{ column_heading_color }};
       line-height: {{ column_heading_height }}%;
       text-align: {{ column_heading_align_mobile }};
       font-weight: 700;
     }
-
-    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-column-heading-{{ section.id }} {
-      color: #ffffff;
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}.active h3,
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}.active a {
+      color: {{ column_heading_active_color }};
     }
 
-    #senson-edge-section .comparison-column-image-{{ section.id }} {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      z-index: 4;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      transform: translate(-50%, -42%);
-      pointer-events: none;
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }} {
+      padding: {{ row_padding_vertical_mobile }}px {{ row_padding_horizontal_mobile }}px;
     }
 
-    #senson-edge-section .comparison-item-heading-image-{{ section.id }} {
+    .comparison-grid-header-{{ section.id }} + .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:first-child {
+      border-top-left-radius: {{ table_radius }}px;
+    }
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }} {
+      border-top-left-radius: {{ table_radius }}px;
+      border-top-right-radius: {{ table_radius }}px;
+    }
+    .comparison-grid-rows-{{ section.id }}:last-child .comparison-item-{{ section.id }} {
+      border-bottom-left-radius: {{ table_radius }}px;
+      border-bottom-right-radius: {{ table_radius }}px;
+    }
+
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}.active {
+      background-color: {{ table_column_active_bg_color }};
+    }
+
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:first-child h3 {
       display: block;
-      flex-shrink: 0;
+      margin: 0;
+      font-size: {{ row_heading_size_mobile }}px;
+      color: {{ row_heading_color }};
+      line-height: {{ row_heading_height }}%;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .comparison-item-heading-image-{{ section.id }} {
+      display: block;
+      position: relative;
+      z-index: 2;
+      margin-top: calc(-{{ heading_image_size_mobile | divided_by: 2 }}px - {{ column_heading_padding_vertical_mobile }}px);
       border: {{ heading_image_border_thickness }}px solid {{ heading_image_border_color }};
       border-radius: {{ heading_image_radius }}px;
-      width: {{ heading_image_size_mobile }}px;
+      width: 100%;
+      max-width: {{ heading_image_size_mobile }}px;
       overflow: hidden;
-      pointer-events: auto;
+      aspect-ratio: 1/1;
     }
-
-    #senson-edge-section .comparison-item-heading-image-{{ section.id }} img,
-    #senson-edge-section .comparison-item-heading-image-{{ section.id }} svg {
+    .comparison-item-heading-image-{{ section.id }} img,
+    .comparison-item-heading-image-{{ section.id }} svg {
       display: block;
       width: 100%;
-      height: auto;
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
+    }
+    .comparison-item-heading-image-{{ section.id }} svg {
+      background-color: #AFAFAF;
     }
 
-    #senson-edge-section .comparison-item-heading-image-{{ section.id }} svg {
-      background-color: #afafaf;
-    }
-
-    #senson-edge-section .comparison-column-body-{{ section.id }} {
-      display: contents;
-    }
-
-    #senson-edge-section .comparison-column-row-{{ section.id }} {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: {{ row_padding_vertical_mobile }}px {{ row_padding_horizontal_mobile }}px;
-      text-align: center;
-      background-color: {{ table_column_bg_color }};
-    }
-
-    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-column-row-{{ section.id }} {
-      background-color: {{ table_column_bg_color }};
-    }
-
-    #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-column-row-{{ section.id }} {
-      background-color: {{ table_column_bg_color }};
-    }
-
-    #senson-edge-section .comparison-column-{{ section.id }} .comparison-column-row-{{ section.id }}:last-child {
-      border-radius: 0 0 {{ table_radius }}px {{ table_radius }}px;
-    }
-
-    #senson-edge-section .comparison-value-{{ section.id }} {
+    .comparison-value-{{ section.id }} {
       margin: 0;
       font-size: {{ value_size_mobile }}px;
       color: {{ value_color }};
       line-height: {{ value_height }}%;
       text-align: center;
-      font-weight: 400;
-      word-break: break-word;
-      max-width: 100%;
+    }
+    .comparison-item-{{ section.id }}.active .comparison-value-{{ section.id }} {
+      color: {{ value_active_color }};
     }
 
-    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-value-{{ section.id }} {
-      color: {{ row_heading_color }};
-      font-weight: 700;
-    }
-
-    #senson-edge-section .comparison-value-icon-{{ section.id }} {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .comparison-value-icon-{{ section.id }} {
       width: {{ value_icon_size_mobile }}px;
-      height: {{ value_icon_size_mobile }}px;
+      height: {{ value_icon_size_mobile }}px;    
     }
-
-    #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross {
-      width: calc({{ value_icon_size_mobile }}px + 10px);
-      height: calc({{ value_icon_size_mobile }}px + 10px);
-      border: 1.5px solid {{ value_icon_color }};
-      border-radius: 50%;
-    }
-
-    #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross svg {
-      width: calc({{ value_icon_size_mobile }}px - 8px);
-      height: calc({{ value_icon_size_mobile }}px - 8px);
-    }
-
-    #senson-edge-section .comparison-value-icon-{{ section.id }} img,
-    #senson-edge-section .comparison-value-icon-{{ section.id }} svg {
+    .comparison-value-icon-{{ section.id }} img,
+    .comparison-value-icon-{{ section.id }} svg {
       display: block;
       width: 100%;
       height: 100%;
     }
-
-    #senson-edge-section .comparison-value-icon-{{ section.id }} svg path {
+    .comparison-value-icon-{{ section.id }} svg path {
       fill: {{ value_icon_color }};
     }
-
-    #senson-edge-section .comparison-column-{{ section.id }}.active .comparison-value-icon-{{ section.id }} svg path {
+    .comparison-item-{{ section.id }}.active .comparison-value-icon-{{ section.id }} svg path {
       fill: {{ value_icon_active_color }};
     }
 
-    @media (min-width: 1024px) {
-      #senson-edge-section .section-{{ section.id }} {
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }},
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }} {
+      width: 220px;
+    }
+
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
         margin-top: {{ margin_top }}px;
         margin-bottom: {{ margin_bottom }}px;
         margin-left: {{ margin_horizontal }}rem;
         margin-right: {{ margin_horizontal }}rem;
         border-radius: {{ section_radius }}px;
       }
-
-      #senson-edge-section .section-{{ section.id }}-settings {
+      .section-{{ section.id }}-settings {
         padding-top: {{ padding_top }}px;
         padding-bottom: {{ padding_bottom }}px;
         padding-left: {{ padding_horizontal }}rem;
         padding-right: {{ padding_horizontal }}rem;
+      }  
+      .comparison-heading-{{ section.id }} {
+        text-align: {{ content_align }};
       }
-
-      #senson-edge-section .comparison-table-wrapper-{{ section.id }} {
+      .comparison-heading-{{ section.id }} * {
+        font-size: {{ heading_size }}px;
+      }
+      .comparison-text-{{ section.id }} {
+        margin-top: {{ text_mt }}px;
+        text-align: {{ content_align }};
+      }
+      .comparison-text-{{ section.id }} * {
+        font-size: {{ text_size }}px;
+      }
+      .comparison-grid-{{ section.id }} {
+        gap: 25px;
+        justify-content: center;
+      }
+      .comparison-table-wrapper-{{ section.id }} {
+        padding-top: {{ heading_image_size | divided_by: 2 }}px;
+        margin-left: 0rem;
+        margin-right: 0rem;
+        overflow-x: visible;
+      }
+      .comparison-table-inner-{{ section.id }} {
+        padding-left: 0rem;
+        padding-right: 0rem;
+        display: block;
+      }
+      .comparison-table-{{ section.id }} {
         margin-top: {{ table_mt }}px;
-        width: min(100%, max(560px, {{ content_width | times: content_max_width | divided_by: 100 }}px));
-        margin-left: {% if content_align == 'center' %}auto{% else %}0{% endif %};
-        margin-right: {% if content_align == 'center' %}auto{% else %}0{% endif %};
+        padding-right: 0;
+        display: block;
       }
-
-      #senson-edge-section .comparison-columns-{{ section.id }} {
-        column-gap: 20px;
-        padding-top: {{ heading_image_size | times: 42 | divided_by: 100 | round: 0 }}px;
+      .comparison-item-heading-image-{{ section.id }} {
+        margin-top: calc(-{{ heading_image_size | divided_by: 2 }}px - {{ column_heading_padding_vertical }}px);
+        max-width: {{ heading_image_size }}px;
       }
-
-      #senson-edge-section .comparison-column-header-{{ section.id }} {
-        min-height: 88px;
-        padding: {{ heading_image_size | times: 28 | divided_by: 100 | round: 0 }}px {{ column_heading_padding_horizontal }}px {{ column_heading_padding_vertical | plus: 20 }}px;
+      .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }} {
+        padding: {{ column_heading_padding_vertical }}px {{ column_heading_padding_horizontal }}px;
       }
-
-      #senson-edge-section .comparison-column-heading-{{ section.id }} {
-        font-size: {{ column_heading_size }}px;
+      .comparison-grid-header-{{ section.id }} .comparison-column-heading-{{ section.id }} {
         text-align: {{ column_heading_align }};
+        font-size: {{ column_heading_size }}px;
       }
-
-      #senson-edge-section .comparison-item-heading-image-{{ section.id }} {
-        width: {{ heading_image_size }}px;
-      }
-
-      #senson-edge-section .comparison-column-row-{{ section.id }} {
+      .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }} {
         padding: {{ row_padding_vertical }}px {{ row_padding_horizontal }}px;
       }
-
-      #senson-edge-section .comparison-value-{{ section.id }} {
+      .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:first-child h3 {
+        font-size: {{ row_heading_size }}px;
+      }
+      .comparison-value-{{ section.id }} {
         font-size: {{ value_size }}px;
       }
-
-      #senson-edge-section .comparison-value-icon-{{ section.id }} {
+      .comparison-value-icon-{{ section.id }} {
         width: {{ value_icon_size }}px;
         height: {{ value_icon_size }}px;
       }
+    }
 
-      #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross {
-        width: calc({{ value_icon_size }}px + 10px);
-        height: calc({{ value_icon_size }}px + 10px);
+    /* ========== 自定义覆盖 ========== */
+    /* 移动端：第一列宽73px，其他列宽147px，第一列右边距12.5px，其他列间距25px */
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:first-child,
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:first-child {
+      width: 73px !important;
+    }
+    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child),
+    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child) {
+      width: 147px !important;
+    }
+    .comparison-grid-{{ section.id }} {
+      gap: 0 !important;
+    }
+    .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }} {
+      margin-right: 25px;
+    }
+    .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }}:last-child {
+      margin-right: 0;
+    }
+    .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }}:first-child {
+      margin-right: 12.5px;
+    }
+
+    /* 桌面端：第一列宽220px，其他列宽440px，间距同上 */
+    @media(min-width: 1024px) {
+      .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:first-child,
+      .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:first-child {
+        width: 220px !important;
       }
-
-      #senson-edge-section .comparison-column-{{ section.id }}:not(.active) .comparison-value-icon-{{ section.id }}--cross svg {
-        width: calc({{ value_icon_size }}px - 8px);
-        height: calc({{ value_icon_size }}px - 8px);
+      .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child),
+      .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child) {
+        width: 440px !important;
+      }
+      .comparison-grid-{{ section.id }} {
+        gap: 0 !important;
+      }
+      .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }} {
+        margin-right: 25px;
+      }
+      .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }}:last-child {
+        margin-right: 0;
+      }
+      .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }}:first-child {
+        margin-right: 12.5px;
       }
     }
   {%- endstyle -%}
@@ -414,9 +525,29 @@
     </style>
   {% endif %}
 
+  {% if heading_custom %}
+    <style>
+      .comparison-heading-{{ section.id }} * {
+        font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+        font-weight: {{ heading_font.weight }};
+        font-style: {{ heading_font.style }};
+      }
+    </style>
+  {% endif %}
+
+  {% if text_custom %}
+    <style>
+      .comparison-text-{{ section.id }} * {
+        font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
+        font-weight: {{ text_font.weight }};
+        font-style: {{ text_font.style }};
+      }
+    </style>
+  {% endif %}
+
   {% if column_heading_custom %}
     <style>
-      .comparison-column-heading-{{ section.id }} {
+      .comparison-grid-header-{{ section.id }} .comparison-column-heading-{{ section.id }} {
         font-family: {{ column_heading_font.family }}, {{ column_heading_font.fallback_families }};
         font-weight: {{ column_heading_font.weight }};
         font-style: {{ column_heading_font.style }};
@@ -426,7 +557,7 @@
 
   {% if row_heading_custom %}
     <style>
-      .comparison-column-{{ section.id }}.active .comparison-value-{{ section.id }} {
+      .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:first-child h3 {
         font-family: {{ row_heading_font.family }}, {{ row_heading_font.fallback_families }};
         font-weight: {{ row_heading_font.weight }};
         font-style: {{ row_heading_font.style }};
@@ -436,7 +567,7 @@
 
   {% if value_custom %}
     <style>
-      .comparison-column-{{ section.id }}:not(.active) .comparison-value-{{ section.id }} {
+      .comparison-value-{{ section.id }} {
         font-family: {{ value_font.family }}, {{ value_font.fallback_families }};
         font-weight: {{ value_font.weight }};
         font-style: {{ value_font.style }};
@@ -450,237 +581,181 @@
         {% case block.type %}
           {% when 'heading' %}
             {% if block.settings.heading != blank %}
-              {% style %}
-                .comparison-heading-{{ block.id }} {
-                  text-align: {{ content_align_mobile }};
-                }
-                .comparison-heading-{{ block.id }} * {
-                  margin: 0;
-                  font-size: {{ block.settings.heading_size_mobile }}px;
-                  color: {{ block.settings.heading_color }};
-                  line-height: {{ block.settings.heading_height }}%;
-                }
-                @media (min-width: 1024px) {
-                  .comparison-heading-{{ block.id }} {
-                    text-align: {{ content_align }};
-                    margin-top: {{ block.settings.heading_mt }}px;
-                  }
-                  .comparison-heading-{{ block.id }} * {
-                    font-size: {{ block.settings.heading_size }}px;
-                  }
-                }
-              {% endstyle %}
-              {% if block.settings.heading_custom %}
-                {% style %}
-                  .comparison-heading-{{ block.id }} * {
-                    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
-                    font-weight: {{ block.settings.heading_font.weight }};
-                    font-style: {{ block.settings.heading_font.style }};
-                  }
-                {% endstyle %}
-              {% endif %}
-              <div class="comparison-heading-{{ block.id }}" style="margin-top: {{ block.settings.heading_mt_mobile }}px;">
+              <div class="comparison-heading-{{ block.id }}">
                 {{ block.settings.heading }}
-              </div>
+              </div>  
             {% endif %}
           {% when 'text' %}
             {% if block.settings.text != blank %}
-              {% style %}
-                .comparison-text-{{ block.id }} {
-                  margin-top: {{ block.settings.text_mt_mobile }}px;
-                  text-align: {{ content_align_mobile }};
-                }
-                .comparison-text-{{ block.id }} * {
-                  margin: 0;
-                  font-size: {{ block.settings.text_size_mobile }}px;
-                  color: {{ block.settings.text_color }};
-                  line-height: {{ block.settings.text_height }}%;
-                }
-                @media (min-width: 1024px) {
-                  .comparison-text-{{ block.id }} {
-                    margin-top: {{ block.settings.text_mt }}px;
-                    text-align: {{ content_align }};
-                  }
-                  .comparison-text-{{ block.id }} * {
-                    font-size: {{ block.settings.text_size }}px;
-                  }
-                }
-              {% endstyle %}
-              {% if block.settings.text_custom %}
-                {% style %}
-                  .comparison-text-{{ block.id }} * {
-                    font-family: {{ block.settings.text_font.family }}, {{ block.settings.text_font.fallback_families }};
-                    font-weight: {{ block.settings.text_font.weight }};
-                    font-style: {{ block.settings.text_font.style }};
-                  }
-                {% endstyle %}
-              {% endif %}
               <div class="comparison-text-{{ block.id }}">
                 {{ block.settings.text }}
-              </div>
+              </div>  
             {% endif %}
         {% endcase %}
       {% endfor %}
-
+     
       <div class="comparison-table-wrapper-{{ section.id }}">
         <div class="comparison-table-inner-{{ section.id }}">
           <div class="comparison-table-{{ section.id }}">
-            <div class="comparison-columns-{{ section.id }}">
-
-              {% if first_heading != blank or first_heading_image != blank %}
-                <div class="comparison-column-{{ section.id }} active">
-                  <div class="comparison-column-card-{{ section.id }}">
-                    <div class="comparison-column-header-{{ section.id }}">
-                      <div class="comparison-column-image-{{ section.id }}">
-                        <{% if first_heading_url != blank %}a href="{{ first_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">
-                          {% if first_heading_image != blank %}
-                            {{ first_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                          {% else %}
-                            {{ "image" | placeholder_svg_tag }}
-                          {% endif %}
-                        </{% if first_heading_url != blank %}a{% else %}div{% endif %}>
-                      </div>
-                      {% if first_heading != blank %}
-                        <{% if first_heading_url != blank %}a href="{{ first_heading_url }}"{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ first_heading }}</{% if first_heading_url != blank %}a{% else %}h3{% endif %}>
-                      {% endif %}
+            <div class="comparison-grid-{{ section.id }} comparison-grid-header-{{ section.id }}">
+              <div class="comparison-item-{{ section.id }}"></div>
+              {% if first_heading != blank %}
+                <div class="comparison-item-{{ section.id }} active">
+                  <{% if first_heading_url != blank %}a href="{{ first_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">               
+                    {% if first_heading_image != blank %}
+                      {{ first_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                    {% else %}
+                      {{ 'image' | placeholder_svg_tag }}
+                    {% endif %}   
+                  </{% if first_heading_url != blank %}a{% else %}div{% endif %}>  
+                  {% if use_background_image %}
+                    <div class="comparison-item-bg-image-{{ section.id }}">
+                      <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g opacity="0.5">
+                          <path d="M0 99.9993H4.54V71.0927L0 67.8621V99.9993Z" fill="url(#paint0_linear_106_198-{{ section.id }})"/>
+                          <!-- 此处可保留原有 svg 内容，为了简洁已省略 -->
+                        </g>
+                        <defs>
+                          <linearGradient id="paint0_linear_106_198-{{ section.id }}" x1="2.27" y1="67.8621" x2="2.27" y2="99.9993" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#9DB324"/>
+                            <stop offset="1" stop-color="#9DB324" stop-opacity="0"/>
+                          </linearGradient>
+                        </defs>
+                      </svg>
                     </div>
-                    <div class="comparison-column-body-{{ section.id }}">
-                      {% for block in section.blocks %}
-                        {% if block.type == "table_row" %}
-                          <div class="comparison-column-row-{{ section.id }}">
-                            {% if block.settings.first_column_image != blank or block.settings.first_column_icon != "none" %}
-                              <div class="comparison-value-icon-{{ section.id }}{% if block.settings.first_column_icon == "cross" %} comparison-value-icon-{{ section.id }}--cross{% endif %}">
-                                {% if block.settings.first_column_image != blank %}
-                                  {{ block.settings.first_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                                {% elsif block.settings.first_column_icon == "check" %}
-                                  {% if value_icon_check != blank %}
-                                    <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
-                                  {% else %}
-                                    <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
-                                  {% endif %}
-                                {% elsif block.settings.first_column_icon == "cross" %}
-                                  {% if value_icon_cross != blank %}
-                                    <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
-                                  {% else %}
-                                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
-                                  {% endif %}
-                                {% endif %}
-                              </div>
-                            {% endif %}
-                            {% if block.settings.first_column != blank %}
-                              <p class="comparison-value-{{ section.id }}">{{ block.settings.first_column }}</p>
-                            {% endif %}
-                          </div>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                  </div>
+                  {% endif %}
+                  <{% if first_heading_url != blank %}a{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ first_heading }}</{% if first_heading_url != blank %}a{% else %}h3{% endif %}>                  
                 </div>
               {% endif %}
-
-              {% if table_columns > 1 and second_heading != blank or second_heading_image != blank %}
-                <div class="comparison-column-{{ section.id }}">
-                  <div class="comparison-column-card-{{ section.id }}">
-                    <div class="comparison-column-header-{{ section.id }}">
-                      <div class="comparison-column-image-{{ section.id }}">
-                        <{% if second_heading_url != blank %}a href="{{ second_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">
-                          {% if second_heading_image != blank %}
-                            {{ second_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                          {% else %}
-                            {{ "image" | placeholder_svg_tag }}
-                          {% endif %}
-                        </{% if second_heading_url != blank %}a{% else %}div{% endif %}>
-                      </div>
-                      {% if second_heading != blank %}
-                        <{% if second_heading_url != blank %}a href="{{ second_heading_url }}"{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ second_heading }}</{% if second_heading_url != blank %}a{% else %}h3{% endif %}>
-                      {% endif %}
+              {% if table_columns > 1 and second_heading != blank %}
+                <div class="comparison-item-{{ section.id }}">   
+                  <{% if second_heading_url != blank %}a href="{{ second_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">                     
+                    {% if second_heading_image != blank %}
+                      {{ second_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                    {% else %}
+                      {{ 'image' | placeholder_svg_tag }}
+                    {% endif %}    
+                  </{% if second_heading_url != blank %}a{% else %}div{% endif %}>   
+                  {% if use_background_image %}
+                    <div class="comparison-item-bg-image-{{ section.id }}">
+                      <!-- 对应的 svg -->
                     </div>
-                    <div class="comparison-column-body-{{ section.id }}">
-                      {% for block in section.blocks %}
-                        {% if block.type == "table_row" %}
-                          <div class="comparison-column-row-{{ section.id }}">
-                            {% if block.settings.second_column_image != blank or block.settings.second_column_icon != "none" %}
-                              <div class="comparison-value-icon-{{ section.id }}{% if block.settings.second_column_icon == "cross" %} comparison-value-icon-{{ section.id }}--cross{% endif %}">
-                                {% if block.settings.second_column_image != blank %}
-                                  {{ block.settings.second_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                                {% elsif block.settings.second_column_icon == "check" %}
-                                  {% if value_icon_check != blank %}
-                                    <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
-                                  {% else %}
-                                    <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
-                                  {% endif %}
-                                {% elsif block.settings.second_column_icon == "cross" %}
-                                  {% if value_icon_cross != blank %}
-                                    <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
-                                  {% else %}
-                                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
-                                  {% endif %}
-                                {% endif %}
-                              </div>
-                            {% endif %}
-                            {% if block.settings.second_column != blank %}
-                              <p class="comparison-value-{{ section.id }}">{{ block.settings.second_column }}</p>
-                            {% endif %}
-                          </div>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                  </div>
+                  {% endif %}        
+                  <{% if second_heading_url != blank %}a{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ second_heading }}</{% if second_heading_url != blank %}a{% else %}h3{% endif %}>                  
                 </div>
               {% endif %}
-
-              {% if table_columns > 2 and third_heading != blank or third_heading_image != blank %}
-                <div class="comparison-column-{{ section.id }}">
-                  <div class="comparison-column-card-{{ section.id }}">
-                    <div class="comparison-column-header-{{ section.id }}">
-                      <div class="comparison-column-image-{{ section.id }}">
-                        <{% if third_heading_url != blank %}a href="{{ third_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">
-                          {% if third_heading_image != blank %}
-                            {{ third_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                          {% else %}
-                            {{ "image" | placeholder_svg_tag }}
-                          {% endif %}
-                        </{% if third_heading_url != blank %}a{% else %}div{% endif %}>
-                      </div>
-                      {% if third_heading != blank %}
-                        <{% if third_heading_url != blank %}a href="{{ third_heading_url }}"{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ third_heading }}</{% if third_heading_url != blank %}a{% else %}h3{% endif %}>
-                      {% endif %}
+              {% if table_columns > 2 and third_heading != blank %}
+                <div class="comparison-item-{{ section.id }}">
+                  <{% if third_heading_url != blank %}a href="{{ third_heading_url }}"{% else %}div{% endif %} class="comparison-item-heading-image-{{ section.id }}">                
+                    {% if third_heading_image != blank %}
+                      {{ third_heading_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                    {% else %}
+                      {{ 'image' | placeholder_svg_tag }}
+                    {% endif %}  
+                  </{% if third_heading_url != blank %}a{% else %}div{% endif %}> 
+                  {% if use_background_image %}
+                    <div class="comparison-item-bg-image-{{ section.id }}">
+                      <!-- 对应的 svg -->
                     </div>
-                    <div class="comparison-column-body-{{ section.id }}">
-                      {% for block in section.blocks %}
-                        {% if block.type == "table_row" %}
-                          <div class="comparison-column-row-{{ section.id }}">
-                            {% if block.settings.third_column_image != blank or block.settings.third_column_icon != "none" %}
-                              <div class="comparison-value-icon-{{ section.id }}{% if block.settings.third_column_icon == "cross" %} comparison-value-icon-{{ section.id }}--cross{% endif %}">
-                                {% if block.settings.third_column_image != blank %}
-                                  {{ block.settings.third_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
-                                {% elsif block.settings.third_column_icon == "check" %}
-                                  {% if value_icon_check != blank %}
-                                    <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
-                                  {% else %}
-                                    <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
-                                  {% endif %}
-                                {% elsif block.settings.third_column_icon == "cross" %}
-                                  {% if value_icon_cross != blank %}
-                                    <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
-                                  {% else %}
-                                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
-                                  {% endif %}
-                                {% endif %}
-                              </div>
-                            {% endif %}
-                            {% if block.settings.third_column != blank %}
-                              <p class="comparison-value-{{ section.id }}">{{ block.settings.third_column }}</p>
-                            {% endif %}
-                          </div>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                  </div>
+                  {% endif %} 
+                  <{% if third_heading_url != blank %}a{% else %}h3{% endif %} class="comparison-column-heading-{{ section.id }}">{{ third_heading }}</{% if third_heading_url != blank %}a{% else %}h3{% endif %}>
                 </div>
               {% endif %}
-
             </div>
+
+            {% for block in section.blocks %}
+              {% if block.type == 'table_row' %}
+                <div class="comparison-grid-{{ section.id }} comparison-grid-rows-{{ section.id }}">
+                  <div class="comparison-item-{{ section.id }}">
+                    <h3>{{ block.settings.row_heading }}</h3>
+                  </div>
+                  {% if first_heading != blank or first_heading_image != blank %}
+                    <div class="comparison-item-{{ section.id }} active">
+                      {% if block.settings.first_column_image != blank or block.settings.first_column_icon != "none" %}
+                        <div class="comparison-value-icon-{{ section.id }}">
+                          {% if block.settings.first_column_image != blank %}
+                            {{ block.settings.first_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                          {% else %}
+                            {% if block.settings.first_column_icon == "check" %}
+                              {% if value_icon_check != blank %}
+                                <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
+                              {% else %}
+                                <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
+                              {% endif %}
+                            {% elsif block.settings.first_column_icon == "cross" %}
+                              {% if value_icon_cross != blank %}
+                                <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
+                              {% else %}
+                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
+                              {% endif %}
+                            {% endif %}
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                      {% if block.settings.first_column != blank %}
+                        <p class="comparison-value-{{ section.id }}">{{ block.settings.first_column }}</p>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  {% if table_columns > 1 and second_heading != blank or second_heading_image != blank %}
+                    <div class="comparison-item-{{ section.id }}">
+                      {% if block.settings.second_column_image != blank or block.settings.second_column_icon != "none" %}
+                        <div class="comparison-value-icon-{{ section.id }}">
+                          {% if block.settings.second_column_image != blank %}
+                            {{ block.settings.second_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                          {% else %}
+                            {% if block.settings.second_column_icon == "check" %}
+                              {% if value_icon_check != blank %}
+                                <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
+                              {% else %}
+                                <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
+                              {% endif %}
+                            {% elsif block.settings.second_column_icon == "cross" %}
+                              {% if value_icon_cross != blank %}
+                                <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
+                              {% else %}
+                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
+                              {% endif %}
+                            {% endif %}
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                      {% if block.settings.second_column != blank %}
+                        <p class="comparison-value-{{ section.id }}">{{ block.settings.second_column }}</p>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  {% if table_columns > 2 and third_heading != blank or third_heading_image != blank %}
+                    <div class="comparison-item-{{ section.id }}">
+                      {% if block.settings.third_column_image != blank or block.settings.third_column_icon != "none" %}
+                        <div class="comparison-value-icon-{{ section.id }}">
+                          {% if block.settings.third_column_image != blank %}
+                            {{ block.settings.third_column_image | image_url: width: 535 | image_tag: loading: loading_attribute }}
+                          {% else %}
+                            {% if block.settings.third_column_icon == "check" %}
+                              {% if value_icon_check != blank %}
+                                <img src="{{ value_icon_check | image_url }}" alt="{{ value_icon_check.alt }}">
+                              {% else %}
+                                <svg width="35" height="27" viewBox="0 0 35 27" fill="none"><path d="M34.0312 5.00946L12.1162 25.321L0.706055 13.1432L4.92773 9.18719L12.0713 16.8112L12.4121 17.1745L12.7764 16.8356L30.1074 0.756531L34.0312 5.00946Z" fill="#6CB324"/></svg>
+                              {% endif %}
+                            {% elsif block.settings.third_column_icon == "cross" %}
+                              {% if value_icon_cross != blank %}
+                                <img src="{{ value_icon_cross | image_url }}" alt="{{ value_icon_cross.alt }}">
+                              {% else %}
+                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M25.7313 3.27235L22.5085 0.0494995L12.8657 9.69232L3.22285 0.0494995L0 3.27235L9.64282 12.9152L0 22.558L3.22285 25.7808L12.8657 16.138L22.5085 25.7808L25.7313 22.558L16.0885 12.9152L25.7313 3.27235Z" fill="#FF1616"/></svg>
+                              {% endif %}
+                            {% endif %}
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                      {% if block.settings.third_column != blank %}
+                        <p class="comparison-value-{{ section.id }}">{{ block.settings.third_column }}</p>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
           </div>
         </div>
       </div>
