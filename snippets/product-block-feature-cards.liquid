@@ -2,9 +2,12 @@
   assign pfc_bg = block.settings.background_color | default: '#ffffff'
   assign pfc_radius = block.settings.border_radius | default: 16
   assign pfc_has_card = false
+
   for i in (1..4)
     assign pfc_text_key = 'text_' | append: i
-    if block.settings[pfc_text_key] != blank
+    assign pfc_bg_image_key = 'background_image_' | append: i
+
+    if block.settings[pfc_text_key] != blank or block.settings[pfc_bg_image_key] != blank
       assign pfc_has_card = true
       break
     endif
@@ -27,7 +30,7 @@
     .pfc-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;   /* 移动端间距 8px */
+      gap: 8px;
       width: 100%;
     }
 
@@ -41,6 +44,9 @@
       padding: 8px 8px;
       min-height: 48px;
       box-sizing: border-box;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .pfc-card__text {
@@ -53,10 +59,20 @@
       white-space: pre-line;
     }
 
+    {%- for i in (1..4) -%}
+      {%- assign pfc_bg_image_key = 'background_image_' | append: i -%}
+      {%- assign pfc_bg_image = block.settings[pfc_bg_image_key] -%}
+      {%- if pfc_bg_image != blank -%}
+        #pfc-{{ block.id }} .pfc-card--{{ i }} {
+          background-image: url('{{ pfc_bg_image | image_url: width: 800 }}');
+        }
+      {%- endif -%}
+    {%- endfor -%}
+
     @media (min-width: 768px) {
       .pfc-grid {
         grid-template-columns: repeat(4, 1fr);
-        gap: 6px;   /* PC端间距改为 6px */
+        gap: 6px;
       }
       .pfc-card {
         padding: 10px 6px;
@@ -67,17 +83,19 @@
       }
     }
   </style>
-  
-  
 
   <div id="pfc-{{ block.id }}" class="product-feature-cards">
     <div class="pfc-grid">
       {%- for i in (1..4) -%}
         {%- assign pfc_text_key = 'text_' | append: i -%}
+        {%- assign pfc_bg_image_key = 'background_image_' | append: i -%}
         {%- assign pfc_text = block.settings[pfc_text_key] -%}
-        {%- if pfc_text != blank -%}
-          <div class="pfc-card">
-            <div class="pfc-card__text">{{ pfc_text | newline_to_br }}</div>
+        {%- assign pfc_bg_image = block.settings[pfc_bg_image_key] -%}
+        {%- if pfc_text != blank or pfc_bg_image != blank -%}
+          <div class="pfc-card pfc-card--{{ i }}">
+            {%- if pfc_text != blank -%}
+              <div class="pfc-card__text">{{ pfc_text | newline_to_br }}</div>
+            {%- endif -%}
           </div>
         {%- endif -%}
       {%- endfor -%}
