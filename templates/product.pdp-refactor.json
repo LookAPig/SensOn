@@ -106,6 +106,12 @@
           "disabled": true,
           "settings": {}
         },
+        "text_36KfV6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Where bionic innovation meets the soul of AI. Fully hands-free, the device syncs in real-time with your voice, breath, and interactive stories. Engineered from a female perspective with triple-zone sensory resonance, it brings 500+ virtual companions directly to your ear.</p>"
+          }
+        },
         "feature_cards_NddJBd": {
           "type": "feature_cards",
           "name": "Feature cards",
@@ -123,7 +129,7 @@
         "text_VcpKPp": {
           "type": "text",
           "settings": {
-            "text": "<p>Where bionic innovation meets the soul of AI. Fully hands-free, the device syncs in real-time with your voice, breath, and interactive stories. Engineered from a female perspective with triple-zone sensory resonance, it brings 500+ virtual companions directly to your ear.<br/>📱 App Store: Available now | Web: Coming mid-July. <br/>🎁 Bonus: Includes 7-Day Free Trial (Plans from $9.99/mo after)</p>"
+            "text": "<p>📱 App Store: Available now | Web: Coming mid-July. <br/>🎁 Bonus: Includes 7-Day Free Trial (Plans from $9.99/mo after)</p>"
           }
         },
         "icons_with_text_ANpmKR": {
@@ -297,6 +303,7 @@
         "countdown_H8fV6E",
         "image_DyzwQw",
         "separator_bTgDWQ",
+        "text_36KfV6",
         "feature_cards_NddJBd",
         "text_VcpKPp",
         "icons_with_text_ANpmKR",
