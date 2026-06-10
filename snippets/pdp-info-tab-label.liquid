@@ -19,13 +19,16 @@
     endif
   endfor
 -%}
-<span class="pdp-info-tabs__tab-label">
-  <span class="pdp-info-tabs__tab-line">{{ line1 | escape }}</span>
-  <span class="pdp-info-tabs__tab-line">
-    {%- if line2 != blank -%}
-      {{ line2 | escape }}
-    {%- else -%}
-      &#8203;
-    {%- endif -%}
+<span class="pdp-info-tabs__tab-text pdp-info-tabs__tab-text--desktop">{{ label | escape }}</span>
+<span class="pdp-info-tabs__tab-text pdp-info-tabs__tab-text--mobile">
+  <span class="pdp-info-tabs__tab-label">
+    <span class="pdp-info-tabs__tab-line">{{ line1 | escape }}</span>
+    <span class="pdp-info-tabs__tab-line">
+      {%- if line2 != blank -%}
+        {{ line2 | escape }}
+      {%- else -%}
+        &#8203;
+      {%- endif -%}
+    </span>
   </span>
 </span>
