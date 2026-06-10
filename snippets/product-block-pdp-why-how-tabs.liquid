@@ -192,6 +192,7 @@
       position: absolute;
       inset: 0;
       z-index: 1;
+      cursor: pointer;
     }
 
     #pdp-wh-{{ block.id }} .pdp-creator-video__host video {
@@ -199,10 +200,26 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      cursor: pointer;
     }
 
     #pdp-wh-{{ block.id }} .pdp-creator-video.is-playing .pdp-creator-video__host {
       z-index: 2;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__pause-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: rgb(0 0 0 / 0.15);
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video.is-playing.is-paused .pdp-creator-video__pause-overlay {
+      display: flex;
     }
 
     #pdp-wh-{{ block.id }} .pdp-creator-avatar {
@@ -516,7 +533,7 @@
                   </svg>
                 </button>
               </div>
-              <div class="pdp-creator-video__host">
+              <div class="pdp-creator-video__host" data-pdp-creator-video-host>
                 {{
                   block.settings.creator_video
                   | video_tag:
@@ -526,6 +543,13 @@
                     muted: false,
                     loop: false
                 }}
+              </div>
+              <div class="pdp-creator-video__pause-overlay" data-pdp-creator-video-pause-overlay>
+                <button type="button" class="pdp-creator-video__play-btn" aria-label="Play video" tabindex="-1">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
               </div>
             </div>
           {%- endif -%}
@@ -791,16 +815,38 @@
           wrap.dataset.pdpCreatorVideoBound = "1";
 
           var poster = wrap.querySelector("[data-pdp-creator-video-poster]");
+          var videoHost = wrap.querySelector("[data-pdp-creator-video-host]");
+          var pauseOverlay = wrap.querySelector("[data-pdp-creator-video-pause-overlay]");
           var video = wrap.querySelector("video");
           if (!poster || !video) return;
 
+          video.controls = false;
+          video.setAttribute("controlsList", "nodownload noremoteplayback");
+
           function playVideo() {
-            if (wrap.classList.contains("is-playing")) return;
             wrap.classList.add("is-playing");
-            video.controls = true;
+            wrap.classList.remove("is-paused");
             var playPromise = video.play();
             if (playPromise && playPromise.catch) {
               playPromise.catch(function () {});
+            }
+          }
+
+          function pauseVideo() {
+            video.pause();
+            wrap.classList.add("is-paused");
+          }
+
+          function toggleVideo() {
+            if (!wrap.classList.contains("is-playing")) {
+              playVideo();
+              return;
+            }
+
+            if (video.paused) {
+              playVideo();
+            } else {
+              pauseVideo();
             }
           }
 
@@ -809,10 +855,29 @@
             playVideo();
           });
 
+          if (videoHost) {
+            videoHost.addEventListener("click", function (event) {
+              event.preventDefault();
+              toggleVideo();
+            });
+          }
+
+          if (pauseOverlay) {
+            pauseOverlay.addEventListener("click", function (event) {
+              event.preventDefault();
+              playVideo();
+            });
+          }
+
+          video.addEventListener("ended", function () {
+            wrap.classList.remove("is-playing");
+            wrap.classList.remove("is-paused");
+          });
+
           wrap.addEventListener("keydown", function (event) {
             if (event.key !== "Enter" && event.key !== " ") return;
             event.preventDefault();
-            playVideo();
+            toggleVideo();
           });
         });
       }
