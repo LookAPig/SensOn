@@ -119,9 +119,13 @@
             "background_color": "#feecfc",
             "border_radius": 12,
             "text_1": "Real-time \ncontent sync",
+            "background_image_1": "shopify://shop_images/mask_group_3.webp",
             "text_2": "AI voice, \nhands-free",
+            "background_image_2": "shopify://shop_images/mask_group_2.webp",
             "text_3": "3 in 1, \ntriple stimulation",
+            "background_image_3": "shopify://shop_images/mask_group.webp",
             "text_4": "Waterproof  \nlong Battery",
+            "background_image_4": "shopify://shop_images/mask_group_1.webp",
             "mt": 0,
             "mb": 0
           }
