@@ -360,8 +360,27 @@
       color: #999;
     }
 
-    /* 移动端 */
+    /* 移动端：统一为 author → video → quote */
     @media (max-width: 768px) {
+      #pdp-wh-{{ block.id }} .pdp-creator-card {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #pdp-wh-{{ block.id }} .pdp-creator-card .pdp-creator-author {
+        order: 1;
+        margin-bottom: 20px;
+      }
+
+      #pdp-wh-{{ block.id }} .pdp-creator-card .pdp-creator-video {
+        order: 2;
+      }
+
+      #pdp-wh-{{ block.id }} .pdp-creator-card .pdp-creator-quote {
+        order: 3;
+        margin-bottom: 0;
+      }
+
       #pdp-wh-{{ block.id }} .pdp-info-tabs__bar {
         gap: 4px;
         padding: 4px;
