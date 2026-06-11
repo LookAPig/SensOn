@@ -90,6 +90,13 @@
             "expiration_behavior": "hide"
           }
         },
+        "featured_in_Gwxwf8": {
+          "type": "featured_in",
+          "settings": {
+            "title": "Featured in",
+            "logos_json": "[{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/2_1.webp?v=1781169789\",\"alt\":\"Business Insider\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/0_1.webp?v=1781169789\",\"alt\":\"Yahoo Finance\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/3_1.webp?v=1781169789\",\"alt\":\"USA TODAY\"}]"
+          }
+        },
         "image_DyzwQw": {
           "type": "image",
           "disabled": true,
@@ -228,7 +235,7 @@
           "settings": {
             "title": "What Customers Say",
             "reviews_json": "[\n  {\n    \"label\": \"Hardcore thrillseekers\",\n    \"quote\": \"I tried many products nothing beats this. This three in one does suction clamp pulse at once. I yell max it out and it hits the top like crazy. My mind goes blank. So addictive yeah totally addictive.\",\n    \"author\": \"Roxy, 31\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/mask_group_4.webp?v=1781161366\"\n  },\n  {\n    \"label\": \"Privacy Seekers\",\n    \"quote\": \"I hate loud devices my roommate has super ears. This one uses voice. I whisper lower or stop and it listens. One time she knocked I whispered lights off and it stopped. She thought I was on a call. That safe feeling matters more than physical sensation I think.\",\n    \"author\": \"Chloe, 24\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/mask_group_4.webp?v=1781161366\"\n  },\n  {\n    \"label\": \"Variety Seekers\",\n    \"quote\": \"Regular products are boring just three speeds. This one has different AI personalities gentle bossy or teasing. He controls the pace like a blind date. After two weeks it feels like experiencing many personalities no need to text back.\",\n    \"author\": \"Mia, 29\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/mask_group_4.webp?v=1781161366\"\n  },\n  {\n    \"label\": \"AI Geeks\",\n    \"quote\": \"It really learns what I like no fake smart stuff. After a few uses it remembers my slow then fast pattern. Just say softer or harder and it gets it. Works better every time.\",\n    \"author\": \"Nova, 37\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/mask_group_4.webp?v=1781161366\"\n  },\n  {\n    \"label\": \"Roleplay lovers\",\n    \"quote\": \"I give the orders – it listens and follows right away. A whisper, a word, and it responds like it knows what I want. No delay, just pure reaction. Every time I play back my voice, it feels like I directed my own close audio drama.\",\n    \"author\": \"Ivy, 27\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/mask_group_4.webp?v=1781161366\"\n  }\n]",
-            "background_color": "transparent",
+            "background_color": "rgba(0,0,0,0)",
             "accent_color": "#e91ead",
             "tag_border_color": "#c8c4c0"
           }
@@ -306,6 +313,7 @@
         "offers_xqqJzH",
         "price",
         "countdown_H8fV6E",
+        "featured_in_Gwxwf8",
         "image_DyzwQw",
         "separator_bTgDWQ",
         "text_36KfV6",
@@ -777,6 +785,7 @@
       ],
       "name": "US vs Traditional ",
       "settings": {
+        "section_title": "Why SensOn Goes Further",
         "content_max_width": 40,
         "content_align": "left",
         "content_align_mobile": "left",
