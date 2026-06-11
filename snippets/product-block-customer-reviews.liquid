@@ -202,13 +202,23 @@
         }
 
         #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel {
-          flex-direction: column;
+          flex-direction: row;
+          align-items: flex-start;
+          gap: 12px;
         }
 
         #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel-right {
-          width: 100%;
-          height: auto;
-          aspect-ratio: 1;
+          width: 100px;
+          height: 100px;
+          flex-shrink: 0;
+        }
+
+        #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__quote {
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     </style>
