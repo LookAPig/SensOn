@@ -20,6 +20,7 @@
     assign content_align = section.settings.content_align
     assign content_align_mobile = section.settings.content_align_mobile
     assign content_max_width = section.settings.content_max_width
+    assign section_title = section.settings.section_title
 
     assign table_columns = section.settings.table_columns
     assign table_column_bg_color = section.settings.table_column_bg_color
@@ -119,6 +120,16 @@
       padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
       padding-left: 16px;
       padding-right: 16px;
+    }
+
+    .comparison-section-title-{{ section.id }} {
+      margin: 0 0 24px;
+      color: #000;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 110%;
+      text-align: center;
     }
 
     .comparison-heading-{{ section.id }} {
@@ -767,6 +778,10 @@
             {% endif %}
         {% endcase %}
       {% endfor %}
+
+      {% if section_title != blank %}
+        <h2 class="comparison-section-title-{{ section.id }}">{{ section_title }}</h2>
+      {% endif %}
      
       <div class="comparison-mobile-{{ section.id }}">
         <div class="comparison-mobile-columns-{{ section.id }}">
@@ -1046,6 +1061,12 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "Why SensOn Goes Further"
     },
     {
       "type": "range",
