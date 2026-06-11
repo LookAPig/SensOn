@@ -53,11 +53,17 @@
 
       #pdp-fi-{{ fi_bid }} .pdp-featured-in__logo {
         display: block;
-        width: 100%;
-        max-width: 100%;
+        width: 55px;
+        max-width: 55px;
         height: auto;
-        max-height: 48px;
         object-fit: contain;
+      }
+
+      @media screen and (min-width: 1000px) {
+        #pdp-fi-{{ fi_bid }} .pdp-featured-in__logo {
+          width: 75px;
+          max-width: 75px;
+        }
       }
     </style>
 
@@ -137,8 +143,8 @@
             img.src = item.image;
             img.alt = item.alt || "";
             img.loading = "lazy";
-            img.width = 160;
-            img.height = 48;
+            img.width = 55;
+            img.height = 55;
             cell.appendChild(img);
           }
 
