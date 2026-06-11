@@ -2,23 +2,10 @@
   assign fi_bid = block.id
   assign fi_title = block.settings.title | default: 'Featured in'
   assign fi_json_raw = block.settings.logos_json | strip
-  assign fi_logos = fi_json_raw | parse_json
-  assign fi_has_logos = false
-
-  if fi_logos != blank
-    for i in (0..2)
-      assign fi_check_logo = fi_logos[i]
-      assign fi_check_url = fi_check_logo.image | default: fi_check_logo.url | default: fi_check_logo
-      if fi_check_url != blank
-        assign fi_has_logos = true
-        break
-      endif
-    endfor
-  endif
 -%}
 
-{%- if fi_has_logos -%}
-  <div id="pdp-fi-{{ fi_bid }}" class="pdp-featured-in">
+{%- if fi_json_raw != blank -%}
+  <div id="pdp-fi-{{ fi_bid }}" class="pdp-featured-in" data-fi-root data-fi-block-id="{{ fi_bid }}">
     <style>
       #pdp-fi-{{ fi_bid }} {
         width: 100%;
@@ -78,27 +65,114 @@
       <h3 class="pdp-featured-in__title">{{ fi_title | escape }}</h3>
     {%- endif -%}
 
-    <div class="pdp-featured-in__grid">
-      {%- for i in (0..2) -%}
-        {%- liquid
-          assign fi_logo = fi_logos[i]
-          assign fi_logo_url = fi_logo.image | default: fi_logo.url | default: fi_logo
-          assign fi_logo_alt = fi_logo.alt | default: fi_logo.name | default: ''
-        -%}
-
-        <div class="pdp-featured-in__item">
-          {%- if fi_logo_url != blank -%}
-            <img
-              class="pdp-featured-in__logo"
-              src="{{ fi_logo_url }}"
-              alt="{{ fi_logo_alt | escape }}"
-              loading="lazy"
-              width="160"
-              height="48"
-            >
-          {%- endif -%}
-        </div>
-      {%- endfor -%}
-    </div>
+    <div class="pdp-featured-in__grid" data-fi-grid></div>
+    <script type="application/json" data-fi-json>{{ fi_json_raw }}</script>
   </div>
+
+  <script>
+    (function () {
+      function escapeHtml(text) {
+        return String(text)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function normalizeLogoItem(raw) {
+        if (!raw) return null;
+
+        if (typeof raw === "string") {
+          var trimmed = raw.trim();
+          return trimmed ? { image: trimmed, alt: "" } : null;
+        }
+
+        if (typeof raw === "object") {
+          var image = raw.image || raw.url || "";
+          if (!image) return null;
+
+          return {
+            image: image,
+            alt: raw.alt || raw.name || ""
+          };
+        }
+
+        return null;
+      }
+
+      function renderFeaturedIn(root) {
+        var dataEl = root.querySelector("[data-fi-json]");
+        var gridEl = root.querySelector("[data-fi-grid]");
+
+        if (!dataEl || !gridEl) return;
+
+        var items;
+
+        try {
+          items = JSON.parse(dataEl.textContent.trim());
+        } catch (error) {
+          console.warn("[pdp-featured-in] Invalid JSON:", error);
+          return;
+        }
+
+        if (!Array.isArray(items)) {
+          console.warn("[pdp-featured-in] JSON must be an array.");
+          return;
+        }
+
+        items = items.map(normalizeLogoItem).filter(Boolean).slice(0, 3);
+
+        if (!items.length) return;
+
+        gridEl.innerHTML = "";
+
+        for (var i = 0; i < 3; i++) {
+          var item = items[i];
+          var cell = document.createElement("div");
+          cell.className = "pdp-featured-in__item";
+
+          if (item && item.image) {
+            var img = document.createElement("img");
+            img.className = "pdp-featured-in__logo";
+            img.src = item.image;
+            img.alt = item.alt || "";
+            img.loading = "lazy";
+            img.width = 160;
+            img.height = 48;
+            cell.appendChild(img);
+          }
+
+          gridEl.appendChild(cell);
+        }
+      }
+
+      function initFeaturedIn(root) {
+        if (!root || root.getAttribute("data-fi-initialized") === "true") return;
+
+        renderFeaturedIn(root);
+        root.setAttribute("data-fi-initialized", "true");
+      }
+
+      function initAll(scope) {
+        var container = scope || document;
+        container.querySelectorAll("[data-fi-root]").forEach(initFeaturedIn);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+          initAll();
+        });
+      } else {
+        initAll();
+      }
+
+      document.addEventListener("shopify:section:load", function (event) {
+        initAll(event.target);
+      });
+
+      document.addEventListener("shopify:block:select", function (event) {
+        initAll(event.target);
+      });
+    })();
+  </script>
 {%- endif -%}
