@@ -1,7 +1,7 @@
 {%- liquid
   assign cr_bid = block.id
-  assign cr_title = block.settings.title | default: 'WHAT CUSTOMERS SAY'
-  assign cr_bg = block.settings.background_color | default: '#f5f0eb'
+  assign cr_title = block.settings.title | default: 'What Customers Say'
+  assign cr_bg = block.settings.background_color | default: 'transparent'
   assign cr_accent = block.settings.accent_color | default: '#e91ead'
   assign cr_border = block.settings.tag_border_color | default: '#c8c4c0'
   assign cr_json_raw = block.settings.reviews_json | strip
@@ -49,29 +49,63 @@
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__title {
-        margin: 0 0 24px;
-        font-size: 14px;
-        font-weight: 700;
+        margin: 0 0 16px;
+        font-size: 24px;
+        font-weight: 500;
         line-height: 1.3;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+        text-align: left;
         color: #000;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tags {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        margin: 0 0 24px 0;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag {
+        appearance: none;
+        border: 1px solid var(--pdp-cr-border);
+        background: transparent;
+        color: #000;
+        cursor: pointer;
+        padding: 6px 12px;
+        border-radius: 100px;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.2;
+        transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag[aria-selected='true'] {
+        border-color: var(--pdp-cr-accent);
+        color: #000;
+        background-color: var(--pdp-cr-accent-soft);
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panels {
         display: grid;
         grid-template: 1fr / 1fr;
-        margin: 0 auto 24px;
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel {
         grid-area: 1 / 1;
         width: 100%;
-        margin: 0 auto;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.4s ease, visibility 0.4s ease;
         pointer-events: none;
+        background-color: #F5F5F5;
+        border-radius: 8px;
+        padding: 16px;
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        text-align: left;
       }
 
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel.is-active {
@@ -80,12 +114,70 @@
         pointer-events: auto;
       }
 
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel-left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel-right {
+        flex-shrink: 0;
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel-right img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #E6E6FA;
+        color: #8B92B2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__author-details {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__author-name {
+        font-weight: 600;
+        font-size: 14px;
+        color: #000;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__verified {
+        font-size: 12px;
+        color: var(--pdp-cr-accent);
+      }
+
       #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__quote {
         margin: 0;
         font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 1.35;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
         color: #000;
       }
 
@@ -97,62 +189,27 @@
         content: '\201D';
       }
 
-      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__author {
-        font-weight: 700;
-      }
-
-      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tags {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 12px;
-        max-width: 900px;
-        margin: 0 auto;
-      }
-
-      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag {
-        appearance: none;
-        border: 1px solid var(--pdp-cr-border);
-        background: transparent;
-        color: #000;
-        cursor: pointer;
-        padding: 10px 22px;
-        border-radius: 100px;
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 1.2;
-        transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
-      }
-
-      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag[aria-selected='true'] {
-        border-color: var(--pdp-cr-accent);
-        color: var(--pdp-cr-accent);
-        background-color: var(--pdp-cr-accent-soft);
-      }
-
-      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag:focus-visible {
-        outline: 2px solid var(--pdp-cr-accent);
-        outline-offset: 2px;
-      }
-
       @media screen and (max-width: 749px) {
         #pdp-cr-{{ cr_bid }} {
-          padding: 36px 16px 44px;
+          padding: 24px 16px;
         }
 
         #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__title {
-          margin-bottom: 24px;
-        }
-
-        #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panels {
-          margin-bottom: 28px;
+          font-size: 20px;
         }
 
         #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__tag {
-          padding: 8px 16px;
-          font-size: 13px;
+          font-size: 12px;
+        }
+
+        #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel {
+          flex-direction: column;
+        }
+
+        #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__panel-right {
+          width: 100%;
+          height: auto;
+          aspect-ratio: 1;
         }
       }
     </style>
@@ -163,44 +220,9 @@
 
     {%- if cr_has_json -%}
       <script type="application/json" data-cr-json>{{ cr_json_raw }}</script>
-      <div class="pdp-customer-reviews__panels" data-cr-panels></div>
       <div class="pdp-customer-reviews__tags" data-cr-tags role="tablist" aria-label="{{ cr_title | escape }}"></div>
+      <div class="pdp-customer-reviews__panels" data-cr-panels></div>
     {%- else -%}
-      <div class="pdp-customer-reviews__panels">
-        {%- assign cr_idx = 0 -%}
-        {%- for i in (1..6) -%}
-          {%- liquid
-            assign cr_tag_key = 'tag_' | append: i
-            assign cr_review_key = 'review_' | append: i
-            assign cr_author_key = 'author_' | append: i
-            assign cr_label = block.settings[cr_tag_key]
-            assign cr_quote = block.settings[cr_review_key]
-            assign cr_author = block.settings[cr_author_key]
-          -%}
-          {%- if cr_label != blank and cr_quote != blank -%}
-            <div
-              class="pdp-customer-reviews__panel{% if cr_idx == 0 %} is-active{% endif %}"
-              data-cr-panel
-              data-cr-index="{{ cr_idx }}"
-              role="tabpanel"
-              id="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
-              aria-labelledby="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
-              {% unless cr_idx == 0 %}
-                aria-hidden="true"
-              {% endunless %}
-            >
-              <p class="pdp-customer-reviews__quote">
-                {{- cr_quote | escape -}}
-                {%- if cr_author != blank -%}
-                  <span class="pdp-customer-reviews__author"> — {{ cr_author | escape }}</span>
-                {%- endif -%}
-              </p>
-            </div>
-            {%- assign cr_idx = cr_idx | plus: 1 -%}
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-
       <div class="pdp-customer-reviews__tags" role="tablist" aria-label="{{ cr_title | escape }}">
         {%- assign cr_idx = 0 -%}
         {%- for i in (1..6) -%}
@@ -227,6 +249,54 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
+
+      <div class="pdp-customer-reviews__panels">
+        {%- assign cr_idx = 0 -%}
+        {%- for i in (1..6) -%}
+          {%- liquid
+            assign cr_tag_key = 'tag_' | append: i
+            assign cr_review_key = 'review_' | append: i
+            assign cr_author_key = 'author_' | append: i
+            assign cr_image_key = 'image_' | append: i
+            assign cr_label = block.settings[cr_tag_key]
+            assign cr_quote = block.settings[cr_review_key]
+            assign cr_author = block.settings[cr_author_key]
+            assign cr_image = block.settings[cr_image_key]
+          -%}
+          {%- if cr_label != blank and cr_quote != blank -%}
+            <div
+              class="pdp-customer-reviews__panel{% if cr_idx == 0 %} is-active{% endif %}"
+              data-cr-panel
+              data-cr-index="{{ cr_idx }}"
+              role="tabpanel"
+              id="pdp-cr-panel-{{ cr_bid }}-{{ cr_idx }}"
+              aria-labelledby="pdp-cr-tab-{{ cr_bid }}-{{ cr_idx }}"
+              {% unless cr_idx == 0 %}
+                aria-hidden="true"
+              {% endunless %}
+            >
+              <div class="pdp-customer-reviews__panel-left">
+                {%- if cr_author != blank -%}
+                  <div class="pdp-customer-reviews__user-info">
+                    <div class="pdp-customer-reviews__avatar">{{ cr_author | slice: 0 | upcase }}</div>
+                    <div class="pdp-customer-reviews__author-details">
+                      <div class="pdp-customer-reviews__author-name">{{ cr_author | escape }}</div>
+                      <div class="pdp-customer-reviews__verified">Verified Buyer</div>
+                    </div>
+                  </div>
+                {%- endif -%}
+                <p class="pdp-customer-reviews__quote">{{- cr_quote | escape -}}</p>
+              </div>
+              {%- if cr_image != blank -%}
+                <div class="pdp-customer-reviews__panel-right">
+                  <img src="{{ cr_image | image_url: width: 400 }}" alt="Review image" loading="lazy" width="120" height="120">
+                </div>
+              {%- endif -%}
+            </div>
+            {%- assign cr_idx = cr_idx | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
     {%- endif -%}
   </div>
 
@@ -246,10 +316,12 @@
         var label = raw.label || raw.tag || "";
         var quote = raw.quote || raw.review || raw.content || "";
         var author = raw.author || "";
+        var image = raw.image || "";
+        var verified = raw.verified !== undefined ? raw.verified : true;
 
         if (!label || !quote) return null;
 
-        return { label: label, quote: quote, author: author };
+        return { label: label, quote: quote, author: author, image: image, verified: verified };
       }
 
       function bindTabSwitch(root) {
@@ -319,12 +391,40 @@
           panel.setAttribute("aria-hidden", index === 0 ? "false" : "true");
 
           var quoteHtml = escapeHtml(item.quote);
-
+          var authorHtml = '';
+          
           if (item.author) {
-            quoteHtml += '<span class="pdp-customer-reviews__author"> — ' + escapeHtml(item.author) + "</span>";
+            var firstLetter = item.author.charAt(0).toUpperCase();
+            var verifiedHtml = item.verified ? '<div class="pdp-customer-reviews__verified">Verified Buyer</div>' : '';
+            
+            authorHtml = `
+              <div class="pdp-customer-reviews__user-info">
+                <div class="pdp-customer-reviews__avatar">${firstLetter}</div>
+                <div class="pdp-customer-reviews__author-details">
+                  <div class="pdp-customer-reviews__author-name">${escapeHtml(item.author)}</div>
+                  ${verifiedHtml}
+                </div>
+              </div>
+            `;
           }
 
-          panel.innerHTML = '<p class="pdp-customer-reviews__quote">' + quoteHtml + "</p>";
+          var leftContent = `
+            <div class="pdp-customer-reviews__panel-left">
+              ${authorHtml}
+              <p class="pdp-customer-reviews__quote">${quoteHtml}</p>
+            </div>
+          `;
+
+          var rightContent = '';
+          if (item.image) {
+            rightContent = `
+              <div class="pdp-customer-reviews__panel-right">
+                <img src="${escapeHtml(item.image)}" alt="Review image" loading="lazy" width="120" height="120">
+              </div>
+            `;
+          }
+
+          panel.innerHTML = leftContent + rightContent;
           panelsEl.appendChild(panel);
 
           var tab = document.createElement("button");
