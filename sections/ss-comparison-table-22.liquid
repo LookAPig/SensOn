@@ -443,126 +443,51 @@
       }
     }
 
-    /* ========== 自定义覆盖（两列无缝对比卡片设计） ========== */
-    
-    /* 1. 隐藏多余的边框和 SVG 背景 */
-    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }},
-    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }} {
-      border: none !important;
-    }
-    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:after {
-      display: none !important;
-    }
-    .comparison-item-bg-image-{{ section.id }} {
-      display: none !important;
-    }
-
-    /* 2. 布局调整：隐藏第一列（行标题），剩余两列平分，去除间距 */
-    .comparison-grid-{{ section.id }} {
-      gap: 0 !important;
-      justify-content: center !important;
-    }
+    /* ========== 自定义覆盖 ========== */
+    /* 移动端：第一列宽73px，其他列宽147px，第一列右边距12.5px，其他列间距25px */
     .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:first-child,
     .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:first-child {
-      display: none !important;
+      width: 73px !important;
     }
     .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child),
     .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child) {
-      width: 50% !important;
-      max-width: 280px !important;
-      padding-left: 12px !important;
-      padding-right: 12px !important;
+      width: 147px !important;
+    }
+    .comparison-grid-{{ section.id }} {
+      gap: 0 !important;
+    }
+    .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }} {
+      margin-right: 25px;
+    }
+    .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }}:last-child {
+      margin-right: 0;
+    }
+    .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }}:first-child {
+      margin-right: 12.5px;
     }
 
-    /* 3. 左侧（SensOn S1 - active）整体圆角和背景 */
-    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}.active {
-      background: linear-gradient(180deg, #DF6CEE 0%, #8B51F5 100%) !important;
-      border-top-left-radius: {{ table_radius }}px !important;
-      border-top-right-radius: 0 !important;
-    }
-    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}.active {
-      background: #FDF7FF !important; /* 极浅紫背景 */
-    }
-    .comparison-grid-rows-{{ section.id }}:last-child .comparison-item-{{ section.id }}.active {
-      border-bottom-left-radius: {{ table_radius }}px !important;
-      border-bottom-right-radius: 0 !important;
-      padding-bottom: 24px !important;
-    }
-
-    /* 4. 左侧字体样式 */
-    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}.active .comparison-column-heading-{{ section.id }} {
-      color: #FFFFFF !important;
-    }
-    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}.active .comparison-value-{{ section.id }} {
-      color: #000000 !important;
-      font-weight: 700 !important;
-    }
-
-    /* 5. 右侧（Traditional）整体圆角和背景 */
-    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:nth-child(3) {
-      background: #E8E8E8 !important;
-      border-top-right-radius: {{ table_radius }}px !important;
-      border-top-left-radius: 0 !important;
-    }
-    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:nth-child(3) {
-      background: #F5F5F5 !important;
-    }
-    .comparison-grid-rows-{{ section.id }}:last-child .comparison-item-{{ section.id }}:nth-child(3) {
-      border-bottom-right-radius: {{ table_radius }}px !important;
-      border-bottom-left-radius: 0 !important;
-      padding-bottom: 24px !important;
-    }
-
-    /* 6. 右侧字体样式 */
-    .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:nth-child(3) .comparison-column-heading-{{ section.id }} {
-      color: #121212 !important;
-    }
-    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:nth-child(3) .comparison-value-{{ section.id }} {
-      color: #757575 !important;
-      font-weight: 400 !important;
-    }
-
-    /* 7. 产品图片悬浮与大小调整 */
-    .comparison-item-heading-image-{{ section.id }} {
-      background: transparent !important;
-      aspect-ratio: auto !important;
-      width: auto !important;
-      max-width: 100% !important;
-      border: none !important;
-      margin: 0 auto !important;
-      margin-top: calc(-{{ heading_image_size_mobile | divided_by: 2 }}px - {{ column_heading_padding_vertical_mobile }}px) !important;
-      overflow: visible !important;
-    }
-    .comparison-item-heading-image-{{ section.id }} svg {
-      background-color: transparent !important;
-    }
-
-    /* 8. X 错误图标增加红色圆圈 */
-    .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:nth-child(3) .comparison-value-icon-{{ section.id }} {
-      border: 1.5px solid #FF1616 !important;
-      border-radius: 50% !important;
-      padding: 4px !important;
-      box-sizing: border-box !important;
-      width: calc({{ value_icon_size_mobile }}px + 16px) !important;
-      height: calc({{ value_icon_size_mobile }}px + 16px) !important;
-      margin: 0 auto !important;
-    }
-
+    /* 桌面端：第一列宽220px，其他列宽440px，间距同上 */
     @media(min-width: 1024px) {
-      .comparison-item-heading-image-{{ section.id }} {
-        margin-top: calc(-{{ heading_image_size | divided_by: 2 }}px - {{ column_heading_padding_vertical }}px) !important;
+      .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:first-child,
+      .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:first-child {
+        width: 220px !important;
       }
-      .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:nth-child(3) .comparison-value-icon-{{ section.id }} {
-        width: calc({{ value_icon_size }}px + 16px) !important;
-        height: calc({{ value_icon_size }}px + 16px) !important;
-        padding: 6px !important;
+      .comparison-grid-header-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child),
+      .comparison-grid-rows-{{ section.id }} .comparison-item-{{ section.id }}:not(:first-child) {
+        width: 440px !important;
       }
-    }
-
-    /* 9. 防止悬浮的图片被外层隐藏 */
-    .section-{{ section.id }},
-    .comparison-table-wrapper-{{ section.id }} {
-      overflow: visible !important;
+      .comparison-grid-{{ section.id }} {
+        gap: 0 !important;
+      }
+      .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }} {
+        margin-right: 25px;
+      }
+      .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }}:last-child {
+        margin-right: 0;
+      }
+      .comparison-grid-{{ section.id }} .comparison-item-{{ section.id }}:first-child {
+        margin-right: 12.5px;
+      }
     }
   {%- endstyle -%}
 
