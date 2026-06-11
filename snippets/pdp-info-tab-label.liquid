@@ -1,0 +1,34 @@
+{%- liquid
+  assign words = label | split: ' '
+  assign word_count = words.size
+  assign split_at = word_count | plus: 1 | divided_by: 2
+  assign line1 = ''
+  assign line2 = ''
+
+  for word in words
+    if forloop.index <= split_at
+      if line1 != blank
+        assign line1 = line1 | append: ' '
+      endif
+      assign line1 = line1 | append: word
+    else
+      if line2 != blank
+        assign line2 = line2 | append: ' '
+      endif
+      assign line2 = line2 | append: word
+    endif
+  endfor
+-%}
+<span class="pdp-info-tabs__tab-text pdp-info-tabs__tab-text--desktop">{{ label | escape }}</span>
+<span class="pdp-info-tabs__tab-text pdp-info-tabs__tab-text--mobile">
+  <span class="pdp-info-tabs__tab-label">
+    <span class="pdp-info-tabs__tab-line">{{ line1 | escape }}</span>
+    <span class="pdp-info-tabs__tab-line">
+      {%- if line2 != blank -%}
+        {{ line2 | escape }}
+      {%- else -%}
+        &#8203;
+      {%- endif -%}
+    </span>
+  </span>
+</span>

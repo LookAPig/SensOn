@@ -38,16 +38,16 @@
       align-items: stretch;
       gap: 8px;
       padding: 4px;
+      width: 100%;
       background: var(--pdp-tab-bar-bg);
       border-radius: 100px;
       margin-bottom: 16px;
-      overflow-x: auto;
+      overflow: hidden;
       flex-wrap: nowrap;
-      scrollbar-width: thin;
     }
 
     #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
-      flex: 0 0 125px;
+      flex: 1 1 0;
       min-width: 0;
       appearance: none;
       border: none;
@@ -61,16 +61,21 @@
       text-align: center;
       border-radius: 100px;
       transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-      hyphens: auto;
-      word-break: break-word;
-      white-space: normal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    @media screen and (min-width: 750px) {
-      #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
-        font-size: 14px;
-        flex: 0 0 125px;
-      }
+    #pdp-wh-{{ block.id }} .pdp-info-tabs__tab-text--mobile {
+      display: none;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-info-tabs__tab-text--desktop {
+      display: block;
+      width: 100%;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      white-space: normal;
     }
 
     #pdp-wh-{{ block.id }} .pdp-info-tabs__tab[aria-selected='true'] {
@@ -91,14 +96,30 @@
     }
 
     #pdp-wh-{{ block.id }} .pdp-creator-card {
+      display: flex;
+      flex-direction: column;
       background: var(--pdp-tab-card-bg);
       border-radius: 12px;
       padding: 20px 18px;
     }
 
+    #pdp-wh-{{ block.id }} .pdp-creator-card .pdp-creator-author {
+      order: 1;
+      margin-bottom: 20px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-card .pdp-creator-video {
+      order: 2;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-card .pdp-creator-quote {
+      order: 3;
+      margin-bottom: 0;
+    }
+
     #pdp-wh-{{ block.id }} .pdp-creator-quote {
-      margin: 0 0 20px;
-      font-family: Georgia, 'Times New Roman', serif;
+      margin: 0;
+      {% comment %} font-family: Georgia, 'Times New Roman', serif; {% endcomment %}
       font-size: 14px;
       line-height: 1.45;
       color: #000;
@@ -116,6 +137,100 @@
       display: flex;
       align-items: center;
       gap: 16px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin-bottom: 20px;
+      /* border: 2px solid #4a9eff; */
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__poster {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: #000;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video.is-playing .pdp-creator-video__poster {
+      display: none;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__play-btn {
+      position: relative;
+      z-index: 3;
+      width: 56px;
+      height: 56px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgb(80 80 80 / 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__play-btn svg {
+      width: 22px;
+      height: 22px;
+      margin-left: 3px;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__host {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__host video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video.is-playing .pdp-creator-video__host {
+      z-index: 2;
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video__pause-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: rgb(0 0 0 / 0.15);
+    }
+
+    #pdp-wh-{{ block.id }} .pdp-creator-video.is-playing.is-paused .pdp-creator-video__pause-overlay {
+      display: flex;
     }
 
     #pdp-wh-{{ block.id }} .pdp-creator-avatar {
@@ -259,20 +374,45 @@
     /* 移动端 */
     @media (max-width: 768px) {
       #pdp-wh-{{ block.id }} .pdp-info-tabs__bar {
-        gap: 6px;
+        gap: 4px;
         padding: 4px;
-        justify-content: flex-start;
       }
+
       #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
-        flex: 0 0 80px;
-        font-size: 12px;
-        padding: 8px 6px;
-        line-height: 1.2;
+        flex: 1 1 0;
+        font-size: 11px;
+        padding: 8px 4px;
+        line-height: 1.15;
+      }
+
+      #pdp-wh-{{ block.id }} .pdp-info-tabs__tab-text--desktop {
+        display: none;
+      }
+
+      #pdp-wh-{{ block.id }} .pdp-info-tabs__tab-text--mobile {
+        display: block;
+        width: 100%;
+      }
+
+      #pdp-wh-{{ block.id }} .pdp-info-tabs__tab-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: calc(2 * 1.15em);
+      }
+
+      #pdp-wh-{{ block.id }} .pdp-info-tabs__tab-line {
+        display: block;
+        width: 100%;
+        line-height: 1.15;
+        overflow-wrap: break-word;
+        word-break: break-word;
       }
 
       #pdp-wh-{{ block.id }} .pdp-specs-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px 12px;
       }
 
       #pdp-wh-{{ block.id }} .pdp-spec-value {
@@ -290,7 +430,7 @@
       data-pdp-info-tab="{{ block.id }}"
       data-index="0"
     >
-      {{ tab_creator | escape }}
+      {%- render 'pdp-info-tab-label', label: tab_creator -%}
     </button>
     <button
       type="button"
@@ -300,7 +440,7 @@
       data-pdp-info-tab="{{ block.id }}"
       data-index="1"
     >
-      {{ tab_how | escape }}
+      {%- render 'pdp-info-tab-label', label: tab_how -%}
     </button>
     <button
       type="button"
@@ -310,7 +450,7 @@
       data-pdp-info-tab="{{ block.id }}"
       data-index="2"
     >
-      {{ tab_specs | escape }}
+      {%- render 'pdp-info-tab-label', label: tab_specs -%}
     </button>
     <button
       type="button"
@@ -320,7 +460,7 @@
       data-pdp-info-tab="{{ block.id }}"
       data-index="3"
     >
-      {{ tab_tech | escape }}
+      {%- render 'pdp-info-tab-label', label: tab_tech -%}
     </button>
   </div>
 
@@ -346,9 +486,6 @@
       -%}
       <div class="pdp-creator-stack">
         <div class="pdp-creator-card">
-          {%- if block.settings.creator_quote != blank -%}
-            <p class="pdp-creator-quote">{{ block.settings.creator_quote | escape }}</p>
-          {%- endif -%}
           {%- if block.settings.creator_avatar != blank
             or block.settings.creator_name != blank
             or block.settings.creator_credentials != blank
@@ -372,6 +509,63 @@
                 {%- endif -%}
               </div>
             </div>
+          {%- endif -%}
+
+          {%- if block.settings.creator_video != blank -%}
+            <div class="pdp-creator-video" data-pdp-creator-video tabindex="0" role="group" aria-label="{% if block.settings.creator_name != blank %}{{ block.settings.creator_name | escape }} — {% endif %}Video">
+              <div class="pdp-creator-video__poster" data-pdp-creator-video-poster>
+                {%- if block.settings.creator_video_cover != blank -%}
+                  {{
+                    block.settings.creator_video_cover
+                    | image_url: width: 900
+                    | image_tag:
+                      class: 'pdp-creator-video__cover',
+                      loading: 'lazy',
+                      widths: '400, 600, 900',
+                      sizes: '100vw',
+                      alt: block.settings.creator_name | default: 'Video' | escape
+                  }}
+                {%- elsif block.settings.creator_video.preview_image != blank -%}
+                  {{
+                    block.settings.creator_video.preview_image
+                    | image_url: width: 900
+                    | image_tag:
+                      class: 'pdp-creator-video__cover',
+                      loading: 'lazy',
+                      widths: '400, 600, 900',
+                      sizes: '100vw',
+                      alt: block.settings.creator_name | default: 'Video' | escape
+                  }}
+                {%- endif -%}
+                <button type="button" class="pdp-creator-video__play-btn" aria-label="Play video" tabindex="-1">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="pdp-creator-video__host" data-pdp-creator-video-host>
+                {{
+                  block.settings.creator_video
+                  | video_tag:
+                    playsinline: true,
+                    controls: false,
+                    preload: 'none',
+                    muted: false,
+                    loop: false
+                }}
+              </div>
+              <div class="pdp-creator-video__pause-overlay" data-pdp-creator-video-pause-overlay>
+                <button type="button" class="pdp-creator-video__play-btn" aria-label="Play video" tabindex="-1">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if block.settings.creator_quote != blank -%}
+            <p class="pdp-creator-quote">{{ block.settings.creator_quote | escape }}</p>
           {%- endif -%}
         </div>
 
@@ -625,6 +819,80 @@
         });
       });
 
+      function setupCreatorVideos() {
+        root.querySelectorAll("[data-pdp-creator-video]").forEach(function (wrap) {
+          if (wrap.dataset.pdpCreatorVideoBound === "1") return;
+          wrap.dataset.pdpCreatorVideoBound = "1";
+
+          var poster = wrap.querySelector("[data-pdp-creator-video-poster]");
+          var videoHost = wrap.querySelector("[data-pdp-creator-video-host]");
+          var pauseOverlay = wrap.querySelector("[data-pdp-creator-video-pause-overlay]");
+          var video = wrap.querySelector("video");
+          if (!poster || !video) return;
+
+          video.controls = false;
+          video.setAttribute("controlsList", "nodownload noremoteplayback");
+
+          function playVideo() {
+            wrap.classList.add("is-playing");
+            wrap.classList.remove("is-paused");
+            var playPromise = video.play();
+            if (playPromise && playPromise.catch) {
+              playPromise.catch(function () {});
+            }
+          }
+
+          function pauseVideo() {
+            video.pause();
+            wrap.classList.add("is-paused");
+          }
+
+          function toggleVideo() {
+            if (!wrap.classList.contains("is-playing")) {
+              playVideo();
+              return;
+            }
+
+            if (video.paused) {
+              playVideo();
+            } else {
+              pauseVideo();
+            }
+          }
+
+          poster.addEventListener("click", function (event) {
+            event.preventDefault();
+            playVideo();
+          });
+
+          if (videoHost) {
+            videoHost.addEventListener("click", function (event) {
+              event.preventDefault();
+              toggleVideo();
+            });
+          }
+
+          if (pauseOverlay) {
+            pauseOverlay.addEventListener("click", function (event) {
+              event.preventDefault();
+              playVideo();
+            });
+          }
+
+          video.addEventListener("ended", function () {
+            wrap.classList.remove("is-playing");
+            wrap.classList.remove("is-paused");
+          });
+
+          wrap.addEventListener("keydown", function (event) {
+            if (event.key !== "Enter" && event.key !== " ") return;
+            event.preventDefault();
+            toggleVideo();
+          });
+        });
+      }
+
+      setupCreatorVideos();
       renderSpecsGrid();
     })();
   </script>

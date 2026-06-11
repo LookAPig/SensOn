@@ -1,0 +1,185 @@
+{%- liquid
+  assign fi_bid = block.id
+  assign fi_title = block.settings.title | default: 'Featured in'
+  assign fi_json_raw = block.settings.logos_json | strip
+-%}
+
+{%- if fi_json_raw != blank -%}
+  <div id="pdp-fi-{{ fi_bid }}" class="pdp-featured-in" data-fi-root data-fi-block-id="{{ fi_bid }}">
+    <style>
+      #pdp-fi-{{ fi_bid }} {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      #pdp-fi-{{ fi_bid }} * {
+        box-sizing: border-box;
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__title {
+        margin: 0 0 8px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #000;
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        padding: 12px;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        padding: 0 8px;
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        height: 70%;
+        border-right: 1px dashed #ccc;
+        transform: translateY(-50%);
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__logo {
+        display: block;
+        width: 55px;
+        max-width: 55px;
+        height: auto;
+        object-fit: contain;
+      }
+
+      @media screen and (min-width: 1000px) {
+        #pdp-fi-{{ fi_bid }} .pdp-featured-in__logo {
+          width: 75px;
+          max-width: 75px;
+        }
+      }
+    </style>
+
+    {%- if fi_title != blank -%}
+      <h3 class="pdp-featured-in__title">{{ fi_title | escape }}</h3>
+    {%- endif -%}
+
+    <div class="pdp-featured-in__grid" data-fi-grid></div>
+    <script type="application/json" data-fi-json>{{ fi_json_raw }}</script>
+  </div>
+
+  <script>
+    (function () {
+      function escapeHtml(text) {
+        return String(text)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function normalizeLogoItem(raw) {
+        if (!raw) return null;
+
+        if (typeof raw === "string") {
+          var trimmed = raw.trim();
+          return trimmed ? { image: trimmed, alt: "" } : null;
+        }
+
+        if (typeof raw === "object") {
+          var image = raw.image || raw.url || "";
+          if (!image) return null;
+
+          return {
+            image: image,
+            alt: raw.alt || raw.name || ""
+          };
+        }
+
+        return null;
+      }
+
+      function renderFeaturedIn(root) {
+        var dataEl = root.querySelector("[data-fi-json]");
+        var gridEl = root.querySelector("[data-fi-grid]");
+
+        if (!dataEl || !gridEl) return;
+
+        var items;
+
+        try {
+          items = JSON.parse(dataEl.textContent.trim());
+        } catch (error) {
+          console.warn("[pdp-featured-in] Invalid JSON:", error);
+          return;
+        }
+
+        if (!Array.isArray(items)) {
+          console.warn("[pdp-featured-in] JSON must be an array.");
+          return;
+        }
+
+        items = items.map(normalizeLogoItem).filter(Boolean).slice(0, 3);
+
+        if (!items.length) return;
+
+        gridEl.innerHTML = "";
+
+        for (var i = 0; i < 3; i++) {
+          var item = items[i];
+          var cell = document.createElement("div");
+          cell.className = "pdp-featured-in__item";
+
+          if (item && item.image) {
+            var img = document.createElement("img");
+            img.className = "pdp-featured-in__logo";
+            img.src = item.image;
+            img.alt = item.alt || "";
+            img.loading = "lazy";
+            img.width = 55;
+            img.height = 55;
+            cell.appendChild(img);
+          }
+
+          gridEl.appendChild(cell);
+        }
+      }
+
+      function initFeaturedIn(root) {
+        if (!root || root.getAttribute("data-fi-initialized") === "true") return;
+
+        renderFeaturedIn(root);
+        root.setAttribute("data-fi-initialized", "true");
+      }
+
+      function initAll(scope) {
+        var container = scope || document;
+        container.querySelectorAll("[data-fi-root]").forEach(initFeaturedIn);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+          initAll();
+        });
+      } else {
+        initAll();
+      }
+
+      document.addEventListener("shopify:section:load", function (event) {
+        initAll(event.target);
+      });
+
+      document.addEventListener("shopify:block:select", function (event) {
+        initAll(event.target);
+      });
+    })();
+  </script>
+{%- endif -%}
