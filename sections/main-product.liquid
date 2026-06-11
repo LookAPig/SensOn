@@ -2302,6 +2302,30 @@
     }
   ]
 },
+{
+  "type": "featured_in",
+  "name": "Featured in",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Media endorsement logos in a 3-column grid. Configure up to 3 logos via JSON; each item can be a URL string or an object with image and alt."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured in"
+    },
+    {
+      "type": "textarea",
+      "id": "logos_json",
+      "label": "Logos JSON",
+      "info": "Array of up to 3 items. Example: [{\"image\":\"https://cdn.shopify.com/.../logo.webp\",\"alt\":\"Business Insider\"},{\"image\":\"https://...\",\"alt\":\"Yahoo Finance\"},{\"image\":\"https://...\",\"alt\":\"USA TODAY\"}]",
+      "default": "[{\"image\":\"\",\"alt\":\"Business Insider\"},{\"image\":\"\",\"alt\":\"Yahoo Finance\"},{\"image\":\"\",\"alt\":\"USA TODAY\"}]"
+    }
+  ]
+},
     {
       "type": "share_buttons",
       "name": "t:sections.main_product.blocks.share_buttons.name",

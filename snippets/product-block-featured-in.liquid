@@ -1,0 +1,104 @@
+{%- liquid
+  assign fi_bid = block.id
+  assign fi_title = block.settings.title | default: 'Featured in'
+  assign fi_json_raw = block.settings.logos_json | strip
+  assign fi_logos = fi_json_raw | parse_json
+  assign fi_has_logos = false
+
+  if fi_logos != blank
+    for i in (0..2)
+      assign fi_check_logo = fi_logos[i]
+      assign fi_check_url = fi_check_logo.image | default: fi_check_logo.url | default: fi_check_logo
+      if fi_check_url != blank
+        assign fi_has_logos = true
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- if fi_has_logos -%}
+  <div id="pdp-fi-{{ fi_bid }}" class="pdp-featured-in">
+    <style>
+      #pdp-fi-{{ fi_bid }} {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      #pdp-fi-{{ fi_bid }} * {
+        box-sizing: border-box;
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__title {
+        margin: 0 0 8px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #000;
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        padding: 12px;
+        background-color: #f5f5f5;
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        padding: 0 8px;
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        height: 70%;
+        border-right: 1px dashed #ccc;
+        transform: translateY(-50%);
+      }
+
+      #pdp-fi-{{ fi_bid }} .pdp-featured-in__logo {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 48px;
+        object-fit: contain;
+      }
+    </style>
+
+    {%- if fi_title != blank -%}
+      <h3 class="pdp-featured-in__title">{{ fi_title | escape }}</h3>
+    {%- endif -%}
+
+    <div class="pdp-featured-in__grid">
+      {%- for i in (0..2) -%}
+        {%- liquid
+          assign fi_logo = fi_logos[i]
+          assign fi_logo_url = fi_logo.image | default: fi_logo.url | default: fi_logo
+          assign fi_logo_alt = fi_logo.alt | default: fi_logo.name | default: ''
+        -%}
+
+        <div class="pdp-featured-in__item">
+          {%- if fi_logo_url != blank -%}
+            <img
+              class="pdp-featured-in__logo"
+              src="{{ fi_logo_url }}"
+              alt="{{ fi_logo_alt | escape }}"
+              loading="lazy"
+              width="160"
+              height="48"
+            >
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

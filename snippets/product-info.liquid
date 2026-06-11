@@ -613,6 +613,9 @@
           {%- when 'customer_reviews' -%}
             {%- render 'product-block-customer-reviews', block: block -%}
 
+          {%- when 'featured_in' -%}
+            {%- render 'product-block-featured-in', block: block -%}
+
           {%- when 'share_buttons' -%}
             <share-button>
               <button class="h-stack gap-2 justify-{{ alignment }} share-buttons--native" hidden>
