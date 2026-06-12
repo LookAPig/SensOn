@@ -218,6 +218,13 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__quote.is-expanded {
+          display: block;
+          -webkit-line-clamp: unset;
         }
       }
     </style>
@@ -348,14 +355,29 @@
             var isActive = panel.getAttribute("data-cr-index") === indexStr;
             panel.classList.toggle("is-active", isActive);
             panel.setAttribute("aria-hidden", isActive ? "false" : "true");
+
+            if (!isActive) {
+              var quote = panel.querySelector(".pdp-customer-reviews__quote");
+              if (quote) {
+                quote.classList.remove("is-expanded");
+              }
+            }
           });
         }
 
         root.addEventListener("click", function (event) {
           var tab = event.target.closest("[data-cr-tab]");
-          if (!tab || !root.contains(tab)) return;
+          if (tab && root.contains(tab)) {
+            activateTab(tab.getAttribute("data-cr-index"));
+            return;
+          }
 
-          activateTab(tab.getAttribute("data-cr-index"));
+          var quote = event.target.closest(".pdp-customer-reviews__quote");
+          if (quote && root.contains(quote)) {
+            if (window.innerWidth <= 749) {
+              quote.classList.toggle("is-expanded");
+            }
+          }
         });
       }
 
