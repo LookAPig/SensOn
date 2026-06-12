@@ -905,7 +905,7 @@
       ],
       "settings": {
         "color_scheme": "scheme-2",
-        "add_vertical_spacing": false,
+        "add_vertical_spacing": true,
         "add_horizontal_spacing": false
       }
     },
