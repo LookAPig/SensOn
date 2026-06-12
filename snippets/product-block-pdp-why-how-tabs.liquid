@@ -26,7 +26,7 @@
       --pdp-tab-text-inactive: {{ color_tab_text_inactive }};
       --pdp-tab-text-active: {{ color_tab_text_active }};
       width: 100%;
-      margin-top: 1.25rem;
+      margin-top: 42px;
       margin-bottom: 0.5rem;
     }
     #pdp-wh-{{ block.id }} * {
@@ -259,8 +259,8 @@
 
     #pdp-wh-{{ block.id }} .pdp-creator-credentials {
       margin: 0;
-      font-size: 10px;
-      line-height: 1.35;
+      font-size: 14px;
+      line-height: 115%;
       color: #666;
     }
 
@@ -380,7 +380,7 @@
 
       #pdp-wh-{{ block.id }} .pdp-info-tabs__tab {
         flex: 1 1 0;
-        font-size: 11px;
+        font-size: 14px;
         padding: 8px 4px;
         line-height: 1.15;
       }
@@ -415,8 +415,16 @@
         gap: 16px 12px;
       }
 
+      #pdp-wh-{{ block.id }} .pdp-spec-label {
+        font-size: 14px;
+        font-weight: 400;
+        color: #000;
+      }
+
       #pdp-wh-{{ block.id }} .pdp-spec-value {
-        font-size: 15px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #333;
       }
     }
   </style>
