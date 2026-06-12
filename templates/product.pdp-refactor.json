@@ -734,8 +734,8 @@
             "row_heading": "Audio Sync",
             "first_column": "Low-latency, voice-to-pulse",
             "first_column_icon": "none",
-            "second_column": "No audio response",
-            "second_column_icon": "none",
+            "second_column": "",
+            "second_column_icon": "cross",
             "third_column": "",
             "third_column_icon": "cross"
           }
