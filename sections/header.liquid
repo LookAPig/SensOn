@@ -90,7 +90,7 @@
       .x-header-wrapper>.header{
         max-width: 1680px;margin-left: auto; margin-right: auto;
       }
-      :root:has(.shopify-section:first-child [allow-transparent-header]) .x-header-wrapper:has(.header:not(.is-solid)){
+      :root:has(.shopify-section:first-child [allow-transparent-header]) .x-header-wrapper:has(.header:not(.is-solid, :has([open]))){
         --header-show-transparent-logo: 1;
         --background: 0 0 0 / 0;
         --background-gradient: initial;
