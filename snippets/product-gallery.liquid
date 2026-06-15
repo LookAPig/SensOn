@@ -19,6 +19,13 @@ Supported variables
 * enable_image_zoom: if set to true the gallery allow zoom
 * max_image_zoom_level: the maximum zoom level allowed (if enabled)
 * class: extra class applied on the container
+
+视频自定义封面（产品元字段 custom.video_posters，类型 JSON）：
+[
+  "https://cdn.shopify.com/s/files/1/xxxx/files/cover-1.jpg",
+  "https://cdn.shopify.com/s/files/1/xxxx/files/cover-2.jpg"
+]
+按橱窗媒体顺序，第 1 个视频用第 1 条，第 2 个视频用第 2 条，以此类推。
 {%- endcomment -%}
 
 <style>
@@ -125,6 +132,7 @@ only way to do it on Shopify right now.
     endfor
   endif
 
+  assign video_poster_urls = product.metafields.custom.video_posters.value
 %}
 
 <product-gallery id="product-gallery-{{ product_gallery_carousel_id }}" class="product-gallery {{ class }}" form="{{ product_form_id }}" filtered-indexes="{{ filtered_indexes | json }}" {% if enable_media_autoplay %}autoplay-media{% endif %} {% if enable_image_zoom %}allow-zoom="{{ max_image_zoom_level }}" zoom-color-scheme-id="{{ settings.default_color_scheme.id }}"{% endif %}>
@@ -155,10 +163,18 @@ only way to do it on Shopify right now.
 
                 if media.media_type == 'video' or media.media_type == 'external_video'
                   unless filtered_indexes contains media.position
-                    capture gallery_video_poster_url
-                      render 'product-media-video-poster-url', product: product, poster_index: video_poster_index
-                    endcapture
-                    assign gallery_video_poster_url = gallery_video_poster_url | strip
+                    assign poster_item = video_poster_urls[video_poster_index]
+
+                    if poster_item != blank
+                      if poster_item.url != blank
+                        assign gallery_video_poster_url = poster_item.url | strip
+                      elsif poster_item.poster_url != blank
+                        assign gallery_video_poster_url = poster_item.poster_url | strip
+                      else
+                        assign gallery_video_poster_url = poster_item | strip
+                      endif
+                    endif
+
                     assign video_poster_index = video_poster_index | plus: 1
                   endunless
                 endif
@@ -241,10 +257,18 @@ only way to do it on Shopify right now.
 
                   if media.media_type == 'video' or media.media_type == 'external_video'
                     unless filtered_indexes contains media.position
-                      capture gallery_video_poster_url
-                        render 'product-media-video-poster-url', product: product, poster_index: video_poster_index
-                      endcapture
-                      assign gallery_video_poster_url = gallery_video_poster_url | strip
+                      assign poster_item = video_poster_urls[video_poster_index]
+
+                      if poster_item != blank
+                        if poster_item.url != blank
+                          assign gallery_video_poster_url = poster_item.url | strip
+                        elsif poster_item.poster_url != blank
+                          assign gallery_video_poster_url = poster_item.poster_url | strip
+                        else
+                          assign gallery_video_poster_url = poster_item | strip
+                        endif
+                      endif
+
                       assign video_poster_index = video_poster_index | plus: 1
                     endunless
                   endif
