@@ -188,6 +188,28 @@
         content: '\201D';
       }
 
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__quote-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__read-more {
+        appearance: none;
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin: 4px 0 0;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #5c2d91;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        display: none;
+      }
+
       @media screen and (max-width: 749px) {
         #pdp-cr-{{ cr_bid }} {
           /* padding: 24px 16px; */
@@ -219,13 +241,15 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
-          cursor: pointer;
-          -webkit-tap-highlight-color: transparent;
         }
 
         #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__quote.is-expanded {
           display: block;
           -webkit-line-clamp: unset;
+        }
+
+        #pdp-cr-{{ cr_bid }} .pdp-customer-reviews__read-more.is-visible {
+          display: inline-block;
         }
       }
     </style>
@@ -301,7 +325,18 @@
                     </div>
                   </div>
                 {%- endif -%}
-                <p class="pdp-customer-reviews__quote">{{- cr_quote | escape -}}</p>
+                <div class="pdp-customer-reviews__quote-wrap" data-cr-quote-wrap>
+                  <p class="pdp-customer-reviews__quote">{{- cr_quote | escape -}}</p>
+                  <button
+                    type="button"
+                    class="pdp-customer-reviews__read-more"
+                    data-cr-read-more
+                    hidden
+                    aria-expanded="false"
+                  >
+                    Read more
+                  </button>
+                </div>
               </div>
               {%- if cr_image != blank -%}
                 <div class="pdp-customer-reviews__panel-right">
@@ -318,12 +353,103 @@
 
   <script>
     (function () {
+      var MOBILE_BREAKPOINT = 749;
+
       function escapeHtml(text) {
         return String(text)
           .replace(/&/g, "&amp;")
           .replace(/</g, "&lt;")
           .replace(/>/g, "&gt;")
           .replace(/"/g, "&quot;");
+      }
+
+      function isMobileViewport() {
+        return window.innerWidth <= MOBILE_BREAKPOINT;
+      }
+
+      function collapseQuoteWrap(wrap) {
+        if (!wrap) return;
+
+        var quote = wrap.querySelector(".pdp-customer-reviews__quote");
+        var button = wrap.querySelector("[data-cr-read-more]");
+
+        if (quote) {
+          quote.classList.remove("is-expanded");
+        }
+
+        if (button) {
+          button.textContent = "Read more";
+          button.setAttribute("aria-expanded", "false");
+          button.hidden = true;
+          button.classList.remove("is-visible");
+        }
+      }
+
+      function updateReadMoreVisibility(wrap) {
+        if (!wrap) return;
+
+        var quote = wrap.querySelector(".pdp-customer-reviews__quote");
+        var button = wrap.querySelector("[data-cr-read-more]");
+
+        if (!quote || !button) return;
+
+        quote.classList.remove("is-expanded");
+        button.textContent = "Read more";
+        button.setAttribute("aria-expanded", "false");
+
+        if (!isMobileViewport()) {
+          button.hidden = true;
+          button.classList.remove("is-visible");
+          return;
+        }
+
+        var isTruncated = quote.scrollHeight > quote.clientHeight + 1;
+
+        if (isTruncated) {
+          button.hidden = false;
+          button.classList.add("is-visible");
+        } else {
+          button.hidden = true;
+          button.classList.remove("is-visible");
+        }
+      }
+
+      function scheduleReadMoreCheck(wrap) {
+        if (!wrap) return;
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            updateReadMoreVisibility(wrap);
+          });
+        });
+      }
+
+      function setupReadMoreForPanel(panel) {
+        if (!panel) return;
+
+        var wrap = panel.querySelector("[data-cr-quote-wrap]");
+        scheduleReadMoreCheck(wrap);
+      }
+
+      function setupAllReadMore(root) {
+        var activePanel = root.querySelector("[data-cr-panel].is-active");
+
+        root.querySelectorAll("[data-cr-quote-wrap]").forEach(collapseQuoteWrap);
+        setupReadMoreForPanel(activePanel);
+      }
+
+      function toggleQuoteExpand(wrap) {
+        if (!wrap || !isMobileViewport()) return;
+
+        var quote = wrap.querySelector(".pdp-customer-reviews__quote");
+        var button = wrap.querySelector("[data-cr-read-more]");
+
+        if (!quote || !button) return;
+
+        var isExpanded = quote.classList.toggle("is-expanded");
+
+        button.textContent = isExpanded ? "Read less" : "Read more";
+        button.setAttribute("aria-expanded", isExpanded ? "true" : "false");
       }
 
       function normalizeReviewItem(raw) {
@@ -358,10 +484,9 @@
             panel.setAttribute("aria-hidden", isActive ? "false" : "true");
 
             if (!isActive) {
-              var quote = panel.querySelector(".pdp-customer-reviews__quote");
-              if (quote) {
-                quote.classList.remove("is-expanded");
-              }
+              collapseQuoteWrap(panel.querySelector("[data-cr-quote-wrap]"));
+            } else {
+              setupReadMoreForPanel(panel);
             }
           });
         }
@@ -373,11 +498,9 @@
             return;
           }
 
-          var quote = event.target.closest(".pdp-customer-reviews__quote");
-          if (quote && root.contains(quote)) {
-            if (window.innerWidth <= 749) {
-              quote.classList.toggle("is-expanded");
-            }
+          var readMoreButton = event.target.closest("[data-cr-read-more]");
+          if (readMoreButton && root.contains(readMoreButton)) {
+            toggleQuoteExpand(readMoreButton.closest("[data-cr-quote-wrap]"));
           }
         });
       }
@@ -442,7 +565,18 @@
           var leftContent = `
             <div class="pdp-customer-reviews__panel-left">
               ${authorHtml}
-              <p class="pdp-customer-reviews__quote">${quoteHtml}</p>
+              <div class="pdp-customer-reviews__quote-wrap" data-cr-quote-wrap>
+                <p class="pdp-customer-reviews__quote">${quoteHtml}</p>
+                <button
+                  type="button"
+                  class="pdp-customer-reviews__read-more"
+                  data-cr-read-more
+                  hidden
+                  aria-expanded="false"
+                >
+                  Read more
+                </button>
+              </div>
             </div>
           `;
 
@@ -472,6 +606,7 @@
         });
 
         bindTabSwitch(root);
+        setupAllReadMore(root);
       }
 
       function initCustomerReviews(root) {
@@ -481,6 +616,7 @@
           renderFromJson(root);
         } else {
           bindTabSwitch(root);
+          setupAllReadMore(root);
         }
 
         root.setAttribute("data-cr-initialized", "true");
@@ -501,6 +637,15 @@
 
       document.addEventListener("shopify:section:load", function (event) {
         initAll(event.target);
+      });
+
+      var resizeTimer;
+
+      window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          document.querySelectorAll("[data-cr-root]").forEach(setupAllReadMore);
+        }, 150);
       });
     })();
   </script>
