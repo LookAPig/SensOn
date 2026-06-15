@@ -34,6 +34,7 @@ Supported variables
 * playsinline: controls if the video should be played inline. If none is passed, it will be set to true if the video is autoplaying
 * controls: if set to true, then the controls for the video are displayed
 * poster: for video media, a custom poster that will override the default one
+* poster_url: for video media, a custom poster URL string (used when poster image object is not available)
 * group: an optional group to set for the media. When a group is set, only one media at a time of the given group can play.
 * show_play_button: by default, a play button is added when video is not autoplaying. By setting it to false you can force turning off this behavior.
 * show_play_cursor: if set to true and that the video is not autoplaying, a play cursor will be displayed on top. Because touch devices do not have
@@ -106,19 +107,30 @@ Supported variables
         {%- assign custom_poster = poster | default: media.preview_image -%}
         {%- assign poster_class = '' -%}
         {%- liquid
-          assign poster_desktop_max = custom_poster.width | at_most: 1600
           assign poster_srcset_desktop = '400,600,800,1000,1200,1400,1600'
           assign poster_srcset_mobile = '400,600,800'
+
+          unless poster_url != blank
+            assign poster_desktop_max = custom_poster.width | at_most: 1600
+          endunless
         -%}
 
         {%- if mobile_media != blank -%}
           {%- assign mobile_custom_poster = poster | default: mobile_media.preview_image -%}
           {%- assign poster_class = 'md-max:hidden' -%}
 
-          {{- mobile_custom_poster | image_url: width: 800 | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: '100vw', widths: poster_srcset_mobile, class: 'md:hidden' -}}
+          {%- if poster_url != blank -%}
+            <img src="{{ poster_url }}" loading="{{ loading }}" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} sizes="100vw" class="md:hidden object-cover" alt="">
+          {%- else -%}
+            {{- mobile_custom_poster | image_url: width: 800 | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: '100vw', widths: poster_srcset_mobile, class: 'md:hidden' -}}
+          {%- endif -%}
         {%- endif -%}
 
-        {{- custom_poster | image_url: width: poster_desktop_max | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: poster_srcset_desktop, class: poster_class -}}
+        {%- if poster_url != blank -%}
+          <img src="{{ poster_url }}" loading="{{ loading }}" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} sizes="{{ sizes }}" class="{{ poster_class }} object-cover" alt="">
+        {%- else -%}
+          {{- custom_poster | image_url: width: poster_desktop_max | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: poster_srcset_desktop, class: poster_class -}}
+        {%- endif -%}
       {%- endunless -%}
 
       {%- if media_type == 'video' -%}
@@ -143,13 +155,20 @@ Supported variables
         {%- endcomment -%}
 
         {%- assign custom_poster = poster | default: media.preview_image -%}
+        {%- liquid
+          if poster_url != blank
+            assign video_poster_attribute = poster_url
+          else
+            assign video_poster_attribute = custom_poster | image_url: width: 1200
+          endif
+        -%}
 
         <video class="{{ class_name }}" width="{{ media.sources.first.width }}" height="{{ media.sources.first.height }}" 
           webkit-playsinline
           x5-playsinline
           x5-video-player-type="h5"
           x5-video-player-fullscreen="false"
-          {% if playsinline %}playsinline{% endif %} {% if muted %}muted{% endif %} {% if loop %}loop{% endif %} {% if controls %}controls{% endif %} {% if autoplay %}poster="{{ custom_poster | image_url: width: 1200 }}"{% endif %} preload="{{ preload_attribute }}">
+          {% if playsinline %}playsinline{% endif %} {% if muted %}muted{% endif %} {% if loop %}loop{% endif %} {% if controls %}controls{% endif %} {% if autoplay %}poster="{{ video_poster_attribute }}"{% endif %} preload="{{ preload_attribute }}">
           {%- if mobile_media != blank -%}
             {%- for source in mobile_media.sources -%}
               <source media="(max-width: 999px)" src="{{ source.url }}" width="{{ source.width }}" height="{{ source.height }}" type="{{ source.mime_type }}">

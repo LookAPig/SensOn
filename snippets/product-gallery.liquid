@@ -124,6 +124,7 @@ only way to do it on Shopify right now.
       endif
     endfor
   endif
+
 %}
 
 <product-gallery id="product-gallery-{{ product_gallery_carousel_id }}" class="product-gallery {{ class }}" form="{{ product_form_id }}" filtered-indexes="{{ filtered_indexes | json }}" {% if enable_media_autoplay %}autoplay-media{% endif %} {% if enable_image_zoom %}allow-zoom="{{ max_image_zoom_level }}" zoom-color-scheme-id="{{ settings.default_color_scheme.id }}"{% endif %}>
@@ -138,6 +139,7 @@ only way to do it on Shopify right now.
       <scroll-carousel id="{{ product_gallery_carousel_id }}" class="product-gallery__carousel scroll-area bleed md:unbleed" role="region">
         {%- if product != blank -%}
           {%- assign image_index = 0 -%}
+          {%- assign video_poster_index = 0 -%}
           {%- for media in product.media -%}
             {%- capture sizes -%}(max-width: 699px) 100vw, 50vw{%- endcapture -%}
 
@@ -148,11 +150,29 @@ only way to do it on Shopify right now.
                 {%- assign preload = false -%}
               {%- endif -%}
 
+              {%- liquid
+                assign gallery_video_poster_url = ''
+
+                if media.media_type == 'video' or media.media_type == 'external_video'
+                  unless filtered_indexes contains media.position
+                    capture gallery_video_poster_url
+                      render 'product-media-video-poster-url', product: product, poster_index: video_poster_index
+                    endcapture
+                    assign gallery_video_poster_url = gallery_video_poster_url | strip
+                    assign video_poster_index = video_poster_index | plus: 1
+                  endunless
+                endif
+              -%}
+
               {%- comment -%}
               NOTE: for the product gallery, the autoplay does not work in a similar way. It is always false at the product level,
               and the product-gallery component itself will autoplay (if needed)
               {%- endcomment -%}
-              {%- render 'media', product: product, media: media, sizes: sizes, preload: preload, controls: true, playsinline: false, muted: enable_media_autoplay, loop: enable_video_looping, group: 'product' -%}
+              {%- if gallery_video_poster_url != blank -%}
+                {%- render 'media', product: product, media: media, sizes: sizes, preload: preload, controls: true, playsinline: false, muted: enable_media_autoplay, loop: enable_video_looping, group: 'product', poster_url: gallery_video_poster_url -%}
+              {%- else -%}
+                {%- render 'media', product: product, media: media, sizes: sizes, preload: preload, controls: true, playsinline: false, muted: enable_media_autoplay, loop: enable_video_looping, group: 'product' -%}
+              {%- endif -%}
 
               {%- if enable_image_zoom and section.settings.desktop_media_layout contains 'grid' and media.media_type == 'image' -%}
                 <open-lightbox-button aria-controls="{{ product_gallery_carousel_id}}" class="block sm-max:hidden" image-index="{{ image_index }}">
@@ -214,9 +234,28 @@ only way to do it on Shopify right now.
         <div class="product-gallery__thumbnail-list">
           <carousel-navigation align-selected aria-controls="{{ product_gallery_carousel_id }}" class="scroll-marker-group scroll-marker-group--thumbnails scroll-area bleed md:unbleed">
             {%- if product != blank -%}
+              {%- assign video_poster_index = 0 -%}
               {%- for media in product.media -%}
+                {%- liquid
+                  assign gallery_video_poster_url = ''
+
+                  if media.media_type == 'video' or media.media_type == 'external_video'
+                    unless filtered_indexes contains media.position
+                      capture gallery_video_poster_url
+                        render 'product-media-video-poster-url', product: product, poster_index: video_poster_index
+                      endcapture
+                      assign gallery_video_poster_url = gallery_video_poster_url | strip
+                      assign video_poster_index = video_poster_index | plus: 1
+                    endunless
+                  endif
+                -%}
+
                 <button type="button" class="scroll-marker" {% if filtered_indexes contains media.position %}hidden{% endif %} aria-current="{% if media == default_media %}true{% else %}false{% endif %}" aria-label="{{ 'general.accessibility.go_to_item' | t: index: forloop.index | escape }}">
-                  {{- media | image_url: width: media.preview_image.width | image_tag: loading: 'lazy', sizes: '56px', widths: '56,112,168', class: 'object-cover' -}}
+                  {%- if gallery_video_poster_url != blank -%}
+                    <img src="{{ gallery_video_poster_url }}" loading="lazy" sizes="56px" class="object-cover" alt="" width="56" height="56">
+                  {%- else -%}
+                    {{- media | image_url: width: media.preview_image.width | image_tag: loading: 'lazy', sizes: '56px', widths: '56,112,168', class: 'object-cover' -}}
+                  {%- endif -%}
 
                   {%- unless media.media_type == 'image' -%}
                     <div class="product-gallery__media-badge">
