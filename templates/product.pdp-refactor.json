@@ -92,21 +92,9 @@
         },
         "featured_in_Gwxwf8": {
           "type": "featured_in",
-          "disabled": true,
           "settings": {
             "title": "Featured in",
             "logos_json": "[{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/2_1.webp?v=1781169789\",\"alt\":\"Business Insider\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/0_1.webp?v=1781169789\",\"alt\":\"Yahoo Finance\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/3_1.webp?v=1781169789\",\"alt\":\"USA TODAY\"}]"
-          }
-        },
-        "image_DyzwQw": {
-          "type": "image",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/3fe908a2-f66f-4768-a2cb-79ee2d109646.png",
-            "alignment": "left",
-            "width_mode": "custom",
-            "max_width": 390,
-            "mobile_max_width": 320
           }
         },
         "separator_bTgDWQ": {
@@ -116,6 +104,7 @@
         },
         "text_36KfV6": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p>Where bionic innovation meets the soul of AI. Fully hands-free, the device syncs in real-time with your voice, breath, and interactive stories. Engineered from a female perspective with triple-zone sensory resonance, it brings 500+ virtual companions directly to your ear.</p>"
           }
@@ -316,7 +305,6 @@
         "price",
         "countdown_H8fV6E",
         "featured_in_Gwxwf8",
-        "image_DyzwQw",
         "separator_bTgDWQ",
         "text_36KfV6",
         "feature_cards_NddJBd",
