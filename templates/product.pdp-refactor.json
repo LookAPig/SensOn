@@ -337,7 +337,7 @@
       "custom_css": [
         ".product-countdown-discount-percentage span {padding: 8px 24px; border-radius: 4px; margin-right: 0px;}",
         ".product-countdown-discount-percentage .prose {padding: 8px 32px; background: #f5f5f5;}",
-        ".product {gap: 16px; padding-block-start: 16px; padding-block-end: 48px; color: #000;}",
+        ".product {gap: 16px; padding-block-start: 16px; padding-block-end: 42px; color: #000;}",
         "@media screen and (min-width: 1000px) {.container {margin-inline-start: 80px; margin-inline-end: 80px; } .product {padding-block-start: 64px; padding-block-end: 64px; } .product-info {padding-inline-start: 24px; max-width: 652px; }}"
       ],
       "settings": {

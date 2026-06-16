@@ -34,6 +34,17 @@
 
     --header-transparent-header-text-color: {{ section.settings.transparent_header_text_color.rgb }};
     --header-non-transparent-text-color: {{ section.settings.color_scheme.settings.text_color.rgb }};
+    --header-solid-background: {% if section.settings.color_scheme.settings.background == 'rgba(0,0,0,0)' %}0 0 0 / 0{% else %}{{ section.settings.color_scheme.settings.background.rgb }}{% endif %};
+    --header-solid-background-gradient: {{ section.settings.color_scheme.settings.background_gradient }};
+    --header-solid-text-color: {{ section.settings.color_scheme.settings.text_color.rgb }};
+    {%- if section.settings.color_scheme.settings.background_gradient != blank -%}
+    --header-solid-border-color: {{ section.settings.color_scheme.settings.text_color.rgb }} / 0.1;
+    {%- elsif section.settings.color_scheme.settings.background == 'rgba(0,0,0,0)' -%}
+    --header-solid-border-color: {{ section.settings.color_scheme.settings.text_color.rgb }} / 0.6;
+    {%- else -%}
+    {%- assign header_solid_border_color = section.settings.color_scheme.settings.text_color | color_mix: section.settings.color_scheme.settings.background, 10 -%}
+    --header-solid-border-color: {{ header_solid_border_color.rgb }};
+    {%- endif -%}
   }
 
   @media screen and (min-width: 1000px) {
@@ -96,6 +107,16 @@
         --background-gradient: initial;
         --border-color: 0 0 0 / 0;
         --text-color: var(--header-transparent-header-text-color, var(--header-non-transparent-text-color));
+      }
+
+      @media screen and (max-width: 999px) {
+        :root:has(.shopify-section:first-child [allow-transparent-header]) .x-header-wrapper:has(#menu-drawer[open]) {
+          --header-show-transparent-logo: 0;
+          --background: var(--header-solid-background);
+          --background-gradient: var(--header-solid-background-gradient);
+          --border-color: var(--header-solid-border-color);
+          --text-color: var(--header-solid-text-color);
+        }
       }
       .shopify-section:first-child:has(:not([allow-transparent-header])){
         background-color: rgb(var(--background));
