@@ -140,21 +140,24 @@
       }
 
       #shopify-section-{{ section.id }} .ifi-container {
-        padding: clamp(40px, 5vh, 100px) 100px;
+        padding: clamp(16px, 3vh, 100px) 100px;
         position: sticky;
         top: 0;
-        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: safe center;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
       }
 
       #shopify-section-{{ section.id }} .ifi-header {
         padding: 0;
         gap: 16px;
-        margin: 0 auto 48px;
+        margin: 0 auto clamp(16px, 3vh, 48px);
         max-width: 1400px;
         width: 100%;
+        flex-shrink: 0;
       }
 
       #shopify-section-{{ section.id }} .ifi-label {
@@ -171,29 +174,33 @@
 
       #shopify-section-{{ section.id }} .ifi-pc-layout {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         width: 100%;
         max-width: 1400px;
         margin: 0 auto;
-        gap: 80px;
+        gap: clamp(40px, 6vw, 80px);
+        flex: 1;
+        min-height: 0;
       }
 
       #shopify-section-{{ section.id }} .ifi-pc-left {
         display: flex;
         flex-direction: column;
-        gap: 64px;
-        justify-content: flex-end;
+        gap: clamp(20px, 4vh, 64px);
+        justify-content: flex-start;
         align-self: stretch;
         flex: 1;
+        min-height: 0;
       }
 
       #shopify-section-{{ section.id }} .ifi-accordion-item {
         display: flex;
-        gap: 40px;
+        gap: clamp(24px, 3vw, 40px);
         align-items: flex-start;
         cursor: pointer;
-        padding: 12px 0;
+        padding: clamp(4px, 1vh, 12px) 0;
+        flex-shrink: 0;
       }
 
       #shopify-section-{{ section.id }} .ifi-accordion-line-wrapper {
@@ -249,12 +256,16 @@
         grid-template-rows: 1fr;
       }
 
+      #shopify-section-{{ section.id }} .ifi-accordion-desc-inner {
+        overflow: hidden;
+        min-height: 0;
+      }
+
       #shopify-section-{{ section.id }} .ifi-accordion-desc {
-        font-size: 16px;
+        font-size: clamp(14px, 1.6vh, 16px);
         line-height: 1.4;
         color: #000;
         margin: 0;
-        overflow: hidden;
         opacity: 0;
         padding-top: 0;
         transition: opacity 0.3s ease, padding-top 0.4s ease;
@@ -262,18 +273,58 @@
 
       #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-desc {
         opacity: 1;
-        padding-top: 24px;
+        padding-top: clamp(12px, 2vh, 24px);
         transition: opacity 0.4s ease 0.1s, padding-top 0.4s ease;
       }
 
       #shopify-section-{{ section.id }} .ifi-pc-right {
-        flex: 0 0 clamp(280px, 30vw, 420px);
-        width: clamp(280px, 30vw, 420px);
+        flex: 0 0 clamp(200px, min(30vw, 32vh), 420px);
+        width: clamp(200px, min(30vw, 32vh), 420px);
         aspect-ratio: 1 / 1;
+        max-height: min(420px, 32vh);
         height: auto;
         background-color: #f5f5f5;
         position: relative;
         overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      @media (min-width: 1000px) and (max-height: 800px) {
+        #shopify-section-{{ section.id }} .ifi-container {
+          padding-top: 12px;
+          padding-bottom: 12px;
+        }
+
+        #shopify-section-{{ section.id }} .ifi-header {
+          gap: 8px;
+          margin-bottom: 12px;
+        }
+
+        #shopify-section-{{ section.id }} .ifi-title {
+          font-size: 26px;
+        }
+
+        #shopify-section-{{ section.id }} .ifi-pc-layout {
+          gap: 32px;
+        }
+
+        #shopify-section-{{ section.id }} .ifi-pc-left {
+          gap: 16px;
+        }
+
+        #shopify-section-{{ section.id }} .ifi-accordion-title {
+          font-size: 20px;
+        }
+
+        #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-desc {
+          padding-top: 8px;
+        }
+
+        #shopify-section-{{ section.id }} .ifi-pc-right {
+          flex-basis: clamp(180px, 28vh, 320px);
+          width: clamp(180px, 28vh, 320px);
+          max-height: 28vh;
+        }
       }
 
       #shopify-section-{{ section.id }} .ifi-pc-img {
@@ -374,11 +425,13 @@
                     <h3 class="ifi-accordion-title">{{ block.settings.title | escape }}</h3>
                   {%- endif -%}
                   <div class="ifi-accordion-desc-wrapper">
-                    {%- if block.settings.desc_long != blank -%}
-                      <p class="ifi-accordion-desc">{{ block.settings.desc_long | escape | newline_to_br }}</p>
-                    {%- elsif block.settings.desc_short != blank -%}
-                      <p class="ifi-accordion-desc">{{ block.settings.desc_short | escape }}</p>
-                    {%- endif -%}
+                    <div class="ifi-accordion-desc-inner">
+                      {%- if block.settings.desc_long != blank -%}
+                        <p class="ifi-accordion-desc">{{ block.settings.desc_long | escape | newline_to_br }}</p>
+                      {%- elsif block.settings.desc_short != blank -%}
+                        <p class="ifi-accordion-desc">{{ block.settings.desc_short | escape }}</p>
+                      {%- endif -%}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -448,13 +501,17 @@
         if (window.innerWidth < 1000) {
           container.style.height = '';
           container.style.minHeight = '';
+          container.style.maxHeight = '';
           container.style.top = '';
+          container.style.overflowY = '';
           return;
         }
         var o = getOffsets();
         var available = window.innerHeight - o.headerH - o.navH - o.barH;
-        container.style.height = available + 'px';
         container.style.minHeight = available + 'px';
+        container.style.maxHeight = available + 'px';
+        container.style.height = 'auto';
+        container.style.overflowY = 'auto';
         container.style.top = (o.headerH + o.navH) + 'px';
       }
 
