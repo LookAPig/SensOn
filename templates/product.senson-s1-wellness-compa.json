@@ -1,0 +1,953 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "liquid_PMKK83": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<style>\n  /* 仅在移动端（屏幕宽度小于 1000px）隐藏右下角的放大按钮 */\n  @media screen and (max-width: 999px) {\n    .product-gallery open-lightbox-button {\n      display: none !important;\n    }\n    \n    /* 提升用户体验：让图片在移动端看起来是可点击的 */\n    .product-gallery__media[data-media-type=\"image\"] {\n      cursor: zoom-in;\n      -webkit-tap-highlight-color: transparent; /* 移除移动端点击的高亮背景 */\n    }\n\n  }\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    // 使用事件代理监听整个文档的点击。\n    // 这样做的好处是：Impact 主题在切换变体时会触发 <product-rerender> 局部刷新 DOM，\n    // 事件代理可以确保刷新后的新图片依然能响应点击。\n    document.body.addEventListener('click', function(e) {\n      \n      // 1. 拦截条件：仅针对移动端 (Impact 主题的移动端断点通常为 999px)\n      if (window.innerWidth >= 1000) return;\n\n      // 2. 判断点击的目标是否为产品图\n      const mediaContainer = e.target.closest('.product-gallery__media[data-media-type=\"image\"]');\n\n      if (mediaContainer) {\n        // 3. 获取对应的放大按钮\n        // Impact 有时在 Grid 布局下每个图带一个 btn，在 Carousel 下是全局统一一个 btn\n        let zoomBtn = mediaContainer.querySelector('open-lightbox-button button');\n        \n        if (!zoomBtn) {\n           const gallery = e.target.closest('.product-gallery');\n           if (gallery) {\n             zoomBtn = gallery.querySelector('open-lightbox-button button');\n           }\n        }\n\n        // 4. 如果找到了被隐藏的放大按钮，则触发模拟点击\n        if (zoomBtn) {\n          // 阻止默认行为（防止某些情况下图片拖拽等）\n          e.preventDefault(); \n          zoomBtn.click();\n        }\n      }\n    });\n  });\n</script>"
+          }
+        },
+        "image_nmjnjV": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/2026-01-21_15.23.05.png",
+            "alignment": "left",
+            "width_mode": "custom",
+            "max_width": 100,
+            "mobile_max_width": 100
+          }
+        },
+        "yotpo_product_reviews_star_rating_Xzjcy3": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h4"
+          }
+        },
+        "text_7nhMc6": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Real-time AI-device sync for immersive pleasure.</p>"
+          }
+        },
+        "offers_xqqJzH": {
+          "type": "offers",
+          "disabled": true,
+          "settings": {
+            "layout": "split",
+            "icon_position": "stacked",
+            "text_alignment": "left",
+            "offer_1_icon_width": 16,
+            "offer_1_subheading": "<strong>Limited-time pre-order offer save 30%+</strong>",
+            "offer_1_content": "",
+            "offer_1_background": "#f287ec",
+            "offer_1_text_color": "#ffffff",
+            "offer_2_icon_width": 16,
+            "offer_2_subheading": "",
+            "offer_2_content": "",
+            "offer_2_background": "#f9f9f9",
+            "offer_2_text_color": "#000000",
+            "offer_3_icon_width": 16,
+            "offer_3_subheading": "",
+            "offer_3_content": "",
+            "offer_3_background": "#f9f9f9",
+            "offer_3_text_color": "#000000"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "countdown_H8fV6E": {
+          "type": "countdown",
+          "settings": {
+            "class_name": "pdp-off-show",
+            "text": "<strong>Pride Love Special </strong>",
+            "background": "#ffffff",
+            "text_color": "#000000",
+            "expiration_date": "",
+            "expiration_behavior": "hide"
+          }
+        },
+        "featured_in_Gwxwf8": {
+          "type": "featured_in",
+          "disabled": true,
+          "settings": {
+            "title": "Featured in",
+            "logos_json": "[{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/vice.png?v=1781598208\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/0_1.webp?v=1781169789\",\"alt\":\"Yahoo Finance\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/3_1.webp?v=1781169789\",\"alt\":\"USA TODAY\"}]"
+          }
+        },
+        "separator_bTgDWQ": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "text_36KfV6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Where bionic innovation meets the soul of AI. Fully hands-free, the device syncs in real-time with your voice, breath, and interactive stories. Engineered from a female perspective with triple-zone sensory resonance, it brings 500+ virtual companions directly to your ear.</p>"
+          }
+        },
+        "feature_cards_NddJBd": {
+          "type": "feature_cards",
+          "name": "Four cards",
+          "settings": {
+            "background_color": "#feecfc",
+            "border_radius": 12,
+            "text_1": "Real-time \ncontent sync",
+            "background_image_1": "shopify://shop_images/3_in_1.png",
+            "text_2": "AI voice, \nhands-free",
+            "background_image_2": "shopify://shop_images/AI_voice.png",
+            "text_3": "3 in 1, \ntriple stimulation",
+            "background_image_3": "shopify://shop_images/Real_time.png",
+            "text_4": "Waterproof  \nlong Battery",
+            "background_image_4": "shopify://shop_images/Waterproof.png",
+            "mt": 0,
+            "mb": 0
+          }
+        },
+        "text_VcpKPp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>📱 App Store: Available now | Web: Coming mid-July. <br/>🎁 Bonus: Includes 7-Day Free Trial <br/>📅 Plans from $9.99/mo after</p>"
+          }
+        },
+        "icons_with_text_ANpmKR": {
+          "type": "icons_with_text",
+          "settings": {
+            "icon_layout": "vertical",
+            "items_per_row": 4,
+            "icon_1": "shopify://shop_images/Private_by_design.png",
+            "icon_1_text_size": 12,
+            "icon_1_width": 36,
+            "icon_1_text": "Private by design",
+            "icon_2": "shopify://shop_images/Discreet_shipping.png",
+            "icon_2_text_size": 12,
+            "icon_2_width": 36,
+            "icon_2_text": "Unbranded shipping",
+            "icon_3": "shopify://shop_images/No_data_shared.png",
+            "icon_3_text_size": 12,
+            "icon_3_width": 36,
+            "icon_3_text": "No - data shared",
+            "icon_4": "shopify://shop_images/Body-safe_materials.png",
+            "icon_4_text_size": 12,
+            "icon_4_width": 36,
+            "icon_4_text": "Body-safe materials"
+          }
+        },
+        "liquid_B9y7Yq": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<style>\n.countdown-condensed__timer {\n  display:none;\n}\n</style>"
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "collapse_content": false,
+            "uppercase_title": false
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "separate_options": false,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "swatch_selector_size": "lg",
+            "block_selector_style": "outline",
+            "variant_image_options": "",
+            "size_chart_page": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "disabled": true,
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "show_quantity_selector": false,
+            "add_quantity_selector_spacing": true,
+            "atc_button_style": "solid",
+            "atc_button_background": "#ffffff",
+            "atc_button_text_color": "#000000",
+            "payment_button_background": "#f287ec",
+            "payment_button_text_color": "#000000"
+          }
+        },
+        "image_UHJ7Gd": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/img_v3_02128_f7aa180e-3b89-474f-a9db-9a107582a0cg.png",
+            "alignment": "left",
+            "width_mode": "custom",
+            "max_width": 450,
+            "mobile_max_width": 600
+          }
+        },
+        "liquid_Dn6djg": {
+          "type": "liquid",
+          "name": "Add to Cart And Buy Now",
+          "settings": {
+            "liquid": "{%- assign target_product = all_products['senson-s1-wellness-companion'] -%}\n{%- assign target_variant = target_product.selected_or_first_available_variant -%}\n\n<style>\n  #pdp-add-to-cart .atc-section {\n    width: 100%;\n    background-color: #fff;\n  }\n\n  #pdp-add-to-cart .atc-container {\n    width: 100%;\n    margin: 0 auto;\n    box-sizing: border-box;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    gap: 12px;\n    align-items: flex-start;\n  }\n\n  #pdp-add-to-cart .atc-buttons {\n    display: flex;\n    flex-direction: column;\n    gap: 12px;\n    width: 100%;\n  }\n\n  #pdp-add-to-cart .atc-btn-form {\n    width: 100%;\n    margin: 0;\n  }\n\n  #pdp-add-to-cart .atc-btn {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 100%;\n    padding: 12px 24px;\n    border-radius: 1000px;\n    box-sizing: border-box;\n    cursor: pointer;\n    border: none;\n    background: none;\n    -webkit-appearance: none;\n    appearance: none;\n    font-family: inherit;\n    position: relative;\n    overflow: hidden;\n    transition: opacity 0.3s ease;\n  }\n\n  #pdp-add-to-cart .atc-btn:disabled {\n    opacity: 0.6;\n    cursor: not-allowed;\n  }\n\n  #pdp-add-to-cart .atc-btn-secondary {\n    border: 1px solid #f287ec;\n    background-color: #fff;\n    gap: 8px;\n  }\n\n  #pdp-add-to-cart .atc-btn-primary {\n    background: linear-gradient(to right, #f287ec, #8543ff);\n  }\n\n  #pdp-add-to-cart .atc-cart-icon {\n    width: 18px;\n    height: 18px;\n    object-fit: contain;\n    flex-shrink: 0;\n  }\n\n  #pdp-add-to-cart .atc-btn-secondary .atc-btn-text {\n    background: linear-gradient(to right, #f287ec, #8543ff);\n    -webkit-background-clip: text;\n    -webkit-text-fill-color: transparent;\n    background-clip: text;\n    color: transparent;\n    font-size: 16px;\n    font-weight: 500;\n    line-height: 1.1;\n    white-space: nowrap;\n    flex-shrink: 0;\n  }\n\n  #pdp-add-to-cart .atc-btn-primary .atc-btn-text {\n    color: #fff;\n    font-size: 16px;\n    font-weight: 500;\n    line-height: 1.1;\n    white-space: nowrap;\n    flex-shrink: 0;\n  }\n\n  /* Loading State Styles */\n  #pdp-add-to-cart .atc-btn.is-loading .atc-btn-text,\n  #pdp-add-to-cart .atc-btn.is-loading .atc-cart-icon {\n    opacity: 0;\n  }\n  \n  #pdp-add-to-cart .atc-btn .atc-loader {\n    display: none;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    width: 20px;\n    height: 20px;\n    border-radius: 50%;\n    animation: atc-spin 0.8s linear infinite;\n  }\n\n  #pdp-add-to-cart .atc-btn.is-loading .atc-loader {\n    display: block;\n  }\n\n  #pdp-add-to-cart .atc-btn-primary .atc-loader {\n    border: 2px solid rgba(255, 255, 255, 0.3);\n    border-top-color: #fff;\n  }\n\n  #pdp-add-to-cart .atc-btn-secondary .atc-loader {\n    border: 2px solid rgba(133, 67, 255, 0.3);\n    border-top-color: #8543ff;\n  }\n\n  @keyframes atc-spin {\n    to { transform: translate(-50%, -50%) rotate(360deg); }\n  }\n\n  /* PC Overrides */\n  @media (min-width: 1000px) {\n    #pdp-add-to-cart .atc-container {\n      gap: 16px;\n      padding: 0;\n    }\n\n    #pdp-add-to-cart .atc-buttons {\n      flex-direction: row;\n      align-items: flex-start;\n    }\n\n    #pdp-add-to-cart .atc-btn-form {\n      flex: 1 0 0;\n    }\n  }\n</style>\n\n<section id=\"pdp-add-to-cart\" class=\"atc-section\">\n  <div class=\"atc-container\">\n    <div class=\"atc-buttons\">\n      \n      <!-- Add to Cart Form -->\n      <form action=\"{{ routes.cart_url }}/add\" method=\"post\" enctype=\"multipart/form-data\" class=\"atc-btn-form\" id=\"atc-add-to-cart-form\">\n        <input type=\"hidden\" name=\"id\" value=\"{{ target_variant.id }}\">\n        <input type=\"hidden\" name=\"quantity\" value=\"1\">\n        <button \n          type=\"submit\" \n          name=\"add\"\n          class=\"atc-btn atc-btn-secondary\" \n          id=\"atc-add-to-cart-btn\" \n          data-btn-addToCart\n          {% unless target_variant.available %}disabled{% endunless %}\n        >\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/shopping-cart-2-line.svg?v=1774850088\" alt=\"cart\" class=\"atc-cart-icon\" />\n          <span class=\"atc-btn-text\">\n            {% if target_variant.available %}\n              Add to Cart\n            {% else %}\n              Sold Out\n            {% endif %}\n          </span>\n          <span class=\"atc-loader\"></span>\n        </button>\n      </form>\n      \n      <!-- Buy Now Form / Shop with Pride -->\n      <form action=\"{{ routes.cart_url }}/add\" method=\"post\" enctype=\"multipart/form-data\" class=\"atc-btn-form\" id=\"atc-buy-now-form\">\n        <input type=\"hidden\" name=\"id\" value=\"{{ target_variant.id }}\">\n        <input type=\"hidden\" name=\"quantity\" value=\"1\">\n        <button \n          type=\"button\" \n          class=\"atc-btn atc-btn-primary\" \n          id=\"atc-buy-now-btn\" \n          data-btn-buyNow\n          {% unless target_variant.available %}disabled{% endunless %}\n        >\n          <span class=\"atc-btn-text\">\n            {% if target_variant.available %}\n              Shop with Pride\n            {% else %}\n              Sold Out\n            {% endif %}\n          </span>\n          <span class=\"atc-loader\"></span>\n        </button>\n      </form>\n\n    </div>\n  </div>\n</section>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    \n    // Add to Cart Logic - strictly prevents page jump, fetches add.js, then opens drawer natively\n    document.addEventListener('click', function(event) {\n      var atcBtn = event.target.closest('#atc-add-to-cart-btn');\n      if (atcBtn) {\n        event.preventDefault(); // 阻止表单默认提交和跳转\n        event.stopPropagation(); // 阻止冒泡\n        \n        if (atcBtn.classList.contains('is-loading') || atcBtn.disabled) return;\n        \n        var form = atcBtn.closest('form');\n        if (form) {\n          atcBtn.classList.add('is-loading');\n          var formData = new FormData(form);\n          \n          fetch(window.Shopify.routes.root + 'cart/add.js', {\n            method: 'POST',\n            body: formData,\n            headers: {\n              'X-Requested-With': 'XMLHttpRequest'\n            }\n          })\n          .then(function(response) {\n            return response.json();\n          })\n          .then(function(data) {\n             // 1. 先触发变体添加事件，让主题知道有新商品加入\n             document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));\n             document.dispatchEvent(new CustomEvent('cart:build', { bubbles: true }));\n             \n             // 延迟 500 毫秒后，再去模拟点击打开购物车抽屉，等待列表数据渲染完成\n             setTimeout(function() {\n                 atcBtn.classList.remove('is-loading');\n                 \n                 // 核心：通过模拟点击顶部的购物车Icon，唤醒Stretch主题的原生侧边栏 Drawer\n                 var cartIcon = document.querySelector('a[aria-controls=\"cart-drawer\"], a[href=\"/cart\"], .header__cart-link a');\n                 if (cartIcon) {\n                   cartIcon.click();\n                 }\n             }, 500);\n          })\n          .catch(function(error) {\n            console.error('Add to Cart Error:', error);\n            atcBtn.classList.remove('is-loading');\n          });\n        }\n      }\n    });\n\n    // Buy Now Logic (now \"Shop with Pride\") - Only purchase this specific product (uses Shopify Permalinks)\n    document.addEventListener('click', function(event) {\n      var buyNowBtn = event.target.closest('#atc-buy-now-btn');\n      if (buyNowBtn) {\n        event.preventDefault(); // 阻止表单默认提交和跳转\n        event.stopPropagation(); // 阻止冒泡\n        \n        if (buyNowBtn.classList.contains('is-loading') || buyNowBtn.disabled) return;\n        \n        buyNowBtn.classList.add('is-loading');\n        var form = buyNowBtn.closest('form');\n        var variantId = form.querySelector('input[name=\"id\"]').value;\n        var quantity = form.querySelector('input[name=\"quantity\"]').value || 1;\n        \n        // 使用 Shopify 的 Permalinks 直达结账，跳过当前购物车中的其他商品\n        // 格式: /cart/{variant_id}:{quantity}\n        var checkoutUrl = window.Shopify.routes.root + 'cart/' + variantId + ':' + quantity;\n        window.location.href = checkoutUrl;\n      }\n    });\n\n  });\n</script>"
+          }
+        },
+        "customer_reviews_KgEgwp": {
+          "type": "customer_reviews",
+          "settings": {
+            "title": "What Customers Say",
+            "reviews_json": "[\n  {\n    \"label\": \"Hardcore thrillseekers\",\n    \"quote\": \"I tried many products nothing beats this. This three in one does suction clamp pulse at once. I yell max it out and it hits the top like crazy. My mind goes blank. So addictive yeah totally addictive.\",\n    \"author\": \"Roxy, 31\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/03_6b5a08a8-d865-408b-96b6-57fe6c986ec1.jpg?v=1781180898\"\n  },\n  {\n    \"label\": \"Privacy Seekers\",\n    \"quote\": \"I hate loud devices my roommate has super ears. This one uses voice. I whisper lower or stop and it listens. One time she knocked I whispered lights off and it stopped. She thought I was on a call. That safe feeling matters more than physical sensation I think.\",\n    \"author\": \"Chloe, 24\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/05.jpg?v=1781181815\"\n  },\n  {\n    \"label\": \"Variety Seekers\",\n    \"quote\": \"Regular products are boring just three speeds. This one has different AI personalities gentle bossy or teasing. He controls the pace like a blind date. After two weeks it feels like experiencing many personalities no need to text back.\",\n    \"author\": \"Mia, 29\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/01_580590cf-69a2-412c-913a-7d7555e4a601.jpg?v=1781245153\"\n  },\n  {\n    \"label\": \"AI Geeks\",\n    \"quote\": \"It really learns what I like no fake smart stuff. After a few uses it remembers my slow then fast pattern. Just say softer or harder and it gets it. Works better every time.\",\n    \"author\": \"Nova, 37\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/02_ab0ad54f-d8c4-4cda-86ef-28ebfb34b7cc.jpg?v=1781248912\"\n  },\n  {\n    \"label\": \"Roleplay lovers\",\n    \"quote\": \"I give the orders – it listens and follows right away. A whisper, a word, and it responds like it knows what I want. No delay, just pure reaction. Every time I play back my voice, it feels like I directed my own close audio drama.\",\n    \"author\": \"Ivy, 27\",\n    \"image\": \"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/04_7d939289-c021-4173-9a82-45a13ab236d2.jpg?v=1781249127\"\n  }\n]",
+            "background_color": "rgba(0,0,0,0)",
+            "accent_color": "#e91ead",
+            "tag_border_color": "#c8c4c0"
+          }
+        },
+        "pdp_why_how_tabs_E6JmWA": {
+          "type": "pdp_why_how_tabs",
+          "settings": {
+            "color_tab_pink": "#000000",
+            "color_tab_text_inactive": "#ffffff",
+            "color_tab_text_active": "#000000",
+            "color_tab_bar_bg": "#f187eb",
+            "color_tab_active_bg": "#fef5fd",
+            "color_tab_card_bg": "#fef4fe",
+            "color_tab_step_bg": "#f287ec",
+            "tab_creator_label": "Expert Insights",
+            "tab_how_label": "How to Use",
+            "tab_specs_label": "Spec Details",
+            "tab_tech_label": "The Tech",
+            "creator_quote": "SensOn is not just a chat bot online that you chat to and fall in love with and it's also not just a vibrator it's mixed between the two!!",
+            "creator_avatar": "shopify://shop_images/channels4_profile.jpg",
+            "creator_name": "Dr. Tara",
+            "creator_credentials": "Sex and relationship expert, Tenured professor, Author, TV host",
+            "creator_video": "shopify://files/videos/飞书20260603-150418 (1) (1).mp4",
+            "creator_video_cover": "shopify://shop_images/tara.jpg",
+            "creator_2_quote": "Clinically, female satisfaction requires multi-zone mind-body resonance. SensOn is a breakthrough: syncing AI audio with physical stimulation to activate clitoral, vaginal, breast pathways, engaging cortex and body for deeply immersive complete experience.",
+            "creator_2_avatar": "shopify://shop_images/f794041b-7bc1-49bb-a7f4-de4b7a7421e3.png",
+            "creator_2_name": "Dr. Emily Sterling",
+            "creator_2_credentials": "Clinical Sexologist & Bestselling Author",
+            "how_heading": "Simple 5-Step Process",
+            "how_step_1_title": "Download, prepare and power on",
+            "how_step_1_desc": "Download the SensOn App and turn on Bluetooth. Open the Charging Case and remove the components. Then press and hold the Core power button to turn on. The device enters standby mode.",
+            "how_step_2_title": "Choose your setup",
+            "how_step_2_desc": "Parts connect magnetically and separate with a gentle twist.Assemble the configuration you prefer.",
+            "how_step_3_title": "Insert and adjust",
+            "how_step_3_desc": "Gently insert the Vaginal Stimulator. Let the Core rest naturally between your thighs.Adjust the Clitoral Stimulator head up or down until it sits snugly against the clitoris.",
+            "how_step_4_title": "Wear and fit",
+            "how_step_4_desc": "Place the Nipple Stimulators on the nipples.Use the clasp to adjust tension for a secure, comfortable fit.",
+            "how_step_5_title": "Connect and play",
+            "how_step_5_desc": "Follow the on-screen steps to connect via Bluetooth.Choose your erotic audio and start. During the experience, you can interact with AI characters anytime by voice or text.",
+            "specs_json": "[{\"label\":\"Materials\",\"value\":\"FDA-grade, REACH-compliant body-safe silicone & ABS\"},{\"label\":\"Waterproof Rating\",\"value\":\"IPX6 (Splash-proof; do not submerge)\"},{\"label\":\"Battery Life\",\"value\":\"Up to 90 mins (at max intensity)\"},{\"label\":\"Connectivity\",\"value\":\"Bluetooth\"},{\"label\":\"Charging\",\"value\":\"USB-C (Charging case included)\"},{\"label\":\"Noise Level\",\"value\":\"<55 dB (Whisper-quiet)\"},{\"label\":\"Charging Time\",\"value\":\"~2 hours\"},{\"label\":\"Weight\",\"value\":\"Unit: 513g (Includes 2x Nipple Stimulators, 56g) | Total: 891g\"}]",
+            "tech_heading": "",
+            "tech_step_1_title": "Real-Time Audio Decoding",
+            "tech_step_1_desc": "Driven by a low-latency connection, SensOn S1 instantly decodes companion app audio and AI voices, seamlessly transforming sound frequencies into perfectly synchronized physical responses.",
+            "tech_step_2_title": "Multi-Dimensional Stimulation",
+            "tech_step_2_desc": "Engineered with an advanced multi-motor framework to deliver hands-free, synchronized triple stimulation. Every pulse responds intelligently to the storytelling pace for a balanced, deeply resonant sensation.",
+            "tech_step_3_title": "Bi-Directional Interactive Ecosystem",
+            "tech_step_3_desc": "The integrated software allows dual-direction control, empowering users to text, talk, and dynamically shape the interactive narrative while the hardware adapts fluidly to your vocal inputs."
+          }
+        },
+        "accordion_7km4XX": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "class_name": "",
+            "title": "Specs",
+            "content": "<ul><li><strong>Materials:</strong> Body-safe silicone (REACH compliant / FDA-grade) and ABS</li><li><strong>Waterproof Rating:</strong> IPX6 Protected against powerful water jets. Not suitable for submersion</li><li><strong>Connectivity:</strong> Bluetooth</li><li><strong>Usage Time:</strong> Up to 90 minutes (at maximum intensity)</li><li><strong>Charging Method:</strong> USB-C rechargeable charging case</li><li><strong>Charging Time:</strong> Approximately 2 hours</li><li><strong>Noise Level:</strong> Approximately 55 dB (quiet—comparable to a soft conversation)</li><li><strong>Weight: </strong>Overall weight 891 g. The machine unit weighs 513 g (including two Nipple Stimulators, 56 g in total)</li></ul>",
+            "uppercase_title": false,
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "liquid_6yJArW": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<style>\n  @media (max-width: 999px) {\n    .pdp-swpt-section .pdp-swpt-title { font-size: 16px !important; }\n    .pdp-swpt-section .pdp-swpt-prev, .pdp-swpt-section .pdp-swpt-next { width: 22px !important; height: 22px !important; }\n    .pdp-swpt-section .pdp-swpt-prev img, .pdp-swpt-section .pdp-swpt-next img { width: 14px !important; height: 14px !important; }\n    .pdp-swpt-pc-list { display: none !important; }\n    .pdp-swpt-h5-carousel { display: block !important; }\n  }\n  .pdp-swpt-h5-carousel { display: none; align-self: stretch; overflow: hidden; }\n</style>\n\n<section class=\"pdp-swpt-section\"\n  style=\"width:100%;position:relative;background-color:#fff;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:left;font-size:20px;color:#000;box-sizing:border-box;overflow:hidden;\">\n\n  <div style=\"align-self:stretch;display:flex;align-items:center;gap:32px;\">\n    <h3 class=\"pdp-swpt-title\" style=\"flex:1;position:relative;line-height:120%;font-weight:400;font-size:16px;\">\n      See what people think\n    </h3>\n    <div style=\"display:flex;align-items:center;gap:16px;\">\n      <button id=\"swpt-prev\" onclick=\"swptPrev()\"\n        style=\"width:24px;height:24px;border-radius:50%;border:1.5px solid #ccc;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;opacity:0.4;padding:0;\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/arrow-left-s-line.svg?v=1772728772\" alt=\"prev\" style=\"width:16px;height:16px\"/>\n      </button>\n      <button id=\"swpt-next\" onclick=\"swptNext()\"\n        style=\"width:24px;height:24px;border-radius:50%;border:1.5px solid #ccc;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/arrow-right-s-line.svg?v=1772728772\" alt=\"next\" style=\"width:16px;height:16px\"/>\n      </button>\n    </div>\n  </div>\n\n  <!-- PC 视频列表（不变） -->\n  <div class=\"pdp-swpt-pc-list\" style=\"align-self:stretch;overflow:hidden;\">\n    <div id=\"swpt-pc-track\" style=\"display:flex;gap:12px;transition:transform 0.4s ease;font-size:14px;color:#fff;\">\n\n      <div id=\"swpt-card-0\" onclick=\"swptTogglePlay(0)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <video id=\"swpt-video-0\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/1fb9af46dc0f44b483078807d5deabca.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/1fb9af46dc0f44b483078807d5deabca.thumbnail.0000000000_800x800.jpg?v=1772728860\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;\"></video>\n        <div id=\"swpt-mute-btn-0\" onclick=\"event.stopPropagation();swptToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-mute-icon-0\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" alt=\"mute\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-play-btn-0\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" alt=\"play\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Pleasure That Listens</div>\n        </div>\n      </div>\n\n      <div id=\"swpt-card-1\" onclick=\"swptTogglePlay(1)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <video id=\"swpt-video-1\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/3be3f78113c44fb592ca3134a783c7ec.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/3be3f78113c44fb592ca3134a783c7ec.thumbnail.0000000000_800x800.jpg?v=1772728861\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;\"></video>\n        <div id=\"swpt-mute-btn-1\" onclick=\"event.stopPropagation();swptToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-mute-icon-1\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" alt=\"mute\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-play-btn-1\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" alt=\"play\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Mix. Match. Feel.</div>\n        </div>\n      </div>\n\n      <div id=\"swpt-card-2\" onclick=\"swptTogglePlay(2)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <video id=\"swpt-video-2\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/2fa08d676fc343939de902ec2c09a01d.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/2fa08d676fc343939de902ec2c09a01d.thumbnail.0000000000_800x800.jpg?v=1772938888\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;\"></video>\n        <div id=\"swpt-mute-btn-2\" onclick=\"event.stopPropagation();swptToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-mute-icon-2\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" alt=\"mute\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-play-btn-2\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" alt=\"play\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Built Around You</div>\n        </div>\n      </div>\n\n      <div id=\"swpt-card-3\" onclick=\"swptTogglePlay(3)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <video id=\"swpt-video-3\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/7c0f2266069641f3bfab700b9058147b.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/7c0f2266069641f3bfab700b9058147b.thumbnail.0000000000_800x800.jpg?v=1772938902\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;\"></video>\n        <div id=\"swpt-mute-btn-3\" onclick=\"event.stopPropagation();swptToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-mute-icon-3\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" alt=\"mute\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-play-btn-3\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" alt=\"play\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Designed to Adapt</div>\n        </div>\n      </div>\n\n      <div id=\"swpt-card-4\" onclick=\"swptTogglePlay(4)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <video id=\"swpt-video-4\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/1b12385aa6544502b9d6ca57e37edeea.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/1b12385aa6544502b9d6ca57e37edeea.thumbnail.0000000000_800x800.jpg?v=1772938908\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;\"></video>\n        <div id=\"swpt-mute-btn-4\" onclick=\"event.stopPropagation();swptToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-mute-icon-4\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" alt=\"mute\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-play-btn-4\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" alt=\"play\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Your Story, Felt</div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n  <!-- H5 视频列表 -->\n  <div class=\"pdp-swpt-h5-carousel\">\n    <div id=\"swpt-h5-track\" style=\"display:flex;gap:12px;transition:transform 0.4s ease;font-size:14px;color:#fff;\">\n\n      <div onclick=\"swptH5TogglePlay(0)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <!-- ✅ 修复1：加了 pointer-events:none -->\n        <video id=\"swpt-h5-video-0\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/1fb9af46dc0f44b483078807d5deabca.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/1fb9af46dc0f44b483078807d5deabca.thumbnail.0000000000_800x800.jpg?v=1772728860\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none;\"></video>\n        <div id=\"swpt-h5-mute-btn-0\" onclick=\"event.stopPropagation();swptH5ToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-h5-mute-icon-0\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-h5-play-btn-0\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Pleasure That Listens</div>\n        </div>\n      </div>\n\n      <div onclick=\"swptH5TogglePlay(1)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <!-- ✅ 修复1：加了 pointer-events:none -->\n        <video id=\"swpt-h5-video-1\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/3be3f78113c44fb592ca3134a783c7ec.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/3be3f78113c44fb592ca3134a783c7ec.thumbnail.0000000000_800x800.jpg?v=1772728861\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none;\"></video>\n        <div id=\"swpt-h5-mute-btn-1\" onclick=\"event.stopPropagation();swptH5ToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-h5-mute-icon-1\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-h5-play-btn-1\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Mix. Match. Feel.</div>\n        </div>\n      </div>\n\n      <div onclick=\"swptH5TogglePlay(2)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <!-- ✅ 修复1：加了 pointer-events:none -->\n        <video id=\"swpt-h5-video-2\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/2fa08d676fc343939de902ec2c09a01d.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/2fa08d676fc343939de902ec2c09a01d.thumbnail.0000000000_800x800.jpg?v=1772938888\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none;\"></video>\n        <div id=\"swpt-h5-mute-btn-2\" onclick=\"event.stopPropagation();swptH5ToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-h5-mute-icon-2\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-h5-play-btn-2\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Built Around You</div>\n        </div>\n      </div>\n\n      <div onclick=\"swptH5TogglePlay(3)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <!-- ✅ 修复1：加了 pointer-events:none -->\n        <video id=\"swpt-h5-video-3\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/7c0f2266069641f3bfab700b9058147b.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/7c0f2266069641f3bfab700b9058147b.thumbnail.0000000000_800x800.jpg?v=1772938902\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none;\"></video>\n        <div id=\"swpt-h5-mute-btn-3\" onclick=\"event.stopPropagation();swptH5ToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-h5-mute-icon-3\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-h5-play-btn-3\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Designed to Adapt</div>\n        </div>\n      </div>\n\n      <div onclick=\"swptH5TogglePlay(4)\"\n        style=\"height:284px;width:160px;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;cursor:pointer;\">\n        <!-- ✅ 修复1：加了 pointer-events:none -->\n        <video id=\"swpt-h5-video-4\"\n          data-src=\"https://cdn.shopify.com/videos/c/o/v/1b12385aa6544502b9d6ca57e37edeea.mp4\"\n          poster=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/preview_images/1b12385aa6544502b9d6ca57e37edeea.thumbnail.0000000000_800x800.jpg?v=1772938908\"\n          loop preload=\"none\" muted playsinline webkit-playsinline x5-playsinline\n          style=\"position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none;\"></video>\n        <div id=\"swpt-h5-mute-btn-4\" onclick=\"event.stopPropagation();swptH5ToggleMute()\"\n          style=\"position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50px;background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:2;\">\n          <img id=\"swpt-h5-mute-icon-4\" src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div id=\"swpt-h5-play-btn-4\"\n          style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:100px;background:rgba(0,0,0,0.35);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/play-fill.svg?v=1772728781\" style=\"width:14px;height:14px\"/>\n        </div>\n        <div style=\"position:absolute;width:100%;right:0;bottom:0;left:0;background:linear-gradient(0deg,#000,rgba(128,128,128,0));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;z-index:2;\">\n          <div style=\"align-self:stretch;position:relative;line-height:110%;\">Your Story, Felt</div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</section>\n\n<script>\n  var SWPT_TOTAL = 5\n  var swptCurrent = 0\n  var swptMuted = true\n  var swptH5Current = 0\n  var swptH5Muted = true\n  var swptH5Playing = -1\n  var swptH5Swiped = false\n  var CARD_W = 160\n  var CARD_GAP = 12\n\n  var SWPT_ICON_MUTE = 'https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-mute-fill.svg?v=1772728781'\n  var SWPT_ICON_VOLUME = 'https://cdn.shopify.com/s/files/1/0775/2446/7967/files/volume-up-fill_b0e75cc5-fc59-4aa4-aa70-e24ee19b3e18.svg?v=1772729919'\n\n  function swptInit() {\n    document.getElementById('swpt-prev').style.opacity = '0.4'\n    document.getElementById('swpt-next').style.opacity = SWPT_TOTAL > 1 ? '1' : '0.4'\n  }\n\n  if (document.readyState === 'loading') {\n    document.addEventListener('DOMContentLoaded', swptInit)\n  } else {\n    swptInit()\n  }\n\n  function swptPCScrollTo(idx) {\n    swptCurrent = idx\n    var track = document.getElementById('swpt-pc-track')\n    var viewport = track.parentElement\n    var totalWidth = SWPT_TOTAL * CARD_W + (SWPT_TOTAL - 1) * CARD_GAP\n    var maxOffset = Math.max(0, totalWidth - viewport.clientWidth)\n    var offset = Math.min((CARD_W + CARD_GAP) * idx, maxOffset)\n    track.style.transform = 'translateX(' + -offset + 'px)'\n    document.getElementById('swpt-prev').style.opacity = idx === 0 ? '0.4' : '1'\n    document.getElementById('swpt-next').style.opacity = idx === SWPT_TOTAL - 1 ? '0.4' : '1'\n  }\n\n  function swptTogglePlay(idx) {\n    var video = document.getElementById('swpt-video-' + idx)\n    if (video.paused) {\n      for (var i = 0; i < SWPT_TOTAL; i++) {\n        if (i !== idx) {\n          document.getElementById('swpt-video-' + i).pause()\n          document.getElementById('swpt-play-btn-' + i).style.display = 'flex'\n          document.getElementById('swpt-mute-btn-' + i).style.display = 'none'\n        }\n      }\n      swptCurrent = idx\n      if (!video.getAttribute('src')) {\n        video.src = video.dataset.src\n      }\n      video.muted = swptMuted\n      video.play()\n        .then(function () {\n          document.getElementById('swpt-play-btn-' + idx).style.display = 'none'\n          document.getElementById('swpt-mute-btn-' + idx).style.display = 'flex'\n          document.getElementById('swpt-mute-icon-' + idx).src = swptMuted ? SWPT_ICON_MUTE : SWPT_ICON_VOLUME\n        })\n        .catch(function () {\n          document.getElementById('swpt-play-btn-' + idx).style.display = 'flex'\n          document.getElementById('swpt-mute-btn-' + idx).style.display = 'none'\n        })\n      swptPCScrollTo(idx)\n    } else {\n      video.pause()\n      document.getElementById('swpt-play-btn-' + idx).style.display = 'flex'\n      document.getElementById('swpt-mute-btn-' + idx).style.display = 'none'\n    }\n  }\n\n  function swptToggleMute() {\n    swptMuted = !swptMuted\n    var video = document.getElementById('swpt-video-' + swptCurrent)\n    video.muted = swptMuted\n    document.getElementById('swpt-mute-icon-' + swptCurrent).src = swptMuted ? SWPT_ICON_MUTE : SWPT_ICON_VOLUME\n  }\n\n  function swptPrev() {\n    if (window.innerWidth <= 999) {\n      if (swptH5Current > 0) swptH5ScrollTo(swptH5Current - 1)\n    } else {\n      if (swptCurrent > 0) swptPCScrollTo(swptCurrent - 1)\n    }\n  }\n\n  function swptNext() {\n    if (window.innerWidth <= 999) {\n      if (swptH5Current < SWPT_TOTAL - 1) swptH5ScrollTo(swptH5Current + 1)\n    } else {\n      if (swptCurrent < SWPT_TOTAL - 1) swptPCScrollTo(swptCurrent + 1)\n    }\n  }\n\n  function swptH5ScrollTo(idx) {\n    swptH5Current = idx\n    var track = document.getElementById('swpt-h5-track')\n    var viewport = track.parentElement\n    var totalWidth = SWPT_TOTAL * CARD_W + (SWPT_TOTAL - 1) * CARD_GAP\n    var maxOffset = Math.max(0, totalWidth - (viewport.clientWidth - 16))\n    var offset = Math.min((CARD_W + CARD_GAP) * idx, maxOffset)\n    track.style.transform = 'translateX(' + -offset + 'px)'\n    document.getElementById('swpt-prev').style.opacity = idx === 0 ? '0.4' : '1'\n    document.getElementById('swpt-next').style.opacity = idx === SWPT_TOTAL - 1 ? '0.4' : '1'\n  }\n\n  function swptH5TogglePlay(idx) {\n    if (swptH5Swiped) return\n    var video = document.getElementById('swpt-h5-video-' + idx)\n    if (video.paused) {\n      for (var i = 0; i < SWPT_TOTAL; i++) {\n        if (i !== idx) {\n          document.getElementById('swpt-h5-video-' + i).pause()\n          document.getElementById('swpt-h5-play-btn-' + i).style.display = 'flex'\n          document.getElementById('swpt-h5-mute-btn-' + i).style.display = 'none'\n        }\n      }\n      swptH5Playing = idx\n      if (!video.getAttribute('src')) {\n        video.src = video.dataset.src\n        /* ✅ 修复2：删除了 video.load()，play() 会自动处理加载，\n           load() 会中断 iOS 用户手势上下文导致 play() 被拒绝 */\n      }\n      video.muted = swptH5Muted\n      video.play()\n        .then(function () {\n          if (swptH5Playing !== idx) return\n          document.getElementById('swpt-h5-play-btn-' + idx).style.display = 'none'\n          document.getElementById('swpt-h5-mute-btn-' + idx).style.display = 'flex'\n          document.getElementById('swpt-h5-mute-icon-' + idx).src = swptH5Muted ? SWPT_ICON_MUTE : SWPT_ICON_VOLUME\n        })\n        .catch(function () {\n          if (swptH5Playing !== idx) return\n          document.getElementById('swpt-h5-play-btn-' + idx).style.display = 'flex'\n          document.getElementById('swpt-h5-mute-btn-' + idx).style.display = 'none'\n        })\n    } else {\n      video.pause()\n      document.getElementById('swpt-h5-play-btn-' + idx).style.display = 'flex'\n      document.getElementById('swpt-h5-mute-btn-' + idx).style.display = 'none'\n      swptH5Playing = -1\n    }\n  }\n\n  function swptH5ToggleMute() {\n    swptH5Muted = !swptH5Muted\n    if (swptH5Playing < 0) return\n    var video = document.getElementById('swpt-h5-video-' + swptH5Playing)\n    video.muted = swptH5Muted\n    document.getElementById('swpt-h5-mute-icon-' + swptH5Playing).src = swptH5Muted ? SWPT_ICON_MUTE : SWPT_ICON_VOLUME\n  }\n\n  ;(function () {\n    var track = document.getElementById('swpt-h5-track')\n    var startX = 0\n    track.addEventListener('touchstart', function (e) {\n      startX = e.touches[0].clientX\n    })\n    track.addEventListener('touchend', function (e) {\n      var diff = startX - e.changedTouches[0].clientX\n      if (Math.abs(diff) > 40) {\n        swptH5Swiped = true\n        setTimeout(function () { swptH5Swiped = false }, 400)\n        if (diff > 0 && swptH5Current < SWPT_TOTAL - 1) swptH5ScrollTo(swptH5Current + 1)\n        else if (diff < 0 && swptH5Current > 0) swptH5ScrollTo(swptH5Current - 1)\n      }\n    })\n  })()\n</script>"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_PMKK83",
+        "image_nmjnjV",
+        "yotpo_product_reviews_star_rating_Xzjcy3",
+        "title",
+        "text_7nhMc6",
+        "offers_xqqJzH",
+        "price",
+        "countdown_H8fV6E",
+        "featured_in_Gwxwf8",
+        "separator_bTgDWQ",
+        "text_36KfV6",
+        "feature_cards_NddJBd",
+        "text_VcpKPp",
+        "icons_with_text_ANpmKR",
+        "liquid_B9y7Yq",
+        "payment_terms",
+        "description",
+        "variant_picker",
+        "buy_buttons",
+        "image_UHJ7Gd",
+        "liquid_Dn6djg",
+        "customer_reviews_KgEgwp",
+        "pdp_why_how_tabs_E6JmWA",
+        "accordion_7km4XX",
+        "liquid_6yJArW"
+      ],
+      "custom_css": [
+        ".product-countdown-discount-percentage span {padding: 8px 24px; border-radius: 4px; margin-right: 0px;}",
+        ".product-countdown-discount-percentage .prose {padding: 8px 32px; background: #f5f5f5;}",
+        ".product {gap: 16px; padding-block-start: 16px; padding-block-end: 42px; color: #000;}",
+        "@media screen and (min-width: 1000px) {.container {margin-inline-start: 80px; margin-inline-end: 80px; } .product {padding-block-start: 64px; padding-block-end: 64px; } .product-info {padding-inline-start: 24px; max-width: 652px; }}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "allow_transparent_header": false,
+        "transparent_header_use_primary_colors": false,
+        "add_top_spacing": true,
+        "show_sticky_add_to_cart": false,
+        "product_media_size": 50,
+        "content_alignment": "left",
+        "desktop_media_layout": "carousel",
+        "desktop_carousel_controls": "thumbnails_under",
+        "mobile_controls": "thumbnails",
+        "enable_media_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3
+      }
+    },
+    "custom_liquid_bp3AW4": {
+      "type": "custom-liquid",
+      "custom_css": [],
+      "name": "t:sections.custom_liquid.name",
+      "settings": {
+        "color_scheme": "",
+        "liquid": "<style>\n.product-price-wrapper .line-through {\n  color: #B5B5B5;\n}\n.product-info .product-info__block-list > :nth-child(5 of :not(:empty)) {\n  color: #242526;\n}\n.product-info .product-info__block-list > :nth-child(6 of :not(:empty)) {\n  color: #242526;\n}\n.product-info__block-item .accordion__content {\n  color: #000;\n}\n.product-info__block-list > :not(:nth-child(1 of:not(:empty))) {\n  margin-block-start: 16px;\n  margin-block-end:0px;\n}\n.product-info__block-list > :nth-child(3 of :not(:empty)) {\n  margin-block-start: 8px;\n}\n\n\n@media screen and (max-width: 999px) {\n\n.product-info__block-item .accordion__summary    {\n font-size: 16px !important;\n}\n\n.product-info .product-info__block-list > :nth-child(3 of :not(:empty)),.product-info .product-info__block-list > :nth-child(6 of :not(:empty)),.product-info__block-item .accordion__content {\n  font-size: 14px !important;\n}\n.prose-justify-start p {\nfont-size: 14px !important;\n}\n\n.product-info .product-info__block-list > :nth-child(7 of :not(:empty)) {\n font-size: 14px !important;\n}\n}\n\n@media screen and (min-width: 1000px) {\n\n  .product-info__block-list > :not(:nth-child(1 of:not(:empty))) {\n    margin-block-start: 32px;\n  }\n\n.product-info__block-list > :nth-child(2 of :not(:empty)) {\n  margin-block-start: 24px;\n}\n\n.product-info__block-list > :nth-child(3 of :not(:empty)) {\n  margin-block-start: 16px;\n}\n  .product-info .product-info__block-list > :nth-child(6 of :not(:empty)) .icon {\n      width: 40px !important;\n      height: 40px !important;\n    }\n  .product-countdown-discount-percentage .prose {\n  width: auto;\n}\n}\n</style>",
+        "text_alignment": "left",
+        "add_vertical_spacing": false,
+        "add_horizontal_spacing": false
+      }
+    },
+    "custom_liquid_x7H3pN": {
+      "type": "custom-liquid",
+      "name": "Sticky Nav",
+      "settings": {
+        "color_scheme": "",
+        "liquid": "<style>\n  #pdp-sticky-nav-section {\n    width: 100%;\n    background-color: #f5f5f5;\n    box-sizing: border-box;\n  }\n  \n  #pdp-sticky-nav-section.is-fixed {\n    position: fixed;\n    top: 0;\n    left: 0;\n    z-index: 998;\n  }\n\n  #pdp-sticky-nav-wrapper {\n    width: 100%;\n    background-color: transparent;\n  }\n  \n  #pdp-sticky-nav-section * {\n    box-sizing: border-box;\n  }\n\n  #pdp-sticky-nav-section .nav-scroll-area {\n    display: flex;\n    align-items: center;\n    justify-content: flex-start;\n    gap: 24px;\n    padding: 0 16px;\n    height: 48px;\n    overflow-x: auto;\n    scrollbar-width: none;\n    -ms-overflow-style: none;\n  }\n\n  #pdp-sticky-nav-section .nav-scroll-area::-webkit-scrollbar {\n    display: none;\n  }\n\n  #pdp-sticky-nav-section .nav-item {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    height: 100%;\n    position: relative;\n    flex-shrink: 0;\n    cursor: pointer;\n  }\n\n  #pdp-sticky-nav-section .nav-item span {\n    font-size: 14px;\n    line-height: 1.4;\n    color: #000;\n    white-space: nowrap;\n    transition: color 0.3s ease;\n  }\n\n  #pdp-sticky-nav-section .nav-item::after {\n    content: '';\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 2px;\n    background-color: #f287ec;\n    transform: scaleX(0);\n    transition: transform 0.3s ease;\n  }\n\n  #pdp-sticky-nav-section .nav-item.is-active::after {\n    transform: scaleX(1);\n  }\n\n  @media (min-width: 1000px) {\n    #pdp-sticky-nav-section .nav-scroll-area {\n      max-width: 1200px;\n      margin: 0 auto;\n      padding: 0 80px;\n      height: 64px;\n      justify-content: center;\n      gap: 60px;\n      overflow-x: visible;\n    }\n\n    #pdp-sticky-nav-section .nav-item {\n      width: auto;\n    }\n\n    #pdp-sticky-nav-section .nav-item span {\n      font-size: 20px;\n    }\n  }\n</style>\n\n<div id=\"pdp-sticky-nav-wrapper\">\n  <section id=\"pdp-sticky-nav-section\">\n    <div class=\"nav-scroll-area\">\n      <!-- Creator Buzz -->\n      <div class=\"nav-item\" data-target-class=\"creator-buzz-slider\">\n        <span>Creator Buzz</span>\n      </div>\n      <!-- The Tech -->\n      <div class=\"nav-item\" data-target-id=\"pdp-intelligence-intimacy\">\n        <span>The Tech</span>\n      </div>\n      <!-- The SensOn Edge -->\n      <div class=\"nav-item\" data-target-id=\"senson-edge-section\">\n        <span>The SensOn Edge</span>\n      </div>\n      <!-- Real Voices -->\n      <div class=\"nav-item\" data-target-id=\"yotpo-reviews-main-widget\">\n        <span>Real Voices</span>\n      </div>\n    </div>\n  </section>\n</div>\n\n<script>\n  ;(function () {\n    var navSection = document.getElementById('pdp-sticky-nav-section')\n    var navWrapper = document.getElementById('pdp-sticky-nav-wrapper')\n    if (!navSection || !navWrapper) return\n\n    var items = navSection.querySelectorAll('.nav-item')\n    var scrollArea = navSection.querySelector('.nav-scroll-area')\n    \n    var isClickScrolling = false\n    var clickScrollCheckInterval\n\n    // 获取 header 底部在视口中的位置（考虑 Announcement bar）\n    function getHeaderBottomInViewport() {\n      var header = document.querySelector('.shopify-section--header');\n      if (!header) return 0;\n      var rect = header.getBoundingClientRect();\n      return rect.bottom; // header 底部距离视口顶部的距离\n    }\n\n    function updateStickyPosition() {\n      var headerBottom = getHeaderBottomInViewport();\n      var wrapperRect = navWrapper.getBoundingClientRect(); // 相对视口\n\n      // 当 navWrapper 的顶部接触到 header 底部时，开始吸附\n      if (wrapperRect.top <= headerBottom) {\n        if (!navSection.classList.contains('is-fixed')) {\n          navWrapper.style.height = navSection.offsetHeight + 'px';\n          navSection.classList.add('is-fixed');\n        }\n        // fixed 后直接贴在 header 下方，即 top = headerBottom\n        navSection.style.top = headerBottom + 'px';\n      } else {\n        if (navSection.classList.contains('is-fixed')) {\n          navSection.classList.remove('is-fixed');\n          navSection.style.top = 'auto';\n          navWrapper.style.height = 'auto';\n        }\n      }\n    }\n\n    function getTargetElement(item) {\n      var targetId = item.getAttribute('data-target-id')\n      if (targetId) {\n        return document.getElementById(targetId)\n      }\n      var targetClass = item.getAttribute('data-target-class')\n      if (targetClass) {\n        return document.querySelector('.' + targetClass)\n      }\n      return null\n    }\n\n    function updateActiveTab() {\n      if (isClickScrolling) return\n\n      var headerBottom = getHeaderBottomInViewport();\n      var navHeight = navSection.offsetHeight;\n      // 计算偏移：header底部 + 导航栏自身高度 + 20px 余量\n      var offset = headerBottom + navHeight + 20;\n\n      var currentActive = null\n      var sectionPositions = []\n\n      for (var i = 0; i < items.length; i++) {\n        var item = items[i]\n        var targetSection = getTargetElement(item)\n\n        if (targetSection) {\n          var rect = targetSection.getBoundingClientRect()\n          var sectionTop = rect.top + window.scrollY\n          sectionPositions.push({\n            item: item,\n            top: sectionTop\n          })\n        }\n      }\n\n      sectionPositions.sort(function (a, b) {\n        return a.top - b.top\n      })\n\n      var scrollPosition = window.scrollY\n      var isAtAbsoluteBottom = (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 20;\n\n      if (isAtAbsoluteBottom && sectionPositions.length > 0) {\n        currentActive = sectionPositions[sectionPositions.length - 1].item;\n      } else {\n        for (var j = 0; j < sectionPositions.length; j++) {\n          if (scrollPosition >= sectionPositions[j].top - offset) {\n            currentActive = sectionPositions[j].item\n          }\n        }\n      }\n\n      if (!currentActive && items.length > 0) {\n        currentActive = sectionPositions.length > 0 ? sectionPositions[0].item : items[0]\n      }\n\n      if (currentActive && !currentActive.classList.contains('is-active')) {\n        items.forEach(function (i) {\n          i.classList.remove('is-active')\n        })\n        currentActive.classList.add('is-active')\n\n        if (window.innerWidth < 1000) {\n          var scrollLeft =\n            currentActive.offsetLeft -\n            scrollArea.offsetWidth / 2 +\n            currentActive.offsetWidth / 2\n          scrollArea.scrollTo({ left: scrollLeft, behavior: 'smooth' })\n        }\n      }\n    }\n\n    function abortClickScroll() {\n      if (!isClickScrolling) return;\n      clearInterval(clickScrollCheckInterval);\n      isClickScrolling = false;\n      window.removeEventListener('wheel', abortClickScroll);\n      window.removeEventListener('touchstart', abortClickScroll);\n      window.removeEventListener('keydown', abortClickScroll);\n      updateActiveTab();\n    }\n\n    items.forEach(function (item) {\n      item.addEventListener('click', function () {\n        var targetSection = getTargetElement(this)\n        if (!targetSection) return\n\n        isClickScrolling = true\n        clearInterval(clickScrollCheckInterval)\n\n        items.forEach(function (i) {\n          i.classList.remove('is-active')\n        })\n        this.classList.add('is-active')\n\n        if (window.innerWidth < 1000) {\n          var scrollLeft =\n            this.offsetLeft -\n            scrollArea.offsetWidth / 2 +\n            this.offsetWidth / 2\n          scrollArea.scrollTo({ left: scrollLeft, behavior: 'smooth' })\n        }\n\n        var headerBottom = getHeaderBottomInViewport();\n        var navHeight = navSection.offsetHeight;\n        var sectionTop = targetSection.getBoundingClientRect().top + window.scrollY;\n        // 目标滚动位置：section 顶部 - header底部 - 导航栏高度 + 1px 微调\n        var finalScrollTop = Math.round(sectionTop - headerBottom - navHeight + 1);\n        \n        window.scrollTo({\n          top: finalScrollTop,\n          behavior: 'smooth',\n        })\n\n        var lastScrollY = window.scrollY;\n        var unchangedCount = 0;\n        \n        clickScrollCheckInterval = setInterval(function() {\n          var currentScrollY = Math.round(window.scrollY);\n          \n          if (Math.abs(currentScrollY - finalScrollTop) <= 5) {\n            abortClickScroll();\n            return;\n          }\n          \n          if (currentScrollY === lastScrollY) {\n            unchangedCount++;\n            if (unchangedCount >= 3) {\n              abortClickScroll();\n              return;\n            }\n          } else {\n            unchangedCount = 0;\n            lastScrollY = currentScrollY;\n          }\n        }, 100);\n\n        window.addEventListener('wheel', abortClickScroll, { passive: true });\n        window.addEventListener('touchstart', abortClickScroll, { passive: true });\n        window.addEventListener('keydown', abortClickScroll, { passive: true });\n      })\n    })\n\n    window.addEventListener(\n      'scroll',\n      function () {\n        requestAnimationFrame(function() {\n          updateStickyPosition()\n          updateActiveTab()\n        })\n      },\n      { passive: true }\n    )\n\n    window.addEventListener('resize', function () {\n      updateStickyPosition()\n      updateActiveTab()\n    })\n\n    updateStickyPosition()\n    updateActiveTab()\n  })()\n</script>",
+        "text_alignment": "center",
+        "add_vertical_spacing": false,
+        "add_horizontal_spacing": false
+      }
+    },
+    "img_cars_UibYpV": {
+      "type": "img-cars",
+      "blocks": {
+        "item_MEzM93": {
+          "type": "item",
+          "settings": {
+            "title": "AI-Led Intimacy",
+            "description": "Real-time AI responses make each interaction feel more natural, emotionally engaging, and genuinely personal instead of scripted.",
+            "image_mobile": "shopify://shop_images/AI-Led_Intimacy_3_h5.png",
+            "image_desktop": "shopify://shop_images/Frame_2147237645.png"
+          }
+        },
+        "item_4hbxQg": {
+          "type": "item",
+          "settings": {
+            "title": "Software + Hardware in One Loop",
+            "description": "The app and device work together in one connected system, so every voice, story, and sensation stays seamlessly in sync.",
+            "image_mobile": "shopify://shop_images/Software_Hardware_in_One_Loop_2_h5.png",
+            "image_desktop": "shopify://shop_images/Frame_2147237648.png"
+          }
+        },
+        "item_WUFag9": {
+          "type": "item",
+          "settings": {
+            "title": "Personal, Continuous, Evolving",
+            "description": "Each interaction builds over time, creating an experience that feels more familiar and more uniquely yours.",
+            "image_mobile": "shopify://shop_images/Frame_2147237640_h5.png",
+            "image_desktop": "shopify://shop_images/Frame_2147237649.png"
+          }
+        }
+      },
+      "block_order": [
+        "item_MEzM93",
+        "item_4hbxQg",
+        "item_WUFag9"
+      ],
+      "disabled": true,
+      "name": "Why SensOn Feels Different",
+      "settings": {
+        "heading": "Why SensOn Feels Different",
+        "icon_default": "shopify://shop_images/add-line.svg",
+        "icon_hover": "shopify://shop_images/add-line-1.svg"
+      }
+    },
+    "user_saying_B9AMxW": {
+      "type": "user-saying",
+      "blocks": {
+        "creator_slide_rPTNDD": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "",
+            "quote": "",
+            "avatar": "shopify://shop_images/channels4_profile.jpg",
+            "creator_name": "Dr. Tara",
+            "creator_desc": "Sex and relationship expert, Tenured professor, Author, TV host",
+            "creator_subs": "7.36M Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/飞书20260603-150418 (1) (1).mp4",
+            "video_cover": "shopify://shop_images/tara.jpg",
+            "video_aspect_ratio": "16-9"
+          }
+        }
+      },
+      "block_order": [
+        "creator_slide_rPTNDD"
+      ],
+      "disabled": true,
+      "name": "expert-insights-slider",
+      "settings": {
+        "heading": "Expert Insights",
+        "slider_type": "expert-insights-slider"
+      }
+    },
+    "user_saying_jXxM9p": {
+      "type": "user-saying",
+      "blocks": {
+        "creator_slide_jVtThp": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "AI-assisted\nIntense orgasm\nLong lasting",
+            "quote": "<p>“Girls!! I’m LIVING for this tech revolution!! SensOn is AI intimate experience syncing audio erotica with hardware response. BOUT TIME!!”</p>",
+            "avatar": "shopify://shop_images/channels4_profile_1.jpg",
+            "creator_name": "Lilly Singh",
+            "creator_desc": "Actress, Self-Growth Nerd, Goofball",
+            "creator_subs": "14.2M Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/ea34a6af4103371d4ec3ea635775ed4d.mp4",
+            "video_cover": "shopify://shop_images/01_3d08d2d1-de5c-4855-89e0-7335f38087f1.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
+        "creator_slide_WHVR3q": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "Pleasure-Built AI\nWomen-First Science",
+            "quote": "<p>\"IT redefines women's experience. This is the first time I've seen AI built for pleasure, designed entirely around women's arousal patterns.\"</p>",
+            "avatar": "shopify://shop_images/20260528-180022.jpg",
+            "creator_name": "jamesjoseph",
+            "creator_desc": "LA-based actor，Live show host",
+            "creator_subs": "1.5M Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/snaptik.monster_d6b968db_57f3_499c_9f4c_c508470bffbf.mp4",
+            "video_cover": "shopify://shop_images/02_17fe275b-19d7-4399-bc48-8cd7b6a6ff19.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
+        "creator_slide_exrhef": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "real-time interaction\nModular multi-zone",
+            "quote": "<p>“All accessories are magnetic, like grown‑up Lego. Connect to the app, pick your content, and the character responds to you in real time!”</p>",
+            "avatar": "shopify://shop_images/20260525-162849.jpg",
+            "creator_name": "misskaterinar",
+            "creator_desc": "Female-focused creator",
+            "creator_subs": "21K Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/file_v3_00128_9c5d571a-2656-4d04-861a-21317756cf6g.mp4",
+            "video_cover": "shopify://shop_images/kat.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
+        "creator_slide_Dzbpkt": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "Instant Story \nTri-Sense Response",
+            "quote": "<p>“This is an AI fantasy software that you can actually feel. The device pairs with a premium AI character app which has synched hardware.”</p>",
+            "avatar": "shopify://shop_images/img_v3_02128_39fd11d1-6996-4767-97bc-14bbed1b4adg.jpg",
+            "creator_name": "jkiillem",
+            "creator_desc": "Performer，LGBTQ+ Creator",
+            "creator_subs": "150K Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/file_v3_00128_26b6c7c2-7a56-42f1-a05c-81bb7b995feg.mp4",
+            "video_cover": "shopify://shop_images/jkiillem.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
+        "creator_slide_g8grbA": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "World-First AI\nLady-Centric",
+            "quote": "<p>\"SensOn S1: One of the world's FIRST AI intimate experiences that redefines pleasure. Ladies, would you try this? Unbox with usand see!\" </p>",
+            "avatar": "shopify://shop_images/20260528-180029.jpg",
+            "creator_name": "theinnovatorwives",
+            "creator_desc": "Female Entrepreneurs，Leo couple",
+            "creator_subs": "80K Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/First the teaser, now we have The Goods! 😮 from @senson_official one of the worlds FIRST AI int.mp4",
+            "video_cover": "shopify://shop_images/03_c9455c7b-bffe-4cb2-89a6-f7842b77b78a.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
+        "creator_slide_XRnUxa": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "AI Mind-Reader\nSmarter Climax",
+            "quote": "<p>\"Sometimes moms deserve a little SensOnAI-assisted relaxation too. The more you use it, the better it understands what you like.\"</p>",
+            "avatar": "shopify://shop_images/20260528-175842.jpg",
+            "creator_name": "felecia.monique",
+            "creator_desc": "Beauty & lifestyle content creator",
+            "creator_subs": "44K Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/Single mom life means I do everything… bills, kids, work, content… so yes, sometimes mama deserv.mp4",
+            "video_cover": "shopify://shop_images/04.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
+        "creator_slide_kpcnax": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "AI-Enhanced Atmosphere\nImmersive Sync",
+            "quote": "<p>“This might be the most futuristic thing I've unboxed — not a chatbot, but the first AI-driven sensory experience you can physically enjoy.”</p>",
+            "avatar": "shopify://shop_images/img_v3_02128_8cb8096b-f8a2-40e1-859d-522a7130ba5g.jpg",
+            "creator_name": "vvaishnavi04",
+            "creator_desc": "AI enthusiast，Fashion lover",
+            "creator_subs": "694K Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/file_v3_00128_db51e244-e376-48a8-b2ea-3003020570eg.mp4",
+            "video_cover": "shopify://shop_images/vvaishnavi04.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
+        "creator_slide_7GVnpL": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "Immersive Interactive\nReal-Time Voice",
+            "quote": "<p>“You can interact with a fantasy that you have just by lying down… it knows what to do, creates an immersive experience.This is a physical and auditory experience！“</p>",
+            "avatar": "shopify://shop_images/nadyneluchon.jpg",
+            "creator_name": "nadyneluchon",
+            "creator_desc": "Content creator，fashion enthusiast",
+            "creator_subs": "84K Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/6月2日 (4)-1 (1) (1).mp4",
+            "video_cover": "shopify://shop_images/6_2_4.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        }
+      },
+      "block_order": [
+        "creator_slide_jVtThp",
+        "creator_slide_WHVR3q",
+        "creator_slide_exrhef",
+        "creator_slide_Dzbpkt",
+        "creator_slide_g8grbA",
+        "creator_slide_XRnUxa",
+        "creator_slide_kpcnax",
+        "creator_slide_7GVnpL"
+      ],
+      "name": "creator-buzz-slider",
+      "settings": {
+        "heading": "What Creators are Saying",
+        "slider_type": "creator-buzz-slider"
+      }
+    },
+    "scroll_images_baNjt4": {
+      "type": "scroll-images",
+      "blocks": {
+        "item_mmKQMw": {
+          "type": "item",
+          "settings": {
+            "title": "Stories Made for Your Mood",
+            "desc_short": "Slip into stories that match your mood, your pace, and your fantasies.",
+            "desc_long": "Slip into audio stories designed to meet you where you are—soft and slow, playful and teasing, or deeper and more intense. With a wide range of characters, tones, and fantasies to explore, every session can feel a little more like exactly what you're craving.",
+            "image_mobile": "shopify://shop_images/Frame_2147237640.png",
+            "image_desktop": "shopify://shop_images/Frame_2147237640.png"
+          }
+        },
+        "item_yaPwJ9": {
+          "type": "item",
+          "settings": {
+            "title": "Talk to Your AI, Not Just Hear It",
+            "desc_short": "Don't just listen. Talk, text, and shape the experience as it unfolds.",
+            "desc_long": "Don't just listen. Talk, text, and shape the experience as it unfolds.",
+            "image_mobile": "shopify://shop_images/Frame_2147237658.png",
+            "image_desktop": "shopify://shop_images/Frame_2147237658.png"
+          }
+        },
+        "item_hQeCcb": {
+          "type": "item",
+          "settings": {
+            "title": "It Remembers You",
+            "desc_short": "Your AI remembers what you like, so each time feels more familiar and more personal.",
+            "desc_long": "Your AI remembers what you like, so each time feels more familiar and more personal.",
+            "image_mobile": "shopify://shop_images/It_Remembers_You_1.png",
+            "image_desktop": "shopify://shop_images/It_Remembers_You_1.png"
+          }
+        }
+      },
+      "block_order": [
+        "item_mmKQMw",
+        "item_yaPwJ9",
+        "item_hQeCcb"
+      ],
+      "name": "PDP Intelligence Intimacy",
+      "settings": {
+        "label": "SOFTWARE EXPERIENCE",
+        "heading": "Intelligence for Intimacy"
+      }
+    },
+    "scroll_images_TjAexy": {
+      "type": "scroll-images",
+      "blocks": {
+        "item_VGVzrM": {
+          "type": "item",
+          "settings": {
+            "title": "Triple Stimulation, In Sync",
+            "desc_short": "Three sensations work together in one seamless, body-led rhythm.",
+            "desc_long": "Enjoy three synchronized sensations working together at once for a fuller, more immersive experience. By keeping every element in rhythm, the stimulation feels more balanced, more intense, and more satisfying overall.",
+            "image_mobile": "shopify://shop_images/Triple_Stimulation_In_Sync.gif",
+            "image_desktop": "shopify://shop_images/Triple_Stimulation_In_Sync.gif"
+          }
+        },
+        "item_nqxRHW": {
+          "type": "item",
+          "settings": {
+            "title": "Hands-Free, Modular Design",
+            "desc_short": "Wear it your way and let the experience move with you, effortlessly.",
+            "desc_long": "Wear it your way and let the experience move with you, effortlessly.",
+            "image_mobile": "shopify://shop_images/Hands-Free_Modular_Design_1.png",
+            "image_desktop": "shopify://shop_images/Hands-Free_Modular_Design_1.png"
+          }
+        },
+        "item_FQ3kam": {
+          "type": "item",
+          "settings": {
+            "title": "Smart Sensory Feedback",
+            "desc_short": "Every pulse responds with intention, so each moment feels more alive.",
+            "desc_long": "Every pulse responds with intention, so each moment feels more alive.",
+            "image_mobile": "shopify://shop_images/Smart_Sensory_Feedback_1.png",
+            "image_desktop": "shopify://shop_images/Smart_Sensory_Feedback_1.png"
+          }
+        }
+      },
+      "block_order": [
+        "item_VGVzrM",
+        "item_nqxRHW",
+        "item_FQ3kam"
+      ],
+      "name": "Engineered for Sensation",
+      "settings": {
+        "label": "HARDWARE EXPERIENCE",
+        "heading": "Engineered for Sensation"
+      }
+    },
+    "ss_comparison_table_22_Uhm4pg": {
+      "type": "ss-comparison-table-22",
+      "blocks": {
+        "heading_LCcRW3": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "<p><strong>US vs Traditional</strong></p>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 22,
+            "heading_size_mobile": 20,
+            "heading_height": 100,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#121212"
+          }
+        },
+        "text_jzp8kU": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Not overhyped or overpriced. Just the best vibes one can get.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 18,
+            "text_size_mobile": 16,
+            "text_height": 90,
+            "text_mt": 0,
+            "text_mt_mobile": 0,
+            "text_color": "#121212"
+          }
+        },
+        "table_row_UQcyJE": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Triple Stim",
+            "first_column": "3 in 1, hands-free, story-adaptive",
+            "first_column_icon": "none",
+            "second_column": "Single motor, no coordination",
+            "second_column_icon": "none",
+            "third_column": "",
+            "third_column_icon": "none"
+          }
+        },
+        "table_row_wUGCqE": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Audio Sync",
+            "first_column": "Low-latency, voice-to-pulse",
+            "first_column_icon": "none",
+            "second_column": "",
+            "second_column_icon": "cross",
+            "third_column": "",
+            "third_column_icon": "cross"
+          }
+        },
+        "table_row_4YfA3r": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Orgasm Quality",
+            "first_column": "Deeper, more intenseorgasms",
+            "first_column_icon": "none",
+            "second_column": "Monotonous, numbing",
+            "second_column_icon": "none",
+            "third_column": "",
+            "third_column_icon": "cross"
+          }
+        },
+        "table_row_abMwfE": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Sensation Type",
+            "first_column": "Touch-free, adaptive pulses",
+            "first_column_icon": "none",
+            "second_column": "Direct vibration only",
+            "second_column_icon": "none",
+            "third_column": "",
+            "third_column_icon": "cross"
+          }
+        },
+        "table_row_iDxGyh": {
+          "type": "table_row",
+          "settings": {
+            "row_heading": "Discreet Design",
+            "first_column": "<55 dB ，Whisper-quiet",
+            "first_column_icon": "none",
+            "second_column": "",
+            "second_column_icon": "cross",
+            "third_column": "",
+            "third_column_icon": "cross"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LCcRW3",
+        "text_jzp8kU",
+        "table_row_UQcyJE",
+        "table_row_wUGCqE",
+        "table_row_4YfA3r",
+        "table_row_abMwfE",
+        "table_row_iDxGyh"
+      ],
+      "name": "US vs Traditional ",
+      "settings": {
+        "section_title": "Why SensOn Goes Further",
+        "content_max_width": 40,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "table_columns": 2,
+        "table_radius": 20,
+        "table_mt": 0,
+        "table_mt_mobile": 0,
+        "table_column_border_thickness": 2,
+        "first_heading": "SensOn S1",
+        "first_heading_image": "shopify://shop_images/ec0b97d5178b9ec1b1c6412709cba729b4fea91e.png",
+        "first_heading_url": "",
+        "second_heading": "Traditional",
+        "second_heading_image": "shopify://shop_images/20260603-165846.png",
+        "second_heading_url": "",
+        "third_heading": "Other 2",
+        "third_heading_url": "",
+        "heading_image_size": 100,
+        "heading_image_size_mobile": 100,
+        "heading_image_radius": 0,
+        "heading_image_border_thickness": 0,
+        "use_background_image": false,
+        "column_heading_custom": false,
+        "column_heading_font": "cabin_n4",
+        "column_heading_size": 18,
+        "column_heading_size_mobile": 15,
+        "column_heading_height": 150,
+        "column_heading_align": "center",
+        "column_heading_align_mobile": "center",
+        "column_heading_padding_horizontal": 0,
+        "column_heading_padding_horizontal_mobile": 0,
+        "column_heading_padding_vertical": 0,
+        "column_heading_padding_vertical_mobile": 8,
+        "row_padding_horizontal": 0,
+        "row_padding_horizontal_mobile": 0,
+        "row_padding_vertical": 24,
+        "row_padding_vertical_mobile": 24,
+        "row_border_thickness": 1,
+        "row_heading_custom": false,
+        "row_heading_font": "assistant_n4",
+        "row_heading_size": 18,
+        "row_heading_size_mobile": 15,
+        "row_heading_height": 150,
+        "value_custom": false,
+        "value_font": "assistant_n4",
+        "value_size": 18,
+        "value_size_mobile": 15,
+        "value_height": 150,
+        "value_icon_size": 24,
+        "value_icon_size_mobile": 24,
+        "column_heading_active_color": "#121212",
+        "value_active_color": "#f187eb",
+        "table_column_active_bg_color": "#fff5ff",
+        "table_bg_image_active_color": "#fff5ff",
+        "table_column_active_border_color": "#f187eb",
+        "column_heading_color": "#121212",
+        "value_color": "#757575",
+        "table_column_bg_color": "#ffffff",
+        "table_bg_image_color": "#c7c7c7",
+        "table_column_border_color": "#757575",
+        "heading_image_border_color": "#121212",
+        "row_heading_color": "#121212",
+        "row_heading_border_color": "#121212",
+        "value_icon_active_color": "#6cb324",
+        "value_icon_color": "#ff1616",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#757575",
+        "margin_top": 52,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "1777538267162d7a7c": {
+      "type": "apps",
+      "blocks": {
+        "yotpo_product_reviews_reviews_fjjCWN": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "section-header": {
+          "type": "_section-header",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "class": "",
+            "subheading": "",
+            "title": "Header",
+            "content": "<p>Use this content to share information about your store and products.</p>",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "left",
+            "heading_size": "h3",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "yotpo_product_reviews_reviews_fjjCWN"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "add_vertical_spacing": true,
+        "add_horizontal_spacing": false
+      }
+    },
+    "how_works_aErNkp": {
+      "type": "how-works",
+      "blocks": {
+        "feature_aXrbnp": {
+          "type": "feature",
+          "settings": {
+            "title": "Preparing",
+            "description": "Download the SensOn app, turn on Bluetooth, then open the case and take the devices out.",
+            "image": "shopify://shop_images/Frame_2147237640-2.png"
+          }
+        },
+        "feature_aGHMex": {
+          "type": "feature",
+          "settings": {
+            "title": "Using",
+            "description": "Insert the vaginal stimulator, adjust the clitoral head for a snug fit, and place the nipple stimulators on the nipples.",
+            "image": "shopify://shop_images/Frame_2147237640-1_bb2e9096-a036-4cb4-812b-489c94c2cc95.png"
+          }
+        },
+        "feature_X8wW4k": {
+          "type": "feature",
+          "settings": {
+            "title": "Playing",
+            "description": "Insert the vaginal stimulator, adjust the clitoral head for a snug fit, and place the nipple stimulators on the nipples.",
+            "image": "shopify://shop_images/Frame_2147237640_75dd3ee4-287b-420e-bf2a-5c6c3cca4ab2.png"
+          }
+        }
+      },
+      "block_order": [
+        "feature_aXrbnp",
+        "feature_aGHMex",
+        "feature_X8wW4k"
+      ],
+      "disabled": true,
+      "name": "How to Use",
+      "settings": {
+        "heading": "How to Use"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_bp3AW4",
+    "custom_liquid_x7H3pN",
+    "img_cars_UibYpV",
+    "user_saying_B9AMxW",
+    "user_saying_jXxM9p",
+    "scroll_images_baNjt4",
+    "scroll_images_TjAexy",
+    "ss_comparison_table_22_Uhm4pg",
+    "1777538267162d7a7c",
+    "how_works_aErNkp"
+  ]
+}
