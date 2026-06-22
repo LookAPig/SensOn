@@ -16,7 +16,7 @@
     "product_sold_out_badge_background": "#321e1e",
     "product_custom_badge_background": "#ffffff",
     "text_font": "montserrat_n4",
-    "text_font_size_mobile": 12,
+    "text_font_size_mobile": 14,
     "text_font_size_desktop": 16,
     "text_font_text_transform": "none",
     "text_font_letter_spacing": 0,
@@ -67,26 +67,6 @@
         "disabled": false,
         "settings": {}
       },
-      "17368511000352060744": {
-        "type": "shopify://apps/goaffpro-affiliate-marketing/blocks/goaffpro-embedded-pixel/2f4d802b-86c2-47e4-8096-ae1aa3efbab2",
-        "disabled": true,
-        "settings": {}
-      },
-      "11723975244080033176": {
-        "type": "shopify://apps/agex-age-verification-popup/blocks/app-embed/ccc19dcf-a0b2-4621-954b-f8c47e714e91",
-        "disabled": true,
-        "settings": {}
-      },
-      "10191866119664032810": {
-        "type": "shopify://apps/zoorix-sticky-atc/blocks/zoorix-head/16cf6adc-8b22-4e73-be2b-b93c1acde1da",
-        "disabled": true,
-        "settings": {
-          "home_product": "senson-s1-wellness-companion",
-          "show_on_out_of_stock": true,
-          "blacklisted_products": [],
-          "blacklisted_collections": []
-        }
-      },
       "855628211100114053": {
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
@@ -94,11 +74,6 @@
       },
       "7570552984445421165": {
         "type": "shopify://apps/yotpo-product-photo-reviews/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-        "disabled": false,
-        "settings": {}
-      },
-      "10974556588217313781": {
-        "type": "shopify://apps/nabu-for-fb-pixel/blocks/script-block/692d25a0-75b7-4cff-b3eb-8f1d8e1670bf",
         "disabled": false,
         "settings": {}
       }

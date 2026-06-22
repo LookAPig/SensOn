@@ -20,7 +20,7 @@
 
         <div class="quize-question-box js-quize-question-box">
           {% comment %} 问题 {% endcomment %}
-          <h2 class="js-quize-question-title"></h2>
+          <div class="js-quize-question-title h5"></div>
 
           {% comment %} 选项 {% endcomment %}
           <div class="js-quize-btn-wrapper"></div>
@@ -46,7 +46,7 @@
 
         {% comment %} result {% endcomment %}
         <div class="quize-question-result-wrapper js-quize-question-result-wrapper">
-          <h3>Velvet Touch</h3>
+          <div class="h3">Velvet Touch</div>
           <p>
             You crave soft, slow, sensory pleasure—warm hands, quiet moments, and gentle tension that lets you melt
             without pressure.
@@ -458,7 +458,7 @@
     transition: all 0.3s ease-in-out;
   }
 
-  .quize-question-box h2 {
+  .quize-question-box .h5 {
     text-align: center;
     margin-bottom: 24px;
     text-transform: none !important;
@@ -551,11 +551,12 @@
     max-width: 80%;
     margin: 16px auto 32px
   }
-  .quize-question-result-wrapper h3{
+  .quize-question-result-wrapper .h3{
     color: #fff;
     font-size: 30px;
     margin-bottom: 16px;
     text-align:center;
+    margin: 12px 0 16px 0;
   }
   .quize-question-result-wrapper p{
     color:rgb(209, 213, 219);
