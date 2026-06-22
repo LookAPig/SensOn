@@ -621,7 +621,7 @@
     >
       <div class="pdp-how-panel">
         {%- if block.settings.how_heading != blank -%}
-          <h3 class="pdp-how-heading">{{ block.settings.how_heading | escape }}</h3>
+          <div class="pdp-how-heading">{{ block.settings.how_heading | escape }}</div>
         {%- endif -%}
         <ol class="pdp-steps-list">
           {%- for i in (1..5) -%}
