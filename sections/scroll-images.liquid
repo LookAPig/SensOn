@@ -140,9 +140,10 @@
       }
 
       #shopify-section-{{ section.id }} .ifi-container {
-        padding: clamp(16px, 3vh, 100px) 100px;
+        padding: clamp(40px, 5vh, 100px) 100px;
         position: sticky;
         top: 0;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: safe center;
@@ -151,11 +152,11 @@
       #shopify-section-{{ section.id }} .ifi-header {
         padding: 0;
         gap: 16px;
-        margin: 0 auto clamp(16px, 3vh, 48px);
+        margin: 0 auto 48px;
         max-width: 1400px;
         width: 100%;
-        flex-shrink: 0;
       }
+
       #shopify-section-{{ section.id }} .ifi-label {
         font-size: 16px;
       }
@@ -175,25 +176,24 @@
         width: 100%;
         max-width: 1400px;
         margin: 0 auto;
-        gap: clamp(40px, 6vw, 80px);
-        flex-shrink: 0;
+        gap: 80px;
       }
 
       #shopify-section-{{ section.id }} .ifi-pc-left {
         display: flex;
         flex-direction: column;
-        gap: clamp(20px, 4vh, 64px);
-        justify-content: flex-start;
+        gap: 64px;
+        justify-content: flex-end;
+        align-self: stretch;
         flex: 1;
       }
 
       #shopify-section-{{ section.id }} .ifi-accordion-item {
         display: flex;
-        gap: clamp(24px, 3vw, 40px);
+        gap: 40px;
         align-items: flex-start;
         cursor: pointer;
-        padding: clamp(4px, 1vh, 12px) 0;
-        flex-shrink: 0;
+        padding: 12px 0;
       }
 
       #shopify-section-{{ section.id }} .ifi-accordion-line-wrapper {
@@ -249,16 +249,12 @@
         grid-template-rows: 1fr;
       }
 
-      #shopify-section-{{ section.id }} .ifi-accordion-desc-inner {
-        overflow: hidden;
-        min-height: 0;
-      }
-
       #shopify-section-{{ section.id }} .ifi-accordion-desc {
-        font-size: clamp(14px, 1.6vh, 16px);
+        font-size: 16px;
         line-height: 1.4;
         color: #000;
         margin: 0;
+        overflow: hidden;
         opacity: 0;
         padding-top: 0;
         transition: opacity 0.3s ease, padding-top 0.4s ease;
@@ -266,100 +262,18 @@
 
       #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-desc {
         opacity: 1;
-        padding-top: clamp(12px, 2vh, 24px);
+        padding-top: 24px;
         transition: opacity 0.4s ease 0.1s, padding-top 0.4s ease;
       }
 
       #shopify-section-{{ section.id }} .ifi-pc-right {
-        flex: 0 0 clamp(200px, min(30vw, 32vh), 420px);
-        width: clamp(200px, min(30vw, 32vh), 420px);
+        flex: 0 0 clamp(280px, 30vw, 420px);
+        width: clamp(280px, 30vw, 420px);
         aspect-ratio: 1 / 1;
-        max-height: min(420px, 32vh);
         height: auto;
         background-color: #f5f5f5;
         position: relative;
         overflow: hidden;
-        flex-shrink: 0;
-      }
-
-      @media (min-width: 1000px) and (max-height: 800px) {
-        #shopify-section-{{ section.id }} .ifi-container {
-          padding-top: 12px;
-          padding-bottom: 12px;
-        }
-
-        #shopify-section-{{ section.id }} .ifi-header {
-          gap: 8px;
-          margin-bottom: 12px;
-        }
-
-        #shopify-section-{{ section.id }} .ifi-title {
-          font-size: 26px;
-        }
-
-        #shopify-section-{{ section.id }} .ifi-pc-layout {
-          gap: 32px;
-        }
-
-        #shopify-section-{{ section.id }} .ifi-pc-left {
-          gap: 16px;
-        }
-
-        #shopify-section-{{ section.id }} .ifi-accordion-title {
-          font-size: 20px;
-        }
-
-        #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-desc {
-          padding-top: 8px;
-        }
-
-        #shopify-section-{{ section.id }} .ifi-pc-right {
-          flex-basis: clamp(180px, 28vh, 320px);
-          width: clamp(180px, 28vh, 320px);
-          max-height: 28vh;
-        }
-      }
-
-      #shopify-section-{{ section.id }} .ifi-container.ifi-is-compact {
-        justify-content: flex-start;
-        padding-top: 12px;
-        padding-bottom: 12px;
-      }
-
-      #shopify-section-{{ section.id }} .ifi-container.ifi-is-compact .ifi-header {
-        gap: 8px;
-        margin-bottom: 12px;
-      }
-
-      #shopify-section-{{ section.id }} .ifi-container.ifi-is-compact .ifi-title {
-        font-size: 24px;
-      }
-
-      #shopify-section-{{ section.id }} .ifi-container.ifi-is-compact .ifi-pc-layout {
-        gap: 24px;
-      }
-
-      #shopify-section-{{ section.id }} .ifi-container.ifi-is-compact .ifi-pc-left {
-        gap: 12px;
-      }
-
-      #shopify-section-{{ section.id }} .ifi-container.ifi-is-compact .ifi-accordion-title {
-        font-size: 18px;
-      }
-
-      #shopify-section-{{ section.id }} .ifi-container.ifi-is-compact .ifi-accordion-item {
-        padding: 2px 0;
-      }
-
-      #shopify-section-{{ section.id }} .ifi-container.ifi-is-compact .ifi-accordion-item.is-active .ifi-accordion-desc {
-        padding-top: 6px;
-        font-size: 14px;
-      }
-
-      #shopify-section-{{ section.id }} .ifi-container.ifi-is-compact .ifi-pc-right {
-        flex-basis: clamp(160px, 24vh, 280px);
-        width: clamp(160px, 24vh, 280px);
-        max-height: 24vh;
       }
 
       #shopify-section-{{ section.id }} .ifi-pc-img {
@@ -457,16 +371,14 @@
                 </div>
                 <div class="ifi-accordion-content">
                   {%- if block.settings.title != blank -%}
-                    <div class="ifi-accordion-title">{{ block.settings.title | escape }}</div>
+                    <h3 class="ifi-accordion-title">{{ block.settings.title | escape }}</h3>
                   {%- endif -%}
                   <div class="ifi-accordion-desc-wrapper">
-                    <div class="ifi-accordion-desc-inner">
-                      {%- if block.settings.desc_long != blank -%}
-                        <p class="ifi-accordion-desc">{{ block.settings.desc_long | escape | newline_to_br }}</p>
-                      {%- elsif block.settings.desc_short != blank -%}
-                        <p class="ifi-accordion-desc">{{ block.settings.desc_short | escape }}</p>
-                      {%- endif -%}
-                    </div>
+                    {%- if block.settings.desc_long != blank -%}
+                      <p class="ifi-accordion-desc">{{ block.settings.desc_long | escape | newline_to_br }}</p>
+                    {%- elsif block.settings.desc_short != blank -%}
+                      <p class="ifi-accordion-desc">{{ block.settings.desc_short | escape }}</p>
+                    {%- endif -%}
                   </div>
                 </div>
               </div>
@@ -532,27 +444,11 @@
         return { headerH: headerH, navH: navH, barH: barH };
       }
 
-      function updateCompactMode() {
-        if (window.innerWidth < 1000) return;
-        var o = getOffsets();
-        var available = window.innerHeight - o.headerH - o.navH - o.barH;
-        var savedHeight = container.style.height;
-        var savedMinHeight = container.style.minHeight;
-        container.style.height = 'auto';
-        container.style.minHeight = '0';
-        container.classList.remove('ifi-is-compact');
-        var needsCompact = container.scrollHeight > available;
-        container.classList.toggle('ifi-is-compact', needsCompact);
-        container.style.height = savedHeight;
-        container.style.minHeight = savedMinHeight;
-      }
-
       function updateStickyLayout() {
         if (window.innerWidth < 1000) {
           container.style.height = '';
           container.style.minHeight = '';
           container.style.top = '';
-          container.classList.remove('ifi-is-compact');
           return;
         }
         var o = getOffsets();
@@ -560,7 +456,6 @@
         container.style.height = available + 'px';
         container.style.minHeight = available + 'px';
         container.style.top = (o.headerH + o.navH) + 'px';
-        updateCompactMode();
       }
 
       function setActive(index) {
@@ -570,9 +465,6 @@
         imgs.forEach(function (el, i) {
           el.classList.toggle('is-active', i === index);
         });
-        if (window.innerWidth >= 1000) {
-          requestAnimationFrame(updateCompactMode);
-        }
       }
 
       window.addEventListener('resize', updateStickyLayout);
