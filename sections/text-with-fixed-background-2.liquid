@@ -21,7 +21,7 @@
             {%- when 'title' -%}
               {%- if block.settings.subheading != blank or block.settings.title != blank -%}
                 <div class="text-with-fixed-background__title-block {% if section.blocks.size > 1 %}align-self-start{% else %}align-self-{{ text_alignment }}{% endif %} justify-self-{{ text_justification }} {{ block.settings.content_position }}" {{ block.shopify_attributes }}>
-                  <div class="prose prose-justify-{{ text_justification }} md:prose-justify-{{ block.settings.content_position | split: '-' | last }}">
+                  <h1 class="prose prose-justify-{{ text_justification }} md:prose-justify-{{ block.settings.content_position | split: '-' | last }}">
                     {%- render 'heading', 
                       content: block.settings.title, 
                       style: block.settings.heading_tag,
@@ -33,7 +33,7 @@
                     -%}
                     {%- render 'subheading', content: block.settings.subheading -%}
                     {%- render 'text-desc', content: block.settings.desc,style: block.settings.text_desc_tag, -%}
-                  </div>
+                  </h1>
                 </div>
               {%- endif -%}
 
