@@ -1,7 +1,7 @@
 <section class="custom-swiper-outer section-spacing">
   <div class="custom-swiper-title-wrapper">
     {% if section.settings.title %}
-      <h3>{{ section.settings.title }}</h3>
+      <h2>{{ section.settings.title }}</h2>
     {% endif %}
     {% if section.settings.subtitle %}
       <p>{{ section.settings.subtitle }}</p>
@@ -19,6 +19,8 @@
                     src="{{ block.settings.image | image_url: width: 1600 }}"
                     alt="{{ block.settings.image.alt | escape }}"
                     loading="lazy"
+                    width="100%"
+                    height="100%"
                   >
                 {% endif %}
 
@@ -354,7 +356,7 @@ if (window.Shopify && Shopify.designMode) {
   margin-bottom: 50px;
 }
 
-.custom-swiper-title-wrapper h3{
+.custom-swiper-title-wrapper h2{
   font-size: {{ section.settings.title_size | default: 24 }}px;
   color: {{ section.settings.title_color | default: '#000' }};
   margin: 0 0 10px;
@@ -371,7 +373,7 @@ if (window.Shopify && Shopify.designMode) {
 }
 
 @media screen and (max-width: 750px) {
-  .custom-swiper-title-wrapper h3{
+  .custom-swiper-title-wrapper h2{
     font-size: {{ section.settings.title_size_mobile | default: section.settings.title_size }}px;
   }
   .custom-swiper-title-wrapper p{
