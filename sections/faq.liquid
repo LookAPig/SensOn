@@ -5,7 +5,7 @@
         <div class="section-header">
           <div class="prose {% if section.settings.layout == 'stacked' %}prose-justify-center{% endif %}">
             {%- render 'subheading', content: section.settings.subheading -%}
-            {%- render 'heading', content: section.settings.title, balance_text: true, style: section.settings.title_tag, html_tag: 'h2' -%}
+            {%- render 'heading', content: section.settings.title, balance_text: true, style: section.settings.title_tag, html_tag: 'h1' -%}
 
             <div class="max-w-sm">
               {{- section.settings.content -}}
@@ -31,7 +31,7 @@
                       {%- render 'icon' with block.settings.icon, width: block.settings.icon_width, mobile_width: block.settings.mobile_icon_width -%}
                     {%- endif -%}
 
-                    <p class="h6 text-start" {{ block.shopify_attributes }}>{{ block.settings.title }}</p>
+                    <h2 class="h6 text-start" {{ block.shopify_attributes }}>{{ block.settings.title }}</h2>
                   </div>
                 {%- endif -%}
   
