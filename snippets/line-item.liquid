@@ -15,16 +15,16 @@ Supported variables
 * hide_unit_price: if set to true, we hide the unit price. We do that in the cart drawer to simplify it.
 {%- endcomment -%}
 
-<line-item class="line-item" style="background-color: #121212; padding: 16px; border-radius: 8px;">
+<line-item class="line-item" style="background-color: #121212; padding: 16px; border-radius: 8px; align-items: stretch;">
   {%- if line_item.image != blank -%}
     <a href="{{ line_item.url }}" class="line-item__media">
       {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 80px, 96px', widths: '80,96,160,192' -}}
     </a>
   {%- endif -%}
 
-  <div class="{% if show_line_price %}line-item__info-with-line-price{% else %}contents{% endif %}">
-    <div class="line-item__info">
-      <div class="v-stack gap-3">
+  <div class="{% if show_line_price %}line-item__info-with-line-price{% else %}contents{% endif %}" style="display: flex; flex-direction: row; flex-grow: 1;">
+    <div class="line-item__info" style="display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
+      <div class="v-stack gap-3" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
         <div class="v-stack gap-2">
           <div class="v-stack gap-0.5">
             {%- if settings.product_card_show_vendor and line_item.vendor != blank -%}
@@ -32,9 +32,9 @@ Supported variables
             {%- endif -%}
 
             {%- if line_item.url != blank -%}
-              <a href="{{ line_item.url }}" class="subheading">{{ line_item.product.title | default: line_item.title }}</a>
+              <a href="{{ line_item.url }}" class="subheading" style="font-size: 18px; font-weight: 500;">{{ line_item.product.title | default: line_item.title }}</a>
             {%- else -%}
-              <p class="subheading">{{ line_item.product.title | default: line_item.title }}</p>
+              <p class="subheading" style="font-size: 18px; font-weight: 500;">{{ line_item.product.title | default: line_item.title }}</p>
             {%- endif -%}
 
             {%- if hide_unit_price -%}
