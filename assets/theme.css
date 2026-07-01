@@ -2823,6 +2823,7 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
+  height: 100%;
 }
 
 .line-item__info-stack {
