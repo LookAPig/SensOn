@@ -15,7 +15,7 @@ Supported variables
 * hide_unit_price: if set to true, we hide the unit price. We do that in the cart drawer to simplify it.
 {%- endcomment -%}
 
-<line-item class="line-item">
+<line-item class="line-item" style="background-color: #121212; padding: 16px; border-radius: 8px;">
   {%- if line_item.image != blank -%}
     <a href="{{ line_item.url }}" class="line-item__media">
       {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 80px, 96px', widths: '80,96,160,192' -}}
@@ -98,10 +98,10 @@ Supported variables
             <div class="h-stack gap-5">
               {%- render 'quantity-selector', line_item: line_item, show_rules: false -%}
 
-              <a href="{{ line_item.url_to_remove }}" class="line-item__remove-button">
+              <a href="{{ line_item.url_to_remove }}" class="line-item__remove-button" style="opacity: 1; align-items: center; display: flex; gap: 4px; text-decoration: none;">
                 <span class="sr-only">{{ 'cart.general.remove_item' | t: title: line_item.title }}</span>
                 {%- render 'icon' with 'remove-bin' -%}
-                <span aria-hidden="true" class="text-xs">{{ 'cart.order.remove' | t }}</span>
+                <span aria-hidden="true" class="text-base" style="font-size: 14px; margin-left: 4px;">{{ 'cart.order.remove' | t }}</span>
               </a>
             </div>
 
@@ -114,12 +114,34 @@ Supported variables
     {%- if show_line_price -%}
       <div class="v-stack justify-items-end shrink-0 gap-0.5">
         <span class="line-item__line-price subheading">
-          {%- if settings.currency_code_enabled -%}
-            {{- line_item.final_line_price | money_with_currency -}}
+          {%- if line_item.final_line_price == 0 -%}
+            <span style="color: #F287EC;">Free</span>
           {%- else -%}
-            {{- line_item.final_line_price | money -}}
+            {%- if settings.currency_code_enabled -%}
+              {{- line_item.final_line_price | money_with_currency -}}
+            {%- else -%}
+              {{- line_item.final_line_price | money -}}
+            {%- endif -%}
           {%- endif -%}
         </span>
+
+        {%- if line_item.variant.compare_at_price > line_item.variant.price -%}
+          <s class="text-subdued text-sm" style="color: #888;">
+            {%- if settings.currency_code_enabled -%}
+              {{- line_item.variant.compare_at_price | times: line_item.quantity | money_with_currency -}}
+            {%- else -%}
+              {{- line_item.variant.compare_at_price | times: line_item.quantity | money -}}
+            {%- endif -%}
+          </s>
+        {%- elsif line_item.original_line_price > line_item.final_line_price -%}
+          <s class="text-subdued text-sm" style="color: #888;">
+            {%- if settings.currency_code_enabled -%}
+              {{- line_item.original_line_price | money_with_currency -}}
+            {%- else -%}
+              {{- line_item.original_line_price | money -}}
+            {%- endif -%}
+          </s>
+        {%- endif -%}
 
         {%- if line_item.unit_price -%}
           <unit-price class="line-item__unit-line-price subheading text-subdued">
