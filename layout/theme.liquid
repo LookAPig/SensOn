@@ -90,6 +90,10 @@
   <meta name="robots" content="noindex,follow">
 {% endif %}
 
+{% if request.path == routes.search_url %}
+  <meta name="robots" content="noindex,follow">
+{% endif %}
+
   </head>
 
   {% liquid
