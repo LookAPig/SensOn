@@ -2809,7 +2809,6 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
   display: flex;
   background-color: #121212;
   padding: 16px;
-  border-radius: 8px;
 }
 
 .line-item__info-wrapper {
