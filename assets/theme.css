@@ -1141,7 +1141,8 @@ shopify-accelerated-checkout, shopify-accelerated-checkout-cart {
 
 .drawer::part(body) {
   --distance-to-bleed: var(--drawer-body-padding-inline);
-  padding: var(--drawer-body-padding-block) var(--drawer-body-padding-inline);
+  /* padding: var(--drawer-body-padding-block) var(--drawer-body-padding-inline); */
+  padding: 16px;
   overscroll-behavior-y: contain;
   flex: auto;
   grid-template-columns: minmax(0, 1fr);
