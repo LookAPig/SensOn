@@ -15,16 +15,16 @@ Supported variables
 * hide_unit_price: if set to true, we hide the unit price. We do that in the cart drawer to simplify it.
 {%- endcomment -%}
 
-<line-item class="line-item" style="background-color: #121212; padding: 16px; border-radius: 8px; align-items: stretch;">
+<line-item class="line-item">
   {%- if line_item.image != blank -%}
     <a href="{{ line_item.url }}" class="line-item__media">
       {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 80px, 96px', widths: '80,96,160,192' -}}
     </a>
   {%- endif -%}
 
-  <div class="{% if show_line_price %}line-item__info-with-line-price{% else %}contents{% endif %}" style="display: flex; flex-direction: row; flex-grow: 1;">
-    <div class="line-item__info" style="display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;height: 100%;">
-      <div class="v-stack gap-3" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+  <div class="{% if show_line_price %}line-item__info-with-line-price{% else %}line-item__info-wrapper{% endif %}">
+    <div class="line-item__info line-item__info--column">
+      <div class="v-stack gap-3 line-item__info-stack">
         <div class="v-stack gap-2">
           <div class="v-stack gap-0.5">
             {%- if settings.product_card_show_vendor and line_item.vendor != blank -%}
@@ -32,9 +32,9 @@ Supported variables
             {%- endif -%}
 
             {%- if line_item.url != blank -%}
-              <a href="{{ line_item.url }}" class="subheading" style="font-size: 18px; font-weight: 500;">{{ line_item.product.title | default: line_item.title }}</a>
+              <a href="{{ line_item.url }}" class="subheading line-item__title">{{ line_item.product.title | default: line_item.title }}</a>
             {%- else -%}
-              <p class="subheading" style="font-size: 18px; font-weight: 500;">{{ line_item.product.title | default: line_item.title }}</p>
+              <p class="subheading line-item__title">{{ line_item.product.title | default: line_item.title }}</p>
             {%- endif -%}
 
             {%- if hide_unit_price -%}
@@ -98,10 +98,10 @@ Supported variables
             <div class="h-stack gap-5">
               {%- render 'quantity-selector', line_item: line_item, show_rules: false -%}
 
-              <a href="{{ line_item.url_to_remove }}" class="line-item__remove-button" style="opacity: 1; align-items: center; display: flex; gap: 4px; text-decoration: none;">
+              <a href="{{ line_item.url_to_remove }}" class="line-item__remove-button line-item__remove-button--visible">
                 <span class="sr-only">{{ 'cart.general.remove_item' | t: title: line_item.title }}</span>
                 {%- render 'icon' with 'remove-bin' -%}
-                <span aria-hidden="true" class="text-base" style="font-size: 14px; margin-left: 4px;">{{ 'cart.order.remove' | t }}</span>
+                <span aria-hidden="true" class="text-base line-item__remove-text">{{ 'cart.order.remove' | t }}</span>
               </a>
             </div>
 
@@ -115,7 +115,7 @@ Supported variables
       <div class="v-stack justify-items-end shrink-0 gap-0.5">
         <span class="line-item__line-price subheading">
           {%- if line_item.final_line_price == 0 -%}
-            <span style="color: #F287EC;">Free</span>
+            <span class="line-item__free-text">Free</span>
           {%- else -%}
             {%- if settings.currency_code_enabled -%}
               {{- line_item.final_line_price | money_with_currency -}}
@@ -126,7 +126,7 @@ Supported variables
         </span>
 
         {%- if line_item.variant.compare_at_price > line_item.variant.price -%}
-          <s class="text-subdued text-sm" style="color: #888;">
+          <s class="text-subdued text-sm line-item__compare-price">
             {%- if settings.currency_code_enabled -%}
               {{- line_item.variant.compare_at_price | times: line_item.quantity | money_with_currency -}}
             {%- else -%}
@@ -134,7 +134,7 @@ Supported variables
             {%- endif -%}
           </s>
         {%- elsif line_item.original_line_price > line_item.final_line_price -%}
-          <s class="text-subdued text-sm" style="color: #888;">
+          <s class="text-subdued text-sm line-item__compare-price">
             {%- if settings.currency_code_enabled -%}
               {{- line_item.original_line_price | money_with_currency -}}
             {%- else -%}
