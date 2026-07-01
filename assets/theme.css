@@ -2834,7 +2834,7 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
 }
 
 .line-item__title {
-  font-size: 18px;
+  font-size: 18px !important;
   font-weight: 500;
 }
 
@@ -2844,7 +2844,7 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
 
 .line-item__compare-price {
   color: #888;
-  font-size: 16px;
+  font-size: 16px !important;
 }
 
 .line-item__remove-button--visible {
@@ -2858,7 +2858,7 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
 }
 
 .line-item__line-price {
-  font-size: 18px;
+  font-size: 18px !important;
 }
 
 .line-item__media {
