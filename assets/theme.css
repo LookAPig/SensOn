@@ -1141,7 +1141,8 @@ shopify-accelerated-checkout, shopify-accelerated-checkout-cart {
 
 .drawer::part(body) {
   --distance-to-bleed: var(--drawer-body-padding-inline);
-  padding: var(--drawer-body-padding-block) var(--drawer-body-padding-inline);
+  /* padding: var(--drawer-body-padding-block) var(--drawer-body-padding-inline); */
+  padding: 16px;
   overscroll-behavior-y: contain;
   flex: auto;
   grid-template-columns: minmax(0, 1fr);
@@ -2804,9 +2805,60 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
 
 .line-item {
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   column-gap: 1rem;
   display: flex;
+  background-color: #121212;
+  padding: 16px;
+}
+
+.line-item__info-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.line-item__info--column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.line-item__info-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.line-item__title {
+  font-size: 16px !important;
+  font-weight: 500;
+}
+
+.line-item__free-text {
+  color: #F287EC;
+}
+
+.line-item__compare-price {
+  color: #888;
+  font-size: 14px !important;
+}
+
+.line-item__remove-button--visible {
+  opacity: 1 !important;
+  text-decoration: none;
+}
+
+.line-item__remove-text {
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.line-item__line-price {
+  font-size: 16px !important;
 }
 
 .line-item__media {
@@ -4755,7 +4807,8 @@ table caption {
 }
 
 .quantity-selector--line-item {
-  border-color: rgb(var(--border-color));
+  /* border-color: rgb(var(--border-color)); */
+  border-color: rgba(255, 255, 255, 0.15);
   grid-template-columns: 2.5rem auto 2.5rem;
 }
 

@@ -22,9 +22,9 @@ Supported variables
     </a>
   {%- endif -%}
 
-  <div class="{% if show_line_price %}line-item__info-with-line-price{% else %}contents{% endif %}">
-    <div class="line-item__info">
-      <div class="v-stack gap-3">
+  <div class="{% if show_line_price %}line-item__info-with-line-price{% else %}line-item__info-wrapper{% endif %}">
+    <div class="line-item__info line-item__info--column">
+      <div class="v-stack gap-3 line-item__info-stack">
         <div class="v-stack gap-2">
           <div class="v-stack gap-0.5">
             {%- if settings.product_card_show_vendor and line_item.vendor != blank -%}
@@ -32,9 +32,9 @@ Supported variables
             {%- endif -%}
 
             {%- if line_item.url != blank -%}
-              <a href="{{ line_item.url }}" class="subheading">{{ line_item.product.title | default: line_item.title }}</a>
+              <a href="{{ line_item.url }}" class="subheading line-item__title">{{ line_item.product.title | default: line_item.title }}</a>
             {%- else -%}
-              <p class="subheading">{{ line_item.product.title | default: line_item.title }}</p>
+              <p class="subheading line-item__title">{{ line_item.product.title | default: line_item.title }}</p>
             {%- endif -%}
 
             {%- if hide_unit_price -%}
@@ -98,10 +98,10 @@ Supported variables
             <div class="h-stack gap-5">
               {%- render 'quantity-selector', line_item: line_item, show_rules: false -%}
 
-              <a href="{{ line_item.url_to_remove }}" class="line-item__remove-button">
+              <a href="{{ line_item.url_to_remove }}" class="line-item__remove-button line-item__remove-button--visible">
                 <span class="sr-only">{{ 'cart.general.remove_item' | t: title: line_item.title }}</span>
                 {%- render 'icon' with 'remove-bin' -%}
-                <span aria-hidden="true" class="text-xs">{{ 'cart.order.remove' | t }}</span>
+                <span aria-hidden="true" class="text-base line-item__remove-text">{{ 'cart.order.remove' | t }}</span>
               </a>
             </div>
 
@@ -114,12 +114,34 @@ Supported variables
     {%- if show_line_price -%}
       <div class="v-stack justify-items-end shrink-0 gap-0.5">
         <span class="line-item__line-price subheading">
-          {%- if settings.currency_code_enabled -%}
-            {{- line_item.final_line_price | money_with_currency -}}
+          {%- if line_item.final_line_price == 0 -%}
+            <span class="line-item__free-text">Free</span>
           {%- else -%}
-            {{- line_item.final_line_price | money -}}
+            {%- if settings.currency_code_enabled -%}
+              {{- line_item.final_line_price | money_with_currency -}}
+            {%- else -%}
+              {{- line_item.final_line_price | money -}}
+            {%- endif -%}
           {%- endif -%}
         </span>
+
+        {%- if line_item.variant.compare_at_price > line_item.variant.price -%}
+          <s class="text-subdued text-sm line-item__compare-price">
+            {%- if settings.currency_code_enabled -%}
+              {{- line_item.variant.compare_at_price | times: line_item.quantity | money_with_currency -}}
+            {%- else -%}
+              {{- line_item.variant.compare_at_price | times: line_item.quantity | money -}}
+            {%- endif -%}
+          </s>
+        {%- elsif line_item.original_line_price > line_item.final_line_price -%}
+          <s class="text-subdued text-sm line-item__compare-price">
+            {%- if settings.currency_code_enabled -%}
+              {{- line_item.original_line_price | money_with_currency -}}
+            {%- else -%}
+              {{- line_item.original_line_price | money -}}
+            {%- endif -%}
+          </s>
+        {%- endif -%}
 
         {%- if line_item.unit_price -%}
           <unit-price class="line-item__unit-line-price subheading text-subdued">

@@ -378,6 +378,98 @@
   </cart-drawer>
 {%- endif -%}
 
+{%- if section.settings.auto_add_product != blank -%}
+  <script>
+    (function() {
+      const autoAddVariantId = {{ section.settings.auto_add_product.selected_or_first_available_variant.id | json }};
+      if (!autoAddVariantId) return;
+
+      let cartHasBonus = false;
+      {%- for item in cart.items -%}
+        if ({{ item.variant_id }} === autoAddVariantId) {
+          cartHasBonus = true;
+        }
+      {%- endfor -%}
+
+      const originalFetch = window.fetch;
+      window.fetch = async function() {
+        let url = arguments[0];
+        if (typeof url === 'string' && url.includes('/cart/add') && !cartHasBonus) {
+          let options = arguments[1];
+          if (options && options.body instanceof FormData) {
+            let formData = options.body;
+            let idBeingAdded = formData.get('id');
+            
+            if (idBeingAdded && idBeingAdded.toString() !== autoAddVariantId.toString()) {
+              let jsonBody = { items: [] };
+              let mainItem = {};
+              
+              formData.forEach((value, key) => {
+                if (key === 'sections' || key === 'sections_url') {
+                  jsonBody[key] = value;
+                } else if (key.includes('properties[')) {
+                  mainItem.properties = mainItem.properties || {};
+                  let propKey = key.match(/\[(.*?)\]/)[1];
+                  mainItem.properties[propKey] = value;
+                } else {
+                  mainItem[key] = value;
+                }
+              });
+              
+              jsonBody.items.push(mainItem);
+              jsonBody.items.push({
+                id: autoAddVariantId,
+                quantity: 1
+              });
+
+              options.body = JSON.stringify(jsonBody);
+              options.headers = options.headers || {};
+              options.headers['Content-Type'] = 'application/json';
+              cartHasBonus = true;
+            }
+          }
+        }
+        return originalFetch.apply(this, arguments);
+      };
+
+      let isUpdatingAutoAdd = false;
+      document.documentElement.addEventListener('cart:change', async (e) => {
+        const cart = e.detail.cart;
+        if (!cart || !cart.items || isUpdatingAutoAdd) return;
+
+        const hasAutoAdd = cart.items.some(item => item.variant_id === autoAddVariantId);
+        cartHasBonus = hasAutoAdd;
+        
+        let otherItemsCount = 0;
+        cart.items.forEach(item => {
+          if (item.variant_id !== autoAddVariantId) {
+            otherItemsCount += item.quantity;
+          }
+        });
+
+        if (otherItemsCount === 0 && hasAutoAdd) {
+          isUpdatingAutoAdd = true;
+          try {
+            let formData = new FormData();
+            formData.append('updates[' + autoAddVariantId + ']', 0);
+            formData.append('sections', 'cart-drawer');
+            
+            await originalFetch(window.Shopify.routes.root + 'cart/update.js', {
+              method: 'POST',
+              body: formData,
+              headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            
+            document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+          } finally {
+            isUpdatingAutoAdd = false;
+          }
+        }
+      });
+    })();
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "t:sections.cart_drawer.name",
@@ -440,6 +532,16 @@
       "id": "show_checkout_button",
       "label": "t:sections.cart_drawer.show_checkout_button",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Auto Add Product Config"
+    },
+    {
+      "type": "product",
+      "id": "auto_add_product",
+      "label": "Auto Add Product",
+      "info": "Automatically add this product when any item is added to the cart."
     },
     {
       "type": "header",
