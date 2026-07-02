@@ -22,7 +22,7 @@
         "show_terms_of_service_checkbox": false,
         "show_view_cart_button": false,
         "show_checkout_button": true,
-        "auto_add_product": "senson-s1-wellness-companion-landing",
+        "auto_add_product": "bonus",
         "enable_cross_sell": true,
         "cross_sell_title": "You may also like"
       }
