@@ -83,7 +83,7 @@
           "type": "countdown",
           "settings": {
             "class_name": "pdp-off-show",
-            "text": "<strong>Self-Love Special Ends Soon</strong>",
+            "text": "Self-Love Special",
             "background": "#ffffff",
             "text_color": "#000000",
             "expiration_date": "",
