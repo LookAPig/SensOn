@@ -39,7 +39,7 @@
         "rich_text_CEVP3k"
       ],
       "custom_css": [
-        "@media (max-width: 768px) {.content-box {min-height: 260px; } .content-box .max-w-md {font-size: 12px;}}"
+        "@media (max-width: 768px) {.content-box {min-height: 260px; } .content-box .place-self-center {margin-top: 60px; } .content-box .max-w-md {font-size: 12px; }}"
       ],
       "name": "t:sections.image_with_text_overlay.name",
       "settings": {
