@@ -42,7 +42,7 @@
       "settings": {
         "color_scheme": "scheme-7",
         "allow_transparent_header": false,
-        "image_size": "auto",
+        "image_size": "md",
         "image": "shopify://shop_images/6_8.webp",
         "mobile_image": "shopify://shop_images/6_8.webp",
         "overlay_color": "#000000",
