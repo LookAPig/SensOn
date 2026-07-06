@@ -9,6 +9,50 @@
  */
 {
   "sections": {
+    "image_with_text_overlay_gUxxWB": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_6EWytb": {
+          "type": "heading",
+          "settings": {
+            "text": "<span style=\"color: #F287EC\">Join the community trusted by SheKnows.</span>",
+            "pc_font_size": 42,
+            "h5_font_size": 20,
+            "pc_line_height": 1.2,
+            "h5_line_height": 1.2,
+            "heading_size": "h3",
+            "html_tag": "p"
+          },
+          "blocks": {}
+        },
+        "rich_text_CEVP3k": {
+          "type": "rich-text",
+          "settings": {
+            "text": "<p>Clinically, female satisfaction requires multi-zone mind-body resonance. SensOn is a breakthrough: syncing AI audio with physical stimulation to activate clitoral, vaginal, breast pathways, engaging cortex and body for deeply immersive complete experience.<br/><br/></p>",
+            "content_width": "md"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading_6EWytb",
+        "rich_text_CEVP3k"
+      ],
+      "name": "t:sections.image_with_text_overlay.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "allow_transparent_header": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/6_8.webp",
+        "mobile_image": "shopify://shop_images/6_8.webp",
+        "overlay_color": "#000000",
+        "overlay_opacity": 40,
+        "enable_sticky_content": false,
+        "content_width": "md",
+        "desktop_text_position": "sm:place-self-center",
+        "mobile_text_position": "place-self-center"
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -938,6 +982,7 @@
     }
   },
   "order": [
+    "image_with_text_overlay_gUxxWB",
     "main",
     "custom_liquid_bp3AW4",
     "custom_liquid_x7H3pN",
