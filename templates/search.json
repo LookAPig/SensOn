@@ -1,1 +1,153 @@
-{"sections":{"main":{"type":"main-search","settings":{"color_scheme":"scheme-4","show_sort_by":true,"products_per_page":24,"show_filters":true,"show_filter_group_name":false,"show_filter_values_count":true,"open_filters_by_default":false,"swatch_selector_size":"lg","show_category":true,"show_date":true,"show_excerpt":true}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-search",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "show_sort_by": false,
+        "products_per_page": 8,
+        "show_filters": true,
+        "show_filter_group_name": false,
+        "show_filter_values_count": true,
+        "open_filters_by_default": false,
+        "swatch_selector_size": "lg",
+        "show_category": true,
+        "show_date": true,
+        "show_excerpt": true
+      }
+    },
+    "faq_faTjM3": {
+      "type": "faq",
+      "blocks": {
+        "category_983Ewb": {
+          "type": "category",
+          "settings": {
+            "title": "AI and Software",
+            "icon": "none",
+            "custom_icon": "shopify://shop_images/2._AI_and_Software.png",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "question_EnxayA": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Can the AI simulate romantic or emotional intimacy beyond physical stimulation?</strong>",
+            "answer": "<p>Yes, the AI characters would remember your name, preferences, and past interactions—foundational elements in building romantic and emotional intimacy.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "question_VGjWMU": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>How is the content synced with physical sensations in real time?</strong>",
+            "answer": "<p>The device synchronizes with the storyline and your interaction in real time. When a character stimulates your nipples, the<strong>Nipple Stimulator</strong>activates; during oral scenes, the<strong>Clitoral Stimulator</strong>engages; and as the narrative moves into penetrative intimacy, the<strong>Vaginal Stimulator</strong>begins to operate. Intensity and rhythm then adjust fluidly based on the progression of the story and the depth of your interaction with the character.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "category_GXAcEc": {
+          "type": "category",
+          "settings": {
+            "title": "<strong>Handware</strong>",
+            "icon": "none",
+            "custom_icon": "shopify://shop_images/1._Hardware.png",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "question_YaVY8w": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>How does the 3-in-1 system work?</strong>",
+            "answer": "<p>Open the<strong>Charging Case</strong>and remove all components. Gently insert the<strong>Vaginal Stimulator</strong>into the vagina. Position the<strong>Core</strong>comfortably between your thighs to keep the device in place hands-free. Adjust the<strong>Clitoral Stimulator</strong>so it aligns naturally with the clitoris. Place the<strong>Nipple Stimulator</strong>on the nipples and adjust tension using the clasp.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "question_jPwzhL": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Is SensOn truly hands-free?</strong>",
+            "answer": "<p>Yes! Users can gently hold the<strong>Core</strong>between their thighs, freeing their hands. And our product senses changes in pressure and responds with adaptive, real-time feedback.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "category_Q63Arm": {
+          "type": "category",
+          "settings": {
+            "title": "<strong>Privacy and Safety</strong>",
+            "icon": "none",
+            "custom_icon": "shopify://shop_images/3.Privacy_and_Safety.png",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "question_3W7bkN": {
+          "type": "question",
+          "settings": {
+            "question": "How is my data protected when I use the AI platform?",
+            "answer": "<p>All user data is handled with strict confidentiality. Without explicit user consent, it will not be used for any purpose beyond the provision and improvement of our products and services, nor will it be disclosed to any third party.Write a clear and concise answer to guide your customers.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "question_HkrfMk": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Any question?</strong>",
+            "answer": "<p>You can contact us through our contact page or via email atsupport@senson.ai. We will be happy to assist you!</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        }
+      },
+      "block_order": [
+        "category_983Ewb",
+        "question_EnxayA",
+        "question_VGjWMU",
+        "category_GXAcEc",
+        "question_YaVY8w",
+        "question_jPwzhL",
+        "category_Q63Arm",
+        "question_3W7bkN",
+        "question_HkrfMk"
+      ],
+      "name": "t:sections.faq.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "layout": "stacked",
+        "accordion_style": "border",
+        "question_style": "text",
+        "subheading": "",
+        "title": "Frequently asked questions",
+        "title_tag": "h3",
+        "content": "",
+        "button_text": "",
+        "button_url": "",
+        "button_style": "solid"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_faTjM3"
+  ]
+}
