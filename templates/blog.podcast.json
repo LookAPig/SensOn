@@ -1,1 +1,143 @@
-{"sections":{"blog-banner":{"type":"blog-banner","settings":{"color_scheme":"scheme-4","allow_transparent_header":false,"image":"shopify:\/\/shop_images\/1.Articles.jpg","title_tag":"h2","content":""}},"image_with_text_overlay_iDN39Q":{"type":"image-with-text-overlay","blocks":{"heading_EtJfbw":{"type":"heading","settings":{"text":"<strong>Pillow Talk<\/strong>","pc_font_size":40,"h5_font_size":23,"pc_line_height":1.2,"h5_line_height":1.2,"heading_size":"h1","html_tag":"p","indent":"none","highlight_effect":"default","highlight_accent_color":"","highlight_text_color":""},"blocks":{}}},"block_order":["heading_EtJfbw"],"disabled":true,"name":"t:sections.image_with_text_overlay.name","settings":{"color_scheme":"","allow_transparent_header":true,"image_size":"auto","image":"shopify:\/\/shop_images\/1.Articles.jpg","overlay_color":"#000000","overlay_opacity":20,"enable_sticky_content":false,"content_width":"md","desktop_text_position":"sm:place-self-center","mobile_text_position":"place-self-center"}},"main":{"type":"main-blog","settings":{"color_scheme":"scheme-4","show_tags":true,"posts_per_page":9,"highlight_blog_post_position":0,"blog_post_card_heading_size":"h5","show_category":true,"show_date":true,"show_reading_time":false,"show_excerpt":true}}},"order":["blog-banner","image_with_text_overlay_iDN39Q","main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "blog-banner": {
+      "type": "blog-banner",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-4",
+        "allow_transparent_header": true,
+        "image": "shopify://shop_images/1.Articles.jpg",
+        "title_tag": "h2",
+        "content": ""
+      }
+    },
+    "image_with_text_overlay_iDN39Q": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "rich_text_jYFraR": {
+          "type": "rich-text",
+          "name": "t:blocks.rich_text.name",
+          "settings": {
+            "text": "<p>[PODCAST · EXPLICIT]</p>",
+            "content_width": "sm"
+          },
+          "blocks": {}
+        },
+        "heading_EtJfbw": {
+          "type": "heading",
+          "settings": {
+            "text": "<strong>\nPillow Talk</strong>",
+            "pc_font_size": 40,
+            "h5_font_size": 23,
+            "pc_line_height": 1.2,
+            "h5_line_height": 1.2,
+            "heading_size": "h1",
+            "html_tag": "p"
+          },
+          "blocks": {}
+        },
+        "subheading_Xhty8W": {
+          "type": "subheading",
+          "name": "t:blocks.subheading.name",
+          "settings": {
+            "text": "Into SensOnLate-Night Sessions —the podcast where technology meets intimacy.Real stories about modern love,dating, and self-love,recorded live with the SensOn community."
+          },
+          "blocks": {}
+        },
+        "rich_text_KMW48a": {
+          "type": "rich-text",
+          "name": "t:blocks.rich_text.name",
+          "settings": {
+            "text": "<p>New episodes every other Thursday</p>",
+            "content_width": "sm"
+          },
+          "blocks": {}
+        },
+        "button_group_rJxLhA": {
+          "type": "button-group",
+          "name": "t:blocks.button_group.name",
+          "settings": {},
+          "blocks": {
+            "button_C6kCrD": {
+              "type": "button",
+              "name": "t:blocks.button.name",
+              "settings": {
+                "text": "Listen on Spotify",
+                "url": "",
+                "open_in_new_tab": false,
+                "style": "solid",
+                "background": "",
+                "text_color": ""
+              },
+              "blocks": {}
+            },
+            "button_YnUgbU": {
+              "type": "button",
+              "settings": {
+                "text": "Apple Podcasts",
+                "url": "",
+                "open_in_new_tab": false,
+                "style": "outline",
+                "background": "",
+                "text_color": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "button_C6kCrD",
+            "button_YnUgbU"
+          ]
+        }
+      },
+      "block_order": [
+        "rich_text_jYFraR",
+        "heading_EtJfbw",
+        "subheading_Xhty8W",
+        "rich_text_KMW48a",
+        "button_group_rJxLhA"
+      ],
+      "name": "t:sections.image_with_text_overlay.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "allow_transparent_header": true,
+        "image_size": "auto",
+        "image": "shopify://shop_images/1.Articles.jpg",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "enable_sticky_content": false,
+        "content_width": "md",
+        "desktop_text_position": "sm:place-self-center",
+        "mobile_text_position": "place-self-center"
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "show_tags": true,
+        "posts_per_page": 9,
+        "highlight_blog_post_position": 0,
+        "blog_post_card_heading_size": "h5",
+        "show_category": true,
+        "show_date": true,
+        "show_reading_time": false,
+        "show_excerpt": true
+      }
+    }
+  },
+  "order": [
+    "blog-banner",
+    "image_with_text_overlay_iDN39Q",
+    "main"
+  ]
+}
