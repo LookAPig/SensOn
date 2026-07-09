@@ -1,4 +1,10 @@
 <style>
+  #shopify-section-{{ section.id }} .blog_banner_section .button-group .button .button__content .icon {
+    margin: 0;
+    margin-block-start: 0;
+    margin-top: 0;
+  }
+
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .blog_banner_section {
       width: 100%;
@@ -66,6 +72,7 @@
     }
 
     #shopify-section-{{ section.id }} .blog_banner_section .button-group .button .button__content {
+      align-items: center;
       column-gap: 0.375rem;
       justify-content: center;
       padding: var(--button-padding-block) var(--button-padding-inline);
@@ -73,9 +80,13 @@
       white-space: normal;
     }
 
+    #shopify-section-{{ section.id }} .blog_banner_section .button-group .button .button__content .icon,
     #shopify-section-{{ section.id }} .blog_banner_section .button-group .button .button__content svg {
       flex-shrink: 0;
       height: 1rem;
+      margin: 0;
+      margin-block-start: 0;
+      margin-top: 0;
       width: 1rem;
     }
 
