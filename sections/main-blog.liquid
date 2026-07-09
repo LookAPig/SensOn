@@ -55,6 +55,37 @@
       background-position-x: var(--transform-origin-start);
     }
   }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container {
+    margin-block-end: 1rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container iframe,
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container audio {
+    display: block;
+    width: 100%;
+    border: 0;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__episode-label {
+    margin: 0;
+    color: #F287EC;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__title-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container {
+      margin-block-end: 1.5rem;
+    }
+  }
 </style>
 
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
@@ -203,7 +234,8 @@
                   show_date: section.settings.show_date,
                   show_reading_time: section.settings.show_reading_time,
                   show_excerpt: section.settings.show_excerpt,
-                  position: forloop.index
+                  position: forloop.index,
+                  podcast_mode: section.settings.enable_podcast_cards
                 -%}
               {%- endif -%}
             {%- endfor -%}
@@ -252,6 +284,13 @@
       "max": 50,
       "step": 1,
       "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_podcast_cards",
+      "label": "Podcast 列表模式",
+      "info": "启用后，卡片顶部显示备注字段中的嵌入式音频播放器，并在标题上方显示粉色集数标题（读取 custom.episode_label）。",
+      "default": false
     },
     {
       "type": "header",

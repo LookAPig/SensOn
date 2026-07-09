@@ -117,6 +117,7 @@
         "show_tags": true,
         "posts_per_page": 9,
         "highlight_blog_post_position": 0,
+        "enable_podcast_cards": true,
         "blog_post_card_heading_size": "h5",
         "show_category": true,
         "show_date": true,

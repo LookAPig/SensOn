@@ -20,11 +20,48 @@ Supported parameters
 * position: the position of the card in the list. If specified, the theme will eagerly load the first 3 cards images
 * placeholder_image: the name of an image used for the placeholder_svg_tag
 * block: an optional block from which theme editor attributes are rendered
+* podcast_mode: if set to true, renders an embedded audio player from article excerpt (备注) and episode label above title
 {%- endcomment -%}
 
-<a href="{{ article.url }}" class="blog-post-card {% if horizontal %}blog-post-card--horizontal{% endif %} group snap-start" {% if settings.stagger_blog_posts and reveal != false %}reveal-on-scroll="true"{% endif %} {{ block.shopify_attributes }}>
+{%- liquid
+  assign card_tag = 'a'
+  assign card_href = article.url
+  assign episode_label = article.metafields.custom.episode_label.value
+  assign audio_embed = article.excerpt | strip
+  assign has_audio_embed = false
+
+  if podcast_mode and article and audio_embed != blank
+    assign has_audio_embed = true
+  endif
+
+  if podcast_mode and has_audio_embed
+    assign card_tag = 'div'
+    assign card_href = nil
+  endif
+-%}
+
+<{{ card_tag }} {% if card_href %}href="{{ card_href }}"{% endif %} class="blog-post-card {% if horizontal %}blog-post-card--horizontal{% endif %}{% if podcast_mode %} blog-post-card--podcast{% endif %} group snap-start" {% if settings.stagger_blog_posts and reveal != false %}reveal-on-scroll="true"{% endif %} {{ block.shopify_attributes }}>
   {%- if article -%}
-    {%- if article.image != blank -%}
+    {%- if has_audio_embed -%}
+      <div class="blog-post-card__audio-container">
+        {%- if audio_embed contains '<iframe' or audio_embed contains '<audio' -%}
+          {{- audio_embed -}}
+        {%- else -%}
+          {%- liquid
+            assign embed_src = audio_embed
+
+            if embed_src contains 'open.spotify.com/episode/'
+              unless embed_src contains '/embed/'
+                assign spotify_episode_id = embed_src | split: 'episode/' | last | split: '?' | first | split: '&' | first
+                assign embed_src = 'https://open.spotify.com/embed/episode/' | append: spotify_episode_id
+              endunless
+            endif
+          -%}
+
+          <iframe src="{{ embed_src }}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen title="{{ article.title | escape }}"></iframe>
+        {%- endif -%}
+      </div>
+    {%- elsif article.image != blank -%}
       {%- liquid
         assign loading_strategy = nil
         
@@ -75,14 +112,24 @@ Supported parameters
           {{- meta_content -}}
         </div>
       {%- endif -%}
+
+      {%- if podcast_mode and episode_label != blank -%}
+        <p class="blog-post-card__episode-label subheading">{{ episode_label }}</p>
+      {%- endif -%}
       
       {%- if article -%}
-        <span class="{{ heading_size | default: 'h5' }}">{{ article.title }}</span>
+        {%- if podcast_mode and has_audio_embed -%}
+          <a href="{{ article.url }}" class="blog-post-card__title-link">
+            <span class="{{ heading_size | default: 'h5' }}">{{ article.title }}</span>
+          </a>
+        {%- else -%}
+          <span class="{{ heading_size | default: 'h5' }}">{{ article.title }}</span>
+        {%- endif -%}
       {%- else -%}
         <span class="{{ heading_size | default: 'h5' }}">{{- 'general.on_boarding.blog_post_title' | t -}}</span>
       {%- endif -%}
 
-      {%- if show_excerpt -%}
+      {%- if show_excerpt and has_audio_embed == false -%}
         {%- if article -%}
           {%- unless article.excerpt_or_content == blank -%}
             <p>{{ article.excerpt_or_content | strip_html | truncate: 200 }}</p>
@@ -93,4 +140,4 @@ Supported parameters
       {%- endif -%}
     </div>
   </div>
-</a>
+</{{ card_tag }}>
