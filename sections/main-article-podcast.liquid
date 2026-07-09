@@ -2,6 +2,7 @@
   assign article_video = article.metafields.custom.video.value
   assign external_video = article.metafields.custom.external_video_url.value
   assign episode_label = article.metafields.custom.episode_label.value
+  assign video_poster = article.metafields.custom.secondary_image | default: article.image
   assign audio_embed = article.metafields.custom.notes.value | default: article.excerpt | strip
 
   assign has_video = false
@@ -453,17 +454,13 @@
         <div class="article_podcast_hero">
           <div class="article_podcast_player">
             {%- if has_audio_embed -%}
-              {%- if audio_embed contains '<iframe' or audio_embed contains '<embed' -%}
-                {{ audio_embed }}
-              {%- else -%}
-                <iframe
-                  src="{{ audio_embed }}"
-                  title="{{ article.title | escape }}"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                  height="232"
-                ></iframe>
-              {%- endif -%}
+              <iframe
+                src="{{ audio_embed }}"
+                title="{{ article.title | escape }}"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                height="232"
+              ></iframe>
             {%- else -%}
               <div class="article_podcast_player__placeholder">
                 {{ section.settings.audio_embed_placeholder }}
@@ -481,7 +478,11 @@
                 {%- render 'media' with article_video, id: video_id, preload: section.index <= 3, autoplay: false, controls: true, playsinline: true, show_play_button: true -%}
               {%- elsif external_video != blank -%}
                 <video-media id="{{ video_id }}" host="{{ external_video.type }}" show-play-button>
-                  {{- 'hero-apparel-1' | placeholder_svg_tag: 'size-full' -%}
+                  {%- if video_poster != blank -%}
+                    {{- video_poster | image_url: width: 1200 | image_tag: sizes: '100vw', widths: '400,600,800,1000,1200' -}}
+                  {%- else -%}
+                    {{- 'hero-apparel-1' | placeholder_svg_tag: 'size-full' -}}
+                  {%- endif -%}
 
                   <template>
                     {%- if external_video.type == 'youtube' -%}
@@ -752,7 +753,7 @@
     },
     {
       "type": "paragraph",
-      "content": "在文章 metafield custom.notes（备注）中填写 Spotify / Apple Podcasts 等嵌入链接；若填写完整 iframe 代码也会直接渲染。未配置时回退读取文章摘要（Excerpt）。"
+      "content": "在文章 metafield custom.notes（备注）中填写 Spotify / Apple Podcasts 等嵌入链接（如 https://open.spotify.com/embed/episode/xxx）。未配置时回退读取文章摘要（Excerpt）。"
     },
     {
       "type": "text",
