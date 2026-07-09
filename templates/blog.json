@@ -42,7 +42,8 @@
               "type": "button",
               "name": "t:blocks.button.name",
               "settings": {
-                "text": "Listen to Spotify",
+                "text": "Listen on Spotify",
+                "icon": "spotify",
                 "url": "",
                 "open_in_new_tab": false,
                 "style": "solid",
@@ -54,10 +55,11 @@
             "button_Dm7Ht7": {
               "type": "button",
               "settings": {
-                "text": "",
+                "text": "Apple Podcasts",
+                "icon": "apple_podcast",
                 "url": "",
                 "open_in_new_tab": false,
-                "style": "solid",
+                "style": "outline",
                 "background": "",
                 "text_color": ""
               },

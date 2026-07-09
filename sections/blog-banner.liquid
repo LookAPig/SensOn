@@ -1,3 +1,101 @@
+<style>
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .blog_banner_section {
+      width: 100%;
+      max-width: 100%;
+      padding-inline: 0.5rem;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section > *:nth-child(1) p {
+      color: #c8a0e8;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      line-height: 1.4;
+      margin-block: 0 0.875rem;
+      text-transform: uppercase;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section .custom-responsive-heading {
+      margin-block-end: 0.625rem;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section .custom-responsive-heading .heading {
+      letter-spacing: -0.01em;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section .subheading {
+      background: none !important;
+      border: none !important;
+      color: #9ca3af !important;
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      line-height: 1.65;
+      padding: 0 !important;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section > *:nth-child(4) p {
+      color: rgb(255 255 255 / 0.85);
+      font-size: 0.75rem;
+      letter-spacing: 0.03em;
+      line-height: 1.5;
+      margin-block: 1rem 0;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section .button-group {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.625rem;
+      justify-content: center;
+      margin-block-start: 1.25rem;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section .button-group .button {
+      --button-padding-block: 0.625rem;
+      --button-padding-inline: 0.875rem;
+      border-radius: 999px;
+      flex: 1 1 0;
+      font-size: 0.625rem;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      min-width: 0;
+      text-transform: none;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section .button-group .button .button__content {
+      column-gap: 0.375rem;
+      justify-content: center;
+      padding: var(--button-padding-block) var(--button-padding-inline);
+      text-align: center;
+      white-space: normal;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section .button-group .button .button__content svg {
+      flex-shrink: 0;
+      height: 1rem;
+      width: 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section .button-group .button:not(.button--outline) {
+      --button-background: 242 135 236;
+      --button-text-color: 0 0 0;
+      background: rgb(var(--button-background));
+      border-color: rgb(var(--button-background));
+      color: rgb(var(--button-text-color));
+    }
+
+    #shopify-section-{{ section.id }} .blog_banner_section .button-group .button--outline {
+      --button-text-color: 255 255 255;
+      background: transparent;
+      border-color: rgb(255 255 255 / 0.9);
+      color: rgb(var(--button-text-color));
+    }
+  }
+</style>
+
 <div {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %} class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
   <div class="content-box min-h-{{ section.settings.image_size }}">
     <div class="content-box__background-media with-overlay" style="--overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }}">
@@ -19,14 +117,14 @@
       {%- if section.settings.enable_sticky_content -%}
         <div class="justify-self-{{ mobile_text_alignment }} sm:justify-self-{{ desktop_text_alignment }}">
           <div class="sticky">
-            <div class="max-w-{{ section.settings.content_width }} prose prose-justify-{{ mobile_text_alignment }} sm:prose-justify-{{ desktop_text_alignment }}">
+            <div class="blog_banner_section max-w-{{ section.settings.content_width }} prose prose-justify-{{ mobile_text_alignment }} sm:prose-justify-{{ desktop_text_alignment }}">
               {{- blocks -}}
             </div>
           </div>
         </div>
       {%- else -%}
         <div class="{{ section.settings.mobile_text_position }} {{ section.settings.desktop_text_position }}">
-          <div class="max-w-{{ section.settings.content_width }} prose prose-justify-{{ mobile_text_alignment }} sm:prose-justify-{{ desktop_text_alignment }}">
+          <div class="blog_banner_section max-w-{{ section.settings.content_width }} prose prose-justify-{{ mobile_text_alignment }} sm:prose-justify-{{ desktop_text_alignment }}">
             {{- blocks -}}
           </div>
         </div>
