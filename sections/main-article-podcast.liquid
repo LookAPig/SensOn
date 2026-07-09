@@ -1,12 +1,17 @@
 {%- liquid
-  assign hero_image = article.metafields.custom.secondary_image | default: article.image
   assign article_video = article.metafields.custom.video.value
   assign external_video = article.metafields.custom.external_video_url.value
   assign episode_label = article.metafields.custom.episode_label.value
+  assign audio_embed = article.metafields.custom.notes.value | default: article.excerpt | strip
 
   assign has_video = false
   if article_video != blank or external_video != blank
     assign has_video = true
+  endif
+
+  assign has_audio_embed = false
+  if audio_embed != blank
+    assign has_audio_embed = true
   endif
 
   assign reading_time = article.content | strip_html | split: ' ' | size | times: 1.0 | divided_by: 250 | ceil
@@ -20,7 +25,6 @@
     --article-podcast-content-gap: 2.5rem;
     --article-podcast-nav-icon-size: 2.25rem;
     --article-podcast-play-button-size: 4.5rem;
-    --article-podcast-mobile-hero-ratio: 1.1;
   }
 
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_layout {
@@ -30,17 +34,38 @@
 
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    padding: var(--container-gutter);
   }
 
-  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero img,
-  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero svg {
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_player {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 28rem;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_player iframe {
+    width: 100%;
+    min-height: 10rem;
+    border: 0;
+    border-radius: 0.75rem;
     display: block;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_player__placeholder {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 10rem;
+    padding: 2rem;
+    border: 1px dashed rgb(var(--text-color) / 0.25);
+    border-radius: 0.75rem;
+    color: rgb(var(--text-color) / 0.55);
+    font-size: var(--text-sm);
+    text-align: center;
   }
 
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_content {
@@ -166,8 +191,9 @@
 
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_episode_type {
     margin: 0;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    color: #F287EC;
+    letter-spacing: 0.06em;
+    text-transform: none;
   }
 
   #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_title {
@@ -258,8 +284,12 @@
     }
 
     #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_hero {
-      aspect-ratio: var(--article-podcast-mobile-hero-ratio);
       min-height: auto;
+      padding: 1.5rem var(--container-gutter) 0;
+    }
+
+    #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_player {
+      max-width: none;
     }
 
     #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_content_col {
@@ -421,11 +451,25 @@
 
       <div class="article_podcast_hero_col">
         <div class="article_podcast_hero">
-          {%- if hero_image != blank -%}
-            {{- hero_image | image_url: width: hero_image.width | image_tag: sizes: '(max-width: 999px) 100vw, 40vw', widths: '400,600,800,1000,1200,1400,1600,1800,2000', alt: article.title -}}
-          {%- else -%}
-            {{- 'lifestyle-1' | placeholder_svg_tag: 'size-full' -}}
-          {%- endif -%}
+          <div class="article_podcast_player">
+            {%- if has_audio_embed -%}
+              {%- if audio_embed contains '<iframe' or audio_embed contains '<embed' -%}
+                {{ audio_embed }}
+              {%- else -%}
+                <iframe
+                  src="{{ audio_embed }}"
+                  title="{{ article.title | escape }}"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                  height="232"
+                ></iframe>
+              {%- endif -%}
+            {%- else -%}
+              <div class="article_podcast_player__placeholder">
+                {{ section.settings.audio_embed_placeholder }}
+              </div>
+            {%- endif -%}
+          </div>
         </div>
       </div>
 
@@ -437,11 +481,7 @@
                 {%- render 'media' with article_video, id: video_id, preload: section.index <= 3, autoplay: false, controls: true, playsinline: true, show_play_button: true -%}
               {%- elsif external_video != blank -%}
                 <video-media id="{{ video_id }}" host="{{ external_video.type }}" show-play-button>
-                  {%- if hero_image != blank -%}
-                    {{- hero_image | image_url: width: 1200 | image_tag: sizes: '100vw', widths: '400,600,800,1000,1200' -}}
-                  {%- else -%}
-                    {{- 'hero-apparel-1' | placeholder_svg_tag: 'size-full' -}}
-                  {%- endif -%}
+                  {{- 'hero-apparel-1' | placeholder_svg_tag: 'size-full' -%}
 
                   <template>
                     {%- if external_video.type == 'youtube' -%}
@@ -456,18 +496,8 @@
           {%- endif -%}
 
           <div class="v-stack gap-4 sm:gap-6">
-            {%- if section.settings.show_category -%}
-              {%- liquid
-                assign category_text = episode_label
-
-                if category_text == blank and article.tags.size > 0
-                  assign category_text = article.tags.first
-                endif
-              -%}
-
-              {%- if category_text != blank -%}
-                <p class="subheading article_podcast_episode_type">{{ category_text }}</p>
-              {%- endif -%}
+            {%- if section.settings.show_category and episode_label != blank -%}
+              <p class="subheading article_podcast_episode_type">{{ episode_label }}</p>
             {%- endif -%}
 
             <h1 class="{{ section.settings.heading_size }} article_podcast_title">{{ article.title }}</h1>
@@ -575,7 +605,7 @@
     {
       "type": "range",
       "id": "image_column_width",
-      "label": "左侧图片列宽度",
+      "label": "左侧播放器列宽度",
       "min": 30,
       "max": 55,
       "step": 1,
@@ -661,8 +691,8 @@
     {
       "type": "checkbox",
       "id": "show_category",
-      "label": "t:global.blog.show_category",
-      "info": "优先读取文章 metafield custom.episode_label，否则使用第一个标签",
+      "label": "显示集数标题",
+      "info": "读取文章 metafield custom.episode_label，显示在主标题上方（主题粉色 #F287EC）",
       "default": true
     },
     {
@@ -715,6 +745,20 @@
       "label": "提交按钮文案",
       "default": "Post Comment",
       "visible_if": "{{ section.settings.show_comment_form }}"
+    },
+    {
+      "type": "header",
+      "content": "音频嵌入"
+    },
+    {
+      "type": "paragraph",
+      "content": "在文章 metafield custom.notes（备注）中填写 Spotify / Apple Podcasts 等嵌入链接；若填写完整 iframe 代码也会直接渲染。未配置时回退读取文章摘要（Excerpt）。"
+    },
+    {
+      "type": "text",
+      "id": "audio_embed_placeholder",
+      "label": "未配置嵌入时的占位提示",
+      "default": "请在文章备注（custom.notes）中填写音频嵌入链接"
     },
     {
       "type": "header",
