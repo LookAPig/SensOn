@@ -38,12 +38,9 @@
 {% schema %}
 {
   "name": "t:sections.blog_page_banner.name",
-  "class": "shopify-section--blog-page-banner",
+  "class": "shopify-section--image-with-text-overlay",
   "tag": "section",
   "max_blocks": 10,
-  "enabled_on": {
-    "templates": ["blog"]
-  },
   "disabled_on": {
     "groups": ["header", "custom.overlay"]
   },
@@ -63,7 +60,7 @@
     },
     {
       "type": "header",
-      "content": "t:sections.blog_page_banner.image_category"
+      "content": "t:sections.image_with_text_overlay.image_category"
     },
     {
       "type": "select",
@@ -102,13 +99,13 @@
       "type": "image_picker",
       "id": "image",
       "label": "t:global.image.image",
-      "info": "t:sections.blog_page_banner.image_size_recommendation"
+      "info": "t:sections.image_with_text_overlay.image_size_recommendation"
     },
     {
       "type": "image_picker",
       "id": "mobile_image",
       "label": "t:global.image.mobile_image",
-      "info": "t:sections.blog_page_banner.mobile_image_size_recommendation"
+      "info": "t:sections.image_with_text_overlay.mobile_image_size_recommendation"
     },
     {
       "type": "color",
@@ -128,13 +125,13 @@
     },
     {
       "type": "header",
-      "content": "t:sections.blog_page_banner.layout_category"
+      "content": "t:sections.image_with_text_overlay.layout_category"
     },
     {
       "type": "checkbox",
       "id": "enable_sticky_content",
-      "label": "t:sections.blog_page_banner.content_follows_on_scroll",
-      "info": "t:sections.blog_page_banner.content_follows_on_scroll_info",
+      "label": "t:sections.image_with_text_overlay.content_follows_on_scroll",
+      "info": "t:sections.image_with_text_overlay.content_follows_on_scroll_info",
       "default": false
     },
     {
@@ -274,7 +271,7 @@
         {
           "type": "heading",
           "settings": {
-            "text": "Blog page banner"
+            "text": "Image with text overlay"
           }
         },
         {
