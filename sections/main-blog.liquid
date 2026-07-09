@@ -22,6 +22,39 @@
       --blog-post-list-grid: auto-flow dense / repeat(4, minmax(0, 1fr));
     }
   }
+
+  #shopify-section-{{ section.id }} .blog-tags {
+    background-color: #000;
+    border-block-end-width: 0;
+    justify-content: safe center;
+  }
+
+  #shopify-section-{{ section.id }} .blog-tags .link-reversed {
+    color: #999;
+    padding-block-end: 0.625rem;
+    background: linear-gradient(to right, #F287EC, #F287EC) 0 100% / 0 2px no-repeat;
+    background-position-x: var(--transform-origin-end);
+    transition: background-size .2s ease-in-out, color .2s ease-in-out;
+  }
+
+  #shopify-section-{{ section.id }} .blog-tags .link-reversed[aria-current="true"] {
+    color: #fff;
+    background-size: 100% 2px;
+  }
+
+  #shopify-section-{{ section.id }} .blog-tags .link-reversed a {
+    color: inherit;
+    text-decoration: none;
+    background: none;
+  }
+
+  @media screen and (pointer: fine) {
+    #shopify-section-{{ section.id }} .blog-tags .link-reversed:not([aria-current="true"]):hover {
+      color: #fff;
+      background-size: 100% 2px;
+      background-position-x: var(--transform-origin-start);
+    }
+  }
 </style>
 
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
@@ -37,7 +70,7 @@
       </div>
     {%- else -%}
       {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
-        <ul class="blog-tags unstyled-list scroll-area bleed" role="list" style="justify-content: safe center;">
+        <ul class="blog-tags unstyled-list scroll-area bleed" role="list">
           <li class="link-reversed subheading" aria-current="{% if current_tags == blank %}true{% else %}false{% endif %}">
             <a href="{{ blog.url }}">{{- 'blog.general.all_posts' | t -}}</a>
           </li>
