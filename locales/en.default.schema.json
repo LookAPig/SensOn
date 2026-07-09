@@ -713,6 +713,15 @@
       "blog_title_tag": "Blog title size",
       "blog_description": "Blog description"
     },
+    "blog_page_banner": {
+      "name": "Blog page banner",
+      "image_category": "Image",
+      "image_size_recommendation": "3200 x 1600px .jpg recommended",
+      "mobile_image_size_recommendation": "1300 x 1500px .jpg recommended. Default to desktop image.",
+      "layout_category": "Layout",
+      "content_follows_on_scroll": "Content follows on scroll",
+      "content_follows_on_scroll_info": "Content will be aligned on top if enabled."
+    },
     "blog_post_banner": {
       "name": "Blog post banner",
       "image_layout": "Image layout",

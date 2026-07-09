@@ -21,7 +21,7 @@
       }
     },
     "image_with_text_overlay_iDN39Q": {
-      "type": "image-with-text-overlay",
+      "type": "blog-page-banner",
       "blocks": {
         "rich_text_jYFraR": {
           "type": "rich-text",
@@ -106,7 +106,7 @@
         "rich_text_KMW48a",
         "button_group_rJxLhA"
       ],
-      "name": "t:sections.image_with_text_overlay.name",
+      "name": "t:sections.blog_page_banner.name",
       "settings": {
         "color_scheme": "scheme-7",
         "allow_transparent_header": true,

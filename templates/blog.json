@@ -21,7 +21,7 @@
       }
     },
     "image_with_text_overlay_iDN39Q": {
-      "type": "image-with-text-overlay",
+      "type": "blog-page-banner",
       "blocks": {
         "heading_EtJfbw": {
           "type": "heading",
@@ -86,7 +86,7 @@
         "subheading_VjP9dG",
         "button_group_YJh3Hd"
       ],
-      "name": "t:sections.image_with_text_overlay.name",
+      "name": "t:sections.blog_page_banner.name",
       "settings": {
         "color_scheme": "",
         "allow_transparent_header": true,
