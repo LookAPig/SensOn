@@ -11,17 +11,6 @@
   "sections": {
     "blog-banner": {
       "type": "blog-banner",
-      "disabled": true,
-      "settings": {
-        "color_scheme": "scheme-4",
-        "allow_transparent_header": false,
-        "image": "shopify://shop_images/1.Articles.jpg",
-        "title_tag": "h2",
-        "content": ""
-      }
-    },
-    "image_with_text_overlay_iDN39Q": {
-      "type": "blog-page-banner",
       "blocks": {
         "heading_EtJfbw": {
           "type": "heading",
@@ -86,7 +75,6 @@
         "subheading_VjP9dG",
         "button_group_YJh3Hd"
       ],
-      "name": "t:sections.blog_page_banner.name",
       "settings": {
         "color_scheme": "",
         "allow_transparent_header": true,
@@ -117,7 +105,6 @@
   },
   "order": [
     "blog-banner",
-    "image_with_text_overlay_iDN39Q",
     "main"
   ]
 }
