@@ -9,10 +9,10 @@
  */
 {
   "sections": {
-    "blog-banner": {
-      "type": "blog-banner",
+    "image_with_text_overlay_wJjwN6": {
+      "type": "image-with-text-overlay",
       "blocks": {
-        "heading_EtJfbw": {
+        "heading_7htqjz": {
           "type": "heading",
           "settings": {
             "text": "<strong>Pillow Talk</strong>",
@@ -20,63 +20,40 @@
             "h5_font_size": 23,
             "pc_line_height": 1.2,
             "h5_line_height": 1.2,
-            "heading_size": "h1",
+            "heading_size": "h3",
             "html_tag": "p"
           },
           "blocks": {}
         },
-        "subheading_VjP9dG": {
-          "type": "subheading",
-          "name": "t:blocks.subheading.name",
+        "rich_text_VNGDHb": {
+          "type": "rich-text",
           "settings": {
-            "text": "Late-Night Sessions — the podcast where technology meets intimacy.Real stories about modern love, dating, and self-love,recorded live with the SensOn community."
+            "text": "<p><br/>Late-Night Sessions — the podcast where technology meets intimacy.Real stories about modern love, dating, and self-love,recorded live with the SensOn community.<br/><br/></p>",
+            "content_width": "sm"
           },
           "blocks": {}
         },
-        "button_group_YJh3Hd": {
-          "type": "button-group",
-          "name": "t:blocks.button_group.name",
-          "settings": {},
-          "blocks": {
-            "button_rfENbp": {
-              "type": "button",
-              "name": "t:blocks.button.name",
-              "settings": {
-                "text": "Listen on Spotify",
-                "icon": "spotify",
-                "url": "",
-                "open_in_new_tab": false,
-                "style": "solid",
-                "background": "",
-                "text_color": ""
-              },
-              "blocks": {}
-            },
-            "button_Dm7Ht7": {
-              "type": "button",
-              "settings": {
-                "text": "Apple Podcasts",
-                "icon": "apple_podcast",
-                "url": "",
-                "open_in_new_tab": false,
-                "style": "outline",
-                "background": "",
-                "text_color": ""
-              },
-              "blocks": {}
-            }
+        "button_gQbNXJ": {
+          "type": "button",
+          "name": "t:blocks.button.name",
+          "settings": {
+            "text": "Listen on Spotify",
+            "icon": "",
+            "url": "",
+            "open_in_new_tab": false,
+            "style": "solid",
+            "background": "",
+            "text_color": ""
           },
-          "block_order": [
-            "button_rfENbp",
-            "button_Dm7Ht7"
-          ]
+          "blocks": {}
         }
       },
       "block_order": [
-        "heading_EtJfbw",
-        "subheading_VjP9dG",
-        "button_group_YJh3Hd"
+        "heading_7htqjz",
+        "rich_text_VNGDHb",
+        "button_gQbNXJ"
       ],
+      "name": "t:sections.image_with_text_overlay.name",
       "settings": {
         "color_scheme": "",
         "allow_transparent_header": true,
@@ -97,6 +74,7 @@
         "show_tags": true,
         "posts_per_page": 9,
         "highlight_blog_post_position": 0,
+        "enable_podcast_cards": false,
         "blog_post_card_heading_size": "h5",
         "show_category": true,
         "show_date": true,
@@ -106,7 +84,7 @@
     }
   },
   "order": [
-    "blog-banner",
+    "image_with_text_overlay_wJjwN6",
     "main"
   ]
 }
