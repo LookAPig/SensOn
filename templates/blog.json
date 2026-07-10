@@ -27,6 +27,7 @@
         },
         "rich_text_VNGDHb": {
           "type": "rich-text",
+          "disabled": true,
           "settings": {
             "text": "<p><br/>Late-Night Sessions — the podcast where technology meets intimacy.Real stories about modern love, dating, and self-love,recorded live with the SensOn community.<br/><br/></p>",
             "content_width": "sm"
@@ -36,6 +37,7 @@
         "button_gQbNXJ": {
           "type": "button",
           "name": "t:blocks.button.name",
+          "disabled": true,
           "settings": {
             "text": "Listen on Spotify",
             "icon": "",
