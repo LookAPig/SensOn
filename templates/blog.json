@@ -53,7 +53,7 @@
               "type": "button",
               "name": "t:blocks.button.name",
               "settings": {
-                "text": "Listen to Spotify",
+                "text": "Listen on Spotify",
                 "url": "",
                 "open_in_new_tab": false,
                 "style": "solid",
