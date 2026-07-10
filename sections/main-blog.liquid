@@ -76,7 +76,7 @@
     margin-block-end: 1rem;
   }
 
-  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__episode-label {
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-title {
     margin: 0 0 0.5rem;
     color: #F287EC;
     letter-spacing: 0.08em;
@@ -363,7 +363,7 @@
       "type": "checkbox",
       "id": "enable_podcast_cards",
       "label": "音频播放器卡片模式",
-      "info": "开启后按 Podcast 样式展示：封面图 → 粉色集数标题 → 文章标题 → 底部音频播放器。封面/标题区域可点击进入文章；音频嵌入代码填写在文章摘要，或 custom.audio_embed 元字段（推荐 Buzzsprout 等 script 嵌入）。",
+      "info": "开启后按 Podcast 样式展示：custom.audio_image 封面图、custom.audio_title 粉色描述标题、文章标题、底部音频播放器。音频嵌入填写在 custom.audio_embed、摘要或正文。",
       "default": false
     },
     {
