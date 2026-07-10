@@ -60,7 +60,7 @@
     "social_instagram": "https://www.instagram.com/senson_official/",
     "social_youtube": "https://www.youtube.com/@senson_ai",
     "social_tiktok": "",
-    "favicon": "shopify://shop_images/2026-01-21_16.06.42.png",
+    "favicon": "shopify://shop_images/20260710-114039.png",
     "content_for_index": [],
     "blocks": {
       "6279071938380501511": {
@@ -76,11 +76,6 @@
       "7570552984445421165": {
         "type": "shopify://apps/yotpo-product-photo-reviews/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
         "disabled": false,
-        "settings": {}
-      },
-      "10974556588217313781": {
-        "type": "shopify://apps/nabu-for-fb-pixel/blocks/script-block/692d25a0-75b7-4cff-b3eb-8f1d8e1670bf",
-        "disabled": true,
         "settings": {}
       }
     },
