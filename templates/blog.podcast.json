@@ -120,7 +120,7 @@
         "enable_podcast_cards": true,
         "blog_post_card_heading_size": "h5",
         "show_category": true,
-        "show_date": true,
+        "show_date": false,
         "show_reading_time": false,
         "show_excerpt": true
       }
