@@ -62,7 +62,7 @@
               "settings": {
                 "text": "Listen on Spotify",
                 "icon": "spotify",
-                "url": "",
+                "url": "https://open.spotify.com/show/033wRHX4VYK0iNYgXaY8T4",
                 "open_in_new_tab": false,
                 "style": "solid",
                 "background": "",
@@ -75,7 +75,7 @@
               "settings": {
                 "text": "Apple Podcasts",
                 "icon": "apple_podcast",
-                "url": "",
+                "url": "https://podcasts.apple.com/us/podcast/into-senson-late-night-sessions/id1896915408",
                 "open_in_new_tab": false,
                 "style": "outline",
                 "background": "",
