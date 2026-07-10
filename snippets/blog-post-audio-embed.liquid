@@ -1,0 +1,73 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+BLOG POST AUDIO EMBED
+----------------------------------------------------------------------------------------------------------------------
+Renders an embedded audio player from raw embed HTML or URL.
+
+Supported parameters:
+* audio_embed: raw embed code or URL (Buzzsprout, Spotify iframe, etc.)
+* title: accessible title for iframe fallback
+{%- endcomment -%}
+
+{%- liquid
+  assign embed_html = audio_embed | strip
+-%}
+
+{%- if embed_html == blank -%}
+{%- elsif embed_html contains 'buzzsprout.com' -%}
+  {%- liquid
+    assign buzzsprout_container_id = ''
+    assign buzzsprout_script_src = ''
+
+    assign id_chunks = embed_html | split: 'id="'
+    if id_chunks.size > 1
+      assign buzzsprout_container_id = id_chunks[1] | split: '"' | first
+    endif
+
+    assign src_chunks = embed_html | split: 'src="'
+    if src_chunks.size > 1
+      assign buzzsprout_script_src = src_chunks[1] | split: '"' | first
+    endif
+
+    if buzzsprout_container_id == blank and embed_html contains 'container_id='
+      assign container_chunk = embed_html | split: 'container_id=' | last
+      assign buzzsprout_container_id = container_chunk | split: '&' | first | split: '"' | first
+    endif
+  -%}
+
+  {%- if buzzsprout_container_id != blank and buzzsprout_script_src != blank -%}
+    <div
+      class="blog-post-audio-embed blog-post-audio-embed--buzzsprout"
+      data-buzzsprout-embed
+      data-buzzsprout-container="{{ buzzsprout_container_id | escape }}"
+      data-buzzsprout-src="{{ buzzsprout_script_src | escape }}"
+    >
+      <div id="{{ buzzsprout_container_id }}"></div>
+    </div>
+  {%- else -%}
+    {{- embed_html -}}
+  {%- endif -%}
+
+{%- elsif embed_html contains '<iframe' or embed_html contains '<audio' -%}
+  {{- embed_html -}}
+
+{%- else -%}
+  {%- liquid
+    assign embed_src = embed_html
+
+    if embed_src contains 'open.spotify.com/episode/'
+      unless embed_src contains '/embed/'
+        assign spotify_episode_id = embed_src | split: 'episode/' | last | split: '?' | first | split: '&' | first
+        assign embed_src = 'https://open.spotify.com/embed/episode/' | append: spotify_episode_id
+      endunless
+    endif
+  -%}
+
+  <iframe
+    src="{{ embed_src }}"
+    loading="lazy"
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    allowfullscreen
+    title="{{ title | escape }}"
+  ></iframe>
+{%- endif -%}

@@ -22,6 +22,107 @@
       --blog-post-list-grid: auto-flow dense / repeat(4, minmax(0, 1fr));
     }
   }
+
+  #shopify-section-{{ section.id }} .blog-tags {
+    background-color: #000;
+    border-block-end-width: 0;
+    justify-content: safe center;
+  }
+
+  #shopify-section-{{ section.id }} .blog-tags .link-reversed {
+    color: #999;
+    padding-block-end: 0.625rem;
+    background: linear-gradient(to right, #F287EC, #F287EC) 0 100% / 0 2px no-repeat;
+    background-position-x: var(--transform-origin-end);
+    transition: background-size .2s ease-in-out, color .2s ease-in-out;
+  }
+
+  #shopify-section-{{ section.id }} .blog-tags .link-reversed[aria-current="true"] {
+    color: #fff;
+    background-size: 100% 2px;
+  }
+
+  #shopify-section-{{ section.id }} .blog-tags .link-reversed a {
+    color: inherit;
+    text-decoration: none;
+    background: none;
+  }
+
+  @media screen and (pointer: fine) {
+    #shopify-section-{{ section.id }} .blog-tags .link-reversed:not([aria-current="true"]):hover {
+      color: #fff;
+      background-size: 100% 2px;
+      background-position-x: var(--transform-origin-start);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__primary-link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: 0;
+    flex: 1;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__image-container {
+    margin-block-end: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-title {
+    margin: 0 0 0.5rem;
+    color: #F287EC;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__title {
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container {
+    margin-block-start: 1rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    background: rgb(255 255 255 / 0.06);
+    position: relative;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container iframe,
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container audio,
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-audio-embed {
+    display: block;
+    width: 100%;
+    border: 0;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-audio-embed--buzzsprout {
+    min-height: 5.5rem;
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    #shopify-section-{{ section.id }} .blog-post-card--podcast-with-player {
+      grid-row: span 3;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__image-container {
+      margin-block-end: 1.5rem;
+    }
+
+    #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container {
+      margin-block-start: 1.25rem;
+    }
+  }
 </style>
 
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
@@ -37,7 +138,7 @@
       </div>
     {%- else -%}
       {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
-        <ul class="blog-tags unstyled-list scroll-area bleed" role="list" style="justify-content: safe center;">
+        <ul class="blog-tags unstyled-list scroll-area bleed" role="list">
           <li class="link-reversed subheading" aria-current="{% if current_tags == blank %}true{% else %}false{% endif %}">
             <a href="{{ blog.url }}">{{- 'blog.general.all_posts' | t -}}</a>
           </li>
@@ -170,7 +271,8 @@
                   show_date: section.settings.show_date,
                   show_reading_time: section.settings.show_reading_time,
                   show_excerpt: section.settings.show_excerpt,
-                  position: forloop.index
+                  position: forloop.index,
+                  podcast_mode: section.settings.enable_podcast_cards
                 -%}
               {%- endif -%}
             {%- endfor -%}
@@ -182,6 +284,43 @@
     {%- endif -%}
   </div>
 </div>
+
+{%- if section.settings.enable_podcast_cards -%}
+  <script>
+    (function () {
+      const initBuzzsproutEmbeds = () => {
+        document.querySelectorAll("#shopify-section-{{ section.id }} [data-buzzsprout-embed]:not([data-buzzsprout-loaded])").forEach((wrapper) => {
+          const scriptSrc = wrapper.dataset.buzzsproutSrc;
+
+          if (!scriptSrc) {
+            return;
+          }
+
+          wrapper.dataset.buzzsproutLoaded = "true";
+
+          const script = document.createElement("script");
+          script.src = scriptSrc;
+          script.type = "text/javascript";
+          script.charset = "utf-8";
+          script.async = true;
+          wrapper.appendChild(script);
+        });
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initBuzzsproutEmbeds);
+      } else {
+        initBuzzsproutEmbeds();
+      }
+
+      document.addEventListener("shopify:section:load", (event) => {
+        if (event.target.id === "shopify-section-{{ section.id }}") {
+          initBuzzsproutEmbeds();
+        }
+      });
+    })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -219,6 +358,13 @@
       "max": 50,
       "step": 1,
       "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_podcast_cards",
+      "label": "音频播放器卡片模式",
+      "info": "开启后按 Podcast 样式展示：custom.audio_image 封面图、custom.audio_title 粉色描述标题、文章标题、底部音频播放器。音频嵌入填写在 custom.audio_embed、摘要或正文。",
+      "default": false
     },
     {
       "type": "header",

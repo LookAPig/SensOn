@@ -11,17 +11,6 @@
   "sections": {
     "blog-banner": {
       "type": "blog-banner",
-      "disabled": true,
-      "settings": {
-        "color_scheme": "scheme-4",
-        "allow_transparent_header": true,
-        "image": "shopify://shop_images/1.Articles.jpg",
-        "title_tag": "h2",
-        "content": ""
-      }
-    },
-    "image_with_text_overlay_iDN39Q": {
-      "type": "image-with-text-overlay",
       "blocks": {
         "rich_text_jYFraR": {
           "type": "rich-text",
@@ -35,9 +24,9 @@
         "heading_EtJfbw": {
           "type": "heading",
           "settings": {
-            "text": "<strong>\nPillow Talk</strong>",
+            "text": "<strong>Into SensOn</strong>",
             "pc_font_size": 40,
-            "h5_font_size": 23,
+            "h5_font_size": 28,
             "pc_line_height": 1.2,
             "h5_line_height": 1.2,
             "heading_size": "h1",
@@ -49,7 +38,7 @@
           "type": "subheading",
           "name": "t:blocks.subheading.name",
           "settings": {
-            "text": "Into SensOn：Late-Night Sessions — the podcast where technology meets intimacy. Real stories about modern love,dating,and self-love,recorded live with the SensOn community."
+            "text": "Late-Night Sessions — the podcast where technology meets intimacy. Real stories about modern love, dating, and self-love, recorded live with the SensOn community."
           },
           "blocks": {}
         },
@@ -72,6 +61,7 @@
               "name": "t:blocks.button.name",
               "settings": {
                 "text": "Listen on Spotify",
+                "icon": "spotify",
                 "url": "",
                 "open_in_new_tab": false,
                 "style": "solid",
@@ -84,6 +74,7 @@
               "type": "button",
               "settings": {
                 "text": "Apple Podcasts",
+                "icon": "apple_podcast",
                 "url": "",
                 "open_in_new_tab": false,
                 "style": "outline",
@@ -106,7 +97,6 @@
         "rich_text_KMW48a",
         "button_group_rJxLhA"
       ],
-      "name": "t:sections.image_with_text_overlay.name",
       "settings": {
         "color_scheme": "scheme-7",
         "allow_transparent_header": true,
@@ -127,9 +117,10 @@
         "show_tags": true,
         "posts_per_page": 9,
         "highlight_blog_post_position": 0,
+        "enable_podcast_cards": true,
         "blog_post_card_heading_size": "h5",
         "show_category": true,
-        "show_date": true,
+        "show_date": false,
         "show_reading_time": false,
         "show_excerpt": true
       }
@@ -137,7 +128,6 @@
   },
   "order": [
     "blog-banner",
-    "image_with_text_overlay_iDN39Q",
     "main"
   ]
 }
