@@ -491,6 +491,19 @@
         elsif block.settings.creator_2_credentials != blank
           assign creator_2_has_content = true
         endif
+
+        assign creator_3_has_content = false
+        if block.settings.creator_3_quote != blank
+          assign creator_3_has_content = true
+        elsif block.settings.creator_3_avatar != blank
+          assign creator_3_has_content = true
+        elsif block.settings.creator_3_name != blank
+          assign creator_3_has_content = true
+        elsif block.settings.creator_3_credentials != blank
+          assign creator_3_has_content = true
+        elsif block.settings.creator_3_video != blank
+          assign creator_3_has_content = true
+        endif
       -%}
       <div class="pdp-creator-stack">
         <div class="pdp-creator-card">
@@ -605,6 +618,92 @@
                   {%- endif -%}
                 </div>
               </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if creator_3_has_content -%}
+          <div class="pdp-creator-card">
+            {%- if block.settings.creator_3_avatar != blank
+              or block.settings.creator_3_name != blank
+              or block.settings.creator_3_credentials != blank
+            -%}
+              <div class="pdp-creator-author">
+                {%- if block.settings.creator_3_avatar != blank -%}
+                  <div class="pdp-creator-avatar">
+                    {{
+                      block.settings.creator_3_avatar
+                      | image_url: width: 112
+                      | image_tag: loading: 'lazy', widths: '56, 112', sizes: '56px', alt: block.settings.creator_3_name
+                    }}
+                  </div>
+                {%- endif -%}
+                <div>
+                  {%- if block.settings.creator_3_name != blank -%}
+                    <p class="pdp-creator-name">{{ block.settings.creator_3_name | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.creator_3_credentials != blank -%}
+                    <p class="pdp-creator-credentials">{{ block.settings.creator_3_credentials | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.creator_3_video != blank -%}
+              <div class="pdp-creator-video" data-pdp-creator-video tabindex="0" role="group" aria-label="{% if block.settings.creator_3_name != blank %}{{ block.settings.creator_3_name | escape }} — {% endif %}Video">
+                <div class="pdp-creator-video__poster" data-pdp-creator-video-poster>
+                  {%- if block.settings.creator_3_video_cover != blank -%}
+                    {{
+                      block.settings.creator_3_video_cover
+                      | image_url: width: 900
+                      | image_tag:
+                        class: 'pdp-creator-video__cover',
+                        loading: 'lazy',
+                        widths: '400, 600, 900',
+                        sizes: '100vw',
+                        alt: block.settings.creator_3_name | default: 'Video' | escape
+                    }}
+                  {%- elsif block.settings.creator_3_video.preview_image != blank -%}
+                    {{
+                      block.settings.creator_3_video.preview_image
+                      | image_url: width: 900
+                      | image_tag:
+                        class: 'pdp-creator-video__cover',
+                        loading: 'lazy',
+                        widths: '400, 600, 900',
+                        sizes: '100vw',
+                        alt: block.settings.creator_3_name | default: 'Video' | escape
+                    }}
+                  {%- endif -%}
+                  <button type="button" class="pdp-creator-video__play-btn" aria-label="Play video" tabindex="-1">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="pdp-creator-video__host" data-pdp-creator-video-host>
+                  {{
+                    block.settings.creator_3_video
+                    | video_tag:
+                      playsinline: true,
+                      controls: false,
+                      preload: 'none',
+                      muted: false,
+                      loop: false
+                  }}
+                </div>
+                <div class="pdp-creator-video__pause-overlay" data-pdp-creator-video-pause-overlay>
+                  <button type="button" class="pdp-creator-video__play-btn" aria-label="Play video" tabindex="-1">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.creator_3_quote != blank -%}
+              <p class="pdp-creator-quote">{{ block.settings.creator_3_quote | escape }}</p>
             {%- endif -%}
           </div>
         {%- endif -%}
