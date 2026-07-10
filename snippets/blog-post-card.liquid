@@ -20,64 +20,69 @@ Supported parameters
 * position: the position of the card in the list. If specified, the theme will eagerly load the first 3 cards images
 * placeholder_image: the name of an image used for the placeholder_svg_tag
 * block: an optional block from which theme editor attributes are rendered
-* podcast_mode: if set to true, renders an embedded audio player from article excerpt (备注) and episode label above title
+* podcast_mode: podcast card layout with cover image, episode label, title, and bottom audio player
 {%- endcomment -%}
 
 {%- liquid
-  assign card_tag = 'a'
-  assign card_href = article.url
   assign episode_label = article.metafields.custom.episode_label.value
-  assign audio_embed = article.excerpt | strip
+  assign audio_embed = article.metafields.custom.audio_embed.value | default: article.excerpt | strip
   assign has_audio_embed = false
 
   if podcast_mode and article and audio_embed != blank
     assign has_audio_embed = true
   endif
 
-  if podcast_mode and has_audio_embed
-    assign card_tag = 'div'
-    assign card_href = nil
+  assign podcast_card_classes = 'blog-post-card'
+
+  if horizontal
+    assign podcast_card_classes = podcast_card_classes | append: ' blog-post-card--horizontal'
   endif
+
+  if podcast_mode
+    assign podcast_card_classes = podcast_card_classes | append: ' blog-post-card--podcast'
+  endif
+
+  if has_audio_embed
+    assign podcast_card_classes = podcast_card_classes | append: ' blog-post-card--podcast-with-player'
+  endif
+
+  assign podcast_card_classes = podcast_card_classes | append: ' group snap-start'
 -%}
 
-<{{ card_tag }} {% if card_href %}href="{{ card_href }}"{% endif %} class="blog-post-card {% if horizontal %}blog-post-card--horizontal{% endif %}{% if podcast_mode %} blog-post-card--podcast{% endif %} group snap-start" {% if settings.stagger_blog_posts and reveal != false %}reveal-on-scroll="true"{% endif %} {{ block.shopify_attributes }}>
+{%- capture blog_post_card_meta -%}
+  {%- if show_category and article.tags.size > 0 -%}
+    <span>{{ article.tags | first }}</span>
+  {%- endif -%}
+
+  {%- if show_date and article != blank -%}
+    <span>{{ article.published_at | date: format: 'abbreviated_date' }}</span>
+  {%- endif -%}
+
+  {%- if show_reading_time -%}
+    {%- assign reading_time = article.content | strip_html | split: ' ' | size | times: 1.0 | divided_by: 250 | ceil -%}
+    <span>{{ 'blog.post.reading_time' | t: time: reading_time }}</span>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture blog_post_card_image -%}
   {%- if article -%}
-    {%- if has_audio_embed -%}
-      <div class="blog-post-card__audio-container">
-        {%- if audio_embed contains '<iframe' or audio_embed contains '<audio' -%}
-          {{- audio_embed -}}
-        {%- else -%}
-          {%- liquid
-            assign embed_src = audio_embed
+    {%- liquid
+      assign loading_strategy = nil
 
-            if embed_src contains 'open.spotify.com/episode/'
-              unless embed_src contains '/embed/'
-                assign spotify_episode_id = embed_src | split: 'episode/' | last | split: '?' | first | split: '&' | first
-                assign embed_src = 'https://open.spotify.com/embed/episode/' | append: spotify_episode_id
-              endunless
-            endif
-          -%}
+      if section.index > 3 or position > 3
+        assign loading_strategy = 'lazy'
+      endif
 
-          <iframe src="{{ embed_src }}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen title="{{ article.title | escape }}"></iframe>
-        {%- endif -%}
-      </div>
-    {%- elsif article.image != blank -%}
-      {%- liquid
-        assign loading_strategy = nil
-        
-        if section.index > 3 or position > 3
-          assign loading_strategy = 'lazy'
-        endif
+      if use_secondary_image or podcast_mode
+        assign image = article.metafields.custom.secondary_image
+      endif
 
-        if use_secondary_image
-          assign image = article.metafields.custom.secondary_image
-        endif
+      assign image = image | default: article.image
+    -%}
 
-        assign image = image | default: article.image
-      -%}
-
+    {%- if image != blank -%}
       <div class="blog-post-card__image-container overflow-hidden">
-        {{- image | image_url: width: image.width | image_tag: loading: loading_strategy, sizes: sizes, widths: '300,400,500,600,800,1000,1200,1400', class: 'w-full zoom-image group-hover:zoom' -}}
+        {{- image | image_url: width: image.width | image_tag: loading: loading_strategy, sizes: sizes, widths: '300,400,500,600,800,1000,1200,1400', class: 'w-full zoom-image group-hover:zoom', alt: article.title -}}
       </div>
     {%- endif -%}
   {%- else -%}
@@ -85,48 +90,29 @@ Supported parameters
       {{- placeholder_image | placeholder_svg_tag: 'w-full zoom-image group-hover:zoom' -}}
     </div>
   {%- endif -%}
+{%- endcapture -%}
 
+{%- capture blog_post_card_content -%}
   <div class="blog-post-card__content">
     <div class="prose prose--compact">
-      {%- capture meta_content -%}
-        {%- if show_category and article.tags.size > 0 -%}
-          <span>{{ article.tags | first }}</span>
-        {%- endif -%}
-
-        {%- if show_date and article != blank -%}
-          <span>{{ article.published_at | date: format: 'abbreviated_date' }}</span>
-        {%- endif -%}
-
-        {%- if show_reading_time -%}
-          {%- assign reading_time = article.content | strip_html | split: ' ' | size | times: 1.0 | divided_by: 250 | ceil -%}
-          <span>{{ 'blog.post.reading_time' | t: time: reading_time }}</span>
-        {%- endif -%}
-      {%- endcapture -%}
-
-      {%- if meta_content != blank -%}
+      {%- if blog_post_card_meta != blank -%}
         <div class="meta-information subheading">
           {%- if settings.subheading_icon != blank -%}
             <span class="shape shape--{{ settings.subheading_icon }}"></span>
           {%- endif -%}
-          
-          {{- meta_content -}}
+
+          {{- blog_post_card_meta -}}
         </div>
       {%- endif -%}
 
       {%- if podcast_mode and episode_label != blank -%}
         <p class="blog-post-card__episode-label subheading">{{ episode_label }}</p>
       {%- endif -%}
-      
+
       {%- if article -%}
-        {%- if podcast_mode and has_audio_embed -%}
-          <a href="{{ article.url }}" class="blog-post-card__title-link">
-            <span class="{{ heading_size | default: 'h5' }}">{{ article.title }}</span>
-          </a>
-        {%- else -%}
-          <span class="{{ heading_size | default: 'h5' }}">{{ article.title }}</span>
-        {%- endif -%}
+        <span class="{{ heading_size | default: 'h5' }} blog-post-card__title">{{ article.title }}</span>
       {%- else -%}
-        <span class="{{ heading_size | default: 'h5' }}">{{- 'general.on_boarding.blog_post_title' | t -}}</span>
+        <span class="{{ heading_size | default: 'h5' }} blog-post-card__title">{{- 'general.on_boarding.blog_post_title' | t -}}</span>
       {%- endif -%}
 
       {%- if show_excerpt and has_audio_embed == false -%}
@@ -140,4 +126,22 @@ Supported parameters
       {%- endif -%}
     </div>
   </div>
-</{{ card_tag }}>
+{%- endcapture -%}
+
+{%- if podcast_mode and has_audio_embed -%}
+  <div class="{{ podcast_card_classes }}" {% if settings.stagger_blog_posts and reveal != false %}reveal-on-scroll="true"{% endif %} {{ block.shopify_attributes }}>
+    <a href="{{ article.url }}" class="blog-post-card__primary-link">
+      {{- blog_post_card_image -}}
+      {{- blog_post_card_content -}}
+    </a>
+
+    <div class="blog-post-card__audio-container">
+      {%- render 'blog-post-audio-embed', audio_embed: audio_embed, title: article.title -%}
+    </div>
+  </div>
+{%- else -%}
+  <a href="{{ article.url }}" class="{{ podcast_card_classes }}" {% if settings.stagger_blog_posts and reveal != false %}reveal-on-scroll="true"{% endif %} {{ block.shopify_attributes }}>
+    {{- blog_post_card_image -}}
+    {{- blog_post_card_content -}}
+  </a>
+{%- endif -%}
