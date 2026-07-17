@@ -2,7 +2,12 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
   crossorigin="anonymous"
+  media="print"
+  onload="this.media='all'; this.onload=null"
 >
+<noscript>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" crossorigin="anonymous">
+</noscript>
 
 <div id="creators-saying-{{ section.id }}" class="creators-saying cs-root {{ section.settings.slider_type }}">
   <div class="cs-section">

@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {%- comment -%} Hero / 全局标题实际使用 Mabry TTF，需优先加载以免文字 LCP 偏晚 {%- endcomment -%}
+    {%- comment -%} Hero / 全局标题实际使用 Mabry；UI 已覆盖主题设置字体，勿再 preload 未使用的 heading/text 字体 {%- endcomment -%}
     <link rel="preload" href="https://cdn.shopify.com/s/files/1/0775/2446/7967/files/MabryPro-Medium.ttf?v=1777534590" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="https://cdn.shopify.com/s/files/1/0775/2446/7967/files/MabryPro-Regular.ttf?v=1777534590" as="font" type="font/ttf" crossorigin>
     <link
@@ -40,14 +40,6 @@
       <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
     {%- endif -%}
 
-    {%- unless settings.heading_font.system? -%}
-      <link rel="preload" href="{{ settings.heading_font | font_url }}" as="font" type="font/woff2" crossorigin>
-    {%- endunless -%}
-
-    {%- unless settings.text_font.system? -%}
-      <link rel="preload" href="{{ settings.text_font | font_url }}" as="font" type="font/woff2" crossorigin>
-    {%- endunless -%}
-
     {%- render 'social-meta-tags' -%}
     {%- render 'microdata-schema' -%}
     {%- render 'css-variables' -%}
@@ -56,6 +48,9 @@
     {%- if request.page_type == 'gift_card' -%}
       <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
     {%- endif -%}
+
+    {%- comment -%} 主题 CSS 放在 content_for_header 之前，更早发现，减少被 App 资源抢占连接 {%- endcomment -%}
+    {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
 
     <script type="importmap">
       {%- comment -%}On Safari 16.3 and lower, a polyfill is used to load importmap{%- endcomment -%}
@@ -72,8 +67,6 @@
     <script type="module" src="{{ 'theme.js' | asset_url }}"></script>
 
     {{ content_for_header }}
-
-    {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
 
     {% if request.path == '/collections/all' %}
       <meta name="robots" content="noindex,follow">
