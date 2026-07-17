@@ -64,13 +64,38 @@
     position: relative;
     border-radius: {{ block.settings.video_border_radius }}px;
     overflow: hidden;
+    background: #6f6f6f;
+  }
+
+  .ai-words-video-poster-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 7.2;
+    object-fit: cover;
+    border-radius: {{ block.settings.video_border_radius }}px;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
   }
 
   .ai-words-video-video-{{ ai_gen_id }} {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
     border-radius: {{ block.settings.video_border_radius }}px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-words-video-media-{{ ai_gen_id }}.is-playing .ai-words-video-poster-{{ ai_gen_id }} {
+    opacity: 0;
+  }
+
+  .ai-words-video-media-{{ ai_gen_id }}.is-playing .ai-words-video-video-{{ ai_gen_id }} {
+    opacity: 1;
   }
 
   .ai-words-video-placeholder-{{ ai_gen_id }} {
@@ -131,9 +156,9 @@
       margin: 0 0 18px;
     }
 
+    .ai-words-video-poster-{{ ai_gen_id }},
     .ai-words-video-placeholder-{{ ai_gen_id }} {
       aspect-ratio: 1.55 / 1;
-      background-color: #6f6f6f;
     }
 
     .ai-words-video-description-{{ ai_gen_id }} {
@@ -164,10 +189,56 @@
       {% endif %}
     </div>
 
-    <div class="ai-words-video-media-{{ ai_gen_id }}">
+    <div class="ai-words-video-media-{{ ai_gen_id }}" data-words-video-media>
       {% if block.settings.video != blank %}
-        {% assign video_class = "ai-words-video-video-" | append: ai_gen_id %}
-        {{ block.settings.video | video_tag: autoplay: block.settings.autoplay, loop: block.settings.loop, controls: block.settings.show_controls, muted: block.settings.muted, class: video_class }}
+        {% liquid
+          assign video_src = blank
+          for source in block.settings.video.sources
+            if source.mime_type == 'video/mp4'
+              assign video_src = source.url
+              break
+            endif
+          endfor
+          if video_src == blank and block.settings.video.sources.size > 0
+            assign video_src = block.settings.video.sources.first.url
+          endif
+
+          assign poster_url = blank
+          if block.settings.poster != blank
+            assign poster_url = block.settings.poster | image_url: width: 1600
+          elsif block.settings.video.preview_image != blank
+            assign poster_url = block.settings.video.preview_image | image_url: width: 1600
+          endif
+        %}
+
+        {% if poster_url != blank %}
+          <img
+            class="ai-words-video-poster-{{ ai_gen_id }}"
+            src="{{ poster_url }}"
+            alt=""
+            loading="lazy"
+            width="1600"
+            height="900"
+            data-words-video-poster
+          >
+        {% else %}
+          <div class="ai-words-video-poster-{{ ai_gen_id }}" data-words-video-poster aria-hidden="true"></div>
+        {% endif %}
+
+        <video
+          class="ai-words-video-video-{{ ai_gen_id }}"
+          data-words-video
+          data-src="{{ video_src | escape }}"
+          {% if poster_url != blank %}
+            poster="{{ poster_url }}"
+          {% endif %}
+          preload="none"
+          playsinline
+          webkit-playsinline
+          {% if block.settings.loop %}loop{% endif %}
+          {% if block.settings.muted %}muted{% endif %}
+          {% if block.settings.show_controls %}controls{% endif %}
+        ></video>
       {% else %}
         <div class="ai-words-video-placeholder-{{ ai_gen_id }}">
           <svg
@@ -191,6 +262,109 @@
 
   </div>
 </div>
+
+{% if block.settings.video != blank %}
+  <script>
+    (function () {
+      const root = document.querySelector(".ai-words-video-{{ ai_gen_id }}");
+
+      if (!root) return;
+
+      const media = root.querySelector("[data-words-video-media]");
+      const video = root.querySelector("[data-words-video]");
+
+      if (!media || !video) return;
+
+      const shouldAutoplayInView = {{ block.settings.autoplay | json }};
+      let hasLoaded = false;
+      let loadPromise = null;
+      let playRequested = false;
+
+      const markPlaying = function () {
+        media.classList.add("is-playing");
+      };
+
+      const loadVideo = function () {
+        if (hasLoaded) return Promise.resolve();
+
+        if (loadPromise) return loadPromise;
+
+        const videoSrc = video.getAttribute("data-src");
+
+        if (!videoSrc) return Promise.resolve();
+
+        loadPromise = new Promise(function (resolve) {
+          const source = document.createElement("source");
+
+          source.src = videoSrc;
+          source.type = "video/mp4";
+          video.appendChild(source);
+          video.load();
+
+          video.addEventListener("loadeddata", function () {
+            hasLoaded = true;
+            resolve();
+          }, { once: true });
+        });
+
+        return loadPromise;
+      };
+
+      const playVideo = function () {
+        if (playRequested && !video.paused) return;
+
+        playRequested = true;
+
+        loadVideo().then(function () {
+          const playPromise = video.play();
+
+          if (playPromise !== undefined) {
+            playPromise.then(markPlaying).catch(function () {
+              playRequested = false;
+            });
+          }
+        });
+      };
+
+      const pauseVideo = function () {
+        if (!video.paused) {
+          video.pause();
+        }
+      };
+
+      video.addEventListener("playing", markPlaying);
+
+      if (!("IntersectionObserver" in window)) {
+        if (shouldAutoplayInView) {
+          playVideo();
+        } else {
+          loadVideo();
+        }
+
+        return;
+      }
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            if (shouldAutoplayInView) {
+              playVideo();
+            } else {
+              loadVideo().then(markPlaying);
+            }
+          } else if (hasLoaded) {
+            pauseVideo();
+          }
+        });
+      }, {
+        threshold: 0.35,
+        rootMargin: "0px 0px -10% 0px"
+      });
+
+      observer.observe(media);
+    })();
+  </script>
+{% endif %}
 
 {% schema %}
 {
@@ -332,10 +506,17 @@
       "label": "Video"
     },
     {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Poster image",
+      "info": "Shown before the video loads. Falls back to the video preview image if empty."
+    },
+    {
       "type": "checkbox",
       "id": "autoplay",
-      "label": "Autoplay",
-      "default": false
+      "label": "Play when in view",
+      "info": "Loads and plays only after the section scrolls into view. Video uses preload none for on-demand loading.",
+      "default": true
     },
     {
       "type": "checkbox",

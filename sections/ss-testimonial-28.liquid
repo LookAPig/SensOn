@@ -11,7 +11,12 @@ For inquiries or permissions, contact daniel@section.store
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+  media="print"
+  onload="this.media='all'; this.onload=null"
+>
+<noscript>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+</noscript>
 
 {%- liquid 
   assign padding_horizontal = section.settings.padding_horizontal

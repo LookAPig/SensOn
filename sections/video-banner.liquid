@@ -147,25 +147,19 @@
   }
 
   .video-banner:after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
-    width: 100%;
-    background: linear-gradient(180deg, rgba(102, 102, 102, 0.00) 0%, rgba(0, 0, 0, 0.07) 100%);
-    backdrop-filter: blur(6.65px);
-    -webkit-backdrop-filter: blur(6.65px);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 60%, black 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60%, black 100%);
-    height: 353px;
-    background-size: cover;
-    display: block;
-    position: absolute;
     bottom: 0;
-    left: 0;
+    width: 100%;
+    height: 353px;
+    background: linear-gradient(180deg, rgba(102, 102, 102, 0) 0%, rgba(0, 0, 0, 0.07) 100%);
+    pointer-events: none;
+    z-index: 2;
   }
 
 
-  /* Poster图片始终显示直到视频加载 */
+  /* Poster 保持 opacity:1，避免被踢出 LCP；视频就绪后仅降低层级盖住 */
   #video-{{ section.id }} .hero-media .poster-image {
     position: absolute !important;
     top: 0;
@@ -174,16 +168,13 @@
     height: 100% !important;
     object-fit: cover;
     z-index: 1;
-    transition: opacity 0.8s ease;
     display: block !important;
   }
 
-  #video-{{ section.id }} .hero-media .poster-image.hidden {
-    opacity: 0;
+  #video-{{ section.id }} .hero-media .poster-image.is-behind {
     z-index: 0;
   }
-  
-  /* 确保video在poster下方 */
+
   #video-{{ section.id }} .hero-media video {
     position: absolute !important;
     top: 0;
@@ -192,6 +183,10 @@
     height: 100% !important;
     object-fit: cover;
     z-index: 0;
+  }
+
+  #video-{{ section.id }} .hero-media video.loaded {
+    z-index: 1;
   }
 
   @media (max-width: 768px) {
@@ -227,7 +222,7 @@
 
     #video-{{ section.id }} .hero-inner {
       padding-bottom: 35px;
-      z-index: 1;
+      z-index: 3;
     }
 
     .btn_wj {
@@ -242,6 +237,40 @@
 
   }
 </style>
+
+{%- comment -%} 仅 preload 当前端可见 poster，避免双端抢带宽 {%- endcomment -%}
+{% if section.settings.poster != blank %}
+  <link
+    rel="preload"
+    as="image"
+    href="{{ section.settings.poster | image_url: width: 1920 }}"
+    imagesrcset="{{ section.settings.poster | image_url: width: 800 }} 800w, {{ section.settings.poster | image_url: width: 1200 }} 1200w, {{ section.settings.poster | image_url: width: 1600 }} 1600w, {{ section.settings.poster | image_url: width: 1920 }} 1920w"
+    imagesizes="100vw"
+    media="(min-width: 769px)"
+    fetchpriority="high"
+  >
+{% endif %}
+{% if section.settings.mobile_poster != blank %}
+  <link
+    rel="preload"
+    as="image"
+    href="{{ section.settings.mobile_poster | image_url: width: 768 }}"
+    imagesrcset="{{ section.settings.mobile_poster | image_url: width: 400 }} 400w, {{ section.settings.mobile_poster | image_url: width: 600 }} 600w, {{ section.settings.mobile_poster | image_url: width: 768 }} 768w"
+    imagesizes="100vw"
+    media="(max-width: 768px)"
+    fetchpriority="high"
+  >
+{% elsif section.settings.poster != blank %}
+  <link
+    rel="preload"
+    as="image"
+    href="{{ section.settings.poster | image_url: width: 768 }}"
+    imagesrcset="{{ section.settings.poster | image_url: width: 400 }} 400w, {{ section.settings.poster | image_url: width: 600 }} 600w, {{ section.settings.poster | image_url: width: 768 }} 768w"
+    imagesizes="100vw"
+    media="(max-width: 768px)"
+    fetchpriority="high"
+  >
+{% endif %}
 
 <section id="video-{{ section.id }}" class="video-banner" data-section-id="{{ section.id }}" allow-transparent-header>
   <div class="hero-media">
@@ -268,7 +297,6 @@
           playsinline 
           loop
           preload="none"
-          poster="{{ section.settings.poster | img_url: '1920x' }}"
           data-video-src="{{ desktop_hq_url }}"
           {% if section.settings.enable_low_quality_preview and desktop_lq_url != blank %}
           data-hq-src="{{ desktop_hq_url }}"
@@ -281,7 +309,7 @@
       {% endif %}
     </div>
 
-    <!-- 移动端 -->
+    <!-- 移动端：非首屏端不抢 fetchpriority -->
     <div class="mobile-media">
       {% if section.settings.mobile_poster != blank %}
         {%- capture mobile_sizes -%}
@@ -316,7 +344,6 @@
           playsinline 
           loop
           preload="none"
-          poster="{{ section.settings.mobile_poster | default: section.settings.poster | img_url: '768x' }}"
           data-video-src="{{ mobile_hq_url }}"
           {% if section.settings.enable_low_quality_preview and mobile_lq_url != blank %}
           data-hq-src="{{ mobile_hq_url }}"
@@ -333,7 +360,6 @@
           playsinline 
           loop
           preload="none"
-          poster="{{ section.settings.poster | img_url: '1200x' }}"
           data-video-src="{{ desktop_hq_url }}"
         >
         </video>
@@ -346,14 +372,14 @@
   <div class="hero-inner">
     <div class="page-width">
       {% if section.settings.title != blank %}
-        <h2 class="vediohero-title h0 space-thin wow fadeInUp" data-wow-delay=".1s">
+        <h2 class="vediohero-title h0 space-thin">
           {{ section.settings.title }}
         </h2>
       {% endif %}
       <div class="video_desc">{{ section.settings.desc }}</div>
       <div class="video_btns">
         {% if section.settings.button != blank %}
-          <a class="hero-cta btn_wj wow fadeInUp" href="{{ section.settings.cta_link | default: '#' }}" role="button" data-wow-delay=".2s">{{ section.settings.button }}</a>
+          <a class="hero-cta btn_wj" href="{{ section.settings.cta_link | default: '#' }}" role="button">{{ section.settings.button }}</a>
         {% endif %}
       </div>
     </div>
@@ -362,103 +388,109 @@
 
 <script>
 (function() {
-  const sectionId = '{{ section.id }}';
-  const desktopVideo = document.getElementById('desktop-video-' + sectionId);
-  const mobileVideo = document.getElementById('mobile-video-' + sectionId) || document.getElementById('mobile-video-fallback-' + sectionId);
+  const sectionId = "{{ section.id }}";
+  const desktopVideo = document.getElementById("desktop-video-" + sectionId);
+  const mobileVideo = document.getElementById("mobile-video-" + sectionId) || document.getElementById("mobile-video-fallback-" + sectionId);
   const enableLowQualityPreview = {{ section.settings.enable_low_quality_preview | json }};
-  
-  // 判断是否移动端
   const isMobile = window.innerWidth <= 768;
   const activeVideo = isMobile ? mobileVideo : desktopVideo;
-  
+
   if (!activeVideo) return;
 
-  function hidePoster() {
-    const posterImages = document.querySelectorAll('#video-' + sectionId + ' .poster-image');
-    posterImages.forEach(img => {
-      img.classList.add('hidden');
+  function revealVideoOverPoster() {
+    activeVideo.classList.add("loaded");
+
+    const posterImages = document.querySelectorAll("#video-" + sectionId + " .poster-image");
+
+    posterImages.forEach(function(img) {
+      img.classList.add("is-behind");
     });
   }
 
-  function onVideoLoaded() {
-    activeVideo.classList.add('loaded');
-    // 延迟隐藏poster，确保视频已经开始播放
-    setTimeout(hidePoster, 300);
-  }
-
-  // 加载高质量视频（如果启用了低质量预览）
   function loadHighQualityVideo() {
-    const hqSrc = activeVideo.getAttribute('data-hq-src');
-    if (hqSrc && enableLowQualityPreview) {
-      // 创建临时video来预加载高质量版本
-      const tempVideo = document.createElement('video');
-      tempVideo.src = hqSrc;
-      tempVideo.preload = 'auto';
-      
-      tempVideo.addEventListener('canplaythrough', () => {
-        // 高质量视频加载完成，替换源
-        const currentTime = activeVideo.currentTime;
-        const newSource = document.createElement('source');
-        newSource.src = hqSrc;
-        newSource.type = 'video/mp4';
-        
-        activeVideo.innerHTML = '';
-        activeVideo.appendChild(newSource);
-        activeVideo.load();
-        activeVideo.currentTime = currentTime;
-        activeVideo.play();
-      }, { once: true });
-    }
+    const hqSrc = activeVideo.getAttribute("data-hq-src");
+
+    if (!hqSrc || !enableLowQualityPreview) return;
+
+    const tempVideo = document.createElement("video");
+    tempVideo.src = hqSrc;
+    tempVideo.preload = "auto";
+
+    tempVideo.addEventListener("canplaythrough", function() {
+      const currentTime = activeVideo.currentTime;
+      const newSource = document.createElement("source");
+
+      newSource.src = hqSrc;
+      newSource.type = "video/mp4";
+
+      activeVideo.innerHTML = "";
+      activeVideo.appendChild(newSource);
+      activeVideo.load();
+      activeVideo.currentTime = currentTime;
+      activeVideo.play();
+    }, { once: true });
   }
 
-  // 开始加载视频
   function loadVideo() {
-    const videoSrc = activeVideo.getAttribute('data-video-src');
-    if (enableLowQualityPreview && activeVideo.querySelector('source')) {
+    const videoSrc = activeVideo.getAttribute("data-video-src");
+
+    if (enableLowQualityPreview && activeVideo.querySelector("source")) {
       activeVideo.load();
     } else if (videoSrc) {
-      const source = document.createElement('source');
+      const source = document.createElement("source");
+
       source.src = videoSrc;
-      source.type = 'video/mp4';
+      source.type = "video/mp4";
       activeVideo.appendChild(source);
       activeVideo.load();
-    } else return;
+    } else {
+      return;
+    }
 
-    activeVideo.addEventListener('loadeddata', () => {
-      
-      // 尝试播放视频
+    activeVideo.addEventListener("loadeddata", function() {
       const playPromise = activeVideo.play();
-      
+
       if (playPromise !== undefined) {
-        playPromise.then(() => {
-          onVideoLoaded();
-          
-          // 如果启用了低质量预览，开始加载高质量版本
+        playPromise.then(function() {
+          revealVideoOverPoster();
+
           if (enableLowQualityPreview) {
             setTimeout(loadHighQualityVideo, 2000);
           }
-        }).catch(() => {
-          onVideoLoaded();
-          document.addEventListener('touchstart', function playOnTouch() {
-            activeVideo.play().catch(function(){});
-            document.removeEventListener('touchstart', playOnTouch);
+        }).catch(function() {
+          revealVideoOverPoster();
+          document.addEventListener("touchstart", function playOnTouch() {
+            activeVideo.play().catch(function() {});
+            document.removeEventListener("touchstart", playOnTouch);
           }, { once: true });
         });
       }
     }, { once: true });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(loadVideo, 100));
-  } else {
-    setTimeout(loadVideo, 100);
+  // 等 window load 后再播视频，避免与 poster / 字体抢首屏带宽
+  function scheduleVideoLoad() {
+    const start = function() {
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(loadVideo, { timeout: 2000 });
+      } else {
+        setTimeout(loadVideo, 500);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      start();
+    } else {
+      window.addEventListener("load", start, { once: true });
+    }
   }
 
-  // 页面可见性变化时的处理
-  document.addEventListener('visibilitychange', () => {
+  scheduleVideoLoad();
+
+  document.addEventListener("visibilitychange", function() {
     if (document.hidden) {
       activeVideo.pause();
-    } else if (activeVideo.classList.contains('loaded')) {
+    } else if (activeVideo.classList.contains("loaded")) {
       activeVideo.play();
     }
   });
