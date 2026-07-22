@@ -97,7 +97,7 @@
         "logo_mobile_max_width": 45,
         "menu": "main-menu-web",
         "drawer_menu": "main-menu-web",
-        "secondary_menu": "main-menu-web",
+        "secondary_menu": "",
         "desktop_dropdown_menu_style": "below",
         "menu_open_trigger": "hover",
         "desktop_icon_size": 16,
