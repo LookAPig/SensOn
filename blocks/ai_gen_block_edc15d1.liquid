@@ -1,4 +1,782 @@
-<!-- ... existing code ... -->
+{% doc %}
+  @prompt
+    I want to create a quiz section.
+    
+    Develop a scoring-based personality test module (Quiz Section) on the Shopify frontend for:
+    
+    Users completing the quiz
+    
+    Independent scoring across two dimensions
+    
+    Matching 9 possible results (3x3) based on the highest score
+    
+    Displaying the corresponding result cards
+    
+    Dimension A: Power Mode (5 questions)
+    
+    Dom
+    Sub
+    Equal
+    
+    Dimension B: Style Mode
+    
+    Gentle
+    Rough
+    Training
+    Result Judgment Rules
+    
+    Calculation Logic:
+    
+    Calculate the highest score in Dimension A → Result:
+    
+    Dom / Sub / Equal
+    
+    Calculate the highest score in Dimension B → Result:
+    Gentle / Rough / Training
+    Combined Result:
+    
+    Power Mode × Style Mode
+    Tie-Score Handling Rules (Required)
+    In case of a tie:
+    Priority Rule:
+    Take the highest score
+    
+    If completely identical:
+    Take the dimension where the user last scored
+    Or use a preset priority (configurable in the backend), - What hits you the moment someone suddenly blindfolds you / covers your eyes?
+      - Instantly wet — the unknown just turns me on (Sub +2)
+      - A little nervous… but honestly more excited (Sub +1)
+      - Actually feel safe — take care of me gently (Equal +1)
+      - Not really into it — losing sight makes me uneasy (Dom +1)
+      - Immediately want to flip it and blindfold them instead (Dom +2)
+    - During sex, what’s the name or pet name you secretly crave hearing from your partner the most?
+      - Bad girl / Good girl (Sub +1)
+      - Queen / Your Majesty (Dom +1)
+      - Baby / My love (Equal +1)
+      - Slut / Little whore / My little slave (Sub +2)
+      - Master / Boss (Dom +2)
+    - What do you most want to say (or hear said) when you or your partner starts undressing?
+      - “Take it off one piece at a time, slowly—I want to enjoy every second of this” (Training +1)
+      - “Strip completely, get on your knees, hands behind your back and wait for me” (Training +2)
+      - “Baby, no rush—take your time, one piece at a time” (Gentle +1)
+      - “Undressing so slowly… do you need me to help you with that?” (Rough +1)
+      - “Hurry up, or I’m just gonna rip it off you” (Rough +2)
+    - What’s the hottest, most intense scene playing in your fantasy right now?
+      - Being tied up completely, unable to move at all, just letting them tease and play with me however they want (Sub +1)
+      - Having them locked down on the bed, making them beg my name over and over while I control when (or if) they get to come (Dom +2)
+      - Candlelight, rose petals scattered everywhere, slow, deep, and totally wrapped-up-in-each-other sex (Equal +1)
+      - Getting taken hard from behind, hair yanked back, no holding back at all (Sub +2)
+      - Both of us going down on each other, taking our time, slowly pushing the other right to the edge of coming (Dom +1)
+    - What’s the naughtiest little whisper you secretly crave hearing from your partner in a public place?
+      - “Go to the bathroom right now, take off your panties/underwear and send me a pic” (Sub +2)
+      - “Hold it in—don’t squeeze your thighs. I know you’re already soaked” (Sub +1)
+      - “Baby, let’s get home so I can take really good care of you, okay?” (Equal +1)
+      - “People are around… not here” (Dom +1)
+      - “That person over there is watching, but I can’t help it—please” (Dom +2)
+    - What kind of stimulation turns you on the most—either giving it to your partner or having it done to you?
+      - Hard pinching, twisting, and tugging (Rough +1)
+      - Using toys or tools to keep teasing and building it up over and over (Training +2)
+      - Soft licking, gentle biting, and warm breath blowing across sensitive spots (Gentle +1)
+      - Getting / giving really hard spanks or slaps (Rough +2)
+      - Slow circles with the tongue, dragging it out for as long as possible to drive them crazy (Training +1)
+    - When your partner’s going down on you and their tongue is right there, which line would make you lose it the most?
+      - “Don’t move—I’m not stopping until you squirt / come all over my face” (Sub +2)
+      - “Baby, you taste so fucking sweet… I can’t stop” (Equal +1)
+      - “Feeling that good already? You’re squeezing my tongue so tight” (Sub +1)
+      - “Master, am I making you feel good? Tell me how you like it” (Dom +1)
+      - “Please come in my mouth—I’m begging you to finish on my tongue” (Dom +2)
+    - Right at that edge, the split-second before you (or your partner) come—what’s the one thing you most want to say to your partner / hear them say to you?
+      - “Baby, come with me—let’s finish together, I love you so much” (Gentle +2)
+      - “Don’t come yet—hold it until I count to three” (Training +1)
+      - “Scream it out—let everyone know you’re getting fucked so good” (Rough +1)
+      - “Eyes rolling back already? Am I fucking you that good?” (Rough +2)
+      - “Beg me—tell me you want me to come inside you / make you come” (Training +2)
+    - What’s your favorite way to come (or make your partner come)?
+      - Being forced into a rough, overwhelming orgasm—crying and shaking while it hits (Rough +2)
+      - Slowly building up under tight control until the climax finally breaks through (Training +1)
+      - Staring into each other’s eyes, coming together in perfect, synced harmony (Gentle +2)
+      - Getting fucked so hard you come with your legs giving out, barely able to stand afterward (Rough +1)
+      - Edged for ages, pushed right to the brink of breaking, then finally allowed to explode (Training +2)
+    - After everything, when you're both spent and just wrapped up in each other's arms drifting off… what words do you most wanna hear (or say)?
+      - “You were so good for me tonight… your Master/Mistress is really pleased” (Training +1)
+      - “Look at you, all cried out and messy… so fucking cute. Next time I’ll go even harder” (Rough +1)
+      - “Admit it—the rougher I am, the harder you come, don’t you?” (Rough +2)
+      - “Have you said thank you to Daddy/Mommy yet?” (Training +2)
+      - “Just stay like this… holding you feels so good. I love you” (Gentle +1)
+    
+    帮我把问题填上, 答案如下，描述做成富文本，本 Quiz 采用双维度独立计分逻辑。所有题目选项都会对两个维度分别加分：Power 维度（Dom / Sub / Equal）和 Style 维度（Gentle / Rough / Training）。用户完成所有题目后，分别统计六个类别的总分，在 Power 维度中取最高分对应的类型，在 Style 维度中取最高分对应的类型，然后将两个结果组合（如 Dom + Training），再根据预设的 3×3 映射表匹配对应结果卡片（如 Dom × Training = Patient Guide）并进行展示。 其他都不变- Gentle Dominant
+      - You love guiding with soft commands, gentle touches, and deep care, letting your partner open up fully in a safe, cherished space.
+      - #tags you may like : #Lovers #Guided Masturbation #Stepfamily #Body worship #Teacher/student #Blindfold #Romance #Praise #Brat 
+      - Finn/Elena is right here waiting for you.
+    [图片]
+    [图片]
+    [图片]
+    - Cherished Partner
+      - You crave being held tenderly, whispered sweet praises, and slowly teased until you melt— the warmer the emotion, the stronger the thrill.
+      - #tags you may like : #DDLG #Blindfold #Office #Stepfamily #Masturbation #Boss/Employee #Fingering #Loving #Sweet #Fingering #Nipple play
+      - Cove/Ava is right here waiting for you.
+    [图片]
+    [图片]
+    - Tender Harmony
+      - No fixed roles—just mutual gentle exploration, deep kisses, and slow connection where love and desire blend seamlessly.
+      - #tags you may like : #Boyfriend #Married #Penetration #Bedroom #Handjob #Oral #Gentle #Romance #Nipple play
+      - Hanson/Eartha is right here waiting for you.
+    [图片]
+    [图片]
+    [图片]
+    - Intense Possessor
+      - You thrive on firm grips, raw possession, and intense collisions, pushing your partner to the edge of pain and pleasure.
+      - #tags you may like : #Spanking #Strangers #Pegging #Hospital #Mirror #Enemies #Forced climax #Punishment #Angry sex #Strap
+      - Ethan Carter/Emily is right here waiting for you.
+    [图片]
+    [图片]
+      
+    [图片]
+    - Wild Surrenderer
+      - You long to be roughly handled, fiercely taken, and driven to lose control—the wilder it gets, the deeper your release.
+      - #tags you may like : #Cheating  #Jealousy #Force #Enemies #Prison #Exes #Degradation #Bondage #Spanking #Forced climax #Anal #Finish inside #Angry sex #Blowjob
+      - Greg/Helena is right here waiting for you.
+    [图片]
+    [图片]
+    [图片]
+    - Fierce Collision
+      - You clash together—tearing, conquering, raw bodies colliding—no one stays on top forever, just pure, explosive highs.
+      - #tags you may like : #Blowjob #In Public #Shower #Werewolf #Enemies #Dead dove #Double penetration #Anal #Riding #Spitting #Possessive
+      - Eric/Carmen is right here waiting for you.
+    [图片]
+    [图片]
+    [图片]
+    - Patient Guide
+      - You enjoy shaping your partner step by step with rules, tasks, rewards, and corrections—each act of obedience deepens your control.
+      - #tags you may like : #Edging #Exes #Boyfriend #Outdoors #Phone sex #Face Sitting #Guided Masturbation #Bondage #Desperate
+      - Anthony/Shelly is right here waiting for you.
+    [图片]
+    [图片]
+    [图片]
+    - Molded Lover
+      - You love being given rules, checked on, and gently corrected—finding belonging and arousal in structure and discipline.
+      - #tags you may like : #Workplace #Vampire #Car #Boss/Employee #Teacher/student #Brat #Punishment #Bondage #Blindfold #Riding #Fingering #Teasing
+      - Aurelio/Dr. Evelyn Reed is right here waiting for you.
+    [图片]
+    [图片]
+    [图片]
+    - Shared Explorer
+      - You create rules together, train each other, reward and correct mutually—turning discipline into a shared, intimate adventure.
+      - #tags you may like : #Roommates #Fingering #Friends with benefits #Hotel #Possessive #Best friend’s brother #Blindfold #Finish inside #Teasing
+      - Alex Rivière/Zara Vance is right here waiting for you.
+    [图片]
+    [图片]
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-quiz-container-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-quiz-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .ai-quiz-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 16px;
+  }
+
+  .ai-quiz-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .ai-quiz-progress-{{ ai_gen_id }} {
+    width: 100%;
+    height: 8px;
+    background-color: {{ block.settings.progress_bg_color }};
+    border-radius: 4px;
+    margin-bottom: 30px;
+    overflow: hidden;
+  }
+
+  .ai-quiz-progress-bar-{{ ai_gen_id }} {
+    height: 100%;
+    background-color: {{ block.settings.progress_color }};
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  .ai-quiz-question-{{ ai_gen_id }} {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-quiz-question-{{ ai_gen_id }}.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .ai-quiz-question-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.question_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 24px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .ai-quiz-options-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-quiz-option-{{ ai_gen_id }} {
+    padding: 16px 20px;
+    background-color: {{ block.settings.option_bg_color }};
+    border: 2px solid {{ block.settings.option_border_color }};
+    border-radius: {{ block.settings.option_border_radius }}px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.option_size }}px;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  .ai-quiz-option-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.option_hover_bg_color }};
+    border-color: {{ block.settings.option_hover_border_color }};
+    transform: translateX(4px);
+  }
+
+  .ai-quiz-option-{{ ai_gen_id }}.selected {
+    background-color: {{ block.settings.option_selected_bg_color }};
+    border-color: {{ block.settings.option_selected_border_color }};
+    color: {{ block.settings.option_selected_text_color }};
+  }
+
+  .ai-quiz-navigation-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 12px;
+  }
+
+  .ai-quiz-btn-{{ ai_gen_id }} {
+    padding: 14px 28px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    cursor: pointer;
+    font-size: {{ block.settings.button_size }}px;
+    transition: all 0.3s ease;
+  }
+
+  .ai-quiz-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+  }
+
+  .ai-quiz-btn-{{ ai_gen_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ai-quiz-btn-secondary-{{ ai_gen_id }} {
+    background-color: transparent;
+    border: 2px solid {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_bg_color }};
+  }
+
+  .ai-quiz-btn-secondary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+  }
+
+  .ai-quiz-results-{{ ai_gen_id }} {
+    display: none;
+    text-align: center;
+  }
+
+  .ai-quiz-results-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-quiz-result-card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.result_card_bg_color }};
+    border-radius: {{ block.settings.result_card_border_radius }}px;
+    padding: 40px 30px;
+    margin-top: 20px;
+  }
+
+  .ai-quiz-result-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.result_title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 16px;
+    font-weight: 700;
+  }
+
+  .ai-quiz-result-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.result_subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 24px;
+    opacity: 0.9;
+  }
+
+  .ai-quiz-result-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.result_description_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+    margin: 0 0 30px;
+    opacity: 0.8;
+  }
+
+  .ai-quiz-result-images-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 0 24px;
+  }
+
+  .ai-quiz-result-image-{{ ai_gen_id }} {
+    width: calc(33.333% - 8px);
+    min-width: 150px;
+    max-width: 300px;
+    height: auto;
+    border-radius: {{ block.settings.result_image_border_radius }}px;
+    object-fit: cover;
+  }
+
+  .ai-quiz-restart-{{ ai_gen_id }} {
+    margin-top: 20px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-quiz-container-{{ ai_gen_id }} {
+      padding: 30px 16px;
+    }
+
+    .ai-quiz-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-quiz-question-text-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.question_size }}px * 0.9);
+    }
+
+    .ai-quiz-navigation-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-quiz-result-image-{{ ai_gen_id }} {
+      width: calc(50% - 6px);
+    }
+  }
+{% endstyle %}
+
+<quiz-section-{{ ai_gen_id }} class="ai-quiz-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-quiz-header-{{ ai_gen_id }}">
+    {% if block.settings.title != blank %}
+      <h2 class="ai-quiz-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+    {% endif %}
+    {% if block.settings.description != blank %}
+      <p class="ai-quiz-description-{{ ai_gen_id }}">{{ block.settings.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="ai-quiz-content-{{ ai_gen_id }}">
+    <div class="ai-quiz-progress-{{ ai_gen_id }}">
+      <div class="ai-quiz-progress-bar-{{ ai_gen_id }}" data-progress></div>
+    </div>
+
+    <div class="ai-quiz-questions-{{ ai_gen_id }}">
+      <div class="ai-quiz-question-{{ ai_gen_id }} active" data-question="1">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">What hits you the moment someone suddenly blindfolds you / covers your eyes?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":2}'>Instantly wet — the unknown just turns me on</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":1}'>A little nervous… but honestly more excited</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"equal":1}'>Actually feel safe — take care of me gently</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":1}'>Not really into it — losing sight makes me uneasy</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":2}'>Immediately want to flip it and blindfold them instead</div>
+        </div>
+      </div>
+
+      <div class="ai-quiz-question-{{ ai_gen_id }}" data-question="2">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">During sex, what's the name or pet name you secretly crave hearing from your partner the most?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":1}'>Bad girl / Good girl</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":1}'>Queen / Your Majesty</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"equal":1}'>Baby / My love</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":2}'>Slut / Little whore / My little slave</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":2}'>Master / Boss</div>
+        </div>
+      </div>
+
+      <div class="ai-quiz-question-{{ ai_gen_id }}" data-question="3">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">What do you most want to say (or hear said) when you or your partner starts undressing?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":1}'>"Take it off one piece at a time, slowly—I want to enjoy every second of this"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":2}'>"Strip completely, get on your knees, hands behind your back and wait for me"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"gentle":1}'>"Baby, no rush—take your time, one piece at a time"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":1}'>"Undressing so slowly… do you need me to help you with that?"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":2}'>"Hurry up, or I'm just gonna rip it off you"</div>
+        </div>
+      </div>
+
+      <div class="ai-quiz-question-{{ ai_gen_id }}" data-question="4">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">What's the hottest, most intense scene playing in your fantasy right now?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":1}'>Being tied up completely, unable to move at all, just letting them tease and play with me however they want</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":2}'>Having them locked down on the bed, making them beg my name over and over while I control when (or if) they get to come</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"equal":1}'>Candlelight, rose petals scattered everywhere, slow, deep, and totally wrapped-up-in-each-other sex</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":2}'>Getting taken hard from behind, hair yanked back, no holding back at all</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":1}'>Both of us going down on each other, taking our time, slowly pushing the other right to the edge of coming</div>
+        </div>
+      </div>
+
+      <div class="ai-quiz-question-{{ ai_gen_id }}" data-question="5">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">What's the naughtiest little whisper you secretly crave hearing from your partner in a public place?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":2}'>"Go to the bathroom right now, take off your panties/underwear and send me a pic"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":1}'>"Hold it in—don't squeeze your thighs. I know you're already soaked"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"equal":1}'>"Baby, let's get home so I can take really good care of you, okay?"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":1}'>"People are around… not here"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":2}'>"That person over there is watching, but I can't help it—please"</div>
+        </div>
+      </div>
+
+      <div class="ai-quiz-question-{{ ai_gen_id }}" data-question="6">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">What kind of stimulation turns you on the most—either giving it to your partner or having it done to you?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":1}'>Hard pinching, twisting, and tugging</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":2}'>Using toys or tools to keep teasing and building it up over and over</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"gentle":1}'>Soft licking, gentle biting, and warm breath blowing across sensitive spots</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":2}'>Getting / giving really hard spanks or slaps</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":1}'>Slow circles with the tongue, dragging it out for as long as possible to drive them crazy</div>
+        </div>
+      </div>
+
+      <div class="ai-quiz-question-{{ ai_gen_id }}" data-question="7">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">When your partner's going down on you and their tongue is right there, which line would make you lose it the most?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":2}'>"Don't move—I'm not stopping until you squirt / come all over my face"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"equal":1}'>"Baby, you taste so fucking sweet… I can't stop"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"sub":1}'>"Feeling that good already? You're squeezing my tongue so tight"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":1}'>"Master, am I making you feel good? Tell me how you like it"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"dom":2}'>"Please come in my mouth—I'm begging you to finish on my tongue"</div>
+        </div>
+      </div>
+
+      <div class="ai-quiz-question-{{ ai_gen_id }}" data-question="8">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">Right at that edge, the split-second before you (or your partner) come—what's the one thing you most want to say to your partner / hear them say to you?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"gentle":2}'>"Baby, come with me—let's finish together, I love you so much"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":1}'>"Don't come yet—hold it until I count to three"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":1}'>"Scream it out—let everyone know you're getting fucked so good"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":2}'>"Eyes rolling back already? Am I fucking you that good?"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":2}'>"Beg me—tell me you want me to come inside you / make you come"</div>
+        </div>
+      </div>
+
+      <div class="ai-quiz-question-{{ ai_gen_id }}" data-question="9">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">What's your favorite way to come (or make your partner come)?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":2}'>Being forced into a rough, overwhelming orgasm—crying and shaking while it hits</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":1}'>Slowly building up under tight control until the climax finally breaks through</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"gentle":2}'>Staring into each other's eyes, coming together in perfect, synced harmony</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":1}'>Getting fucked so hard you come with your legs giving out, barely able to stand afterward</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":2}'>Edged for ages, pushed right to the brink of breaking, then finally allowed to explode</div>
+        </div>
+      </div>
+
+      <div class="ai-quiz-question-{{ ai_gen_id }}" data-question="10">
+        <h3 class="ai-quiz-question-text-{{ ai_gen_id }}">After everything, when you're both spent and just wrapped up in each other's arms drifting off… what words do you most wanna hear (or say)?</h3>
+        <div class="ai-quiz-options-{{ ai_gen_id }}">
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":1}'>"You were so good for me tonight… your Master/Mistress is really pleased"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":1}'>"Look at you, all cried out and messy… so fucking cute. Next time I'll go even harder"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"rough":2}'>"Admit it—the rougher I am, the harder you come, don't you?"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"training":2}'>"Have you said thank you to Daddy/Mommy yet?"</div>
+          <div class="ai-quiz-option-{{ ai_gen_id }}" data-scores='{"gentle":1}'>"Just stay like this… holding you feels so good. I love you"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-quiz-navigation-{{ ai_gen_id }}">
+      <button class="ai-quiz-btn-{{ ai_gen_id }} ai-quiz-btn-secondary-{{ ai_gen_id }}" data-prev disabled>Previous</button>
+      <button class="ai-quiz-btn-{{ ai_gen_id }}" data-next disabled>Next</button>
+    </div>
+
+    <div class="ai-quiz-results-{{ ai_gen_id }}" data-results>
+      <h2 class="ai-quiz-title-{{ ai_gen_id }}">Your Result</h2>
+      <div class="ai-quiz-result-card-{{ ai_gen_id }}" data-result-card></div>
+      <button class="ai-quiz-btn-{{ ai_gen_id }} ai-quiz-restart-{{ ai_gen_id }}" data-restart>Take Quiz Again</button>
+    </div>
+  </div>
+</quiz-section-{{ ai_gen_id }}>
+
+<script>
+(function() {
+  class QuizSection{{ ai_gen_id }} extends HTMLElement {
+    constructor() {
+      super();
+      this.currentQuestion = 0;
+      this.totalQuestions = 10;
+      this.answers = {};
+      this.scores = {
+        power: { dom: 0, sub: 0, equal: 0 },
+        style: { gentle: 0, rough: 0, training: 0 }
+      };
+      this.lastScored = {
+        power: null,
+        style: null
+      };
+      
+      this.results = {
+        'dom-gentle': {
+          title: 'Gentle Dominant',
+          subtitle: 'Dom × Gentle',
+          description: '<p>You love guiding with soft commands, gentle touches, and deep care, letting your partner open up fully in a safe, cherished space.</p><p><strong>#tags you may like:</strong> #Lovers #Guided Masturbation #Stepfamily #Body worship #Teacher/student #Blindfold #Romance #Praise #Brat</p><p><em>Finn/Elena is right here waiting for you.</em></p>',
+          images: ['{{ block.settings.result_dom_gentle_image_1 | image_url: width: 600 }}', '{{ block.settings.result_dom_gentle_image_2 | image_url: width: 600 }}', '{{ block.settings.result_dom_gentle_image_3 | image_url: width: 600 }}']
+        },
+        'sub-gentle': {
+          title: 'Cherished Partner',
+          subtitle: 'Sub × Gentle',
+          description: '<p>You crave being held tenderly, whispered sweet praises, and slowly teased until you melt— the warmer the emotion, the stronger the thrill.</p><p><strong>#tags you may like:</strong> #DDLG #Blindfold #Office #Stepfamily #Masturbation #Boss/Employee #Fingering #Loving #Sweet #Fingering #Nipple play</p><p><em>Cove/Ava is right here waiting for you.</em></p>',
+          images: ['{{ block.settings.result_sub_gentle_image_1 | image_url: width: 600 }}', '{{ block.settings.result_sub_gentle_image_2 | image_url: width: 600 }}', '{{ block.settings.result_sub_gentle_image_3 | image_url: width: 600 }}']
+        },
+        'equal-gentle': {
+          title: 'Tender Harmony',
+          subtitle: 'Equal × Gentle',
+          description: '<p>No fixed roles—just mutual gentle exploration, deep kisses, and slow connection where love and desire blend seamlessly.</p><p><strong>#tags you may like:</strong> #Boyfriend #Married #Penetration #Bedroom #Handjob #Oral #Gentle #Romance #Nipple play</p><p><em>Hanson/Eartha is right here waiting for you.</em></p>',
+          images: ['{{ block.settings.result_equal_gentle_image_1 | image_url: width: 600 }}', '{{ block.settings.result_equal_gentle_image_2 | image_url: width: 600 }}', '{{ block.settings.result_equal_gentle_image_3 | image_url: width: 600 }}']
+        },
+        'dom-rough': {
+          title: 'Intense Possessor',
+          subtitle: 'Dom × Rough',
+          description: '<p>You thrive on firm grips, raw possession, and intense collisions, pushing your partner to the edge of pain and pleasure.</p><p><strong>#tags you may like:</strong> #Spanking #Strangers #Pegging #Hospital #Mirror #Enemies #Forced climax #Punishment #Angry sex #Strap</p><p><em>Ethan Carter/Emily is right here waiting for you.</em></p>',
+          images: ['{{ block.settings.result_dom_rough_image_1 | image_url: width: 600 }}', '{{ block.settings.result_dom_rough_image_2 | image_url: width: 600 }}', '{{ block.settings.result_dom_rough_image_3 | image_url: width: 600 }}']
+        },
+        'sub-rough': {
+          title: 'Wild Surrenderer',
+          subtitle: 'Sub × Rough',
+          description: '<p>You long to be roughly handled, fiercely taken, and driven to lose control—the wilder it gets, the deeper your release.</p><p><strong>#tags you may like:</strong> #Cheating #Jealousy #Force #Enemies #Prison #Exes #Degradation #Bondage #Spanking #Forced climax #Anal #Finish inside #Angry sex #Blowjob</p><p><em>Greg/Helena is right here waiting for you.</em></p>',
+          images: ['{{ block.settings.result_sub_rough_image_1 | image_url: width: 600 }}', '{{ block.settings.result_sub_rough_image_2 | image_url: width: 600 }}', '{{ block.settings.result_sub_rough_image_3 | image_url: width: 600 }}']
+        },
+        'equal-rough': {
+          title: 'Fierce Collision',
+          subtitle: 'Equal × Rough',
+          description: '<p>You clash together—tearing, conquering, raw bodies colliding—no one stays on top forever, just pure, explosive highs.</p><p><strong>#tags you may like:</strong> #Blowjob #In Public #Shower #Werewolf #Enemies #Dead dove #Double penetration #Anal #Riding #Spitting #Possessive</p><p><em>Eric/Carmen is right here waiting for you.</em></p>',
+          images: ['{{ block.settings.result_equal_rough_image_1 | image_url: width: 600 }}', '{{ block.settings.result_equal_rough_image_2 | image_url: width: 600 }}', '{{ block.settings.result_equal_rough_image_3 | image_url: width: 600 }}']
+        },
+        'dom-training': {
+          title: 'Patient Guide',
+          subtitle: 'Dom × Training',
+          description: '<p>You enjoy shaping your partner step by step with rules, tasks, rewards, and corrections—each act of obedience deepens your control.</p><p><strong>#tags you may like:</strong> #Edging #Exes #Boyfriend #Outdoors #Phone sex #Face Sitting #Guided Masturbation #Bondage #Desperate</p><p><em>Anthony/Shelly is right here waiting for you.</em></p>',
+          images: ['{{ block.settings.result_dom_training_image_1 | image_url: width: 600 }}', '{{ block.settings.result_dom_training_image_2 | image_url: width: 600 }}', '{{ block.settings.result_dom_training_image_3 | image_url: width: 600 }}']
+        },
+        'sub-training': {
+          title: 'Molded Lover',
+          subtitle: 'Sub × Training',
+          description: '<p>You love being given rules, checked on, and gently corrected—finding belonging and arousal in structure and discipline.</p><p><strong>#tags you may like:</strong> #Workplace #Vampire #Car #Boss/Employee #Teacher/student #Brat #Punishment #Bondage #Blindfold #Riding #Fingering #Teasing</p><p><em>Aurelio/Dr. Evelyn Reed is right here waiting for you.</em></p>',
+          images: ['{{ block.settings.result_sub_training_image_1 | image_url: width: 600 }}', '{{ block.settings.result_sub_training_image_2 | image_url: width: 600 }}', '{{ block.settings.result_sub_training_image_3 | image_url: width: 600 }}']
+        },
+        'equal-training': {
+          title: 'Shared Explorer',
+          subtitle: 'Equal × Training',
+          description: '<p>You create rules together, train each other, reward and correct mutually—turning discipline into a shared, intimate adventure.</p><p><strong>#tags you may like:</strong> #Roommates #Fingering #Friends with benefits #Hotel #Possessive #Best friend\'s brother #Blindfold #Finish inside #Teasing</p><p><em>Alex Rivière/Zara Vance is right here waiting for you.</em></p>',
+          images: ['{{ block.settings.result_equal_training_image_1 | image_url: width: 600 }}', '{{ block.settings.result_equal_training_image_2 | image_url: width: 600 }}', '{{ block.settings.result_equal_training_image_3 | image_url: width: 600 }}']
+        }
+      };
+    }
+
+    connectedCallback() {
+      this.questions = this.querySelectorAll('.ai-quiz-question-{{ ai_gen_id }}');
+      this.progressBar = this.querySelector('[data-progress]');
+      this.prevBtn = this.querySelector('[data-prev]');
+      this.nextBtn = this.querySelector('[data-next]');
+      this.resultsSection = this.querySelector('[data-results]');
+      this.resultCard = this.querySelector('[data-result-card]');
+      this.restartBtn = this.querySelector('[data-restart]');
+
+      this.setupEventListeners();
+      this.updateProgress();
+    }
+
+    setupEventListeners() {
+      this.questions.forEach((question, index) => {
+        const options = question.querySelectorAll('.ai-quiz-option-{{ ai_gen_id }}');
+        options.forEach(option => {
+          option.addEventListener('click', () => this.selectOption(option, index));
+        });
+      });
+
+      this.prevBtn.addEventListener('click', () => this.previousQuestion());
+      this.nextBtn.addEventListener('click', () => this.nextQuestion());
+      this.restartBtn.addEventListener('click', () => this.restartQuiz());
+    }
+
+    selectOption(option, questionIndex) {
+      const question = this.questions[questionIndex];
+      const options = question.querySelectorAll('.ai-quiz-option-{{ ai_gen_id }}');
+      
+      options.forEach(opt => opt.classList.remove('selected'));
+      option.classList.add('selected');
+      
+      const scoresData = option.getAttribute('data-scores');
+      const scores = JSON.parse(scoresData);
+      
+      this.answers[questionIndex] = scores;
+      this.nextBtn.disabled = false;
+    }
+
+    nextQuestion() {
+      if (this.currentQuestion < this.totalQuestions - 1) {
+        this.questions[this.currentQuestion].classList.remove('active');
+        this.currentQuestion++;
+        this.questions[this.currentQuestion].classList.add('active');
+        
+        this.prevBtn.disabled = false;
+        this.nextBtn.disabled = !this.answers[this.currentQuestion];
+        
+        if (this.currentQuestion === this.totalQuestions - 1) {
+          this.nextBtn.textContent = 'See Results';
+        }
+        
+        this.updateProgress();
+      } else {
+        this.calculateResults();
+      }
+    }
+
+    previousQuestion() {
+      if (this.currentQuestion > 0) {
+        this.questions[this.currentQuestion].classList.remove('active');
+        this.currentQuestion--;
+        this.questions[this.currentQuestion].classList.add('active');
+        
+        this.prevBtn.disabled = this.currentQuestion === 0;
+        this.nextBtn.disabled = false;
+        this.nextBtn.textContent = 'Next';
+        
+        this.updateProgress();
+      }
+    }
+
+    updateProgress() {
+      const progress = ((this.currentQuestion + 1) / this.totalQuestions) * 100;
+      this.progressBar.style.width = progress + '%';
+    }
+
+    calculateResults() {
+      this.scores = {
+        power: { dom: 0, sub: 0, equal: 0 },
+        style: { gentle: 0, rough: 0, training: 0 }
+      };
+
+      Object.values(this.answers).forEach(scores => {
+        for (let key in scores) {
+          if (key === 'dom' || key === 'sub' || key === 'equal') {
+            this.scores.power[key] += scores[key];
+            this.lastScored.power = key;
+          } else if (key === 'gentle' || key === 'rough' || key === 'training') {
+            this.scores.style[key] += scores[key];
+            this.lastScored.style = key;
+          }
+        }
+      });
+
+      const powerResult = this.getHighestScore('power');
+      const styleResult = this.getHighestScore('style');
+      
+      const resultKey = powerResult + '-' + styleResult;
+      this.displayResult(resultKey);
+    }
+
+    getHighestScore(dimension) {
+      const scores = this.scores[dimension];
+      const maxScore = Math.max(...Object.values(scores));
+      
+      const tiedOptions = Object.keys(scores).filter(key => scores[key] === maxScore);
+      
+      if (tiedOptions.length === 1) {
+        return tiedOptions[0];
+      }
+      
+      const priorityOrder = dimension === 'power' 
+        ? ['{{ block.settings.power_tie_priority_1 }}', '{{ block.settings.power_tie_priority_2 }}', '{{ block.settings.power_tie_priority_3 }}']
+        : ['{{ block.settings.style_tie_priority_1 }}', '{{ block.settings.style_tie_priority_2 }}', '{{ block.settings.style_tie_priority_3 }}'];
+      
+      for (let option of priorityOrder) {
+        if (tiedOptions.includes(option)) {
+          return option;
+        }
+      }
+      
+      return this.lastScored[dimension] || tiedOptions[0];
+    }
+
+    displayResult(resultKey) {
+      const result = this.results[resultKey];
+      
+      let imagesHTML = '';
+      if (result.images && result.images.length > 0) {
+        const validImages = result.images.filter(img => img && img !== 'https:');
+        if (validImages.length > 0) {
+          imagesHTML = '<div class="ai-quiz-result-images-{{ ai_gen_id }}">';
+          validImages.forEach(img => {
+            imagesHTML += '<img src="' + img + '" alt="' + result.title + '" class="ai-quiz-result-image-{{ ai_gen_id }}" loading="lazy">';
+          });
+          imagesHTML += '</div>';
+        }
+      }
+      
+      this.resultCard.innerHTML = '<h3 class="ai-quiz-result-title-{{ ai_gen_id }}">' + result.title + '</h3>' + '<p class="ai-quiz-result-subtitle-{{ ai_gen_id }}">' + result.subtitle + '</p>' + '<div class="ai-quiz-result-description-{{ ai_gen_id }}">' + result.description + '</div>' + imagesHTML;
+      
+      this.querySelector('.ai-quiz-content-{{ ai_gen_id }}').style.display = 'none';
+      this.resultsSection.classList.add('active');
+    }
+
+    restartQuiz() {
+      this.currentQuestion = 0;
+      this.answers = {};
+      this.scores = {
+        power: { dom: 0, sub: 0, equal: 0 },
+        style: { gentle: 0, rough: 0, training: 0 }
+      };
+      
+      this.questions.forEach(question => {
+        question.classList.remove('active');
+        const options = question.querySelectorAll('.ai-quiz-option-{{ ai_gen_id }}');
+        options.forEach(opt => opt.classList.remove('selected'));
+      });
+      
+      this.questions[0].classList.add('active');
+      this.prevBtn.disabled = true;
+      this.nextBtn.disabled = true;
+      this.nextBtn.textContent = 'Next';
+      
+      this.resultsSection.classList.remove('active');
+      this.querySelector('.ai-quiz-content-{{ ai_gen_id }}').style.display = 'block';
+      
+      this.updateProgress();
+    }
+  }
+
+  customElements.define('quiz-section-{{ ai_gen_id }}', QuizSection{{ ai_gen_id }});
+})();
+</script>
+
 {% schema %}
 {
   "name": "Personality quiz",
@@ -17,7 +795,7 @@
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "Answer 5 questions to find your unique persona"
+      "default": "Answer 10 questions to find your unique combination"
     },
     {
       "type": "range",
@@ -35,126 +813,239 @@
     },
     {
       "type": "select",
-      "id": "tie_priority_1",
-      "label": "Priority 1",
+      "id": "power_tie_priority_1",
+      "label": "Power mode priority 1",
       "options": [
-        { "value": "director", "label": "The Director" },
-        { "value": "muse", "label": "The Muse" },
-        { "value": "switch", "label": "The Switch" },
-        { "value": "dreamer", "label": "The Dreamer" }
+        { "value": "dom", "label": "Dom" },
+        { "value": "sub", "label": "Sub" },
+        { "value": "equal", "label": "Equal" }
       ],
-      "default": "director"
+      "default": "dom"
     },
     {
       "type": "select",
-      "id": "tie_priority_2",
-      "label": "Priority 2",
+      "id": "power_tie_priority_2",
+      "label": "Power mode priority 2",
       "options": [
-        { "value": "director", "label": "The Director" },
-        { "value": "muse", "label": "The Muse" },
-        { "value": "switch", "label": "The Switch" },
-        { "value": "dreamer", "label": "The Dreamer" }
+        { "value": "dom", "label": "Dom" },
+        { "value": "sub", "label": "Sub" },
+        { "value": "equal", "label": "Equal" }
       ],
-      "default": "muse"
+      "default": "equal"
     },
     {
       "type": "select",
-      "id": "tie_priority_3",
-      "label": "Priority 3",
+      "id": "power_tie_priority_3",
+      "label": "Power mode priority 3",
       "options": [
-        { "value": "director", "label": "The Director" },
-        { "value": "muse", "label": "The Muse" },
-        { "value": "switch", "label": "The Switch" },
-        { "value": "dreamer", "label": "The Dreamer" }
+        { "value": "dom", "label": "Dom" },
+        { "value": "sub", "label": "Sub" },
+        { "value": "equal", "label": "Equal" }
       ],
-      "default": "switch"
+      "default": "sub"
     },
     {
       "type": "select",
-      "id": "tie_priority_4",
-      "label": "Priority 4",
+      "id": "style_tie_priority_1",
+      "label": "Style mode priority 1",
       "options": [
-        { "value": "director", "label": "The Director" },
-        { "value": "muse", "label": "The Muse" },
-        { "value": "switch", "label": "The Switch" },
-        { "value": "dreamer", "label": "The Dreamer" }
+        { "value": "gentle", "label": "Gentle" },
+        { "value": "rough", "label": "Rough" },
+        { "value": "training", "label": "Training" }
       ],
-      "default": "dreamer"
+      "default": "gentle"
+    },
+    {
+      "type": "select",
+      "id": "style_tie_priority_2",
+      "label": "Style mode priority 2",
+      "options": [
+        { "value": "gentle", "label": "Gentle" },
+        { "value": "rough", "label": "Rough" },
+        { "value": "training", "label": "Training" }
+      ],
+      "default": "rough"
+    },
+    {
+      "type": "select",
+      "id": "style_tie_priority_3",
+      "label": "Style mode priority 3",
+      "options": [
+        { "value": "gentle", "label": "Gentle" },
+        { "value": "rough", "label": "Rough" },
+        { "value": "training", "label": "Training" }
+      ],
+      "default": "training"
     },
     {
       "type": "header",
-      "content": "Result: The Director"
+      "content": "Result: Dom × Gentle"
     },
     {
       "type": "image_picker",
-      "id": "result_director_image_1",
+      "id": "result_dom_gentle_image_1",
       "label": "Image 1"
     },
     {
       "type": "image_picker",
-      "id": "result_director_image_2",
+      "id": "result_dom_gentle_image_2",
       "label": "Image 2"
     },
     {
       "type": "image_picker",
-      "id": "result_director_image_3",
+      "id": "result_dom_gentle_image_3",
       "label": "Image 3"
     },
     {
       "type": "header",
-      "content": "Result: The Muse"
+      "content": "Result: Sub × Gentle"
     },
     {
       "type": "image_picker",
-      "id": "result_muse_image_1",
+      "id": "result_sub_gentle_image_1",
       "label": "Image 1"
     },
     {
       "type": "image_picker",
-      "id": "result_muse_image_2",
+      "id": "result_sub_gentle_image_2",
       "label": "Image 2"
     },
     {
       "type": "image_picker",
-      "id": "result_muse_image_3",
+      "id": "result_sub_gentle_image_3",
       "label": "Image 3"
     },
     {
       "type": "header",
-      "content": "Result: The Switch"
+      "content": "Result: Equal × Gentle"
     },
     {
       "type": "image_picker",
-      "id": "result_switch_image_1",
+      "id": "result_equal_gentle_image_1",
       "label": "Image 1"
     },
     {
       "type": "image_picker",
-      "id": "result_switch_image_2",
+      "id": "result_equal_gentle_image_2",
       "label": "Image 2"
     },
     {
       "type": "image_picker",
-      "id": "result_switch_image_3",
+      "id": "result_equal_gentle_image_3",
       "label": "Image 3"
     },
     {
       "type": "header",
-      "content": "Result: The Dreamer"
+      "content": "Result: Dom × Rough"
     },
     {
       "type": "image_picker",
-      "id": "result_dreamer_image_1",
+      "id": "result_dom_rough_image_1",
       "label": "Image 1"
     },
     {
       "type": "image_picker",
-      "id": "result_dreamer_image_2",
+      "id": "result_dom_rough_image_2",
       "label": "Image 2"
     },
     {
       "type": "image_picker",
-      "id": "result_dreamer_image_3",
+      "id": "result_dom_rough_image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "header",
+      "content": "Result: Sub × Rough"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_sub_rough_image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_sub_rough_image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_sub_rough_image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "header",
+      "content": "Result: Equal × Rough"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_equal_rough_image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_equal_rough_image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_equal_rough_image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "header",
+      "content": "Result: Dom × Training"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_dom_training_image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_dom_training_image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_dom_training_image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "header",
+      "content": "Result: Sub × Training"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_sub_training_image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_sub_training_image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_sub_training_image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "header",
+      "content": "Result: Equal × Training"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_equal_training_image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_equal_training_image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_equal_training_image_3",
       "label": "Image 3"
     },
     {
@@ -397,7 +1288,3 @@
   ]
 }
 {% endschema %}
-```
-
-### 解决办法：
-直接使用右侧更新后的完整代码覆盖原文件，然后保存即可成功通过 Shopify 校验！
