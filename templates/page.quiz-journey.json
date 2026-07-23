@@ -129,17 +129,11 @@
       "type": "_blocks",
       "blocks": {
         "ai_gen_block_edc15d1_Q4NBBB": {
-          "type": "ai_gen_block_edc15d1",
+          "type": "personality-quiz",
           "settings": {
             "title": "Discover Your Intimacy Style",
             "description": "Answer 10 questions to find your unique combination",
             "desktop_width_percent": 100,
-            "power_tie_priority_1": "dom",
-            "power_tie_priority_2": "equal",
-            "power_tie_priority_3": "sub",
-            "style_tie_priority_1": "gentle",
-            "style_tie_priority_2": "rough",
-            "style_tie_priority_3": "training",
             "background_color": "#ffffff",
             "text_color": "#321e1e",
             "progress_bg_color": "#f0f0f0",
