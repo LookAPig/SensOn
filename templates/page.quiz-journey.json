@@ -18,155 +18,94 @@
         "content_width": "md"
       }
     },
-    "image_with_text_overlay_nzNPrD": {
-      "type": "image-with-text-overlay",
-      "blocks": {
-        "subheading_V6BtEn": {
-          "type": "subheading",
-          "disabled": true,
-          "settings": {
-            "text": ""
-          },
-          "blocks": {}
-        },
-        "heading_3e6hPH": {
-          "type": "heading",
-          "settings": {
-            "text": "Your Space.\nYour Perfect Rhythm.",
-            "pc_font_size": 32,
-            "h5_font_size": 25,
-            "pc_line_height": 1.2,
-            "h5_line_height": 1.2,
-            "heading_size": "h4",
-            "html_tag": "p"
-          },
-          "blocks": {}
-        },
-        "heading_Ve3bVF": {
-          "type": "heading",
-          "name": "t:blocks.heading.name",
-          "settings": {
-            "text": "Meet the AI-powered companion designed to align with your senses and elevate your personal evening sanctuary.",
-            "pc_font_size": 18,
-            "h5_font_size": 12,
-            "pc_line_height": 1.2,
-            "h5_line_height": 1,
-            "heading_size": "h3",
-            "html_tag": "p"
-          },
-          "blocks": {}
-        },
-        "button_group_BneMXH": {
-          "type": "button-group",
-          "name": "t:blocks.button_group.name",
-          "settings": {},
-          "blocks": {
-            "button_aadB4d": {
-              "type": "button",
-              "settings": {
-                "text": "Unlock Your Experience",
-                "icon": "",
-                "url": "shopify://products/senson-s1-wellness-companion",
-                "open_in_new_tab": false,
-                "style": "solid",
-                "background": "",
-                "text_color": "#321e1e"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "button_aadB4d"
-          ]
-        },
-        "liquid_rGyYWm": {
-          "type": "liquid",
-          "name": "t:blocks.liquid.name",
-          "disabled": true,
-          "settings": {
-            "liquid": "<div class=\"banner_bottoms\">\n<p>Earn up to 15% commission on every sale</p>\n<p>Long-term recurring subscription share</p>\n</div>"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "subheading_V6BtEn",
-        "heading_3e6hPH",
-        "heading_Ve3bVF",
-        "button_group_BneMXH",
-        "liquid_rGyYWm"
-      ],
-      "name": "t:sections.image_with_text_overlay.name",
-      "settings": {
-        "color_scheme": "scheme-7",
-        "allow_transparent_header": false,
-        "image_size": "fill",
-        "image": "shopify://shop_images/pc.jpg",
-        "mobile_image": "shopify://shop_images/h5.jpg",
-        "overlay_color": "#000000",
-        "overlay_opacity": 20,
-        "enable_sticky_content": false,
-        "content_width": "md",
-        "desktop_text_position": "sm:place-self-center",
-        "mobile_text_position": "place-self-center"
-      }
-    },
-    "custom_liquid_LPXRCe": {
-      "type": "custom-liquid",
-      "custom_css": [
-        ".section-spacing {padding: 0;}"
-      ],
-      "name": "t:sections.custom_liquid.name",
-      "settings": {
-        "color_scheme": "",
-        "liquid": "{% render 'url-params-forwarder', init: true, selector: '.button' %}",
-        "text_alignment": "left",
-        "add_vertical_spacing": true,
-        "add_horizontal_spacing": true
-      }
-    },
-    "blocks_gwM8V8": {
+    "1784773837ab1b2040": {
       "type": "_blocks",
       "blocks": {
-        "ai_gen_block_edc15d1_Q4NBBB": {
-          "type": "personality-quiz",
+        "ai_gen_block_ccb6ff2_LteeG9": {
+          "type": "ai_gen_block_ccb6ff2",
           "settings": {
-            "title": "Discover Your Intimacy Style",
-            "description": "Answer 10 questions to find your unique combination",
+            "quiz_title": "Take Our Quiz",
+            "quiz_description": "Answer 5 questions to discover your perfect match",
             "desktop_width_percent": 100,
-            "background_color": "#ffffff",
-            "text_color": "#321e1e",
+            "question_1": "Your partner covers your eyes without warning. Your first instinct?",
+            "q1_option_1": "The unknown thrills me",
+            "q1_option_2": "Nervous… but curious",
+            "q1_option_3": "I feel safe — take care of me",
+            "q1_option_4": "I'd rather be the one in control",
+            "q1_option_5": "Others",
+            "question_2": "What role feels most natural to you?",
+            "q2_option_1": "The one in charge",
+            "q2_option_2": "The one who surrenders",
+            "q2_option_3": "Equals, deeply connected",
+            "q2_option_4": "I switch — depends on my mood",
+            "q2_option_5": "Others",
+            "question_3": "Your ideal pace?",
+            "q3_option_1": "A slow burn that builds forever",
+            "q3_option_2": "Intense from the first second",
+            "q3_option_3": "Romantic and unhurried",
+            "q3_option_4": "Unpredictable — keep me guessing",
+            "q3_option_5": "Others",
+            "question_4": "Which scene lives rent-free in your imagination?",
+            "q4_option_1": "Candlelight, slow, completely wrapped up in each other",
+            "q4_option_2": "Somewhere a little risky…, where you shouldn't",
+            "q4_option_3": "Completely at their mercy",
+            "q4_option_4": "Them completely at yours",
+            "q4_option_5": "Others",
+            "question_5": "What do you crave most?",
+            "q5_option_1": "Being desired beyond control",
+            "q5_option_2": "Total escape from my own head",
+            "q5_option_3": "Deep emotional closeness",
+            "q5_option_4": "The rush of power",
+            "q5_option_5": "Others",
+            "previous_button_text": "Previous",
+            "next_button_text": "Next",
+            "submit_button_text": "Submit",
+            "results_image_max_width": 400,
+            "results_image_border_radius": 8,
+            "results_title": "Thank You!",
+            "results_message": "Your answers have been recorded. We'll use this information to provide you with personalized recommendations.",
+            "results_cta_text": "Shop Now",
+            "results_cta_link": "",
+            "show_restart_button": true,
+            "restart_button_text": "Restart Quiz",
+            "results_text_align": "center",
+            "results_bg_color": "#000000",
+            "results_text_color": "#ffffff",
+            "results_cta_bg_color": "#000000",
+            "results_cta_text_color": "#000000",
+            "results_cta_hover_bg_color": "#000000",
+            "results_title_size": 32,
+            "results_message_size": 14,
+            "results_cta_size": 14,
+            "results_border_radius": 16,
+            "results_padding": 40,
+            "results_cta_border_radius": 30,
+            "background_color": "#000000",
+            "text_color": "#ffffff",
             "progress_bg_color": "#f0f0f0",
-            "progress_color": "#321e1e",
-            "option_bg_color": "#faf4f0",
+            "progress_color": "#F287EC",
+            "option_bg_color": "#000000",
             "option_border_color": "#e0e0e0",
-            "option_hover_bg_color": "#f1e4d3",
+            "option_hover_bg_color": "#F287EC",
             "option_hover_border_color": "#321e1e",
-            "option_selected_bg_color": "#321e1e",
+            "option_selected_bg_color": "#000000",
             "option_selected_border_color": "#321e1e",
-            "option_selected_text_color": "#ffffff",
-            "button_bg_color": "#321e1e",
+            "button_bg_color": "#F287EC",
             "button_text_color": "#ffffff",
             "button_hover_bg_color": "#1e1212",
-            "result_card_bg_color": "#faf4f0",
             "title_size": 32,
-            "description_size": 16,
-            "question_size": 20,
+            "description_size": 14,
+            "question_size": 16,
             "option_size": 16,
-            "button_size": 14,
-            "result_title_size": 36,
-            "result_subtitle_size": 18,
-            "result_description_size": 16,
-            "border_radius": 12,
+            "border_radius": 16,
             "option_border_radius": 8,
-            "button_border_radius": 30,
-            "result_card_border_radius": 12,
-            "result_image_border_radius": 8
+            "button_border_radius": 30
           },
           "blocks": {}
         },
         "section-header": {
           "type": "_section-header",
+          "disabled": true,
           "static": true,
           "settings": {
             "class": "",
@@ -185,11 +124,10 @@
         }
       },
       "block_order": [
-        "ai_gen_block_edc15d1_Q4NBBB"
+        "ai_gen_block_ccb6ff2_LteeG9"
       ],
-      "name": "Personality quiz",
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-7",
         "add_vertical_spacing": true,
         "add_horizontal_spacing": true
       }
@@ -197,8 +135,6 @@
   },
   "order": [
     "main",
-    "image_with_text_overlay_nzNPrD",
-    "custom_liquid_LPXRCe",
-    "blocks_gwM8V8"
+    "1784773837ab1b2040"
   ]
 }
