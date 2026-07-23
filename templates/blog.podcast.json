@@ -45,6 +45,7 @@
         "rich_text_KMW48a": {
           "type": "rich-text",
           "name": "t:blocks.rich_text.name",
+          "disabled": true,
           "settings": {
             "text": "<p>New episodes every other Thursday</p>",
             "content_width": "sm"
