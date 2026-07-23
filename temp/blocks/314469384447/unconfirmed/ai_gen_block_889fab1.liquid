@@ -1,6 +1,673 @@
+{% doc %}
+  @prompt
+    设计一个quiz答案页的block
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-quiz-result-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .ai-quiz-result-container-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .ai-quiz-result-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.icon_background_color }};
+    border-radius: 50%;
+  }
+
+  .ai-quiz-result-icon-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.icon_size }}px * 0.5);
+    height: calc({{ block.settings.icon_size }}px * 0.5);
+    stroke: {{ block.settings.icon_color }};
+  }
+
+  .ai-quiz-result-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 20px;
+    line-height: 1.2;
+  }
+
+  .ai-quiz-result-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.description_color }};
+    margin: 0 0 40px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ai-quiz-result-score-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.score_background_color }};
+    color: {{ block.settings.score_text_color }};
+    padding: 15px 30px;
+    border-radius: {{ block.settings.score_border_radius }}px;
+    font-size: {{ block.settings.score_size }}px;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+
+  .ai-quiz-result-products-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .ai-quiz-result-product-{{ ai_gen_id }} {
+    background-color: {{ block.settings.product_card_background }};
+    border-radius: {{ block.settings.product_card_border_radius }}px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-quiz-result-product-{{ ai_gen_id }}:hover {
+    transform: translateY(-5px);
+  }
+
+  .ai-quiz-result-product-image-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 15px;
+    border-radius: {{ block.settings.product_image_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-quiz-result-product-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-quiz-result-product-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-quiz-result-product-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  .ai-quiz-result-product-title-{{ ai_gen_id }} {
+    font-size: 18px;
+    color: {{ block.settings.product_title_color }};
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+
+  .ai-quiz-result-product-price-{{ ai_gen_id }} {
+    font-size: 16px;
+    color: {{ block.settings.product_price_color }};
+    margin-bottom: 15px;
+  }
+
+  .ai-quiz-result-product-link-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: {{ block.settings.product_button_background }};
+    color: {{ block.settings.product_button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.product_button_border_radius }}px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-quiz-result-product-link-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.product_button_hover_background }};
+  }
+
+  .ai-quiz-result-actions-{{ ai_gen_id }} {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .ai-quiz-result-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: {{ block.settings.primary_button_background }};
+    color: {{ block.settings.primary_button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ai-quiz-result-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.primary_button_hover_background }};
+  }
+
+  .ai-quiz-result-button-secondary-{{ ai_gen_id }} {
+    background-color: {{ block.settings.secondary_button_background }};
+    color: {{ block.settings.secondary_button_text_color }};
+    border: 2px solid {{ block.settings.secondary_button_border_color }};
+  }
+
+  .ai-quiz-result-button-secondary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.secondary_button_hover_background }};
+  }
+
+  .ai-quiz-result-empty-state-{{ ai_gen_id }} {
+    padding: 20px;
+    color: #999;
+    font-style: italic;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-quiz-result-container-{{ ai_gen_id }} {
+      padding: 40px 20px;
+    }
+
+    .ai-quiz-result-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-quiz-result-products-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .ai-quiz-result-actions-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-quiz-result-button-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<quiz-result-{{ ai_gen_id }} class="ai-quiz-result-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-quiz-result-container-{{ ai_gen_id }}">
+    {% if block.settings.show_icon %}
+      <div class="ai-quiz-result-icon-{{ ai_gen_id }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+    {% endif %}
+
+    {% if block.settings.title != blank %}
+      <h2 class="ai-quiz-result-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+    {% endif %}
+
+    {% if block.settings.description != blank %}
+      <div class="ai-quiz-result-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+    {% endif %}
+
+    {% if block.settings.show_score %}
+      <div class="ai-quiz-result-score-{{ ai_gen_id }}">
+        {{ block.settings.score_label }}: {{ block.settings.score_value }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_recommended_products %}
+      <div class="ai-quiz-result-products-{{ ai_gen_id }}">
+        {% for i in (1..3) %}
+          {% liquid
+            assign product_key = 'recommended_product_' | append: i
+            assign product = block.settings[product_key]
+          %}
+
+          {% if product != blank %}
+            <div class="ai-quiz-result-product-{{ ai_gen_id }}">
+              <div class="ai-quiz-result-product-image-{{ ai_gen_id }}">
+                {% if product.featured_image %}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 400 }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    width="400"
+                    height="400"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <div class="ai-quiz-result-product-image-placeholder-{{ ai_gen_id }}">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+              </div>
+              <h3 class="ai-quiz-result-product-title-{{ ai_gen_id }}">{{ product.title }}</h3>
+              <div class="ai-quiz-result-product-price-{{ ai_gen_id }}">{{ product.price | money }}</div>
+              <a href="{{ product.url }}" class="ai-quiz-result-product-link-{{ ai_gen_id }}">
+                {{ block.settings.product_button_text }}
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if block.settings.recommended_product_1 == blank and block.settings.recommended_product_2 == blank and block.settings.recommended_product_3 == blank %}
+        <div class="ai-quiz-result-empty-state-{{ ai_gen_id }}">
+          Next, add recommended products
+        </div>
+      {% endif %}
+    {% endif %}
+
+    <div class="ai-quiz-result-actions-{{ ai_gen_id }}">
+      {% if block.settings.primary_button_text != blank %}
+        <a href="{{ block.settings.primary_button_link }}" class="ai-quiz-result-button-{{ ai_gen_id }}">
+          {{ block.settings.primary_button_text }}
+        </a>
+      {% endif %}
+
+      {% if block.settings.secondary_button_text != blank %}
+        <a href="{{ block.settings.secondary_button_link }}" class="ai-quiz-result-button-{{ ai_gen_id }} ai-quiz-result-button-secondary-{{ ai_gen_id }}">
+          {{ block.settings.secondary_button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</quiz-result-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class QuizResult{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.init();
+      }
+
+      init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const score = urlParams.get('score');
+        
+        if (score) {
+          const scoreElement = this.querySelector('.ai-quiz-result-score-{{ ai_gen_id }}');
+          if (scoreElement) {
+            const scoreLabel = scoreElement.textContent.split(':')[0];
+            scoreElement.textContent = scoreLabel + ': ' + score;
+          }
+        }
+      }
+    }
+
+    customElements.define('quiz-result-{{ ai_gen_id }}', QuizResult{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Quiz result",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fef5fd"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "icon_background_color",
+      "label": "Icon background",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Congratulations!"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Thank you for completing the quiz. Based on your answers, we have personalized recommendations for you."
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "header",
+      "content": "Score"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_score",
+      "label": "Show score",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "score_label",
+      "label": "Score label",
+      "default": "Your Score"
+    },
+    {
+      "type": "text",
+      "id": "score_value",
+      "label": "Score value",
+      "default": "85/100"
+    },
+    {
+      "type": "range",
+      "id": "score_size",
+      "label": "Score size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "score_background_color",
+      "label": "Score background",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "score_text_color",
+      "label": "Score text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "score_border_radius",
+      "label": "Score border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Recommended products"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_recommended_products",
+      "label": "Show recommended products",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "recommended_product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "product",
+      "id": "recommended_product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "product",
+      "id": "recommended_product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "text",
+      "id": "product_button_text",
+      "label": "Product button text",
+      "default": "View Product"
+    },
+    {
+      "type": "color",
+      "id": "product_card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "product_card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "product_image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Title color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "product_price_color",
+      "label": "Price color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "product_button_background",
+      "label": "Button background",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "product_button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "product_button_hover_background",
+      "label": "Button hover background",
+      "default": "#1e1212"
+    },
+    {
+      "type": "range",
+      "id": "product_button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Primary button"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Button text",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_background",
+      "label": "Background",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_hover_background",
+      "label": "Hover background",
+      "default": "#1e1212"
+    },
+    {
+      "type": "header",
+      "content": "Secondary button"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Button text",
+      "default": "Retake Quiz"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_text_color",
+      "label": "Text color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_border_color",
+      "label": "Border color",
+      "default": "#321e1e"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_hover_background",
+      "label": "Hover background",
+      "default": "#fef5fd"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiz result"
+    }
+  ]
+}
 {% endschema %}
