@@ -6,10 +6,10 @@
 >
   <div id="pdp-quize" class="quize-box">
     <div class="quize-left">
-      {% if section.settings.title != blank %}
+      {% if section.settings.title %}
         <h2>{{ section.settings.title }}</h2>
       {% endif %}
-      {% if section.settings.subtitle != blank %}
+      {% if section.settings.subtitle %}
         <p>{{ section.settings.subtitle }}</p>
       {% endif %}
     </div>
@@ -39,17 +39,20 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
             <svg class="quize-question-icon-hook" stroke="currentColor" width="20" height="20" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              <path  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
             </svg>
           </div>
         </div>
 
         {% comment %} result {% endcomment %}
         <div class="quize-question-result-wrapper js-quize-question-result-wrapper">
-          <h3 class="h3"></h3>
-          <div class="js-quize-result-desc"></div>
+          <div class="h3">Velvet Touch</div>
+          <p>
+            You crave soft, slow, sensory pleasure—warm hands, quiet moments, and gentle tension that lets you melt
+            without pressure.
+          </p>
           <div class="quize-question-result-img-box">
-            <img src="" alt="Quiz Result" />
+            <img src="" />
           </div>
           <div>
             <button class="js-quize-question-reset">Restart Quiz</button>
@@ -61,273 +64,309 @@
 </section>
 
 <script>
-(function() {
-  var quizeData = [
-    {% for block in section.blocks %}
-      {% if block.type == 'item' %}
-        {
-          question: {{ block.settings.question | json }},
-          answers: [
+      var quizeData = [
+        {% for block in section.blocks %}
+          {% if block.type == 'item' %}
             {
-              text: {{ block.settings.answer_1 | json }},
-              mode: {{ block.settings.mode1 | json }},
-              score: {{ block.settings.score_1 }},
-              option: {{ block.settings.option_1 | json }},
-              optionScore: {{ block.settings.option_score_1 }}
-            },
-            {
-              text: {{ block.settings.answer_2 | json }},
-              mode: {{ block.settings.mode_2 | json }},
-              score: {{ block.settings.score_2 }},
-              option: {{ block.settings.option_2 | json }},
-              optionScore: {{ block.settings.option_score_2 }}
-            },
-            {
-              text: {{ block.settings.answer_3 | json }},
-              mode: {{ block.settings.mode_3 | json }},
-              score: {{ block.settings.score_3 }},
-              option: {{ block.settings.option_3 | json }},
-              optionScore: {{ block.settings.option_score_3 }}
-            },
-            {
-              text: {{ block.settings.answer_4 | json }},
-              mode: {{ block.settings.mode_4 | json }},
-              score: {{ block.settings.score_4 }},
-              option: {{ block.settings.option_4 | json }},
-              optionScore: {{ block.settings.option_score_4 }}
-            },
-            {
-              text: {{ block.settings.answer_5 | json }},
-              mode: {{ block.settings.mode_5 | json }},
-              score: {{ block.settings.score_5 }},
-              option: {{ block.settings.option_5 | json }},
-              optionScore: {{ block.settings.option_score_5 }}
-            }
-          ]
-        }{% unless forloop.last %},{% endunless %}
-      {% endif %}
-    {% endfor %}
-  ];
-
-  {% assign result_block = nil %}
-  {% for b in section.blocks %}
-    {% if b.type == 'quize_result' %}
-      {% assign result_block = b %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-
-  var quizeResultData = null;
-  {% if result_block %}
-    quizeResultData = {
-      dom_gentle: {
-        img: {% if result_block.settings.result_img_dom_gentle %}{{ result_block.settings.result_img_dom_gentle | image_url: width: 1200 | json }}{% else %}''{% endif %},
-        title: {{ result_block.settings.result_title_dom_gentle | json }},
-        desc: {{ result_block.settings.result_desc_dom_gentle | json }}
-      },
-      dom_rough: {
-        img: {% if result_block.settings.result_img_dom_rough %}{{ result_block.settings.result_img_dom_rough | image_url: width: 1200 | json }}{% else %}''{% endif %},
-        title: {{ result_block.settings.result_title_dom_rough | json }},
-        desc: {{ result_block.settings.result_desc_dom_rough | json }}
-      },
-      dom_training: {
-        img: {% if result_block.settings.result_img_dom_training %}{{ result_block.settings.result_img_dom_training | image_url: width: 1200 | json }}{% else %}''{% endif %},
-        title: {{ result_block.settings.result_title_dom_training | json }},
-        desc: {{ result_block.settings.result_desc_dom_training | json }}
-      },
-      sub_gentle: {
-        img: {% if result_block.settings.result_img_sub_gentle %}{{ result_block.settings.result_img_sub_gentle | image_url: width: 1200 | json }}{% else %}''{% endif %},
-        title: {{ result_block.settings.result_title_sub_gentle | json }},
-        desc: {{ result_block.settings.result_desc_sub_gentle | json }}
-      },
-      sub_rough: {
-        img: {% if result_block.settings.result_img_sub_rough %}{{ result_block.settings.result_img_sub_rough | image_url: width: 1200 | json }}{% else %}''{% endif %},
-        title: {{ result_block.settings.result_title_sub_rough | json }},
-        desc: {{ result_block.settings.result_desc_sub_rough | json }}
-      },
-      sub_training: {
-        img: {% if result_block.settings.result_img_sub_training %}{{ result_block.settings.result_img_sub_training | image_url: width: 1200 | json }}{% else %}''{% endif %},
-        title: {{ result_block.settings.result_title_sub_training | json }},
-        desc: {{ result_block.settings.result_desc_sub_training | json }}
-      },
-      equal_gentle: {
-        img: {% if result_block.settings.result_img_equal_gentle %}{{ result_block.settings.result_img_equal_gentle | image_url: width: 1200 | json }}{% else %}''{% endif %},
-        title: {{ result_block.settings.result_title_equal_gentle | json }},
-        desc: {{ result_block.settings.result_desc_equal_gentle | json }}
-      },
-      equal_rough: {
-        img: {% if result_block.settings.result_img_equal_rough %}{{ result_block.settings.result_img_equal_rough | image_url: width: 1200 | json }}{% else %}''{% endif %},
-        title: {{ result_block.settings.result_title_equal_rough | json }},
-        desc: {{ result_block.settings.result_desc_equal_rough | json }}
-      },
-      equal_training: {
-        img: {% if result_block.settings.result_img_equal_training %}{{ result_block.settings.result_img_equal_training | image_url: width: 1200 | json }}{% else %}''{% endif %},
-        title: {{ result_block.settings.result_title_equal_training | json }},
-        desc: {{ result_block.settings.result_desc_equal_training | json }}
-      }
-    };
+              question: {{ block.settings.question | json }},
+              answers: [
+                {
+                  text: {{ block.settings.answer_1 | json }},
+                  mode: {{ block.settings.mode1 | json }},
+                  score: {{ block.settings.score_1 }},
+                  option: {{ block.settings.option_1 | json }},
+                  optionScore: {{block.settings.option_score_1 }}
+                },
+                {
+                  text: {{ block.settings.answer_2 | json }},
+                  mode: {{ block.settings.mode_2 | json }},
+                  score: {{ block.settings.score_2 }},
+                  option: {{ block.settings.option_2 | json }},
+                  optionScore: {{block.settings.option_score_2 }}
+                },
+                {
+                  text: {{ block.settings.answer_3 | json }},
+                  mode: {{ block.settings.mode_3 | json }},
+                  score: {{ block.settings.score_3 }},
+                  option: {{ block.settings.option_3 | json }},
+                  optionScore: {{block.settings.option_score_3 }}
+                },
+                {
+                  text: {{ block.settings.answer_4 | json }},
+                  mode: {{ block.settings.mode_4 | json }},
+                  score: {{ block.settings.score_4 }},
+                  option: {{ block.settings.option_4 | json }},
+                  optionScore: {{block.settings.option_score_4 }}
+                },
+                {
+                  text: {{ block.settings.answer_5 | json }},
+                  mode: {{ block.settings.mode_5 | json }},
+                  score: {{ block.settings.score_5 }},
+                  option: {{ block.settings.option_5 | json }},
+                  optionScore: {{block.settings.option_score_5 }}
+                }
+              ]
+            }{% unless forloop.last %},{% endunless %}
+          {% endif %}
+        {% endfor %}
+      ];
+    
+      {% assign result_block = nil %}
+        
+        {% for b in section.blocks %}
+        {% if b.type == 'quize_result' %}
+            {% assign result_block = b %}
+            {% break %}
+        {% endif %}
+        {% endfor %}
+    
+    var quizeResultData = null;
+    {% if result_block %}
+        quizeResultData = {
+          dom_gentle: {
+            {% if result_block.settings.result_img_dom_gentle %}
+            img: {{ result_block.settings.result_img_dom_gentle | image_url: width: 1200 | json }},
+            {% else %}
+                img: '',
+                {% endif %}
+            title: {{ result_block.settings.result_title_dom_gentle | json }},
+            desc: {{ result_block.settings.result_desc_dom_gentle | json }}
+          },
+          dom_rough: {
+            {% if result_block.settings.result_img_dom_rough %}
+            img: {{ result_block.settings.result_img_dom_rough | image_url: width: 1200 | json }},
+            {% else %}
+                img: '',
+                {% endif %}
+            title: {{ result_block.settings.result_title_dom_rough | json }},
+            desc: {{ result_block.settings.result_desc_dom_rough | json }}
+          },
+          dom_training: {
+            {% if result_block.settings.result_img_dom_training %}
+            img: {{ result_block.settings.result_img_dom_training | image_url: width: 1200 | json }},
+            {% else %}
+                img: '',
+                {% endif %}
+            title: {{ result_block.settings.result_title_dom_training | json }},
+            desc: {{ result_block.settings.result_desc_dom_training | json }}
+          },
+      
+          sub_gentle: {
+            {% if result_block.settings.result_img_sub_gentle %}
+            img: {{ result_block.settings.result_img_sub_gentle | image_url: width: 1200 | json }},
+            {% else %}
+                img: '',
+                {% endif %}
+            title: {{ result_block.settings.result_title_sub_gentle | json }},
+            desc: {{ result_block.settings.result_desc_sub_gentle | json }}
+          },
+          sub_rough: {
+            {% if result_block.settings.result_img_sub_rough %}
+            img: {{ result_block.settings.result_img_sub_rough | image_url: width: 1200 | json }},
+            {% else %}
+                img: '',
+                {% endif %}
+            title: {{ result_block.settings.result_title_sub_rough | json }},
+            desc: {{ result_block.settings.result_desc_sub_rough | json }}
+          },
+          sub_training: {
+            {% if result_block.settings.result_img_sub_training %}
+            img: {{ result_block.settings.result_img_sub_training | image_url: width: 1200 | json }},
+            {% else %}
+                img: '',
+                {% endif %}
+            title: {{ result_block.settings.result_title_sub_training | json }},
+            desc: {{ result_block.settings.result_desc_sub_training | json }}
+          },
+      
+          equal_gentle: {
+            {% if result_block.settings.result_img_equal_gentle %}
+            img: {{ result_block.settings.result_img_equal_gentle | image_url: width: 1200 | json }},
+            {% else %}
+                img: '',
+                {% endif %}
+            title: {{ result_block.settings.result_title_equal_gentle | json }},
+            desc: {{ result_block.settings.result_desc_equal_gentle | json }}
+          },
+          equal_rough: {
+            {% if result_block.settings.result_img_equal_rough %}
+            img: {{ result_block.settings.result_img_equal_rough | image_url: width: 1200 | json }},
+            {% else %}
+                img: '',
+                {% endif %}
+            title: {{ result_block.settings.result_title_equal_rough | json }},
+            desc: {{ result_block.settings.result_desc_equal_rough | json }}
+          },
+          equal_training: {
+            {% if result_block.settings.result_img_equal_training %}
+            img: {{ result_block.settings.result_img_equal_training | image_url: width: 1200 | json }},
+            {% else %}
+                img: '',
+                {% endif %}
+            title: {{ result_block.settings.result_title_equal_training | json }},
+            desc: {{ result_block.settings.result_desc_equal_training | json }}
+          }
+        }
   {% endif %}
-
-  if (quizeData.length) {
-    let curIndex = 0;
-    let curQuestion;
-    let scoreMap = [];
-
-    const questionWrapper = document.querySelector(".js-quize-question-wrapper");
-    if (!questionWrapper) return;
-
-    const questionSteps = questionWrapper.querySelector(".js-quize-steps");
-    const questionBox = questionWrapper.querySelector(".js-quize-question-box");
-    const questionTitle = questionBox.querySelector(".js-quize-question-title");
-    const questionBtnWrapper = questionBox.querySelector(".js-quize-btn-wrapper");
-    const resultWrapper = questionWrapper.querySelector(".js-quize-question-result-wrapper");
-
-    const fn = () => {
-      curQuestion = quizeData[curIndex];
-
-      questionTitle.textContent = curQuestion.question;
-
-      questionSteps.querySelector("p").innerText = `${curIndex + 1}/${quizeData.length}`;
-      questionSteps.style.setProperty('--quize-step-percentage', `${(curIndex + 1) / quizeData.length * 100}%`);
-
-      const fragment = document.createDocumentFragment();
-      const answerList = curQuestion.answers.filter((v) => v.text && v.mode && v.option);
-
-      answerList.forEach((v, i) => {
-        const btn = document.createElement('button');
-        btn.textContent = v.text;
-        btn.setAttribute('data-step', curIndex);
-        btn.setAttribute('data-index', i);
-        btn.setAttribute('data-mode', v.mode);
-        btn.setAttribute('data-score', v.score || 1);
-        btn.setAttribute('data-option', v.option);
-        btn.setAttribute('data-option-score', v.optionScore || 1);
-        btn.className = "js-quize-question-answer";
-        fragment.appendChild(btn);
-      });
-      questionBtnWrapper.innerHTML = "";
-      questionBtnWrapper.appendChild(fragment);
-
-      if (!scoreMap[curIndex]) {
-        questionWrapper.querySelector('.js-quize-nav-right')?.classList?.add('is-disabled-nav');
-      }
-
-      if (curIndex === 0) {
-        questionWrapper.querySelector('.js-quize-nav-left')?.classList?.add('is-disabled-nav');
-        questionWrapper.querySelector('.js-quize-nav-right span').innerText = "Next";
-      }
-
-      if (curIndex === quizeData.length - 1) {
-        questionWrapper.querySelector('.js-quize-nav-left')?.classList?.remove('is-disabled-nav');
-        questionWrapper.querySelector('.js-quize-nav-right span').innerText = "Submit";
-        questionWrapper.classList.add("is-hook");
-      } else {
-        questionWrapper.querySelector('.js-quize-nav-right span').innerText = "Next";
-        questionWrapper.classList.remove("is-hook");
-      }
-    };
-
-    const showResult = () => {
-      const innerFn = (type) => {
-        const ret = scoreMap.reduce((acc, cur) => {
-          const key = cur[type];
-          const scoreType = type === "option" ? 'optionScore' : 'score';
-
-          if (!acc[key]) {
-            acc[key] = 0;
+    
+      
+        if (quizeData.length) {
+        let curIndex = 0;
+        let curQuestion;
+        let scoreMap = [];
+      
+        const questionWrapper = document.querySelector(".js-quize-question-wrapper");
+        const questionSteps = questionWrapper.querySelector(".js-quize-steps");
+        const questionBox = questionWrapper.querySelector(".js-quize-question-box");
+        const questionTitle = questionBox.querySelector(".js-quize-question-title");
+        const questionBtnWrapper = questionBox.querySelector(".js-quize-btn-wrapper");
+        const resultWrapper = questionWrapper.querySelector(".js-quize-question-result-wrapper")
+      
+        const fn = () => {
+          curQuestion = quizeData[curIndex];
+      
+          questionTitle.textContent = curQuestion.question;
+      
+          questionSteps.querySelector("p").innerText = `${curIndex + 1}/${quizeData.length}`;
+          questionSteps.style.setProperty('--quize-step-percentage', `${(curIndex + 1) / quizeData.length * 100}%`);
+      
+          const fragment = document.createDocumentFragment();
+          const answerList = curQuestion.answers.filter((v) => v.text && v.mode && v.option && (v.score !== undefined || v.score !== '') && (v.optionScore !== undefined || v.optionScore !== ''));
+      
+          answerList.forEach((v, i) => {
+            const btn = document.createElement('button');
+            btn.textContent = v.text;
+            btn.setAttribute('data-step', curIndex);
+            btn.setAttribute('data-index', i);
+            btn.setAttribute('data-mode', v.mode);
+            btn.setAttribute('data-score', v.score);
+            btn.setAttribute('data-option', v.option);
+            btn.setAttribute('data-option-score', v.optionScore);
+            btn.className = "js-quize-question-answer";
+            fragment.appendChild(btn);
+          });
+          questionBtnWrapper.innerHTML = "";
+          questionBtnWrapper.appendChild(fragment);
+      
+          if (!scoreMap[curIndex]) {
+            questionWrapper.querySelector('.js-quize-nav-right')?.classList?.add('is-disabled-nav');
           }
-          acc[key] += Number(cur[scoreType] || 1);
-          return acc;
-        }, {});
-
-        let result;
-        let max = -1;
-
-        Object.keys(ret).forEach((key) => {
-          if (ret[key] > max) {
-            max = ret[key];
-            result = key;
+      
+          if (curIndex === 0) {
+            questionWrapper.querySelector('.js-quize-nav-left')?.classList?.add('is-disabled-nav');
+            questionWrapper.querySelector('.js-quize-nav-right span').innerText = "Next";
           }
-        });
-        return result || (type === 'mode' ? 'Dom' : 'Gentle');
-      };
-
-      let mode = innerFn('mode');
-      let option = innerFn('option');
-
-      if (quizeResultData) {
-        const key = [mode, option].map(v => v.toLowerCase()).join("_");
-        const ret = quizeResultData[key] || quizeResultData['dom_gentle'];
-
-        const img = resultWrapper.querySelector("img");
-        const title = resultWrapper.querySelector(".h3");
-        const desc = resultWrapper.querySelector(".js-quize-result-desc");
-
-        if (img) {
-          if (ret.img) {
-            img.src = ret.img;
-            img.style.display = 'block';
+      
+          if (curIndex === quizeData.length - 1) {
+            questionWrapper.querySelector('.js-quize-nav-left')?.classList?.remove('is-disabled-nav');
+            questionWrapper.querySelector('.js-quize-nav-right span').innerText = "Submit";
+            questionWrapper.classList.add("is-hook")
           } else {
-            img.style.display = 'none';
+            questionWrapper.querySelector('.js-quize-nav-right span').innerText = "Next";
+            questionWrapper.classList.remove("is-hook")
           }
         }
-        if (title) title.innerText = ret.title || '';
-        if (desc) desc.innerHTML = ret.desc || '';
+        
+        const showResult = () => {
+          const innerFn = (type, sortType = "score") => {
+            const ret = scoreMap.reduce((acc, cur) => {
+              const key = cur[type];
+              const scoreType = type === "option" ? 'optionScore' : 'score';
+              
+              if (!acc[key]) {
+                acc[key] = {
+                  count: 0,
+                  score: 0,
+                };
+              }
+              acc[key].count += 1;
+              acc[key].score += Number(cur[scoreType]);
+              return acc;
+            }, {});
+        
+            let result;
+            let max = 0;
+            
+            Object.keys(ret).forEach((key) => {
+              const { count, score } = ret[key];
+              let temp = sortType === "count" ? count : score;
+              if (temp > max) {
+                max = temp;
+                result = key;
+              }
+            });
+            return result;
+          };
+        
+          let mode = innerFn('mode');
+          let option = innerFn('option');
+          if (quizeResultData) {
+            const key = [mode, option].map(v => v.toLowerCase()).join("_");
+            const ret = quizeResultData[key];
+           
+            const img = resultWrapper.querySelector("img");
+            const title = resultWrapper.querySelector("h3");
+            const desc = resultWrapper.querySelector("p");
+            img.src = ret.img;
+            title.innerText = ret.title;
+            desc.innerHTML = ret.desc;
 
-        setTimeout(() => {
-          questionWrapper.classList.add("is-show-result");
-          resultWrapper.classList.add("is-show-result");
-        }, 10);
-      }
-    };
-
-    questionWrapper.addEventListener('click', (e) => {
-      const target = e.target.closest('button, .js-quize-nav-left, .js-quize-nav-right, .js-quize-question-reset');
-      if (!target) return;
-
-      if (target.classList.contains('js-quize-question-answer')) {
-        const { step, index, mode, score, option, optionScore } = target.dataset;
-        const indexNum = +step;
-        scoreMap[indexNum] = { step, index, mode, score, option, optionScore };
-
-        questionBtnWrapper.querySelectorAll(".js-quize-question-answer").forEach((v) => {
-          v.classList.remove('is-active-answer');
-        });
-        target.classList.add("is-active-answer");
-
-        indexNum !== 0 && questionWrapper.querySelector('.js-quize-nav-left')?.classList?.remove('is-disabled-nav');
-        questionWrapper.querySelector('.js-quize-nav-right')?.classList?.remove('is-disabled-nav');
-      }
-
-      if (target.classList.contains('js-quize-nav-left')) {
-        if (curIndex === 0) return;
-        curIndex = curIndex - 1;
-        fn();
-      }
-
-      if (target.classList.contains('js-quize-nav-right')) {
-        if (!scoreMap[curIndex]) return;
-        if (curIndex + 1 >= quizeData.length) {
-          showResult();
-          return;
+            // show result
+            setTimeout(()=>{
+              questionWrapper.classList.toggle("is-show-result");
+              resultWrapper.classList.toggle("is-show-result");
+            }, 10);
+          }
         }
-        curIndex = curIndex + 1;
+      
+        questionWrapper.addEventListener('click', (e) => {
+          // 算分
+          if (e.target.classList.contains('js-quize-question-answer')) {
+            const { step, index, mode, score, option, optionScore } = e.target.dataset;
+            const indexNum = +step;
+            scoreMap[indexNum] = { step, index, mode, score, option, optionScore };
+            console.log("scoreMap",scoreMap)
+            questionBtnWrapper.querySelectorAll(".js-quize-question-answer").forEach((v, i) => v.dataset.index !== index && v.classList.remove('is-active-answer'));
+            e.target.classList.add("is-active-answer");
+      
+            indexNum !== 0 && questionWrapper.querySelector('.js-quize-nav-left')?.classList?.remove('is-disabled-nav');
+            questionWrapper.querySelector('.js-quize-nav-right')?.classList?.remove('is-disabled-nav');
+          }
+      
+          if (e.target.classList.contains('js-quize-nav-left')) {
+            if (curIndex === 0) return;
+            scoreMap = scoreMap.slice(0, curIndex);
+            curIndex = curIndex - 1 < 0 ? 0 : curIndex - 1;
+            fn();
+            const el = questionBtnWrapper.querySelectorAll(".js-quize-question-answer")[curIndex]
+            el.focus();
+            el.click();
+          }
+      
+          if (e.target.classList.contains('js-quize-nav-right')) {
+            if (!scoreMap[curIndex]) return;
+            if (curIndex + 1 >= quizeData.length) {
+              // 展示结果y
+              showResult();
+              return
+            }
+            curIndex = curIndex + 1 >= quizeData.length ? quizeData.length - 1 : curIndex + 1;
+            fn();
+          }
+
+          if(e.target.classList.contains("js-quize-question-reset")) {
+            curIndex = 0;
+            scoreMap = [];
+
+            fn();
+
+            questionWrapper.classList.toggle("is-show-result");
+            resultWrapper.classList.toggle("is-show-result");
+          }
+        });
+      
         fn();
       }
-
-      if (target.classList.contains("js-quize-question-reset")) {
-        curIndex = 0;
-        scoreMap = [];
-        fn();
-
-        questionWrapper.classList.remove("is-show-result");
-        resultWrapper.classList.remove("is-show-result");
-      }
-    });
-
-    fn();
-  }
-})();
 </script>
 
 <style>
@@ -335,6 +374,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    {% comment %} padding: 96px 0; {% endcomment %}
   }
   .quize-box {
     margin: 0 auto;
@@ -375,6 +415,7 @@
     margin: 0 auto;
     padding: 20px;
     border-radius: 16px;
+
     display: flex;
     flex-direction: column;
   }
@@ -402,7 +443,9 @@
     width: var(--quize-step-percentage, 0);
     background-image: linear-gradient(to right, rgb(236, 72, 153), rgb(168, 85, 247));
     border-radius: 4px;
+
     transition: width 0.15s ease-in-out;
+
     position: absolute;
     left: 0;
     bottom: 0;
@@ -419,35 +462,35 @@
     text-align: center;
     margin-bottom: 24px;
     text-transform: none !important;
-    font-size: 18px;
-    line-height: 1.4;
   }
 
   .quize-question-box > div {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
     align-items: center;
     justify-content: center;
   }
 
   .quize-question-box > div > button {
-    display: flex;
+    display: block;
+    {% comment %} max-width: 60%;
+    min-width: 60%; {% endcomment %}
     flex: 1;
     width: 100%;
+    /* flex: 1; */
+    border: 1px solid red;
     margin: auto;
     border: 1px solid rgba(255, 255, 255, 0.3);
+    line-height: 50px;
     border-radius: 50px;
-    transition: all 0.15s ease-in-out;
-    line-height: 1.4;
-    padding: 10px 16px;
-    min-height: 44px;
+    transition: background 0.15s ease-in-out;
+    line-height: 1.5;
+    padding: 5px 10px;
+    min-height: 40px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
   }
 
   .quize-question-box > div > button:hover,
@@ -455,7 +498,6 @@
   .quize-question-box > div > button.is-active-answer {
     background-color: rgba(242, 135, 236, 1);
     color: #000;
-    border-color: rgba(242, 135, 236, 1);
   }
 
   .quize-question-nav-wrapper {
@@ -471,6 +513,16 @@
     cursor: pointer;
     transition: opacity 0.15s ease-in-out;
   }
+  .quize-question-nav-item::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
   .quize-question-nav-item span {
     color: #fff;
     padding: 0 4px;
@@ -478,99 +530,110 @@
   }
   .quize-question-nav-item.is-disabled-nav {
     opacity: 0.5;
-    pointer-events: none;
   }
-
-  .quize-question-result-wrapper {
-    display: none;
+  {% comment %} 结果 {% endcomment %}
+   .quize-question-result-wrapper{
+    display: flex;
     flex-direction: column;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    width: 0;
+    height:0;
+    opacity:0;
+    transition: all 0.15s ease-in-out;
+    overflow: hidden
   }
   .quize-question-result-wrapper.is-show-result {
-    display: flex;
+    width: auto;
+    height: auto;
     opacity: 1;
+    overflow: unset
   }
   .quize-question-result-img-box {
     max-width: 80%;
-    margin: 16px auto 24px;
+    margin: 16px auto 32px
   }
-  .quize-question-result-img-box img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  .quize-question-result-wrapper .h3 {
+  .quize-question-result-wrapper .h3{
     color: #fff;
-    font-size: 26px;
-    text-align: center;
+    font-size: 30px;
+    margin-bottom: 16px;
+    text-align:center;
     margin: 12px 0 16px 0;
-    font-weight: bold;
   }
-  .quize-question-result-wrapper .js-quize-result-desc {
-    color: rgb(209, 213, 219);
-    font-size: 15px;
-    line-height: 1.6;
-    text-align: left;
-  }
-  .quize-question-result-wrapper .js-quize-result-desc strong {
-    color: #f287ec;
-  }
-  .quize-question-result-wrapper button {
-    display: block;
-    margin: 20px auto 0;
+  .quize-question-result-wrapper p{
+    color:rgb(209, 213, 219);
     font-size: 16px;
-    color: #fff;
+    {% comment %} margin-bottom: 32px; {% endcomment %}
+    line-height: 28px;
+  }
+  .quize-question-result-wrapper button{
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    color:#fff;
     background: linear-gradient(93.25deg, rgb(242, 135, 236) 7.14%, rgb(133, 67, 255) 99.1%);
-    line-height: 48px;
-    padding: 0 32px;
+    line-height:48px;
+    padding: 0 24px;
     border-radius: 24px;
-    border: none;
-    cursor: pointer;
   }
 
-  .quize-question-wrapper.is-show-result .quize-question-steps,
-  .quize-question-wrapper.is-show-result .quize-question-box,
-  .quize-question-wrapper.is-show-result .quize-question-nav-wrapper {
-    display: none !important;
+  .quize-question-wrapper.is-show-result .quize-question-steps ,
+  .quize-question-wrapper.is-show-result  .quize-question-box,
+  .quize-question-wrapper.is-show-result .quize-question-nav-wrapper  {
+    height: 0;
+    opacity: 0;
+    margin: 0;
+    overflow: hidden;
+    pointer-events: none;
   }
 
-  .quize-question-wrapper.is-hook .quize-question-icon-right {
-    display: none;
+    {% comment %} 提交按钮 {% endcomment %}
+  .quize-question-wrapper.is-hook .quize-question-icon-right{
+    display: none
   }
   .quize-question-wrapper .quize-question-icon-hook {
-    display: none;
+    display: none
   }
   .quize-question-wrapper.is-hook .quize-question-icon-hook {
-    display: block;
+    display: block
   }
 
   @media (max-width: 1200px) {
-    .quize-wrapper .quize-box {
+     .quize-wrapper .quize-box{
       flex-direction: column;
       gap: 32px;
       padding: 0 16px;
     }
-    .quize-left {
+    .quize-left{
       text-align: center;
     }
-    .quize-left h2 {
+     .quize-left h2 {
       font-size: 32px;
       line-height: 48px;
-      margin-bottom: 8px;
+       margin-bottom: 8px
     }
     .quize-left p {
       font-size: 14px;
       line-height: 1.3;
-      margin-bottom: 0;
+      margin-bottom: 0
+    }
+    .quize-question-box > div {
+      gap: 16px;
+    }
+    .quize-question-box > div > button{
+      {% comment %} max-width: 70%;
+      min-width: 70%; {% endcomment %}
+       flex: 1;
+    width: 100%;
     }
   }
-  @media (max-width: 768px) {
-    .quize-question-box h2 {
-      margin-bottom: 14px;
-      font-size: 16px;
+    @media (max-width: 768px) {
+  .quize-question-box h2 {
+       margin-bottom: 14px;
+    font-size: 16px;
+}
+    .quize-question-box > div {
+        gap: 10px;
     }
-  }
+}
 </style>
 
 {% schema %}
@@ -593,7 +656,7 @@
       "type": "text",
       "id": "subtitle",
       "label": "副标题",
-      "default": "Answer 5 quick questions to discover your intimate persona."
+      "default": "Step two: answer a few quick questions to discover what turns you on."
     }
   ],
   "blocks": [
@@ -620,9 +683,18 @@
           "id": "mode1",
           "label": "权利方式",
           "options": [
-            { "value": "Dom", "label": "Dom" },
-            { "value": "Equal", "label": "Equal" },
-            { "value": "Sub", "label": "Sub" }
+            {
+              "value": "Dom",
+              "label": "Dom"
+            },
+            {
+              "value": "Equal",
+              "label": "Equal"
+            },
+            {
+              "value": "Sub",
+              "label": "Sub"
+            }
           ]
         },
         {
@@ -636,9 +708,18 @@
           "id": "option_1",
           "label": "操作方式",
           "options": [
-            { "value": "Gentle", "label": "Gentle" },
-            { "value": "Rough", "label": "Rough" },
-            { "value": "Training", "label": "Training" }
+            {
+              "value": "Gentle",
+              "label": "Gentle"
+            },
+            {
+              "value": "Rough",
+              "label": "Rough"
+            },
+            {
+              "value": "Training",
+              "label": "Training"
+            }
           ]
         },
         {
@@ -661,9 +742,18 @@
           "id": "mode_2",
           "label": "权利方式",
           "options": [
-            { "value": "Dom", "label": "Dom" },
-            { "value": "Equal", "label": "Equal" },
-            { "value": "Sub", "label": "Sub" }
+            {
+              "value": "Dom",
+              "label": "Dom"
+            },
+            {
+              "value": "Equal",
+              "label": "Equal"
+            },
+            {
+              "value": "Sub",
+              "label": "Sub"
+            }
           ]
         },
         {
@@ -672,14 +762,24 @@
           "label": "分值",
           "default": 1
         },
+
         {
           "type": "select",
           "id": "option_2",
           "label": "操作方式",
           "options": [
-            { "value": "Gentle", "label": "Gentle" },
-            { "value": "Rough", "label": "Rough" },
-            { "value": "Training", "label": "Training" }
+            {
+              "value": "Gentle",
+              "label": "Gentle"
+            },
+            {
+              "value": "Rough",
+              "label": "Rough"
+            },
+            {
+              "value": "Training",
+              "label": "Training"
+            }
           ]
         },
         {
@@ -702,9 +802,18 @@
           "id": "mode_3",
           "label": "权利方式",
           "options": [
-            { "value": "Dom", "label": "Dom" },
-            { "value": "Equal", "label": "Equal" },
-            { "value": "Sub", "label": "Sub" }
+            {
+              "value": "Dom",
+              "label": "Dom"
+            },
+            {
+              "value": "Equal",
+              "label": "Equal"
+            },
+            {
+              "value": "Sub",
+              "label": "Sub"
+            }
           ]
         },
         {
@@ -713,14 +822,24 @@
           "label": "分值",
           "default": 1
         },
+
         {
           "type": "select",
           "id": "option_3",
           "label": "操作方式",
           "options": [
-            { "value": "Gentle", "label": "Gentle" },
-            { "value": "Rough", "label": "Rough" },
-            { "value": "Training", "label": "Training" }
+            {
+              "value": "Gentle",
+              "label": "Gentle"
+            },
+            {
+              "value": "Rough",
+              "label": "Rough"
+            },
+            {
+              "value": "Training",
+              "label": "Training"
+            }
           ]
         },
         {
@@ -729,6 +848,7 @@
           "label": "分值",
           "default": 1
         },
+
         {
           "type": "header",
           "content": "答案4设置"
@@ -743,9 +863,18 @@
           "id": "mode_4",
           "label": "权利方式",
           "options": [
-            { "value": "Dom", "label": "Dom" },
-            { "value": "Equal", "label": "Equal" },
-            { "value": "Sub", "label": "Sub" }
+            {
+              "value": "Dom",
+              "label": "Dom"
+            },
+            {
+              "value": "Equal",
+              "label": "Equal"
+            },
+            {
+              "value": "Sub",
+              "label": "Sub"
+            }
           ]
         },
         {
@@ -754,14 +883,24 @@
           "label": "分值",
           "default": 1
         },
+
         {
           "type": "select",
           "id": "option_4",
           "label": "操作方式",
           "options": [
-            { "value": "Gentle", "label": "Gentle" },
-            { "value": "Rough", "label": "Rough" },
-            { "value": "Training", "label": "Training" }
+            {
+              "value": "Gentle",
+              "label": "Gentle"
+            },
+            {
+              "value": "Rough",
+              "label": "Rough"
+            },
+            {
+              "value": "Training",
+              "label": "Training"
+            }
           ]
         },
         {
@@ -774,6 +913,7 @@
           "type": "header",
           "content": "答案5设置"
         },
+
         {
           "type": "text",
           "id": "answer_5",
@@ -784,9 +924,18 @@
           "id": "mode_5",
           "label": "权利方式",
           "options": [
-            { "value": "Dom", "label": "Dom" },
-            { "value": "Equal", "label": "Equal" },
-            { "value": "Sub", "label": "Sub" }
+            {
+              "value": "Dom",
+              "label": "Dom"
+            },
+            {
+              "value": "Equal",
+              "label": "Equal"
+            },
+            {
+              "value": "Sub",
+              "label": "Sub"
+            }
           ]
         },
         {
@@ -800,9 +949,18 @@
           "id": "option_5",
           "label": "操作方式",
           "options": [
-            { "value": "Gentle", "label": "Gentle" },
-            { "value": "Rough", "label": "Rough" },
-            { "value": "Training", "label": "Training" }
+            {
+              "value": "Gentle",
+              "label": "Gentle"
+            },
+            {
+              "value": "Rough",
+              "label": "Rough"
+            },
+            {
+              "value": "Training",
+              "label": "Training"
+            }
           ]
         },
         {
@@ -813,221 +971,209 @@
         }
       ]
     },
+
     {
       "type": "quize_result",
       "name": "Quize Result",
       "limit": 1,
       "settings": [
-        { "type": "header", "content": "Dom Gentle 设置" },
-        { "type": "image_picker", "id": "result_img_dom_gentle", "label": "结果配图" },
-        { "type": "text", "id": "result_title_dom_gentle", "default": "Result 4 — The Dreamer", "label": "结果标题" },
-        { "type": "richtext", "id": "result_desc_dom_gentle", "default": "<p>You want a scene you can step into and disappear inside.</p><p><strong>You’re drawn to:</strong><br>Atmosphere, voice, story, emotional immersion.</p>", "label": "结果描述" },
+        {
+          "type": "header",
+          "content": "结果 Dom Gentle 设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "result_img_dom_gentle",
+          "label": "结果配图"
+        },
+        {
+          "type": "text",
+          "id": "result_title_dom_gentle",
+          "default": "Dom Gentle",
+          "label": "结果标题"
+        },
+        {
+          "type": "richtext",
+          "id": "result_desc_dom_gentle",
+          "default": "<p>Dom Gentle</p>",
+          "label": "结果描述"
+        },
+        {
+          "type": "header",
+          "content": "结果 Dom Rough 设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "result_img_dom_rough",
+          "label": "结果配图"
+        },
+        {
+          "type": "text",
+          "id": "result_title_dom_rough",
+          "default": "Dom Rough",
+          "label": "结果标题"
+        },
+        {
+          "type": "richtext",
+          "id": "result_desc_dom_rough",
+          "default": "<p>Dom Rough</p>",
+          "label": "结果描述"
+        },
+        {
+          "type": "header",
+          "content": "结果 Dom Training 设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "result_img_dom_training",
+          "label": "结果配图"
+        },
+        {
+          "type": "text",
+          "id": "result_title_dom_training",
+          "default": "Dom Training",
+          "label": "结果标题"
+        },
+        {
+          "type": "richtext",
+          "id": "result_desc_dom_training",
+          "default": "<p>Dom Training</p>",
+          "label": "结果描述"
+        },
+        {
+          "type": "header",
+          "content": "结果 Sub Gentle 设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "result_img_sub_gentle",
+          "label": "结果配图"
+        },
+        {
+          "type": "text",
+          "id": "result_title_sub_gentle",
+          "default": "Sub Gentle",
+          "label": "结果标题"
+        },
+        {
+          "type": "richtext",
+          "id": "result_desc_sub_gentle",
+          "default": "<p>Sub Gentle</p>",
+          "label": "结果描述"
+        },
+        {
+          "type": "header",
+          "content": "结果 Sub Rough 设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "result_img_sub_rough",
+          "label": "结果配图"
+        },
+        {
+          "type": "text",
+          "id": "result_title_sub_rough",
+          "default": "Sub Rough",
+          "label": "结果标题"
+        },
+        {
+          "type": "richtext",
+          "id": "result_desc_sub_rough",
+          "default": "<p>Sub Rough</p>",
+          "label": "结果描述"
+        },
+        {
+          "type": "header",
+          "content": "结果 Sub Training 设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "result_img_sub_training",
+          "label": "结果配图"
+        },
+        {
+          "type": "text",
+          "id": "result_title_sub_training",
+          "default": "Sub Training",
+          "label": "结果标题"
+        },
+        {
+          "type": "richtext",
+          "id": "result_desc_sub_training",
+          "default": "<p>Sub Training</p>",
+          "label": "结果描述"
+        },
 
-        { "type": "header", "content": "Dom Rough 设置" },
-        { "type": "image_picker", "id": "result_img_dom_rough", "label": "结果配图" },
-        { "type": "text", "id": "result_title_dom_rough", "default": "Result 1 — The Director", "label": "结果标题" },
-        { "type": "richtext", "id": "result_desc_dom_rough", "default": "<p>You like clarity, pace, and a voice that knows exactly where the scene is going.</p><p><strong>You’re drawn to:</strong><br>Direct cues, confident lead, structured fantasies.</p>", "label": "结果描述" },
-
-        { "type": "header", "content": "Dom Training 设置" },
-        { "type": "image_picker", "id": "result_img_dom_training", "label": "结果配图" },
-        { "type": "text", "id": "result_title_dom_training", "default": "Result 1 — The Director", "label": "结果标题" },
-        { "type": "richtext", "id": "result_desc_dom_training", "default": "<p>You like clarity, pace, and a voice that knows exactly where the scene is going.</p><p><strong>You’re drawn to:</strong><br>Direct cues, confident lead, structured fantasies.</p>", "label": "结果描述" },
-
-        { "type": "header", "content": "Sub Gentle 设置" },
-        { "type": "image_picker", "id": "result_img_sub_gentle", "label": "结果配图" },
-        { "type": "text", "id": "result_title_sub_gentle", "default": "Result 2 — The Muse", "label": "结果标题" },
-        { "type": "richtext", "id": "result_desc_sub_gentle", "default": "<p>You melt for warmth, patience, and attention that lingers.</p><p><strong>You’re drawn to:</strong><br>Soft voices, slow build, private one-on-one energy.</p>", "label": "结果描述" },
-
-        { "type": "header", "content": "Sub Rough 设置" },
-        { "type": "image_picker", "id": "result_img_sub_rough", "label": "结果配图" },
-        { "type": "text", "id": "result_title_sub_rough", "default": "Result 3 — The Switch", "label": "结果标题" },
-        { "type": "richtext", "id": "result_desc_sub_rough", "default": "<p>You like the tension between holding on and letting go.</p><p><strong>You’re drawn to:</strong><br>Shifting roles, playful push-pull, surprise turns.</p>", "label": "结果描述" },
-
-        { "type": "header", "content": "Sub Training 设置" },
-        { "type": "image_picker", "id": "result_img_sub_training", "label": "结果配图" },
-        { "type": "text", "id": "result_title_sub_training", "default": "Result 3 — The Switch", "label": "结果标题" },
-        { "type": "richtext", "id": "result_desc_sub_training", "default": "<p>You like the tension between holding on and letting go.</p><p><strong>You’re drawn to:</strong><br>Shifting roles, playful push-pull, surprise turns.</p>", "label": "结果描述" },
-
-        { "type": "header", "content": "Equal Gentle 设置" },
-        { "type": "image_picker", "id": "result_img_equal_gentle", "label": "结果配图" },
-        { "type": "text", "id": "result_title_equal_gentle", "default": "Result 2 — The Muse", "label": "结果标题" },
-        { "type": "richtext", "id": "result_desc_equal_gentle", "default": "<p>You melt for warmth, patience, and attention that lingers.</p><p><strong>You’re drawn to:</strong><br>Soft voices, slow build, private one-on-one energy.</p>", "label": "结果描述" },
-
-        { "type": "header", "content": "Equal Rough 设置" },
-        { "type": "image_picker", "id": "result_img_equal_rough", "label": "结果配图" },
-        { "type": "text", "id": "result_title_equal_rough", "default": "Result 3 — The Switch", "label": "结果标题" },
-        { "type": "richtext", "id": "result_desc_equal_rough", "default": "<p>You like the tension between holding on and letting go.</p><p><strong>You’re drawn to:</strong><br>Shifting roles, playful push-pull, surprise turns.</p>", "label": "结果描述" },
-
-        { "type": "header", "content": "Equal Training 设置" },
-        { "type": "image_picker", "id": "result_img_equal_training", "label": "结果配图" },
-        { "type": "text", "id": "result_title_equal_training", "default": "Result 4 — The Dreamer", "label": "结果标题" },
-        { "type": "richtext", "id": "result_desc_equal_training", "default": "<p>You want a scene you can step into and disappear inside.</p><p><strong>You’re drawn to:</strong><br>Atmosphere, voice, story, emotional immersion.</p>", "label": "结果描述" }
+        {
+          "type": "header",
+          "content": "结果 Equal Gentle 设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "result_img_equal_gentle",
+          "label": "结果配图"
+        },
+        {
+          "type": "text",
+          "id": "result_title_equal_gentle",
+          "default": "Equal Gentle",
+          "label": "结果标题"
+        },
+        {
+          "type": "richtext",
+          "id": "result_desc_equal_gentle",
+          "default": "<p>Equal Gentle</p>",
+          "label": "结果描述"
+        },
+        {
+          "type": "header",
+          "content": "结果 Equal Rough 设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "result_img_equal_rough",
+          "label": "结果配图"
+        },
+        {
+          "type": "text",
+          "id": "result_title_equal_rough",
+          "default": "Equal Rough",
+          "label": "结果标题"
+        },
+        {
+          "type": "richtext",
+          "id": "result_desc_equal_rough",
+          "default": "<p>Equal Rough</p>",
+          "label": "结果描述"
+        },
+        {
+          "type": "header",
+          "content": "结果 Equal Training 设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "result_img_equal_training",
+          "label": "结果配图"
+        },
+        {
+          "type": "text",
+          "id": "result_title_equal_training",
+          "default": "Equal Training",
+          "label": "结果标题"
+        },
+        {
+          "type": "richtext",
+          "id": "result_desc_equal_training",
+          "default": "<p>Equal Training</p>",
+          "label": "结果描述"
+        }
       ]
     }
   ],
   "presets": [
     {
       "name": "Custom Quize",
-      "blocks": [
-        {
-          "type": "item",
-          "settings": {
-            "question": "1/5 — 控制/臣服: Your partner covers your eyes without warning. Your first instinct?",
-            "answer_1": "The unknown thrills me",
-            "mode1": "Sub",
-            "score_1": 1,
-            "option_1": "Training",
-            "option_score_1": 1,
-            "answer_2": "Nervous… but curious",
-            "mode_2": "Sub",
-            "score_2": 1,
-            "option_2": "Gentle",
-            "option_score_2": 1,
-            "answer_3": "I feel safe — take care of me",
-            "mode_3": "Equal",
-            "score_3": 1,
-            "option_3": "Gentle",
-            "option_score_3": 1,
-            "answer_4": "I'd rather be the one in control",
-            "mode_4": "Dom",
-            "score_4": 1,
-            "option_4": "Rough",
-            "option_score_4": 1,
-            "answer_5": "Others",
-            "mode_5": "Equal",
-            "score_5": 1,
-            "option_5": "Training",
-            "option_score_5": 1
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "question": "2/5 — 角色定位: What role feels most natural to you?",
-            "answer_1": "The one in charge",
-            "mode1": "Dom",
-            "score_1": 1,
-            "option_1": "Rough",
-            "option_score_1": 1,
-            "answer_2": "The one who surrenders",
-            "mode_2": "Sub",
-            "score_2": 1,
-            "option_2": "Gentle",
-            "option_score_2": 1,
-            "answer_3": "Equals, deeply connected",
-            "mode_3": "Equal",
-            "score_3": 1,
-            "option_3": "Gentle",
-            "option_score_3": 1,
-            "answer_4": "I switch — depends on my mood",
-            "mode_4": "Equal",
-            "score_4": 1,
-            "option_4": "Training",
-            "option_score_4": 1,
-            "answer_5": "Others",
-            "mode_5": "Equal",
-            "score_5": 1,
-            "option_5": "Training",
-            "option_score_5": 1
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "question": "3/5 — 节奏/强度: Your ideal pace?",
-            "answer_1": "A slow burn that builds forever",
-            "mode1": "Sub",
-            "score_1": 1,
-            "option_1": "Gentle",
-            "option_score_1": 1,
-            "answer_2": "Intense from the first second",
-            "mode_2": "Dom",
-            "score_2": 1,
-            "option_2": "Rough",
-            "option_score_2": 1,
-            "answer_3": "Romantic and unhurried",
-            "mode_3": "Equal",
-            "score_3": 1,
-            "option_3": "Gentle",
-            "option_score_3": 1,
-            "answer_4": "Unpredictable — keep me guessing",
-            "mode_4": "Equal",
-            "score_4": 1,
-            "option_4": "Training",
-            "option_score_4": 1,
-            "answer_5": "Others",
-            "mode_5": "Equal",
-            "score_5": 1,
-            "option_5": "Training",
-            "option_score_5": 1
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "question": "4/5 — 幻想场景: Which scene lives rent-free in your imagination?",
-            "answer_1": "Candlelight, slow, completely wrapped up in each other",
-            "mode1": "Equal",
-            "score_1": 1,
-            "option_1": "Gentle",
-            "option_score_1": 1,
-            "answer_2": "Somewhere a little risky…, where you shouldn't",
-            "mode_2": "Equal",
-            "score_2": 1,
-            "option_2": "Training",
-            "option_score_2": 1,
-            "answer_3": "Completely at their mercy",
-            "mode_3": "Sub",
-            "score_3": 1,
-            "option_3": "Gentle",
-            "option_score_3": 1,
-            "answer_4": "Them completely at yours",
-            "mode_4": "Dom",
-            "score_4": 1,
-            "option_4": "Rough",
-            "option_score_4": 1,
-            "answer_5": "Others",
-            "mode_5": "Equal",
-            "score_5": 1,
-            "option_5": "Training",
-            "option_score_5": 1
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "question": "5/5 — 核心渴望: What do you crave most?",
-            "answer_1": "Being desired beyond control",
-            "mode1": "Sub",
-            "score_1": 1,
-            "option_1": "Gentle",
-            "option_score_1": 1,
-            "answer_2": "Total escape from my own head",
-            "mode_2": "Sub",
-            "score_2": 1,
-            "option_2": "Training",
-            "option_score_2": 1,
-            "answer_3": "Deep emotional closeness",
-            "mode_3": "Equal",
-            "score_3": 1,
-            "option_3": "Gentle",
-            "option_score_3": 1,
-            "answer_4": "The rush of power",
-            "mode_4": "Dom",
-            "score_4": 1,
-            "option_4": "Rough",
-            "option_score_4": 1,
-            "answer_5": "Others",
-            "mode_5": "Equal",
-            "score_5": 1,
-            "option_5": "Training",
-            "option_score_5": 1
-          }
-        },
-        {
-          "type": "quize_result"
-        }
-      ]
+      "blocks": [{ "type": "item" }]
     }
   ]
 }
