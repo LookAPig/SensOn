@@ -65,6 +65,7 @@
               "type": "button",
               "settings": {
                 "text": "Apply",
+                "icon": "",
                 "url": "https://app.impact.com/advertiser-advertiser-info/Sensa-Something-Inc.brand",
                 "open_in_new_tab": false,
                 "style": "solid",
@@ -120,7 +121,7 @@
           "settings": {
             "icon": "shopify://shop_images/Group_1363527277.svg",
             "title": "High-Performance Earnings",
-            "description": "With a premium $229 AOV and a 20% commission rate, you earn $45.80 on every single sale. No caps, no limits."
+            "description": "With a premium $249 AOV and a 15% commission rate, you earn $37.4 on every single sale. No caps, no limits."
           }
         },
         "feature_rkM7xY": {
