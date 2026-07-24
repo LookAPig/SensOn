@@ -415,8 +415,9 @@
         },
         "testimonial_NTFCRi": {
           "type": "testimonial",
-          "disabled": true,
           "settings": {
+            "cover": "shopify://shop_images/just-lex.jpg",
+            "video": "shopify://files/videos/just-lex.mp4",
             "comment": "<p><em>\"It literally reads your body and adjust on its own. No buttons, no interruptions.\"</em></p>",
             "stars": 5,
             "avatar": "shopify://shop_images/just-lex_jpg.jpg",
