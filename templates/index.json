@@ -63,6 +63,7 @@
                   "type": "button",
                   "settings": {
                     "text": "shop Now",
+                    "icon": "",
                     "url": "shopify://products/senson-s1-wellness-companion",
                     "open_in_new_tab": false,
                     "style": "solid",
@@ -412,6 +413,18 @@
             "creator_subs": "1.5M Subscribers"
           }
         },
+        "testimonial_NTFCRi": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "comment": "<p><em>\"It literally reads your body and adjust on its own. No buttons, no interruptions.\"</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/just-lex_jpg.jpg",
+            "creator_name": "just-lex",
+            "creator_desc": "Wellness Intimacy Guide",
+            "creator_subs": "780K Subscribers"
+          }
+        },
         "testimonial_yrVtLm": {
           "type": "testimonial",
           "settings": {
@@ -494,6 +507,7 @@
       "block_order": [
         "testimonial_LyiQeD",
         "testimonial_yn4fjr",
+        "testimonial_NTFCRi",
         "testimonial_yrVtLm",
         "testimonial_FTcrGb",
         "testimonial_Vzm4HY",
