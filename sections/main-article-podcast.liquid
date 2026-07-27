@@ -239,6 +239,26 @@
     width: 100%;
   }
 
+  #shopify-section-{{ section.id }} .article_podcast_section .summary_block {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_summary {
+    width: 100%;
+    border-block: 1px solid rgb(var(--text-color) / 0.15);
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_summary .accordion__summary {
+    padding-inline: 0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+  }
+
+  #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_summary .accordion__content {
+    padding-inline: 0;
+  }
+
   @media screen and (max-width: 999px) {
     #shopify-section-{{ section.id }} .article_podcast_section .article_podcast_layout {
       grid-template-areas:
@@ -489,9 +509,63 @@
             {%- endif -%}
           </div>
 
-          <div class="prose">
+          <div class="prose" data-article-podcast-content>
             {{- article.content -}}
           </div>
+
+          <template id="ArticlePodcastSummaryTemplate-{{ section.id }}">
+            <accordion-disclosure class="accordion article_podcast_summary">
+              <details class="accordion__disclosure">
+                <summary class="accordion__summary">
+                  <span data-summary-label></span>
+                  {%- render 'icon' with 'accordion-small-arrow' -%}
+                </summary>
+                <div class="accordion__content" data-summary-content></div>
+              </details>
+            </accordion-disclosure>
+          </template>
+
+          <script>
+            (function () {
+              const sectionRoot = document.getElementById("shopify-section-{{ section.id }}");
+
+              if (!sectionRoot) {
+                return;
+              }
+
+              const contentRoot = sectionRoot.querySelector("[data-article-podcast-content]");
+              const template = document.getElementById("ArticlePodcastSummaryTemplate-{{ section.id }}");
+              const summaryLabel = {{ section.settings.summary_label | json }};
+
+              if (!contentRoot || !template) {
+                return;
+              }
+
+              const summaryBlocks = contentRoot.querySelectorAll(".summary_block");
+
+              if (!summaryBlocks.length) {
+                return;
+              }
+
+              summaryBlocks.forEach((summaryBlock) => {
+                const accordionNode = template.content.firstElementChild.cloneNode(true);
+                const labelNode = accordionNode.querySelector("[data-summary-label]");
+                const contentNode = accordionNode.querySelector("[data-summary-content]");
+
+                if (labelNode) {
+                  labelNode.textContent = summaryLabel;
+                }
+
+                if (contentNode) {
+                  while (summaryBlock.firstChild) {
+                    contentNode.appendChild(summaryBlock.firstChild);
+                  }
+                }
+
+                summaryBlock.replaceWith(accordionNode);
+              });
+            })();
+          </script>
 
           {%- if section.settings.show_social_share -%}
             {%- assign excerpt = article.excerpt | strip_html -%}
@@ -625,6 +699,17 @@
       "id": "next_label",
       "label": "下一篇按钮文案",
       "default": "Next"
+    },
+    {
+      "type": "header",
+      "content": "文章摘要折叠"
+    },
+    {
+      "type": "text",
+      "id": "summary_label",
+      "label": "摘要折叠标题",
+      "info": "仅在文章内容中存在 class 为 summary_block 的父容器时显示可折叠摘要，默认折叠",
+      "default": "Summary"
     },
     {
       "type": "header",
