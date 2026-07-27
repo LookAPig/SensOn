@@ -3,6 +3,8 @@
     做一个quiz，有四个答案，五个问题，每个问题五个选项, 结论页面分成一个单独可以设计的
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign quiz_newsletter_form_id = 'quiz-newsletter-' | append: ai_gen_id %}
+{% assign quiz_newsletter_form_class = 'ai-quiz-result-form-' | append: ai_gen_id %}
 
 {% style %}
   .ai-quiz-container-{{ ai_gen_id }} {
@@ -13,6 +15,13 @@
     padding: 40px 20px;
     background-color: {{ block.settings.background_color }};
     border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-quiz-container-{{ ai_gen_id }}.is-results {
+    padding: 0;
+    background-color: transparent;
+    width: 100%;
+    max-width: 440px;
   }
 
   .ai-quiz-header-{{ ai_gen_id }} {
@@ -132,6 +141,7 @@
     color: {{ block.settings.button_text_color }};
   }
 
+  /* ========== Results page ========== */
   .ai-quiz-results-{{ ai_gen_id }} {
     display: none;
     animation: ai-quiz-fade-in-{{ ai_gen_id }} 0.4s ease;
@@ -141,60 +151,267 @@
     display: block;
   }
 
-  .ai-quiz-results-container-{{ ai_gen_id }} {
+  .ai-quiz-result-card-{{ ai_gen_id }} {
     background-color: {{ block.settings.results_bg_color }};
     border-radius: {{ block.settings.results_border_radius }}px;
     padding: {{ block.settings.results_padding }}px;
-    text-align: {{ block.settings.results_text_align }};
-  }
-
-  .ai-quiz-results-image-{{ ai_gen_id }} {
-    margin-bottom: 24px;
-  }
-
-  .ai-quiz-results-image-{{ ai_gen_id }} img {
-    width: 100%;
-    max-width: {{ block.settings.results_image_max_width }}px;
-    height: auto;
-    border-radius: {{ block.settings.results_image_border_radius }}px;
-    margin: 0 auto;
-    display: block;
-  }
-
-  .ai-quiz-results-title-{{ ai_gen_id }} {
-    font-size: {{ block.settings.results_title_size }}px;
     color: {{ block.settings.results_text_color }};
-    margin: 0 0 16px;
-    font-weight: 700;
+    text-align: left;
   }
 
-  .ai-quiz-results-message-{{ ai_gen_id }} {
-    font-size: {{ block.settings.results_message_size }}px;
-    color: {{ block.settings.results_text_color }};
-    margin-bottom: 32px;
-    line-height: 1.6;
-  }
-
-  .ai-quiz-results-cta-{{ ai_gen_id }} {
-    display: inline-block;
-    padding: 16px 32px;
-    background-color: {{ block.settings.results_cta_bg_color }};
-    color: {{ block.settings.results_cta_text_color }};
-    text-decoration: none;
-    border-radius: {{ block.settings.results_cta_border_radius }}px;
-    font-size: {{ block.settings.results_cta_size }}px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+  .ai-quiz-result-top-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
     margin-bottom: 16px;
   }
 
-  .ai-quiz-results-cta-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.results_cta_hover_bg_color }};
-    transform: translateY(-2px);
+  .ai-quiz-result-brand-{{ ai_gen_id }} {
+    font-size: {{ block.settings.results_brand_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.results_text_color }};
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
-  .ai-quiz-restart-{{ ai_gen_id }} {
+  .ai-quiz-result-status-{{ ai_gen_id }} {
+    font-size: {{ block.settings.results_status_size }}px;
+    color: {{ block.settings.results_muted_color }};
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .ai-quiz-result-divider-{{ ai_gen_id }} {
+    height: {{ block.settings.results_divider_height }}px;
+    background-color: {{ block.settings.results_accent_color }};
+    border: none;
+    margin: 0 0 28px;
+    width: 100%;
+  }
+
+  .ai-quiz-result-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.results_label_size }}px;
+    color: {{ block.settings.results_accent_color }};
+    font-weight: 500;
+    margin: 0 0 10px;
+    line-height: 1.3;
+  }
+
+  .ai-quiz-result-type-{{ ai_gen_id }} {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: {{ block.settings.results_type_size }}px;
+    font-weight: 400;
+    color: {{ block.settings.results_text_color }};
+    margin: 0 0 16px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .ai-quiz-result-body-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+
+  .ai-quiz-result-main-{{ ai_gen_id }} {
+    min-width: 0;
+  }
+
+  .ai-quiz-result-desc-{{ ai_gen_id }} {
+    font-size: {{ block.settings.results_desc_size }}px;
+    color: {{ block.settings.results_text_color }};
+    line-height: 1.55;
+    margin: 0;
+    max-width: 36em;
+  }
+
+  .ai-quiz-result-locked-{{ ai_gen_id }} {
+    background-color: {{ block.settings.results_locked_bg_color }};
+    border: 1px solid {{ block.settings.results_locked_border_color }};
+    border-radius: {{ block.settings.results_locked_radius }}px;
+    padding: 22px 20px;
+    margin: 0;
+  }
+
+  .ai-quiz-result-dim-{{ ai_gen_id }} {
+    margin-bottom: 18px;
+  }
+
+  .ai-quiz-result-dim-{{ ai_gen_id }}:last-of-type {
+    margin-bottom: 20px;
+  }
+
+  .ai-quiz-result-dim-row-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .ai-quiz-result-dim-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.results_dim_label_size }}px;
+    color: {{ block.settings.results_text_color }};
+    font-weight: 500;
+  }
+
+  .ai-quiz-result-dim-value-{{ ai_gen_id }} {
+    font-size: {{ block.settings.results_dim_label_size }}px;
+    color: {{ block.settings.results_text_color }};
+    font-weight: 600;
+    min-width: 42px;
+    text-align: right;
+    transition: filter 0.35s ease;
+  }
+
+  .ai-quiz-result-dim-bar-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.results_bar_height }}px;
+    background-color: {{ block.settings.results_bar_bg_color }};
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .ai-quiz-result-dim-fill-{{ ai_gen_id }} {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      {{ block.settings.results_bar_fill_start }},
+      {{ block.settings.results_bar_fill_end }}
+    );
+    transition: width 0.6s ease;
+  }
+
+  .ai-quiz-result-locked-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.results_locked_text_size }}px;
+    color: {{ block.settings.results_text_color }};
+    line-height: 1.6;
+    margin: 0;
+    transition: filter 0.35s ease;
+  }
+
+  .ai-quiz-result-blur-{{ ai_gen_id }} {
+    filter: blur({{ block.settings.results_blur_amount }}px);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .ai-quiz-result-subscribe-note-{{ ai_gen_id }} {
+    font-size: {{ block.settings.results_subscribe_note_size }}px;
+    color: {{ block.settings.results_text_color }};
+    margin: 0 0 16px;
+    line-height: 1.45;
+  }
+
+  .ai-quiz-result-form-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .ai-quiz-result-email-{{ ai_gen_id }} {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    background-color: {{ block.settings.results_input_bg_color }};
+    border: 1px solid {{ block.settings.results_input_border_color }};
+    border-radius: {{ block.settings.results_input_radius }}px;
+    color: {{ block.settings.results_text_color }};
+    font-size: {{ block.settings.results_input_size }}px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .ai-quiz-result-email-{{ ai_gen_id }}::placeholder {
+    color: {{ block.settings.results_muted_color }};
+  }
+
+  .ai-quiz-result-email-{{ ai_gen_id }}:focus {
+    border-color: {{ block.settings.results_accent_color }};
+  }
+
+  button.ai-quiz-result-submit-{{ ai_gen_id }}[type="submit"] {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 15px 20px;
+    background-color: {{ block.settings.results_cta_bg_color }};
+    background-image: none;
+    color: {{ block.settings.results_cta_text_color }};
+    border: none;
+    border-radius: {{ block.settings.results_cta_border_radius }}px;
+    font-size: {{ block.settings.results_cta_size }}px;
+    font-weight: 700;
+    line-height: 1.3;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+  }
+
+  button.ai-quiz-result-submit-{{ ai_gen_id }}[type="submit"]:hover {
+    background-color: {{ block.settings.results_cta_hover_bg_color }};
+    color: {{ block.settings.results_cta_text_color }};
+  }
+
+  button.ai-quiz-result-submit-{{ ai_gen_id }}[type="submit"]:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  .ai-quiz-result-privacy-{{ ai_gen_id }} {
+    font-size: {{ block.settings.results_privacy_size }}px;
+    color: {{ block.settings.results_muted_color }};
+    line-height: 1.5;
+    margin: 0;
+    text-align: left;
+  }
+
+  .ai-quiz-result-message-{{ ai_gen_id }} {
+    font-size: 14px;
+    margin: 0 0 12px;
+    line-height: 1.4;
+    display: none;
+  }
+
+  .ai-quiz-result-message-{{ ai_gen_id }}.is-error {
+    display: block;
+    color: {{ block.settings.results_accent_color }};
+  }
+
+  .ai-quiz-result-message-{{ ai_gen_id }}.is-success {
+    display: block;
+    color: {{ block.settings.results_text_color }};
+  }
+
+  .ai-quiz-result-subscribe-{{ ai_gen_id }}.is-subscribed .ai-quiz-result-form-{{ ai_gen_id }},
+  .ai-quiz-result-subscribe-{{ ai_gen_id }}.is-subscribed .ai-quiz-result-subscribe-note-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-quiz-result-subscribe-{{ ai_gen_id }}.is-subscribed .ai-quiz-result-message-{{ ai_gen_id }}.is-success {
+    margin-bottom: 0;
+  }
+
+  .ai-quiz-result-restart-wrap-{{ ai_gen_id }} {
     margin-top: 24px;
+  }
+
+  .ai-quiz-result-restart-wrap-{{ ai_gen_id }} .ai-quiz-button-{{ ai_gen_id }} {
+    background-color: transparent;
+    color: {{ block.settings.results_text_color }};
+    border: 1px solid {{ block.settings.results_input_border_color }};
+  }
+
+  .ai-quiz-result-restart-wrap-{{ ai_gen_id }} .ai-quiz-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.results_locked_bg_color }};
+    color: {{ block.settings.results_text_color }};
   }
 
   @keyframes ai-quiz-fade-in-{{ ai_gen_id }} {
@@ -208,9 +425,147 @@
     }
   }
 
+  /* Desktop results layout */
+  @media screen and (min-width: 750px) {
+    .ai-quiz-container-{{ ai_gen_id }}.is-results {
+      max-width: {{ block.settings.results_max_width }}px;
+      padding: 24px 20px;
+    }
+
+    .ai-quiz-result-card-{{ ai_gen_id }} {
+      padding: 48px 56px;
+      border-radius: {{ block.settings.results_border_radius | plus: 4 }}px;
+    }
+
+    .ai-quiz-result-top-{{ ai_gen_id }} {
+      margin-bottom: 20px;
+    }
+
+    .ai-quiz-result-brand-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_brand_size }}px * 1.15);
+    }
+
+    .ai-quiz-result-divider-{{ ai_gen_id }} {
+      margin-bottom: 36px;
+    }
+
+    .ai-quiz-result-body-{{ ai_gen_id }} {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 40px 48px;
+      align-items: start;
+      margin-bottom: 36px;
+    }
+
+    .ai-quiz-result-main-{{ ai_gen_id }} {
+      padding-top: 4px;
+    }
+
+    .ai-quiz-result-label-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_label_size }}px * 1.05);
+      margin-bottom: 14px;
+    }
+
+    .ai-quiz-result-type-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_type_size }}px * 1.2);
+      margin-bottom: 20px;
+      max-width: 12em;
+    }
+
+    .ai-quiz-result-desc-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_desc_size }}px * 1.05);
+      line-height: 1.65;
+      max-width: 28em;
+    }
+
+    .ai-quiz-result-locked-{{ ai_gen_id }} {
+      padding: 28px 26px;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .ai-quiz-result-dim-{{ ai_gen_id }} {
+      margin-bottom: 22px;
+    }
+
+    .ai-quiz-result-subscribe-{{ ai_gen_id }} {
+      max-width: 100%;
+      padding-top: 8px;
+      border-top: 1px solid {{ block.settings.results_locked_border_color }};
+    }
+
+    .ai-quiz-result-subscribe-note-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_subscribe_note_size }}px * 1.05);
+      margin-bottom: 18px;
+    }
+
+    .ai-quiz-result-form-{{ ai_gen_id }} {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.9fr);
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 14px;
+    }
+
+    .ai-quiz-result-email-{{ ai_gen_id }} {
+      height: 100%;
+      min-height: 52px;
+      padding: 16px 18px;
+    }
+
+    button.ai-quiz-result-submit-{{ ai_gen_id }}[type="submit"] {
+      width: 100%;
+      min-height: 52px;
+      padding: 16px 24px;
+      white-space: nowrap;
+    }
+
+    .ai-quiz-result-privacy-{{ ai_gen_id }} {
+      max-width: 42em;
+    }
+
+    .ai-quiz-result-restart-wrap-{{ ai_gen_id }} {
+      margin-top: 28px;
+    }
+
+    .ai-quiz-result-restart-wrap-{{ ai_gen_id }} .ai-quiz-button-{{ ai_gen_id }} {
+      width: auto;
+      min-width: 180px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .ai-quiz-container-{{ ai_gen_id }}.is-results {
+      padding: 32px 24px;
+    }
+
+    .ai-quiz-result-card-{{ ai_gen_id }} {
+      padding: 56px 64px;
+    }
+
+    .ai-quiz-result-body-{{ ai_gen_id }} {
+      gap: 48px 64px;
+      margin-bottom: 40px;
+    }
+
+    .ai-quiz-result-type-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_type_size }}px * 1.35);
+    }
+
+    .ai-quiz-result-form-{{ ai_gen_id }} {
+      max-width: 720px;
+      grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.85fr);
+    }
+  }
+
   @media screen and (max-width: 749px) {
     .ai-quiz-container-{{ ai_gen_id }} {
       padding: 24px 16px;
+    }
+
+    .ai-quiz-container-{{ ai_gen_id }}.is-results {
+      padding: 0;
+      max-width: 440px;
     }
 
     .ai-quiz-title-{{ ai_gen_id }} {
@@ -221,8 +576,13 @@
       font-size: calc({{ block.settings.question_size }}px * 0.85);
     }
 
-    .ai-quiz-results-title-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.results_title_size }}px * 0.85);
+    .ai-quiz-result-card-{{ ai_gen_id }} {
+      padding: {{ block.settings.results_padding | times: 0.7 }}px;
+      border-radius: {{ block.settings.results_border_radius | times: 0.75 }}px;
+    }
+
+    .ai-quiz-result-type-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_type_size }}px * 0.82);
     }
 
     .ai-quiz-navigation-{{ ai_gen_id }} {
@@ -232,15 +592,64 @@
     .ai-quiz-button-{{ ai_gen_id }} {
       width: 100%;
     }
-
-    .ai-quiz-results-container-{{ ai_gen_id }} {
-      padding: {{ block.settings.results_padding | times: 0.7 }}px;
-    }
   }
 {% endstyle %}
 
+<script type="application/json" data-quiz-types-{{ ai_gen_id }}>
+  [
+    {
+      "name": {{ block.settings.type_1_name | json }},
+      "tagline": {{ block.settings.type_1_tagline | json }},
+      "percent": {{ block.settings.type_1_percent | default: 8 }},
+      "dim1_label": {{ block.settings.type_1_dim1_label | json }},
+      "dim1_value": {{ block.settings.type_1_dim1_value | default: 78 }},
+      "dim2_label": {{ block.settings.type_1_dim2_label | json }},
+      "dim2_value": {{ block.settings.type_1_dim2_value | default: 85 }},
+      "dim3_label": {{ block.settings.type_1_dim3_label | json }},
+      "dim3_value": {{ block.settings.type_1_dim3_value | default: 62 }},
+      "locked_text": {{ block.settings.type_1_locked_text | json }}
+    },
+    {
+      "name": {{ block.settings.type_2_name | json }},
+      "tagline": {{ block.settings.type_2_tagline | json }},
+      "percent": {{ block.settings.type_2_percent | default: 14 }},
+      "dim1_label": {{ block.settings.type_2_dim1_label | json }},
+      "dim1_value": {{ block.settings.type_2_dim1_value | default: 55 }},
+      "dim2_label": {{ block.settings.type_2_dim2_label | json }},
+      "dim2_value": {{ block.settings.type_2_dim2_value | default: 70 }},
+      "dim3_label": {{ block.settings.type_2_dim3_label | json }},
+      "dim3_value": {{ block.settings.type_2_dim3_value | default: 88 }},
+      "locked_text": {{ block.settings.type_2_locked_text | json }}
+    },
+    {
+      "name": {{ block.settings.type_3_name | json }},
+      "tagline": {{ block.settings.type_3_tagline | json }},
+      "percent": {{ block.settings.type_3_percent | default: 21 }},
+      "dim1_label": {{ block.settings.type_3_dim1_label | json }},
+      "dim1_value": {{ block.settings.type_3_dim1_value | default: 90 }},
+      "dim2_label": {{ block.settings.type_3_dim2_label | json }},
+      "dim2_value": {{ block.settings.type_3_dim2_value | default: 48 }},
+      "dim3_label": {{ block.settings.type_3_dim3_label | json }},
+      "dim3_value": {{ block.settings.type_3_dim3_value | default: 67 }},
+      "locked_text": {{ block.settings.type_3_locked_text | json }}
+    },
+    {
+      "name": {{ block.settings.type_4_name | json }},
+      "tagline": {{ block.settings.type_4_tagline | json }},
+      "percent": {{ block.settings.type_4_percent | default: 11 }},
+      "dim1_label": {{ block.settings.type_4_dim1_label | json }},
+      "dim1_value": {{ block.settings.type_4_dim1_value | default: 64 }},
+      "dim2_label": {{ block.settings.type_4_dim2_label | json }},
+      "dim2_value": {{ block.settings.type_4_dim2_value | default: 92 }},
+      "dim3_label": {{ block.settings.type_4_dim3_label | json }},
+      "dim3_value": {{ block.settings.type_4_dim3_value | default: 73 }},
+      "locked_text": {{ block.settings.type_4_locked_text | json }}
+    }
+  ]
+</script>
+
 <quiz-component-{{ ai_gen_id }} class="ai-quiz-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-quiz-header-{{ ai_gen_id }}">
+  <div class="ai-quiz-header-{{ ai_gen_id }}" data-quiz-header>
     {% if block.settings.quiz_title != blank %}
       <h2 class="ai-quiz-title-{{ ai_gen_id }}">{{ block.settings.quiz_title }}</h2>
     {% endif %}
@@ -249,11 +658,11 @@
     {% endif %}
   </div>
 
-  <div class="ai-quiz-progress-{{ ai_gen_id }}">
+  <div class="ai-quiz-progress-{{ ai_gen_id }}" data-quiz-progress>
     <div class="ai-quiz-progress-bar-{{ ai_gen_id }}" data-progress-bar></div>
   </div>
 
-  <div class="ai-quiz-questions-{{ ai_gen_id }}">
+  <div class="ai-quiz-questions-{{ ai_gen_id }}" data-quiz-questions>
     {% for i in (1..5) %}
       {% liquid
         assign question_key = 'question_' | append: i
@@ -294,46 +703,100 @@
     {% endfor %}
   </div>
 
-  <div class="ai-quiz-navigation-{{ ai_gen_id }}">
-    <button class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-button-secondary-{{ ai_gen_id }}" data-prev-btn disabled>
+  <div class="ai-quiz-navigation-{{ ai_gen_id }}" data-quiz-nav>
+    <button type="button" class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-button-secondary-{{ ai_gen_id }}" data-prev-btn disabled>
       {{ block.settings.previous_button_text }}
     </button>
-    <button class="ai-quiz-button-{{ ai_gen_id }}" data-next-btn disabled>
+    <button type="button" class="ai-quiz-button-{{ ai_gen_id }}" data-next-btn disabled>
       {{ block.settings.next_button_text }}
     </button>
   </div>
 
   <div class="ai-quiz-results-{{ ai_gen_id }}" data-results>
-    <div class="ai-quiz-results-container-{{ ai_gen_id }}">
-      {% if block.settings.results_image %}
-        <div class="ai-quiz-results-image-{{ ai_gen_id }}">
-          <img
-            src="{{ block.settings.results_image | image_url: width: 1000 }}"
-            alt="{{ block.settings.results_image.alt | escape }}"
-            loading="lazy"
-            width="{{ block.settings.results_image.width }}"
-            height="{{ block.settings.results_image.height }}"
-          >
+    <div class="ai-quiz-result-card-{{ ai_gen_id }}">
+      <div class="ai-quiz-result-top-{{ ai_gen_id }}">
+        <div class="ai-quiz-result-brand-{{ ai_gen_id }}">{{ block.settings.results_brand_name }}</div>
+        <div class="ai-quiz-result-status-{{ ai_gen_id }}">{{ block.settings.results_status_text }}</div>
+      </div>
+
+      <hr class="ai-quiz-result-divider-{{ ai_gen_id }}">
+
+      <div class="ai-quiz-result-body-{{ ai_gen_id }}">
+        <div class="ai-quiz-result-main-{{ ai_gen_id }}">
+          {% if block.settings.results_type_label != blank %}
+            <div class="ai-quiz-result-label-{{ ai_gen_id }}">{{ block.settings.results_type_label }}</div>
+          {% endif %}
+
+          <h2 class="ai-quiz-result-type-{{ ai_gen_id }}" data-type-name></h2>
+
+          <p class="ai-quiz-result-desc-{{ ai_gen_id }}">
+            <span data-type-tagline></span>
+            {% if block.settings.results_percent_prefix != blank or block.settings.results_percent_suffix != blank %}
+              <span data-percent-sentence>
+                {{ block.settings.results_percent_prefix }}<span data-type-percent></span>{{ block.settings.results_percent_suffix }}
+              </span>
+            {% endif %}
+          </p>
         </div>
-      {% endif %}
 
-      {% if block.settings.results_title != blank %}
-        <h2 class="ai-quiz-results-title-{{ ai_gen_id }}">{{ block.settings.results_title }}</h2>
-      {% endif %}
+        <div class="ai-quiz-result-locked-{{ ai_gen_id }}" data-locked-card>
+          {% for dim_index in (1..3) %}
+            <div class="ai-quiz-result-dim-{{ ai_gen_id }}" data-dim="{{ dim_index }}">
+              <div class="ai-quiz-result-dim-row-{{ ai_gen_id }}">
+                <span class="ai-quiz-result-dim-label-{{ ai_gen_id }}" data-dim-label></span>
+                <span
+                  class="ai-quiz-result-dim-value-{{ ai_gen_id }} ai-quiz-result-blur-{{ ai_gen_id }}"
+                  data-dim-value
+                  aria-hidden="true"
+                >88%</span>
+              </div>
+              <div class="ai-quiz-result-dim-bar-{{ ai_gen_id }}">
+                <div class="ai-quiz-result-dim-fill-{{ ai_gen_id }}" data-dim-fill></div>
+              </div>
+            </div>
+          {% endfor %}
 
-      {% if block.settings.results_message != blank %}
-        <div class="ai-quiz-results-message-{{ ai_gen_id }}">{{ block.settings.results_message }}</div>
-      {% endif %}
+          <p
+            class="ai-quiz-result-locked-text-{{ ai_gen_id }} ai-quiz-result-blur-{{ ai_gen_id }}"
+            data-locked-text
+            aria-hidden="true"
+          ></p>
+        </div>
+      </div>
 
-      {% if block.settings.results_cta_text != blank %}
-        <a href="{{ block.settings.results_cta_link }}" class="ai-quiz-results-cta-{{ ai_gen_id }}">
-          {{ block.settings.results_cta_text }}
-        </a>
-      {% endif %}
+      <div class="ai-quiz-result-subscribe-{{ ai_gen_id }}" data-subscribe-area>
+        {% if block.settings.results_subscribe_note != blank %}
+          <p class="ai-quiz-result-subscribe-note-{{ ai_gen_id }}">{{ block.settings.results_subscribe_note }}</p>
+        {% endif %}
+
+        <p class="ai-quiz-result-message-{{ ai_gen_id }}" data-form-message role="status"></p>
+
+        {% form 'customer', id: quiz_newsletter_form_id, class: quiz_newsletter_form_class %}
+          <input type="hidden" name="contact[tags]" value="{{ block.settings.results_newsletter_tags }}">
+          <input
+            class="ai-quiz-result-email-{{ ai_gen_id }}"
+            type="email"
+            name="contact[email]"
+            placeholder="{{ block.settings.results_email_placeholder }}"
+            autocomplete="email"
+            required
+            data-email-input
+          >
+          <button type="submit" class="ai-quiz-result-submit-{{ ai_gen_id }}" data-submit-btn>
+            {{ block.settings.results_cta_text }}
+          </button>
+        {% endform %}
+
+        {% if block.settings.results_privacy_text != blank %}
+          <p class="ai-quiz-result-privacy-{{ ai_gen_id }}" data-privacy-text>
+            {{ block.settings.results_privacy_text }}
+          </p>
+        {% endif %}
+      </div>
 
       {% if block.settings.show_restart_button %}
-        <div>
-          <button class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-button-secondary-{{ ai_gen_id }} ai-quiz-restart-{{ ai_gen_id }}" data-restart-btn>
+        <div class="ai-quiz-result-restart-wrap-{{ ai_gen_id }}">
+          <button type="button" class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-restart-{{ ai_gen_id }}" data-restart-btn>
             {{ block.settings.restart_button_text }}
           </button>
         </div>
@@ -350,44 +813,68 @@
         this.currentQuestion = 1;
         this.totalQuestions = 5;
         this.answers = {};
+        this.resultTypeIndex = 0;
+        this.isSubscribed = false;
       }
 
       connectedCallback() {
-        this.progressBar = this.querySelector('[data-progress-bar]');
-        this.questions = this.querySelectorAll('.ai-quiz-question-{{ ai_gen_id }}');
-        this.prevBtn = this.querySelector('[data-prev-btn]');
-        this.nextBtn = this.querySelector('[data-next-btn]');
-        this.results = this.querySelector('[data-results]');
-        this.restartBtn = this.querySelector('[data-restart-btn]');
+        this.progressBar = this.querySelector("[data-progress-bar]");
+        this.questions = this.querySelectorAll(".ai-quiz-question-{{ ai_gen_id }}");
+        this.prevBtn = this.querySelector("[data-prev-btn]");
+        this.nextBtn = this.querySelector("[data-next-btn]");
+        this.results = this.querySelector("[data-results]");
+        this.restartBtn = this.querySelector("[data-restart-btn]");
+        this.subscribeForm = this.querySelector("#{{ quiz_newsletter_form_id }}");
+        this.formMessage = this.querySelector("[data-form-message]");
+        this.subscribeArea = this.querySelector("[data-subscribe-area]");
+        this.types = this.loadTypes();
 
         this.setupEventListeners();
         this.updateProgress();
       }
 
-      setupEventListeners() {
-        this.querySelectorAll('.ai-quiz-option-{{ ai_gen_id }}').forEach(option => {
-          option.addEventListener('click', (e) => this.selectOption(e));
-        });
+      loadTypes() {
+        const typesNode = document.querySelector("[data-quiz-types-{{ ai_gen_id }}]");
 
-        this.prevBtn.addEventListener('click', () => this.previousQuestion());
-        this.nextBtn.addEventListener('click', () => this.nextQuestion());
-        
-        if (this.restartBtn) {
-          this.restartBtn.addEventListener('click', () => this.restartQuiz());
+        if (!typesNode) {
+          return [];
+        }
+
+        try {
+          return JSON.parse(typesNode.textContent);
+        } catch (error) {
+          console.error("Quiz types JSON parse failed", error);
+          return [];
         }
       }
 
-      selectOption(e) {
-        const questionEl = e.target.closest('.ai-quiz-question-{{ ai_gen_id }}');
-        const questionNum = questionEl.dataset.question;
-        
-        questionEl.querySelectorAll('.ai-quiz-option-{{ ai_gen_id }}').forEach(opt => {
-          opt.classList.remove('selected');
+      setupEventListeners() {
+        this.querySelectorAll(".ai-quiz-option-{{ ai_gen_id }}").forEach((option) => {
+          option.addEventListener("click", (event) => this.selectOption(event));
         });
-        
-        e.target.classList.add('selected');
-        this.answers[questionNum] = e.target.dataset.option;
-        
+
+        this.prevBtn.addEventListener("click", () => this.previousQuestion());
+        this.nextBtn.addEventListener("click", () => this.nextQuestion());
+
+        if (this.restartBtn) {
+          this.restartBtn.addEventListener("click", () => this.restartQuiz());
+        }
+
+        if (this.subscribeForm) {
+          this.subscribeForm.addEventListener("submit", (event) => this.handleSubscribe(event));
+        }
+      }
+
+      selectOption(event) {
+        const questionEl = event.target.closest(".ai-quiz-question-{{ ai_gen_id }}");
+        const questionNum = questionEl.dataset.question;
+
+        questionEl.querySelectorAll(".ai-quiz-option-{{ ai_gen_id }}").forEach((opt) => {
+          opt.classList.remove("selected");
+        });
+
+        event.target.classList.add("selected");
+        this.answers[questionNum] = event.target.dataset.option;
         this.nextBtn.disabled = false;
       }
 
@@ -410,55 +897,278 @@
       }
 
       showQuestion() {
-        this.questions.forEach(q => q.classList.remove('active'));
+        this.questions.forEach((question) => question.classList.remove("active"));
         const currentQ = this.querySelector(`[data-question="${this.currentQuestion}"]`);
-        currentQ.classList.add('active');
+        currentQ.classList.add("active");
 
         this.prevBtn.disabled = this.currentQuestion === 1;
-        
+
         const hasAnswer = this.answers[this.currentQuestion];
         this.nextBtn.disabled = !hasAnswer;
-        
+
         if (this.currentQuestion === this.totalQuestions && hasAnswer) {
-          this.nextBtn.textContent = '{{ block.settings.submit_button_text }}';
+          this.nextBtn.textContent = {{ block.settings.submit_button_text | json }};
         } else {
-          this.nextBtn.textContent = '{{ block.settings.next_button_text }}';
+          this.nextBtn.textContent = {{ block.settings.next_button_text | json }};
         }
       }
 
       updateProgress() {
         const progress = ((this.currentQuestion - 1) / this.totalQuestions) * 100;
-        this.progressBar.style.width = progress + '%';
+        this.progressBar.style.width = progress + "%";
+      }
+
+      calculateResultIndex() {
+        let totalScore = 0;
+
+        for (let i = 1; i <= this.totalQuestions; i++) {
+          totalScore += Number(this.answers[i] || 1);
+        }
+
+        if (totalScore <= 10) {
+          return 0;
+        }
+
+        if (totalScore <= 15) {
+          return 1;
+        }
+
+        if (totalScore <= 20) {
+          return 2;
+        }
+
+        return 3;
       }
 
       showResults() {
-        this.querySelector('.ai-quiz-header-{{ ai_gen_id }}').style.display = 'none';
-        this.querySelector('.ai-quiz-progress-{{ ai_gen_id }}').style.display = 'none';
-        this.querySelector('.ai-quiz-questions-{{ ai_gen_id }}').style.display = 'none';
-        this.querySelector('.ai-quiz-navigation-{{ ai_gen_id }}').style.display = 'none';
-        this.results.classList.add('active');
+        this.resultTypeIndex = this.calculateResultIndex();
+        this.renderResultType(this.types[this.resultTypeIndex] || this.types[0]);
+
+        this.classList.add("is-results");
+        this.querySelector("[data-quiz-header]").style.display = "none";
+        this.querySelector("[data-quiz-progress]").style.display = "none";
+        this.querySelector("[data-quiz-questions]").style.display = "none";
+        this.querySelector("[data-quiz-nav]").style.display = "none";
+        this.results.classList.add("active");
+
+        const storageKey = this.getSubscribeStorageKey();
+
+        if (storageKey && window.sessionStorage.getItem(storageKey) === "1") {
+          this.showSubscribeSuccess(true);
+        }
+      }
+
+      getSubscribeStorageKey() {
+        const type = this.types[this.resultTypeIndex];
+
+        if (!type || !type.name) {
+          return "";
+        }
+
+        return "quiz-subscribed-{{ ai_gen_id }}-" + type.name;
+      }
+
+      renderResultType(type) {
+        if (!type) {
+          return;
+        }
+
+        const nameEl = this.querySelector("[data-type-name]");
+        const taglineEl = this.querySelector("[data-type-tagline]");
+        const percentEl = this.querySelector("[data-type-percent]");
+        const lockedTextEl = this.querySelector("[data-locked-text]");
+
+        if (nameEl) {
+          nameEl.textContent = type.name || "";
+        }
+
+        if (taglineEl) {
+          taglineEl.textContent = type.tagline || "";
+        }
+
+        if (percentEl) {
+          percentEl.textContent = String(type.percent || "");
+        }
+
+        if (lockedTextEl) {
+          lockedTextEl.textContent = type.locked_text || "";
+        }
+
+        const dimensions = [
+          { label: type.dim1_label, value: type.dim1_value },
+          { label: type.dim2_label, value: type.dim2_value },
+          { label: type.dim3_label, value: type.dim3_value }
+        ];
+
+        dimensions.forEach((dimension, index) => {
+          const dimEl = this.querySelector(`[data-dim="${index + 1}"]`);
+
+          if (!dimEl) {
+            return;
+          }
+
+          const labelEl = dimEl.querySelector("[data-dim-label]");
+          const valueEl = dimEl.querySelector("[data-dim-value]");
+          const fillEl = dimEl.querySelector("[data-dim-fill]");
+          const safeValue = Math.max(0, Math.min(100, Number(dimension.value) || 0));
+
+          if (labelEl) {
+            labelEl.textContent = dimension.label || "";
+          }
+
+          if (valueEl) {
+            valueEl.textContent = safeValue + "%";
+          }
+
+          if (fillEl) {
+            requestAnimationFrame(() => {
+              fillEl.style.width = safeValue + "%";
+            });
+          }
+        });
+
+        this.resetLockedState();
+      }
+
+      resetLockedState() {
+        this.isSubscribed = false;
+
+        this.querySelectorAll("[data-dim-value], [data-locked-text]").forEach((el) => {
+          el.classList.add("ai-quiz-result-blur-{{ ai_gen_id }}");
+          el.setAttribute("aria-hidden", "true");
+        });
+
+        if (this.subscribeArea) {
+          this.subscribeArea.classList.remove("is-subscribed");
+        }
+
+        if (this.formMessage) {
+          this.formMessage.textContent = "";
+          this.formMessage.classList.remove("is-error", "is-success");
+        }
+
+        if (this.subscribeForm) {
+          this.subscribeForm.reset();
+          const submitBtn = this.subscribeForm.querySelector("[data-submit-btn]");
+
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = {{ block.settings.results_cta_text | json }};
+          }
+        }
+      }
+
+      showSubscribeSuccess(fromStorage) {
+        this.isSubscribed = true;
+
+        if (this.subscribeArea) {
+          this.subscribeArea.classList.add("is-subscribed");
+        }
+
+        if (this.formMessage) {
+          this.formMessage.textContent = fromStorage
+            ? {{ block.settings.results_unlocked_message | json }}
+            : {{ block.settings.results_success_message | json }};
+          this.formMessage.classList.remove("is-error");
+          this.formMessage.classList.add("is-success");
+        }
+
+        const storageKey = this.getSubscribeStorageKey();
+
+        if (storageKey) {
+          window.sessionStorage.setItem(storageKey, "1");
+        }
+      }
+
+      async handleSubscribe(event) {
+        event.preventDefault();
+
+        if (!this.subscribeForm || this.isSubscribed) {
+          return;
+        }
+
+        const emailInput = this.subscribeForm.querySelector("[data-email-input]");
+        const submitBtn = this.subscribeForm.querySelector("[data-submit-btn]");
+        const email = emailInput ? emailInput.value.trim() : "";
+
+        if (!email || !emailInput.checkValidity()) {
+          this.showFormError({{ block.settings.results_invalid_email_message | json }});
+          emailInput.focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = {{ block.settings.results_loading_text | json }};
+        this.clearFormMessage();
+
+        try {
+          const formData = new FormData(this.subscribeForm);
+
+          const response = await fetch("/contact#contact_form", {
+            method: "POST",
+            body: formData,
+            headers: {
+              Accept: "application/json",
+              "X-Requested-With": "XMLHttpRequest"
+            }
+          });
+
+          if (!response.ok && response.status >= 500) {
+            throw new Error("Subscribe request failed");
+          }
+
+          this.showSubscribeSuccess(false);
+        } catch (error) {
+          console.error(error);
+          this.showFormError({{ block.settings.results_error_message | json }});
+          submitBtn.disabled = false;
+          submitBtn.textContent = {{ block.settings.results_cta_text | json }};
+        }
+      }
+
+      showFormError(message) {
+        if (!this.formMessage) {
+          return;
+        }
+
+        this.formMessage.textContent = message;
+        this.formMessage.classList.remove("is-success");
+        this.formMessage.classList.add("is-error");
+      }
+
+      clearFormMessage() {
+        if (!this.formMessage) {
+          return;
+        }
+
+        this.formMessage.textContent = "";
+        this.formMessage.classList.remove("is-error", "is-success");
       }
 
       restartQuiz() {
         this.currentQuestion = 1;
         this.answers = {};
-        
-        this.querySelector('.ai-quiz-header-{{ ai_gen_id }}').style.display = 'block';
-        this.querySelector('.ai-quiz-progress-{{ ai_gen_id }}').style.display = 'block';
-        this.querySelector('.ai-quiz-questions-{{ ai_gen_id }}').style.display = 'block';
-        this.querySelector('.ai-quiz-navigation-{{ ai_gen_id }}').style.display = 'flex';
-        this.results.classList.remove('active');
-        
-        this.querySelectorAll('.ai-quiz-option-{{ ai_gen_id }}').forEach(opt => {
-          opt.classList.remove('selected');
+        this.resultTypeIndex = 0;
+        this.isSubscribed = false;
+
+        this.classList.remove("is-results");
+        this.querySelector("[data-quiz-header]").style.display = "";
+        this.querySelector("[data-quiz-progress]").style.display = "";
+        this.querySelector("[data-quiz-questions]").style.display = "";
+        this.querySelector("[data-quiz-nav]").style.display = "";
+        this.results.classList.remove("active");
+
+        this.querySelectorAll(".ai-quiz-option-{{ ai_gen_id }}").forEach((opt) => {
+          opt.classList.remove("selected");
         });
-        
+
+        this.resetLockedState();
         this.showQuestion();
         this.updateProgress();
       }
     }
 
-    customElements.define('quiz-component-{{ ai_gen_id }}', QuizComponent{{ ai_gen_id }});
+    customElements.define("quiz-component-{{ ai_gen_id }}", QuizComponent{{ ai_gen_id }});
   })();
 </script>
 
@@ -717,61 +1427,84 @@
     },
     {
       "type": "header",
-      "content": "Results page design"
+      "content": "Results page — layout"
     },
     {
-      "type": "image_picker",
-      "id": "results_image",
-      "label": "Results image"
+      "type": "text",
+      "id": "results_brand_name",
+      "label": "Brand name",
+      "default": "SensOn"
+    },
+    {
+      "type": "text",
+      "id": "results_status_text",
+      "label": "Status text",
+      "default": "Profile complete"
+    },
+    {
+      "type": "text",
+      "id": "results_type_label",
+      "label": "Type label",
+      "default": "Your resonance type"
+    },
+    {
+      "type": "text",
+      "id": "results_percent_prefix",
+      "label": "Percent sentence prefix",
+      "default": " Only "
+    },
+    {
+      "type": "text",
+      "id": "results_percent_suffix",
+      "label": "Percent sentence suffix",
+      "default": "% of people share this type."
     },
     {
       "type": "range",
-      "id": "results_image_max_width",
-      "label": "Image max width",
-      "min": 100,
-      "max": 800,
-      "step": 50,
+      "id": "results_max_width",
+      "label": "Desktop results max width",
+      "min": 640,
+      "max": 1200,
+      "step": 20,
       "unit": "px",
-      "default": 400
+      "default": 960,
+      "info": "Mobile keeps a compact card; this width applies from tablet/desktop up."
     },
     {
       "type": "range",
-      "id": "results_image_border_radius",
-      "label": "Image border radius",
+      "id": "results_padding",
+      "label": "Results padding",
+      "min": 20,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "results_border_radius",
+      "label": "Results border radius",
       "min": 0,
       "max": 40,
       "step": 2,
       "unit": "px",
-      "default": 8
+      "default": 28
     },
     {
-      "type": "text",
-      "id": "results_title",
-      "label": "Results title",
-      "default": "Thank You!"
-    },
-    {
-      "type": "textarea",
-      "id": "results_message",
-      "label": "Results message",
-      "default": "Your answers have been recorded. We'll use this information to provide you with personalized recommendations."
-    },
-    {
-      "type": "text",
-      "id": "results_cta_text",
-      "label": "CTA button text",
-      "default": "Shop Now"
-    },
-    {
-      "type": "url",
-      "id": "results_cta_link",
-      "label": "CTA button link"
+      "type": "range",
+      "id": "results_blur_amount",
+      "label": "Locked content blur",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 7
     },
     {
       "type": "checkbox",
       "id": "show_restart_button",
       "label": "Show restart button",
-      "default": true
+      "default": false
     },
     {
       "type": "text",
@@ -780,126 +1513,641 @@
       "default": "Restart Quiz"
     },
     {
-      "type": "select",
-      "id": "results_text_align",
-      "label": "Text alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
+      "type": "header",
+      "content": "Results page — subscribe"
+    },
+    {
+      "type": "text",
+      "id": "results_subscribe_note",
+      "label": "Subscribe note",
+      "default": "Full profile + 3 stories matched to your type — locked"
+    },
+    {
+      "type": "text",
+      "id": "results_email_placeholder",
+      "label": "Email placeholder",
+      "default": "name@email.com"
+    },
+    {
+      "type": "text",
+      "id": "results_cta_text",
+      "label": "CTA button text",
+      "default": "Reveal my full profile"
+    },
+    {
+      "type": "textarea",
+      "id": "results_privacy_text",
+      "label": "Privacy text",
+      "default": "Discreet by design — plain subject lines, no explicit sender name. Unsubscribe anytime. We never share your email."
+    },
+    {
+      "type": "text",
+      "id": "results_newsletter_tags",
+      "label": "Customer tags",
+      "default": "newsletter, quiz-result",
+      "info": "Comma-separated tags applied when the customer subscribes"
+    },
+    {
+      "type": "text",
+      "id": "results_loading_text",
+      "label": "Loading text",
+      "default": "Sending..."
+    },
+    {
+      "type": "text",
+      "id": "results_success_message",
+      "label": "Success message",
+      "default": "You're in — check your inbox for your full profile."
+    },
+    {
+      "type": "text",
+      "id": "results_unlocked_message",
+      "label": "Already subscribed message",
+      "default": "You're subscribed — check your inbox for your full profile."
+    },
+    {
+      "type": "text",
+      "id": "results_invalid_email_message",
+      "label": "Invalid email message",
+      "default": "Please enter a valid email address."
+    },
+    {
+      "type": "text",
+      "id": "results_error_message",
+      "label": "Error message",
+      "default": "Something went wrong. Please try again."
     },
     {
       "type": "header",
-      "content": "Results page colors"
+      "content": "Result type 1 (score 5–10)"
+    },
+    {
+      "type": "text",
+      "id": "type_1_name",
+      "label": "Type name",
+      "default": "The Velvet Switch"
+    },
+    {
+      "type": "textarea",
+      "id": "type_1_tagline",
+      "label": "Tagline / comment",
+      "default": "You crave control — and love surrendering it."
+    },
+    {
+      "type": "range",
+      "id": "type_1_percent",
+      "label": "Rarity percent",
+      "min": 1,
+      "max": 99,
+      "step": 1,
+      "unit": "%",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "type_1_dim1_label",
+      "label": "Dimension 1 label",
+      "default": "Dominance"
+    },
+    {
+      "type": "range",
+      "id": "type_1_dim1_value",
+      "label": "Dimension 1 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 78
+    },
+    {
+      "type": "text",
+      "id": "type_1_dim2_label",
+      "label": "Dimension 2 label",
+      "default": "Intensity"
+    },
+    {
+      "type": "range",
+      "id": "type_1_dim2_value",
+      "label": "Dimension 2 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 85
+    },
+    {
+      "type": "text",
+      "id": "type_1_dim3_label",
+      "label": "Dimension 3 label",
+      "default": "Adventure"
+    },
+    {
+      "type": "range",
+      "id": "type_1_dim3_value",
+      "label": "Dimension 3 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 62
+    },
+    {
+      "type": "textarea",
+      "id": "type_1_locked_text",
+      "label": "Locked description",
+      "default": "Your full resonance map reveals how you negotiate power, pace desire, and choose partners who can meet both sides of your switch."
+    },
+    {
+      "type": "header",
+      "content": "Result type 2 (score 11–15)"
+    },
+    {
+      "type": "text",
+      "id": "type_2_name",
+      "label": "Type name",
+      "default": "The Soft Current"
+    },
+    {
+      "type": "textarea",
+      "id": "type_2_tagline",
+      "label": "Tagline / comment",
+      "default": "You move with feeling first — and let tension bloom slowly."
+    },
+    {
+      "type": "range",
+      "id": "type_2_percent",
+      "label": "Rarity percent",
+      "min": 1,
+      "max": 99,
+      "step": 1,
+      "unit": "%",
+      "default": 14
+    },
+    {
+      "type": "text",
+      "id": "type_2_dim1_label",
+      "label": "Dimension 1 label",
+      "default": "Dominance"
+    },
+    {
+      "type": "range",
+      "id": "type_2_dim1_value",
+      "label": "Dimension 1 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 55
+    },
+    {
+      "type": "text",
+      "id": "type_2_dim2_label",
+      "label": "Dimension 2 label",
+      "default": "Intensity"
+    },
+    {
+      "type": "range",
+      "id": "type_2_dim2_value",
+      "label": "Dimension 2 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "text",
+      "id": "type_2_dim3_label",
+      "label": "Dimension 3 label",
+      "default": "Adventure"
+    },
+    {
+      "type": "range",
+      "id": "type_2_dim3_value",
+      "label": "Dimension 3 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 88
+    },
+    {
+      "type": "textarea",
+      "id": "type_2_locked_text",
+      "label": "Locked description",
+      "default": "Your full resonance map shows how tenderness and curiosity shape the stories that stay with you longest."
+    },
+    {
+      "type": "header",
+      "content": "Result type 3 (score 16–20)"
+    },
+    {
+      "type": "text",
+      "id": "type_3_name",
+      "label": "Type name",
+      "default": "The Night Architect"
+    },
+    {
+      "type": "textarea",
+      "id": "type_3_tagline",
+      "label": "Tagline / comment",
+      "default": "You design the scene — and thrive when others follow your lead."
+    },
+    {
+      "type": "range",
+      "id": "type_3_percent",
+      "label": "Rarity percent",
+      "min": 1,
+      "max": 99,
+      "step": 1,
+      "unit": "%",
+      "default": 21
+    },
+    {
+      "type": "text",
+      "id": "type_3_dim1_label",
+      "label": "Dimension 1 label",
+      "default": "Dominance"
+    },
+    {
+      "type": "range",
+      "id": "type_3_dim1_value",
+      "label": "Dimension 1 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 90
+    },
+    {
+      "type": "text",
+      "id": "type_3_dim2_label",
+      "label": "Dimension 2 label",
+      "default": "Intensity"
+    },
+    {
+      "type": "range",
+      "id": "type_3_dim2_value",
+      "label": "Dimension 2 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 48
+    },
+    {
+      "type": "text",
+      "id": "type_3_dim3_label",
+      "label": "Dimension 3 label",
+      "default": "Adventure"
+    },
+    {
+      "type": "range",
+      "id": "type_3_dim3_value",
+      "label": "Dimension 3 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 67
+    },
+    {
+      "type": "textarea",
+      "id": "type_3_locked_text",
+      "label": "Locked description",
+      "default": "Your full resonance map unpacks the rituals, boundaries, and pacing that make your control feel magnetic."
+    },
+    {
+      "type": "header",
+      "content": "Result type 4 (score 21–25)"
+    },
+    {
+      "type": "text",
+      "id": "type_4_name",
+      "label": "Type name",
+      "default": "The Ember Pulse"
+    },
+    {
+      "type": "textarea",
+      "id": "type_4_tagline",
+      "label": "Tagline / comment",
+      "default": "You chase heat and novelty — then linger in the afterglow."
+    },
+    {
+      "type": "range",
+      "id": "type_4_percent",
+      "label": "Rarity percent",
+      "min": 1,
+      "max": 99,
+      "step": 1,
+      "unit": "%",
+      "default": 11
+    },
+    {
+      "type": "text",
+      "id": "type_4_dim1_label",
+      "label": "Dimension 1 label",
+      "default": "Dominance"
+    },
+    {
+      "type": "range",
+      "id": "type_4_dim1_value",
+      "label": "Dimension 1 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 64
+    },
+    {
+      "type": "text",
+      "id": "type_4_dim2_label",
+      "label": "Dimension 2 label",
+      "default": "Intensity"
+    },
+    {
+      "type": "range",
+      "id": "type_4_dim2_value",
+      "label": "Dimension 2 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 92
+    },
+    {
+      "type": "text",
+      "id": "type_4_dim3_label",
+      "label": "Dimension 3 label",
+      "default": "Adventure"
+    },
+    {
+      "type": "range",
+      "id": "type_4_dim3_value",
+      "label": "Dimension 3 value",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 73
+    },
+    {
+      "type": "textarea",
+      "id": "type_4_locked_text",
+      "label": "Locked description",
+      "default": "Your full resonance map highlights the sparks, risks, and recovery rhythms that keep your desire alive."
+    },
+    {
+      "type": "header",
+      "content": "Results page — colors"
     },
     {
       "type": "color",
       "id": "results_bg_color",
-      "label": "Background",
-      "default": "#fef5fd"
+      "label": "Card background",
+      "default": "#120E16"
     },
     {
       "type": "color",
       "id": "results_text_color",
       "label": "Text",
-      "default": "#321e1e"
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "results_muted_color",
+      "label": "Muted text",
+      "default": "#A0A0A0"
+    },
+    {
+      "type": "color",
+      "id": "results_accent_color",
+      "label": "Accent color",
+      "default": "#F287EC"
+    },
+    {
+      "type": "color",
+      "id": "results_locked_bg_color",
+      "label": "Locked card background",
+      "default": "#1A1520"
+    },
+    {
+      "type": "color",
+      "id": "results_locked_border_color",
+      "label": "Locked card border",
+      "default": "#2A2233"
+    },
+    {
+      "type": "color",
+      "id": "results_bar_bg_color",
+      "label": "Bar track",
+      "default": "#2A2233"
+    },
+    {
+      "type": "color",
+      "id": "results_bar_fill_start",
+      "label": "Bar fill start",
+      "default": "#F287EC"
+    },
+    {
+      "type": "color",
+      "id": "results_bar_fill_end",
+      "label": "Bar fill end",
+      "default": "#F5A8F1"
+    },
+    {
+      "type": "color",
+      "id": "results_input_bg_color",
+      "label": "Input background",
+      "default": "#120E16"
+    },
+    {
+      "type": "color",
+      "id": "results_input_border_color",
+      "label": "Input border",
+      "default": "#3A3145"
     },
     {
       "type": "color",
       "id": "results_cta_bg_color",
-      "label": "CTA button background",
-      "default": "#321e1e"
+      "label": "CTA background",
+      "default": "#F287EC"
     },
     {
       "type": "color",
       "id": "results_cta_text_color",
-      "label": "CTA button text",
-      "default": "#ffffff"
+      "label": "CTA text",
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
       "id": "results_cta_hover_bg_color",
-      "label": "CTA button hover background",
-      "default": "#1e1212"
+      "label": "CTA hover background",
+      "default": "#E06FD9"
     },
     {
       "type": "header",
-      "content": "Results page typography"
+      "content": "Results page — typography & style"
     },
     {
       "type": "range",
-      "id": "results_title_size",
-      "label": "Title size",
-      "min": 24,
+      "id": "results_brand_size",
+      "label": "Brand size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "results_status_size",
+      "label": "Status size",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "results_divider_height",
+      "label": "Divider height",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "results_label_size",
+      "label": "Type label size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "results_type_size",
+      "label": "Type name size",
+      "min": 28,
       "max": 56,
-      "step": 2,
+      "step": 1,
       "unit": "px",
       "default": 40
     },
     {
       "type": "range",
-      "id": "results_message_size",
-      "label": "Message size",
-      "min": 14,
-      "max": 28,
-      "step": 2,
-      "unit": "px",
-      "default": 18
-    },
-    {
-      "type": "range",
-      "id": "results_cta_size",
-      "label": "CTA button size",
-      "min": 14,
-      "max": 24,
+      "id": "results_desc_size",
+      "label": "Description size",
+      "min": 13,
+      "max": 22,
       "step": 1,
-      "unit": "px",
-      "default": 18
-    },
-    {
-      "type": "header",
-      "content": "Results page style"
-    },
-    {
-      "type": "range",
-      "id": "results_border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
       "unit": "px",
       "default": 16
     },
     {
       "type": "range",
-      "id": "results_padding",
-      "label": "Padding",
-      "min": 20,
-      "max": 80,
-      "step": 5,
+      "id": "results_dim_label_size",
+      "label": "Dimension label size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
       "unit": "px",
-      "default": 40
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "results_bar_height",
+      "label": "Bar height",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "results_locked_text_size",
+      "label": "Locked text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "results_locked_radius",
+      "label": "Locked card radius",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "results_subscribe_note_size",
+      "label": "Subscribe note size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "results_input_size",
+      "label": "Input text size",
+      "min": 13,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "results_input_radius",
+      "label": "Input radius",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "results_cta_size",
+      "label": "CTA text size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
     },
     {
       "type": "range",
       "id": "results_cta_border_radius",
-      "label": "CTA button border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
+      "label": "CTA radius",
+      "min": 4,
+      "max": 24,
+      "step": 1,
       "unit": "px",
-      "default": 30
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "results_privacy_size",
+      "label": "Privacy text size",
+      "min": 10,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "header",
@@ -909,79 +2157,79 @@
       "type": "color",
       "id": "background_color",
       "label": "Background",
-      "default": "#ffffff"
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text",
-      "default": "#321e1e"
+      "default": "#321E1E"
     },
     {
       "type": "color",
       "id": "progress_bg_color",
       "label": "Progress background",
-      "default": "#f0f0f0"
+      "default": "#F0F0F0"
     },
     {
       "type": "color",
       "id": "progress_color",
       "label": "Progress bar",
-      "default": "#321e1e"
+      "default": "#321E1E"
     },
     {
       "type": "color",
       "id": "option_bg_color",
       "label": "Option background",
-      "default": "#ffffff"
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
       "id": "option_border_color",
       "label": "Option border",
-      "default": "#e0e0e0"
+      "default": "#E0E0E0"
     },
     {
       "type": "color",
       "id": "option_hover_bg_color",
       "label": "Option hover background",
-      "default": "#fef5fd"
+      "default": "#FEF5FD"
     },
     {
       "type": "color",
       "id": "option_hover_border_color",
       "label": "Option hover border",
-      "default": "#321e1e"
+      "default": "#321E1E"
     },
     {
       "type": "color",
       "id": "option_selected_bg_color",
       "label": "Option selected background",
-      "default": "#fef5fd"
+      "default": "#FEF5FD"
     },
     {
       "type": "color",
       "id": "option_selected_border_color",
       "label": "Option selected border",
-      "default": "#321e1e"
+      "default": "#321E1E"
     },
     {
       "type": "color",
       "id": "button_bg_color",
       "label": "Button background",
-      "default": "#321e1e"
+      "default": "#321E1E"
     },
     {
       "type": "color",
       "id": "button_text_color",
       "label": "Button text",
-      "default": "#ffffff"
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
       "id": "button_hover_bg_color",
       "label": "Button hover background",
-      "default": "#1e1212"
+      "default": "#1E1212"
     },
     {
       "type": "header",
