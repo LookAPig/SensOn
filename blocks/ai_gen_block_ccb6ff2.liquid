@@ -20,7 +20,8 @@
   .ai-quiz-container-{{ ai_gen_id }}.is-results {
     padding: 0;
     background-color: transparent;
-    max-width: {{ block.settings.results_max_width }}px;
+    width: 100%;
+    max-width: 440px;
   }
 
   .ai-quiz-header-{{ ai_gen_id }} {
@@ -207,11 +208,22 @@
     letter-spacing: -0.01em;
   }
 
+  .ai-quiz-result-body-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+
+  .ai-quiz-result-main-{{ ai_gen_id }} {
+    min-width: 0;
+  }
+
   .ai-quiz-result-desc-{{ ai_gen_id }} {
     font-size: {{ block.settings.results_desc_size }}px;
     color: {{ block.settings.results_text_color }};
     line-height: 1.55;
-    margin: 0 0 28px;
+    margin: 0;
     max-width: 36em;
   }
 
@@ -220,7 +232,7 @@
     border: 1px solid {{ block.settings.results_locked_border_color }};
     border-radius: {{ block.settings.results_locked_radius }}px;
     padding: 22px 20px;
-    margin-bottom: 28px;
+    margin: 0;
   }
 
   .ai-quiz-result-dim-{{ ai_gen_id }} {
@@ -413,6 +425,139 @@
     }
   }
 
+  /* Desktop results layout */
+  @media screen and (min-width: 750px) {
+    .ai-quiz-container-{{ ai_gen_id }}.is-results {
+      max-width: {{ block.settings.results_max_width }}px;
+      padding: 24px 20px;
+    }
+
+    .ai-quiz-result-card-{{ ai_gen_id }} {
+      padding: 48px 56px;
+      border-radius: {{ block.settings.results_border_radius | plus: 4 }}px;
+    }
+
+    .ai-quiz-result-top-{{ ai_gen_id }} {
+      margin-bottom: 20px;
+    }
+
+    .ai-quiz-result-brand-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_brand_size }}px * 1.15);
+    }
+
+    .ai-quiz-result-divider-{{ ai_gen_id }} {
+      margin-bottom: 36px;
+    }
+
+    .ai-quiz-result-body-{{ ai_gen_id }} {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 40px 48px;
+      align-items: start;
+      margin-bottom: 36px;
+    }
+
+    .ai-quiz-result-main-{{ ai_gen_id }} {
+      padding-top: 4px;
+    }
+
+    .ai-quiz-result-label-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_label_size }}px * 1.05);
+      margin-bottom: 14px;
+    }
+
+    .ai-quiz-result-type-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_type_size }}px * 1.2);
+      margin-bottom: 20px;
+      max-width: 12em;
+    }
+
+    .ai-quiz-result-desc-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_desc_size }}px * 1.05);
+      line-height: 1.65;
+      max-width: 28em;
+    }
+
+    .ai-quiz-result-locked-{{ ai_gen_id }} {
+      padding: 28px 26px;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .ai-quiz-result-dim-{{ ai_gen_id }} {
+      margin-bottom: 22px;
+    }
+
+    .ai-quiz-result-subscribe-{{ ai_gen_id }} {
+      max-width: 100%;
+      padding-top: 8px;
+      border-top: 1px solid {{ block.settings.results_locked_border_color }};
+    }
+
+    .ai-quiz-result-subscribe-note-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_subscribe_note_size }}px * 1.05);
+      margin-bottom: 18px;
+    }
+
+    .ai-quiz-result-form-{{ ai_gen_id }} {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.9fr);
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 14px;
+    }
+
+    .ai-quiz-result-email-{{ ai_gen_id }} {
+      height: 100%;
+      min-height: 52px;
+      padding: 16px 18px;
+    }
+
+    button.ai-quiz-result-submit-{{ ai_gen_id }}[type="submit"] {
+      width: 100%;
+      min-height: 52px;
+      padding: 16px 24px;
+      white-space: nowrap;
+    }
+
+    .ai-quiz-result-privacy-{{ ai_gen_id }} {
+      max-width: 42em;
+    }
+
+    .ai-quiz-result-restart-wrap-{{ ai_gen_id }} {
+      margin-top: 28px;
+    }
+
+    .ai-quiz-result-restart-wrap-{{ ai_gen_id }} .ai-quiz-button-{{ ai_gen_id }} {
+      width: auto;
+      min-width: 180px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .ai-quiz-container-{{ ai_gen_id }}.is-results {
+      padding: 32px 24px;
+    }
+
+    .ai-quiz-result-card-{{ ai_gen_id }} {
+      padding: 56px 64px;
+    }
+
+    .ai-quiz-result-body-{{ ai_gen_id }} {
+      gap: 48px 64px;
+      margin-bottom: 40px;
+    }
+
+    .ai-quiz-result-type-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.results_type_size }}px * 1.35);
+    }
+
+    .ai-quiz-result-form-{{ ai_gen_id }} {
+      max-width: 720px;
+      grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.85fr);
+    }
+  }
+
   @media screen and (max-width: 749px) {
     .ai-quiz-container-{{ ai_gen_id }} {
       padding: 24px 16px;
@@ -420,6 +565,7 @@
 
     .ai-quiz-container-{{ ai_gen_id }}.is-results {
       padding: 0;
+      max-width: 440px;
     }
 
     .ai-quiz-title-{{ ai_gen_id }} {
@@ -575,43 +721,47 @@
 
       <hr class="ai-quiz-result-divider-{{ ai_gen_id }}">
 
-      {% if block.settings.results_type_label != blank %}
-        <div class="ai-quiz-result-label-{{ ai_gen_id }}">{{ block.settings.results_type_label }}</div>
-      {% endif %}
+      <div class="ai-quiz-result-body-{{ ai_gen_id }}">
+        <div class="ai-quiz-result-main-{{ ai_gen_id }}">
+          {% if block.settings.results_type_label != blank %}
+            <div class="ai-quiz-result-label-{{ ai_gen_id }}">{{ block.settings.results_type_label }}</div>
+          {% endif %}
 
-      <h2 class="ai-quiz-result-type-{{ ai_gen_id }}" data-type-name></h2>
+          <h2 class="ai-quiz-result-type-{{ ai_gen_id }}" data-type-name></h2>
 
-      <p class="ai-quiz-result-desc-{{ ai_gen_id }}">
-        <span data-type-tagline></span>
-        {% if block.settings.results_percent_prefix != blank or block.settings.results_percent_suffix != blank %}
-          <span data-percent-sentence>
-            {{ block.settings.results_percent_prefix }}<span data-type-percent></span>{{ block.settings.results_percent_suffix }}
-          </span>
-        {% endif %}
-      </p>
+          <p class="ai-quiz-result-desc-{{ ai_gen_id }}">
+            <span data-type-tagline></span>
+            {% if block.settings.results_percent_prefix != blank or block.settings.results_percent_suffix != blank %}
+              <span data-percent-sentence>
+                {{ block.settings.results_percent_prefix }}<span data-type-percent></span>{{ block.settings.results_percent_suffix }}
+              </span>
+            {% endif %}
+          </p>
+        </div>
 
-      <div class="ai-quiz-result-locked-{{ ai_gen_id }}" data-locked-card>
-        {% for dim_index in (1..3) %}
-          <div class="ai-quiz-result-dim-{{ ai_gen_id }}" data-dim="{{ dim_index }}">
-            <div class="ai-quiz-result-dim-row-{{ ai_gen_id }}">
-              <span class="ai-quiz-result-dim-label-{{ ai_gen_id }}" data-dim-label></span>
-              <span
-                class="ai-quiz-result-dim-value-{{ ai_gen_id }} ai-quiz-result-blur-{{ ai_gen_id }}"
-                data-dim-value
-                aria-hidden="true"
-              >88%</span>
+        <div class="ai-quiz-result-locked-{{ ai_gen_id }}" data-locked-card>
+          {% for dim_index in (1..3) %}
+            <div class="ai-quiz-result-dim-{{ ai_gen_id }}" data-dim="{{ dim_index }}">
+              <div class="ai-quiz-result-dim-row-{{ ai_gen_id }}">
+                <span class="ai-quiz-result-dim-label-{{ ai_gen_id }}" data-dim-label></span>
+                <span
+                  class="ai-quiz-result-dim-value-{{ ai_gen_id }} ai-quiz-result-blur-{{ ai_gen_id }}"
+                  data-dim-value
+                  aria-hidden="true"
+                >88%</span>
+              </div>
+              <div class="ai-quiz-result-dim-bar-{{ ai_gen_id }}">
+                <div class="ai-quiz-result-dim-fill-{{ ai_gen_id }}" data-dim-fill></div>
+              </div>
             </div>
-            <div class="ai-quiz-result-dim-bar-{{ ai_gen_id }}">
-              <div class="ai-quiz-result-dim-fill-{{ ai_gen_id }}" data-dim-fill></div>
-            </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
 
-        <p
-          class="ai-quiz-result-locked-text-{{ ai_gen_id }} ai-quiz-result-blur-{{ ai_gen_id }}"
-          data-locked-text
-          aria-hidden="true"
-        ></p>
+          <p
+            class="ai-quiz-result-locked-text-{{ ai_gen_id }} ai-quiz-result-blur-{{ ai_gen_id }}"
+            data-locked-text
+            aria-hidden="true"
+          ></p>
+        </div>
       </div>
 
       <div class="ai-quiz-result-subscribe-{{ ai_gen_id }}" data-subscribe-area>
@@ -1312,12 +1462,13 @@
     {
       "type": "range",
       "id": "results_max_width",
-      "label": "Results max width",
-      "min": 320,
-      "max": 720,
-      "step": 10,
+      "label": "Desktop results max width",
+      "min": 640,
+      "max": 1200,
+      "step": 20,
       "unit": "px",
-      "default": 440
+      "default": 960,
+      "info": "Mobile keeps a compact card; this width applies from tablet/desktop up."
     },
     {
       "type": "range",
