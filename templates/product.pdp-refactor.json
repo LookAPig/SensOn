@@ -448,6 +448,19 @@
     "user_saying_jXxM9p": {
       "type": "user-saying",
       "blocks": {
+        "creator_slide_gbVTNd": {
+          "type": "creator_slide",
+          "disabled": true,
+          "settings": {
+            "tags": "AI-assisted\nIntense orgasm\nLong lasting",
+            "quote": "",
+            "creator_name": "janessadanielle__",
+            "creator_desc": "Actress, Self-Growth Nerd, Goofball",
+            "creator_subs": "14.2M Subscribers",
+            "profile_url": "",
+            "video_aspect_ratio": "3-4"
+          }
+        },
         "creator_slide_jVtThp": {
           "type": "creator_slide",
           "settings": {
@@ -585,6 +598,7 @@
         }
       },
       "block_order": [
+        "creator_slide_gbVTNd",
         "creator_slide_jVtThp",
         "creator_slide_WHVR3q",
         "creator_slide_BYJhKB",
