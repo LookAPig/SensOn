@@ -478,6 +478,21 @@
             "video_aspect_ratio": "3-4"
           }
         },
+        "creator_slide_BYJhKB": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "Body-Responsive Tech Hands-Free\nAI-Powered Companionship",
+            "quote": "<p>\"It literally reads your body and adjust on its own. No buttons, no interruptions.\"</p>",
+            "avatar": "shopify://shop_images/just-lex_jpg.jpg",
+            "creator_name": "just-lex",
+            "creator_desc": "Wellness，Intimacy Guide",
+            "creator_subs": "780K Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/just-lex.mp4",
+            "video_cover": "shopify://shop_images/just-lex.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
         "creator_slide_exrhef": {
           "type": "creator_slide",
           "settings": {
@@ -572,6 +587,7 @@
       "block_order": [
         "creator_slide_jVtThp",
         "creator_slide_WHVR3q",
+        "creator_slide_BYJhKB",
         "creator_slide_exrhef",
         "creator_slide_Dzbpkt",
         "creator_slide_g8grbA",
