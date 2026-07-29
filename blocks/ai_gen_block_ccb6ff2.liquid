@@ -1,4 +1,3 @@
-
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 {% assign quiz_newsletter_form_id = 'quiz-newsletter-' | append: ai_gen_id %}
 {% assign quiz_newsletter_form_class = 'ai-quiz-result-form-' | append: ai_gen_id %}
@@ -30,7 +29,7 @@
 
   .ai-quiz-header-{{ ai_gen_id }} {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 12px;
   }
 
   .ai-quiz-title-{{ ai_gen_id }} {
@@ -51,12 +50,16 @@
     background-color: {{ block.settings.progress_bg_color }};
     border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
   }
 
   .ai-quiz-progress-bar-{{ ai_gen_id }} {
     height: 100%;
-    background-color: {{ block.settings.progress_color }};
+    background: linear-gradient(
+      90deg,
+      {{ block.settings.results_bar_fill_start }},
+      {{ block.settings.results_bar_fill_end }}
+    );
     transition: width 0.3s ease;
     width: 0%;
   }
@@ -205,7 +208,7 @@
   }
 
   .ai-quiz-result-type-{{ ai_gen_id }} {
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: inherit !important;
     font-size: {{ block.settings.results_type_size }}px;
     font-weight: 400;
     color: {{ block.settings.results_text_color }};
@@ -231,6 +234,11 @@
     line-height: 1.55;
     margin: 0;
     max-width: 36em;
+  }
+
+  .ai-quiz-result-desc-{{ ai_gen_id }} [data-type-tagline],
+  .ai-quiz-result-locked-text-{{ ai_gen_id }} {
+    white-space: pre-line;
   }
 
   .ai-quiz-result-locked-{{ ai_gen_id }} {
@@ -786,7 +794,7 @@
             placeholder="{{ block.settings.results_email_placeholder }}"
             autocomplete="email"
             required
-            data-email-input
+                        data-email-input
           >
           <button type="submit" class="ai-quiz-result-submit-{{ ai_gen_id }}" data-submit-btn>
             {{ block.settings.results_cta_text }}
@@ -989,7 +997,7 @@
         }
 
         if (taglineEl) {
-          taglineEl.textContent = type.tagline || "";
+          this.renderMultilineText(taglineEl, type.tagline || "");
         }
 
         if (percentEl) {
@@ -997,7 +1005,7 @@
         }
 
         if (lockedTextEl) {
-          lockedTextEl.textContent = type.locked_text || "";
+          this.renderMultilineText(lockedTextEl, type.locked_text || "");
         }
 
         const dimensions = [
@@ -1034,6 +1042,19 @@
         });
 
         this.resetLockedState();
+      }
+
+      renderMultilineText(element, value) {
+        const lines = String(value).replace(/\r\n?/g, "\n").split("\n");
+        element.replaceChildren();
+
+        lines.forEach((line, index) => {
+          if (index > 0) {
+            element.appendChild(document.createElement("br"));
+          }
+
+          element.appendChild(document.createTextNode(line));
+        });
       }
 
       resetLockedState() {
@@ -1573,7 +1594,7 @@
     },
     {
       "type": "text",
-      "id": "results_invalid_email_message",
+            "id": "results_invalid_email_message",
       "label": "Invalid email message",
       "default": "Please enter a valid email address."
     },
