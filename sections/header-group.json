@@ -92,9 +92,9 @@
         "hide_on_scroll": false,
         "mobile_layout": "logo_left_navigation_right",
         "desktop_layout": "logo_left_navigation_center",
-        "logo": "shopify://shop_images/20251215-133135.png",
-        "logo_max_width": 60,
-        "logo_mobile_max_width": 45,
+        "logo": "shopify://shop_images/senson-logo.jpg",
+        "logo_max_width": 280,
+        "logo_mobile_max_width": 60,
         "menu": "main-menu-web",
         "drawer_menu": "main-menu-web",
         "secondary_menu": "",
@@ -107,7 +107,7 @@
         "show_country_flag": true,
         "show_locale_selector": true,
         "transparent_header_text_color": "#ffffff",
-        "transparent_logo": "shopify://shop_images/20251215-133135.png"
+        "transparent_logo": "shopify://shop_images/64f7c409ab6805f0e465bebfec803d20.png"
       }
     }
   },

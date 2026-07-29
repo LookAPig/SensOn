@@ -39,8 +39,8 @@
         "image_kekyAg": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/20251215-133135.png",
-            "image_width": 70,
+            "image": "shopify://shop_images/senson-logo.jpg",
+            "image_width": 90,
             "link": ""
           }
         },
@@ -50,24 +50,6 @@
             "title": "<strong>ABOUT SENSON</strong>",
             "content": "<p>SensOn delivers the first AI-powered pleasure experience created for women. It combines bionic stimulation through the S1 device with a premium erotica platform to create cinematic intimacy that users can truly feel. Through the SensOn.AI app, users pair the device to access female-focused, LGBTQ+ inclusive erotic audio and engage in real-time voice interaction with story characters. As the experience unfolds, the hardware responds in sync with both content and conversation.</p><p>SensOn is not just an intimate product. It is an AI companion you can feel and touch.</p>",
             "enable_follow_on_shop": true
-          }
-        },
-        "image_RmTAqY": {
-          "type": "image",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/20251215-133135.png",
-            "image_width": 80,
-            "link": ""
-          }
-        },
-        "text_KAbTKM": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "title": "About our store",
-            "content": "<p>Use this text area to tell your customers about your brand and vision. You can change it in the theme editor.</p>",
-            "enable_follow_on_shop": false
           }
         },
         "links": {
@@ -101,8 +83,6 @@
       "block_order": [
         "image_kekyAg",
         "text_U93RUy",
-        "image_RmTAqY",
-        "text_KAbTKM",
         "links",
         "links_rDkXqA",
         "links_GQLnBp"
