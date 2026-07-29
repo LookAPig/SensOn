@@ -93,7 +93,7 @@
         "mobile_layout": "logo_left_navigation_right",
         "desktop_layout": "logo_left_navigation_center",
         "logo": "shopify://shop_images/senson-logo.jpg",
-        "logo_max_width": 280,
+        "logo_max_width": 120,
         "logo_mobile_max_width": 60,
         "menu": "main-menu-web",
         "drawer_menu": "main-menu-web",
