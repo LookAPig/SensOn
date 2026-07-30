@@ -13,6 +13,19 @@
   "sections": {
     "announcement_bar_LbA99x": {
       "type": "announcement-bar",
+      "blocks": {
+        "message_yntTNt": {
+          "type": "message",
+          "settings": {
+            "icon": "null",
+            "icon_size": 14,
+            "text": "Announce something here"
+          }
+        }
+      },
+      "block_order": [
+        "message_yntTNt"
+      ],
       "disabled": true,
       "name": "t:sections.announcement_bar.name",
       "settings": {}
