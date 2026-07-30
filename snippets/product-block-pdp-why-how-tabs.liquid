@@ -135,19 +135,14 @@
       font-size: 14px;
       line-height: 1.45;
       color: #000;
+      position: relative;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-quote-text {
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
-    }
-
-    #pdp-wh-{{ block.id }} .creator-quote-wrapper.expanded {
-      display: block;
-      overflow: visible;
-    }
-
-    #pdp-wh-{{ block.id }} .creator-quote-text {
-      display: inline;
     }
 
     #pdp-wh-{{ block.id }} .creator-quote-text::before {
@@ -158,11 +153,18 @@
       content: '\201D';
     }
 
-    #pdp-wh-{{ block.id }} .creator-read-more-btn {
+    #pdp-wh-{{ block.id }} .creator-quote-wrapper.expanded .creator-quote-text {
       display: inline;
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-read-more-btn {
+      display: inline-block;
       border: none;
       background: none;
       padding: 0;
+      margin-top: 4px;
       margin-left: 4px;
       color: #FF47F5;
       font-size: 14px;
