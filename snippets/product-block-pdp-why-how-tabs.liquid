@@ -133,6 +133,33 @@
       content: '\201D';
     }
 
+
+    /* ===== Expert Review Read More ===== */
+    #pdp-wh-{{ block.id }} .creator-read-more-wrap {
+      margin-top: 0;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-quote-collapse {
+      max-height: 90px;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-quote-collapse.is-open {
+      max-height: 1000px;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-read-more-btn {
+      margin-top: 10px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: #FF47F5;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
     #pdp-wh-{{ block.id }} .pdp-creator-author {
       display: flex;
       align-items: center;
@@ -593,7 +620,10 @@
         {%- if creator_2_has_content -%}
           <div class="pdp-creator-card">
             {%- if block.settings.creator_2_quote != blank -%}
-              <p class="pdp-creator-quote">{{ block.settings.creator_2_quote | escape }}</p>
+              <div class="creator-read-more-wrap">
+                <p class="pdp-creator-quote creator-quote-collapse">{{ block.settings.creator_2_quote | escape }}</p>
+                <button type="button" class="creator-read-more-btn">Read More</button>
+              </div>
             {%- endif -%}
             {%- if block.settings.creator_2_avatar != blank
               or block.settings.creator_2_name != blank
@@ -703,7 +733,10 @@
             {%- endif -%}
 
             {%- if block.settings.creator_3_quote != blank -%}
-              <p class="pdp-creator-quote">{{ block.settings.creator_3_quote | escape }}</p>
+              <div class="creator-read-more-wrap">
+                <p class="pdp-creator-quote creator-quote-collapse">{{ block.settings.creator_3_quote | escape }}</p>
+                <button type="button" class="creator-read-more-btn">Read More</button>
+              </div>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -1001,6 +1034,15 @@
 
       setupCreatorVideos();
       renderSpecsGrid();
+
+      root.querySelectorAll('.creator-read-more-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var text = btn.previousElementSibling;
+          text.classList.toggle('is-open');
+          btn.textContent = text.classList.contains('is-open') ? 'Read Less' : 'Read More';
+        });
+      });
+
     })();
   </script>
 </div>
