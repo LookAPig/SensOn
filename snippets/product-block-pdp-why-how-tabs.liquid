@@ -119,29 +119,43 @@
 
     #pdp-wh-{{ block.id }} .pdp-creator-quote {
       margin: 0;
-      {% comment %} font-family: Georgia, 'Times New Roman', serif; {% endcomment %}
       font-size: 14px;
       line-height: 1.45;
       color: #000;
     }
 
-    /* Expert Review Inline Read More */
+    /* Expert Review Inline Read More & 引号挂载 */
+
+    #pdp-wh-{{ block.id }} .pdp-creator-quote::before,
+    #pdp-wh-{{ block.id }} .pdp-creator-quote::after {
+      content: none;
+    }
 
     #pdp-wh-{{ block.id }} .creator-quote-wrapper {
       font-size: 14px;
       line-height: 1.45;
       color: #000;
-    }
-
-    #pdp-wh-{{ block.id }} .creator-quote-text {
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
 
-    #pdp-wh-{{ block.id }} .creator-quote-text.expanded {
+    #pdp-wh-{{ block.id }} .creator-quote-wrapper.expanded {
       display: block;
+      overflow: visible;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-quote-text {
+      display: inline;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-quote-text::before {
+      content: '\201C';
+    }
+
+    #pdp-wh-{{ block.id }} .creator-quote-text::after {
+      content: '\201D';
     }
 
     #pdp-wh-{{ block.id }} .creator-read-more-btn {
@@ -156,14 +170,6 @@
       cursor: pointer;
     }
 
-    #pdp-wh-{{ block.id }} .pdp-creator-quote::before {
-      content: '\201C';
-    }
-
-    #pdp-wh-{{ block.id }} .pdp-creator-quote::after {
-      content: '\201D';
-    }
-
     #pdp-wh-{{ block.id }} .pdp-creator-author {
       display: flex;
       align-items: center;
@@ -175,7 +181,6 @@
       width: 100%;
       aspect-ratio: 16 / 9;
       margin-bottom: 20px;
-      /* border: 2px solid #4a9eff; */
       border-radius: 12px;
       overflow: hidden;
       background: #000;
@@ -617,7 +622,9 @@
           {%- endif -%}
 
           {%- if block.settings.creator_quote != blank -%}
-            <p class="pdp-creator-quote">{{ block.settings.creator_quote | escape }}</p>
+            <p class="pdp-creator-quote">
+              <span class="creator-quote-text">{{ block.settings.creator_quote | escape }}</span>
+            </p>
           {%- endif -%}
         </div>
 
@@ -625,13 +632,8 @@
           <div class="pdp-creator-card">
             {%- if block.settings.creator_2_quote != blank -%}
               <p class="pdp-creator-quote creator-quote-wrapper">
-                <span class="creator-quote-text">
-                  {{ block.settings.creator_2_quote | escape }}
-                </span>
-
-                <button type="button" class="creator-read-more-btn">
-                  Read More
-                </button>
+                <span class="creator-quote-text">{{ block.settings.creator_2_quote | escape }}</span>
+                <button type="button" class="creator-read-more-btn">Read More</button>
               </p>
             {%- endif -%}
             {%- if block.settings.creator_2_avatar != blank
@@ -743,13 +745,8 @@
 
             {%- if block.settings.creator_3_quote != blank -%}
               <p class="pdp-creator-quote creator-quote-wrapper">
-                <span class="creator-quote-text">
-                  {{ block.settings.creator_3_quote | escape }}
-                </span>
-
-                <button type="button" class="creator-read-more-btn">
-                  Read More
-                </button>
+                <span class="creator-quote-text">{{ block.settings.creator_3_quote | escape }}</span>
+                <button type="button" class="creator-read-more-btn">Read More</button>
               </p>
             {%- endif -%}
           </div>
@@ -1051,12 +1048,11 @@
 
       root.querySelectorAll('.creator-read-more-btn').forEach(function(btn){
         btn.addEventListener('click', function(){
-          var text = btn.previousElementSibling;
-          text.classList.toggle('expanded');
-          btn.textContent =
-            text.classList.contains('expanded')
-            ? 'Read Less'
-            : 'Read More';
+          var wrapper = btn.closest('.creator-quote-wrapper');
+          if (!wrapper) return;
+          
+          wrapper.classList.toggle('expanded');
+          btn.textContent = wrapper.classList.contains('expanded') ? 'Read Less' : 'Read More';
         });
       });
     })();
