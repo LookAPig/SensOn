@@ -92,16 +92,10 @@
         },
         "featured_in_Gwxwf8": {
           "type": "featured_in",
-          "disabled": true,
           "settings": {
             "title": "Featured in",
             "logos_json": "[{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/vice.png?v=1781598208\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/0_1.webp?v=1781169789\",\"alt\":\"Yahoo Finance\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/3_1.webp?v=1781169789\",\"alt\":\"USA TODAY\"}]"
           }
-        },
-        "separator_bTgDWQ": {
-          "type": "separator",
-          "disabled": true,
-          "settings": {}
         },
         "text_36KfV6": {
           "type": "text",
@@ -309,7 +303,6 @@
         "price",
         "countdown_H8fV6E",
         "featured_in_Gwxwf8",
-        "separator_bTgDWQ",
         "text_36KfV6",
         "feature_cards_NddJBd",
         "text_VcpKPp",
