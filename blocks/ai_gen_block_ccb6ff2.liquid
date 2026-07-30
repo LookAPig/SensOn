@@ -4,27 +4,50 @@
 
 {% style %}
   .ai-quiz-container-{{ ai_gen_id }} {
+    position: relative;
+    isolation: isolate;
     display: block;
     width: {{ block.settings.desktop_width_percent }}%;
     max-width: 100%;
+    min-height: 100svh;
+    box-sizing: border-box;
     margin: 0 auto;
     padding: 40px 20px;
+    background-color: transparent;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-quiz-container-{{ ai_gen_id }}::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    min-height: 100svh;
+    transform: translateX(-50%);
+    pointer-events: none;
     background-color: {{ block.settings.background_color }};
-    {% if block.settings.background_image != blank %}
-      background-image: url('{{ block.settings.background_image | image_url: width: 2400 }}');
+    {% if block.settings.desktop_background_image != blank %}
+      background-image: url('{{ block.settings.desktop_background_image | image_url: width: 2400 }}');
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
     {% endif %}
-    border-radius: {{ block.settings.border_radius }}px;
   }
 
   .ai-quiz-container-{{ ai_gen_id }}.is-results {
     padding: 0;
+    min-height: auto;
     background-color: transparent;
     background-image: none;
     width: 100%;
     max-width: 440px;
+  }
+
+  .ai-quiz-container-{{ ai_gen_id }}.is-results::before {
+    display: none;
   }
 
   .ai-quiz-header-{{ ai_gen_id }} {
@@ -577,6 +600,15 @@
       padding: 24px 16px;
     }
 
+    .ai-quiz-container-{{ ai_gen_id }}::before {
+      {% if block.settings.mobile_background_image != blank %}
+        background-image: url('{{ block.settings.mobile_background_image | image_url: width: 1200 }}');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+      {% endif %}
+    }
+
     .ai-quiz-container-{{ ai_gen_id }}.is-results {
       padding: 0;
       max-width: 440px;
@@ -794,7 +826,7 @@
             placeholder="{{ block.settings.results_email_placeholder }}"
             autocomplete="email"
             required
-                        data-email-input
+            data-email-input
           >
           <button type="submit" class="ai-quiz-result-submit-{{ ai_gen_id }}" data-submit-btn>
             {{ block.settings.results_cta_text }}
@@ -1594,7 +1626,7 @@
     },
     {
       "type": "text",
-            "id": "results_invalid_email_message",
+      "id": "results_invalid_email_message",
       "label": "Invalid email message",
       "default": "Please enter a valid email address."
     },
@@ -2188,8 +2220,15 @@
     },
     {
       "type": "image_picker",
-      "id": "background_image",
-      "label": "Background image"
+      "id": "desktop_background_image",
+      "label": "PC background image",
+      "info": "Recommended size: 1920 × 1200 px"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_image",
+      "label": "H5 background image",
+      "info": "Recommended size: 1080 × 2400 px"
     },
     {
       "type": "color",
