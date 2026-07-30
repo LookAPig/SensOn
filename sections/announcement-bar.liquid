@@ -1,6 +1,5 @@
 {%- if section.blocks.size > 0 -%}
   {%- unless request.page_type != 'index' and section.settings.show_on_homepage_only -%}
-
     <style>
       :root {
         --announcement-bar-is-sticky: {% if section.settings.enable_sticky %}1{% else %}0{% endif %};
@@ -17,28 +16,28 @@
         }
       {%- endif -%}
 
-
+      /* 跑马灯容器 */
       .announcement-bar {
         padding: 0;
         overflow: hidden;
         white-space: nowrap;
       }
 
-
+      /* 滚动内容包装器 */
       .marquee {
         display: inline-block;
         white-space: nowrap;
         animation: marqueeScroll linear infinite;
+        /* 动画时长通过 JS 动态设置，或使用固定值；这里先用变量，后面用内联样式覆盖 */
         animation-duration: {{ section.settings.scroll_speed }}s;
       }
 
-
+      /* 每个消息块样式（保持原有图标+文字布局） */
       .marquee-item {
         display: inline-flex;
         align-items: center;
-        margin-right: 60px;
+        margin-right: 60px; /* 消息之间的间隔，可自行调整 */
       }
-
 
       .marquee-item .subheading {
         display: flex;
@@ -47,196 +46,123 @@
         padding: 0.7rem 0;
       }
 
-
       .marquee-item svg {
         margin-right: 4px;
       }
 
-
+      /* 无限滚动关键帧 */
       @keyframes marqueeScroll {
         0% {
           transform: translateX(0);
         }
-
         100% {
           transform: translateX(-50%);
         }
       }
 
-
-      /* Orgasm Day Peach Pink Gradient */
-
+      /* 暗色调低饱和度彩虹渐变背景（无 !important） */
       #shopify-section-{{ section.id }} .announcement-bar {
         background: linear-gradient(
           to right,
-          #FFF1EA,
-          #FAD3C7,
-          #F7A58B,
-          #F287EC,
-          #E8C7F5
+          #A87C7C,
+          #B89B6E,
+          #7B8E6E,
+          #6E8E8E,
+          #7E74A8,
+          #A87C9E
         );
-        color: #34263B;
+        color: #ffffff;
       }
-
 
       #shopify-section-{{ section.id }} .announcement-bar,
       #shopify-section-{{ section.id }} .announcement-bar .subheading,
       #shopify-section-{{ section.id }} .announcement-bar span,
       #shopify-section-{{ section.id }} .announcement-bar p,
       #shopify-section-{{ section.id }} .announcement-bar .subheading span {
-        color: #34263B;
+        color: #ffffff;
       }
-
 
       #shopify-section-{{ section.id }} .announcement-bar svg {
         fill: none;
         stroke: currentColor;
-        color: #34263B;
+        color: #ffffff;
       }
-
     </style>
 
-
     <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
-
       <height-observer variable="announcement-bar">
-
-        <div
-          class="announcement-bar"
-          id="announcement-bar-{{ section.id }}"
-        >
-
-          <div
-            class="marquee"
-            id="marquee-{{ section.id }}"
-          >
-
+        <div class="announcement-bar" id="announcement-bar-{{ section.id }}">
+          <div class="marquee" id="marquee-{{ section.id }}">
             {%- capture marquee_content -%}
-
               {%- for block in section.blocks -%}
-
                 {%- if block.settings.text != blank -%}
-
-                  <span
-                    class="marquee-item"
-                    {{ block.shopify_attributes }}
-                  >
-
+                  <span class="marquee-item" {{ block.shopify_attributes }}>
                     <p class="subheading subheading-xs">
-
                       {%- if block.settings.icon and block.settings.icon != 'null' -%}
-
                         {%- render 'icon' with block.settings.icon, width: block.settings.icon_size -%}
-
                       {%- endif -%}
-
-                      <span>
-                        {{ block.settings.text }}
-                      </span>
-
+                      <span>{{ block.settings.text }}</span>
                     </p>
-
                   </span>
-
                 {%- endif -%}
-
               {%- endfor -%}
-
             {%- endcapture -%}
-
-
             {{ marquee_content }}
             {{ marquee_content }}
-
-
           </div>
-
         </div>
-
       </height-observer>
-
     </div>
 
+    <script>
+      (function() {
+        const marquee = document.getElementById('marquee-{{ section.id }}');
+        if (!marquee) return;
 
+        // 获取所有原始内容项（注意：由于复制了一份，实际子节点是原始的两倍）
+        const items = marquee.children;
+        if (items.length === 0) return;
+
+        // 计算原始一组内容的总宽度（取前一半）
+        const halfLength = items.length / 2;
+        let originalWidth = 0;
+        for (let i = 0; i < halfLength; i++) {
+          originalWidth += items[i].offsetWidth;
+          // 加上 margin-right（每个 item 有 margin-right: 60px）
+          if (i < halfLength - 1) originalWidth += 60;
+        }
+
+        // 获取用户设置的滚动速度（秒），速度值越小滚动越快，这里用速度值控制动画时长：总宽度 / (像素/秒)
+        // 更符合直觉：speed 秒内滚完一整份内容的距离，则动画时长 = speed 秒，但是因为动画移动了 -50%（整份内容的宽度），
+        // 所以动画时长 = speed 秒即可。为了平滑，直接使用 speed 作为动画时长。
+        let speed = {{ section.settings.scroll_speed | default: 20 }};
+        // 避免过小或过大
+        if (speed < 5) speed = 5;
+        if (speed > 60) speed = 60;
+        marquee.style.animationDuration = speed + 's';
+
+        // 如果用户想暂停悬停（可选，通常跑马灯悬停暂停体验更好，默认关闭，需要可开启）
+        const bar = document.getElementById('announcement-bar-{{ section.id }}');
+        {% if section.settings.pause_on_hover %}
+        bar.addEventListener('mouseenter', () => {
+          marquee.style.animationPlayState = 'paused';
+        });
+        bar.addEventListener('mouseleave', () => {
+          marquee.style.animationPlayState = 'running';
+        });
+        {% endif %}
+      })();
+    </script>
+
+    <script>
+      // 公告栏高度计算
+      document.documentElement.style.setProperty(
+        '--announcement-bar-height',
+        `${Math.round(document.getElementById('shopify-section-{{ section.id }}').clientHeight)}px`
+      );
+    </script>
   {%- endunless -%}
 {%- endif -%}
-<script>
-(function() {
-
-  const marquee = document.getElementById('marquee-{{ section.id }}');
-
-  if (!marquee) return;
-
-
-  const items = marquee.children;
-
-  if (items.length === 0) return;
-
-
-  const halfLength = items.length / 2;
-
-  let originalWidth = 0;
-
-
-  for (let i = 0; i < halfLength; i++) {
-
-    originalWidth += items[i].offsetWidth;
-
-    if (i < halfLength - 1) {
-      originalWidth += 60;
-    }
-
-  }
-
-
-  let speed = {{ section.settings.scroll_speed | default: 20 }};
-
-
-  if (speed < 5) speed = 5;
-
-  if (speed > 60) speed = 60;
-
-
-  marquee.style.animationDuration = speed + 's';
-
-
-
-  const bar = document.getElementById('announcement-bar-{{ section.id }}');
-
-
-  {% if section.settings.pause_on_hover %}
-
-  bar.addEventListener('mouseenter', () => {
-
-    marquee.style.animationPlayState = 'paused';
-
-  });
-
-
-  bar.addEventListener('mouseleave', () => {
-
-    marquee.style.animationPlayState = 'running';
-
-  });
-
-  {% endif %}
-
-
-})();
-</script>
-
-
-
-<script>
-
-document.documentElement.style.setProperty(
-  '--announcement-bar-height',
-  `${Math.round(document.getElementById('shopify-section-{{ section.id }}').clientHeight)}px`
-);
-
-</script>
-
-
 
 {% schema %}
 {
@@ -297,26 +223,11 @@ document.documentElement.style.setProperty(
           "id": "icon",
           "label": "Icon选项",
           "options": [
-            {
-              "value": "null",
-              "label": "不显示 Icon"
-            },
-            {
-              "value": "global",
-              "label": "global"
-            },
-            {
-              "value": "warranty",
-              "label": "warranty"
-            },
-            {
-              "value": "package",
-              "label": "package"
-            },
-            {
-              "value": "award",
-              "label": "award"
-            }
+            { "value": "null", "label": "不显示 Icon" },
+            { "value": "global", "label": "global" },
+            { "value": "warranty", "label": "warranty" },
+            { "value": "package", "label": "package" },
+            { "value": "award", "label": "award" }
           ],
           "default": "null"
         },
