@@ -21,7 +21,7 @@
     "1784773837ab1b2040": {
       "type": "_blocks",
       "blocks": {
-        "ai_gen_block_ccb6ff2_LteeG9": {
+        "ai_gen_block_ccb6ff2_pTkbNR": {
           "type": "ai_gen_block_ccb6ff2",
           "settings": {
             "quiz_title": "Find Your Fantasy",
@@ -152,6 +152,8 @@
             "results_cta_border_radius": 20,
             "results_privacy_size": 12,
             "background_color": "#000000",
+            "desktop_background_image": "shopify://shop_images/pc-2.jpg",
+            "mobile_background_image": "shopify://shop_images/h5-2.jpg",
             "text_color": "#ffffff",
             "progress_bg_color": "#000000",
             "progress_color": "#f287ec",
@@ -197,7 +199,7 @@
         }
       },
       "block_order": [
-        "ai_gen_block_ccb6ff2_LteeG9"
+        "ai_gen_block_ccb6ff2_pTkbNR"
       ],
       "settings": {
         "color_scheme": "scheme-7",
