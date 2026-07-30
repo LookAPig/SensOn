@@ -125,6 +125,37 @@
       color: #000;
     }
 
+    /* Expert Review Inline Read More */
+
+    #pdp-wh-{{ block.id }} .creator-quote-wrapper {
+      font-size: 14px;
+      line-height: 1.45;
+      color: #000;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-quote-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-quote-text.expanded {
+      display: block;
+    }
+
+    #pdp-wh-{{ block.id }} .creator-read-more-btn {
+      display: inline;
+      border: none;
+      background: none;
+      padding: 0;
+      margin-left: 4px;
+      color: #FF47F5;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
     #pdp-wh-{{ block.id }} .pdp-creator-quote::before {
       content: '\201C';
     }
@@ -593,7 +624,15 @@
         {%- if creator_2_has_content -%}
           <div class="pdp-creator-card">
             {%- if block.settings.creator_2_quote != blank -%}
-              <p class="pdp-creator-quote">{{ block.settings.creator_2_quote | escape }}</p>
+              <p class="pdp-creator-quote creator-quote-wrapper">
+                <span class="creator-quote-text">
+                  {{ block.settings.creator_2_quote | escape }}
+                </span>
+
+                <button type="button" class="creator-read-more-btn">
+                  Read More
+                </button>
+              </p>
             {%- endif -%}
             {%- if block.settings.creator_2_avatar != blank
               or block.settings.creator_2_name != blank
@@ -703,7 +742,15 @@
             {%- endif -%}
 
             {%- if block.settings.creator_3_quote != blank -%}
-              <p class="pdp-creator-quote">{{ block.settings.creator_3_quote | escape }}</p>
+              <p class="pdp-creator-quote creator-quote-wrapper">
+                <span class="creator-quote-text">
+                  {{ block.settings.creator_3_quote | escape }}
+                </span>
+
+                <button type="button" class="creator-read-more-btn">
+                  Read More
+                </button>
+              </p>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -1001,6 +1048,17 @@
 
       setupCreatorVideos();
       renderSpecsGrid();
+
+      root.querySelectorAll('.creator-read-more-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var text = btn.previousElementSibling;
+          text.classList.toggle('expanded');
+          btn.textContent =
+            text.classList.contains('expanded')
+            ? 'Read Less'
+            : 'Read More';
+        });
+      });
     })();
   </script>
 </div>
