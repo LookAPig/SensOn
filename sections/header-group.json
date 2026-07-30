@@ -13,28 +13,9 @@
   "sections": {
     "announcement_bar_LbA99x": {
       "type": "announcement-bar",
-      "blocks": {
-        "message_9nAPCq": {
-          "type": "message",
-          "settings": {
-            "icon": "null",
-            "icon_size": 14,
-            "text": "Celebrate Pride: $50 OFF SensOn S1 + Free 7-Day App Premium Membership"
-          }
-        }
-      },
-      "block_order": [
-        "message_9nAPCq"
-      ],
       "disabled": true,
       "name": "t:sections.announcement_bar.name",
-      "settings": {
-        "color_scheme": "",
-        "enable_sticky": true,
-        "show_on_homepage_only": false,
-        "scroll_speed": 20,
-        "pause_on_hover": false
-      }
+      "settings": {}
     },
     "178002765214b2b463": {
       "type": "_blocks",
