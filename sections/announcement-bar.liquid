@@ -1,5 +1,6 @@
 {%- if section.blocks.size > 0 -%}
   {%- unless request.page_type != 'index' and section.settings.show_on_homepage_only -%}
+
     <style>
       :root {
         --announcement-bar-is-sticky: {% if section.settings.enable_sticky %}1{% else %}0{% endif %};
@@ -17,75 +18,65 @@
       {%- endif -%}
 
 
-      /* 跑马灯容器 */
       .announcement-bar {
-        padding:0;
-        overflow:hidden;
-        white-space:nowrap;
+        padding: 0;
+        overflow: hidden;
+        white-space: nowrap;
       }
 
 
-      /* 滚动内容 */
       .marquee {
-        display:inline-block;
-        white-space:nowrap;
+        display: inline-block;
+        white-space: nowrap;
         animation: marqueeScroll linear infinite;
-        animation-duration:{{ section.settings.scroll_speed }}s;
+        animation-duration: {{ section.settings.scroll_speed }}s;
       }
 
 
       .marquee-item {
-        display:inline-flex;
-        align-items:center;
-        margin-right:60px;
+        display: inline-flex;
+        align-items: center;
+        margin-right: 60px;
       }
 
 
       .marquee-item .subheading {
-        display:flex;
-        align-items:center;
-        margin:0;
-        padding:0.7rem 0;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0.7rem 0;
       }
 
 
       .marquee-item svg {
-        margin-right:4px;
+        margin-right: 4px;
       }
 
 
-      /* 无限滚动 */
       @keyframes marqueeScroll {
         0% {
-          transform:translateX(0);
+          transform: translateX(0);
         }
 
         100% {
-          transform:translateX(-50%);
+          transform: translateX(-50%);
         }
       }
 
 
-
-      /* ==========================
-         Orgasm Day Peach Theme
-         ========================== */
-
+      /* Orgasm Day Peach Pink Gradient */
 
       #shopify-section-{{ section.id }} .announcement-bar {
-
-        background:linear-gradient(
-          90deg,
-          #FFF4EE 0%,
-          #FBC4B0 40%,
-          #F7A58B 70%,
-          #F287EC 100%
+        background: linear-gradient(
+          to right,
+          #FFF1EA,
+          #FAD3C7,
+          #F7A58B,
+          #F287EC,
+          #E8C7F5
         );
-
-        color:#34263B;
-
+        color: #34263B;
       }
-
 
 
       #shopify-section-{{ section.id }} .announcement-bar,
@@ -93,44 +84,17 @@
       #shopify-section-{{ section.id }} .announcement-bar span,
       #shopify-section-{{ section.id }} .announcement-bar p,
       #shopify-section-{{ section.id }} .announcement-bar .subheading span {
-
-        color:#34263B;
-
+        color: #34263B;
       }
-
 
 
       #shopify-section-{{ section.id }} .announcement-bar svg {
-
-        fill:none;
-        stroke:currentColor;
-        color:#34263B;
-
-      }
-
-
-
-      /* Mobile */
-
-      @media screen and (max-width:600px){
-
-        .announcement-bar .subheading {
-
-          font-size:12px;
-
-        }
-
-
-        .marquee-item {
-
-          margin-right:40px;
-
-        }
-
+        fill: none;
+        stroke: currentColor;
+        color: #34263B;
       }
 
     </style>
-
 
 
     <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
@@ -147,7 +111,6 @@
             id="marquee-{{ section.id }}"
           >
 
-
             {%- capture marquee_content -%}
 
               {%- for block in section.blocks -%}
@@ -163,18 +126,13 @@
 
                       {%- if block.settings.icon and block.settings.icon != 'null' -%}
 
-                        {%- render 'icon'
-                          with block.settings.icon,
-                          width: block.settings.icon_size
-                        -%}
+                        {%- render 'icon' with block.settings.icon, width: block.settings.icon_size -%}
 
                       {%- endif -%}
-
 
                       <span>
                         {{ block.settings.text }}
                       </span>
-
 
                     </p>
 
@@ -183,7 +141,6 @@
                 {%- endif -%}
 
               {%- endfor -%}
-
 
             {%- endcapture -%}
 
@@ -196,107 +153,88 @@
 
         </div>
 
-
       </height-observer>
 
     </div>
 
 
-
-
-    <script>
-
-      (function() {
-
-        const marquee =
-        document.getElementById('marquee-{{ section.id }}');
-
-
-        if (!marquee) return;
-
-
-        const items = marquee.children;
-
-
-        if (items.length === 0) return;
-
-
-
-        let speed =
-        {{ section.settings.scroll_speed | default:20 }};
-
-
-
-        if(speed < 5){
-          speed = 5;
-        }
-
-
-        if(speed > 60){
-          speed = 60;
-        }
-
-
-        marquee.style.animationDuration =
-        speed + 's';
-
-
-
-
-        const bar =
-        document.getElementById(
-          'announcement-bar-{{ section.id }}'
-        );
-
-
-
-        {% if section.settings.pause_on_hover %}
-
-        bar.addEventListener(
-          'mouseenter',
-          () => {
-            marquee.style.animationPlayState='paused';
-          }
-        );
-
-
-        bar.addEventListener(
-          'mouseleave',
-          () => {
-            marquee.style.animationPlayState='running';
-          }
-        );
-
-        {% endif %}
-
-
-
-      })();
-
-
-    </script>
-
-
-
-
-    <script>
-
-      document.documentElement.style.setProperty(
-        '--announcement-bar-height',
-        `${Math.round(
-          document.getElementById(
-            'shopify-section-{{ section.id }}'
-          ).clientHeight
-        )}px`
-      );
-
-    </script>
-
-
   {%- endunless -%}
-
 {%- endif -%}
+<script>
+(function() {
 
+  const marquee = document.getElementById('marquee-{{ section.id }}');
+
+  if (!marquee) return;
+
+
+  const items = marquee.children;
+
+  if (items.length === 0) return;
+
+
+  const halfLength = items.length / 2;
+
+  let originalWidth = 0;
+
+
+  for (let i = 0; i < halfLength; i++) {
+
+    originalWidth += items[i].offsetWidth;
+
+    if (i < halfLength - 1) {
+      originalWidth += 60;
+    }
+
+  }
+
+
+  let speed = {{ section.settings.scroll_speed | default: 20 }};
+
+
+  if (speed < 5) speed = 5;
+
+  if (speed > 60) speed = 60;
+
+
+  marquee.style.animationDuration = speed + 's';
+
+
+
+  const bar = document.getElementById('announcement-bar-{{ section.id }}');
+
+
+  {% if section.settings.pause_on_hover %}
+
+  bar.addEventListener('mouseenter', () => {
+
+    marquee.style.animationPlayState = 'paused';
+
+  });
+
+
+  bar.addEventListener('mouseleave', () => {
+
+    marquee.style.animationPlayState = 'running';
+
+  });
+
+  {% endif %}
+
+
+})();
+</script>
+
+
+
+<script>
+
+document.documentElement.style.setProperty(
+  '--announcement-bar-height',
+  `${Math.round(document.getElementById('shopify-section-{{ section.id }}').clientHeight)}px`
+);
+
+</script>
 
 
 
@@ -386,20 +324,20 @@
           "type": "number",
           "id": "icon_size",
           "label": "Icon 大小",
-          "default":14
+          "default": 14
         },
         {
           "type": "inline_richtext",
           "id": "text",
           "label": "t:sections.announcement_bar.blocks.message.text",
-          "default":"Announce something here"
+          "default": "Announce something here"
         }
       ]
     }
   ],
-  "presets":[
+  "presets": [
     {
-      "name":"t:sections.announcement_bar.name"
+      "name": "t:sections.announcement_bar.name"
     }
   ]
 }
