@@ -1125,6 +1125,11 @@
       showSubscribeSuccess(fromStorage) {
         this.isSubscribed = true;
 
+        this.querySelectorAll("[data-dim-value], [data-locked-text]").forEach((el) => {
+          el.classList.remove("ai-quiz-result-blur-{{ ai_gen_id }}");
+          el.removeAttribute("aria-hidden");
+        });
+
         if (this.subscribeArea) {
           this.subscribeArea.classList.add("is-subscribed");
         }
@@ -1491,7 +1496,7 @@
     },
     {
       "type": "header",
-      "content": "Results page — layout"
+      "content": "Results page â€” layout"
     },
     {
       "type": "text",
@@ -1578,13 +1583,13 @@
     },
     {
       "type": "header",
-      "content": "Results page — subscribe"
+      "content": "Results page â€” subscribe"
     },
     {
       "type": "text",
       "id": "results_subscribe_note",
       "label": "Subscribe note",
-      "default": "Full profile + 3 stories matched to your type — locked"
+      "default": "Full profile + 3 stories matched to your type â€” locked"
     },
     {
       "type": "text",
@@ -1602,7 +1607,7 @@
       "type": "textarea",
       "id": "results_privacy_text",
       "label": "Privacy text",
-      "default": "Discreet by design — plain subject lines, no explicit sender name. Unsubscribe anytime. We never share your email."
+      "default": "Discreet by design â€” plain subject lines, no explicit sender name. Unsubscribe anytime. We never share your email."
     },
     {
       "type": "text",
@@ -1621,13 +1626,13 @@
       "type": "text",
       "id": "results_success_message",
       "label": "Success message",
-      "default": "You're in — check your inbox for your full profile."
+      "default": "You're in â€” check your inbox for your full profile."
     },
     {
       "type": "text",
       "id": "results_unlocked_message",
       "label": "Already subscribed message",
-      "default": "You're subscribed — check your inbox for your full profile."
+      "default": "You're subscribed â€” check your inbox for your full profile."
     },
     {
       "type": "text",
@@ -1643,7 +1648,7 @@
     },
     {
       "type": "header",
-      "content": "Result type 1 (score 5–10)"
+      "content": "Result type 1 (score 5â€“10)"
     },
     {
       "type": "text",
@@ -1655,7 +1660,7 @@
       "type": "textarea",
       "id": "type_1_tagline",
       "label": "Tagline / comment",
-      "default": "You crave control — and love surrendering it."
+      "default": "You crave control â€” and love surrendering it."
     },
     {
       "type": "range",
@@ -1723,7 +1728,7 @@
     },
     {
       "type": "header",
-      "content": "Result type 2 (score 11–15)"
+      "content": "Result type 2 (score 11â€“15)"
     },
     {
       "type": "text",
@@ -1735,7 +1740,7 @@
       "type": "textarea",
       "id": "type_2_tagline",
       "label": "Tagline / comment",
-      "default": "You move with feeling first — and let tension bloom slowly."
+      "default": "You move with feeling first â€” and let tension bloom slowly."
     },
     {
       "type": "range",
@@ -1803,7 +1808,7 @@
     },
     {
       "type": "header",
-      "content": "Result type 3 (score 16–20)"
+      "content": "Result type 3 (score 16â€“20)"
     },
     {
       "type": "text",
@@ -1815,7 +1820,7 @@
       "type": "textarea",
       "id": "type_3_tagline",
       "label": "Tagline / comment",
-      "default": "You design the scene — and thrive when others follow your lead."
+      "default": "You design the scene â€” and thrive when others follow your lead."
     },
     {
       "type": "range",
@@ -1883,7 +1888,7 @@
     },
     {
       "type": "header",
-      "content": "Result type 4 (score 21–25)"
+      "content": "Result type 4 (score 21â€“25)"
     },
     {
       "type": "text",
@@ -1895,7 +1900,7 @@
       "type": "textarea",
       "id": "type_4_tagline",
       "label": "Tagline / comment",
-      "default": "You chase heat and novelty — then linger in the afterglow."
+      "default": "You chase heat and novelty â€” then linger in the afterglow."
     },
     {
       "type": "range",
@@ -1963,7 +1968,7 @@
     },
     {
       "type": "header",
-      "content": "Results page — colors"
+      "content": "Results page â€” colors"
     },
     {
       "type": "color",
@@ -2051,7 +2056,7 @@
     },
     {
       "type": "header",
-      "content": "Results page — typography & style"
+      "content": "Results page â€” typography & style"
     },
     {
       "type": "range",
@@ -2227,13 +2232,13 @@
       "type": "image_picker",
       "id": "desktop_background_image",
       "label": "PC background image",
-      "info": "Recommended size: 1920 × 1200 px"
+      "info": "Recommended size: 1920 Ã— 1200 px"
     },
     {
       "type": "image_picker",
       "id": "mobile_background_image",
       "label": "H5 background image",
-      "info": "Recommended size: 1080 × 2400 px"
+      "info": "Recommended size: 1080 Ã— 2400 px"
     },
     {
       "type": "color",
