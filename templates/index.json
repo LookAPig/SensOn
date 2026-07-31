@@ -394,9 +394,10 @@
             "video": "shopify://files/videos/eliseabell.mp4",
             "comment": "<p>Share what creators said about your product.</p>",
             "stars": 5,
-            "creator_name": "Creator name",
-            "creator_desc": "Actress, Self-Growth Nerd",
-            "creator_subs": "14.2M Subscribers"
+            "avatar": "shopify://shop_images/e.jpg",
+            "creator_name": "eliseabell",
+            "creator_desc": "Wellness Advocate,LGBTQ+ Creator  ,Ballerina",
+            "creator_subs": "97K Subscribers"
           }
         },
         "testimonial_LyiQeD": {
