@@ -350,6 +350,7 @@
     },
     "custom_liquid_x7H3pN": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "Sticky Nav",
       "settings": {
         "color_scheme": "",
@@ -596,6 +597,7 @@
         "creator_slide_kpcnax",
         "creator_slide_7GVnpL"
       ],
+      "disabled": true,
       "name": "creator-buzz-slider",
       "settings": {
         "heading": "What Creators are Saying",
