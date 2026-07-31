@@ -67,7 +67,7 @@
                 "open_in_new_tab": false,
                 "style": "solid",
                 "background": "",
-                "text_color": ""
+                "text_color": "#000000"
               },
               "blocks": {}
             },
