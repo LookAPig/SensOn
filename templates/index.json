@@ -387,6 +387,17 @@
     "reviews_49wHXX": {
       "type": "reviews",
       "blocks": {
+        "testimonial_mMEfTq": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "comment": "<p>Share what creators said about your product.</p>",
+            "stars": 5,
+            "creator_name": "Creator name",
+            "creator_desc": "Actress, Self-Growth Nerd",
+            "creator_subs": "14.2M Subscribers"
+          }
+        },
         "testimonial_LyiQeD": {
           "type": "testimonial",
           "settings": {
@@ -437,6 +448,18 @@
             "creator_name": "misskaterinar",
             "creator_desc": "Female-focused creator",
             "creator_subs": "21K Subscribers"
+          }
+        },
+        "testimonial_PD7fcH": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/f.jpg",
+            "comment": "<p><em>“Place between your thighs and let all three zones sync with your body, while connecting with the fantacies made for you.”</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/florencebarks.jpg",
+            "creator_name": "florencebark",
+            "creator_desc": "Women’s Wellness Podcast Host",
+            "creator_subs": "30K Subscribers"
           }
         },
         "testimonial_FTcrGb": {
@@ -506,10 +529,12 @@
         }
       },
       "block_order": [
+        "testimonial_mMEfTq",
         "testimonial_LyiQeD",
         "testimonial_yn4fjr",
         "testimonial_NTFCRi",
         "testimonial_yrVtLm",
+        "testimonial_PD7fcH",
         "testimonial_FTcrGb",
         "testimonial_Vzm4HY",
         "testimonial_fqkBNz",
