@@ -387,6 +387,18 @@
     "reviews_49wHXX": {
       "type": "reviews",
       "blocks": {
+        "testimonial_axGFwx": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/adhd.jpg",
+            "video": "shopify://files/videos/eliseabell.mp4",
+            "comment": "<p>Share what creators said about your product.</p>",
+            "stars": 5,
+            "creator_name": "Creator name",
+            "creator_desc": "Actress, Self-Growth Nerd",
+            "creator_subs": "14.2M Subscribers"
+          }
+        },
         "testimonial_LyiQeD": {
           "type": "testimonial",
           "settings": {
@@ -417,6 +429,7 @@
           "type": "testimonial",
           "settings": {
             "cover": "shopify://shop_images/janes.jpg",
+            "video": "shopify://files/videos/jans.mp4",
             "comment": "<p><em>\"AI getting a little too smart for me these days. I was definitely not expecting all of this, but the technology behind it actually is really impressive.\"</em></p>",
             "stars": 5,
             "avatar": "shopify://shop_images/jan.jpg",
@@ -531,6 +544,7 @@
         }
       },
       "block_order": [
+        "testimonial_axGFwx",
         "testimonial_LyiQeD",
         "testimonial_yn4fjr",
         "testimonial_mMEfTq",
