@@ -19,12 +19,21 @@
           "settings": {
             "icon": "null",
             "icon_size": 14,
-            "text": "Pleasure Is Personal ✨ Celebrate Your Experience This Orgasm Day"
+            "text": "✨  Pleasure Is Personal"
+          }
+        },
+        "message_bnLEiU": {
+          "type": "message",
+          "settings": {
+            "icon": "null",
+            "icon_size": 14,
+            "text": "🎉 Celebrate Your Experience This Orgasm Day"
           }
         }
       },
       "block_order": [
-        "message_yntTNt"
+        "message_yntTNt",
+        "message_bnLEiU"
       ],
       "name": "t:sections.announcement_bar.name",
       "settings": {
