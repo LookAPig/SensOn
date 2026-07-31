@@ -692,6 +692,7 @@
         "item_nqxRHW",
         "item_FQ3kam"
       ],
+      "disabled": true,
       "name": "Engineered for Sensation",
       "settings": {
         "label": "HARDWARE EXPERIENCE",
@@ -801,6 +802,7 @@
         "table_row_abMwfE",
         "table_row_iDxGyh"
       ],
+      "disabled": true,
       "name": "US vs Traditional ",
       "settings": {
         "section_title": "Why SensOn Goes Further",
@@ -891,6 +893,7 @@
       "blocks": {
         "yotpo_product_reviews_reviews_fjjCWN": {
           "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "disabled": true,
           "settings": {
             "product": "{{product}}"
           }
