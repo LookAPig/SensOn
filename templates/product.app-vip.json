@@ -126,6 +126,7 @@
         },
         "icons_with_text_ANpmKR": {
           "type": "icons_with_text",
+          "disabled": true,
           "settings": {
             "icon_layout": "vertical",
             "items_per_row": 4,
