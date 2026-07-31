@@ -83,7 +83,7 @@
           "type": "countdown",
           "settings": {
             "class_name": "pdp-off-show",
-            "text": "Self-Love Special",
+            "text": "<strong>🎉 Orgasm Day Special</strong>",
             "background": "#ffffff",
             "text_color": "#000000",
             "expiration_date": "",
