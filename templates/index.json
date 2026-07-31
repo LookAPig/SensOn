@@ -389,13 +389,13 @@
       "blocks": {
         "testimonial_mMEfTq": {
           "type": "testimonial",
-          "disabled": true,
           "settings": {
-            "comment": "<p>Share what creators said about your product.</p>",
+            "comment": "<p><em>\"AI getting a little too smart for me these days. I was definitely not expecting all of this, but the technology behind it actually is really impressive.\"</em></p>",
             "stars": 5,
-            "creator_name": "Creator name",
-            "creator_desc": "Actress, Self-Growth Nerd",
-            "creator_subs": "14.2M Subscribers"
+            "avatar": "shopify://shop_images/jan.jpg",
+            "creator_name": "janessadanielle__",
+            "creator_desc": "Comedy Creator,Lifestyle Influencer",
+            "creator_subs": "229K Subscribers"
           }
         },
         "testimonial_LyiQeD": {
