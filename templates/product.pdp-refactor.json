@@ -501,21 +501,6 @@
             "video_aspect_ratio": "3-4"
           }
         },
-        "creator_slide_tHjVL8": {
-          "type": "creator_slide",
-          "settings": {
-            "tags": "AI Character Chat\nHands-Free Intelligence",
-            "quote": "<p>“I'm trying out the SensOn intimate wellness device designed with woman in mind which is awesome ！”</p>",
-            "avatar": "shopify://shop_images/e.jpg",
-            "creator_name": "eliseabell",
-            "creator_desc": "Wellness Advocate,LGBTQ+ Creator  ,Ballerina",
-            "creator_subs": "97K Subscribers",
-            "profile_url": "",
-            "video": "shopify://files/videos/eliseabell.mp4",
-            "video_cover": "shopify://shop_images/adhd.jpg",
-            "video_aspect_ratio": "3-4"
-          }
-        },
         "creator_slide_exrhef": {
           "type": "creator_slide",
           "settings": {
@@ -528,6 +513,21 @@
             "profile_url": "",
             "video": "shopify://files/videos/file_v3_00128_9c5d571a-2656-4d04-861a-21317756cf6g.mp4",
             "video_cover": "shopify://shop_images/kat.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
+        "creator_slide_tHjVL8": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "AI Character Chat\nHands-Free Intelligence",
+            "quote": "<p>“I'm trying out the SensOn intimate wellness device designed with woman in mind which is awesome ！”</p>",
+            "avatar": "shopify://shop_images/e.jpg",
+            "creator_name": "eliseabell",
+            "creator_desc": "Wellness Advocate,LGBTQ+ Creator  ,Ballerina",
+            "creator_subs": "97K Subscribers",
+            "profile_url": "",
+            "video": "shopify://files/videos/eliseabell.mp4",
+            "video_cover": "shopify://shop_images/adhd.jpg",
             "video_aspect_ratio": "3-4"
           }
         },
@@ -627,8 +627,8 @@
         "creator_slide_WHVR3q",
         "creator_slide_BYJhKB",
         "creator_slide_gbVTNd",
-        "creator_slide_tHjVL8",
         "creator_slide_exrhef",
+        "creator_slide_tHjVL8",
         "creator_slide_Dzbpkt",
         "creator_slide_g8grbA",
         "creator_slide_9LYMDn",
