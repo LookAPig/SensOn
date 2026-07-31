@@ -39,7 +39,7 @@
         "rich_text_CEVP3k"
       ],
       "custom_css": [
-        ".content-box {min-height: 45rem; }",
+        ".content-box {min-height: 45rem;}",
         "@media (max-width: 768px) {.content-box {min-height: 260px; } .content-box .place-self-center {margin-top: 60px; } .content-box .max-w-md {font-size: 12px; }}"
       ],
       "name": "t:sections.image_with_text_overlay.name",
@@ -178,7 +178,7 @@
         "text_VcpKPp": {
           "type": "text",
           "settings": {
-            "text": "<p>📱 App Store: Available now | Web: Coming mid-July. <br/>🎁 Bonus: Includes 7-Day Free Trial <br/>📅 Plans from $9.99/mo after</p>"
+            "text": "<p>📱 App Store and Web: Available now<br/>🎁 Bonus: Includes 7-Day Free Trial <br/>📅 Plans from $9.99/mo after</p>"
           }
         },
         "icons_with_text_ANpmKR": {
@@ -302,6 +302,9 @@
             "creator_2_avatar": "shopify://shop_images/f794041b-7bc1-49bb-a7f4-de4b7a7421e3.png",
             "creator_2_name": "Dr. Emily Sterling",
             "creator_2_credentials": "Clinical Sexologist & Bestselling Author",
+            "creator_3_quote": "",
+            "creator_3_name": "",
+            "creator_3_credentials": "",
             "how_heading": "Simple 5-Step Process",
             "how_step_1_title": "Download, prepare and power on",
             "how_step_1_desc": "Download the SensOn App and turn on Bluetooth. Open the Charging Case and remove the components. Then press and hold the Core power button to turn on. The device enters standby mode.",
