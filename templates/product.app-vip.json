@@ -85,6 +85,12 @@
             "expiration_behavior": "hide"
           }
         },
+        "text_36KfV6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Where bionic innovation meets the soul of AI. Fully hands-free, the device syncs in real-time with your voice, breath, and interactive stories. Engineered from a female perspective with triple-zone sensory resonance, it brings 500+ virtual companions directly to your ear.</p>"
+          }
+        },
         "featured_in_Gwxwf8": {
           "type": "featured_in",
           "settings": {
@@ -92,15 +98,10 @@
             "logos_json": "[{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/she_konws.png?v=1785387945\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/0_1.webp?v=1781169789\",\"alt\":\"Yahoo Finance\"},{\"image\":\"https://cdn.shopify.com/s/files/1/0775/2446/7967/files/3_1.webp?v=1781169789\",\"alt\":\"USA TODAY\"}]"
           }
         },
-        "text_36KfV6": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Where bionic innovation meets the soul of AI. Fully hands-free, the device syncs in real-time with your voice, breath, and interactive stories. Engineered from a female perspective with triple-zone sensory resonance, it brings 500+ virtual companions directly to your ear.</p>"
-          }
-        },
         "feature_cards_NddJBd": {
           "type": "feature_cards",
           "name": "Four cards",
+          "disabled": true,
           "settings": {
             "background_color": "#feecfc",
             "border_radius": 12,
@@ -296,8 +297,8 @@
         "offers_xqqJzH",
         "price",
         "countdown_H8fV6E",
-        "featured_in_Gwxwf8",
         "text_36KfV6",
+        "featured_in_Gwxwf8",
         "feature_cards_NddJBd",
         "text_VcpKPp",
         "icons_with_text_ANpmKR",
