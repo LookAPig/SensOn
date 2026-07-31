@@ -387,17 +387,6 @@
     "reviews_49wHXX": {
       "type": "reviews",
       "blocks": {
-        "testimonial_mMEfTq": {
-          "type": "testimonial",
-          "settings": {
-            "comment": "<p><em>\"AI getting a little too smart for me these days. I was definitely not expecting all of this, but the technology behind it actually is really impressive.\"</em></p>",
-            "stars": 5,
-            "avatar": "shopify://shop_images/jan.jpg",
-            "creator_name": "janessadanielle__",
-            "creator_desc": "Comedy Creator,Lifestyle Influencer",
-            "creator_subs": "229K Subscribers"
-          }
-        },
         "testimonial_LyiQeD": {
           "type": "testimonial",
           "settings": {
@@ -422,6 +411,18 @@
             "creator_name": "jamesjoseph",
             "creator_desc": "LA-based actor，Live show host",
             "creator_subs": "1.5M Subscribers"
+          }
+        },
+        "testimonial_mMEfTq": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/janes.jpg",
+            "comment": "<p><em>\"AI getting a little too smart for me these days. I was definitely not expecting all of this, but the technology behind it actually is really impressive.\"</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/jan.jpg",
+            "creator_name": "janessadanielle__",
+            "creator_desc": "Comedy Creator,Lifestyle Influencer",
+            "creator_subs": "229K Subscribers"
           }
         },
         "testimonial_NTFCRi": {
@@ -454,6 +455,7 @@
           "type": "testimonial",
           "settings": {
             "cover": "shopify://shop_images/f.jpg",
+            "video": "shopify://files/videos/florencebark.mp4",
             "comment": "<p><em>“Place between your thighs and let all three zones sync with your body, while connecting with the fantacies made for you.”</em></p>",
             "stars": 5,
             "avatar": "shopify://shop_images/florencebarks.jpg",
@@ -529,9 +531,9 @@
         }
       },
       "block_order": [
-        "testimonial_mMEfTq",
         "testimonial_LyiQeD",
         "testimonial_yn4fjr",
+        "testimonial_mMEfTq",
         "testimonial_NTFCRi",
         "testimonial_yrVtLm",
         "testimonial_PD7fcH",
