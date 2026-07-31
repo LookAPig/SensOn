@@ -1,7 +1,12 @@
+{%- assign mobile_padding_top = section.settings.mobile_padding_top | default: 40 -%}
+{%- assign mobile_padding_bottom = section.settings.mobile_padding_bottom | default: 30 -%}
+{%- assign desktop_padding_top = section.settings.desktop_padding_top | default: 60 -%}
+{%- assign desktop_padding_bottom = section.settings.desktop_padding_bottom | default: 40 -%}
+
 <section class="custom-swiper-outer section-spacing">
   <div class="custom-swiper-title-wrapper">
     {% if section.settings.title %}
-      <h2>{{ section.settings.title }}</h2>
+      <h3>{{ section.settings.title }}</h3>
     {% endif %}
     {% if section.settings.subtitle %}
       <p>{{ section.settings.subtitle }}</p>
@@ -13,14 +18,12 @@
         <div class="swiper-wrapper">
           {% for block in section.blocks %}
             <div class="swiper-slide" data-index="{{ forloop.index0 }}">
-              <div>
+              <div class="swiper-slide-card">
                 {% if block.settings.image %}
                   <img
                     src="{{ block.settings.image | image_url: width: 1600 }}"
                     alt="{{ block.settings.image.alt | escape }}"
-                    loading="lazy"
-                    width="100%"
-                    height="100%"
+                    loading="lazy" width="100%" height="100%"
                   >
                 {% endif %}
 
@@ -34,12 +37,12 @@
                   ></video>
                   <div class="swiper-item-play js-swiper-item-play">
                     {% comment %} 播放 {% endcomment %}
-                    <svg class="svg-play" fill="#fff" viewBox="0 0 24 24" width="30" height="30">
-                      <path  d="M8 5v14l11-7z"></path>
+                    <svg class="svg-play" fill="#000" viewBox="0 0 24 24" width="30" height="30">
+                      <path  d="M8 5v14l11-7z" stroke="#000"></path>
                     </svg>
                     {% comment %} 暂停 {% endcomment %}
-                    <svg class="svg-pause" fill="#fff" viewBox="0 0 24 24" width="30" height="30">
-                      <path  d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
+                    <svg class="svg-pause" fill="#000" viewBox="0 0 24 24" width="30" height="30">
+                      <path  d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" stroke="#000"></path>
                     </svg>
                   </div>
                 {% endif %}
@@ -56,18 +59,25 @@
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </section>
+
+    {% if section.settings.button_label != blank %}
+      <div class="custom-swiper-button-wrapper">
+        {% if section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="custom-swiper-button">
+            {{ section.settings.button_label }}
+          </a>
+        {% else %}
+          <span class="custom-swiper-button">{{ section.settings.button_label }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
   </section>
 </section>
 
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-  media="print"
-  onload="this.media='all'; this.onload=null"
 >
-<noscript>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-</noscript>
 
 <script
   src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
@@ -75,168 +85,262 @@
 ></script>
 
 <script>
-  function initCustomSwiper(scope = document) {
-  scope.querySelectorAll('.custom-swiper').forEach(swiperEl => {
+  const CUSTOM_SWIPER_EASING = "cubic-bezier(0.4, 0, 0.2, 1)";
 
-    // 防止重复初始化
-    if (swiperEl.swiper) {
-      swiperEl.swiper.destroy(true, true);
-    }
+  const CUSTOM_SWIPER_MOBILE_BREAKPOINT = 768;
 
-    const slideIns = new Swiper(swiperEl, {
-      slidesPerView: 'auto',
-      loop: false,
-      centeredSlides: true,
-      watchOverflow: true,
-      initialSlide: 2,
+  const isCustomSwiperMobile = () => window.innerWidth <= CUSTOM_SWIPER_MOBILE_BREAKPOINT;
 
-      navigation: {
-        nextEl: swiperEl.parentNode.querySelector('.swiper-button-next'),
-        prevEl: swiperEl.parentNode.querySelector('.swiper-button-prev')
-      },
+  const setCustomSwiperTransitions = (swiper, duration) => {
+    const timing = duration ? `${duration}ms ${CUSTOM_SWIPER_EASING}` : "0ms";
+    const mobile = isCustomSwiperMobile();
 
-      breakpoints: {
-        768: {
-          slidesPerView: 'auto',
-          spaceBetween: 20
-        },
-        1024: {
-          slidesPerView: 'auto',
-          spaceBetween: 20
-        }
+    swiper.slides.forEach(slide => {
+      slide.style.transition = mobile ? "none" : `width ${timing}`;
+
+      const card = slide.querySelector(".swiper-slide-card");
+      if (card) {
+        const cardTransition = mobile
+          ? `opacity ${timing}, box-shadow ${timing}`
+          : `height ${timing}, opacity ${timing}, box-shadow ${timing}`;
+        card.style.transition = cardTransition;
+      }
+
+      const nameEl = slide.querySelector(".swiper-item-name");
+      if (nameEl) {
+        nameEl.style.transition = `font-size ${timing}`;
       }
     });
+  };
 
-    let currentVideo;
+  function initCustomSwiper(scope = document) {
+    scope.querySelectorAll(".custom-swiper").forEach(swiperEl => {
+      if (swiperEl.swiper) {
+        swiperEl.swiper.destroy(true, true);
+      }
 
-    swiperEl.querySelectorAll('.swiper-slide').forEach(slide => {
-      slide.addEventListener('click', (e) => {
-        const index = parseInt(slide.dataset.index);
+      let currentVideo;
+      let currentPlayEl = null;
 
-        if (!slide.querySelector('a') || e.target.tagName !== 'A') {
-          slideIns.slideTo(index);
+      const resetVideo = () => {
+        if (currentVideo) {
+          currentVideo.pause();
+          currentVideo.currentTime = 0;
+          currentVideo.classList.remove("active");
+        }
 
-          if (currentVideo) {
-            currentVideo.pause();
-            currentVideo.currentTime = 0;
-            currentVideo.classList.remove("active");
+        if (currentPlayEl) {
+          currentPlayEl.classList.remove("active");
+        }
+
+        currentVideo = null;
+        currentPlayEl = null;
+      };
+
+      const slideIns = new Swiper(swiperEl, {
+        slidesPerView: "auto",
+        loop: false,
+        centeredSlides: true,
+        centeredSlidesBounds: true,
+        watchOverflow: true,
+        initialSlide: 2,
+        spaceBetween: 12,
+        speed: 500,
+        resistanceRatio: 0.85,
+        roundLengths: true,
+
+        breakpoints: {
+          769: {
+            spaceBetween: 20,
+            centeredSlidesBounds: false
+          }
+        },
+
+        navigation: {
+          nextEl: swiperEl.parentNode.querySelector(".swiper-button-next"),
+          prevEl: swiperEl.parentNode.querySelector(".swiper-button-prev")
+        },
+
+        on: {
+          init(swiper) {
+            setCustomSwiperTransitions(swiper, 0);
+          },
+          setTransition(swiper, duration) {
+            setCustomSwiperTransitions(swiper, duration);
+          },
+          touchStart(swiper) {
+            setCustomSwiperTransitions(swiper, 0);
+          },
+          slideChangeTransitionEnd(swiper) {
+            setCustomSwiperTransitions(swiper, 0);
+          },
+          slideChange() {
+            resetVideo();
           }
         }
       });
 
-      const playEl = slide.querySelector(".js-swiper-item-play");
-      const videoEl = slide.querySelector(".js-swiper-item-video");
+      swiperEl.querySelectorAll(".swiper-slide").forEach(slide => {
+        slide.addEventListener("click", (e) => {
+          const index = parseInt(slide.dataset.index, 10);
 
-      if (playEl && videoEl) {
-        playEl.addEventListener("click", (e) => {
-          e.stopPropagation();
-
-          if (!playEl.classList.contains('active')) {
-            videoEl.play();
-            videoEl.classList.add("active");
-            currentVideo = videoEl;
-          } else {
-            videoEl.pause();
-            videoEl.currentTime = 0;
-            videoEl.classList.remove("active");
+          if (!slide.querySelector("a") || e.target.tagName !== "A") {
+            slideIns.slideTo(index);
           }
-
-          playEl.classList.toggle("active");
         });
-      }
+
+        const playEl = slide.querySelector(".js-swiper-item-play");
+        const videoEl = slide.querySelector(".js-swiper-item-video");
+
+        if (playEl && videoEl) {
+          playEl.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            if (!playEl.classList.contains("active")) {
+              resetVideo();
+              videoEl.play();
+              videoEl.classList.add("active");
+              playEl.classList.add("active");
+              currentVideo = videoEl;
+              currentPlayEl = playEl;
+            } else {
+              videoEl.pause();
+              videoEl.currentTime = 0;
+              videoEl.classList.remove("active");
+              playEl.classList.remove("active");
+              currentVideo = null;
+              currentPlayEl = null;
+            }
+          });
+        }
+      });
     });
-  });
-}
+  }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initCustomSwiper();
-});
-
-if (window.Shopify && Shopify.designMode) {
-
-  // section 被重新渲染
-  document.addEventListener('shopify:section:load', (e) => {
-    initCustomSwiper(e.target);
+  document.addEventListener("DOMContentLoaded", () => {
+    initCustomSwiper();
   });
 
-  // section 删除
-  document.addEventListener('shopify:section:unload', (e) => {
-    e.target.querySelectorAll('.custom-swiper').forEach(el => {
-      if (el.swiper) {
-        el.swiper.destroy(true, true);
-      }
+  if (window.Shopify && Shopify.designMode) {
+    document.addEventListener("shopify:section:load", (e) => {
+      initCustomSwiper(e.target);
     });
-  });
 
-  // block 选中时自动切到对应 slide（可选）
-  document.addEventListener('shopify:block:select', (e) => {
-    const slide = e.target.closest('.swiper-slide');
-    if (!slide) return;
+    document.addEventListener("shopify:section:unload", (e) => {
+      e.target.querySelectorAll(".custom-swiper").forEach(el => {
+        if (el.swiper) {
+          el.swiper.destroy(true, true);
+        }
+      });
+    });
 
-    const swiperEl = slide.closest('.custom-swiper');
-    if (!swiperEl || !swiperEl.swiper) return;
+    document.addEventListener("shopify:block:select", (e) => {
+      const slide = e.target.closest(".swiper-slide");
+      if (!slide) return;
 
-    swiperEl.swiper.slideTo(parseInt(slide.dataset.index));
-  });
+      const swiperEl = slide.closest(".custom-swiper");
+      if (!swiperEl || !swiperEl.swiper) return;
 
-}
+      swiperEl.swiper.slideTo(parseInt(slide.dataset.index, 10));
+    });
+  }
 </script>
 
 <style>
      .custom-swiper-outer {
        width: 100%;
-       overflow-x: hidden;
-       {% comment %} padding: 80px 0; {% endcomment %}
+       overflow-x: clip;
+       background: #000;
+       padding-top: {{ mobile_padding_top }}px;
+       padding-bottom: {{ mobile_padding_bottom }}px;
+     }
+
+     @media (min-width: 769px) {
+       .custom-swiper-outer {
+         padding-top: {{ desktop_padding_top }}px;
+         padding-bottom: {{ desktop_padding_bottom }}px;
+       }
      }
 
      .custom-swiper-wrapper {
-       max-width: 1400px;
+       width: 100%;
+       max-width: 100%;
        margin: 0 auto;
        position: relative;
-     }
-     .custom-swiper-section img,
-     .custom-swiper-section .swiper-slide > div {
-       width: 100%;
-       display: block;
-       border-radius: 12px;
-       position: relative;
-       overflow: hidden
-     }
-     .custom-swiper-section .swiper-slide > div {
-       width: 66%;
-       aspect-ratio: inherit;
-       transition: width 0.15s ease-in-out;
+       z-index: 1;
      }
 
-     .custom-swiper-section h3 {
-       margin-top: 12px;
-       text-align: center;
-     }
      .custom-swiper-section {
-       max-width: 1000px;
+       width: 100%;
        margin: 0 auto;
-       max-height: 510px;
-     }
-     .custom-swiper-section .swiper {
+       position: relative;
        overflow: visible;
      }
+
+     .custom-swiper-section .swiper {
+       overflow: visible;
+       min-height: 448px;
+     }
+
+     .custom-swiper-section .swiper-wrapper {
+       align-items: center;
+       height: 448px;
+     }
+
+     /* slide 宽度 = 卡片宽度，spaceBetween:20 保证图片间距 20px */
      .custom-swiper-section .swiper-slide {
-       width: 320px;
-       aspect-ratio: 3 / 4; /* 宽 : 高 = 3 : 4 */
-       height: auto;
+       width: 222px;
+       height: 448px;
        flex-shrink: 0;
        flex-grow: 0;
        display: flex;
        align-items: center;
        justify-content: center;
+       overflow: hidden;
      }
 
-     .custom-swiper-section .swiper-slide.swiper-slide-prev > div,
-     .custom-swiper-section .swiper-slide.swiper-slide-next > div {
-       width: 80%;
+     .custom-swiper-section .swiper-slide.swiper-slide-prev,
+     .custom-swiper-section .swiper-slide.swiper-slide-next {
+       width: 269px;
      }
-     .custom-swiper-section .swiper-slide.swiper-slide-active > div {
+
+     .custom-swiper-section .swiper-slide.swiper-slide-active {
+       width: 336px;
+     }
+
+     .swiper-slide-card {
        width: 100%;
+       height: 295px;
+       border-radius: 12px;
+       overflow: hidden;
+       position: relative;
+       opacity: 0.88;
+       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+     }
+
+     .custom-swiper-section .swiper-slide.swiper-slide-prev .swiper-slide-card,
+     .custom-swiper-section .swiper-slide.swiper-slide-next .swiper-slide-card {
+       height: 358px;
+     }
+
+     .custom-swiper-section .swiper-slide.swiper-slide-active .swiper-slide-card {
+       height: 448px;
+       opacity: 1;
+       box-shadow: 0 16px 48px rgba(242, 135, 236, 0.18);
+     }
+
+     .custom-swiper-section img,
+     .custom-swiper-section .swiper-item-video {
+       width: 100%;
+       height: 100%;
+       display: block;
+       object-fit: cover;
+       object-position: center top;
+     }
+
+     .custom-swiper-section h3 {
+       margin-top: 12px;
+       text-align: center;
      }
 
      .custom-swiper-section .swiper-button-prev,
@@ -251,17 +355,32 @@ if (window.Shopify && Shopify.designMode) {
        align-items: center;
        justify-content: center;
        border-radius: 50%;
+       top: 50%;
+       margin-top: 0;
+       z-index: 10;
+       transform: translate(-50%, -50%);
        box-shadow:
          rgba(0, 0, 0, 0) 0px 0px 0px 0px,
          rgba(0, 0, 0, 0) 0px 0px 0px 0px,
          rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
          rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
      }
+
+     /* 居中 5 张时，左右按钮落在外侧两张卡片中央 */
+     .custom-swiper-section .swiper-button-prev {
+       left: calc(50% - 660px);
+       right: auto;
+     }
+
+     .custom-swiper-section .swiper-button-next {
+       left: calc(50% + 660px);
+       right: auto;
+     }
+
      .custom-swiper-section .swiper-button-prev::after,
      .custom-swiper-section .swiper-button-next::after {
        font-size: 14px;
      }
-
 
      .swiper-item-name {
        position: absolute;
@@ -269,10 +388,13 @@ if (window.Shopify && Shopify.designMode) {
        bottom: 20px;
        width: 100%;
        text-align: center;
-       transition: scale 0.15s ease-in-out;
+       font-size: 14px;
+       line-height: 1.2;
+       z-index: 2;
      }
-     .custom-swiper-section .swiper-slide.swiper-slide-active .swiper-item-name{
-       transform: scale(1.5);
+
+     .custom-swiper-section .swiper-slide.swiper-slide-active .swiper-item-name {
+       font-size: 18px;
      }
 
      .swiper-item-video {
@@ -283,6 +405,7 @@ if (window.Shopify && Shopify.designMode) {
        left: 0;
        opacity: 0;
      }
+
      .swiper-item-video.active {
        opacity: 1;
      }
@@ -291,21 +414,21 @@ if (window.Shopify && Shopify.designMode) {
        position: absolute;
        background-color: rgb(242 135 236 / 0.9);
        bottom: 48px;
-       width: 64px;
-       height: 64px;
+       width: 40px;
+       height: 40px;
        left: 50%;
-       margin-left: -32px;
+       transform: translateX(-50%);
        border-radius: 50%;
        display: flex;
        align-items: center;
        justify-content: center;
        cursor: pointer;
-       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+       transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+       z-index: 2;
      }
 
      .swiper-item-play:hover {
        background-color: rgb(242 135 236);
-       transform: scaleX(1.1) scaleY(1.1)
      }
 
      .swiper-item-play .svg-pause {
@@ -315,34 +438,71 @@ if (window.Shopify && Shopify.designMode) {
      .swiper-item-play.active .svg-play {
        display: none;
      }
+
      .swiper-item-play.active .svg-pause {
        display: block;
-
      }
+
      .swiper-item-play.active {
        animation: play 1.5s ease-in-out infinite;
      }
 
-     .custom-swiper-section .swiper-slide .swiper-item-play {
-       display: none;
-     }
-     .custom-swiper-section .swiper-slide.swiper-slide-active .swiper-item-play {
-       display: flex;
-     }
-
      @media (max-width: 768px) {
-       .custom-swiper-section .swiper-slide {
-         width: 240px;
+       .custom-swiper-section .swiper {
+         min-height: 320px;
        }
+
+       .custom-swiper-section .swiper-wrapper {
+         height: 320px;
+       }
+
+       /* 移动端：统一尺寸，无错落高度 */
+       .custom-swiper-section .swiper-slide,
+       .custom-swiper-section .swiper-slide.swiper-slide-prev,
+       .custom-swiper-section .swiper-slide.swiper-slide-next,
+       .custom-swiper-section .swiper-slide.swiper-slide-active {
+         width: 240px;
+         height: 320px;
+       }
+
+       .custom-swiper-section .swiper-slide-card,
+       .custom-swiper-section .swiper-slide.swiper-slide-prev .swiper-slide-card,
+       .custom-swiper-section .swiper-slide.swiper-slide-next .swiper-slide-card,
+       .custom-swiper-section .swiper-slide.swiper-slide-active .swiper-slide-card {
+         width: 100%;
+         height: 320px;
+         margin: 0;
+         transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+       }
+
+       .custom-swiper-section .swiper-slide.swiper-slide-active .swiper-item-name {
+         font-size: 14px;
+       }
+
+       /* 左右按钮落在两侧露出卡片的中央 */
+       .custom-swiper-section .swiper-button-prev {
+         left: calc((100vw - 240px) / 4);
+         right: auto;
+         transform: translate(-50%, -50%);
+       }
+
+       .custom-swiper-section .swiper-button-next {
+         left: auto;
+         right: calc((100vw - 240px) / 4);
+         transform: translate(50%, -50%);
+       }
+
        .custom-swiper-section .swiper-button-prev::after,
        .custom-swiper-section .swiper-button-next::after {
-         font-size: 12px;
+         font-size: 11px;
        }
+
        .custom-swiper-section .swiper-button-prev,
        .custom-swiper-section .swiper-button-next {
-         width: 40px;
-         height: 40px;
+         width: 36px;
+         height: 36px;
        }
+
      }
 
      @keyframes play {
@@ -358,32 +518,75 @@ if (window.Shopify && Shopify.designMode) {
 
 .custom-swiper-title-wrapper{
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
 }
 
-.custom-swiper-title-wrapper h2{
+.custom-swiper-title-wrapper h3{
+  font-family: var(--font-heading--family);
   font-size: {{ section.settings.title_size | default: 24 }}px;
   color: {{ section.settings.title_color | default: '#000' }};
   margin: 0 0 10px;
-  font-weight: 600;
+  font-weight: var(--font-heading--weight);
   line-height: 1.2;
 }
 
 .custom-swiper-title-wrapper p{
+  font-family: var(--font-body--family);
   font-size: {{ section.settings.subtitle_size | default: 16 }}px;
   color: {{ section.settings.subtitle_color | default: '#666' }};
   margin: 0;
+  font-weight: var(--font-body--weight);
   line-height: 1.5;
   padding: 0 10px;
 }
 
 @media screen and (max-width: 750px) {
-  .custom-swiper-title-wrapper h2{
+  .custom-swiper-title-wrapper {
+    text-align: left;
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+
+  .custom-swiper-title-wrapper h3{
     font-size: {{ section.settings.title_size_mobile | default: section.settings.title_size }}px;
   }
+
   .custom-swiper-title-wrapper p{
     font-size: {{ section.settings.subtitle_size_mobile | default: section.settings.subtitle_size }}px;
+    padding: 0;
   }
+}
+
+.custom-swiper-button-wrapper {
+  margin-top: 60px;
+  text-align: center;
+}
+@media screen and (max-width: 750px) {
+  
+  .custom-swiper-button-wrapper {
+    margin-top: 36px;
+  }
+}
+.custom-swiper-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 32px;
+  border-radius: 100px;
+  border: 1px solid #F287EC;
+  color: #FFF;
+  text-align: center;
+  font-family: var(--font-body--family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: var(--font-body--weight);
+  line-height: normal;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
 }
 </style>
 
@@ -414,13 +617,13 @@ if (window.Shopify && Shopify.designMode) {
       "type": "color",
       "id": "title_color",
       "label": "主标题",
-      "default": "#000"
+      "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "subtitle_color",
       "label": "副标题",
-      "default": "#ccc"
+      "default": "#cccccc"
     },
     {
       "type": "header",
@@ -449,6 +652,73 @@ if (window.Shopify && Shopify.designMode) {
       "id": "subtitle_size_mobile",
       "label": "副标题移动端",
       "default": 24
+    },
+    {
+      "type": "header",
+      "content": "间距设置"
+    },
+    {
+      "type": "header",
+      "content": "移动端内边距"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "上内边距",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "下内边距",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "PC 端内边距"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "label": "上内边距",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "label": "下内边距",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "按钮设置"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "按钮文字",
+      "default": "Listen More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "按钮链接"
     }
   ],
   "blocks": [
