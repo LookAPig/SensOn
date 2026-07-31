@@ -544,6 +544,20 @@
             "video_aspect_ratio": "3-4"
           }
         },
+        "creator_slide_9LYMDn": {
+          "type": "creator_slide",
+          "settings": {
+            "tags": "New ergonomic design\n3-zones sync",
+            "quote": "<p>“Place between your thighs and let all three zones sync with your body, while connecting with the fantacies made for you.”</p>",
+            "avatar": "shopify://shop_images/florencebarks.jpg",
+            "creator_name": "florencebark",
+            "creator_desc": "Women’s Wellness Podcast Host",
+            "creator_subs": "30K Subscribers",
+            "profile_url": "",
+            "video_cover": "shopify://shop_images/f.jpg",
+            "video_aspect_ratio": "3-4"
+          }
+        },
         "creator_slide_XRnUxa": {
           "type": "creator_slide",
           "settings": {
@@ -598,6 +612,7 @@
         "creator_slide_exrhef",
         "creator_slide_Dzbpkt",
         "creator_slide_g8grbA",
+        "creator_slide_9LYMDn",
         "creator_slide_XRnUxa",
         "creator_slide_kpcnax",
         "creator_slide_7GVnpL"
