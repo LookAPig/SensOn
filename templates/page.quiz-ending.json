@@ -54,6 +54,7 @@
       "blocks": {
         "section-header": {
           "type": "_section-header",
+          "disabled": true,
           "static": true,
           "settings": {
             "class": "",
@@ -130,8 +131,8 @@
       ],
       "name": "Custom Swiper",
       "settings": {
-        "title": "Turn On Your Fantasy",
-        "subtitle": "SensOn offers a curated library of interactive audio stories created for women, spanning a wide spectrum of desires and kinks.",
+        "title": "",
+        "subtitle": "",
         "title_color": "#000000",
         "subtitle_color": "#000000",
         "title_size": 32,
