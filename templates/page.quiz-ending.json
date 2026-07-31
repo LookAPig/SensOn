@@ -1,0 +1,492 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-7",
+        "show_title": true,
+        "content_width": "md"
+      }
+    },
+    "text_with_fixed_background_4BQcA8": {
+      "type": "text-with-fixed-background",
+      "blocks": {
+        "title_beGCM7": {
+          "type": "title",
+          "settings": {
+            "content_position": "md:place-self-center",
+            "subheading": "",
+            "title": "How <em>SensOn S1</em> Works",
+            "heading_tag": "h2",
+            "highlight_effect": "marker",
+            "highlight_accent_color": "#f287ec",
+            "highlight_text_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "title_beGCM7"
+      ],
+      "custom_css": [
+        ".min-h-fill {min-height: 500px;}",
+        "@media screen and (max-width: 768px) {.min-h-fill {min-height: 300px; }}"
+      ],
+      "name": "t:sections.text_with_fixed_background.name",
+      "settings": {
+        "color_scheme": "",
+        "image": "shopify://shop_images/2026-01-21_15.29.45.png",
+        "overlay_color": "#000000",
+        "overlay_opacity": 10
+      }
+    },
+    "1769342421c8d5c13c": {
+      "type": "_blocks",
+      "blocks": {
+        "section-header": {
+          "type": "_section-header",
+          "static": true,
+          "settings": {
+            "class": "",
+            "subheading": "",
+            "title": "Header",
+            "content": "<p>Use this content to share information about your store and products.</p>",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "left",
+            "heading_size": "h3",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
+        }
+      },
+      "settings": {
+        "color_scheme": "scheme-7",
+        "add_vertical_spacing": false,
+        "add_horizontal_spacing": false
+      }
+    },
+    "img_cars_Mxtbjq": {
+      "type": "img-cars",
+      "blocks": {
+        "item_d3DcpG": {
+          "type": "item",
+          "settings": {
+            "title": "Download and Connect",
+            "description": "Download the SensOn App,  turn on Bluetooth, and choose the control mode you prefer.The app guides setup, connection, and control.",
+            "image_mobile": "shopify://shop_images/how_it_works1.jpg",
+            "image_desktop": "shopify://shop_images/how_it_works1.jpg"
+          }
+        },
+        "item_HEh7UL": {
+          "type": "item",
+          "settings": {
+            "title": "Assemble and Fit",
+            "description": "Connect the magnetic components and adjust the setup for a secure, comfortable fit. SensOn S1 is designed to support hands-free use.",
+            "image_mobile": "shopify://shop_images/how_it_works2.jpg",
+            "image_desktop": "shopify://shop_images/how_it_works2.jpg"
+          }
+        },
+        "item_deU97j": {
+          "type": "item",
+          "settings": {
+            "title": "Choose and Begin",
+            "description": "The smart intimacy device respond in sync with the story, voice, and interaction. Choose the control mode you prefer and start your interactive audio experience.",
+            "image_mobile": "shopify://shop_images/how_it_works3.jpg",
+            "image_desktop": "shopify://shop_images/how_it_works3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "item_d3DcpG",
+        "item_HEh7UL",
+        "item_deU97j"
+      ],
+      "disabled": true,
+      "name": "Images card",
+      "settings": {
+        "heading": "The SensOn S1 Experience in 3 Simple Steps"
+      }
+    },
+    "blocks_G4yn7H": {
+      "type": "_blocks",
+      "blocks": {
+        "step_section_7QfezR": {
+          "type": "step_section",
+          "name": "步骤 steps",
+          "settings": {
+            "subtitle": "How it works",
+            "title": "The Experience, Step by Step",
+            "background_color": "#000000",
+            "background_gradient": "#000000",
+            "text_color": "#ffffff",
+            "accent_color": "#f287ec",
+            "accent_light": "#e8d4d4",
+            "quote_color": "#f287ec",
+            "quote_background": "#000000",
+            "placeholder_bg_1": "#f287ec",
+            "placeholder_bg_2": "#f287ec",
+            "step_1_label": "Step 1",
+            "step_1_title": "Download and prepare",
+            "step_1_description": "<p>Download the SensOn App and turn on Bluetooth.<br/>Open the Charging Case and remove the components.</p>",
+            "step_1_quote": "",
+            "step_1_image": "shopify://shop_images/step-1.jpg",
+            "step_2_label": "Step 2",
+            "step_2_title": "Choose your setup",
+            "step_2_description": "<p>Parts connect magnetically and separate with a gentle twist.<br/> Assemble the configuration you prefer.</p>",
+            "step_2_quote": "",
+            "step_2_image": "shopify://shop_images/step-2.jpg",
+            "step_3_label": "Step 3",
+            "step_3_title": "Insert and adjust",
+            "step_3_description": "<p>Gently insert the Vaginal Stimulator. Let the Core rest naturally between your thighs.<br/>Adjust the Clitoral Stimulator head up or down until it sits snugly against the clitoris.</p>",
+            "step_3_quote": "",
+            "step_3_image": "shopify://shop_images/step-3.jpg",
+            "step_4_label": "Step 4",
+            "step_4_title": "Wear and fit",
+            "step_4_description": "<p>Place the Nipple Stimulators on the nipples.<br/>Use the clasp to adjust tension for a secure, comfortable fit.</p>",
+            "step_4_quote": "",
+            "step_4_image": "shopify://shop_images/step-4.jpg",
+            "step_5_label": "Step 5",
+            "step_5_title": "Power on",
+            "step_5_description": "<p>Press and hold the Core power button to turn on.<br/>The device enters standby mode.</p>",
+            "step_5_quote": "",
+            "step_5_image": "shopify://shop_images/step-5.jpg",
+            "step_6_label": "Step 6",
+            "step_6_title": "Connect and play",
+            "step_6_description": "<p>Follow the on-screen steps to connect via Bluetooth.<br/>Choose your erotic audio and start. During the experience, you can interact with AI characters anytime by voice or text.</p>",
+            "step_6_quote": "",
+            "step_6_image": "shopify://shop_images/step-6.jpg"
+          },
+          "blocks": {}
+        },
+        "section-header": {
+          "type": "_section-header",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "class": "",
+            "subheading": "",
+            "title": "Header",
+            "content": "<p>Use this content to share information about your store and products.</p>",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "left",
+            "heading_size": "h3",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "step_section_7QfezR"
+      ],
+      "custom_css": [
+        "[class^=\"ai-steps__step-title\"] {text-transform: none !important;}"
+      ],
+      "name": "Experience steps",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "add_vertical_spacing": false,
+        "add_horizontal_spacing": true
+      }
+    },
+    "17693451417d23555f": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_054164a_4Kha6n": {
+          "type": "ai_gen_block_054164a",
+          "settings": {
+            "title": "Choose Your Mode",
+            "title_size": 42,
+            "tab_text_size": 18,
+            "description_text_size": 16,
+            "underline_color": "#f287ec",
+            "tab_1_label": "AI Mode",
+            "tab_1_image": "shopify://shop_images/AI_Mode.jpg",
+            "tab_1_description": "<ul><li>Select AI Mode in the app</li><li>Set minimum and maximum intensity limits for each component</li><li>The device responds automatically to content and interaction</li></ul>",
+            "tab_2_label": "Manual Mode",
+            "tab_2_image": "shopify://shop_images/Manual_Mode.jpg",
+            "tab_2_description": "<ul><li>Select Manual Mode in the app</li><li>Manually adjust intensity for each component</li></ul>",
+            "tab_3_label": "Physical Buttons",
+            "tab_3_image": "shopify://shop_images/Physical_Buttons.jpg",
+            "tab_3_description": "<ul><li>Use on-device buttons to switch between 5 intensity levels</li><li>Works even without app connection</li></ul>"
+          },
+          "blocks": {}
+        },
+        "product_3_col_img_text_MpPMwA": {
+          "type": "product_3_col_img_text",
+          "name": "SensOn App",
+          "settings": {
+            "title": "SensOn App",
+            "subtitle": "Follow these simple steps",
+            "header_spacing": 50,
+            "step_1_title": "1. Choose and explore",
+            "step_1_description": "",
+            "step_1_video": "shopify://files/videos/飞书20260214-224829.mp4",
+            "step_1_media_size": "large",
+            "step_2_title": "2. Play and interact",
+            "step_2_description": "",
+            "step_2_video": "shopify://files/videos/2. Play and interact.mp4",
+            "step_2_media_size": "large",
+            "step_3_title": "3. Connect and enjoy",
+            "step_3_description": "",
+            "step_3_video": "shopify://files/videos/3. Connect and enjoy.mp4",
+            "step_3_media_size": "large",
+            "max_width": 1400,
+            "step_gap_mobile": 40,
+            "step_gap_desktop": 50,
+            "content_gap": 25,
+            "content_padding_top": 4,
+            "media_spacing": 20,
+            "media_border_radius": 12,
+            "media_background": "#f5f5f5",
+            "show_connector": false,
+            "connector_width": 3,
+            "connector_color": "#e0e0e0",
+            "background_color": "#000000",
+            "title_color": "#ffffff",
+            "subtitle_color": "#666666",
+            "step_title_color": "#ffffff",
+            "step_description_color": "#666666",
+            "number_background": "#000000",
+            "number_color": "#ffffff",
+            "icon_background": "#000000",
+            "icon_color": "#000000",
+            "title_size_mobile": 32,
+            "title_size_desktop": 44,
+            "title_bottom_spacing": 10,
+            "subtitle_size_mobile": 16,
+            "subtitle_size_desktop": 18,
+            "step_title_size_mobile": 18,
+            "step_title_size_desktop": 20,
+            "title_spacing": 10,
+            "step_description_size_mobile": 15,
+            "step_description_size_desktop": 16,
+            "number_size": 50,
+            "number_font_size": 24,
+            "number_border_width": 4,
+            "show_icons": false,
+            "icon_size": 60,
+            "icon_padding": 12,
+            "icon_border_radius": 12,
+            "icon_spacing": 15,
+            "section_padding_mobile": 50,
+            "section_padding_desktop": 80
+          },
+          "blocks": {}
+        },
+        "section-header": {
+          "type": "_section-header",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "class": "",
+            "subheading": "",
+            "title": "Header",
+            "content": "<p>Use this content to share information about your store and products.</p>",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "left",
+            "heading_size": "h3",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_054164a_4Kha6n",
+        "product_3_col_img_text_MpPMwA"
+      ],
+      "custom_css": [
+        "[class^=\"ai-how-to-use-step-title\"] {text-transform: none !important;}",
+        "[class^=\".ai-how-to-use-step-media-\"] {background-color: transparent;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-7",
+        "add_vertical_spacing": false,
+        "add_horizontal_spacing": true
+      }
+    },
+    "swiper_list_3BB8Hc": {
+      "type": "swiper-list",
+      "blocks": {
+        "slide_4fmNni": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20260205-211623.jpg",
+            "video": "https://cdn.shopify.com/videos/c/o/v/a5d91bf682064f4e9b98c8eb20e6fc0c.mp4",
+            "name": "Cedric"
+          }
+        },
+        "slide_ixrNPt": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20260205-211630.jpg",
+            "video": "https://cdn.shopify.com/videos/c/o/v/12225cb270c04dfbaa47ae112b6ed528.mp4",
+            "name": "Viola"
+          }
+        },
+        "slide_3YzxHy": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20260203-222738.png",
+            "video": "https://cdn.shopify.com/videos/c/o/v/4d5c592c6d1b486c984a05d8520dbb9f.mp4",
+            "name": "Miles"
+          }
+        },
+        "slide_9jALpx": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20260204-210257.jpg",
+            "video": "https://cdn.shopify.com/videos/c/o/v/2b4b8cb7a97146b6802af493fc0340fe.mp4",
+            "name": "Charlie"
+          }
+        },
+        "slide_JjbfrQ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20260204-210252.jpg",
+            "video": "https://cdn.shopify.com/videos/c/o/v/ef1302572e284b09b2a3d7dd8bd21bba.mp4",
+            "name": "Nolan"
+          }
+        }
+      },
+      "block_order": [
+        "slide_4fmNni",
+        "slide_ixrNPt",
+        "slide_3YzxHy",
+        "slide_9jALpx",
+        "slide_JjbfrQ"
+      ],
+      "name": "Custom Swiper",
+      "settings": {
+        "title": "Turn On Your Fantasy",
+        "subtitle": "SensOn offers a curated library of interactive audio stories created for women, spanning a wide spectrum of desires and kinks.",
+        "title_color": "#000000",
+        "subtitle_color": "#000000",
+        "title_size": 32,
+        "subtitle_size": 18,
+        "title_size_mobile": 32,
+        "subtitle_size_mobile": 24
+      }
+    },
+    "quize_T6yrTE": {
+      "type": "quize",
+      "blocks": {
+        "quize_result_YATcen": {
+          "type": "quize_result",
+          "settings": {
+            "result_img_dom_gentle": "shopify://shop_images/002-min.png",
+            "result_title_dom_gentle": "Dom Gentle",
+            "result_desc_dom_gentle": "<p>Dom Gentle</p>",
+            "result_title_dom_rough": "Dom Rough",
+            "result_desc_dom_rough": "<p>Dom Rough</p>",
+            "result_title_dom_training": "Dom Training",
+            "result_desc_dom_training": "<p>Dom Training</p>",
+            "result_title_sub_gentle": "Sub Gentle",
+            "result_desc_sub_gentle": "<p>Sub Gentle</p>",
+            "result_title_sub_rough": "Sub Rough",
+            "result_desc_sub_rough": "<p>Sub Rough</p>",
+            "result_title_sub_training": "Sub Training",
+            "result_desc_sub_training": "<p>Sub Training</p>",
+            "result_title_equal_gentle": "Equal Gentle",
+            "result_desc_equal_gentle": "<p>Equal Gentle</p>",
+            "result_title_equal_rough": "Equal Rough",
+            "result_desc_equal_rough": "<p>Equal Rough</p>",
+            "result_title_equal_training": "Equal Training",
+            "result_desc_equal_training": "<p>Equal Training</p>"
+          }
+        },
+        "item_WRaxCw": {
+          "type": "item",
+          "settings": {
+            "question": "Quesiton 1",
+            "answer_1": "Answer 1",
+            "mode1": "Dom",
+            "score_1": 1,
+            "option_1": "Gentle",
+            "option_score_1": 1,
+            "answer_2": "Answer 2",
+            "mode_2": "Dom",
+            "score_2": 1,
+            "option_2": "Gentle",
+            "option_score_2": 1,
+            "answer_3": "Answer 3",
+            "mode_3": "Dom",
+            "score_3": 1,
+            "option_3": "Gentle",
+            "option_score_3": 1,
+            "answer_4": "Answer 4",
+            "mode_4": "Dom",
+            "score_4": 1,
+            "option_4": "Gentle",
+            "option_score_4": 1,
+            "answer_5": "Answer 5",
+            "mode_5": "Dom",
+            "score_5": 1,
+            "option_5": "Gentle",
+            "option_score_5": 1
+          }
+        }
+      },
+      "block_order": [
+        "quize_result_YATcen",
+        "item_WRaxCw"
+      ],
+      "disabled": true,
+      "name": "Custom Quize",
+      "settings": {
+        "bg": "shopify://shop_images/question_bg_18153c8d-d3e0-460b-9460-97696b85f146.jpg",
+        "title": "Find Your Pleasure Style",
+        "subtitle": "Step two: answer a few quick questions to discover what turns you on."
+      }
+    },
+    "reading_text_h9Dted": {
+      "type": "reading-text",
+      "name": "t:sections.reading_text.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "image": "shopify://shop_images/PC-min.jpg",
+        "subheading": "",
+        "content": "SensOn combines AI fantasy, immersive audio, and bionic stimulation into one seamless experience—so all you need to do is lie down.",
+        "button_text": "",
+        "button_link": "",
+        "heading_tag": "h3",
+        "mobile_text_position": "place-self-center",
+        "desktop_text_position": "sm:place-self-center",
+        "content_width": "full",
+        "reading_speed": "1.5",
+        "separate_button": false,
+        "text_opacity": 20,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20
+      }
+    }
+  },
+  "order": [
+    "main",
+    "text_with_fixed_background_4BQcA8",
+    "1769342421c8d5c13c",
+    "img_cars_Mxtbjq",
+    "blocks_G4yn7H",
+    "17693451417d23555f",
+    "swiper_list_3BB8Hc",
+    "quize_T6yrTE",
+    "reading_text_h9Dted"
+  ]
+}
