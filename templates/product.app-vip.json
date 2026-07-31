@@ -30,12 +30,6 @@
             "mobile_max_width": 100
           }
         },
-        "yotpo_product_reviews_star_rating_Xzjcy3": {
-          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "settings": {
-            "product": "{{product}}"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
@@ -81,6 +75,7 @@
         },
         "countdown_H8fV6E": {
           "type": "countdown",
+          "disabled": true,
           "settings": {
             "class_name": "pdp-off-show",
             "text": "Self-Love Special",
@@ -296,7 +291,6 @@
       "block_order": [
         "liquid_PMKK83",
         "image_nmjnjV",
-        "yotpo_product_reviews_star_rating_Xzjcy3",
         "title",
         "text_7nhMc6",
         "offers_xqqJzH",
@@ -888,45 +882,6 @@
         "lazy": true
       }
     },
-    "1777538267162d7a7c": {
-      "type": "apps",
-      "blocks": {
-        "yotpo_product_reviews_reviews_fjjCWN": {
-          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "disabled": true,
-          "settings": {
-            "product": "{{product}}"
-          }
-        },
-        "section-header": {
-          "type": "_section-header",
-          "disabled": true,
-          "static": true,
-          "settings": {
-            "class": "",
-            "subheading": "",
-            "title": "Header",
-            "content": "<p>Use this content to share information about your store and products.</p>",
-            "button_text": "",
-            "button_link": "",
-            "button_style": "outline",
-            "text_alignment": "left",
-            "heading_size": "h3",
-            "title_icon": "none",
-            "show_scrolling_title": false
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "yotpo_product_reviews_reviews_fjjCWN"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "add_vertical_spacing": true,
-        "add_horizontal_spacing": false
-      }
-    },
     "how_works_aErNkp": {
       "type": "how-works",
       "blocks": {
@@ -960,7 +915,6 @@
         "feature_aGHMex",
         "feature_X8wW4k"
       ],
-      "disabled": true,
       "name": "How to Use",
       "settings": {
         "heading": "How to Use"
@@ -977,7 +931,6 @@
     "scroll_images_baNjt4",
     "scroll_images_TjAexy",
     "ss_comparison_table_22_Uhm4pg",
-    "1777538267162d7a7c",
     "how_works_aErNkp"
   ]
 }
