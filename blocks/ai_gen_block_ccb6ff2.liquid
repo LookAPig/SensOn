@@ -658,7 +658,8 @@
       "dim2_value": {{ block.settings.type_1_dim2_value | default: 85 }},
       "dim3_label": {{ block.settings.type_1_dim3_label | json }},
       "dim3_value": {{ block.settings.type_1_dim3_value | default: 62 }},
-      "locked_text": {{ block.settings.type_1_locked_text | json }}
+      "locked_text": {{ block.settings.type_1_locked_text | json }},
+      "customer_tags": {{ block.settings.type_1_customer_tags | json }}
     },
     {
       "name": {{ block.settings.type_2_name | json }},
@@ -670,7 +671,8 @@
       "dim2_value": {{ block.settings.type_2_dim2_value | default: 70 }},
       "dim3_label": {{ block.settings.type_2_dim3_label | json }},
       "dim3_value": {{ block.settings.type_2_dim3_value | default: 88 }},
-      "locked_text": {{ block.settings.type_2_locked_text | json }}
+      "locked_text": {{ block.settings.type_2_locked_text | json }},
+      "customer_tags": {{ block.settings.type_2_customer_tags | json }}
     },
     {
       "name": {{ block.settings.type_3_name | json }},
@@ -682,7 +684,8 @@
       "dim2_value": {{ block.settings.type_3_dim2_value | default: 48 }},
       "dim3_label": {{ block.settings.type_3_dim3_label | json }},
       "dim3_value": {{ block.settings.type_3_dim3_value | default: 67 }},
-      "locked_text": {{ block.settings.type_3_locked_text | json }}
+      "locked_text": {{ block.settings.type_3_locked_text | json }},
+      "customer_tags": {{ block.settings.type_3_customer_tags | json }}
     },
     {
       "name": {{ block.settings.type_4_name | json }},
@@ -694,7 +697,8 @@
       "dim2_value": {{ block.settings.type_4_dim2_value | default: 92 }},
       "dim3_label": {{ block.settings.type_4_dim3_label | json }},
       "dim3_value": {{ block.settings.type_4_dim3_value | default: 73 }},
-      "locked_text": {{ block.settings.type_4_locked_text | json }}
+      "locked_text": {{ block.settings.type_4_locked_text | json }},
+      "customer_tags": {{ block.settings.type_4_customer_tags | json }}
     }
   ]
 </script>
@@ -823,7 +827,12 @@
         <p class="ai-quiz-result-message-{{ ai_gen_id }}" data-form-message role="status"></p>
 
         {% form 'customer', id: quiz_newsletter_form_id, class: quiz_newsletter_form_class %}
-          <input type="hidden" name="contact[tags]" value="{{ block.settings.results_newsletter_tags }}">
+          <input type="hidden" name="contact[tags]" value="{{ block.settings.results_newsletter_tags }}" data-tags-input>
+          <input type="hidden" name="contact[accepts_marketing]" value="true">
+          <input type="hidden" name="return_to" value="{{ request.path }}">
+          {% if form.posted_successfully? %}
+            <input type="hidden" data-subscribe-posted value="1">
+          {% endif %}
           <input
             class="ai-quiz-result-email-{{ ai_gen_id }}"
             type="email"
@@ -866,6 +875,8 @@
         this.answers = {};
         this.resultTypeIndex = 0;
         this.isSubscribed = false;
+        this.resultsCookieName = "quiz-results-{{ ai_gen_id }}";
+        this.resultsCookieMaxAge = 2 * 60 * 60;
       }
 
       connectedCallback() {
@@ -882,6 +893,112 @@
 
         this.setupEventListeners();
         this.updateProgress();
+
+        if (this.restoreResultsFromCookie()) {
+          return;
+        }
+      }
+
+      getCookie(name) {
+        const prefix = name + "=";
+        const parts = document.cookie.split(";");
+
+        for (let i = 0; i < parts.length; i++) {
+          const part = parts[i].trim();
+
+          if (part.indexOf(prefix) === 0) {
+            return decodeURIComponent(part.slice(prefix.length));
+          }
+        }
+
+        return "";
+      }
+
+      setCookie(name, value, maxAgeSeconds) {
+        document.cookie = [
+          name + "=" + encodeURIComponent(value),
+          "path=/",
+          "max-age=" + maxAgeSeconds,
+          "SameSite=Lax"
+        ].join("; ");
+      }
+
+      clearCookie(name) {
+        document.cookie = name + "=; path=/; max-age=0; SameSite=Lax";
+      }
+
+      getResultsCookiePayload() {
+        return {
+          answers: this.answers,
+          resultTypeIndex: this.resultTypeIndex,
+          subscribed: this.isSubscribed ? 1 : 0
+        };
+      }
+
+      saveResultsCookie() {
+        this.setCookie(
+          this.resultsCookieName,
+          JSON.stringify(this.getResultsCookiePayload()),
+          this.resultsCookieMaxAge
+        );
+      }
+
+      clearResultsCookie() {
+        this.clearCookie(this.resultsCookieName);
+      }
+
+      readResultsCookie() {
+        const raw = this.getCookie(this.resultsCookieName);
+
+        if (!raw) {
+          return null;
+        }
+
+        try {
+          const data = JSON.parse(raw);
+
+          if (!data || typeof data !== "object" || !data.answers) {
+            return null;
+          }
+
+          return data;
+        } catch (error) {
+          console.error("Quiz results cookie parse failed", error);
+          return null;
+        }
+      }
+
+      restoreResultsFromCookie() {
+        const data = this.readResultsCookie();
+
+        if (!data) {
+          return false;
+        }
+
+        this.answers = data.answers || {};
+        this.resultTypeIndex = Number(data.resultTypeIndex) || 0;
+
+        Object.keys(this.answers).forEach((questionNum) => {
+          const option = this.querySelector(
+            `[data-question="${questionNum}"] [data-option="${this.answers[questionNum]}"]`
+          );
+
+          if (option) {
+            option.classList.add("selected");
+          }
+        });
+
+        this.showResults({ skipCookieWrite: true });
+
+        const formPosted = Boolean(this.subscribeForm && this.subscribeForm.querySelector("[data-subscribe-posted]"));
+        const storageKey = this.getSubscribeStorageKey();
+        const fromStorage = storageKey && window.sessionStorage.getItem(storageKey) === "1";
+
+        if (formPosted || fromStorage || data.subscribed === 1) {
+          this.showSubscribeSuccess(true);
+        }
+
+        return true;
       }
 
       loadTypes() {
@@ -991,9 +1108,10 @@
         return 3;
       }
 
-      showResults() {
+      showResults(options = {}) {
         this.resultTypeIndex = this.calculateResultIndex();
         this.renderResultType(this.types[this.resultTypeIndex] || this.types[0]);
+        this.updateSubscribeTags();
 
         this.classList.add("is-results");
         this.querySelector("[data-quiz-header]").style.display = "none";
@@ -1001,6 +1119,10 @@
         this.querySelector("[data-quiz-questions]").style.display = "none";
         this.querySelector("[data-quiz-nav]").style.display = "none";
         this.results.classList.add("active");
+
+        if (!options.skipCookieWrite) {
+          this.saveResultsCookie();
+        }
 
         const storageKey = this.getSubscribeStorageKey();
 
@@ -1017,6 +1139,40 @@
         }
 
         return "quiz-subscribed-{{ ai_gen_id }}-" + type.name;
+      }
+
+      parseTagList(value) {
+        return String(value || "")
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter(Boolean);
+      }
+
+      getSubscribeTags() {
+        const type = this.types[this.resultTypeIndex] || {};
+        const baseTags = this.parseTagList({{ block.settings.results_newsletter_tags | json }});
+        const typeTags = this.parseTagList(type.customer_tags);
+        const uniqueTags = [];
+
+        [...baseTags, ...typeTags].forEach((tag) => {
+          if (!uniqueTags.includes(tag)) {
+            uniqueTags.push(tag);
+          }
+        });
+
+        return uniqueTags.join(", ");
+      }
+
+      updateSubscribeTags() {
+        if (!this.subscribeForm) {
+          return;
+        }
+
+        const tagsInput = this.subscribeForm.querySelector("[data-tags-input]");
+
+        if (tagsInput) {
+          tagsInput.value = this.getSubscribeTags();
+        }
       }
 
       renderResultType(type) {
@@ -1119,6 +1275,8 @@
             submitBtn.disabled = false;
             submitBtn.textContent = {{ block.settings.results_cta_text | json }};
           }
+
+          this.updateSubscribeTags();
         }
       }
 
@@ -1147,10 +1305,13 @@
         if (storageKey) {
           window.sessionStorage.setItem(storageKey, "1");
         }
+
+        this.saveResultsCookie();
       }
 
       async handleSubscribe(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         if (!this.subscribeForm || this.isSubscribed) {
           return;
@@ -1166,23 +1327,33 @@
           return;
         }
 
+        this.updateSubscribeTags();
+
         submitBtn.disabled = true;
         submitBtn.textContent = {{ block.settings.results_loading_text | json }};
         this.clearFormMessage();
 
         try {
           const formData = new FormData(this.subscribeForm);
+          const body = new URLSearchParams(formData);
+          const actionUrl = this.subscribeForm.getAttribute("action") || "/contact";
 
-          const response = await fetch("/contact#contact_form", {
+          const response = await fetch(actionUrl, {
             method: "POST",
-            body: formData,
+            body: body,
             headers: {
               Accept: "application/json",
+              "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
               "X-Requested-With": "XMLHttpRequest"
-            }
+            },
+            credentials: "same-origin",
+            redirect: "manual"
           });
 
-          if (!response.ok && response.status >= 500) {
+          const isOpaqueRedirect = response.type === "opaqueredirect";
+          const isSuccessStatus = response.ok || response.status === 0 || (response.status >= 300 && response.status < 400);
+
+          if (!isOpaqueRedirect && !isSuccessStatus && response.status >= 500) {
             throw new Error("Subscribe request failed");
           }
 
@@ -1219,6 +1390,7 @@
         this.answers = {};
         this.resultTypeIndex = 0;
         this.isSubscribed = false;
+        this.clearResultsCookie();
 
         this.classList.remove("is-results");
         this.querySelector("[data-quiz-header]").style.display = "";
@@ -1612,9 +1784,9 @@
     {
       "type": "text",
       "id": "results_newsletter_tags",
-      "label": "Customer tags",
+      "label": "Base customer tags",
       "default": "newsletter, quiz-result",
-      "info": "Comma-separated tags applied when the customer subscribes"
+      "info": "Comma-separated tags always applied on subscribe. Per-result tags below are merged with these."
     },
     {
       "type": "text",
@@ -1727,6 +1899,13 @@
       "default": "Your full resonance map reveals how you negotiate power, pace desire, and choose partners who can meet both sides of your switch."
     },
     {
+      "type": "text",
+      "id": "type_1_customer_tags",
+      "label": "Customer tags for this result",
+      "default": "quiz-type-1",
+      "info": "Comma-separated tags sent to Shopify when this score result subscribes"
+    },
+    {
       "type": "header",
       "content": "Result type 2 (score 11â€“15)"
     },
@@ -1805,6 +1984,13 @@
       "id": "type_2_locked_text",
       "label": "Locked description",
       "default": "Your full resonance map shows how tenderness and curiosity shape the stories that stay with you longest."
+    },
+    {
+      "type": "text",
+      "id": "type_2_customer_tags",
+      "label": "Customer tags for this result",
+      "default": "quiz-type-2",
+      "info": "Comma-separated tags sent to Shopify when this score result subscribes"
     },
     {
       "type": "header",
@@ -1887,6 +2073,13 @@
       "default": "Your full resonance map unpacks the rituals, boundaries, and pacing that make your control feel magnetic."
     },
     {
+      "type": "text",
+      "id": "type_3_customer_tags",
+      "label": "Customer tags for this result",
+      "default": "quiz-type-3",
+      "info": "Comma-separated tags sent to Shopify when this score result subscribes"
+    },
+    {
       "type": "header",
       "content": "Result type 4 (score 21â€“25)"
     },
@@ -1965,6 +2158,13 @@
       "id": "type_4_locked_text",
       "label": "Locked description",
       "default": "Your full resonance map highlights the sparks, risks, and recovery rhythms that keep your desire alive."
+    },
+    {
+      "type": "text",
+      "id": "type_4_customer_tags",
+      "label": "Customer tags for this result",
+      "default": "quiz-type-4",
+      "info": "Comma-separated tags sent to Shopify when this score result subscribes"
     },
     {
       "type": "header",
