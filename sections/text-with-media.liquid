@@ -94,7 +94,8 @@
                 highlight_accent_color: block.settings.highlight_accent_color, 
                 highlight_text_color: block.settings.highlight_text_color, 
                 style: block.settings.heading_tag,
-                block: block 
+                block: block,
+                html_tag: 'h2'
               -%}
 
             {%- when 'button' -%}
@@ -176,7 +177,17 @@
       
             {% if middle_left_content != blank %}
               <div class="place-self-center-start prose prose-justify-start">
-                {{- middle_left_content -}}
+                <style>
+                  .prose-justify-start .h6 {
+                    margin-bottom: -16px;
+                  }
+                </style>
+                {{- middle_left_content
+                  | replace: '<p><strong>', '<h3 class="h6">'
+                  | replace: '</strong></p>', '</h3>'
+                  | replace: '<strong>', '<h3 class="h6">'
+                  | replace: '</strong>', '</h3>'
+                -}}
               </div>
             {%- endif -%}
       
