@@ -23,7 +23,6 @@
       "blocks": {
         "ai_gen_block_ccb6ff2_pTkbNR": {
           "type": "ai_gen_block_ccb6ff2",
-          "disabled": true,
           "settings": {
             "quiz_title": "Step into the scene.",
             "quiz_description": "It’s late. Your phone lights up with a message from someone you can’t stop thinking about.<br>\nFive moments. Five choices.<br>\nDon’t choose what sounds right. <br>Choose what you want to happen next.",
