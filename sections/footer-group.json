@@ -100,11 +100,75 @@
         "show_country_flag": true,
         "show_locale_selector": true
       }
+    },
+    "blocks_3jEXGR": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5deff5d_BryBCX": {
+          "type": "ai_gen_block_5deff5d",
+          "settings": {
+            "background_color": "#ffffff",
+            "divider_color": "#e0e0e0",
+            "desktop_width_percent": 100,
+            "module_1_title": "Easy to Use",
+            "module_1_body": "<p>Our intuitive interface makes it simple to navigate and use all features. Get started in minutes with our streamlined onboarding process.</p>",
+            "module_2_title": "Powerful Features",
+            "module_2_body": "<p>Access advanced tools and features designed to boost your productivity. Customize your experience to match your workflow perfectly.</p>",
+            "module_3_title": "Secure & Reliable",
+            "module_3_body": "<p>Your data is protected with enterprise-grade security. Enjoy 99.9% uptime and automatic backups for peace of mind.</p>",
+            "title_size": 24,
+            "title_color": "#000000",
+            "title_hover_color": "#666666",
+            "arrow_color": "#000000",
+            "body_size": 16,
+            "body_color": "#666666",
+            "image_max_width": 400,
+            "image_aspect_ratio": "9/16",
+            "image_border_radius": 20,
+            "image_shadow": "0 8px 24px rgba(0,0,0,0.15)",
+            "download_text": "<p>Available on the App Store and Google Play</p>",
+            "download_text_size": 14,
+            "download_text_color": "#666666",
+            "app_store_link": "",
+            "google_play_link": "",
+            "store_icon_height": 40
+          },
+          "blocks": {}
+        },
+        "section-header": {
+          "type": "_section-header",
+          "static": true,
+          "settings": {
+            "class": "",
+            "subheading": "",
+            "title": "Header",
+            "content": "<p>Use this content to share information about your store and products.</p>",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "left",
+            "heading_size": "h3",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5deff5d_BryBCX"
+      ],
+      "name": "App introduction",
+      "settings": {
+        "color_scheme": "",
+        "add_vertical_spacing": true,
+        "add_horizontal_spacing": true
+      }
     }
   },
   "order": [
     "custom_liquid_EnKPWR",
     "custom_liquid_wxeCym",
-    "footer"
+    "footer",
+    "blocks_3jEXGR"
   ]
 }
