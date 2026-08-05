@@ -121,6 +121,8 @@
         "color_scheme": "",
         "allow_transparent_header": true,
         "image_size": "fill",
+        "image": "shopify://shop_images/works.jpg",
+        "mobile_image": "shopify://shop_images/works.jpg",
         "overlay_color": "#000000",
         "overlay_opacity": 20,
         "enable_sticky_content": false,
