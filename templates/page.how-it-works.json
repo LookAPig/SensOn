@@ -84,8 +84,8 @@
         "item_d3DcpG": {
           "type": "item",
           "settings": {
-            "title": "Download and Connect",
-            "description": "Download the SensOn App,  turn on Bluetooth, and choose the control mode you prefer.The app guides setup, connection, and control.",
+            "title": "Choose Interactive Audio",
+            "description": "Explore interactive audio stories created with women in mind.",
             "image_mobile": "shopify://shop_images/how_it_works1.jpg",
             "image_desktop": "shopify://shop_images/how_it_works1.jpg"
           }
@@ -93,8 +93,8 @@
         "item_HEh7UL": {
           "type": "item",
           "settings": {
-            "title": "Assemble and Fit",
-            "description": "Connect the magnetic components and adjust the setup for a secure, comfortable fit. SensOn S1 is designed to support hands-free use.",
+            "title": "Talk or text with AI characters",
+            "description": "",
             "image_mobile": "shopify://shop_images/how_it_works2.jpg",
             "image_desktop": "shopify://shop_images/how_it_works2.jpg"
           }
@@ -102,8 +102,8 @@
         "item_deU97j": {
           "type": "item",
           "settings": {
-            "title": "Choose and Begin",
-            "description": "The smart intimacy device respond in sync with the story, voice, and interaction. Choose the control mode you prefer and start your interactive audio experience.",
+            "title": "Sync SensOn S1",
+            "description": "",
             "image_mobile": "shopify://shop_images/how_it_works3.jpg",
             "image_desktop": "shopify://shop_images/how_it_works3.jpg"
           }
@@ -157,7 +157,7 @@
       ],
       "name": "Images card",
       "settings": {
-        "heading": "The SensOn S1 Experience in 3 Simple Steps"
+        "heading": "What You Can Do in theSensOn App"
       }
     },
     "blocks_G4yn7H": {
