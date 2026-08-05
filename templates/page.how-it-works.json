@@ -109,12 +109,51 @@
             "content_width": "sm"
           },
           "blocks": {}
+        },
+        "button_group_GwfQag": {
+          "type": "button-group",
+          "name": "t:blocks.button_group.name",
+          "settings": {},
+          "blocks": {
+            "button_wrA66X": {
+              "type": "button",
+              "name": "t:blocks.button.name",
+              "settings": {
+                "text": "Start in 3 Steps",
+                "icon": "",
+                "url": "",
+                "open_in_new_tab": false,
+                "style": "solid",
+                "background": "#F287EC",
+                "text_color": "#000000"
+              },
+              "blocks": {}
+            },
+            "button_rB9dRP": {
+              "type": "button",
+              "settings": {
+                "text": "Button",
+                "icon": "",
+                "url": "",
+                "open_in_new_tab": false,
+                "style": "solid",
+                "background": "",
+                "text_color": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "button_wrA66X",
+            "button_rB9dRP"
+          ]
         }
       },
       "block_order": [
         "subheading_g4e4jX",
         "heading_KeKUMp",
-        "rich_text_yHH9YG"
+        "rich_text_yHH9YG",
+        "button_group_GwfQag"
       ],
       "name": "t:sections.image_with_text_overlay.name",
       "settings": {
