@@ -85,14 +85,14 @@
         "subheading_g4e4jX": {
           "type": "subheading",
           "settings": {
-            "text": "Subheading"
+            "text": "How It Works"
           },
           "blocks": {}
         },
         "heading_KeKUMp": {
           "type": "heading",
           "settings": {
-            "text": "Image with text overlay",
+            "text": "How SensOn S1 Works",
             "pc_font_size": 40,
             "h5_font_size": 23,
             "pc_line_height": 1.2,
@@ -105,7 +105,7 @@
         "rich_text_yHH9YG": {
           "type": "rich-text",
           "settings": {
-            "text": "<p>Write some text about your products or your brand.</p>",
+            "text": "<p>An app-connected intimacy device that brings the SensOn App, AI companions,</p>",
             "content_width": "sm"
           },
           "blocks": {}
