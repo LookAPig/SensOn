@@ -119,47 +119,6 @@
         "heading": "The SensOn S1 Experience in 3 Simple Steps"
       }
     },
-    "img_cars_hQheEX": {
-      "type": "img-cars",
-      "blocks": {
-        "item_8GBApd": {
-          "type": "item",
-          "settings": {
-            "title": "Download and Connect",
-            "description": "Download the SensOn App,  turn on Bluetooth, and choose the control mode you prefer.The app guides setup, connection, and control.",
-            "image_mobile": "shopify://shop_images/how_it_works1.jpg",
-            "image_desktop": "shopify://shop_images/how_it_works1.jpg"
-          }
-        },
-        "item_R4HW7D": {
-          "type": "item",
-          "settings": {
-            "title": "Assemble and Fit",
-            "description": "Connect the magnetic components and adjust the setup for a secure, comfortable fit. SensOn S1 is designed to support hands-free use.",
-            "image_mobile": "shopify://shop_images/how_it_works2.jpg",
-            "image_desktop": "shopify://shop_images/how_it_works2.jpg"
-          }
-        },
-        "item_XjNHLy": {
-          "type": "item",
-          "settings": {
-            "title": "Choose and Begin",
-            "description": "The smart intimacy device respond in sync with the story, voice, and interaction. Choose the control mode you prefer and start your interactive audio experience.",
-            "image_mobile": "shopify://shop_images/how_it_works3.jpg",
-            "image_desktop": "shopify://shop_images/how_it_works3.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "item_8GBApd",
-        "item_R4HW7D",
-        "item_XjNHLy"
-      ],
-      "name": "Images card",
-      "settings": {
-        "heading": "What You Can Do in theSensOn App"
-      }
-    },
     "blocks_G4yn7H": {
       "type": "_blocks",
       "blocks": {
@@ -534,7 +493,6 @@
     "text_with_fixed_background_4BQcA8",
     "1769342421c8d5c13c",
     "img_cars_Mxtbjq",
-    "img_cars_hQheEX",
     "blocks_G4yn7H",
     "17693451417d23555f",
     "swiper_list_3BB8Hc",
