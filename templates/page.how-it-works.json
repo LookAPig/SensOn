@@ -37,7 +37,6 @@
       "block_order": [
         "title_beGCM7"
       ],
-      "disabled": true,
       "custom_css": [
         ".min-h-fill {min-height: 500px;}",
         "@media screen and (max-width: 768px) {.min-h-fill {min-height: 300px; }}"
@@ -72,7 +71,6 @@
           "blocks": {}
         }
       },
-      "disabled": true,
       "settings": {
         "color_scheme": "scheme-7",
         "add_vertical_spacing": false,
@@ -124,7 +122,7 @@
                 "url": "",
                 "open_in_new_tab": false,
                 "style": "solid",
-                "background": "#F287EC",
+                "background": "#f287ec",
                 "text_color": "#000000"
               },
               "blocks": {}
@@ -137,8 +135,8 @@
                 "url": "",
                 "open_in_new_tab": false,
                 "style": "solid",
-                "background": "#F287EC",
-                "text_color": "#FFFFFF"
+                "background": "#f287ec",
+                "text_color": "#ffffff"
               },
               "blocks": {}
             }
@@ -155,6 +153,7 @@
         "rich_text_yHH9YG",
         "button_group_GwfQag"
       ],
+      "disabled": true,
       "name": "t:sections.image_with_text_overlay.name",
       "settings": {
         "color_scheme": "",
@@ -206,6 +205,7 @@
         "item_HEh7UL",
         "item_deU97j"
       ],
+      "disabled": true,
       "name": "Images card",
       "settings": {
         "heading": "The SensOn S1 Experience in 3 Simple Steps"
@@ -285,7 +285,6 @@
       "block_order": [
         "step_section_7QfezR"
       ],
-      "disabled": true,
       "custom_css": [
         "[class^=\"ai-steps__step-title\"] {text-transform: none !important;}"
       ],
@@ -405,7 +404,6 @@
         "ai_gen_block_054164a_4Kha6n",
         "product_3_col_img_text_MpPMwA"
       ],
-      "disabled": true,
       "custom_css": [
         "[class^=\"ai-how-to-use-step-title\"] {text-transform: none !important;}",
         "[class^=\".ai-how-to-use-step-media-\"] {background-color: transparent;}"
@@ -467,7 +465,6 @@
         "slide_9jALpx",
         "slide_JjbfrQ"
       ],
-      "disabled": true,
       "name": "Custom Swiper",
       "settings": {
         "title": "Turn On Your Fantasy",
@@ -549,7 +546,6 @@
         "quize_result_YATcen",
         "item_WRaxCw"
       ],
-      "disabled": true,
       "name": "Custom Quize",
       "settings": {
         "bg": "shopify://shop_images/question_bg_18153c8d-d3e0-460b-9460-97696b85f146.jpg",
@@ -559,7 +555,6 @@
     },
     "reading_text_h9Dted": {
       "type": "reading-text",
-      "disabled": true,
       "name": "t:sections.reading_text.name",
       "settings": {
         "color_scheme": "scheme-7",
