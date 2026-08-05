@@ -107,8 +107,8 @@
         "ai_gen_block_5deff5d_BryBCX": {
           "type": "ai_gen_block_5deff5d",
           "settings": {
-            "background_color": "#ffffff",
-            "divider_color": "#e0e0e0",
+            "background_color": "#000000",
+            "divider_color": "#FFFFFF",
             "desktop_width_percent": 100,
             "module_1_title": "AI Mode",
             "module_1_body": "<p>Select AI Mode in the SensOn App and set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive audio, AI voice, and character interaction.</p>",
@@ -128,7 +128,7 @@
             "image_shadow": "0 8px 24px rgba(0,0,0,0.15)",
             "download_text": "",
             "download_text_size": 14,
-            "download_text_color": "#666666",
+            "download_text_color": "#FFFFFF",
             "app_store_link": "",
             "google_play_link": "",
             "store_icon_height": 40
@@ -157,11 +157,12 @@
       "block_order": [
         "ai_gen_block_5deff5d_BryBCX"
       ],
+      "disabled": true,
       "name": "App introduction",
       "settings": {
         "color_scheme": "scheme-7",
         "add_vertical_spacing": true,
-        "add_horizontal_spacing": true
+        "add_horizontal_spacing": false
       }
     }
   },
