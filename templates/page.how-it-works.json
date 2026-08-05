@@ -382,7 +382,13 @@
         "title_size": 32,
         "subtitle_size": 18,
         "title_size_mobile": 32,
-        "subtitle_size_mobile": 24
+        "subtitle_size_mobile": 24,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 30,
+        "desktop_padding_top": 60,
+        "desktop_padding_bottom": 40,
+        "button_label": "Listen More",
+        "button_link": ""
       }
     },
     "quize_T6yrTE": {
