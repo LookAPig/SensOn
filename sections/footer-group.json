@@ -159,7 +159,7 @@
       ],
       "name": "App introduction",
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-7",
         "add_vertical_spacing": true,
         "add_horizontal_spacing": true
       }
