@@ -37,6 +37,7 @@
       "block_order": [
         "title_beGCM7"
       ],
+      "disabled": true,
       "custom_css": [
         ".min-h-fill {min-height: 500px;}",
         "@media screen and (max-width: 768px) {.min-h-fill {min-height: 300px; }}"
@@ -76,6 +77,56 @@
         "color_scheme": "scheme-7",
         "add_vertical_spacing": false,
         "add_horizontal_spacing": false
+      }
+    },
+    "image_with_text_overlay_gdrnBr": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_g4e4jX": {
+          "type": "subheading",
+          "settings": {
+            "text": "Subheading"
+          },
+          "blocks": {}
+        },
+        "heading_KeKUMp": {
+          "type": "heading",
+          "settings": {
+            "text": "Image with text overlay",
+            "pc_font_size": 40,
+            "h5_font_size": 23,
+            "pc_line_height": 1.2,
+            "h5_line_height": 1.2,
+            "heading_size": "h3",
+            "html_tag": "p"
+          },
+          "blocks": {}
+        },
+        "rich_text_yHH9YG": {
+          "type": "rich-text",
+          "settings": {
+            "text": "<p>Write some text about your products or your brand.</p>",
+            "content_width": "sm"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "subheading_g4e4jX",
+        "heading_KeKUMp",
+        "rich_text_yHH9YG"
+      ],
+      "name": "t:sections.image_with_text_overlay.name",
+      "settings": {
+        "color_scheme": "",
+        "allow_transparent_header": true,
+        "image_size": "fill",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "enable_sticky_content": false,
+        "content_width": "md",
+        "desktop_text_position": "sm:place-self-center",
+        "mobile_text_position": "place-self-center"
       }
     },
     "img_cars_Mxtbjq": {
@@ -492,6 +543,7 @@
     "main",
     "text_with_fixed_background_4BQcA8",
     "1769342421c8d5c13c",
+    "image_with_text_overlay_gdrnBr",
     "img_cars_Mxtbjq",
     "blocks_G4yn7H",
     "17693451417d23555f",
