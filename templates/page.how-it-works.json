@@ -132,13 +132,13 @@
             "button_rB9dRP": {
               "type": "button",
               "settings": {
-                "text": "Button",
+                "text": "Choose Your Mode",
                 "icon": "",
                 "url": "",
                 "open_in_new_tab": false,
                 "style": "solid",
-                "background": "",
-                "text_color": ""
+                "background": "#F287EC",
+                "text_color": "#FFFFFF"
               },
               "blocks": {}
             }
