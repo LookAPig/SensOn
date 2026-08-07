@@ -310,7 +310,7 @@
       "name": "How it works banner",
       "settings": {
         "allow_transparent_header": true,
-        "disable_overlay": false,
+        "disable_overlay": true,
         "desktop_image": "shopify://shop_images/works1.jpg",
         "mobile_image": "shopify://shop_images/36e4d73bf8f328e5aa44651fcdd5af4a_2.webp",
         "desktop_height": "600px",
@@ -318,7 +318,7 @@
         "tag": "",
         "title": "One Seamless SensOn Experience",
         "description": "<p>SensOn combines AI fantasy, immersive audio, app control, and synchronized stimulation into one seamless experience. Connect, choose your mode, and let the moment unfold.<br/><br/></p>",
-        "button_width_desktop": 220,
+        "button_width_desktop": 280,
         "button_width_mobile": 240,
         "primary_button_text": "Shop Senson S1",
         "primary_button_link": "",
