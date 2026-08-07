@@ -1,0 +1,488 @@
+<style>
+  #shopify-section-{{ section.id }} .how_it_work_swiper {
+    --accent-color: {{ section.settings.accent_color }};
+    background: #000000;
+    color: #ffffff;
+    overflow: hidden;
+    padding: 72px 0 80px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .inner {
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 24px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .header {
+    margin-bottom: 38px;
+    max-width: 660px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .eyebrow,
+  #shopify-section-{{ section.id }} .how_it_work_swiper .step_label {
+    color: var(--accent-color);
+    font-weight: 600;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .eyebrow {
+    font-size: 18px;
+    line-height: 1.25;
+    margin: 0 0 14px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .section_title {
+    color: #ffffff;
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .section_description {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1.35;
+    margin-top: 18px;
+    max-width: 620px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .section_description p,
+  #shopify-section-{{ section.id }} .how_it_work_swiper .card_description p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .swiper {
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .swiper-wrapper {
+    align-items: flex-start;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .swiper-slide {
+    height: auto;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .image_wrap {
+    aspect-ratio: 1 / 1;
+    background: #1d1d1d;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .image,
+  #shopify-section-{{ section.id }} .how_it_work_swiper .placeholder {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .placeholder {
+    background: linear-gradient(135deg, #3c2c38, #161016);
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .card_content {
+    padding-top: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .step_label {
+    font-size: 15px;
+    line-height: 1.2;
+    margin: 0 0 5px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .card_title {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.18;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .title_line {
+    background: var(--accent-color);
+    height: 2px;
+    margin: 14px 0 14px;
+    width: 92px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .card_description {
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details {
+    background: #1d1d1d;
+    border-radius: 8px;
+    margin-top: 28px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details[open] {
+    background: #333333;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details_summary {
+    align-items: center;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    justify-content: space-between;
+    line-height: 1.25;
+    list-style: none;
+    min-height: 58px;
+    padding: 14px 18px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details_summary::-webkit-details-marker {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details_icon {
+    border-right: 2px solid var(--accent-color);
+    border-top: 2px solid var(--accent-color);
+    flex: 0 0 auto;
+    height: 9px;
+    margin-left: 16px;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    width: 9px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details[open] .details_icon {
+    transform: rotate(135deg);
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details_content {
+    border-top: 1px solid #777777;
+    color: #aaaaaa;
+    font-size: 13px;
+    line-height: 1.38;
+    margin: 0 12px;
+    padding: 12px 0 18px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details_content p {
+    margin: 0 0 14px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details_content p:last-child {
+    margin-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details_content strong {
+    color: #ffffff;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .how_it_work_swiper .swiper-wrapper {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      transform: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .swiper-slide {
+      margin: 0 !important;
+      width: auto !important;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .how_it_work_swiper {
+      padding: 42px 0 48px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .inner {
+      padding: 0 16px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .header {
+      margin-bottom: 28px;
+      max-width: 390px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .eyebrow {
+      font-size: 16px;
+      margin-bottom: 13px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .section_title {
+      font-size: 27px;
+      line-height: 1.02;
+      max-width: 390px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .section_description {
+      font-size: 16px;
+      line-height: 1.27;
+      margin-top: 17px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .swiper {
+      margin-right: -16px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      padding-right: 16px;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .swiper::-webkit-scrollbar {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .swiper-wrapper {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .swiper-slide {
+      flex: 0 0 320px;
+      scroll-snap-align: start;
+      width: 320px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .image_wrap {
+      height: 320px;
+      width: 320px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .card_content {
+      padding-top: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .card_title {
+      font-size: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .details {
+      margin-top: 28px;
+    }
+  }
+
+  @media screen and (max-width: 359px) {
+    #shopify-section-{{ section.id }} .how_it_work_swiper .swiper-slide {
+      flex-basis: calc(100vw - 32px);
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .swiper-slide,
+    #shopify-section-{{ section.id }} .how_it_work_swiper .image_wrap {
+      height: calc(100vw - 32px);
+      width: calc(100vw - 32px);
+    }
+  }
+</style>
+
+<section class="how_it_work_swiper" id="how-it-work-swiper-{{ section.id }}">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="section_description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <article class="swiper-slide" {{ block.shopify_attributes }}>
+            <div class="image_wrap">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1000
+                  | image_tag:
+                    class: 'image',
+                    loading: 'lazy',
+                    sizes: '(max-width: 749px) 320px, 33vw',
+                    widths: '320, 480, 640, 800, 1000',
+                    alt: block.settings.title
+                }}
+              {%- else -%}
+                <div class="placeholder"></div>
+              {%- endif -%}
+            </div>
+
+            <div class="card_content">
+              {%- if block.settings.subtitle != blank -%}
+                <p class="step_label">{{ block.settings.subtitle | escape }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.title != blank -%}
+                <h3 class="card_title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+
+              <div class="title_line"></div>
+
+              {%- if block.settings.description != blank -%}
+                <div class="card_description">{{ block.settings.description }}</div>
+              {%- endif -%}
+
+              {%- if block.settings.details_title != blank and block.settings.details_content != blank -%}
+                <details class="details">
+                  <summary class="details_summary">
+                    <span>{{ block.settings.details_title | escape }}</span>
+                    <span class="details_icon" aria-hidden="true"></span>
+                  </summary>
+                  <div class="details_content">{{ block.settings.details_content }}</div>
+                </details>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const sectionId = "how-it-work-swiper-{{ section.id }}";
+
+    if (window.Shopify?.designMode) {
+      document.addEventListener("shopify:block:select", (event) => {
+        const selectedSlide = event.target.closest(`#${sectionId} .swiper-slide`);
+
+        if (!selectedSlide || window.innerWidth >= 750) {
+          return;
+        }
+
+        selectedSlide.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "start"
+        });
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "How it works swiper",
+  "tag": "section",
+  "class": "shopify-section--how-it-works-swiper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题",
+      "default": "Start Simple"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "主标题",
+      "default": "The SensOn S1 Experience in 3 Simple Steps"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>A clearer flow helps you understand the full experience quickly, while detailed setup guidance remains available when you need it.</p>"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "强调色",
+      "default": "#f287ec"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "步骤",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "图片副标题",
+          "default": "Step 01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "图片主标题",
+          "default": "Download and Connect"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "图片描述",
+          "default": "<p>Download the SensOn App, turn on Bluetooth, and choose the control mode you prefer.</p>"
+        },
+        {
+          "type": "text",
+          "id": "details_title",
+          "label": "下拉菜单标题",
+          "default": "Need more setup details?"
+        },
+        {
+          "type": "richtext",
+          "id": "details_content",
+          "label": "下拉菜单内容",
+          "default": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "How it works swiper",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "step"
+        },
+        {
+          "type": "step",
+          "settings": {
+            "subtitle": "Step 02",
+            "title": "Assemble and Fit",
+            "description": "<p>Connect the magnetic components and adjust the setup for a secure, comfortable fit.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "subtitle": "Step 03",
+            "title": "Choose and Begin",
+            "description": "<p>Choose the control mode you prefer and start your interactive experience.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
