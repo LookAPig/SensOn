@@ -7,6 +7,8 @@
   #shopify-section-{{ section.id }} .how_it_work_banner {
     --banner-height: {{ section.settings.desktop_height }};
     --banner-mobile-height: {{ section.settings.mobile_height }};
+    --button-width: {{ section.settings.button_width_desktop }}px;
+    --button-mobile-width: {{ section.settings.button_width_mobile }}px;
     background: #261334;
     color: #ffffff;
     min-height: var(--banner-height);
@@ -28,16 +30,18 @@
     object-position: center;
   }
 
-  #shopify-section-{{ section.id }} .how_it_work_banner .media::after {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.80) 8.37%, rgba(0, 0, 0, 0.00) 100%);
-    content: "";
-    height: 500px;
-    left: 0;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
+  {%- unless section.settings.disable_overlay -%}
+    #shopify-section-{{ section.id }} .how_it_work_banner .media::after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.80) 8.37%, rgba(0, 0, 0, 0.00) 100%);
+      content: "";
+      height: 500px;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  {%- endunless -%}
 
   #shopify-section-{{ section.id }} .how_it_work_banner .mobile_image {
     display: none;
@@ -78,7 +82,10 @@
     font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 1.15;
-    margin: 0;
+    margin: 0 auto;
+    max-width: 100%;
+    text-align: center;
+    word-wrap: break-word;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_banner .description {
@@ -98,7 +105,7 @@
     flex-direction: column;
     gap: 16px;
     margin-top: 28px;
-    width: 220px;
+    width: var(--button-width);
   }
 
   #shopify-section-{{ section.id }} .how_it_work_banner .button {
@@ -160,7 +167,6 @@
       font-size: 28px;
       letter-spacing: -0.025em;
       line-height: 1.12;
-      white-space: nowrap;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_banner .description {
@@ -173,7 +179,7 @@
     #shopify-section-{{ section.id }} .how_it_work_banner .buttons {
       gap: 15px;
       margin-top: 22px;
-      width: 200px;
+      width: var(--button-mobile-width);
     }
 
     #shopify-section-{{ section.id }} .how_it_work_banner .button {
@@ -232,7 +238,7 @@
     {%- endif -%}
 
     {%- if section.settings.title != blank -%}
-      <h1 class="title">{{ section.settings.title | escape }}</h1>
+      <h1 class="title">{{ section.settings.title | escape | newline_to_br }}</h1>
     {%- endif -%}
 
     {%- if section.settings.description != blank -%}
@@ -271,6 +277,12 @@
       "id": "allow_transparent_header",
       "label": "启用透明页头",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_overlay",
+      "label": "取消遮罩层",
+      "default": false
     },
     {
       "type": "header",
@@ -346,10 +358,11 @@
       "default": "How It Works"
     },
     {
-      "type": "text",
+      "type": "textarea",
       "id": "title",
       "label": "标题",
-      "default": "How SensOn S1 Works"
+      "default": "How SensOn S1 Works",
+      "info": "支持换行；超出内容区最大宽度时自动折行并居中。"
     },
     {
       "type": "richtext",
@@ -360,6 +373,26 @@
     {
       "type": "header",
       "content": "按钮"
+    },
+    {
+      "type": "range",
+      "id": "button_width_desktop",
+      "label": "电脑端按钮宽度",
+      "min": 120,
+      "max": 400,
+      "step": 4,
+      "unit": "px",
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "button_width_mobile",
+      "label": "移动端按钮宽度",
+      "min": 120,
+      "max": 360,
+      "step": 4,
+      "unit": "px",
+      "default": 200
     },
     {
       "type": "text",
