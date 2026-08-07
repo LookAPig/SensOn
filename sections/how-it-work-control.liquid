@@ -89,11 +89,16 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .desktop_item::after {
-    background: linear-gradient(180deg, transparent 35%, rgb(0 0 0 / 0.86) 100%);
+    background: linear-gradient(180deg, transparent 30%, rgb(0 0 0 / 0.28) 56%, rgb(0 0 0 / 0.9) 100%);
     content: "";
     inset: 0;
     pointer-events: none;
     position: absolute;
+    transition: background 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_item.is_active::after {
+    background: linear-gradient(180deg, transparent 22%, rgb(0 0 0 / 0.38) 52%, rgb(0 0 0 / 0.94) 100%);
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .desktop_button {
@@ -113,11 +118,13 @@
 
   #shopify-section-{{ section.id }} .how_it_work_control .desktop_content {
     max-width: 500px;
+    position: relative;
     width: 100%;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .item_title {
     color: #ffffff;
+    display: block;
     font-size: clamp(20px, 1.7vw, 28px);
     font-weight: 600;
     line-height: 1.15;
@@ -125,25 +132,42 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .desktop_accordion .item_description {
-    display: grid;
+    bottom: calc(100% + 14px);
+    display: block;
     font-size: 16px;
-    grid-template-rows: 0fr;
+    left: 0;
     line-height: 1.4;
     opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(18px);
     transition:
-      grid-template-rows 0.45s ease,
-      margin-top 0.45s ease,
-      opacity 0.3s ease;
+      opacity 0.18s ease,
+      transform 0.28s cubic-bezier(0.4, 0, 1, 1),
+      visibility 0s linear 0.28s;
+    visibility: hidden;
+    width: min(100%, 460px);
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .desktop_accordion .description_inner {
-    overflow: hidden;
+    clip-path: inset(100% 0 0);
+    display: block;
+    transition: clip-path 0.28s cubic-bezier(0.4, 0, 1, 1);
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .desktop_item.is_active .item_description {
-    grid-template-rows: 1fr;
-    margin-top: 12px;
     opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.32s ease 0.24s,
+      transform 0.48s cubic-bezier(0.22, 1, 0.36, 1) 0.2s,
+      visibility 0s linear 0.2s;
+    visibility: visible;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_item.is_active .description_inner {
+    clip-path: inset(0 0 0);
+    transition: clip-path 0.48s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .mobile_control {
@@ -281,7 +305,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     #shopify-section-{{ section.id }} .how_it_work_control .desktop_item,
+    #shopify-section-{{ section.id }} .how_it_work_control .desktop_item::after,
     #shopify-section-{{ section.id }} .how_it_work_control .item_description,
+    #shopify-section-{{ section.id }} .how_it_work_control .description_inner,
     #shopify-section-{{ section.id }} .how_it_work_control .mobile_image,
     #shopify-section-{{ section.id }} .how_it_work_control .mobile_placeholder,
     #shopify-section-{{ section.id }} .how_it_work_control .icon,
