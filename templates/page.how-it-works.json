@@ -36,6 +36,53 @@
         "secondary_button_link": ""
       }
     },
+    "how_it_work_swiper_m8wRHg": {
+      "type": "how-it-work-swiper",
+      "blocks": {
+        "step_8pdeYT": {
+          "type": "step",
+          "settings": {
+            "subtitle": "Step 01",
+            "title": "Download and Connect",
+            "description": "<p>Download the SensOn App, turn on Bluetooth, and choose the control mode you prefer.</p>",
+            "details_title": "Need more setup details?",
+            "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
+          }
+        },
+        "step_T4m9w9": {
+          "type": "step",
+          "settings": {
+            "subtitle": "Step 02",
+            "title": "Assemble and Fit",
+            "description": "<p>Connect the magnetic components and adjust the setup for a secure, comfortable fit.</p>",
+            "details_title": "Need more setup details?",
+            "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
+          }
+        },
+        "step_H9rGRe": {
+          "type": "step",
+          "settings": {
+            "subtitle": "Step 03",
+            "title": "Choose and Begin",
+            "description": "<p>Choose the control mode you prefer and start your interactive experience.</p>",
+            "details_title": "Need more setup details?",
+            "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_8pdeYT",
+        "step_T4m9w9",
+        "step_H9rGRe"
+      ],
+      "name": "How it works swiper",
+      "settings": {
+        "subtitle": "Start Simple",
+        "title": "The SensOn S1 Experience in 3 Simple Steps",
+        "description": "<p>A clearer flow helps you understand the full experience quickly, while detailed setup guidance remains available when you need it.</p>",
+        "accent_color": "#f287ec"
+      }
+    },
     "text_with_fixed_background_4BQcA8": {
       "type": "text-with-fixed-background",
       "blocks": {
@@ -90,6 +137,7 @@
           "blocks": {}
         }
       },
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-7",
         "add_vertical_spacing": false,
@@ -304,6 +352,7 @@
       "block_order": [
         "step_section_7QfezR"
       ],
+      "disabled": true,
       "custom_css": [
         "[class^=\"ai-steps__step-title\"] {text-transform: none !important;}"
       ],
@@ -423,6 +472,7 @@
         "ai_gen_block_054164a_4Kha6n",
         "product_3_col_img_text_MpPMwA"
       ],
+      "disabled": true,
       "custom_css": [
         "[class^=\"ai-how-to-use-step-title\"] {text-transform: none !important;}",
         "[class^=\".ai-how-to-use-step-media-\"] {background-color: transparent;}"
@@ -565,6 +615,7 @@
         "quize_result_YATcen",
         "item_WRaxCw"
       ],
+      "disabled": true,
       "name": "Custom Quize",
       "settings": {
         "bg": "shopify://shop_images/question_bg_18153c8d-d3e0-460b-9460-97696b85f146.jpg",
@@ -574,6 +625,7 @@
     },
     "reading_text_h9Dted": {
       "type": "reading-text",
+      "disabled": true,
       "name": "t:sections.reading_text.name",
       "settings": {
         "color_scheme": "scheme-7",
@@ -597,6 +649,7 @@
   "order": [
     "main",
     "how_it_work_banner_ErFRkT",
+    "how_it_work_swiper_m8wRHg",
     "text_with_fixed_background_4BQcA8",
     "1769342421c8d5c13c",
     "image_with_text_overlay_gdrnBr",
