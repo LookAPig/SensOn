@@ -340,21 +340,21 @@
               {%- if block.settings.description != blank -%}
                 <div class="card_description">{{ block.settings.description }}</div>
               {%- endif -%}
-
-              {%- if block.settings.details_title != blank and block.settings.details_content != blank -%}
-                <details class="details">
-                  <summary class="details_summary">
-                    <span>{{ block.settings.details_title | escape }}</span>
-                    <span class="details_icon" aria-hidden="true"></span>
-                  </summary>
-                  <div class="details_content">{{ block.settings.details_content }}</div>
-                </details>
-              {%- endif -%}
             </div>
           </article>
         {%- endfor -%}
       </div>
     </div>
+
+    {%- if section.settings.details_title != blank and section.settings.details_content != blank -%}
+      <details class="details">
+        <summary class="details_summary">
+          <span>{{ section.settings.details_title | escape }}</span>
+          <span class="details_icon" aria-hidden="true"></span>
+        </summary>
+        <div class="details_content">{{ section.settings.details_content }}</div>
+      </details>
+    {%- endif -%}
   </div>
 </section>
 
@@ -412,6 +412,22 @@
       "id": "accent_color",
       "label": "强调色",
       "default": "#f287ec"
+    },
+    {
+      "type": "header",
+      "content": "下拉菜单"
+    },
+    {
+      "type": "text",
+      "id": "details_title",
+      "label": "下拉菜单标题",
+      "default": "Need more setup details?"
+    },
+    {
+      "type": "richtext",
+      "id": "details_content",
+      "label": "下拉菜单内容",
+      "default": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
     }
   ],
   "blocks": [
@@ -441,18 +457,6 @@
           "id": "description",
           "label": "图片描述",
           "default": "<p>Download the SensOn App, turn on Bluetooth, and choose the control mode you prefer.</p>"
-        },
-        {
-          "type": "text",
-          "id": "details_title",
-          "label": "下拉菜单标题",
-          "default": "Need more setup details?"
-        },
-        {
-          "type": "richtext",
-          "id": "details_content",
-          "label": "下拉菜单内容",
-          "default": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
         }
       ]
     }
