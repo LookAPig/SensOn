@@ -173,21 +173,21 @@
         "control_am6mT4": {
           "type": "control",
           "settings": {
-            "title": "AI Mode",
-            "description": "<p>Select AI Mode in the SensOn App and set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive audio, AI voice, and character interaction.</p>"
+            "title": "Smart Intimacy Design",
+            "description": "<p>More than a basic smart vibrator, SensOn S1 is built around content-led interaction and synchronized control.<br/><br/></p>"
           }
         },
         "control_JkYpKM": {
           "type": "control",
           "settings": {
-            "title": "Manual Mode",
+            "title": "AI-powered interaction",
             "description": "<p>Control SensOn S1 directly in the app and adjust the experience in real time.</p>"
           }
         },
         "control_NXhiL8": {
           "type": "control",
           "settings": {
-            "title": "Physical Buttons",
+            "title": "Bluetooth, But Deeper",
             "description": "<p>Use the on-device buttons for simple, immediate control whenever you prefer.</p>"
           }
         }
