@@ -257,21 +257,66 @@
         "mobile_padding_bottom": 48
       }
     },
+    "how_it_work_policy_NMzHPd": {
+      "type": "how-it-work-policy",
+      "blocks": {
+        "policy_FkTRaY": {
+          "type": "policy",
+          "settings": {
+            "icon": "privacy",
+            "title": "Private by design",
+            "description": "<p>Built for private self-care moments with simple app and button control.</p>"
+          }
+        },
+        "policy_hqBGxU": {
+          "type": "policy",
+          "settings": {
+            "icon": "comfort",
+            "title": "Comfort-focused setup",
+            "description": "<p>Magnetic components and adjustable fit help SensOn S1 feel easier to prepare and use.</p>"
+          }
+        },
+        "policy_iNyD66": {
+          "type": "policy",
+          "settings": {
+            "icon": "support",
+            "title": "Support when needed",
+            "description": "<p>Use the FAQ for details about privacy, safety, cleaning, connectivity, and support.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "policy_FkTRaY",
+        "policy_hqBGxU",
+        "policy_iNyD66"
+      ],
+      "name": "How it works policy",
+      "settings": {
+        "background_color": "#000000",
+        "text_color": "#ffffff",
+        "description_color": "#b3b3b3",
+        "accent_color": "#f287ec",
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 42,
+        "mobile_padding_bottom": 48
+      }
+    },
     "how_it_work_banner_P6By9c": {
       "type": "how-it-work-banner",
       "name": "How it works banner",
       "settings": {
         "allow_transparent_header": true,
-        "desktop_image": "shopify://shop_images/works.jpg",
-        "mobile_image": "shopify://shop_images/works.jpg",
+        "desktop_image": "shopify://shop_images/works1.jpg",
+        "mobile_image": "shopify://shop_images/36e4d73bf8f328e5aa44651fcdd5af4a_2.webp",
         "desktop_height": "600px",
         "mobile_height": "480px",
-        "tag": "How It Works",
-        "title": "How SensOn S1 Works",
-        "description": "<p>An app-connected intimacy device that brings<br/>the SensOn App, AI companions,</p>",
-        "primary_button_text": "Start in 3 Steps",
+        "tag": "",
+        "title": "One Seamless SensOn Experience",
+        "description": "<p>SensOn combines AI fantasy, immersive audio, app control, and synchronized stimulation into one seamless experience. Connect, choose your mode, and let the moment unfold.<br/><br/></p>",
+        "primary_button_text": "Shop Senson S1",
         "primary_button_link": "",
-        "secondary_button_text": "Choose Your Mode",
+        "secondary_button_text": "Learn More About The App",
         "secondary_button_link": ""
       }
     },
@@ -847,6 +892,7 @@
     "how_it_work_app_4LghmF",
     "how_it_work_control_EYzwxq",
     "how_it_work_card_4HVPha",
+    "how_it_work_policy_NMzHPd",
     "how_it_work_banner_P6By9c",
     "text_with_fixed_background_4BQcA8",
     "1769342421c8d5c13c",
