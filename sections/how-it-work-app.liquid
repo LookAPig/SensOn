@@ -1,0 +1,575 @@
+<style>
+  #shopify-section-{{ section.id }} .how_it_work_app {
+    --accent-color: {{ section.settings.accent_color }};
+    background: #000000;
+    color: #ffffff;
+    overflow: hidden;
+    padding: {{ section.settings.desktop_padding_top }}px 0 {{ section.settings.desktop_padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .inner {
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 24px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .header {
+    margin-bottom: 40px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .eyebrow {
+    color: var(--accent-color);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 14px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .section_title {
+    color: #ffffff;
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .section_description {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1.35;
+    margin-top: 18px;
+    max-width: 620px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .section_description p,
+  #shopify-section-{{ section.id }} .how_it_work_app .slide_description p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .carousel {
+    margin: 0 auto;
+    max-width: 1100px;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .viewport {
+    margin: 0 auto;
+    max-width: 760px;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .track {
+    align-items: flex-start;
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .slide {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .image_wrap {
+    aspect-ratio: 3 / 4;
+    background: #282828;
+    border-radius: 12px;
+    margin: 0 auto;
+    max-width: 460px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .image,
+  #shopify-section-{{ section.id }} .how_it_work_app .placeholder {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .placeholder {
+    background: linear-gradient(135deg, #51384b, #171117);
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .slide_content {
+    margin: 30px auto 0;
+    max-width: 650px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .slide_title {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .title_line {
+    background: var(--accent-color);
+    height: 2px;
+    margin: 12px 0 14px;
+    width: 76px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .slide_description {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .arrow {
+    align-items: center;
+    background: #3f3f42;
+    border: 0;
+    border-radius: 50%;
+    color: var(--accent-color);
+    cursor: pointer;
+    display: flex;
+    height: 44px;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    top: 307px;
+    transform: translateY(-50%);
+    transition:
+      background 0.2s ease,
+      opacity 0.2s ease;
+    width: 44px;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .arrow:hover {
+    background: #555558;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .arrow:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .arrow[disabled] {
+    cursor: default;
+    opacity: 0.35;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .arrow_prev {
+    left: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .arrow_next {
+    right: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .arrow_icon {
+    border-right: 1.5px solid currentcolor;
+    border-top: 1.5px solid currentcolor;
+    display: block;
+    height: 9px;
+    width: 9px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .arrow_prev .arrow_icon {
+    margin-left: 4px;
+    transform: rotate(-135deg);
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .arrow_next .arrow_icon {
+    margin-right: 4px;
+    transform: rotate(45deg);
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .how_it_work_app {
+      padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .inner {
+      padding: 0 14px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .header {
+      margin-bottom: 23px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .eyebrow {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .section_title {
+      font-size: 23px;
+      line-height: 1.02;
+      max-width: 330px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .section_description {
+      font-size: 14px;
+      line-height: 1.17;
+      margin-top: 14px;
+      max-width: 330px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .viewport {
+      max-width: none;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .image_wrap {
+      border-radius: 10px;
+      max-width: min(61.2vw, 260px);
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .slide_content {
+      margin-top: 31px;
+      max-width: none;
+      padding: 0 5px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .slide_title {
+      font-size: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .title_line {
+      margin: 10px 0 13px;
+      width: 76px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .slide_description {
+      font-size: 14px;
+      line-height: 1.24;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .arrow {
+      height: 28px;
+      top: min(40.8vw, 173px);
+      width: 28px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .arrow_prev {
+      left: 0;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .arrow_next {
+      right: 0;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .arrow_icon {
+      height: 7px;
+      width: 7px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .how_it_work_app .track {
+      transition: none;
+    }
+  }
+</style>
+
+<section class="how_it_work_app" id="how-it-work-app-{{ section.id }}">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="section_description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="carousel">
+        <div
+          class="viewport"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="{{ section.settings.title | default: 'SensOn App' | escape }}"
+          tabindex="0"
+        >
+          <div class="track">
+            {%- for block in section.blocks -%}
+              <article
+                class="slide"
+                data-app-slide="{{ forloop.index0 }}"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="{{ forloop.index }} / {{ forloop.length }}"
+                aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                <div class="image_wrap">
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 1200
+                      | image_tag:
+                        class: 'image',
+                        loading: 'lazy',
+                        sizes: '(max-width: 749px) 61vw, 460px',
+                        widths: '240, 320, 460, 640, 800, 1000, 1200',
+                        alt: block.settings.title
+                    }}
+                  {%- else -%}
+                    <div class="placeholder"></div>
+                  {%- endif -%}
+                </div>
+
+                <div class="slide_content">
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="slide_title">{{ block.settings.title | escape }}</h3>
+                  {%- endif -%}
+
+                  <div class="title_line"></div>
+
+                  {%- if block.settings.description != blank -%}
+                    <div class="slide_description">{{ block.settings.description }}</div>
+                  {%- endif -%}
+                </div>
+              </article>
+            {%- endfor -%}
+          </div>
+        </div>
+
+        <button class="arrow arrow_prev" type="button" aria-label="上一张">
+          <span class="arrow_icon" aria-hidden="true"></span>
+        </button>
+        <button class="arrow arrow_next" type="button" aria-label="下一张">
+          <span class="arrow_icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.querySelector("#how-it-work-app-{{ section.id }}");
+
+    if (!section || section.dataset.carouselInitialized === "true") {
+      return;
+    }
+
+    section.dataset.carouselInitialized = "true";
+
+    const track = section.querySelector(".track");
+    const viewport = section.querySelector(".viewport");
+    const slides = Array.from(section.querySelectorAll("[data-app-slide]"));
+    const previousButton = section.querySelector(".arrow_prev");
+    const nextButton = section.querySelector(".arrow_next");
+
+    if (!track || !viewport || slides.length === 0) {
+      return;
+    }
+
+    let activeIndex = 0;
+    let touchStartX = 0;
+
+    const showSlide = (index) => {
+      activeIndex = (index + slides.length) % slides.length;
+      track.style.transform = `translate3d(-${activeIndex * 100}%, 0, 0)`;
+
+      slides.forEach((slide, slideIndex) => {
+        slide.setAttribute("aria-hidden", slideIndex === activeIndex ? "false" : "true");
+      });
+    };
+
+    const hasMultipleSlides = slides.length > 1;
+    previousButton.disabled = !hasMultipleSlides;
+    nextButton.disabled = !hasMultipleSlides;
+
+    previousButton.addEventListener("click", () => {
+      showSlide(activeIndex - 1);
+    });
+
+    nextButton.addEventListener("click", () => {
+      showSlide(activeIndex + 1);
+    });
+
+    viewport.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        showSlide(activeIndex - 1);
+      }
+
+      if (event.key === "ArrowRight") {
+        showSlide(activeIndex + 1);
+      }
+    });
+
+    viewport.addEventListener(
+      "touchstart",
+      (event) => {
+        touchStartX = event.touches[0].clientX;
+      },
+      { passive: true }
+    );
+
+    viewport.addEventListener(
+      "touchend",
+      (event) => {
+        const touchDistance = event.changedTouches[0].clientX - touchStartX;
+
+        if (Math.abs(touchDistance) < 45) {
+          return;
+        }
+
+        showSlide(touchDistance > 0 ? activeIndex - 1 : activeIndex + 1);
+      },
+      { passive: true }
+    );
+
+    if (window.Shopify && window.Shopify.designMode) {
+      document.addEventListener("shopify:block:select", (event) => {
+        const selectedSlide = event.target.closest("[data-app-slide]");
+
+        if (selectedSlide && section.contains(selectedSlide)) {
+          showSlide(Number(selectedSlide.dataset.appSlide));
+        }
+      });
+    }
+
+    showSlide(0);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "How it works app",
+  "tag": "section",
+  "class": "shopify-section--how-it-works-app",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题",
+      "default": "SensOn App"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "主标题",
+      "default": "What You Can Do in the SensOn App"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>The SensOn App is an AI intimacy app where AI fantasy, interactive audio, and device control come together.</p>"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "强调色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "header",
+      "content": "模块间距"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "label": "PC 端顶部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "label": "PC 端底部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "移动端顶部间距",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "移动端底部间距",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "app_feature",
+      "name": "App 功能",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片",
+          "info": "建议使用 3:4 的竖版图片。"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "Choose Interactive Audio"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "描述",
+          "default": "<p>Explore interactive audio stories created with women in mind.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "How it works app",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "app_feature"
+        },
+        {
+          "type": "app_feature",
+          "settings": {
+            "title": "Explore AI Fantasy",
+            "description": "<p>Discover immersive AI characters and experiences designed around your preferences.</p>"
+          }
+        },
+        {
+          "type": "app_feature",
+          "settings": {
+            "title": "Control Your Device",
+            "description": "<p>Connect SensOn S1 and adjust your experience directly from the app.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
