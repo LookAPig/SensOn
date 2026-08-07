@@ -18,6 +18,24 @@
         "content_width": "md"
       }
     },
+    "how_it_work_banner_ErFRkT": {
+      "type": "how-it-work-banner",
+      "name": "How it works banner",
+      "settings": {
+        "allow_transparent_header": true,
+        "desktop_image": "shopify://shop_images/works.jpg",
+        "mobile_image": "shopify://shop_images/works.jpg",
+        "desktop_height": "100svh",
+        "mobile_height": "636px",
+        "tag": "How It Works",
+        "title": "How SensOn S1 Works",
+        "description": "<p>An app-connected intimacy device that brings<br/>the SensOn App, AI companions,</p>",
+        "primary_button_text": "Start in 3 Steps",
+        "primary_button_link": "",
+        "secondary_button_text": "Choose Your Mode",
+        "secondary_button_link": ""
+      }
+    },
     "text_with_fixed_background_4BQcA8": {
       "type": "text-with-fixed-background",
       "blocks": {
@@ -37,6 +55,7 @@
       "block_order": [
         "title_beGCM7"
       ],
+      "disabled": true,
       "custom_css": [
         ".min-h-fill {min-height: 500px;}",
         "@media screen and (max-width: 768px) {.min-h-fill {min-height: 300px; }}"
@@ -577,6 +596,7 @@
   },
   "order": [
     "main",
+    "how_it_work_banner_ErFRkT",
     "text_with_fixed_background_4BQcA8",
     "1769342421c8d5c13c",
     "image_with_text_overlay_gdrnBr",
