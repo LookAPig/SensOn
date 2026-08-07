@@ -44,9 +44,7 @@
           "settings": {
             "subtitle": "Step 01",
             "title": "Download and Connect",
-            "description": "<p>Download the SensOn App, turn on Bluetooth, and choose the control mode you prefer.</p>",
-            "details_title": "Need more setup details?",
-            "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
+            "description": "<p>Download the SensOn App, turn on Bluetooth, and choose the control mode you prefer.</p>"
           }
         },
         "step_T4m9w9": {
@@ -54,9 +52,7 @@
           "settings": {
             "subtitle": "Step 02",
             "title": "Assemble and Fit",
-            "description": "<p>Connect the magnetic components and adjust the setup for a secure, comfortable fit.</p>",
-            "details_title": "Need more setup details?",
-            "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
+            "description": "<p>Connect the magnetic components and adjust the setup for a secure, comfortable fit.</p>"
           }
         },
         "step_H9rGRe": {
@@ -64,9 +60,7 @@
           "settings": {
             "subtitle": "Step 03",
             "title": "Choose and Begin",
-            "description": "<p>Choose the control mode you prefer and start your interactive experience.</p>",
-            "details_title": "Need more setup details?",
-            "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
+            "description": "<p>Choose the control mode you prefer and start your interactive experience.</p>"
           }
         }
       },
@@ -80,6 +74,46 @@
         "subtitle": "Start Simple",
         "title": "The SensOn S1 Experience in 3 Simple Steps",
         "description": "<p>A clearer flow helps you understand the full experience quickly, while detailed setup guidance remains available when you need it.</p>",
+        "accent_color": "#f287ec",
+        "details_title": "Need more setup details?",
+        "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
+      }
+    },
+    "how_it_work_control_F7F6LC": {
+      "type": "how-it-work-control",
+      "blocks": {
+        "control_pJ996X": {
+          "type": "control",
+          "settings": {
+            "title": "AI Mode",
+            "description": "<p>Select AI Mode in the SensOn App and set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive audio, AI voice, and character interaction.</p>"
+          }
+        },
+        "control_pDDqit": {
+          "type": "control",
+          "settings": {
+            "title": "Manual Mode",
+            "description": "<p>Control SensOn S1 directly in the app and adjust the experience in real time.</p>"
+          }
+        },
+        "control_4LfLrp": {
+          "type": "control",
+          "settings": {
+            "title": "Physical Buttons",
+            "description": "<p>Use the on-device buttons for simple, immediate control whenever you prefer.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "control_pJ996X",
+        "control_pDDqit",
+        "control_4LfLrp"
+      ],
+      "name": "How it works control",
+      "settings": {
+        "subtitle": "Control Modes",
+        "title": "Choose How You Control SensOn S1",
+        "description": "<p>SensOn S1 gives you flexible ways to control the experience, whether you want AI-powered response, direct app control, or simple on-device buttons.</p>",
         "accent_color": "#f287ec"
       }
     },
@@ -650,6 +684,7 @@
     "main",
     "how_it_work_banner_ErFRkT",
     "how_it_work_swiper_m8wRHg",
+    "how_it_work_control_F7F6LC",
     "text_with_fixed_background_4BQcA8",
     "1769342421c8d5c13c",
     "image_with_text_overlay_gdrnBr",
