@@ -167,6 +167,48 @@
         "mobile_padding_bottom": 48
       }
     },
+    "how_it_work_control_EYzwxq": {
+      "type": "how-it-work-control",
+      "blocks": {
+        "control_am6mT4": {
+          "type": "control",
+          "settings": {
+            "title": "Smart Intimacy Design",
+            "description": "<p>More than a basic smart vibrator, SensOn S1 is built around content-led interaction and synchronized control.<br/><br/></p>"
+          }
+        },
+        "control_JkYpKM": {
+          "type": "control",
+          "settings": {
+            "title": "AI-powered interaction",
+            "description": "<p>Control SensOn S1 directly in the app and adjust the experience in real time.</p>"
+          }
+        },
+        "control_NXhiL8": {
+          "type": "control",
+          "settings": {
+            "title": "Bluetooth, But Deeper",
+            "description": "<p>Use the on-device buttons for simple, immediate control whenever you prefer.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "control_am6mT4",
+        "control_JkYpKM",
+        "control_NXhiL8"
+      ],
+      "name": "How it works control",
+      "settings": {
+        "subtitle": "Why It Feels Different",
+        "title": "Designed Around Content, Control, and Response",
+        "description": "<p>Compared with many connected sex toys or a basic Bluetooth vibrator, it is built around content-led interaction, AI companion response, and synchronized control.</p>",
+        "accent_color": "#f287ec",
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 42,
+        "mobile_padding_bottom": 48
+      }
+    },
     "text_with_fixed_background_4BQcA8": {
       "type": "text-with-fixed-background",
       "blocks": {
@@ -737,6 +779,7 @@
     "how_it_work_swiper_m8wRHg",
     "how_it_work_control_F7F6LC",
     "how_it_work_app_4LghmF",
+    "how_it_work_control_EYzwxq",
     "text_with_fixed_background_4BQcA8",
     "1769342421c8d5c13c",
     "image_with_text_overlay_gdrnBr",
