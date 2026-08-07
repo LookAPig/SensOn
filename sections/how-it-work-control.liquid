@@ -1,0 +1,531 @@
+<style>
+  #shopify-section-{{ section.id }} .how_it_work_control {
+    --accent-color: {{ section.settings.accent_color }};
+    background: #000000;
+    color: #ffffff;
+    overflow: hidden;
+    padding: 72px 0 80px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .inner {
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 24px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .header {
+    margin-bottom: 38px;
+    max-width: 660px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .eyebrow {
+    color: var(--accent-color);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 14px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .section_title {
+    color: #ffffff;
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .section_description {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1.35;
+    margin-top: 18px;
+    max-width: 620px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .section_description p,
+  #shopify-section-{{ section.id }} .how_it_work_control .item_description p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_accordion {
+    display: flex;
+    gap: 16px;
+    height: clamp(420px, 42vw, 620px);
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_item {
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+    transition: flex-grow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_item.is_active {
+    flex-grow: 2.2;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_image,
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_placeholder {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_placeholder,
+  #shopify-section-{{ section.id }} .how_it_work_control .mobile_placeholder {
+    background: #404040;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_item::after {
+    background: linear-gradient(180deg, transparent 35%, rgb(0 0 0 / 0.86) 100%);
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_button {
+    align-items: flex-end;
+    background: transparent;
+    border: 0;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    inset: 0;
+    padding: 24px;
+    position: absolute;
+    text-align: left;
+    width: 100%;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_content {
+    max-width: 500px;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .item_title {
+    color: #ffffff;
+    font-size: clamp(20px, 1.7vw, 28px);
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_accordion .item_description {
+    display: grid;
+    font-size: 16px;
+    grid-template-rows: 0fr;
+    line-height: 1.4;
+    opacity: 0;
+    transition:
+      grid-template-rows 0.45s ease,
+      margin-top 0.45s ease,
+      opacity 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_accordion .description_inner {
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .desktop_item.is_active .item_description {
+    grid-template-rows: 1fr;
+    margin-top: 12px;
+    opacity: 1;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .mobile_control {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .how_it_work_control {
+      padding: 42px 0 48px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .inner {
+      padding: 0 16px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .header {
+      margin-bottom: 18px;
+      max-width: 100%;
+      padding: 0;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .eyebrow {
+      font-size: 16px;
+      margin-bottom: 13px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .section_title {
+      font-size: 27px;
+      line-height: 1.02;
+      max-width: 390px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .section_description {
+      font-size: 16px;
+      line-height: 1.27;
+      margin-top: 17px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .desktop_accordion {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_control {
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_media {
+      aspect-ratio: 1.7 / 1;
+      background: #404040;
+      margin-bottom: 19px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_image,
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_placeholder {
+      height: 100%;
+      inset: 0;
+      object-fit: cover;
+      opacity: 0;
+      position: absolute;
+      transition: opacity 0.4s ease;
+      visibility: hidden;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_image.is_active,
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_placeholder.is_active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_item {
+      border-bottom: 1px solid #666666;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_button {
+      align-items: center;
+      background: transparent;
+      border: 0;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      font-family: inherit;
+      justify-content: space-between;
+      min-height: 54px;
+      padding: 12px 2px 12px 0;
+      text-align: left;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_button .item_title {
+      font-size: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .icon {
+      border-right: 2px solid var(--accent-color);
+      border-top: 2px solid var(--accent-color);
+      flex: 0 0 auto;
+      height: 11px;
+      margin-left: 16px;
+      transform: rotate(45deg);
+      transition: transform 0.35s ease;
+      width: 11px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_item.is_active .icon {
+      transform: rotate(135deg);
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition:
+        grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s ease;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_panel_inner {
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_item.is_active .mobile_panel {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_item .item_description {
+      font-size: 15px;
+      line-height: 1.28;
+      padding: 0 0 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .how_it_work_control .desktop_item,
+    #shopify-section-{{ section.id }} .how_it_work_control .item_description,
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_image,
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_placeholder,
+    #shopify-section-{{ section.id }} .how_it_work_control .icon,
+    #shopify-section-{{ section.id }} .how_it_work_control .mobile_panel {
+      transition: none;
+    }
+  }
+</style>
+
+<section class="how_it_work_control" id="how-it-work-control-{{ section.id }}">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="section_description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="desktop_accordion">
+        {%- for block in section.blocks -%}
+          <article
+            class="desktop_item{% if forloop.first %} is_active{% endif %}"
+            data-control-item="{{ forloop.index0 }}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1600
+                | image_tag:
+                  class: 'desktop_image',
+                  loading: 'lazy',
+                  sizes: '(min-width: 750px) 50vw',
+                  widths: '550, 750, 1000, 1200, 1600',
+                  alt: block.settings.title
+              }}
+            {%- else -%}
+              <div class="desktop_placeholder"></div>
+            {%- endif -%}
+
+            <button
+              class="desktop_button"
+              type="button"
+              data-control-trigger="{{ forloop.index0 }}"
+              aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+            >
+              <span class="desktop_content">
+                <span class="item_title">{{ block.settings.title | escape }}</span>
+
+                {%- if block.settings.description != blank -%}
+                  <span class="item_description">
+                    <span class="description_inner">{{ block.settings.description }}</span>
+                  </span>
+                {%- endif -%}
+              </span>
+            </button>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      <div class="mobile_control">
+        <div class="mobile_media">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1000
+                | image_tag:
+                  class: 'mobile_image',
+                  loading: 'lazy',
+                  sizes: 'calc(100vw - 32px)',
+                  widths: '375, 550, 750, 1000',
+                  alt: block.settings.title
+              }}
+            {%- else -%}
+              <div class="mobile_placeholder"></div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <div class="mobile_accordion">
+          {%- for block in section.blocks -%}
+            <article
+              class="mobile_item{% if forloop.first %} is_active{% endif %}"
+              data-control-item="{{ forloop.index0 }}"
+            >
+              <button
+                class="mobile_button"
+                type="button"
+                data-control-trigger="{{ forloop.index0 }}"
+                aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-controls="control-panel-{{ section.id }}-{{ forloop.index0 }}"
+              >
+                <span class="item_title">{{ block.settings.title | escape }}</span>
+                <span class="icon" aria-hidden="true"></span>
+              </button>
+
+              <div
+                class="mobile_panel"
+                id="control-panel-{{ section.id }}-{{ forloop.index0 }}"
+              >
+                <div class="mobile_panel_inner">
+                  {%- if block.settings.description != blank -%}
+                    <div class="item_description">{{ block.settings.description }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.querySelector("#how-it-work-control-{{ section.id }}");
+
+    if (!section) {
+      return;
+    }
+
+    const setActiveItem = (index) => {
+      section.querySelectorAll("[data-control-item]").forEach((item) => {
+        item.classList.toggle("is_active", item.dataset.controlItem === index);
+      });
+
+      section.querySelectorAll("[data-control-trigger]").forEach((trigger) => {
+        trigger.setAttribute("aria-expanded", trigger.dataset.controlTrigger === index ? "true" : "false");
+      });
+
+      section.querySelectorAll(".mobile_media > *").forEach((image, imageIndex) => {
+        image.classList.toggle("is_active", String(imageIndex) === index);
+      });
+    };
+
+    section.querySelectorAll("[data-control-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        setActiveItem(trigger.dataset.controlTrigger);
+      });
+    });
+
+    setActiveItem("0");
+
+    if (window.Shopify && window.Shopify.designMode) {
+      document.addEventListener("shopify:block:select", (event) => {
+        const selectedBlock = event.target.closest("[data-control-item]");
+
+        if (selectedBlock && section.contains(selectedBlock)) {
+          setActiveItem(selectedBlock.dataset.controlItem);
+        }
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "How it works control",
+  "tag": "section",
+  "class": "shopify-section--how-it-works-control",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题",
+      "default": "Control Modes"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "主标题",
+      "default": "Choose How You Control SensOn S1"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>SensOn S1 gives you flexible ways to control the experience, whether you want AI-powered response, direct app control, or simple on-device buttons.</p>"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "强调色",
+      "default": "#f287ec"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "control",
+      "name": "控制模式",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "AI Mode"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "展开内容",
+          "default": "<p>Select AI Mode in the SensOn App and set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive audio, AI voice, and character interaction.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "How it works control",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "control"
+        },
+        {
+          "type": "control",
+          "settings": {
+            "title": "Manual Mode",
+            "description": "<p>Control SensOn S1 directly in the app and adjust the experience in real time.</p>"
+          }
+        },
+        {
+          "type": "control",
+          "settings": {
+            "title": "Physical Buttons",
+            "description": "<p>Use the on-device buttons for simple, immediate control whenever you prefer.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
