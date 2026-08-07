@@ -209,6 +209,54 @@
         "mobile_padding_bottom": 48
       }
     },
+    "how_it_work_card_4HVPha": {
+      "type": "how-it-work-card",
+      "blocks": {
+        "card_Qx8YUw": {
+          "type": "card",
+          "settings": {
+            "title": "Soft & Romantic"
+          }
+        },
+        "card_AybRDj": {
+          "type": "card",
+          "settings": {
+            "title": "Voice-Led Fantasy"
+          }
+        },
+        "card_JXJz6A": {
+          "type": "card",
+          "settings": {
+            "title": "Character Interaction"
+          }
+        },
+        "card_HtTK9P": {
+          "type": "card",
+          "settings": {
+            "title": "Immersive Audio"
+          }
+        }
+      },
+      "block_order": [
+        "card_Qx8YUw",
+        "card_AybRDj",
+        "card_JXJz6A",
+        "card_HtTK9P"
+      ],
+      "name": "How it works cards",
+      "settings": {
+        "subtitle": "Turn On Your Fantasy",
+        "title": "Interactive Stories Created with Women in Mind",
+        "description": "<p>SensOn offers a curated library of interactive audio stories and erotic audio stories covering different moods, fantasies, and desires. Choose a story, connect SensOn S1, and let immersive audio, AI interaction, and synchronized response work together.</p>",
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "accent_color": "#f287ec",
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 42,
+        "mobile_padding_bottom": 48
+      }
+    },
     "text_with_fixed_background_4BQcA8": {
       "type": "text-with-fixed-background",
       "blocks": {
@@ -780,6 +828,7 @@
     "how_it_work_control_F7F6LC",
     "how_it_work_app_4LghmF",
     "how_it_work_control_EYzwxq",
+    "how_it_work_card_4HVPha",
     "text_with_fixed_background_4BQcA8",
     "1769342421c8d5c13c",
     "image_with_text_overlay_gdrnBr",
