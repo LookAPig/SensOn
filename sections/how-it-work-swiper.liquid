@@ -4,7 +4,7 @@
     background: #000000;
     color: #ffffff;
     overflow: hidden;
-    padding: 72px 0 80px;
+    padding: {{ section.settings.desktop_padding_top }}px 0 {{ section.settings.desktop_padding_bottom }}px;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_swiper * {
@@ -19,7 +19,10 @@
 
   #shopify-section-{{ section.id }} .how_it_work_swiper .header {
     margin-bottom: 38px;
-    max-width: 660px;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_swiper .eyebrow,
@@ -202,7 +205,7 @@
 
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .how_it_work_swiper {
-      padding: 42px 0 48px;
+      padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_swiper .inner {
@@ -412,6 +415,50 @@
       "id": "accent_color",
       "label": "强调色",
       "default": "#f287ec"
+    },
+    {
+      "type": "header",
+      "content": "模块间距"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "label": "PC 端顶部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "label": "PC 端底部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "移动端顶部间距",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "移动端底部间距",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
     },
     {
       "type": "header",
