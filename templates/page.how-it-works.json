@@ -333,7 +333,7 @@
         "button_width_desktop": 280,
         "button_width_mobile": 240,
         "primary_button_text": "Shop Senson S1",
-        "primary_button_link": "",
+        "primary_button_link": "shopify://products/senson-s1-wellness-companion",
         "secondary_button_text": "Learn More About The App",
         "secondary_button_link": ""
       }
