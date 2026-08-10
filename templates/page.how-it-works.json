@@ -103,7 +103,7 @@
         "control_pDDqit": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/neck-caress.jpg",
+            "image": "shopify://shop_images/intimate-hands-touching-sensual-lighting.jpg",
             "title": "Manual Mode",
             "description": "<p>Select Manual Mode in the app to adjust each component's intensity in real time, giving you direct control over rhythm, strength, and pacing.</p>"
           }
@@ -140,6 +140,7 @@
         "app_feature_j4y7Ci": {
           "type": "app_feature",
           "settings": {
+            "image": "shopify://shop_images/senson-app-character-selection-carousel.png",
             "title": "Choose Interactive Audio",
             "description": "<p>Explore interactive audio stories created with women in mind.</p>"
           }
@@ -147,6 +148,7 @@
         "app_feature_xf4bjy": {
           "type": "app_feature",
           "settings": {
+            "image": "shopify://shop_images/senson-s1-wearable-device-placement.png",
             "title": "Explore AI Fantasy",
             "description": "<p>Interact with an AI voice companion or text-based character anytime.</p>"
           }
@@ -154,6 +156,7 @@
         "app_feature_JBbnir": {
           "type": "app_feature",
           "settings": {
+            "image": "shopify://shop_images/senson-app-interactive-text-chat.png",
             "title": "Control Your Device",
             "description": "<p>Let content, voice interaction, and SensOn device response move together.</p>"
           }
@@ -190,6 +193,7 @@
         "control_JkYpKM": {
           "type": "control",
           "settings": {
+            "image": "shopify://shop_images/senson-s1-glowing-device-pleasure.png",
             "title": "AI-powered interaction",
             "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
           }
@@ -197,6 +201,7 @@
         "control_NXhiL8": {
           "type": "control",
           "settings": {
+            "image": "shopify://shop_images/04_ce59a00f-a525-42ee-9888-e476a00eb5be.jpg",
             "title": "Bluetooth, But Deeper",
             "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
           }
