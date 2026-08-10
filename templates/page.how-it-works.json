@@ -145,14 +145,14 @@
           "type": "app_feature",
           "settings": {
             "title": "Explore AI Fantasy",
-            "description": "<p>Discover immersive AI characters and experiences designed around your preferences.</p>"
+            "description": "<p>Interact with an AI voice companion or text-based character anytime.</p>"
           }
         },
         "app_feature_JBbnir": {
           "type": "app_feature",
           "settings": {
             "title": "Control Your Device",
-            "description": "<p>Connect SensOn S1 and adjust your experience directly from the app.</p>"
+            "description": "<p>Let content, voice interaction, and SensOn device response move together.</p>"
           }
         }
       },
