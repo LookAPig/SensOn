@@ -179,6 +179,7 @@
         "control_am6mT4": {
           "type": "control",
           "settings": {
+            "image": "shopify://shop_images/works1.jpg",
             "title": "Smart Intimacy Design",
             "description": "<p>More than a basic smart vibrator, SensOn S1 is built around content-led interaction and synchronized control.<br/><br/></p>"
           }
