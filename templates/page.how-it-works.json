@@ -96,21 +96,21 @@
           "type": "control",
           "settings": {
             "title": "AI Mode",
-            "description": "<p>Select AI Mode in the SensOn App and set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive audio, AI voice, and character interaction.</p>"
+            "description": "<p>Select AI Mode in the SensOn App and optionally set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive AI voice and character interactions.</p>"
           }
         },
         "control_pDDqit": {
           "type": "control",
           "settings": {
             "title": "Manual Mode",
-            "description": "<p>Control SensOn S1 directly in the app and adjust the experience in real time.</p>"
+            "description": "<p>Select Manual Mode in the app to adjust each component's intensity in real time, giving you direct control over rhythm, strength, and pacing.</p>"
           }
         },
         "control_4LfLrp": {
           "type": "control",
           "settings": {
             "title": "Physical Buttons",
-            "description": "<p>Use the on-device buttons for simple, immediate control whenever you prefer.</p>"
+            "description": "<p>Use the on-device buttons to switch between 5 intensity levels, even without <strong>the</strong> app connection.</p>"
           }
         }
       },
