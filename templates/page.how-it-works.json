@@ -222,24 +222,32 @@
         "card_Qx8YUw": {
           "type": "card",
           "settings": {
+            "desktop_image": "shopify://shop_images/cards1.jpg",
+            "mobile_image": "shopify://shop_images/cards1.jpg",
             "title": "Soft & Romantic"
           }
         },
         "card_AybRDj": {
           "type": "card",
           "settings": {
+            "desktop_image": "shopify://shop_images/cards2.jpg",
+            "mobile_image": "shopify://shop_images/cards2.jpg",
             "title": "Voice-Led Fantasy"
           }
         },
         "card_JXJz6A": {
           "type": "card",
           "settings": {
+            "desktop_image": "shopify://shop_images/cards3.jpg",
+            "mobile_image": "shopify://shop_images/cards3.jpg",
             "title": "Character Interaction"
           }
         },
         "card_HtTK9P": {
           "type": "card",
           "settings": {
+            "desktop_image": "shopify://shop_images/cards4.jpg",
+            "mobile_image": "shopify://shop_images/cards4.jpg",
             "title": "Immersive Audio"
           }
         }
