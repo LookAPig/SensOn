@@ -95,6 +95,7 @@
         "control_pJ996X": {
           "type": "control",
           "settings": {
+            "image": "shopify://shop_images/intimate-couple-resting-hands-bed.jpg",
             "title": "AI Mode",
             "description": "<p>Select AI Mode in the SensOn App and optionally set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive AI voice and character interactions.</p>"
           }
@@ -102,6 +103,7 @@
         "control_pDDqit": {
           "type": "control",
           "settings": {
+            "image": "shopify://shop_images/neck-caress.jpg",
             "title": "Manual Mode",
             "description": "<p>Select Manual Mode in the app to adjust each component's intensity in real time, giving you direct control over rhythm, strength, and pacing.</p>"
           }
@@ -109,6 +111,7 @@
         "control_4LfLrp": {
           "type": "control",
           "settings": {
+            "image": "shopify://shop_images/intimate-sculpture-pink-glow.jpg",
             "title": "Physical Buttons",
             "description": "<p>Use the on-device buttons to switch between 5 intensity levels, even without <strong>the</strong> app connection.</p>"
           }
