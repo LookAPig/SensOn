@@ -45,6 +45,7 @@
         "step_8pdeYT": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/how_it_works1.jpg",
             "subtitle": "Step 01",
             "title": "Download and Connect",
             "description": "<p>Download the SensOn App, turn on Bluetooth, and choose the control mode you prefer.</p>"
@@ -53,6 +54,7 @@
         "step_T4m9w9": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/how_it_works2.jpg",
             "subtitle": "Step 02",
             "title": "Assemble and Fit",
             "description": "<p>Connect the magnetic components and adjust the setup for a secure, comfortable fit.</p>"
@@ -61,6 +63,7 @@
         "step_H9rGRe": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/how_it_works3.jpg",
             "subtitle": "Step 03",
             "title": "Choose and Begin",
             "description": "<p>Choose the control mode you prefer and start your interactive experience.</p>"
@@ -83,7 +86,7 @@
         "mobile_padding_top": 42,
         "mobile_padding_bottom": 48,
         "details_title": "Need more setup details?",
-        "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p>"
+        "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.</p><p><strong>2. Choose your setup</strong>Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Adjust the clitoral stimulator head until it sits comfortably in place.</p><p><strong>4.Wear and fit</strong>Place the nipple stimulators on the nipples. Use the clasp to adjust tension for a secure, comfortable fit.</p><p><strong>5.Power on</strong>Press and hold the Core power button to turn on SensOn S1. The device will enter standby mode.</p><p><strong>6.Connect and play</strong>Follow the on-screen steps to connect through Bluetooth. Choose your audio story and begin. During the experience, you can interact with AI characters anytime by voice or text.</p>"
       }
     },
     "how_it_work_control_F7F6LC": {
