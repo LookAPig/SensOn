@@ -1,0 +1,310 @@
+<style>
+  #shopify-section-{{ section.id }} .how_it_work_policy {
+    --accent-color: {{ section.settings.accent_color }};
+    --background-color: {{ section.settings.background_color }};
+    --text-color: {{ section.settings.text_color }};
+    --description-color: {{ section.settings.description_color }};
+    background: var(--background-color);
+    color: var(--text-color);
+    overflow: hidden;
+    padding: {{ section.settings.desktop_padding_top }}px 0 {{ section.settings.desktop_padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy .inner {
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 24px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy .policy_list {
+    display: grid;
+    gap: 48px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy .policy_item {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy .icon {
+    color: var(--accent-color);
+    flex-shrink: 0;
+    height: 36px;
+    width: 36px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy .icon svg {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy .content {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy .item_title {
+    color: var(--text-color);
+    font-size: clamp(24px, 2vw, 30px);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy .item_description {
+    color: var(--description-color);
+    font-size: 18px;
+    line-height: 1.5;
+    margin-top: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_policy .item_description p {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .how_it_work_policy {
+      padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_policy .inner {
+      padding: 0 16px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_policy .policy_list {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_policy .policy_item {
+      flex-direction: row;
+      gap: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_policy .icon {
+      height: 24px;
+      width: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_policy .item_title {
+      font-size: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_policy .item_description {
+      font-size: 15px;
+      margin-top: 8px;
+    }
+  }
+</style>
+
+<section class="how_it_work_policy">
+  <div class="inner">
+    {%- if section.blocks.size > 0 -%}
+      <ul class="policy_list">
+        {%- for block in section.blocks -%}
+          <li class="policy_item" {{ block.shopify_attributes }}>
+            <span class="icon" aria-hidden="true">
+              {%- case block.settings.icon -%}
+                {%- when "privacy" -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15" fill="none">
+                    <path d="M11.3531 1.92875L7.28381 0.203624C6.65124 -0.06483 5.93999 -0.0679555 5.30517 0.194929L1.11112 1.93397C0.783064 2.0691 0.502097 2.30072 0.304161 2.59921C0.106225 2.89769 0.000320846 3.24947 7.85426e-08 3.60953V8.98663C-7.53634e-05 9.24478 0.0541978 9.49995 0.159167 9.73497C0.264137 9.97 0.417367 10.1794 0.608551 10.3492L5.03251 14.2803C5.35557 14.5673 5.76972 14.7259 6.19866 14.7269C6.6276 14.7278 7.04242 14.5711 7.36672 14.2855L11.8309 10.3509C12.0253 10.1813 12.1814 9.97097 12.2885 9.7343C12.3956 9.49763 12.4511 9.24021 12.4514 8.97967V3.59822C12.451 3.24067 12.3465 2.89124 12.151 2.59409C11.9555 2.29694 11.6779 2.06541 11.3531 1.92875ZM11.0796 8.97967C11.0794 9.03953 11.0666 9.09866 11.0422 9.1531C11.0177 9.20753 10.9821 9.25602 10.9377 9.29531L6.47355 13.229C6.39897 13.2952 6.30332 13.3317 6.20431 13.3317C6.10531 13.3317 6.00967 13.2952 5.93508 13.229L1.51112 9.29705C1.46715 9.2577 1.4319 9.20928 1.40774 9.15501C1.38357 9.10074 1.37103 9.04186 1.37095 8.98228V3.60518C1.371 3.52216 1.39544 3.44105 1.44112 3.37226C1.48681 3.30347 1.55167 3.25014 1.62736 3.21911L5.82226 1.48008C6.12331 1.35351 6.4614 1.35351 6.76244 1.48008L10.8274 3.21303C10.9029 3.24419 10.9675 3.29743 11.0131 3.36601C11.0588 3.43459 11.0834 3.5154 11.0838 3.59822L11.0796 8.97967Z" fill="currentColor"/>
+                    <path d="M6.24811 4.80372C6.08634 4.80349 5.92611 4.83571 5.77659 4.89853C5.62707 4.96136 5.49119 5.05355 5.37672 5.16984C5.26225 5.28613 5.17143 5.42424 5.10948 5.57627C5.04752 5.72829 5.01563 5.89125 5.01563 6.05583C5.01533 6.26212 5.0651 6.4653 5.16052 6.64732C5.25595 6.82934 5.39408 6.98458 5.56264 7.09925V9.41825C5.56264 9.60882 5.63699 9.79159 5.76936 9.92642C5.90174 10.0613 6.08131 10.1371 6.26862 10.1373C6.36195 10.1382 6.45451 10.1201 6.54096 10.0844C6.62741 10.0486 6.70604 9.99575 6.77231 9.92889C6.83859 9.86204 6.89118 9.7825 6.92708 9.69485C6.96297 9.60721 6.98146 9.5132 6.98145 9.41825V7.09925C6.98145 7.08795 6.98145 7.07664 6.98145 7.06534C7.13729 6.94907 7.26401 6.79708 7.35132 6.62168C7.43864 6.44629 7.4841 6.25243 7.48402 6.05583C7.48402 5.89096 7.45202 5.72771 7.38984 5.57546C7.32767 5.42321 7.23656 5.28494 7.12172 5.16861C7.00689 5.05227 6.87061 4.96015 6.72069 4.89753C6.57077 4.83491 6.41017 4.80303 6.24811 4.80372Z" fill="currentColor"/>
+                  </svg>
+                {%- when "comfort" -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M6.67833 1.76132e-06C4.90713 1.76132e-06 3.20847 0.715803 1.95603 1.98994C0.703604 3.26407 4.80932e-08 4.99217 4.80931e-08 6.79407C-0.000105206 7.68634 0.172554 8.5699 0.508125 9.39429C0.843696 10.2187 1.3356 10.9678 1.95575 11.5987C2.5759 12.2297 3.31216 12.7302 4.12246 13.0717C4.93277 13.4132 5.80125 13.5889 6.67833 13.5889C7.55579 13.5895 8.42475 13.4141 9.23556 13.0729C10.0464 12.7317 10.7831 12.2312 11.4038 11.6002C12.0244 10.9692 12.5168 10.22 12.8527 9.3953C13.1886 8.57064 13.3615 7.68673 13.3615 6.79407C13.3615 5.90145 13.1886 5.01757 12.8527 4.19296C12.5167 3.36835 12.0244 2.61916 11.4037 1.98821C10.7831 1.35726 10.0463 0.85691 9.2355 0.515764C8.42469 0.174618 7.55575 -0.000640952 6.67833 1.76132e-06ZM6.67833 12.2298C5.26124 12.2298 3.90219 11.6571 2.90015 10.6377C1.89812 9.61832 1.33518 8.23571 1.33518 6.79407C1.33518 5.35242 1.89812 3.96982 2.90015 2.95042C3.90219 1.93102 5.26124 1.35833 6.67833 1.35833C8.09542 1.35833 9.45447 1.93102 10.4565 2.95042C11.4585 3.96982 12.0215 5.35242 12.0215 6.79407C12.0215 7.5079 11.8833 8.21474 11.6148 8.87424C11.3462 9.53373 10.9527 10.133 10.4565 10.6377C9.96035 11.1425 9.37133 11.5429 8.72307 11.816C8.0748 12.0892 7.38 12.2298 6.67833 12.2298Z" fill="currentColor"/>
+                    <path d="M9.42752 6.29728C9.24745 6.28215 9.06883 6.34024 8.93078 6.45883C8.79273 6.57742 8.70651 6.74684 8.691 6.92997C8.64613 7.43522 8.41766 7.90529 8.05025 8.2483C7.68285 8.59132 7.20291 8.78262 6.70425 8.78482C6.20559 8.78262 5.72565 8.59132 5.35825 8.2483C4.99084 7.90529 4.76238 7.43522 4.7175 6.92997C4.702 6.74684 4.61578 6.57742 4.47773 6.45883C4.33968 6.34024 4.16105 6.28215 3.98098 6.29728C3.89184 6.30498 3.80506 6.33048 3.7256 6.3723C3.64614 6.41413 3.57555 6.47147 3.51788 6.54104C3.4602 6.61062 3.41656 6.69108 3.38945 6.77781C3.36234 6.86455 3.35229 6.95587 3.35987 7.04656C3.43543 7.89724 3.81996 8.68872 4.43837 9.26644C5.05679 9.84416 5.86466 10.1666 6.70425 10.1709C7.54383 10.1666 8.35172 9.84416 8.97013 9.26644C9.58854 8.68872 9.97307 7.89724 10.0486 7.04656C10.0562 6.95587 10.0462 6.86455 10.019 6.77781C9.99194 6.69108 9.9483 6.61062 9.89062 6.54104C9.83295 6.47147 9.76236 6.41413 9.6829 6.3723C9.60344 6.33048 9.51666 6.30498 9.42752 6.29728Z" fill="currentColor"/>
+                  </svg>
+                {%- when "support" -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M10.0748 13.3494C9.9126 13.3493 9.75706 13.2845 9.64241 13.1693L7.09253 10.6098H4.12608C3.03212 10.6086 1.9833 10.1719 1.20976 9.39546C0.43622 8.619 0.0011447 7.56623 0 6.46816V4.14234C0.00114436 3.0442 0.436197 1.99136 1.20972 1.21479C1.98324 0.438218 3.03206 0.00134046 4.12608 0H9.0644C10.1584 0.00134046 11.2072 0.438218 11.9808 1.21479C12.7543 1.99136 13.1893 3.0442 13.1905 4.14234V6.46816C13.185 7.27785 12.9452 8.0685 12.5004 8.74393C12.0555 9.41937 11.4246 9.95048 10.6846 10.2727V12.7323C10.6847 12.854 10.6488 12.9729 10.5814 13.074C10.514 13.1751 10.4182 13.2539 10.3062 13.3002C10.2331 13.3317 10.1544 13.3485 10.0748 13.3494ZM4.12608 1.22983C3.35689 1.23078 2.61949 1.53797 2.07565 2.08398C1.53182 2.63 1.22597 3.37025 1.22521 4.14234V6.46816C1.22616 7.24012 1.5321 7.98019 2.07591 8.52605C2.61972 9.07191 3.35701 9.379 4.12608 9.37995H7.34694C7.50917 9.38008 7.66471 9.44487 7.77937 9.56009L9.45935 11.25V9.84439C9.4591 9.7127 9.50098 9.5844 9.57883 9.47839C9.65668 9.37238 9.76638 9.29426 9.89177 9.25552C10.4868 9.07204 11.0081 8.7028 11.3797 8.20151C11.7513 7.70021 11.9539 7.09299 11.9581 6.46816V4.14234C11.9573 3.37025 11.6514 2.63 11.1076 2.08398C10.5638 1.53797 9.82638 1.23078 9.05719 1.22983H4.12608Z" fill="currentColor"/>
+                    <path d="M3.92929 6.21215C4.39937 6.21215 4.78045 5.82964 4.78045 5.35778C4.78045 4.88593 4.39937 4.50342 3.92929 4.50342C3.4592 4.50342 3.07812 4.88593 3.07812 5.35778C3.07812 5.82964 3.4592 6.21215 3.92929 6.21215Z" fill="currentColor"/>
+                    <path d="M6.5914 6.21215C7.06148 6.21215 7.44256 5.82964 7.44256 5.35778C7.44256 4.88593 7.06148 4.50342 6.5914 4.50342C6.12131 4.50342 5.74023 4.88593 5.74023 5.35778C5.74023 5.82964 6.12131 6.21215 6.5914 6.21215Z" fill="currentColor"/>
+                    <path d="M9.25741 6.21215C9.72749 6.21215 10.1086 5.82964 10.1086 5.35778C10.1086 4.88593 9.72749 4.50342 9.25741 4.50342C8.78733 4.50342 8.40625 4.88593 8.40625 5.35778C8.40625 5.82964 8.78733 6.21215 9.25741 6.21215Z" fill="currentColor"/>
+                  </svg>
+              {%- endcase -%}
+            </span>
+
+            <div class="content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="item_title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.description != blank -%}
+                <div class="item_description">{{ block.settings.description }}</div>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How it works policy",
+  "tag": "section",
+  "class": "shopify-section--how-it-works-policy",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "组件背景色",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "描述颜色",
+      "default": "#b3b3b3"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "图标颜色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "header",
+      "content": "模块间距"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "label": "PC 端顶部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "label": "PC 端底部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "移动端顶部间距",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "移动端底部间距",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "policy",
+      "name": "政策条目",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "图标",
+          "options": [
+            {
+              "value": "privacy",
+              "label": "隐私盾牌"
+            },
+            {
+              "value": "comfort",
+              "label": "舒适笑脸"
+            },
+            {
+              "value": "support",
+              "label": "支持对话"
+            }
+          ],
+          "default": "privacy"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "Private by design"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "描述",
+          "default": "<p>Built for private self-care moments with simple app and button control.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "How it works policy",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "policy",
+          "settings": {
+            "icon": "privacy",
+            "title": "Private by design",
+            "description": "<p>Built for private self-care moments with simple app and button control.</p>"
+          }
+        },
+        {
+          "type": "policy",
+          "settings": {
+            "icon": "comfort",
+            "title": "Comfort-focused setup",
+            "description": "<p>Magnetic components and adjustable fit help SensOn S1 feel easier to prepare and use.</p>"
+          }
+        },
+        {
+          "type": "policy",
+          "settings": {
+            "icon": "support",
+            "title": "Support when needed",
+            "description": "<p>Use the FAQ for details about privacy, safety, cleaning, connectivity, and support.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

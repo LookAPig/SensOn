@@ -1,0 +1,367 @@
+<style>
+  #shopify-section-{{ section.id }} .how_it_work_card {
+    --accent-color: {{ section.settings.accent_color }};
+    --background-color: {{ section.settings.background_color }};
+    --text-color: {{ section.settings.text_color }};
+    background: var(--background-color);
+    color: var(--text-color);
+    overflow: hidden;
+    padding: {{ section.settings.desktop_padding_top }}px 0 {{ section.settings.desktop_padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .inner {
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 24px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .header {
+    display: block;
+    margin: 0 0 38px;
+    max-width: none;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .eyebrow {
+    color: var(--accent-color);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 14px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .section_title {
+    color: var(--text-color);
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .section_description {
+    color: var(--text-color);
+    font-size: 18px;
+    line-height: 1.35;
+    margin-top: 18px;
+    max-width: 620px;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .section_description p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .card_grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .card {
+    aspect-ratio: 1.9 / 1;
+    background: #d8d8d8;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .card_image,
+  #shopify-section-{{ section.id }} .how_it_work_card .card_placeholder {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .card_placeholder {
+    background: linear-gradient(135deg, #8f7786, #343134);
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .card::after {
+    background: linear-gradient(90deg, rgb(0 0 0 / 0.48), rgb(0 0 0 / 0.08));
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_card .card_title {
+    color: #ffffff;
+    font-size: clamp(16px, 1.35vw, 21px);
+    font-weight: 600;
+    left: 20px;
+    line-height: 1.2;
+    margin: 0;
+    position: absolute;
+    right: 20px;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .how_it_work_card .card_grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .how_it_work_card {
+      padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_card .inner {
+      padding: 0 16px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_card .header {
+      margin-bottom: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_card .eyebrow {
+      font-size: 16px;
+      margin-bottom: 13px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_card .section_title {
+      font-size: 27px;
+      line-height: 1.02;
+      max-width: 390px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_card .section_description {
+      font-size: 16px;
+      line-height: 1.27;
+      margin-top: 17px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_card .card_grid {
+      gap: 8px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_card .card {
+      aspect-ratio: 1.95 / 1;
+      border-radius: 8px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_card .card_title {
+      font-size: 14px;
+      left: 8px;
+      right: 8px;
+    }
+  }
+</style>
+
+<section class="how_it_work_card">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="section_description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="card_grid">
+        {%- for block in section.blocks -%}
+          <article class="card" {{ block.shopify_attributes }}>
+            {%- if block.settings.desktop_image != blank or block.settings.mobile_image != blank -%}
+              <picture>
+                {%- if block.settings.mobile_image != blank -%}
+                  <source
+                    media="(max-width: 749px)"
+                    srcset="
+                      {{ block.settings.mobile_image | image_url: width: 360 }} 360w,
+                      {{ block.settings.mobile_image | image_url: width: 540 }} 540w,
+                      {{ block.settings.mobile_image | image_url: width: 720 }} 720w
+                    "
+                    sizes="calc((100vw - 40px) / 2)"
+                  >
+                {%- endif -%}
+
+                {%- assign desktop_card_image = block.settings.desktop_image | default: block.settings.mobile_image -%}
+                {{
+                  desktop_card_image
+                  | image_url: width: 900
+                  | image_tag:
+                    class: 'card_image',
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) calc((100vw - 96px) / 4), calc((100vw - 64px) / 2)',
+                    widths: '360, 540, 720, 900',
+                    alt: block.settings.title
+                }}
+              </picture>
+            {%- else -%}
+              <div class="card_placeholder"></div>
+            {%- endif -%}
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="card_title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How it works cards",
+  "tag": "section",
+  "class": "shopify-section--how-it-works-cards",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题",
+      "default": "Turn On Your Fantasy"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "主标题",
+      "default": "Interactive Stories Created with Women in Mind"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>SensOn offers a curated library of interactive audio stories and erotic audio stories covering different moods, fantasies, and desires. Choose a story, connect SensOn S1, and let immersive audio, AI interaction, and synchronized response work together.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "组件背景色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "文字颜色",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "强调色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "header",
+      "content": "模块间距"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "label": "PC 端顶部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "label": "PC 端底部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "移动端顶部间距",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "移动端底部间距",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "小卡片",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "PC 端图片"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "移动端图片"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "卡片文案",
+          "default": "Soft & Romantic"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "How it works cards",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Voice-Led Fantasy"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Character Interaction"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Immersive Audio"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
