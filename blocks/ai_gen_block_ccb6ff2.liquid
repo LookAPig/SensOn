@@ -57,7 +57,9 @@
   .ai-quiz-container-{{ ai_gen_id }} {
     position: relative;
     isolation: isolate;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: {{ block.settings.desktop_width_percent }}%;
     max-width: 100%;
     min-height: 100svh;
