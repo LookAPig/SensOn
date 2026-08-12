@@ -116,9 +116,29 @@
     display: none;
   }
 
+  .ai-quiz-start-{{ ai_gen_id }} {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .ai-quiz-container-{{ ai_gen_id }}.is-start .ai-quiz-start-{{ ai_gen_id }} {
+    display: flex;
+  }
+
+  .ai-quiz-container-{{ ai_gen_id }}.is-start .ai-quiz-progress-{{ ai_gen_id }},
+  .ai-quiz-container-{{ ai_gen_id }}.is-start .ai-quiz-questions-{{ ai_gen_id }},
+  .ai-quiz-container-{{ ai_gen_id }}.is-start .ai-quiz-navigation-{{ ai_gen_id }} {
+    display: none;
+  }
+
   .ai-quiz-header-{{ ai_gen_id }} {
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 28px;
   }
 
   .ai-quiz-title-{{ ai_gen_id }} {
@@ -131,6 +151,13 @@
     font-size: {{ block.settings.description_size }}px;
     color: {{ block.settings.text_color }};
     opacity: 0.8;
+    white-space: pre-line;
+    line-height: 1.5;
+  }
+
+  .ai-quiz-start-cta-{{ ai_gen_id }} {
+    margin-top: 8px;
+    min-width: 200px;
   }
 
   .ai-quiz-progress-{{ ai_gen_id }} {
@@ -705,6 +732,10 @@
     .ai-quiz-button-{{ ai_gen_id }} {
       width: 100%;
     }
+
+    .ai-quiz-start-cta-{{ ai_gen_id }} {
+      width: 100%;
+    }
   }
 {% endstyle %}
 
@@ -765,14 +796,20 @@
   ]
 </script>
 
-<quiz-component-{{ ai_gen_id }} class="ai-quiz-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-quiz-header-{{ ai_gen_id }}" data-quiz-header>
-    {% if block.settings.quiz_title != blank %}
-      <h2 class="ai-quiz-title-{{ ai_gen_id }}">{{ block.settings.quiz_title }}</h2>
-    {% endif %}
-    {% if block.settings.quiz_description != blank %}
-      <div class="ai-quiz-description-{{ ai_gen_id }}">{{ block.settings.quiz_description }}</div>
-    {% endif %}
+<quiz-component-{{ ai_gen_id }} class="ai-quiz-container-{{ ai_gen_id }} is-start" {{ block.shopify_attributes }}>
+  <div class="ai-quiz-start-{{ ai_gen_id }}" data-quiz-start>
+    <div class="ai-quiz-header-{{ ai_gen_id }}" data-quiz-header>
+      {% if block.settings.quiz_title != blank %}
+        <h2 class="ai-quiz-title-{{ ai_gen_id }}">{{ block.settings.quiz_title }}</h2>
+      {% endif %}
+      {% if block.settings.quiz_description != blank %}
+        <div class="ai-quiz-description-{{ ai_gen_id }}">{{ block.settings.quiz_description }}</div>
+      {% endif %}
+    </div>
+
+    <button type="button" class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-start-cta-{{ ai_gen_id }}" data-start-btn>
+      {{ block.settings.start_button_text }}
+    </button>
   </div>
 
   <div class="ai-quiz-progress-{{ ai_gen_id }}" data-quiz-progress>
@@ -944,6 +981,8 @@
       connectedCallback() {
         this.progressBar = this.querySelector("[data-progress-bar]");
         this.questions = this.querySelectorAll(".ai-quiz-question-{{ ai_gen_id }}");
+        this.startScreen = this.querySelector("[data-quiz-start]");
+        this.startBtn = this.querySelector("[data-start-btn]");
         this.prevBtn = this.querySelector("[data-prev-btn]");
         this.nextBtn = this.querySelector("[data-next-btn]");
         this.results = this.querySelector("[data-results]");
@@ -959,6 +998,8 @@
         if (this.restoreResultsFromCookie()) {
           return;
         }
+
+        this.showStartScreen();
       }
 
       getCookie(name) {
@@ -1083,6 +1124,10 @@
           option.addEventListener("click", (event) => this.selectOption(event));
         });
 
+        if (this.startBtn) {
+          this.startBtn.addEventListener("click", () => this.startQuiz());
+        }
+
         this.prevBtn.addEventListener("click", () => this.previousQuestion());
         this.nextBtn.addEventListener("click", () => this.nextQuestion());
 
@@ -1093,6 +1138,30 @@
         if (this.subscribeForm) {
           this.subscribeForm.addEventListener("submit", (event) => this.handleSubscribe(event));
         }
+      }
+
+      showStartScreen() {
+        this.classList.add("is-start");
+        this.classList.remove("is-results");
+
+        if (this.startScreen) {
+          this.startScreen.style.display = "";
+        }
+
+        this.querySelector("[data-quiz-progress]").style.display = "";
+        this.querySelector("[data-quiz-questions]").style.display = "";
+        this.querySelector("[data-quiz-nav]").style.display = "";
+
+        if (this.results) {
+          this.results.classList.remove("active");
+        }
+      }
+
+      startQuiz() {
+        this.classList.remove("is-start");
+        this.currentQuestion = 1;
+        this.showQuestion();
+        this.updateProgress();
       }
 
       selectOption(event) {
@@ -1175,8 +1244,13 @@
         this.renderResultType(this.types[this.resultTypeIndex] || this.types[0]);
         this.updateSubscribeTags();
 
+        this.classList.remove("is-start");
         this.classList.add("is-results");
-        this.querySelector("[data-quiz-header]").style.display = "none";
+
+        if (this.startScreen) {
+          this.startScreen.style.display = "none";
+        }
+
         this.querySelector("[data-quiz-progress]").style.display = "none";
         this.querySelector("[data-quiz-questions]").style.display = "none";
         this.querySelector("[data-quiz-nav]").style.display = "none";
@@ -1454,19 +1528,12 @@
         this.isSubscribed = false;
         this.clearResultsCookie();
 
-        this.classList.remove("is-results");
-        this.querySelector("[data-quiz-header]").style.display = "";
-        this.querySelector("[data-quiz-progress]").style.display = "";
-        this.querySelector("[data-quiz-questions]").style.display = "";
-        this.querySelector("[data-quiz-nav]").style.display = "";
-        this.results.classList.remove("active");
-
         this.querySelectorAll(".ai-quiz-option-{{ ai_gen_id }}").forEach((opt) => {
           opt.classList.remove("selected");
         });
 
         this.resetLockedState();
-        this.showQuestion();
+        this.showStartScreen();
         this.updateProgress();
       }
     }
@@ -1495,6 +1562,12 @@
       "id": "quiz_description",
       "label": "Quiz description",
       "default": "Answer 5 questions to discover your perfect match"
+    },
+    {
+      "type": "text",
+      "id": "start_button_text",
+      "label": "Start button",
+      "default": "Enter the scene"
     },
     {
       "type": "range",
