@@ -139,7 +139,9 @@
     </span>
     
     {%- if request.page_type != 'password' -%}
-      {%- sections 'header-group' -%}
+      {%- unless is_quiz_journey -%}
+        {%- sections 'header-group' -%}
+      {%- endunless -%}
       {%- unless is_quiz_journey -%}
         {%- sections 'overlay-group' -%}
       {%- endunless -%}
