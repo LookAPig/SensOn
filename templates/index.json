@@ -387,18 +387,6 @@
     "reviews_49wHXX": {
       "type": "reviews",
       "blocks": {
-        "testimonial_h73QA7": {
-          "type": "testimonial",
-          "disabled": true,
-          "settings": {
-            "cover": "shopify://shop_images/jask.jpg",
-            "comment": "",
-            "stars": 5,
-            "creator_name": "jasknotjaz",
-            "creator_desc": "LGBTQ+ Creator；Comedy Influencer",
-            "creator_subs": "33K Subscribers"
-          }
-        },
         "testimonial_LyiQeD": {
           "type": "testimonial",
           "settings": {
@@ -503,6 +491,19 @@
             "creator_subs": "80K Subscribers"
           }
         },
+        "testimonial_h73QA7": {
+          "type": "testimonial",
+          "settings": {
+            "cover": "shopify://shop_images/jask.jpg",
+            "video": "shopify://files/videos/jasknot.mp4",
+            "comment": "<p><em>“All you need to do is lie down, that's it.The app is interactive, and the more you use it, it's gonna get to know your body, it's gonna get to know what you like.”</em></p>",
+            "stars": 5,
+            "avatar": "shopify://shop_images/jasknotjaz.jpg",
+            "creator_name": "jasknotjaz",
+            "creator_desc": "LGBTQ+ Creator,Comedy Influencer",
+            "creator_subs": "33K Subscribers"
+          }
+        },
         "testimonial_PD7fcH": {
           "type": "testimonial",
           "settings": {
@@ -557,7 +558,6 @@
         }
       },
       "block_order": [
-        "testimonial_h73QA7",
         "testimonial_LyiQeD",
         "testimonial_yn4fjr",
         "testimonial_mMEfTq",
@@ -566,6 +566,7 @@
         "testimonial_axGFwx",
         "testimonial_FTcrGb",
         "testimonial_Vzm4HY",
+        "testimonial_h73QA7",
         "testimonial_PD7fcH",
         "testimonial_fqkBNz",
         "testimonial_a9RQHa",
