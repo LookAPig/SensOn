@@ -103,7 +103,7 @@
         "control_pDDqit": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/intimate-hands-touching-sensual-lighting.jpg",
+            "image": "shopify://shop_images/Choose_How_You_Control.gif",
             "title": "Manual Mode",
             "description": "<p>Select Manual Mode in the app to adjust each component's intensity in real time, giving you direct control over rhythm, strength, and pacing.</p>"
           }
@@ -111,7 +111,7 @@
         "control_4LfLrp": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/intimate-sculpture-pink-glow.jpg",
+            "image": "shopify://shop_images/Choose_How_You_Control.gif",
             "title": "Physical Buttons",
             "description": "<p>Use the on-device buttons to switch between 5 intensity levels, even without <strong>the</strong> app connection.</p>"
           }
