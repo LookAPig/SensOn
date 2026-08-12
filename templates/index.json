@@ -391,6 +391,7 @@
           "type": "testimonial",
           "disabled": true,
           "settings": {
+            "cover": "shopify://shop_images/jask.jpg",
             "comment": "",
             "stars": 5,
             "creator_name": "jasknotjaz",
