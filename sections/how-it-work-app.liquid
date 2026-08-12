@@ -92,11 +92,25 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_app .image,
+  #shopify-section-{{ section.id }} .how_it_work_app .video,
   #shopify-section-{{ section.id }} .how_it_work_app .placeholder {
     display: block;
     height: 100%;
     object-fit: cover;
     width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .media {
+    height: 100%;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .desktop_media {
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_app .mobile_media {
+    display: none;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_app .placeholder {
@@ -318,6 +332,14 @@
       max-width: none;
     }
 
+    #shopify-section-{{ section.id }} .how_it_work_app .desktop_media {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .mobile_media {
+      display: block;
+    }
+
     #shopify-section-{{ section.id }} .how_it_work_app .image_wrap {
       border-radius: 10px;
       max-width: min(61.2vw, 260px);
@@ -407,7 +429,79 @@
                 {{ block.shopify_attributes }}
               >
                 <div class="image_wrap">
-                  {%- if block.settings.image != blank -%}
+                  {%- liquid
+                    assign has_desktop_video = false
+                    assign has_mobile_video = false
+
+                    if block.settings.video != blank
+                      assign has_desktop_video = true
+                    endif
+
+                    if block.settings.mobile_video != blank
+                      assign has_mobile_video = true
+                    endif
+                  -%}
+
+                  {%- if has_desktop_video and has_mobile_video -%}
+                    <div class="media desktop_media">
+                      {{
+                        block.settings.video
+                        | video_tag:
+                          class: 'video',
+                          autoplay: true,
+                          loop: true,
+                          muted: true,
+                          playsinline: true,
+                          controls: false,
+                          preload: 'metadata',
+                          image_size: '1200x'
+                      }}
+                    </div>
+                    <div class="media mobile_media">
+                      {{
+                        block.settings.mobile_video
+                        | video_tag:
+                          class: 'video',
+                          autoplay: true,
+                          loop: true,
+                          muted: true,
+                          playsinline: true,
+                          controls: false,
+                          preload: 'metadata',
+                          image_size: '800x'
+                      }}
+                    </div>
+                  {%- elsif has_desktop_video -%}
+                    <div class="media">
+                      {{
+                        block.settings.video
+                        | video_tag:
+                          class: 'video',
+                          autoplay: true,
+                          loop: true,
+                          muted: true,
+                          playsinline: true,
+                          controls: false,
+                          preload: 'metadata',
+                          image_size: '1200x'
+                      }}
+                    </div>
+                  {%- elsif has_mobile_video -%}
+                    <div class="media">
+                      {{
+                        block.settings.mobile_video
+                        | video_tag:
+                          class: 'video',
+                          autoplay: true,
+                          loop: true,
+                          muted: true,
+                          playsinline: true,
+                          controls: false,
+                          preload: 'metadata',
+                          image_size: '800x'
+                      }}
+                    </div>
+                  {%- elsif block.settings.image != blank -%}
                     {{
                       block.settings.image
                       | image_url: width: 1200
@@ -473,6 +567,34 @@
     let activeIndex = 0;
     let touchStartX = 0;
 
+    const syncSlideVideos = () => {
+      slides.forEach((slide, slideIndex) => {
+        const videos = slide.querySelectorAll("video");
+        const isActive = slideIndex === activeIndex;
+
+        videos.forEach((video) => {
+          const media = video.closest(".media");
+          const isVisible = !media || window.getComputedStyle(media).display !== "none";
+
+          if (isActive && isVisible) {
+            const playPromise = video.play();
+
+            if (playPromise && typeof playPromise.catch === "function") {
+              playPromise.catch(() => {});
+            }
+
+            return;
+          }
+
+          video.pause();
+
+          if (!isActive) {
+            video.currentTime = 0;
+          }
+        });
+      });
+    };
+
     const showSlide = (index) => {
       activeIndex = (index + slides.length) % slides.length;
       track.style.transform = `translate3d(-${activeIndex * 100}%, 0, 0)`;
@@ -480,6 +602,8 @@
       slides.forEach((slide, slideIndex) => {
         slide.setAttribute("aria-hidden", slideIndex === activeIndex ? "false" : "true");
       });
+
+      syncSlideVideos();
     };
 
     const hasMultipleSlides = slides.length > 1;
@@ -537,6 +661,8 @@
     }
 
     showSlide(0);
+
+    window.addEventListener("resize", syncSlideVideos);
   })();
 </script>
 
@@ -627,7 +753,19 @@
           "type": "image_picker",
           "id": "image",
           "label": "图片",
-          "info": "建议使用 3:4 的竖版图片。"
+          "info": "未上传视频时显示。建议使用 3:4 的竖版图片。"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "PC 端视频",
+          "info": "优先于图片显示。若未上传移动端视频，移动端也会使用此视频。"
+        },
+        {
+          "type": "video",
+          "id": "mobile_video",
+          "label": "移动端视频",
+          "info": "可选。未上传时移动端回退使用 PC 端视频。"
         },
         {
           "type": "text",
