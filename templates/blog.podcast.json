@@ -116,7 +116,7 @@
       "settings": {
         "color_scheme": "scheme-4",
         "show_tags": true,
-        "posts_per_page": 6,
+        "posts_per_page": 4,
         "highlight_blog_post_position": 0,
         "enable_podcast_cards": true,
         "blog_post_card_heading_size": "h5",
