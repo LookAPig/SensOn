@@ -225,7 +225,7 @@
       ],
       "settings": {
         "color_scheme": "scheme-7",
-        "add_vertical_spacing": true,
+        "add_vertical_spacing": false,
         "add_horizontal_spacing": true
       }
     }
