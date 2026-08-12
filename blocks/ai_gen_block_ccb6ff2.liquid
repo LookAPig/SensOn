@@ -21,13 +21,37 @@
     display: none !important;
   }
 
+  body.template-quiz-journey .shopify-section-group-header-group {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  body.template-quiz-journey .shopify-section--header,
+  body.template-quiz-journey .x-header-wrapper,
+  body.template-quiz-journey .header {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    --background: 0 0 0 / 0 !important;
+    --background-gradient: none !important;
+    --border-color: 0 0 0 / 0 !important;
+  }
+
   body.template-quiz-journey .header {
     --header-grid: "logo" / auto !important;
     justify-content: start;
+    padding-block: 12px;
   }
 
   body.template-quiz-journey .header__logo {
     justify-self: start;
+    pointer-events: auto;
   }
 
   .ai-quiz-container-{{ ai_gen_id }} {
