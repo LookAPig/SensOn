@@ -387,6 +387,17 @@
     "reviews_49wHXX": {
       "type": "reviews",
       "blocks": {
+        "testimonial_h73QA7": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "comment": "",
+            "stars": 5,
+            "creator_name": "jasknotjaz",
+            "creator_desc": "LGBTQ+ Creator；Comedy Influencer",
+            "creator_subs": "33K Subscribers"
+          }
+        },
         "testimonial_LyiQeD": {
           "type": "testimonial",
           "settings": {
@@ -545,6 +556,7 @@
         }
       },
       "block_order": [
+        "testimonial_h73QA7",
         "testimonial_LyiQeD",
         "testimonial_yn4fjr",
         "testimonial_mMEfTq",
