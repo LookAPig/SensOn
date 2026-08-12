@@ -105,7 +105,15 @@
     endif
   %}
 
-  <body class="{{ features_class }}">
+  {%- liquid
+    assign is_quiz_journey = false
+
+    if template.name == 'page' and template.suffix == 'quiz-journey'
+      assign is_quiz_journey = true
+    endif
+  -%}
+
+  <body class="{{ features_class }}{% if is_quiz_journey %} template-quiz-journey{% endif %}">
     {%- render 'shadow-dom-templates' -%}
 
     <loading-bar class="loading-bar" aria-hidden="true"></loading-bar>
@@ -132,14 +140,16 @@
     
     {%- if request.page_type != 'password' -%}
       {%- sections 'header-group' -%}
-      {%- sections 'overlay-group' -%}
+      {%- unless is_quiz_journey -%}
+        {%- sections 'overlay-group' -%}
+      {%- endunless -%}
     {%- endif -%}
 
     <main id="main" class="anchor">
       {{ content_for_layout }}
     </main>
 
-    {%- if request.page_type != 'password' -%}
+    {%- if request.page_type != 'password' and is_quiz_journey == false -%}
       {%- sections 'footer-group' -%}
     {%- endif -%}
 

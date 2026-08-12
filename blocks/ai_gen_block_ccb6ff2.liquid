@@ -3,6 +3,33 @@
 {% assign quiz_newsletter_form_class = 'ai-quiz-result-form-' | append: ai_gen_id %}
 
 {% style %}
+  /* Quiz journey: keep logo + quiz only; hide site chrome */
+  body.template-quiz-journey {
+    padding-bottom: 0 !important;
+  }
+
+  body.template-quiz-journey .shopify-section-group-header-group > .shopify-section:not(.shopify-section--header),
+  body.template-quiz-journey .shopify-section--announcement-bar,
+  body.template-quiz-journey .header__primary-nav,
+  body.template-quiz-journey .header__secondary-nav,
+  body.template-quiz-journey #sticky-bar-pc,
+  body.template-quiz-journey #sticky-bar-h5,
+  body.template-quiz-journey .sb-section-pc,
+  body.template-quiz-journey .sb-section-h5,
+  body.template-quiz-journey .shopify-section-group-footer-group,
+  body.template-quiz-journey .shopify-section-group-overlay-group {
+    display: none !important;
+  }
+
+  body.template-quiz-journey .header {
+    --header-grid: "logo" / auto !important;
+    justify-content: start;
+  }
+
+  body.template-quiz-journey .header__logo {
+    justify-self: start;
+  }
+
   .ai-quiz-container-{{ ai_gen_id }} {
     position: relative;
     isolation: isolate;
