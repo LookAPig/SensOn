@@ -67,7 +67,7 @@
     grid-template-columns: minmax(0, 1fr);
     align-content: start;
     gap: 0;
-    flex: 1;
+    /* flex: 1; */
     color: inherit;
     text-decoration: none;
   }
@@ -87,29 +87,22 @@
     display: block;
   }
 
-  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container {
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__introduction {
     margin-block-start: 1rem;
-    overflow: hidden;
-    border-radius: 0.75rem;
-    background: rgb(255 255 255 / 0.06);
-    position: relative;
-    z-index: 2;
+    color: rgb(var(--text-color) / 0.72);
+    text-decoration: none;
   }
 
-  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container iframe,
-  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container audio,
-  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-audio-embed {
-    display: block;
-    width: 100%;
-    border: 0;
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__introduction > *:first-child {
+    margin-block-start: 0;
   }
 
-  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-audio-embed--buzzsprout {
-    min-height: 5.5rem;
+  #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__introduction > *:last-child {
+    margin-block-end: 0;
   }
 
   @supports (grid-template-rows: subgrid) {
-    #shopify-section-{{ section.id }} .blog-post-card--podcast-with-player {
+    #shopify-section-{{ section.id }} .blog-post-card--podcast-with-intro {
       grid-row: span 3;
     }
   }
@@ -119,7 +112,7 @@
       margin-block-end: 1.5rem;
     }
 
-    #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__audio-container {
+    #shopify-section-{{ section.id }} .blog-post-card--podcast .blog-post-card__introduction {
       margin-block-start: 1.25rem;
     }
   }
@@ -285,43 +278,6 @@
   </div>
 </div>
 
-{%- if section.settings.enable_podcast_cards -%}
-  <script>
-    (function () {
-      const initBuzzsproutEmbeds = () => {
-        document.querySelectorAll("#shopify-section-{{ section.id }} [data-buzzsprout-embed]:not([data-buzzsprout-loaded])").forEach((wrapper) => {
-          const scriptSrc = wrapper.dataset.buzzsproutSrc;
-
-          if (!scriptSrc) {
-            return;
-          }
-
-          wrapper.dataset.buzzsproutLoaded = "true";
-
-          const script = document.createElement("script");
-          script.src = scriptSrc;
-          script.type = "text/javascript";
-          script.charset = "utf-8";
-          script.async = true;
-          wrapper.appendChild(script);
-        });
-      };
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initBuzzsproutEmbeds);
-      } else {
-        initBuzzsproutEmbeds();
-      }
-
-      document.addEventListener("shopify:section:load", (event) => {
-        if (event.target.id === "shopify-section-{{ section.id }}") {
-          initBuzzsproutEmbeds();
-        }
-      });
-    })();
-  </script>
-{%- endif -%}
-
 {% schema %}
 {
   "name": "t:sections.main_blog.name",
@@ -363,7 +319,7 @@
       "type": "checkbox",
       "id": "enable_podcast_cards",
       "label": "音频播放器卡片模式",
-      "info": "开启后按 Podcast 样式展示：custom.audio_image 封面图、custom.audio_title 粉色描述标题、文章标题、底部音频播放器。音频嵌入填写在 custom.audio_embed、摘要或正文。",
+      "info": "开启后按 Podcast 样式展示：custom.audio_image 封面图、custom.audio_title 粉色描述标题、文章标题、底部简介（custom.blog_introduction）。",
       "default": false
     },
     {

@@ -3,10 +3,63 @@
 {% assign quiz_newsletter_form_class = 'ai-quiz-result-form-' | append: ai_gen_id %}
 
 {% style %}
+  /* Quiz journey: keep logo + quiz only; hide site chrome */
+  body.template-quiz-journey {
+    padding-bottom: 0 !important;
+  }
+
+  body.template-quiz-journey .shopify-section-group-header-group > .shopify-section:not(.shopify-section--header),
+  body.template-quiz-journey .shopify-section--announcement-bar,
+  body.template-quiz-journey .header__primary-nav,
+  body.template-quiz-journey .header__secondary-nav,
+  body.template-quiz-journey #sticky-bar-pc,
+  body.template-quiz-journey #sticky-bar-h5,
+  body.template-quiz-journey .sb-section-pc,
+  body.template-quiz-journey .sb-section-h5,
+  body.template-quiz-journey .shopify-section-group-footer-group,
+  body.template-quiz-journey .shopify-section-group-overlay-group {
+    display: none !important;
+  }
+
+  body.template-quiz-journey .shopify-section-group-header-group {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  body.template-quiz-journey .shopify-section--header,
+  body.template-quiz-journey .x-header-wrapper,
+  body.template-quiz-journey .header {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    --background: 0 0 0 / 0 !important;
+    --background-gradient: none !important;
+    --border-color: 0 0 0 / 0 !important;
+  }
+
+  body.template-quiz-journey .header {
+    --header-grid: "logo" / auto !important;
+    justify-content: start;
+    padding-block: 12px;
+  }
+
+  body.template-quiz-journey .header__logo {
+    justify-self: start;
+    pointer-events: auto;
+  }
+
   .ai-quiz-container-{{ ai_gen_id }} {
     position: relative;
     isolation: isolate;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: {{ block.settings.desktop_width_percent }}%;
     max-width: 100%;
     min-height: 100svh;
@@ -15,6 +68,14 @@
     padding: 40px 20px;
     background-color: transparent;
     border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-quiz-container-{{ ai_gen_id }} h2,
+  .ai-quiz-container-{{ ai_gen_id }} h3,
+  .ai-quiz-container-{{ ai_gen_id }} h4,
+  .ai-quiz-container-{{ ai_gen_id }} h5,
+  .ai-quiz-container-{{ ai_gen_id }} h6 {
+    text-transform: none !important;
   }
 
   .ai-quiz-container-{{ ai_gen_id }}::before {
@@ -55,9 +116,29 @@
     display: none;
   }
 
+  .ai-quiz-start-{{ ai_gen_id }} {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .ai-quiz-container-{{ ai_gen_id }}.is-start .ai-quiz-start-{{ ai_gen_id }} {
+    display: flex;
+  }
+
+  .ai-quiz-container-{{ ai_gen_id }}.is-start [data-quiz-progress],
+  .ai-quiz-container-{{ ai_gen_id }}.is-start .ai-quiz-questions-{{ ai_gen_id }},
+  .ai-quiz-container-{{ ai_gen_id }}.is-start .ai-quiz-navigation-{{ ai_gen_id }} {
+    display: none;
+  }
+
   .ai-quiz-header-{{ ai_gen_id }} {
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 28px;
   }
 
   .ai-quiz-title-{{ ai_gen_id }} {
@@ -70,6 +151,28 @@
     font-size: {{ block.settings.description_size }}px;
     color: {{ block.settings.text_color }};
     opacity: 0.8;
+    white-space: pre-line;
+    line-height: 1.5;
+  }
+
+  .ai-quiz-start-cta-{{ ai_gen_id }} {
+    margin-top: 8px;
+    min-width: 200px;
+  }
+
+  .ai-quiz-progress-section-{{ ai_gen_id }} {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .ai-quiz-chapter-{{ ai_gen_id }} {
+    margin: 0 0 12px;
+    font-size: {{ block.settings.chapter_size }}px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: #ffffff;
   }
 
   .ai-quiz-progress-{{ ai_gen_id }} {
@@ -78,7 +181,6 @@
     background-color: {{ block.settings.progress_bg_color }};
     border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 16px;
   }
 
   .ai-quiz-progress-bar-{{ ai_gen_id }} {
@@ -106,6 +208,7 @@
     color: {{ block.settings.text_color }};
     margin: 0 0 24px;
     font-weight: 600;
+    text-transform: none !important;
   }
 
   .ai-quiz-options-{{ ai_gen_id }} {
@@ -643,6 +746,10 @@
     .ai-quiz-button-{{ ai_gen_id }} {
       width: 100%;
     }
+
+    .ai-quiz-start-cta-{{ ai_gen_id }} {
+      width: 100%;
+    }
   }
 {% endstyle %}
 
@@ -703,24 +810,39 @@
   ]
 </script>
 
-<quiz-component-{{ ai_gen_id }} class="ai-quiz-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-quiz-header-{{ ai_gen_id }}" data-quiz-header>
-    {% if block.settings.quiz_title != blank %}
-      <h2 class="ai-quiz-title-{{ ai_gen_id }}">{{ block.settings.quiz_title }}</h2>
-    {% endif %}
-    {% if block.settings.quiz_description != blank %}
-      <div class="ai-quiz-description-{{ ai_gen_id }}">{{ block.settings.quiz_description }}</div>
-    {% endif %}
+<quiz-component-{{ ai_gen_id }} class="ai-quiz-container-{{ ai_gen_id }} is-start" {{ block.shopify_attributes }}>
+  <div class="ai-quiz-start-{{ ai_gen_id }}" data-quiz-start>
+    <div class="ai-quiz-header-{{ ai_gen_id }}" data-quiz-header>
+      {% if block.settings.quiz_title != blank %}
+        <h2 class="ai-quiz-title-{{ ai_gen_id }}">{{ block.settings.quiz_title }}</h2>
+      {% endif %}
+      {% if block.settings.quiz_description != blank %}
+        <div class="ai-quiz-description-{{ ai_gen_id }}">{{ block.settings.quiz_description }}</div>
+      {% endif %}
+    </div>
+
+    <button
+      type="button"
+      class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-start-cta-{{ ai_gen_id }}"
+      data-start-btn
+      data-event="quiz_started"
+    >
+      {{ block.settings.start_button_text }}
+    </button>
   </div>
 
-  <div class="ai-quiz-progress-{{ ai_gen_id }}" data-quiz-progress>
-    <div class="ai-quiz-progress-bar-{{ ai_gen_id }}" data-progress-bar></div>
+  <div class="ai-quiz-progress-section-{{ ai_gen_id }}" data-quiz-progress>
+    <p class="ai-quiz-chapter-{{ ai_gen_id }}" data-quiz-chapter hidden></p>
+    <div class="ai-quiz-progress-{{ ai_gen_id }}">
+      <div class="ai-quiz-progress-bar-{{ ai_gen_id }}" data-progress-bar></div>
+    </div>
   </div>
 
   <div class="ai-quiz-questions-{{ ai_gen_id }}" data-quiz-questions>
     {% for i in (1..5) %}
       {% liquid
         assign question_key = 'question_' | append: i
+        assign chapter_key = 'q' | append: i | append: '_chapter'
         assign option_1_key = 'q' | append: i | append: '_option_1'
         assign option_2_key = 'q' | append: i | append: '_option_2'
         assign option_3_key = 'q' | append: i | append: '_option_3'
@@ -728,6 +850,7 @@
         assign option_5_key = 'q' | append: i | append: '_option_5'
 
         assign question = block.settings[question_key]
+        assign chapter = block.settings[chapter_key]
         assign option_1 = block.settings[option_1_key]
         assign option_2 = block.settings[option_2_key]
         assign option_3 = block.settings[option_3_key]
@@ -735,7 +858,11 @@
         assign option_5 = block.settings[option_5_key]
       %}
 
-      <div class="ai-quiz-question-{{ ai_gen_id }} {% if i == 1 %}active{% endif %}" data-question="{{ i }}">
+      <div
+        class="ai-quiz-question-{{ ai_gen_id }} {% if i == 1 %}active{% endif %}"
+        data-question="{{ i }}"
+        data-chapter="{{ chapter | escape }}"
+      >
         <h3 class="ai-quiz-question-title-{{ ai_gen_id }}">{{ i }}. {{ question }}</h3>
         <div class="ai-quiz-options-{{ ai_gen_id }}">
           {% if option_1 != blank %}
@@ -762,12 +889,18 @@
     <button type="button" class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-button-secondary-{{ ai_gen_id }}" data-prev-btn disabled>
       {{ block.settings.previous_button_text }}
     </button>
-    <button type="button" class="ai-quiz-button-{{ ai_gen_id }}" data-next-btn disabled>
+    <button
+      type="button"
+      class="ai-quiz-button-{{ ai_gen_id }}"
+      data-next-btn
+      data-event="question_1_completed"
+      disabled
+    >
       {{ block.settings.next_button_text }}
     </button>
   </div>
 
-  <div class="ai-quiz-results-{{ ai_gen_id }}" data-results>
+  <div class="ai-quiz-results-{{ ai_gen_id }}" data-results data-event="result_preview_viewed">
     <div class="ai-quiz-result-card-{{ ai_gen_id }}">
       <div class="ai-quiz-result-top-{{ ai_gen_id }}">
         <div class="ai-quiz-result-brand-{{ ai_gen_id }}">{{ block.settings.results_brand_name }}</div>
@@ -842,7 +975,12 @@
             required
             data-email-input
           >
-          <button type="submit" class="ai-quiz-result-submit-{{ ai_gen_id }}" data-submit-btn>
+          <button
+            type="submit"
+            class="ai-quiz-result-submit-{{ ai_gen_id }}"
+            data-submit-btn
+            data-event="email_submitted"
+          >
             {{ block.settings.results_cta_text }}
           </button>
         {% endform %}
@@ -881,7 +1019,10 @@
 
       connectedCallback() {
         this.progressBar = this.querySelector("[data-progress-bar]");
+        this.chapterLabel = this.querySelector("[data-quiz-chapter]");
         this.questions = this.querySelectorAll(".ai-quiz-question-{{ ai_gen_id }}");
+        this.startScreen = this.querySelector("[data-quiz-start]");
+        this.startBtn = this.querySelector("[data-start-btn]");
         this.prevBtn = this.querySelector("[data-prev-btn]");
         this.nextBtn = this.querySelector("[data-next-btn]");
         this.results = this.querySelector("[data-results]");
@@ -897,6 +1038,8 @@
         if (this.restoreResultsFromCookie()) {
           return;
         }
+
+        this.showStartScreen();
       }
 
       getCookie(name) {
@@ -988,7 +1131,7 @@
           }
         });
 
-        this.showResults({ skipCookieWrite: true });
+        this.showResults({ skipCookieWrite: true, skipAnalytics: true });
 
         const formPosted = Boolean(this.subscribeForm && this.subscribeForm.querySelector("[data-subscribe-posted]"));
         const storageKey = this.getSubscribeStorageKey();
@@ -1016,10 +1159,58 @@
         }
       }
 
+      trackGa4(eventName, params) {
+        if (!eventName) {
+          return;
+        }
+
+        const payload = Object.assign(
+          {
+            event_category: "quiz",
+            quiz_id: "{{ ai_gen_id }}"
+          },
+          params || {}
+        );
+
+        window.dataLayer = window.dataLayer || [];
+
+        if (typeof window.gtag === "function") {
+          window.gtag("event", eventName, payload);
+          return;
+        }
+
+        window.dataLayer.push(
+          Object.assign(
+            {
+              event: eventName
+            },
+            payload
+          )
+        );
+      }
+
+      trackDataEvent(element, params) {
+        if (!element) {
+          return;
+        }
+
+        const eventName = element.getAttribute("data-event");
+
+        if (!eventName) {
+          return;
+        }
+
+        this.trackGa4(eventName, params);
+      }
+
       setupEventListeners() {
         this.querySelectorAll(".ai-quiz-option-{{ ai_gen_id }}").forEach((option) => {
           option.addEventListener("click", (event) => this.selectOption(event));
         });
+
+        if (this.startBtn) {
+          this.startBtn.addEventListener("click", () => this.startQuiz());
+        }
 
         this.prevBtn.addEventListener("click", () => this.previousQuestion());
         this.nextBtn.addEventListener("click", () => this.nextQuestion());
@@ -1031,6 +1222,31 @@
         if (this.subscribeForm) {
           this.subscribeForm.addEventListener("submit", (event) => this.handleSubscribe(event));
         }
+      }
+
+      showStartScreen() {
+        this.classList.add("is-start");
+        this.classList.remove("is-results");
+
+        if (this.startScreen) {
+          this.startScreen.style.display = "";
+        }
+
+        this.querySelector("[data-quiz-progress]").style.display = "";
+        this.querySelector("[data-quiz-questions]").style.display = "";
+        this.querySelector("[data-quiz-nav]").style.display = "";
+
+        if (this.results) {
+          this.results.classList.remove("active");
+        }
+      }
+
+      startQuiz() {
+        this.trackDataEvent(this.startBtn);
+        this.classList.remove("is-start");
+        this.currentQuestion = 1;
+        this.showQuestion();
+        this.updateProgress();
       }
 
       selectOption(event) {
@@ -1055,30 +1271,65 @@
       }
 
       nextQuestion() {
-        if (this.currentQuestion < this.totalQuestions) {
+        const completedQuestion = this.currentQuestion;
+        const selectedOption = this.answers[completedQuestion];
+
+        this.trackDataEvent(this.nextBtn, {
+          question_number: completedQuestion,
+          selected_option: selectedOption || ""
+        });
+
+        if (completedQuestion < this.totalQuestions) {
           this.currentQuestion++;
           this.showQuestion();
           this.updateProgress();
-        } else {
-          this.showResults();
+          return;
         }
+
+        this.trackGa4("quiz_completed", {
+          question_number: completedQuestion,
+          selected_option: selectedOption || "",
+          result_type_index: this.calculateResultIndex()
+        });
+        this.showResults();
       }
 
       showQuestion() {
         this.questions.forEach((question) => question.classList.remove("active"));
         const currentQ = this.querySelector(`[data-question="${this.currentQuestion}"]`);
         currentQ.classList.add("active");
+        this.updateChapter(currentQ);
 
         this.prevBtn.disabled = this.currentQuestion === 1;
 
         const hasAnswer = this.answers[this.currentQuestion];
         this.nextBtn.disabled = !hasAnswer;
+        this.nextBtn.setAttribute("data-event", "question_" + this.currentQuestion + "_completed");
 
         if (this.currentQuestion === this.totalQuestions && hasAnswer) {
           this.nextBtn.textContent = {{ block.settings.submit_button_text | json }};
         } else {
           this.nextBtn.textContent = {{ block.settings.next_button_text | json }};
         }
+      }
+
+      updateChapter(questionEl) {
+        if (!this.chapterLabel) {
+          return;
+        }
+
+        const chapter = questionEl && questionEl.dataset.chapter
+          ? questionEl.dataset.chapter.trim()
+          : "";
+
+        if (!chapter) {
+          this.chapterLabel.textContent = "";
+          this.chapterLabel.hidden = true;
+          return;
+        }
+
+        this.chapterLabel.textContent = this.currentQuestion + " OF " + this.totalQuestions + " · " + chapter;
+        this.chapterLabel.hidden = false;
       }
 
       updateProgress() {
@@ -1113,8 +1364,13 @@
         this.renderResultType(this.types[this.resultTypeIndex] || this.types[0]);
         this.updateSubscribeTags();
 
+        this.classList.remove("is-start");
         this.classList.add("is-results");
-        this.querySelector("[data-quiz-header]").style.display = "none";
+
+        if (this.startScreen) {
+          this.startScreen.style.display = "none";
+        }
+
         this.querySelector("[data-quiz-progress]").style.display = "none";
         this.querySelector("[data-quiz-questions]").style.display = "none";
         this.querySelector("[data-quiz-nav]").style.display = "none";
@@ -1122,6 +1378,15 @@
 
         if (!options.skipCookieWrite) {
           this.saveResultsCookie();
+        }
+
+        if (!options.skipAnalytics) {
+          const resultType = this.types[this.resultTypeIndex] || {};
+
+          this.trackDataEvent(this.results, {
+            result_type_index: this.resultTypeIndex,
+            result_type_name: resultType.name || ""
+          });
         }
 
         const storageKey = this.getSubscribeStorageKey();
@@ -1300,6 +1565,18 @@
           this.formMessage.classList.add("is-success");
         }
 
+        if (!fromStorage) {
+          const submitBtn = this.subscribeForm
+            ? this.subscribeForm.querySelector("[data-submit-btn]")
+            : null;
+          const resultType = this.types[this.resultTypeIndex] || {};
+
+          this.trackDataEvent(submitBtn, {
+            result_type_index: this.resultTypeIndex,
+            result_type_name: resultType.name || ""
+          });
+        }
+
         const storageKey = this.getSubscribeStorageKey();
 
         if (storageKey) {
@@ -1392,19 +1669,12 @@
         this.isSubscribed = false;
         this.clearResultsCookie();
 
-        this.classList.remove("is-results");
-        this.querySelector("[data-quiz-header]").style.display = "";
-        this.querySelector("[data-quiz-progress]").style.display = "";
-        this.querySelector("[data-quiz-questions]").style.display = "";
-        this.querySelector("[data-quiz-nav]").style.display = "";
-        this.results.classList.remove("active");
-
         this.querySelectorAll(".ai-quiz-option-{{ ai_gen_id }}").forEach((opt) => {
           opt.classList.remove("selected");
         });
 
         this.resetLockedState();
-        this.showQuestion();
+        this.showStartScreen();
         this.updateProgress();
       }
     }
@@ -1435,6 +1705,12 @@
       "default": "Answer 5 questions to discover your perfect match"
     },
     {
+      "type": "text",
+      "id": "start_button_text",
+      "label": "Start button",
+      "default": "Enter the scene"
+    },
+    {
       "type": "range",
       "id": "desktop_width_percent",
       "label": "Desktop width",
@@ -1447,6 +1723,12 @@
     {
       "type": "header",
       "content": "Question 1"
+    },
+    {
+      "type": "text",
+      "id": "q1_chapter",
+      "label": "Chapter name",
+      "default": "THE INVITATION"
     },
     {
       "type": "text",
@@ -1490,6 +1772,12 @@
     },
     {
       "type": "text",
+      "id": "q2_chapter",
+      "label": "Chapter name",
+      "default": "THE ROOM"
+    },
+    {
+      "type": "text",
       "id": "question_2",
       "label": "Question",
       "default": "How would you describe your current lifestyle?"
@@ -1527,6 +1815,12 @@
     {
       "type": "header",
       "content": "Question 3"
+    },
+    {
+      "type": "text",
+      "id": "q3_chapter",
+      "label": "Chapter name",
+      "default": "THE FIRST MOVE"
     },
     {
       "type": "text",
@@ -1570,6 +1864,12 @@
     },
     {
       "type": "text",
+      "id": "q4_chapter",
+      "label": "Chapter name",
+      "default": "THE SHIFT"
+    },
+    {
+      "type": "text",
       "id": "question_4",
       "label": "Question",
       "default": "How do you prefer to track your wellness?"
@@ -1607,6 +1907,12 @@
     {
       "type": "header",
       "content": "Question 5"
+    },
+    {
+      "type": "text",
+      "id": "q5_chapter",
+      "label": "Chapter name",
+      "default": "WHAT STAYS"
     },
     {
       "type": "text",
@@ -2557,6 +2863,16 @@
       "step": 2,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "range",
+      "id": "chapter_size",
+      "label": "Chapter size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
     },
     {
       "type": "range",

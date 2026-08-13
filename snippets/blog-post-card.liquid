@@ -20,7 +20,7 @@ Supported parameters
 * position: the position of the card in the list. If specified, the theme will eagerly load the first 3 cards images
 * placeholder_image: the name of an image used for the placeholder_svg_tag
 * block: an optional block from which theme editor attributes are rendered
-* podcast_mode: podcast card layout with custom audio image/title and bottom audio player
+* podcast_mode: podcast card layout with custom audio image/title and bottom blog introduction
 {%- endcomment -%}
 
 {%- liquid
@@ -32,58 +32,12 @@ Supported parameters
 
   assign audio_image = article.metafields.custom.audio_image.value
   assign audio_title = article.metafields.custom.audio_title.value | strip
+  assign blog_introduction = article.metafields.custom.blog_introduction | metafield_text | strip
 
-  assign audio_embed = article.metafields.custom.audio_embed.value | strip
+  assign has_blog_introduction = false
 
-  if audio_embed == blank
-    assign audio_embed = article.excerpt | strip
-  endif
-
-  if audio_embed == blank and article.content != blank
-    if article.content contains 'buzzsprout.com' or article.content contains 'buzzsprout-player-' or article.content contains 'open.spotify.com/embed' or article.content contains 'open.spotify.com/episode/' or article.content contains '<iframe' or article.content contains '<audio'
-      assign audio_embed = article.content
-    endif
-  endif
-
-  if audio_embed != blank and audio_embed contains 'buzzsprout-player-'
-    assign buzzsprout_chunks = audio_embed | split: 'buzzsprout-player-'
-
-    if buzzsprout_chunks.size > 1
-      assign buzzsprout_player_suffix = buzzsprout_chunks[1] | split: '"' | first | split: "'" | first
-      assign buzzsprout_container_id = 'buzzsprout-player-' | append: buzzsprout_player_suffix
-      assign buzzsprout_div_open = '<div id="' | append: buzzsprout_container_id | append: '"></div>'
-      assign buzzsprout_script_src = ''
-
-      assign src_chunks = audio_embed | split: 'src="'
-      for src_chunk in src_chunks offset: 1
-        assign candidate_src = src_chunk | split: '"' | first
-
-        if buzzsprout_script_src == blank and candidate_src contains 'buzzsprout.com' and candidate_src contains '.js'
-          assign buzzsprout_script_src = candidate_src
-        endif
-      endfor
-
-      if buzzsprout_script_src == blank
-        assign src_chunks = audio_embed | split: "src='"
-        for src_chunk in src_chunks offset: 1
-          assign candidate_src = src_chunk | split: "'" | first
-
-          if buzzsprout_script_src == blank and candidate_src contains 'buzzsprout.com' and candidate_src contains '.js'
-            assign buzzsprout_script_src = candidate_src
-          endif
-        endfor
-      endif
-
-      if buzzsprout_script_src != blank
-        assign audio_embed = buzzsprout_div_open | append: '<script src="' | append: buzzsprout_script_src | append: '" type="text/javascript" charset="utf-8"></script>'
-      endif
-    endif
-  endif
-
-  assign has_audio_embed = false
-
-  if podcast_mode_enabled and article and audio_embed != blank
-    assign has_audio_embed = true
+  if podcast_mode_enabled and article and blog_introduction != blank
+    assign has_blog_introduction = true
   endif
 
   assign podcast_card_classes = 'blog-post-card'
@@ -96,8 +50,8 @@ Supported parameters
     assign podcast_card_classes = podcast_card_classes | append: ' blog-post-card--podcast'
   endif
 
-  if has_audio_embed
-    assign podcast_card_classes = podcast_card_classes | append: ' blog-post-card--podcast-with-player'
+  if has_blog_introduction
+    assign podcast_card_classes = podcast_card_classes | append: ' blog-post-card--podcast-with-intro'
   endif
 
   assign podcast_card_classes = podcast_card_classes | append: ' group snap-start'
@@ -178,7 +132,7 @@ Supported parameters
         <span class="{{ heading_size | default: 'h5' }} blog-post-card__title">{{- 'general.on_boarding.blog_post_title' | t -}}</span>
       {%- endif -%}
 
-      {%- if show_excerpt and has_audio_embed == false -%}
+      {%- if show_excerpt and has_blog_introduction == false -%}
         {%- if article -%}
           {%- unless article.excerpt_or_content == blank -%}
             <p>{{ article.excerpt_or_content | strip_html | truncate: 200 }}</p>
@@ -191,16 +145,16 @@ Supported parameters
   </div>
 {%- endcapture -%}
 
-{%- if podcast_mode_enabled and has_audio_embed -%}
+{%- if podcast_mode_enabled and has_blog_introduction -%}
   <div class="{{ podcast_card_classes }}" {% if settings.stagger_blog_posts and reveal != false %}reveal-on-scroll="true"{% endif %} {{ block.shopify_attributes }}>
     <a href="{{ article.url }}" class="blog-post-card__primary-link">
       {{- blog_post_card_image -}}
       {{- blog_post_card_content -}}
     </a>
 
-    <div class="blog-post-card__audio-container">
-      {%- render 'blog-post-audio-embed', audio_embed: audio_embed, title: article.title -%}
-    </div>
+    <a href="{{ article.url }}" class="blog-post-card__introduction prose prose--compact">
+      {{ article.metafields.custom.blog_introduction | metafield_tag }}
+    </a>
   </div>
 {%- else -%}
   <a href="{{ article.url }}" class="{{ podcast_card_classes }}" {% if settings.stagger_blog_posts and reveal != false %}reveal-on-scroll="true"{% endif %} {{ block.shopify_attributes }}>

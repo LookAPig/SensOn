@@ -223,6 +223,9 @@
       "block_order": [
         "ai_gen_block_ccb6ff2_pTkbNR"
       ],
+      "custom_css": [
+        ".container{padding: 0;}"
+      ],
       "settings": {
         "color_scheme": "scheme-7",
         "add_vertical_spacing": true,
