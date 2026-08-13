@@ -64,6 +64,14 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
+  #shopify-section-{{ section.id }} .how_it_work_control .content.layout_text_left .media {
+    order: 2;
+  }
+
+  #shopify-section-{{ section.id }} .how_it_work_control .content.layout_text_left .accordion {
+    order: 1;
+  }
+
   #shopify-section-{{ section.id }} .how_it_work_control .media {
     aspect-ratio: 1.7 / 1;
     background: #1d1d1d;
@@ -206,6 +214,11 @@
       gap: 0;
     }
 
+    #shopify-section-{{ section.id }} .how_it_work_control .content.layout_text_left .media,
+    #shopify-section-{{ section.id }} .how_it_work_control .content.layout_text_left .accordion {
+      order: initial;
+    }
+
     #shopify-section-{{ section.id }} .how_it_work_control .media {
       aspect-ratio: 1.7 / 1;
       background: #404040;
@@ -255,7 +268,7 @@
     </div>
 
     {%- if section.blocks.size > 0 -%}
-      <div class="content">
+      <div class="content {% if section.settings.desktop_layout == 'text_left' %}layout_text_left{% else %}layout_image_left{% endif %}">
         <div class="media">
           {%- for block in section.blocks -%}
             {%- if block.settings.image != blank -%}
@@ -385,6 +398,22 @@
       "id": "accent_color",
       "label": "强调色",
       "default": "#f287ec"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "PC 端图文布局",
+      "options": [
+        {
+          "value": "image_left",
+          "label": "左图右文"
+        },
+        {
+          "value": "text_left",
+          "label": "左文右图"
+        }
+      ],
+      "default": "image_left"
     },
     {
       "type": "header",
