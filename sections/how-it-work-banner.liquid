@@ -58,7 +58,7 @@
     display: flex;
     flex-direction: column;
     left: 50%;
-    max-width: 760px;
+    max-width: 900px;
     padding: 40px 24px;
     position: absolute;
     text-align: center;
@@ -78,10 +78,10 @@
 
   #shopify-section-{{ section.id }} .how_it_work_banner .title {
     color: #ffffff;
-    font-size: clamp(32px, 3vw, 48px);
-    font-weight: 400;
+    font-size: 42px;
+    font-weight: 500;
     letter-spacing: -0.02em;
-    line-height: 1.15;
+    line-height: 1.2;
     margin: 0 auto;
     max-width: 100%;
     text-align: center;
@@ -89,10 +89,10 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_banner .description {
-    font-size: 18px;
-    line-height: 1.25;
-    margin-top: 18px;
-    max-width: 620px;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-top: 16px;
+    max-width: 720px;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_banner .description p {
@@ -102,10 +102,12 @@
   #shopify-section-{{ section.id }} .how_it_work_banner .buttons {
     align-items: center;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
     margin-top: 28px;
-    width: var(--button-width);
+    width: auto;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_banner .button {
@@ -113,15 +115,16 @@
     border: 1px solid #ffffff;
     border-radius: 999px;
     display: flex;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     justify-content: center;
     line-height: 1.2;
-    min-height: 42px;
-    padding: 8px 20px;
+    min-height: 48px;
+    min-width: var(--button-width);
+    padding: 12px 28px;
     text-decoration: none;
     transition: opacity 0.2s ease;
-    width: 100%;
+    width: auto;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_banner .button:hover {
@@ -153,6 +156,7 @@
     }
 
     #shopify-section-{{ section.id }} .how_it_work_banner .content {
+      max-width: 760px;
       padding: 24px 16px;
       top: 43.3%;
       width: 100%;
@@ -165,6 +169,7 @@
 
     #shopify-section-{{ section.id }} .how_it_work_banner .title {
       font-size: 28px;
+      font-weight: 400;
       letter-spacing: -0.025em;
       line-height: 1.12;
     }
@@ -177,6 +182,7 @@
     }
 
     #shopify-section-{{ section.id }} .how_it_work_banner .buttons {
+      flex-direction: column;
       gap: 15px;
       margin-top: 22px;
       width: var(--button-mobile-width);
@@ -185,7 +191,9 @@
     #shopify-section-{{ section.id }} .how_it_work_banner .button {
       font-size: 14px;
       min-height: 30px;
+      min-width: 0;
       padding: 6px 14px;
+      width: 100%;
     }
   }
 
