@@ -60,16 +60,14 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_app .carousel {
-    margin: 0 auto;
-    max-width: 1100px;
     position: relative;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_app .viewport {
-    margin: 0 auto;
-    max-width: 760px;
     overflow: hidden;
     touch-action: pan-y;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_app .track {
@@ -77,11 +75,13 @@
     display: flex;
     gap: var(--slides-gap);
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_app .slide {
     flex: 0 0 100%;
     min-width: 0;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_app .image_wrap {
@@ -171,8 +171,8 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_app .slide_content {
-    margin: 30px auto 0;
-    max-width: 650px;
+    margin: 30px 0 0;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_app .slide_title {
@@ -267,17 +267,17 @@
       --slides-per-view: 3;
     }
 
-    #shopify-section-{{ section.id }} .how_it_work_app .carousel {
-      max-width: 1280px;
-      padding: 0 68px;
-    }
-
-    #shopify-section-{{ section.id }} .how_it_work_app .viewport {
-      max-width: none;
+    #shopify-section-{{ section.id }} .how_it_work_app .track {
+      width: max-content;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .slide {
-      flex: 0 0 calc((100% - (var(--slides-gap) * (var(--slides-per-view) - 1))) / var(--slides-per-view));
+      flex: 0 0 calc((100cqi - (var(--slides-gap) * (var(--slides-per-view) - 1))) / var(--slides-per-view));
+      width: calc((100cqi - (var(--slides-gap) * (var(--slides-per-view) - 1))) / var(--slides-per-view));
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_app .viewport {
+      container-type: inline-size;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .image_wrap {
@@ -288,7 +288,6 @@
 
     #shopify-section-{{ section.id }} .how_it_work_app .slide_content {
       margin: 28px 0 0;
-      max-width: none;
       text-align: center;
     }
 
@@ -297,8 +296,7 @@
       font-weight: 600;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      margin: 0 auto;
-      max-width: 320px;
+      margin: 0;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .title_line {
@@ -309,8 +307,7 @@
       color: rgb(255 255 255 / 0.9);
       font-size: 16px;
       line-height: 1.4;
-      margin: 12px auto 0;
-      max-width: 320px;
+      margin-top: 12px;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .arrow {
@@ -327,11 +324,11 @@
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .arrow_prev {
-      left: 8px;
+      left: 0;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .arrow_next {
-      right: 8px;
+      right: 0;
     }
   }
 
@@ -341,7 +338,7 @@
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .inner {
-      padding: 0 14px;
+      padding: 0 16px;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .header {
@@ -367,10 +364,6 @@
       font-size: 16px;
       line-height: 1.27;
       margin: 17px 0 0;
-    }
-
-    #shopify-section-{{ section.id }} .how_it_work_app .viewport {
-      max-width: none;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .desktop_media {
@@ -400,8 +393,6 @@
 
     #shopify-section-{{ section.id }} .how_it_work_app .slide_content {
       margin-top: 31px;
-      max-width: none;
-      padding: 0 5px;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_app .slide_title {
