@@ -821,7 +821,12 @@
       {% endif %}
     </div>
 
-    <button type="button" class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-start-cta-{{ ai_gen_id }}" data-start-btn>
+    <button
+      type="button"
+      class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-start-cta-{{ ai_gen_id }}"
+      data-start-btn
+      data-event="quiz_started"
+    >
       {{ block.settings.start_button_text }}
     </button>
   </div>
@@ -884,12 +889,18 @@
     <button type="button" class="ai-quiz-button-{{ ai_gen_id }} ai-quiz-button-secondary-{{ ai_gen_id }}" data-prev-btn disabled>
       {{ block.settings.previous_button_text }}
     </button>
-    <button type="button" class="ai-quiz-button-{{ ai_gen_id }}" data-next-btn disabled>
+    <button
+      type="button"
+      class="ai-quiz-button-{{ ai_gen_id }}"
+      data-next-btn
+      data-event="question_1_completed"
+      disabled
+    >
       {{ block.settings.next_button_text }}
     </button>
   </div>
 
-  <div class="ai-quiz-results-{{ ai_gen_id }}" data-results>
+  <div class="ai-quiz-results-{{ ai_gen_id }}" data-results data-event="result_preview_viewed">
     <div class="ai-quiz-result-card-{{ ai_gen_id }}">
       <div class="ai-quiz-result-top-{{ ai_gen_id }}">
         <div class="ai-quiz-result-brand-{{ ai_gen_id }}">{{ block.settings.results_brand_name }}</div>
@@ -964,7 +975,12 @@
             required
             data-email-input
           >
-          <button type="submit" class="ai-quiz-result-submit-{{ ai_gen_id }}" data-submit-btn>
+          <button
+            type="submit"
+            class="ai-quiz-result-submit-{{ ai_gen_id }}"
+            data-submit-btn
+            data-event="email_submitted"
+          >
             {{ block.settings.results_cta_text }}
           </button>
         {% endform %}
@@ -1115,7 +1131,7 @@
           }
         });
 
-        this.showResults({ skipCookieWrite: true });
+        this.showResults({ skipCookieWrite: true, skipAnalytics: true });
 
         const formPosted = Boolean(this.subscribeForm && this.subscribeForm.querySelector("[data-subscribe-posted]"));
         const storageKey = this.getSubscribeStorageKey();
@@ -1141,6 +1157,50 @@
           console.error("Quiz types JSON parse failed", error);
           return [];
         }
+      }
+
+      trackGa4(eventName, params) {
+        if (!eventName) {
+          return;
+        }
+
+        const payload = Object.assign(
+          {
+            event_category: "quiz",
+            quiz_id: "{{ ai_gen_id }}"
+          },
+          params || {}
+        );
+
+        window.dataLayer = window.dataLayer || [];
+
+        if (typeof window.gtag === "function") {
+          window.gtag("event", eventName, payload);
+          return;
+        }
+
+        window.dataLayer.push(
+          Object.assign(
+            {
+              event: eventName
+            },
+            payload
+          )
+        );
+      }
+
+      trackDataEvent(element, params) {
+        if (!element) {
+          return;
+        }
+
+        const eventName = element.getAttribute("data-event");
+
+        if (!eventName) {
+          return;
+        }
+
+        this.trackGa4(eventName, params);
       }
 
       setupEventListeners() {
@@ -1182,6 +1242,7 @@
       }
 
       startQuiz() {
+        this.trackDataEvent(this.startBtn);
         this.classList.remove("is-start");
         this.currentQuestion = 1;
         this.showQuestion();
@@ -1210,13 +1271,27 @@
       }
 
       nextQuestion() {
-        if (this.currentQuestion < this.totalQuestions) {
+        const completedQuestion = this.currentQuestion;
+        const selectedOption = this.answers[completedQuestion];
+
+        this.trackDataEvent(this.nextBtn, {
+          question_number: completedQuestion,
+          selected_option: selectedOption || ""
+        });
+
+        if (completedQuestion < this.totalQuestions) {
           this.currentQuestion++;
           this.showQuestion();
           this.updateProgress();
-        } else {
-          this.showResults();
+          return;
         }
+
+        this.trackGa4("quiz_completed", {
+          question_number: completedQuestion,
+          selected_option: selectedOption || "",
+          result_type_index: this.calculateResultIndex()
+        });
+        this.showResults();
       }
 
       showQuestion() {
@@ -1229,6 +1304,7 @@
 
         const hasAnswer = this.answers[this.currentQuestion];
         this.nextBtn.disabled = !hasAnswer;
+        this.nextBtn.setAttribute("data-event", "question_" + this.currentQuestion + "_completed");
 
         if (this.currentQuestion === this.totalQuestions && hasAnswer) {
           this.nextBtn.textContent = {{ block.settings.submit_button_text | json }};
@@ -1302,6 +1378,15 @@
 
         if (!options.skipCookieWrite) {
           this.saveResultsCookie();
+        }
+
+        if (!options.skipAnalytics) {
+          const resultType = this.types[this.resultTypeIndex] || {};
+
+          this.trackDataEvent(this.results, {
+            result_type_index: this.resultTypeIndex,
+            result_type_name: resultType.name || ""
+          });
         }
 
         const storageKey = this.getSubscribeStorageKey();
@@ -1478,6 +1563,18 @@
             : {{ block.settings.results_success_message | json }};
           this.formMessage.classList.remove("is-error");
           this.formMessage.classList.add("is-success");
+        }
+
+        if (!fromStorage) {
+          const submitBtn = this.subscribeForm
+            ? this.subscribeForm.querySelector("[data-submit-btn]")
+            : null;
+          const resultType = this.types[this.resultTypeIndex] || {};
+
+          this.trackDataEvent(submitBtn, {
+            result_type_index: this.resultTypeIndex,
+            result_type_name: resultType.name || ""
+          });
         }
 
         const storageKey = this.getSubscribeStorageKey();
