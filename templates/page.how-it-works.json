@@ -36,7 +36,7 @@
         "primary_button_text": "Start in 3 Steps",
         "primary_button_link": "",
         "secondary_button_text": "Choose Your Mode",
-        "secondary_button_link": ""
+        "secondary_button_link": "shopify://products/senson-s1-wellness-companion"
       }
     },
     "how_it_work_swiper_m8wRHg": {
@@ -95,7 +95,7 @@
         "control_pJ996X": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/intimate-couple-resting-hands-bed.jpg",
+            "image": "shopify://shop_images/Choose_How_You_Control.gif",
             "title": "AI Mode",
             "description": "<p>Select AI Mode in the SensOn App and optionally set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive AI voice and character interactions.</p>"
           }
@@ -103,7 +103,7 @@
         "control_pDDqit": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/intimate-hands-touching-sensual-lighting.jpg",
+            "image": "shopify://shop_images/Choose_How_You_Control.gif",
             "title": "Manual Mode",
             "description": "<p>Select Manual Mode in the app to adjust each component's intensity in real time, giving you direct control over rhythm, strength, and pacing.</p>"
           }
@@ -111,7 +111,7 @@
         "control_4LfLrp": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/intimate-sculpture-pink-glow.jpg",
+            "image": "shopify://shop_images/Choose_How_You_Control.gif",
             "title": "Physical Buttons",
             "description": "<p>Use the on-device buttons to switch between 5 intensity levels, even without <strong>the</strong> app connection.</p>"
           }
@@ -194,7 +194,7 @@
         "control_JkYpKM": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/senson-s1-glowing-device-pleasure.png",
+            "image": "shopify://shop_images/works1.jpg",
             "title": "AI-powered interaction",
             "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
           }
@@ -202,7 +202,7 @@
         "control_NXhiL8": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/04_ce59a00f-a525-42ee-9888-e476a00eb5be.jpg",
+            "image": "shopify://shop_images/works1.jpg",
             "title": "Bluetooth, But Deeper",
             "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
           }

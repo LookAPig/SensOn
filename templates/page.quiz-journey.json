@@ -9,6 +9,24 @@
  */
 {
   "sections": {
+    "newsletter_XhbKyD": {
+      "type": "newsletter",
+      "name": "t:sections.newsletter.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "image": "shopify://shop_images/neon-intimacy-hand-touching-face.jpg",
+        "image_position": "background",
+        "image_size": "md",
+        "add_image_spacing": false,
+        "icon": "envelope",
+        "title": "Subscribe to our newsletter",
+        "heading_tag": "h3",
+        "button_text": "Subscribe",
+        "privacy_policy_text": "By signing up, you agree with our privacy policy.",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -172,10 +190,10 @@
             "button_bg_color": "#f287ec",
             "button_text_color": "#000000",
             "button_hover_bg_color": "#f287ec",
-            "title_size": 30,
+            "title_size": 36,
             "description_size": 14,
             "question_size": 20,
-            "option_size": 14,
+            "option_size": 16,
             "border_radius": 0,
             "option_border_radius": 16,
             "button_border_radius": 30
@@ -216,6 +234,7 @@
     }
   },
   "order": [
+    "newsletter_XhbKyD",
     "main",
     "1784773837ab1b2040"
   ]
