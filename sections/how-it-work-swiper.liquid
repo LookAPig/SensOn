@@ -81,6 +81,12 @@
     width: 100%;
   }
 
+  #shopify-section-{{ section.id }} .how_it_work_swiper .image_wrap picture {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
   #shopify-section-{{ section.id }} .how_it_work_swiper .image,
   #shopify-section-{{ section.id }} .how_it_work_swiper .placeholder {
     display: block;
@@ -353,17 +359,34 @@
         {%- for block in section.blocks -%}
           <article class="swiper-slide" {{ block.shopify_attributes }}>
             <div class="image_wrap">
-              {%- if block.settings.image != blank -%}
-                {{
-                  block.settings.image
-                  | image_url: width: 1000
-                  | image_tag:
-                    class: 'image',
-                    loading: 'lazy',
-                    sizes: '(max-width: 749px) 320px, 33vw',
-                    widths: '320, 480, 640, 800, 1000',
-                    alt: block.settings.title
-                }}
+              {%- assign mobile_step_image = block.settings.mobile_image | default: block.settings.image -%}
+              {%- assign desktop_step_image = block.settings.desktop_image | default: mobile_step_image -%}
+
+              {%- if desktop_step_image != blank or mobile_step_image != blank -%}
+                <picture>
+                  {%- if mobile_step_image != blank -%}
+                    <source
+                      media="(max-width: 749px)"
+                      srcset="
+                        {{ mobile_step_image | image_url: width: 320 }} 320w,
+                        {{ mobile_step_image | image_url: width: 480 }} 480w,
+                        {{ mobile_step_image | image_url: width: 640 }} 640w
+                      "
+                      sizes="320px"
+                    >
+                  {%- endif -%}
+
+                  {{
+                    desktop_step_image
+                    | image_url: width: 1000
+                    | image_tag:
+                      class: 'image',
+                      loading: 'lazy',
+                      sizes: '(max-width: 749px) 320px, 33vw',
+                      widths: '320, 480, 640, 800, 1000',
+                      alt: block.settings.title
+                  }}
+                </picture>
               {%- else -%}
                 <div class="placeholder"></div>
               {%- endif -%}
@@ -524,8 +547,13 @@
       "settings": [
         {
           "type": "image_picker",
-          "id": "image",
-          "label": "图片"
+          "id": "desktop_image",
+          "label": "PC 端图片"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "移动端图片"
         },
         {
           "type": "text",
