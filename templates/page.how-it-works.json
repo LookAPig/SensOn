@@ -142,8 +142,8 @@
         "app_feature_j4y7Ci": {
           "type": "app_feature",
           "settings": {
-            "image": "shopify://shop_images/senson-app-character-selection-carousel.png",
-            "video": "shopify://files/videos/file_v3_00128_26b6c7c2-7a56-42f1-a05c-81bb7b995feg.mp4",
+            "video": "shopify://files/videos/02.mp4",
+            "mobile_video": "shopify://files/videos/02.mp4",
             "title": "Choose Interactive Audio",
             "description": "<p>Explore interactive audio stories created with women in mind.</p>"
           }
@@ -151,7 +151,8 @@
         "app_feature_xf4bjy": {
           "type": "app_feature",
           "settings": {
-            "image": "shopify://shop_images/senson-s1-wearable-device-placement.png",
+            "video": "shopify://files/videos/001.mp4",
+            "mobile_video": "shopify://files/videos/001.mp4",
             "title": "Explore AI Fantasy",
             "description": "<p>Interact with an AI voice companion or text-based character anytime.</p>"
           }
@@ -159,7 +160,8 @@
         "app_feature_JBbnir": {
           "type": "app_feature",
           "settings": {
-            "image": "shopify://shop_images/senson-app-interactive-text-chat.png",
+            "video": "shopify://files/videos/003.mp4",
+            "mobile_video": "shopify://files/videos/003.mp4",
             "title": "Control Your Device",
             "description": "<p>Let content, voice interaction, and SensOn device response move together.</p>"
           }
