@@ -46,6 +46,7 @@
           "type": "step",
           "settings": {
             "desktop_image": "shopify://shop_images/Download_and_Connect.jpg",
+            "mobile_image": "shopify://shop_images/how_it_works1.jpg",
             "subtitle": "Step 01",
             "title": "Download and Connect",
             "description": "<p>Download the SensOn App, turn on Bluetooth, and choose the control mode you prefer.</p>"
@@ -64,6 +65,7 @@
           "type": "step",
           "settings": {
             "desktop_image": "shopify://shop_images/Choose_and_Begin.jpg",
+            "mobile_image": "shopify://shop_images/how_it_works3.jpg",
             "subtitle": "Step 03",
             "title": "Choose and Begin",
             "description": "<p>Choose the control mode you prefer and start your interactive experience.</p>"
