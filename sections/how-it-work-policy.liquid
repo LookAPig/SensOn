@@ -22,7 +22,7 @@
 
   #shopify-section-{{ section.id }} .how_it_work_policy .policy_list {
     display: grid;
-    gap: 48px;
+    gap: 56px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin: 0;
     padding: 0;
@@ -30,24 +30,29 @@
 
   #shopify-section-{{ section.id }} .how_it_work_policy .policy_item {
     align-items: flex-start;
+    background: #1a1a1a;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     list-style: none;
     margin: 0;
     min-width: 0;
+    padding: 28px 24px;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_policy .icon {
     color: var(--accent-color);
     flex-shrink: 0;
-    height: 36px;
-    width: 36px;
+    height: 25px;
+    width: 25px;
   }
 
+  #shopify-section-{{ section.id }} .how_it_work_policy .icon img,
   #shopify-section-{{ section.id }} .how_it_work_policy .icon svg {
     display: block;
     height: 100%;
+    object-fit: contain;
     width: 100%;
   }
 
@@ -58,17 +63,17 @@
 
   #shopify-section-{{ section.id }} .how_it_work_policy .item_title {
     color: var(--text-color);
-    font-size: clamp(24px, 2vw, 30px);
+    font-size: 24px;
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.25;
     margin: 0;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_policy .item_description {
     color: var(--description-color);
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.5;
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_policy .item_description p {
@@ -91,8 +96,11 @@
     }
 
     #shopify-section-{{ section.id }} .how_it_work_policy .policy_item {
+      background: transparent;
+      border-radius: 0;
       flex-direction: row;
       gap: 14px;
+      padding: 0;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_policy .icon {

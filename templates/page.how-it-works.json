@@ -24,7 +24,7 @@
       "settings": {
         "allow_transparent_header": true,
         "disable_overlay": false,
-        "desktop_image": "shopify://shop_images/works.jpg",
+        "desktop_image": "shopify://shop_images/works_8db92d1d-71ee-4bb4-b981-ea7bcd7d2310.jpg",
         "mobile_image": "shopify://shop_images/works.jpg",
         "desktop_height": "100svh",
         "mobile_height": "710px",
@@ -45,7 +45,8 @@
         "step_8pdeYT": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/how_it_works1.jpg",
+            "desktop_image": "shopify://shop_images/Download_and_Connect.jpg",
+            "mobile_image": "shopify://shop_images/how_it_works1.jpg",
             "subtitle": "Step 01",
             "title": "Download and Connect",
             "description": "<p>Download the SensOn App, turn on Bluetooth, and choose the control mode you prefer.</p>"
@@ -54,7 +55,7 @@
         "step_T4m9w9": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/how_it_works2.jpg",
+            "desktop_image": "shopify://shop_images/Assemble_and_Fit.jpg",
             "subtitle": "Step 02",
             "title": "Assemble and Fit",
             "description": "<p>Connect the magnetic components and adjust the setup for a secure, comfortable fit.</p>"
@@ -63,7 +64,8 @@
         "step_H9rGRe": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/how_it_works3.jpg",
+            "desktop_image": "shopify://shop_images/Choose_and_Begin.jpg",
+            "mobile_image": "shopify://shop_images/how_it_works3.jpg",
             "subtitle": "Step 03",
             "title": "Choose and Begin",
             "description": "<p>Choose the control mode you prefer and start your interactive experience.</p>"
@@ -95,7 +97,8 @@
         "control_pJ996X": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/Choose_How_You_Control.gif",
+            "desktop_image": "shopify://shop_images/Choose_How_You_Control.gif",
+            "mobile_image": "shopify://shop_images/Choose_How_You_Control.gif",
             "title": "AI Mode",
             "description": "<p>Select AI Mode in the SensOn App and optionally set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive AI voice and character interactions.</p>"
           }
@@ -103,7 +106,8 @@
         "control_pDDqit": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/Choose_How_You_Control.gif",
+            "desktop_image": "shopify://shop_images/Choose_How_You_Control.gif",
+            "mobile_image": "shopify://shop_images/Choose_How_You_Control.gif",
             "title": "Manual Mode",
             "description": "<p>Select Manual Mode in the app to adjust each component's intensity in real time, giving you direct control over rhythm, strength, and pacing.</p>"
           }
@@ -111,7 +115,8 @@
         "control_4LfLrp": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/Choose_How_You_Control.gif",
+            "desktop_image": "shopify://shop_images/Choose_How_You_Control.gif",
+            "mobile_image": "shopify://shop_images/Choose_How_You_Control.gif",
             "title": "Physical Buttons",
             "description": "<p>Use the on-device buttons to switch between 5 intensity levels, even without <strong>the</strong> app connection.</p>"
           }
@@ -128,6 +133,7 @@
         "title": "Choose How You Control SensOn S1",
         "description": "<p>SensOn S1 gives you flexible ways to control the experience, whether you want AI-powered response, direct app control, or simple on-device buttons.</p>",
         "accent_color": "#f287ec",
+        "desktop_layout": "image_left",
         "desktop_padding_top": 72,
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 42,
@@ -140,8 +146,8 @@
         "app_feature_j4y7Ci": {
           "type": "app_feature",
           "settings": {
-            "image": "shopify://shop_images/senson-app-character-selection-carousel.png",
-            "video": "shopify://files/videos/file_v3_00128_26b6c7c2-7a56-42f1-a05c-81bb7b995feg.mp4",
+            "video": "shopify://files/videos/02.mp4",
+            "mobile_video": "shopify://files/videos/02.mp4",
             "title": "Choose Interactive Audio",
             "description": "<p>Explore interactive audio stories created with women in mind.</p>"
           }
@@ -149,7 +155,8 @@
         "app_feature_xf4bjy": {
           "type": "app_feature",
           "settings": {
-            "image": "shopify://shop_images/senson-s1-wearable-device-placement.png",
+            "video": "shopify://files/videos/001.mp4",
+            "mobile_video": "shopify://files/videos/001.mp4",
             "title": "Explore AI Fantasy",
             "description": "<p>Interact with an AI voice companion or text-based character anytime.</p>"
           }
@@ -157,7 +164,8 @@
         "app_feature_JBbnir": {
           "type": "app_feature",
           "settings": {
-            "image": "shopify://shop_images/senson-app-interactive-text-chat.png",
+            "video": "shopify://files/videos/003.mp4",
+            "mobile_video": "shopify://files/videos/003.mp4",
             "title": "Control Your Device",
             "description": "<p>Let content, voice interaction, and SensOn device response move together.</p>"
           }
@@ -186,7 +194,8 @@
         "control_am6mT4": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/works1.jpg",
+            "desktop_image": "shopify://shop_images/Design_Around.jpg",
+            "mobile_image": "shopify://shop_images/works1.jpg",
             "title": "Smart Intimacy Design",
             "description": "<p>More than a basic smart vibrator, SensOn S1 is built around content-led interaction and synchronized control.<br/><br/></p>"
           }
@@ -194,7 +203,8 @@
         "control_JkYpKM": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/works1.jpg",
+            "desktop_image": "shopify://shop_images/Design_Around.jpg",
+            "mobile_image": "shopify://shop_images/works1.jpg",
             "title": "AI-powered interaction",
             "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
           }
@@ -202,7 +212,8 @@
         "control_NXhiL8": {
           "type": "control",
           "settings": {
-            "image": "shopify://shop_images/works1.jpg",
+            "desktop_image": "shopify://shop_images/Design_Around.jpg",
+            "mobile_image": "shopify://shop_images/works1.jpg",
             "title": "Bluetooth, But Deeper",
             "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
           }
@@ -219,6 +230,7 @@
         "title": "Designed Around Content, Control, and Response",
         "description": "<p>Compared with many connected sex toys or a basic Bluetooth vibrator, it is built around content-led interaction, AI companion response, and synchronized control.</p>",
         "accent_color": "#f287ec",
+        "desktop_layout": "text_left",
         "desktop_padding_top": 72,
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 42,
@@ -231,7 +243,7 @@
         "card_Qx8YUw": {
           "type": "card",
           "settings": {
-            "desktop_image": "shopify://shop_images/cards1.jpg",
+            "desktop_image": "shopify://shop_images/Soft_Romantic.jpg",
             "mobile_image": "shopify://shop_images/cards1.jpg",
             "title": "Soft & Romantic"
           }
@@ -239,7 +251,7 @@
         "card_AybRDj": {
           "type": "card",
           "settings": {
-            "desktop_image": "shopify://shop_images/cards2.jpg",
+            "desktop_image": "shopify://shop_images/Voice-Led_Fantasy.jpg",
             "mobile_image": "shopify://shop_images/cards2.jpg",
             "title": "Voice-Led Fantasy"
           }
@@ -247,7 +259,7 @@
         "card_JXJz6A": {
           "type": "card",
           "settings": {
-            "desktop_image": "shopify://shop_images/cards3.jpg",
+            "desktop_image": "shopify://shop_images/Character_Interaction.jpg",
             "mobile_image": "shopify://shop_images/cards3.jpg",
             "title": "Character Interaction"
           }
@@ -255,7 +267,7 @@
         "card_HtTK9P": {
           "type": "card",
           "settings": {
-            "desktop_image": "shopify://shop_images/cards4.jpg",
+            "desktop_image": "shopify://shop_images/Immersive_Audio.jpg",
             "mobile_image": "shopify://shop_images/cards4.jpg",
             "title": "Immersive Audio"
           }
@@ -332,7 +344,7 @@
       "settings": {
         "allow_transparent_header": true,
         "disable_overlay": true,
-        "desktop_image": "shopify://shop_images/works1.jpg",
+        "desktop_image": "shopify://shop_images/One_Seamless_SensOn_Experience.jpg",
         "mobile_image": "shopify://shop_images/36e4d73bf8f328e5aa44651fcdd5af4a_2.webp",
         "desktop_height": "600px",
         "mobile_height": "480px",
