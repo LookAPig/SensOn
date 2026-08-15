@@ -6,84 +6,242 @@ managed at the theme level.
 {%- endcomment -%}
 
 {%- if request.page_type == 'product' -%}
+  {%- liquid
+    assign schema_variant = product.selected_or_first_available_variant
+    assign schema_product_url = shop.url | append: product.url
+    assign schema_description = page_description | default: product.description | strip_html | strip_newlines | truncate: 5000
+
+    if schema_variant.available
+      assign schema_availability = 'https://schema.org/InStock'
+    else
+      assign schema_availability = 'https://schema.org/OutOfStock'
+    endif
+
+    assign schema_price = schema_variant.price | money_without_currency | replace: ',', ''
+    assign schema_has_rating = false
+
+    if product.metafields.reviews.rating.value != blank and product.metafields.reviews.rating_count.value > 0
+      assign schema_has_rating = true
+      assign schema_rating_value = product.metafields.reviews.rating.value.rating | round: 1
+      assign schema_review_count = product.metafields.reviews.rating_count.value
+      assign schema_rating_max = product.metafields.reviews.rating.value.scale_max | default: 5
+    endif
+  -%}
+
   <script type="application/ld+json">
-    {{- product | structured_data -}}
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": {{ schema_product_url | append: '#product' | json }},
+      "name": {{ product.title | json }},
+      "url": {{ schema_product_url | json }},
+      "image": [
+        {%- for image in product.images limit: 5 -%}
+          {{ image | image_url: width: 1200 | json }}{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ],
+      "description": {{ schema_description | json }},
+      "brand": {
+        "@type": "Brand",
+        "name": "SensOn"
+      },
+      "category": "Personal Care Gift Sets",
+      "offers": {
+        "@type": "Offer",
+        "url": {{ schema_product_url | json }},
+        "price": {{ schema_price | json }},
+        "priceCurrency": {{ cart.currency.iso_code | default: shop.currency | json }},
+        "availability": {{ schema_availability | json }},
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+      {%- if schema_has_rating -%}
+        ,"aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ schema_rating_value | json }},
+          "reviewCount": {{ schema_review_count | json }},
+          "bestRating": {{ schema_rating_max | json }},
+          "worstRating": "1"
+        }
+      {%- endif -%}
+    }
   </script>
 {%- elsif request.page_type == 'article' -%}
   <script type="application/ld+json">
     {{- article | structured_data -}}
   </script>
+
+  {%- liquid
+    assign schema_article_url = shop.url | append: article.url
+    assign schema_article_description = page_description | default: article.excerpt | default: article.content | strip_html | strip_newlines | truncate: 300
+    assign schema_article_language = request.locale.iso_code | default: 'en'
+    assign is_podcast_article = false
+
+    if blog.handle == 'podcast' or template.suffix == 'podcast' or template.suffix == 'poadcast'
+      assign is_podcast_article = true
+    endif
+  -%}
+
+  {%- if is_podcast_article -%}
+    {%- liquid
+      assign podcast_image = article.metafields.custom.audio_image.value | default: article.metafields.custom.secondary_image | default: article.image
+      assign podcast_audio_url = article.metafields.custom.audio_url.value | default: article.metafields.custom.podcast_audio_url.value
+      assign podcast_duration = article.metafields.custom.duration.value | default: article.metafields.custom.podcast_duration.value
+    -%}
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "PodcastEpisode",
+        "name": {{ article.title | json }},
+        "url": {{ schema_article_url | json }},
+        "description": {{ schema_article_description | json }},
+        "image": [
+          {%- if podcast_image != blank -%}
+            {{ podcast_image | image_url: width: 1400 | json }}
+          {%- endif -%}
+        ],
+        "datePublished": {{ article.published_at | date: '%Y-%m-%d' | json }}
+        {%- if podcast_duration != blank -%}
+          ,"duration": {{ podcast_duration | json }}
+        {%- endif -%}
+        {%- if podcast_audio_url != blank -%}
+          ,"associatedMedia": {
+            "@type": "MediaObject",
+            "contentUrl": {{ podcast_audio_url | json }}
+          },
+          "encodingFormat": "audio/mpeg"
+        {%- endif -%}
+        ,"publisher": {
+          "@type": "Organization",
+          "name": "SensOn",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://senson.ai/cdn/shop/files/20251215-133135.png?v=1765776806&width=120"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": {{ schema_article_url | json }}
+        },
+        "inLanguage": {{ schema_article_language | json }}
+      }
+    </script>
+  {%- else -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": {{ article.title | json }},
+        "description": {{ schema_article_description | json }},
+        "image": [
+          {%- if article.image -%}
+            {{ article.image | image_url: width: 1200 | json }}
+          {%- endif -%}
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "SensOn Editorial"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "SensOn",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://senson.ai/cdn/shop/files/20251215-133135.png?v=1765776806&width=120"
+          }
+        },
+        "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+        "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": {{ schema_article_url | json }}
+        },
+        "inLanguage": {{ schema_article_language | json }}
+      }
+    </script>
+  {%- endif -%}
 {%- endif -%}
 
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": {{ 'general.home' | t | json }},
-        "item": "{{ shop.url }}"
-      }
-
-      {%- if request.page_type == 'product' -%}
-        {%- if collection -%}
+{%- unless request.page_type == 'index' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": {{ shop.url | json }}
+        }
+        {%- if request.page_type == 'product' -%}
+          {%- if collection -%}
+            ,{
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ collection.title | json }},
+              "item": {{ shop.url | append: collection.url | json }}
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": {{ product.title | json }},
+              "item": {{ shop.url | append: product.url | json }}
+            }
+          {%- else -%}
+            ,{
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ product.title | json }},
+              "item": {{ shop.url | append: product.url | json }}
+            }
+          {%- endif -%}
+        {%- elsif request.page_type == 'collection' -%}
           ,{
             "@type": "ListItem",
             "position": 2,
             "name": {{ collection.title | json }},
-            "item": "{{ shop.url }}{{ collection.url }}"
-          }, {
+            "item": {{ shop.url | append: collection.url | json }}
+          }
+        {%- elsif request.page_type == 'blog' -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ blog.title | json }},
+            "item": {{ shop.url | append: blog.url | json }}
+          }
+        {%- elsif request.page_type == 'article' -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ blog.title | json }},
+            "item": {{ shop.url | append: blog.url | json }}
+          },
+          {
             "@type": "ListItem",
             "position": 3,
-            "name": {{ product.title | json }},
-            "item": "{{ shop.url }}{{ product.url }}"
+            "name": {{ article.title | json }},
+            "item": {{ shop.url | append: article.url | json }}
           }
-        {%- else -%}
+        {%- elsif request.page_type == 'page' -%}
           ,{
-            "@type": "ListItem",
-            "position": 2,
-            "name": {{ product.title | json }},
-            "item": "{{ shop.url }}{{ product.url }}"
-          }
-        {%- endif -%}
-      {%- elsif request.page_type == 'collection' -%}
-          ,{
-            "@type": "ListItem",
-            "position": 2,
-            "name": {{ collection.title | json }},
-            "item": "{{ shop.url }}{{ collection.url }}"
-          }
-      {%- elsif request.page_type == 'blog' -%}
-          ,{
-            "@type": "ListItem",
-            "position": 2,
-            "name": {{ blog.title | json }},
-            "item": "{{ shop.url }}{{ blog.url }}"
-          }
-      {%- elsif request.page_type == 'article' -%}
-          ,{
-            "@type": "ListItem",
-            "position": 2,
-            "name": {{ blog.title | json }},
-            "item": "{{ shop.url }}{{ blog.url }}"
-          }, {
-            "@type": "ListItem",
-            "position": 3,
-            "name": {{ blog.title | json }},
-            "item": "{{ shop.url }}{{ article.url }}"
-          }
-      {%- elsif request.page_type == 'page' -%}
-        ,{
             "@type": "ListItem",
             "position": 2,
             "name": {{ page.title | json }},
-            "item": "{{ shop.url }}{{ page.url }}"
+            "item": {{ shop.url | append: page.url | json }}
           }
-      {%- endif -%}
-    ]
-  }
-</script>
+        {%- elsif request.page_type == 'search' -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ 'search.general.title' | t | json }},
+            "item": {{ shop.url | append: routes.search_url | json }}
+          }
+        {%- endif -%}
+      ]
+    }
+  </script>
+{%- endunless -%}
 
 {%- if request.page_type == 'index' -%}
   {%- assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" -%}
@@ -124,5 +282,85 @@ managed at the theme level.
       "url": {{ shop.url | append: page.url | json }}
     }
   ]
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'page' and page.handle == 'contact-us' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": {{ page.title | json }},
+      "url": {{ shop.url | append: page.url | json }},
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "SensOn",
+        "url": "https://senson.ai/",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "support@senson.ai",
+          "availableLanguage": "en"
+        }
+      }
+    }
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'page' and page.handle == 'how-it-works' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How SensOn S1 Works",
+      "description": "A step-by-step guide to preparing, setting up, wearing, powering on, and connecting SensOn S1.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": {{ shop.url | append: page.url | json }}
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Download and prepare",
+          "text": "Download the SensOn App, turn on Bluetooth, open the Charging Case, and remove the components."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Choose your setup",
+          "text": "Connect the parts magnetically and assemble the configuration you prefer."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Insert and adjust",
+          "text": "Insert the Vaginal Stimulator, let the Core rest between your thighs, and adjust the Clitoral Stimulator."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Wear and fit",
+          "text": "Place the Nipple Stimulators and adjust the clasp for a secure, comfortable fit."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Power on",
+          "text": "Press and hold the Core power button to turn on the device and enter standby mode."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Connect and play",
+          "text": "Follow the on-screen steps to connect via Bluetooth, choose audio, and interact with AI characters by voice or text."
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "SensOn"
+      },
+      "inLanguage": {{ request.locale.iso_code | default: 'en' | json }}
+    }
   </script>
 {%- endif -%}
