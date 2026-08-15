@@ -32,8 +32,8 @@
         "heading_3e6hPH": {
           "type": "heading",
           "settings": {
-            "text": "<h1>Intimate Revolution</h1>",
-            "pc_font_size": 26,
+            "text": "<strong>Intimate Revolution</strong>",
+            "pc_font_size": 46,
             "h5_font_size": 23,
             "pc_line_height": 1.2,
             "h5_line_height": 1.2,
