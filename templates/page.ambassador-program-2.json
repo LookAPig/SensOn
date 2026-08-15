@@ -38,7 +38,7 @@
             "pc_line_height": 1.2,
             "h5_line_height": 1.2,
             "heading_size": "h4",
-            "html_tag": "p"
+            "html_tag": "h1"
           },
           "blocks": {}
         },
