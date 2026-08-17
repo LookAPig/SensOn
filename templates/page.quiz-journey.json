@@ -27,7 +27,7 @@
         "desktop_image": "shopify://shop_images/works1.jpg",
         "mobile_image": "shopify://shop_images/works1.jpg",
         "desktop_height": "720px",
-        "mobile_height": "560px",
+        "mobile_height": "100svh",
         "tag": "SensOn",
         "title": "Your Rhythm. Unlocked.",
         "description": "<p>Driven by intelligent AI, crafted around your unique rhythm. Experience intimacy that truly listens, responds, and adapts.</p>",
@@ -44,8 +44,8 @@
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "scheme-7",
-        "image": "shopify://shop_images/Design_Around.jpg",
-        "image_position": "background",
+        "image": "shopify://shop_images/works_8db92d1d-71ee-4bb4-b981-ea7bcd7d2310.jpg",
+        "image_position": "split",
         "image_size": "lg",
         "add_image_spacing": false,
         "icon": "none",
@@ -264,7 +264,7 @@
   "order": [
     "main",
     "how_it_work_banner_3RARYQ",
-    "newsletter_XhbKyD",
-    "1784773837ab1b2040"
+    "1784773837ab1b2040",
+    "newsletter_XhbKyD"
   ]
 }
