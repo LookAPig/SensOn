@@ -15,20 +15,28 @@
       #cvp-{{ section.id }} .cvp-inner {
         max-width: 1200px;
         margin: 0 auto;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
         align-items: center;
       }
 
-      .cvp-content{
-            width: 50%;
-    padding-right: 55px;
-      }
       #cvp-{{ section.id }} .cvp-heading {
+        grid-column: 1;
+        grid-row: 1;
         margin: 0 0 59px;
+        padding-right: 55px;
         font-size: 42px;
         font-weight: 700;
         line-height: 1.2;
         color: #fff;
+      }
+
+      #cvp-{{ section.id }} .cvp-content {
+        grid-column: 1;
+        grid-row: 2;
+        width: 100%;
+        padding-right: 55px;
       }
 
       #cvp-{{ section.id }} .cvp-features {
@@ -84,11 +92,13 @@
       }
 
       #cvp-{{ section.id }} .cvp-media {
-    width: 50%;
-    border-radius: 4px;
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-    background: #3a3a3a;
+        grid-column: 2;
+        grid-row: 1 / -1;
+        width: 100%;
+        border-radius: 4px;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+        background: #3a3a3a;
       }
 
       #cvp-{{ section.id }} .cvp-media img {
@@ -104,49 +114,49 @@
         }
 
         #cvp-{{ section.id }} .cvp-inner {
-          grid-template-columns: 1fr;
+          display: flex;
+          flex-direction: column;
           gap: 32px;
-                  flex-flow: wrap;
         }
 
         #cvp-{{ section.id }} .cvp-heading {
+          order: 1;
           font-size: 24px;
-          margin-bottom: 24px;
+          margin-bottom: 0;
+          padding-right: 0;
+        }
+
+        #cvp-{{ section.id }} .cvp-media {
+          order: 2;
+          width: 100%;
+        }
+
+        #cvp-{{ section.id }} .cvp-content {
+          order: 3;
+          width: 100%;
+          padding-right: 0;
         }
 
         #cvp-{{ section.id }} .cvp-features {
           gap: 24px;
         }
 
-        #cvp-{{ section.id }} .cvp-media {
-          order: -1;
-              width: 100%;
+        #cvp-{{ section.id }} .cvp-feature-title {
+          margin: 0 0 8px;
+          font-size: 18px;
         }
-        .cvp-content {
-    width: 100%;
-    padding-right: 0;
-}
-  #cvp-{{ section.id }} .cvp-feature-title {
-        margin: 0 0 8px;
-        font-size: 18px;
-      
-      }
 
-      #cvp-{{ section.id }} .cvp-feature-desc {
-        font-size: 14px;
-      
-      }
+        #cvp-{{ section.id }} .cvp-feature-desc {
+          font-size: 14px;
+        }
       }
     </style>
- {%- if section.settings.heading != blank -%}
-          <h2 class="cvp-heading mob_show">{{ section.settings.heading | escape }}</h2>
-        {%- endif -%}
     <div class="cvp-inner">
-      <div class="cvp-content">
-        {%- if section.settings.heading != blank -%}
-          <h2 class="cvp-heading pc_show">{{ section.settings.heading | escape }}</h2>
-        {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="cvp-heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
 
+      <div class="cvp-content">
         {%- if section.blocks.size > 0 -%}
           <div class="cvp-features">
             {%- for block in section.blocks -%}

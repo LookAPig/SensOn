@@ -33,12 +33,12 @@
           "type": "heading",
           "settings": {
             "text": "<strong>Intimate Revolution</strong>",
-            "pc_font_size": 42,
+            "pc_font_size": 46,
             "h5_font_size": 23,
             "pc_line_height": 1.2,
             "h5_line_height": 1.2,
             "heading_size": "h4",
-            "html_tag": "p"
+            "html_tag": "h1"
           },
           "blocks": {}
         },

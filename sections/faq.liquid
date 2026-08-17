@@ -77,28 +77,52 @@
     {%- endif -%}
   </div>
 
-  {%- comment -%}We also output the content with JSON microdata for SEO{%- endcomment -%}
+  {%- comment -%}
+    FAQPage JSON-LD：随 section blocks 动态输出，保证与前台可见问答一致。
+    任意页面挂载本 FAQ section 时都会自动带上，无需在 microdata-schema 再写死一份。
+  {%- endcomment -%}
 
-  <script type="application/ld+json">
-    {%- assign question_blocks = section.blocks | where: 'type', 'question' -%}
+  {%- liquid
+    assign question_blocks = section.blocks | where: 'type', 'question'
+    assign faq_schema_count = 0
 
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {%- for block in question_blocks -%}
-          {
-            "@type": "Question",
-            "name": {{ block.settings.question | json }},
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": {{ block.settings.answer | json }}
-            }
-          }{% unless forloop.last %},{% endunless %}
-        {%- endfor -%}
-      ]
-    }
-  </script>
+    for block in question_blocks
+      assign faq_question = block.settings.question | strip_html | strip
+      assign faq_answer = block.settings.answer | strip_html | strip
+
+      if faq_question != blank and faq_answer != blank
+        assign faq_schema_count = faq_schema_count | plus: 1
+      endif
+    endfor
+  -%}
+
+  {%- if faq_schema_count > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- assign faq_schema_index = 0 -%}
+          {%- for block in question_blocks -%}
+            {%- assign faq_question = block.settings.question | strip_html | strip -%}
+            {%- assign faq_answer = block.settings.answer | strip_html | strip -%}
+
+            {%- if faq_question != blank and faq_answer != blank -%}
+              {%- assign faq_schema_index = faq_schema_index | plus: 1 -%}
+              {
+                "@type": "Question",
+                "name": {{ faq_question | json }},
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": {{ faq_answer | json }}
+                }
+              }{%- unless faq_schema_index == faq_schema_count -%},{%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
 {%- endif -%}
 
 {% schema %}
