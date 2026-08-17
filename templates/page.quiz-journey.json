@@ -20,11 +20,10 @@
     },
     "how_it_work_banner_3RARYQ": {
       "type": "how-it-work-banner",
-      "disabled": true,
       "name": "How it works banner",
       "settings": {
         "allow_transparent_header": false,
-        "disable_overlay": false,
+        "disable_overlay": true,
         "desktop_image": "shopify://shop_images/works1.jpg",
         "mobile_image": "shopify://shop_images/works1.jpg",
         "desktop_height": "720px",
