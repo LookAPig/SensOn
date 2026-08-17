@@ -20,6 +20,7 @@
     },
     "how_it_work_banner_3RARYQ": {
       "type": "how-it-work-banner",
+      "disabled": true,
       "name": "How it works banner",
       "settings": {
         "allow_transparent_header": false,
@@ -41,6 +42,7 @@
     },
     "newsletter_XhbKyD": {
       "type": "newsletter",
+      "disabled": true,
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "scheme-7",
