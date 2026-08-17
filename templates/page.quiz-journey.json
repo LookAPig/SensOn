@@ -20,6 +20,7 @@
     },
     "how_it_work_banner_3RARYQ": {
       "type": "how-it-work-banner",
+      "disabled": true,
       "name": "How it works banner",
       "settings": {
         "allow_transparent_header": false,
@@ -44,9 +45,9 @@
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "scheme-7",
-        "image": "shopify://shop_images/works_8db92d1d-71ee-4bb4-b981-ea7bcd7d2310.jpg",
+        "image": "shopify://shop_images/Design_Around.jpg",
         "image_position": "background",
-        "image_size": "auto",
+        "image_size": "lg",
         "add_image_spacing": false,
         "icon": "none",
         "title": "Subscribe to our newsletter",
