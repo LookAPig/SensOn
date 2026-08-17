@@ -9,24 +9,6 @@
  */
 {
   "sections": {
-    "newsletter_XhbKyD": {
-      "type": "newsletter",
-      "name": "t:sections.newsletter.name",
-      "settings": {
-        "color_scheme": "scheme-7",
-        "image": "shopify://shop_images/neon-intimacy-hand-touching-face.jpg",
-        "image_position": "background",
-        "image_size": "md",
-        "add_image_spacing": false,
-        "icon": "envelope",
-        "title": "Subscribe to our newsletter",
-        "heading_tag": "h3",
-        "button_text": "Subscribe",
-        "privacy_policy_text": "By signing up, you agree with our privacy policy.",
-        "overlay_color": "#000000",
-        "overlay_opacity": 20
-      }
-    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -34,6 +16,24 @@
         "color_scheme": "scheme-2",
         "show_title": true,
         "content_width": "md"
+      }
+    },
+    "newsletter_XhbKyD": {
+      "type": "newsletter",
+      "name": "t:sections.newsletter.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "image": "shopify://shop_images/Design_Around.jpg",
+        "image_position": "background",
+        "image_size": "lg",
+        "add_image_spacing": false,
+        "icon": "envelope",
+        "title": "Subscribe to our newsletter",
+        "heading_tag": "h6",
+        "button_text": "Subscribe",
+        "privacy_policy_text": "By signing up, you agree with our privacy policy.",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20
       }
     },
     "1784773837ab1b2040": {
@@ -241,8 +241,8 @@
     }
   },
   "order": [
-    "newsletter_XhbKyD",
     "main",
+    "newsletter_XhbKyD",
     "1784773837ab1b2040"
   ]
 }
