@@ -20,7 +20,6 @@
     },
     "how_it_work_banner_3RARYQ": {
       "type": "how-it-work-banner",
-      "disabled": true,
       "name": "How it works banner",
       "settings": {
         "allow_transparent_header": false,
@@ -28,7 +27,7 @@
         "desktop_image": "shopify://shop_images/works1.jpg",
         "mobile_image": "shopify://shop_images/works1.jpg",
         "desktop_height": "720px",
-        "mobile_height": "100svh",
+        "mobile_height": "710px",
         "tag": "SensOn",
         "title": "Your Rhythm. Unlocked.",
         "description": "<p>Driven by intelligent AI, crafted around your unique rhythm. Experience intimacy that truly listens, responds, and adapts.</p>",
@@ -45,8 +44,7 @@
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "scheme-7",
-        "image": "shopify://shop_images/Design_Around.jpg",
-        "image_position": "background",
+        "image_position": "split",
         "image_size": "lg",
         "add_image_spacing": false,
         "icon": "none",
