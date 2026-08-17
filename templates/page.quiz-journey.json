@@ -9,24 +9,6 @@
  */
 {
   "sections": {
-    "newsletter_XhbKyD": {
-      "type": "newsletter",
-      "name": "t:sections.newsletter.name",
-      "settings": {
-        "color_scheme": "scheme-7",
-        "image": "shopify://shop_images/neon-intimacy-hand-touching-face.jpg",
-        "image_position": "background",
-        "image_size": "md",
-        "add_image_spacing": false,
-        "icon": "envelope",
-        "title": "Subscribe to our newsletter",
-        "heading_tag": "h3",
-        "button_text": "Subscribe",
-        "privacy_policy_text": "By signing up, you agree with our privacy policy.",
-        "overlay_color": "#000000",
-        "overlay_opacity": 20
-      }
-    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -34,6 +16,45 @@
         "color_scheme": "scheme-2",
         "show_title": true,
         "content_width": "md"
+      }
+    },
+    "how_it_work_banner_3RARYQ": {
+      "type": "how-it-work-banner",
+      "name": "How it works banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "disable_overlay": false,
+        "desktop_image": "shopify://shop_images/works1.jpg",
+        "mobile_image": "shopify://shop_images/works1.jpg",
+        "desktop_height": "720px",
+        "mobile_height": "560px",
+        "tag": "SensOn",
+        "title": "Your Rhythm. Unlocked.",
+        "description": "<p>Driven by intelligent AI, crafted around your unique rhythm. Experience intimacy that truly listens, responds, and adapts.</p>",
+        "button_width_desktop": 220,
+        "button_width_mobile": 200,
+        "primary_button_text": "",
+        "primary_button_link": "",
+        "secondary_button_text": "",
+        "secondary_button_link": ""
+      }
+    },
+    "newsletter_XhbKyD": {
+      "type": "newsletter",
+      "name": "t:sections.newsletter.name",
+      "settings": {
+        "color_scheme": "scheme-7",
+        "image": "shopify://shop_images/works_8db92d1d-71ee-4bb4-b981-ea7bcd7d2310.jpg",
+        "image_position": "background",
+        "image_size": "auto",
+        "add_image_spacing": false,
+        "icon": "none",
+        "title": "Subscribe to our newsletter",
+        "heading_tag": "h6",
+        "button_text": "Subscribe",
+        "privacy_policy_text": "By signing up, you agree with our privacy policy.",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20
       }
     },
     "1784773837ab1b2040": {
@@ -44,31 +65,37 @@
           "settings": {
             "quiz_title": "Step into the scene.",
             "quiz_description": "It’s late. Your phone lights up with a message from someone you can’t stop thinking about.<br>\nFive moments. Five choices.<br>\nDon’t choose what sounds right. <br>Choose what you want to happen next.",
+            "start_button_text": "Enter the scene",
             "desktop_width_percent": 100,
+            "q1_chapter": "THE INVITATION",
             "question_1": "11:47 p.m.Your phone vibrates beside you.A new message appears:“I know what you need tonight. Come upstairs. No questions.”You read it twice. What makes you want to walk through that door?",
             "q1_option_1": "The feeling that they’ve already planned every detail.",
             "q1_option_2": "The chance to walk in and turn their plan into yours.",
             "q1_option_3": "The challenge—I want to see which one of us gives in first.",
             "q1_option_4": "The mystery. I want to know what kind of night this becomes.",
             "q1_option_5": "Others",
+            "q2_chapter": "THE ROOM",
             "question_2": "The door closes behind you.The lights are low. Music is playing somewhere in the room, but you can’t see where they are yet.Then their voice comes from behind you:“Close your eyes.”What do you want to happen next?",
             "q2_option_1": "They take your hand first, making sure you feel safe before leading you further.",
             "q2_option_2": "They stay exactly where they are until you tell them to come closer.",
             "q2_option_3": "They move close enough for you to feel them—then step away again.",
             "q2_option_4": "They keep speaking from the shadows until the room in your imagination feels more real than the one around you.",
             "q2_option_5": "Others",
+            "q3_chapter": "THE FIRST MOVE",
             "question_3": "Their voice is closer now.“Tell me when you want me to stop.”For a moment, nothing happens. The waiting becomes almost unbearable.Which next move would pull you completely into the scene?",
             "q3_option_1": "They whisper, “You don’t have to think. I’ve got you,” and take the lead.",
             "q3_option_2": "They follow your instructions exactly, adjusting to every reaction.",
             "q3_option_3": "They do almost what you asked—but change just enough to challenge you.",
             "q3_option_4": "They begin telling you who they are, why they brought you here and what they have imagined doing all night.",
             "q3_option_5": "Others",
+            "q4_chapter": "THE SHIFT",
             "question_4": "The tension has been building slowly.Then everything pauses.They look at you and ask:“Do you want control?”What do you do?",
             "q4_option_1": "Shake your head. You want them to keep leading, now that you finally trust where they are taking you.",
             "q4_option_2": "Take it—and show them exactly how you want the rest of the night to go.",
             "q4_option_3": "Take control for a moment, then give it back when they least expect it.",
             "q4_option_4": "Tell them to continue the story. You want to find out what this version of you does next.",
             "q4_option_5": "Others",
+            "q5_chapter": "WHAT STAYS",
             "question_5": "Much later, the room is quiet again.The music has stopped. Your breathing is slower, but your mind keeps replaying one part of the night.Which moment stays with you?",
             "q5_option_1": "The moment you stopped thinking and felt completely cared for.",
             "q5_option_2": "The way they responded to every move you made.",
@@ -193,6 +220,7 @@
             "title_size": 36,
             "description_size": 14,
             "question_size": 20,
+            "chapter_size": 16,
             "option_size": 16,
             "border_radius": 0,
             "option_border_radius": 16,
@@ -224,7 +252,7 @@
         "ai_gen_block_ccb6ff2_pTkbNR"
       ],
       "custom_css": [
-        ".container{padding: 0;}"
+        ".container {padding: 0;}"
       ],
       "settings": {
         "color_scheme": "scheme-7",
@@ -234,8 +262,9 @@
     }
   },
   "order": [
-    "newsletter_XhbKyD",
     "main",
+    "how_it_work_banner_3RARYQ",
+    "newsletter_XhbKyD",
     "1784773837ab1b2040"
   ]
 }
