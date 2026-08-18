@@ -16,7 +16,7 @@
   endcase
 -%}
 
-{%- comment -%} CTA 静态样式（固定两行形态，不随点击变形） {%- endcomment -%}
+{%- comment -%} CTA 静态样式（固定两行形态，支持输入框样式切换） {%- endcomment -%}
 <style>
   /* 容器始终保持上下垂直排列 */
   .custom-cta-form .input-with-connected-submit {
@@ -26,11 +26,29 @@
     width: 100%;
   }
 
-  /* 输入框固定满宽 */
+  /* 输入框基础样式 */
   .custom-cta-form .input-with-connected-submit input[type="email"] {
     width: 100%;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
   }
+
+  {%- if section.settings.input_style == 'translucent' -%}
+    /* 选项2：浅灰色框 + 半透明黑底效果 */
+    .custom-cta-form .input-with-connected-submit input[type="email"] {
+      background-color: rgba(0, 0, 0, 0.35) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      color: #ffffff !important;
+    }
+
+    .custom-cta-form .input-with-connected-submit input[type="email"]::placeholder {
+      color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    .custom-cta-form .input-with-connected-submit input[type="email"]:focus {
+      border-color: rgba(255, 255, 255, 0.6) !important;
+      background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+  {%- endif -%}
 
   /* 按钮固定满宽 */
   .custom-cta-form .input-with-connected-submit button,
@@ -164,6 +182,22 @@
       "id": "color_scheme",
       "label": "t:global.colors.scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "input_style",
+      "label": "输入框样式",
+      "options": [
+        {
+          "value": "default",
+          "label": "1. 默认（跟随系统配色）"
+        },
+        {
+          "value": "translucent",
+          "label": "2. 浅灰边框 + 半透明黑底"
+        }
+      ],
+      "default": "default"
     },
     {
       "type": "image_picker",
