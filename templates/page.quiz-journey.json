@@ -54,7 +54,7 @@
         "content": "<p>Five choices reveal what draws you in — and how SensOn turns it into an AI-powered experience you can hear, feel, and touch.</p>",
         "heading_tag": "h5",
         "button_text": "Subscribe",
-        "privacy_policy_text": "By signing up, you agree with our privacy policy.",
+        "privacy_policy_text": "",
         "overlay_color": "#000000",
         "overlay_opacity": 20
       }
