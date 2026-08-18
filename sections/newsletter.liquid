@@ -16,9 +16,9 @@
   endcase
 -%}
 
-{%- comment -%} CTA 终极全端覆盖样式 (全平台强制居中&高度固定) {%- endcomment -%}
+{%- comment -%} CTA 终极全端覆盖样式 (全平台强制居中、形状统一&高度固定) {%- endcomment -%}
 <style>
-  /* 1. 彻底清空 PC/移动端外层容器的限制 */
+  /* 1. 彻底清空 PC/移动端外层容器的限制，全端强制垂直单列排列 */
   .custom-cta-form,
   .custom-cta-form .input-with-connected-submit {
     display: flex !important;
@@ -30,6 +30,7 @@
     max-width: 100% !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    grid-template-columns: none !important; /* 强制覆盖主题原生 H5 网格/拼接布局 */
   }
 
   /* 2. 强行重置渲染组件 (render 'input') 的外层包装包裹 */
@@ -41,7 +42,7 @@
     flex: none !important; /* 彻底禁用 flex-grow 导致的宽度拉伸变形 */
   }
 
-  /* 3. Email 输入框 (同时覆盖移动端与 PC 端) */
+  /* 3. Email 输入框 (彻底重置 H5 拼接样式与圆角) */
   .custom-cta-form .input-with-connected-submit input[type="email"],
   .custom-cta-form .input-with-connected-submit .input {
     width: 100% !important;
@@ -50,6 +51,7 @@
     margin: 0 auto !important;
     background-color: rgba(0, 0, 0, 0.35) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: var(--button-border-radius, 4px) !important; /* 恢复被主题 H5 端强行切掉的圆角 */
     color: #ffffff !important;
     box-sizing: border-box !important;
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -64,7 +66,7 @@
     background-color: rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* 4. Subscribe 按钮 (同时覆盖移动端与 PC 端) */
+  /* 4. Subscribe 按钮 (彻底重置 H5 拼接样式与圆角) */
   .custom-cta-form .input-with-connected-submit button,
   .custom-cta-form .input-with-connected-submit .button {
     {% if section.settings.button_width_type == 'fit' %}
@@ -81,24 +83,9 @@
     align-items: center !important;
     justify-content: center !important;
     margin: 0 auto !important;
+    border-radius: var(--button-border-radius, 4px) !important; /* 恢复被主题 H5 端强行切掉的圆角 */
     box-sizing: border-box !important;
     transition: opacity 0.3s ease;
-  }
-
-  /* 5. 针对 PC 大屏强行干预，压制主题原生媒体查询 */
-  @media screen and (min-width: 700px) {
-    .custom-cta-form .input-with-connected-submit {
-      flex-direction: column !important;
-      grid-template-columns: none !important;
-    }
-    .custom-cta-form .input-with-connected-submit > * {
-      width: 100% !important;
-      max-width: {{ section.settings.input_max_width }}px !important;
-    }
-    .custom-cta-form .input-with-connected-submit button,
-    .custom-cta-form .input-with-connected-submit .button {
-      height: {{ section.settings.button_height }}px !important;
-    }
   }
 </style>
 
