@@ -14,9 +14,9 @@
           {%- render 'icon' with section.settings.icon, width: 48, mobile_width: 28 -%}
         {%- endif -%}
 
-        {%- comment -%} 1. 顶标签 (Tag / Subheading) - 专属粉色 {#f287ec} {%- endcomment -%}
+        {%- comment -%} 1. 顶标签 (Tag / Subheading) {%- endcomment -%}
         {%- if section.settings.subheading != blank -%}
-          <p style="color: #f287ec !important; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 8px 0; display: block;">
+          <p class="bold text-sm uppercase tracking-wider text-subdued" style="margin-bottom: 8px;">
             {{ section.settings.subheading | escape }}
           </p>
         {%- endif -%}
@@ -26,9 +26,9 @@
           {%- render 'heading', content: section.settings.title, style: section.settings.heading_tag, html_tag: 'h2' -%}
         {%- endif -%}
 
-        {%- comment -%} 3. 副标题/描述 (Description) - 纯白度提高 {%- endcomment -%}
+        {%- comment -%} 3. 副标题/描述 (Description) {%- endcomment -%}
         {%- if section.settings.content != blank -%}
-          <div style="color: rgba(255, 255, 255, 0.9) !important; font-size: 15px; line-height: 1.5; margin-top: 12px; display: block;">
+          <div class="description text-subdued" style="margin-top: 12px;">
             {{ section.settings.content }}
           </div>
         {%- endif -%}
@@ -210,7 +210,7 @@
     {
       "type": "text",
       "id": "subheading",
-      "label": "顶标签 (Tag / Subheading)",
+      "label": "副标题/小标签 (Tag / Subheading)",
       "default": "NEWSLETTER"
     },
     {
@@ -222,7 +222,7 @@
     {
       "type": "richtext",
       "id": "content",
-      "label": "副标题/描述 (Description)",
+      "label": "详细描述 (Description / Text)",
       "default": "<p>Get exclusive updates and special offers directly to your inbox.</p>"
     },
     {
