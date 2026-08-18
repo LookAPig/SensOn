@@ -16,7 +16,7 @@
   endcase
 -%}
 
-{%- comment -%} 参考图片 1:1 还原一体化胶囊 CTA 样式 {%- endcomment -%}
+{%- comment -%} 1:1 还原无缝胶囊 CTA 样式 {%- endcomment -%}
 <style>
   /* 基础容器 */
   .custom-cta-form {
@@ -25,7 +25,7 @@
     margin: 0 auto;
   }
 
-  /* 核心：将输入框和按钮强行并排在一行 */
+  /* 核心：将输入框和按钮无缝并排在一行 */
   .custom-cta-form .input-with-connected-submit {
     display: flex !important;
     flex-direction: row !important;
@@ -33,20 +33,22 @@
     position: relative !important;
     width: 100% !important;
     background: transparent !important;
+    gap: 0 !important; /* 彻底消除间距 */
   }
 
-  /* 复写主题可能存在的 input-wrapper 干扰 */
+  /* 消除主题自带的外边距干扰 */
   .custom-cta-form .input-with-connected-submit > * {
     margin: 0 !important;
   }
 
-  /* 左侧输入框：半透明黑底 + 细微亮边框 + 独立大圆角 */
+  /* 左侧输入框：半透明黑底 + 无缝贴合 */
   .custom-cta-form input[type="email"] {
     flex: 1 1 auto !important;
     height: 48px !important;
     background-color: rgba(0, 0, 0, 0.4) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    border-radius: 24px 0 0 24px !important; /* 左侧圆角 */
+    border-right: none !important; /* 关键：移除右边框，与按钮无缝拼接 */
+    border-radius: 24px 0 0 24px !important; /* 左侧大圆角 */
     color: #ffffff !important;
     padding: 0 16px 0 20px !important;
     font-size: 14px !important;
@@ -62,11 +64,10 @@
 
   /* 输入框 Hover & Focus 动态效果 */
   .custom-cta-form input[type="email"]:focus {
-    border-color: rgba(255, 255, 255, 0.6) !important;
-    background-color: rgba(0, 0, 0, 0.5) !important;
+    background-color: rgba(0, 0, 0, 0.55) !important;
   }
 
-  /* 右侧按钮：参考图同款亮紫色/粉紫渐变高光按钮 */
+  /* 右侧按钮：无缝拼接 + 紫粉渐变 */
   .custom-cta-form button,
   .custom-cta-form .button {
     flex: 0 0 auto !important;
@@ -76,8 +77,9 @@
     color: #ffffff !important;
     font-weight: 600 !important;
     font-size: 15px !important;
-    border: none !important;
-    border-radius: 0 24px 24px 0 !important; /* 右侧圆角 */
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-left: none !important; /* 关键：移除左边框，与输入框无缝拼接 */
+    border-radius: 0 24px 24px 0 !important; /* 右侧大圆角 */
     cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -85,7 +87,6 @@
     white-space: nowrap !important;
     box-shadow: 0 4px 15px rgba(180, 80, 255, 0.3) !important;
     transition: all 0.3s ease !important;
-    margin-left: -1px !important; /* 消除与输入框之间的微小缝隙 */
   }
 
   /* 按钮 Hover 效果 */
