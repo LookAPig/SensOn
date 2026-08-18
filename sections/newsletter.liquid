@@ -16,74 +16,61 @@
   endcase
 -%}
 
-{%- comment -%} CTA 静态强覆盖样式（支持前端自定义输入框和按钮宽度及对齐） {%- endcomment -%}
+{%- comment -%} CTA 精简强效样式 (始终居中) {%- endcomment -%}
 <style>
-  /* 增加组件高权重父级选择器，防止被主题样式覆盖 */
+  /* 强制表单容器与子元素全局水平居中 */
   .custom-cta-form .input-with-connected-submit {
     display: flex !important;
     flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
     gap: 12px !important;
     width: 100% !important;
-    /* 对齐控制 */
-    {% if section.settings.form_alignment == 'center' %}
-      align-items: center !important;
-    {% elsif section.settings.form_alignment == 'right' %}
-      align-items: flex-end !important;
-    {% else %}
-      align-items: flex-start !important;
-    {% endif %}
+    margin: 0 auto !important;
   }
 
-  /* 强行接管输入框包装外层（某些主题 input 渲染带有 relative 包装容器） */
+  /* 输入框外层包装强行居中 */
   .custom-cta-form .input-with-connected-submit > * {
     width: 100% !important;
-    {% if section.settings.form_alignment == 'center' %}
-      margin-left: auto !important;
-      margin-right: auto !important;
-    {% endif %}
+    max-width: {{ section.settings.input_max_width }}px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
-  /* 1. Email 输入框宽度及外观强行接管 */
+  /* 1. Email 输入框：居中控制 + 半透明黑底/浅灰框配色 */
   .custom-cta-form .input-with-connected-submit input[type="email"],
   .custom-cta-form .input-with-connected-submit .input {
     width: 100% !important;
     max-width: {{ section.settings.input_max_width }}px !important;
+    margin: 0 auto !important;
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    color: #ffffff !important;
     transition: border-color 0.3s ease, background-color 0.3s ease;
     box-sizing: border-box !important;
   }
 
-  /* 输入框配色：浅灰边框 + 半透明黑底 */
-  {%- if section.settings.input_style == 'translucent' -%}
-    .custom-cta-form .input-with-connected-submit input[type="email"] {
-      background-color: rgba(0, 0, 0, 0.35) !important;
-      border: 1px solid rgba(255, 255, 255, 0.25) !important;
-      color: #ffffff !important;
-    }
+  .custom-cta-form .input-with-connected-submit input[type="email"]::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
 
-    .custom-cta-form .input-with-connected-submit input[type="email"]::placeholder {
-      color: rgba(255, 255, 255, 0.6) !important;
-    }
+  .custom-cta-form .input-with-connected-submit input[type="email"]:focus {
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
 
-    .custom-cta-form .input-with-connected-submit input[type="email"]:focus {
-      border-color: rgba(255, 255, 255, 0.6) !important;
-      background-color: rgba(0, 0, 0, 0.5) !important;
-    }
-  {%- endif -%}
-
-  /* 2. Subscribe 按钮宽度强行接管 */
+  /* 2. Subscribe 按钮：始终居中 */
   .custom-cta-form .input-with-connected-submit button,
   .custom-cta-form .input-with-connected-submit .button {
-    {% if section.settings.button_width_type == 'custom' %}
-      width: 100% !important;
-      max-width: {{ section.settings.button_max_width }}px !important;
-    {% elsif section.settings.button_width_type == 'fit' %}
+    {% if section.settings.button_width_type == 'fit' %}
       width: auto !important;
-      padding-left: 24px !important;
-      padding-right: 24px !important;
+      padding-left: 32px !important;
+      padding-right: 32px !important;
     {% else %}
       width: 100% !important;
       max-width: {{ section.settings.input_max_width }}px !important;
     {% endif %}
+    margin: 0 auto !important;
     transition: opacity 0.3s ease;
     box-sizing: border-box !important;
   }
@@ -101,7 +88,7 @@
 
         {%- comment -%} 1. Logo 图片 (固定宽度 70px，紧贴标题) {%- endcomment -%}
         {%- if section.settings.logo != blank -%}
-          <div class="newsletter-logo-wrapper {% if center_content %}flex justify-center{% endif %}" style="margin-bottom: 4px;">
+          <div class="newsletter-logo-wrapper flex justify-center" style="margin-bottom: 4px;">
             {{ section.settings.logo | image_url: width: 300 | image_tag: style: 'width: 70px; max-width: 70px; height: auto; display: block;', class: 'newsletter-logo', loading: 'lazy' }}
           </div>
         {%- endif -%}
@@ -123,7 +110,7 @@
 
       {%- assign newsletter_form_id = 'newsletter-form-' | append: section.id -%}
 
-      <div class="v-stack {% if center_content %}justify-self-center{% endif %} w-full md:max-w-sm gap-4">
+      <div class="v-stack justify-self-center w-full md:max-w-sm gap-4">
         {%- assign has_form_posted_successfully = false -%}
 
         {%- form 'customer', id: newsletter_form_id, class: 'form custom-cta-form' -%}
@@ -154,7 +141,7 @@
         {%- endform -%}
 
         {%- if section.settings.privacy_policy_text != blank and has_form_posted_successfully == false -%}
-          <p class="text-sm {% if center_content %}text-center{% endif %} {% unless section.settings.image_position == 'background' and section.settings.image != blank %}text-subdued{% endunless %}">
+          <p class="text-sm text-center {% unless section.settings.image_position == 'background' and section.settings.image != blank %}text-subdued{% endunless %}">
             {{- section.settings.privacy_policy_text -}}
           </p>
         {%- endif -%}
@@ -216,28 +203,17 @@
     },
     {
       "type": "header",
-      "content": "表单组件宽度与布局控制"
-    },
-    {
-      "type": "select",
-      "id": "form_alignment",
-      "label": "表单对齐方式",
-      "options": [
-        { "value": "center", "label": "居中" },
-        { "value": "left", "label": "靠左" },
-        { "value": "right", "label": "靠右" }
-      ],
-      "default": "center"
+      "content": "表单组件宽度控制"
     },
     {
       "type": "range",
       "id": "input_max_width",
-      "label": "Email 输入框最大宽度 (px)",
+      "label": "表单组件宽度 (px)",
       "min": 200,
       "max": 600,
       "step": 10,
       "unit": "px",
-      "default": 400
+      "default": 360
     },
     {
       "type": "select",
@@ -245,41 +221,9 @@
       "label": "按钮宽度模式",
       "options": [
         { "value": "match_input", "label": "与输入框同宽" },
-        { "value": "fit", "label": "根据文字自动缩放 (自适应)" },
-        { "value": "custom", "label": "自定义指定宽度" }
+        { "value": "fit", "label": "根据内容自适应" }
       ],
       "default": "match_input"
-    },
-    {
-      "type": "range",
-      "id": "button_max_width",
-      "label": "按钮自定义宽度 (px)",
-      "info": "仅在选择「自定义指定宽度」时生效",
-      "min": 100,
-      "max": 600,
-      "step": 10,
-      "unit": "px",
-      "default": 200
-    },
-    {
-      "type": "header",
-      "content": "输入框外观样式"
-    },
-    {
-      "type": "select",
-      "id": "input_style",
-      "label": "输入框配色样式",
-      "options": [
-        {
-          "value": "default",
-          "label": "1. 默认（跟随系统配色）"
-        },
-        {
-          "value": "translucent",
-          "label": "2. 浅灰边框 + 半透明黑底"
-        }
-      ],
-      "default": "default"
     },
     {
       "type": "image_picker",

@@ -43,7 +43,8 @@
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "scheme-7",
-        "input_style": "translucent",
+        "input_max_width": 280,
+        "button_width_type": "match_input",
         "image": "shopify://shop_images/001.jpg",
         "image_position": "background",
         "content_position": "top",
