@@ -16,9 +16,9 @@
   endcase
 -%}
 
-{%- comment -%} CTA 终极全端覆盖样式 (全平台强制居中、形状统一&高度固定) {%- endcomment -%}
+{%- comment -%} CTA 响应式独立样式设置 {%- endcomment -%}
 <style>
-  /* 1. 彻底清空 PC/移动端外层容器的限制，全端强制垂直单列排列 */
+  /* 移动端 (默认/H5) 基础样式 */
   .custom-cta-form,
   .custom-cta-form .input-with-connected-submit {
     display: flex !important;
@@ -30,28 +30,27 @@
     max-width: 100% !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    grid-template-columns: none !important; /* 强制覆盖主题原生 H5 网格/拼接布局 */
+    grid-template-columns: none !important;
   }
 
-  /* 2. 强行重置渲染组件 (render 'input') 的外层包装包裹 */
   .custom-cta-form .input-with-connected-submit > * {
     width: 100% !important;
-    max-width: {{ section.settings.input_max_width }}px !important;
+    max-width: {{ section.settings.mobile_input_max_width }}px !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    flex: none !important; /* 彻底禁用 flex-grow 导致的宽度拉伸变形 */
+    flex: none !important;
   }
 
-  /* 3. Email 输入框 (彻底重置 H5 拼接样式与圆角) */
+  /* H5 Email 输入框 */
   .custom-cta-form .input-with-connected-submit input[type="email"],
   .custom-cta-form .input-with-connected-submit .input {
     width: 100% !important;
-    max-width: {{ section.settings.input_max_width }}px !important;
-    height: {{ section.settings.button_height }}px !important;
+    max-width: {{ section.settings.mobile_input_max_width }}px !important;
+    height: {{ section.settings.mobile_button_height }}px !important;
     margin: 0 auto !important;
     background-color: rgba(0, 0, 0, 0.35) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    border-radius: var(--button-border-radius, 4px) !important; /* 恢复被主题 H5 端强行切掉的圆角 */
+    border-radius: var(--button-border-radius, 4px) !important;
     color: #ffffff !important;
     box-sizing: border-box !important;
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -66,26 +65,50 @@
     background-color: rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* 4. Subscribe 按钮 (彻底重置 H5 拼接样式与圆角) */
+  /* H5 Subscribe 按钮 */
   .custom-cta-form .input-with-connected-submit button,
   .custom-cta-form .input-with-connected-submit .button {
     {% if section.settings.button_width_type == 'fit' %}
       width: auto !important;
-      min-width: 140px !important;
-      padding-left: 32px !important;
-      padding-right: 32px !important;
+      min-width: 120px !important;
+      padding-left: 24px !important;
+      padding-right: 24px !important;
     {% else %}
       width: 100% !important;
-      max-width: {{ section.settings.input_max_width }}px !important;
+      max-width: {{ section.settings.mobile_input_max_width }}px !important;
     {% endif %}
-    height: {{ section.settings.button_height }}px !important;
+    height: {{ section.settings.mobile_button_height }}px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 auto !important;
-    border-radius: var(--button-border-radius, 4px) !important; /* 恢复被主题 H5 端强行切掉的圆角 */
+    border-radius: var(--button-border-radius, 4px) !important;
     box-sizing: border-box !important;
     transition: opacity 0.3s ease;
+  }
+
+  /* PC 端覆盖样式 (≥700px) */
+  @media screen and (min-width: 700px) {
+    .custom-cta-form .input-with-connected-submit > * {
+      max-width: {{ section.settings.input_max_width }}px !important;
+    }
+
+    .custom-cta-form .input-with-connected-submit input[type="email"],
+    .custom-cta-form .input-with-connected-submit .input {
+      max-width: {{ section.settings.input_max_width }}px !important;
+      height: {{ section.settings.button_height }}px !important;
+    }
+
+    .custom-cta-form .input-with-connected-submit button,
+    .custom-cta-form .input-with-connected-submit .button {
+      {% if section.settings.button_width_type == 'fit' %}
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+      {% else %}
+        max-width: {{ section.settings.input_max_width }}px !important;
+      {% endif %}
+      height: {{ section.settings.button_height }}px !important;
+    }
   }
 </style>
 
@@ -162,14 +185,18 @@
     </div>
   {%- endcapture -%}
 
-  {%- if section.settings.image == blank or section.settings.image_position == 'background' -%}
-    {%- if section.settings.image != blank -%}
+  {%- assign desktop_image = section.settings.image -%}
+  {%- assign mobile_image = section.settings.mobile_image | default: desktop_image -%}
+
+  {%- if desktop_image == blank or section.settings.image_position == 'background' -%}
+    {%- if desktop_image != blank -%}
       <div class="content-box grid min-h-{{ section.settings.image_size }}">
-        {%- if section.settings.image != blank -%}
-          <div class="content-box__background-media with-overlay" style="--overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }}">
-            {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: widths: '400,500,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' -}}
-          </div>
-        {%- endif -%}
+        <div class="content-box__background-media with-overlay" style="--overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }}">
+          {%- comment -%} PC 端背景图 {%- endcomment -%}
+          {{- desktop_image | image_url: width: desktop_image.width | image_tag: widths: '600,800,1000,1200,1400,1600,1800,2000,2200,2400', class: 'hidden sm:block' -}}
+          {%- comment -%} H5 移动端背景图 {%- endcomment -%}
+          {{- mobile_image | image_url: width: mobile_image.width | image_tag: widths: '400,500,600,800', class: 'sm:hidden' -}}
+        </div>
 
         <div class="{{ position_class }} w-full z-10">
           {{- section_text_content -}}
@@ -184,7 +211,10 @@
     <div class="section-split">
       <div class="section-split__column section-split__column--image {% unless section.settings.add_image_spacing %}section-split__column--flushed{% endunless %} relative">
         <div class="with-overlay" style="--overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }}; height: 100%; width: 100%;">
-          {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: sizes: '(max-width: 699px) 100vw, 50vw', widths: '400,500,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' -}}
+          {%- comment -%} PC 端分屏图 {%- endcomment -%}
+          {{- desktop_image | image_url: width: desktop_image.width | image_tag: sizes: '50vw', widths: '600,800,1000,1200,1400,1600,1800,2000', class: 'hidden sm:block' -}}
+          {%- comment -%} H5 移动端分屏图 {%- endcomment -%}
+          {{- mobile_image | image_url: width: mobile_image.width | image_tag: sizes: '100vw', widths: '400,500,600,800', class: 'sm:hidden' -}}
         </div>
       </div>
 
@@ -216,12 +246,12 @@
     },
     {
       "type": "header",
-      "content": "表单组件尺寸控制"
+      "content": "PC 端表单尺寸控制"
     },
     {
       "type": "range",
       "id": "input_max_width",
-      "label": "表单组件宽度 (px)",
+      "label": "PC 端表单组件宽度 (px)",
       "min": 200,
       "max": 600,
       "step": 10,
@@ -231,12 +261,36 @@
     {
       "type": "range",
       "id": "button_height",
-      "label": "按钮/输入框高度 (px)",
+      "label": "PC 端按钮/输入框高度 (px)",
       "min": 32,
       "max": 64,
       "step": 2,
       "unit": "px",
       "default": 48
+    },
+    {
+      "type": "header",
+      "content": "H5 移动端表单尺寸控制"
+    },
+    {
+      "type": "range",
+      "id": "mobile_input_max_width",
+      "label": "H5 端表单组件宽度 (px)",
+      "min": 180,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "mobile_button_height",
+      "label": "H5 端按钮/输入框高度 (px)",
+      "min": 32,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 42
     },
     {
       "type": "select",
@@ -249,10 +303,20 @@
       "default": "match_input"
     },
     {
+      "type": "header",
+      "content": "图片设置 (PC / H5 独立配置)"
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "t:global.image.image",
+      "label": "PC 端图片",
       "info": "t:sections.newsletter.image_size_recommendation"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "H5 移动端图片",
+      "info": "不传则默认使用 PC 端图片"
     },
     {
       "type": "select",
