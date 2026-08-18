@@ -16,24 +16,33 @@
   endcase
 -%}
 
-{%- comment -%} CTA 静态样式（固定两行形态，支持输入框样式切换） {%- endcomment -%}
+{%- comment -%} CTA 静态样式（支持前端自定义输入框和按钮宽度及对齐） {%- endcomment -%}
 <style>
-  /* 容器始终保持上下垂直排列 */
+  /* 容器布局控制 */
   .custom-cta-form .input-with-connected-submit {
     display: flex;
     flex-direction: column;
     gap: 12px;
     width: 100%;
+    /* 根据后台设置对齐方式 */
+    {% if section.settings.form_alignment == 'center' %}
+      align-items: center;
+    {% elsif section.settings.form_alignment == 'right' %}
+      align-items: flex-end;
+    {% else %}
+      align-items: flex-start;
+    {% endif %}
   }
 
-  /* 输入框基础样式 */
+  /* 1. Email 输入框宽度调整 */
   .custom-cta-form .input-with-connected-submit input[type="email"] {
     width: 100%;
+    max-width: {{ section.settings.input_max_width }}px; /* 前端根据设置调整最大宽度 */
     transition: border-color 0.3s ease, background-color 0.3s ease;
   }
 
+  /* 输入框配色：浅灰边框 + 半透明黑底 */
   {%- if section.settings.input_style == 'translucent' -%}
-    /* 选项2：浅灰色框 + 半透明黑底效果 */
     .custom-cta-form .input-with-connected-submit input[type="email"] {
       background-color: rgba(0, 0, 0, 0.35) !important;
       border: 1px solid rgba(255, 255, 255, 0.25) !important;
@@ -50,10 +59,18 @@
     }
   {%- endif -%}
 
-  /* 按钮固定满宽 */
+  /* 2. Subscribe 按钮宽度调整 */
   .custom-cta-form .input-with-connected-submit button,
   .custom-cta-form .input-with-connected-submit .button {
-    width: 100%;
+    {% if section.settings.button_width_type == 'custom' %}
+      width: 100%;
+      max-width: {{ section.settings.button_max_width }}px; /* 前端自定义按钮宽度 */
+    {% elsif section.settings.button_width_type == 'fit' %}
+      width: auto; /* 适应文字内容宽度 */
+    {% else %}
+      width: 100%;
+      max-width: {{ section.settings.input_max_width }}px; /* 默认与输入框同宽 */
+    {% endif %}
     transition: opacity 0.3s ease;
   }
 </style>
@@ -184,9 +201,60 @@
       "default": "scheme-1"
     },
     {
+      "type": "header",
+      "content": "表单组件宽度与布局控制"
+    },
+    {
+      "type": "select",
+      "id": "form_alignment",
+      "label": "表单对齐方式",
+      "options": [
+        { "value": "center", "label": "居中" },
+        { "value": "left", "label": "靠左" },
+        { "value": "right", "label": "靠右" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "input_max_width",
+      "label": "Email 输入框最大宽度 (px)",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "button_width_type",
+      "label": "按钮宽度模式",
+      "options": [
+        { "value": "match_input", "label": "与输入框同宽" },
+        { "value": "fit", "label": "根据文字自动缩放 (自适应)" },
+        { "value": "custom", "label": "自定义指定宽度" }
+      ],
+      "default": "match_input"
+    },
+    {
+      "type": "range",
+      "id": "button_max_width",
+      "label": "按钮自定义宽度 (px)",
+      "info": "仅在选择「自定义指定宽度」时生效",
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "header",
+      "content": "输入框外观样式"
+    },
+    {
       "type": "select",
       "id": "input_style",
-      "label": "输入框样式",
+      "label": "输入框配色样式",
       "options": [
         {
           "value": "default",
