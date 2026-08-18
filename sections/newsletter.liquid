@@ -18,29 +18,31 @@
 
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
   {%- capture section_text_content -%}
-    {%- comment -%} 将整体垂直间距从 gap-6 sm:gap-10 缩小为 gap-3 sm:gap-5 {%- endcomment -%}
-    <div class="v-stack max-w-lg {% if center_content %}mx-auto{% endif %} gap-3 sm:gap-5">
-      <div class="prose {% if center_content %}prose-justify-center{% endif %}">
+    <div class="v-stack max-w-lg {% if center_content %}mx-auto{% endif %} gap-4">
+      <div class="{% if center_content %}text-center{% endif %}">
         {%- if section.settings.icon != 'none' -%}
-          {%- render 'icon' with section.settings.icon, width: 48, mobile_width: 28 -%}
+          <div class="mb-2">
+            {%- render 'icon' with section.settings.icon, width: 48, mobile_width: 28 -%}
+          </div>
         {%- endif -%}
 
-        {%- comment -%} 1. Logo 图片 (替代原 Tag 文案) {%- endcomment -%}
+        {%- comment -%} 1. Logo 图片 (固定宽度 50px，紧贴标题) {%- endcomment -%}
         {%- if section.settings.logo != blank -%}
-          <div class="newsletter-logo-wrapper {% if center_content %}flex justify-center{% endif %}" style="margin-bottom: -12px;">
-            {%- capture logo_style -%}max-width: {{ section.settings.logo_max_width }}px; width: 100%; height: auto; display: block;{%- endcapture -%}
-            {{ section.settings.logo | image_url: width: 600 | image_tag: style: logo_style, class: 'newsletter-logo', loading: 'lazy' }}
+          <div class="newsletter-logo-wrapper {% if center_content %}flex justify-center{% endif %}" style="margin-bottom: 4px;">
+            {{ section.settings.logo | image_url: width: 200 | image_tag: style: 'width: 50px; max-width: 50px; height: auto; display: block;', class: 'newsletter-logo', loading: 'lazy' }}
           </div>
         {%- endif -%}
 
         {%- comment -%} 2. 主标题 (Title) {%- endcomment -%}
         {%- if section.settings.title != blank -%}
-          {%- render 'heading', content: section.settings.title, style: section.settings.heading_tag, html_tag: 'h2' -%}
+          <div style="margin: 0; padding: 0;">
+            {%- render 'heading', content: section.settings.title, style: section.settings.heading_tag, html_tag: 'h2' -%}
+          </div>
         {%- endif -%}
 
         {%- comment -%} 3. 副标题/描述 (Description) {%- endcomment -%}
         {%- if section.settings.content != blank -%}
-          <div style="color: rgba(255, 255, 255, 0.9) !important; font-size: 13px; line-height: 1.5; margin-top: 10px; display: block;">
+          <div style="color: rgba(255, 255, 255, 0.9) !important; font-size: 13px; line-height: 1.5; margin-top: 8px; display: block;">
             {{ section.settings.content }}
           </div>
         {%- endif -%}
@@ -246,16 +248,6 @@
       "id": "logo",
       "label": "顶图 Logo (PNG/SVG)",
       "info": "用于替代顶部文字，建议上传透明底 PNG 或 SVG 图片。"
-    },
-    {
-      "type": "range",
-      "id": "logo_max_width",
-      "label": "Logo 最大宽度",
-      "min": 50,
-      "max": 300,
-      "step": 10,
-      "unit": "px",
-      "default": 120
     },
     {
       "type": "inline_richtext",
