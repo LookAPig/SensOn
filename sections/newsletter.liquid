@@ -16,7 +16,7 @@
   endcase
 -%}
 
-{%- comment -%} CTA 精简强效样式 (始终居中) {%- endcomment -%}
+{%- comment -%} CTA 精简强效样式 (始终居中 & 高度可控) {%- endcomment -%}
 <style>
   /* 强制表单容器与子元素全局水平居中 */
   .custom-cta-form .input-with-connected-submit {
@@ -37,11 +37,12 @@
     margin-right: auto !important;
   }
 
-  /* 1. Email 输入框：居中控制 + 半透明黑底/浅灰框配色 */
+  /* 1. Email 输入框：高度 + 居中 + 配色 */
   .custom-cta-form .input-with-connected-submit input[type="email"],
   .custom-cta-form .input-with-connected-submit .input {
     width: 100% !important;
     max-width: {{ section.settings.input_max_width }}px !important;
+    height: {{ section.settings.button_height }}px !important; /* 动态高度 */
     margin: 0 auto !important;
     background-color: rgba(0, 0, 0, 0.35) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
@@ -59,7 +60,7 @@
     background-color: rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* 2. Subscribe 按钮：始终居中 */
+  /* 2. Subscribe 按钮：高度调整与垂直居中对齐 */
   .custom-cta-form .input-with-connected-submit button,
   .custom-cta-form .input-with-connected-submit .button {
     {% if section.settings.button_width_type == 'fit' %}
@@ -70,6 +71,10 @@
       width: 100% !important;
       max-width: {{ section.settings.input_max_width }}px !important;
     {% endif %}
+    height: {{ section.settings.button_height }}px !important; /* 动态高度 */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     margin: 0 auto !important;
     transition: opacity 0.3s ease;
     box-sizing: border-box !important;
@@ -203,7 +208,7 @@
     },
     {
       "type": "header",
-      "content": "表单组件宽度控制"
+      "content": "表单组件尺寸控制"
     },
     {
       "type": "range",
@@ -214,6 +219,16 @@
       "step": 10,
       "unit": "px",
       "default": 360
+    },
+    {
+      "type": "range",
+      "id": "button_height",
+      "label": "按钮/输入框高度 (px)",
+      "min": 32,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 48
     },
     {
       "type": "select",
