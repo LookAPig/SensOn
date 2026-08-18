@@ -16,97 +16,51 @@
   endcase
 -%}
 
-{%- comment -%} 3:1 比例无缝胶囊 CTA 样式 {%- endcomment -%}
+{%- comment -%} CTA 动态交互样式 {%- endcomment -%}
 <style>
-  /* 基础容器 */
-  .custom-cta-form {
-    width: 100%;
-    max-width: 460px;
-    margin: 0 auto;
-  }
-
-  /* 核心：将输入框和按钮无缝并排在一行 */
+  /* 默认两行形态的输入框与按钮容器布局 */
   .custom-cta-form .input-with-connected-submit {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    position: relative !important;
-    width: 100% !important;
-    background: transparent !important;
-    gap: 0 !important; /* 消除间距 */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* 消除主题自带的外边距干扰 */
-  .custom-cta-form .input-with-connected-submit > * {
-    margin: 0 !important;
+  /* 默认输入框背景与过渡 */
+  .custom-cta-form .input-with-connected-submit input[type="email"] {
+    width: 100%;
+    transition: all 0.3s ease;
   }
 
-  /* 左侧输入框：占据 3/4 (75%) 宽度 */
-  .custom-cta-form input[type="email"] {
-    width: 75% !important;
-    flex: 0 0 75% !important;
-    max-width: 75% !important;
-    height: 48px !important;
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    border-right: none !important; /* 关键：移除右边框，无缝拼接 */
-    border-radius: 24px 0 0 24px !important; /* 左侧大圆角 */
-    color: #ffffff !important;
-    padding: 0 16px 0 20px !important;
-    font-size: 14px !important;
-    outline: none !important;
-    box-shadow: none !important;
-    transition: all 0.3s ease !important;
+  /* 默认按钮形态 */
+  .custom-cta-form .input-with-connected-submit button,
+  .custom-cta-form .input-with-connected-submit .button {
+    width: 100%;
+    transition: all 0.3s ease;
   }
 
-  /* 输入框 Placeholder 颜色 */
-  .custom-cta-form input[type="email"]::placeholder {
-    color: rgba(255, 255, 255, 0.6) !important;
+  /* 点击/聚焦（Focus）或已填写（Focus-within）状态：切换为单行形态 */
+  .custom-cta-form .input-with-connected-submit:focus-within {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
   }
 
-  /* 输入框 Hover & Focus 动态效果 */
-  .custom-cta-form input[type="email"]:focus {
-    background-color: rgba(0, 0, 0, 0.55) !important;
+  /* 单行模式下：左侧输入框放大且背景变透明 */
+  .custom-cta-form .input-with-connected-submit:focus-within input[type="email"] {
+    flex: 1 1 auto;
+    background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.5);
+    color: inherit;
   }
 
-  /* 右侧按钮：占据 1/4 (25%) 宽度 + 紫粉渐变 */
-  .custom-cta-form button,
-  .custom-cta-form .button {
-    width: 25% !important;
-    flex: 0 0 25% !important;
-    max-width: 25% !important;
-    height: 48px !important;
-    padding: 0 8px !important; /* 适当缩小内边距以保证紧凑显示 */
-    background: linear-gradient(135deg, #e57eff 0%, #8a53ff 100%) !important; /* 渐变亮紫色 */
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    border-left: none !important; /* 关键：移除左边框，无缝拼接 */
-    border-radius: 0 24px 24px 0 !important; /* 右侧大圆角 */
-    cursor: pointer !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    white-space: nowrap !important;
-    text-overflow: ellipsis !important;
-    overflow: hidden !important;
-    box-shadow: 0 4px 15px rgba(180, 80, 255, 0.3) !important;
-    transition: all 0.3s ease !important;
-  }
-
-  /* 按钮 Hover 效果 */
-  .custom-cta-form button:hover,
-  .custom-cta-form .button:hover {
-    opacity: 0.92 !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 20px rgba(180, 80, 255, 0.5) !important;
-  }
-
-  /* 隐藏主题默认按钮里的右箭头图标（如果存在） */
-  .custom-cta-form button .icon,
-  .custom-cta-form .button .icon {
-    display: none !important;
+  /* 单行模式下：右侧按钮自适应内容宽度 */
+  .custom-cta-form .input-with-connected-submit:focus-within button,
+  .custom-cta-form .input-with-connected-submit:focus-within .button {
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
 </style>
 
@@ -120,9 +74,9 @@
           </div>
         {%- endif -%}
 
-        {%- comment -%} 1. Logo 图片 (固定宽度 70px) {%- endcomment -%}
+        {%- comment -%} 1. Logo 图片 (固定宽度 70px，紧贴标题) {%- endcomment -%}
         {%- if section.settings.logo != blank -%}
-          <div class="newsletter-logo-wrapper {% if center_content %}flex justify-center{% endif %}" style="margin-bottom: 6px;">
+          <div class="newsletter-logo-wrapper {% if center_content %}flex justify-center{% endif %}" style="margin-bottom: 4px;">
             {{ section.settings.logo | image_url: width: 300 | image_tag: style: 'width: 70px; max-width: 70px; height: auto; display: block;', class: 'newsletter-logo', loading: 'lazy' }}
           </div>
         {%- endif -%}
@@ -144,7 +98,7 @@
 
       {%- assign newsletter_form_id = 'newsletter-form-' | append: section.id -%}
 
-      <div class="v-stack {% if center_content %}justify-self-center{% endif %} w-full md:max-w-md gap-4">
+      <div class="v-stack {% if center_content %}justify-self-center{% endif %} w-full md:max-w-sm gap-4">
         {%- assign has_form_posted_successfully = false -%}
 
         {%- form 'customer', id: newsletter_form_id, class: 'form custom-cta-form' -%}
@@ -169,7 +123,7 @@
               assign button_default_content = 'general.newsletter.subscribe' | t
               assign button_content = section.settings.button_text | default: button_default_content
 
-              render 'button', type: 'submit', content: button_content
+              render 'button', type: 'submit', content: button_content, icon: 'arrow-right'
             -%}
           </div>
         {%- endform -%}
