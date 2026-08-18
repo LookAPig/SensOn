@@ -4,6 +4,16 @@
   unless section.settings.image_position == 'split' and section.settings.image != blank
     assign center_content = true
   endunless
+
+  # 内容垂直对齐样式映射
+  case section.settings.content_position
+    when 'top'
+      assign position_class = 'self-start py-10 sm:py-16'
+    when 'bottom'
+      assign position_class = 'self-end py-10 sm:py-16'
+    else
+      assign position_class = 'place-self-center py-10'
+  endcase
 -%}
 
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
@@ -14,7 +24,7 @@
           {%- render 'icon' with section.settings.icon, width: 48, mobile_width: 28 -%}
         {%- endif -%}
 
-        {%- comment -%} 1. 顶标签 (Tag) - 粉色、保留原始大小写、与主标题间距极近(2px) {%- endcomment -%}
+        {%- comment -%} 1. 顶标签 (Tag / Subheading) {%- endcomment -%}
         {%- if section.settings.subheading != blank -%}
           <p style="color: #f287ec !important; font-size: 14px; font-weight: 600; letter-spacing: 0.05em; margin: 0 0 2px 0; display: block;">
             {{ section.settings.subheading | escape }}
@@ -26,7 +36,7 @@
           {%- render 'heading', content: section.settings.title, style: section.settings.heading_tag, html_tag: 'h2' -%}
         {%- endif -%}
 
-        {%- comment -%} 3. 副标题/描述 (Description) - 字号缩小至 13px {%- endcomment -%}
+        {%- comment -%} 3. 副标题/描述 (Description) {%- endcomment -%}
         {%- if section.settings.content != blank -%}
           <div style="color: rgba(255, 255, 255, 0.9) !important; font-size: 13px; line-height: 1.5; margin-top: 10px; display: block;">
             {{ section.settings.content }}
@@ -77,14 +87,14 @@
 
   {%- if section.settings.image == blank or section.settings.image_position == 'background' -%}
     {%- if section.settings.image != blank -%}
-      <div class="content-box min-h-{{ section.settings.image_size }}">
+      <div class="content-box grid min-h-{{ section.settings.image_size }}">
         {%- if section.settings.image != blank -%}
           <div class="content-box__background-media with-overlay" style="--overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }}">
             {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: widths: '400,500,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' -}}
           </div>
         {%- endif -%}
 
-        <div class="place-self-center">
+        <div class="{{ position_class }} w-full z-10">
           {{- section_text_content -}}
         </div>
       </div>
@@ -99,7 +109,7 @@
         {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: sizes: '(max-width: 699px) 100vw, 50vw', widths: '400,500,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' -}}
       </div>
 
-      <div class="section-split__column">
+      <div class="section-split__column {{ position_class }}">
         {{- section_text_content -}}
       </div>
     </div>
@@ -146,6 +156,26 @@
         }
       ],
       "default": "split"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "内容垂直位置",
+      "options": [
+        {
+          "value": "top",
+          "label": "靠上 (Top)"
+        },
+        {
+          "value": "center",
+          "label": "居中 (Center)"
+        },
+        {
+          "value": "bottom",
+          "label": "靠下 (Bottom)"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "select",
