@@ -21,9 +21,14 @@
   endif
 -%}
 
-{%- if is_stacked -%}
 <style>
-  /* 强制拆分两行布局高权重覆盖 */
+  /* 强制样式覆盖 */
+  #shopify-section-{{ section.id }} .input-with-connected-submit {
+    width: 100% !important;
+  }
+
+  {%- if is_stacked -%}
+  /* 1. 上下两行布局 (Stacked) */
   #shopify-section-{{ section.id }} .input-with-connected-submit {
     display: flex !important;
     flex-direction: column !important;
@@ -61,8 +66,49 @@
     border: none !important;
     margin: 0 !important;
   }
+  {%- else -%}
+  /* 2. 单行左右合并胶囊布局 (Inline) */
+  #shopify-section-{{ section.id }} .input-with-connected-submit {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    background-color: #000000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 9999px !important;
+    padding: 4px 6px 4px 16px !important;
+    min-height: 52px !important;
+    box-shadow: none !important;
+  }
+
+  #shopify-section-{{ section.id }} .input-with-connected-submit input {
+    flex: 1 1 auto !important;
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 100% !important;
+    font-size: 14px !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  #shopify-section-{{ section.id }} .input-with-connected-submit button,
+  #shopify-section-{{ section.id }} .input-with-connected-submit .button {
+    flex: 0 0 auto !important;
+    border-radius: 9999px !important;
+    background-color: #f287ec !important;
+    color: #000000 !important;
+    padding: 10px 20px !important;
+    min-height: 40px !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    border: none !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+  }
+  {%- endif -%}
 </style>
-{%- endif -%}
 
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
   {%- capture section_text_content -%}
@@ -72,7 +118,7 @@
           {%- render 'icon' with section.settings.icon, width: 48, mobile_width: 28 -%}
         {%- endif -%}
 
-        {%- comment -%} 1. 顶标签 (Tag) - 紧贴主标题 (margin-bottom: 0) {%- endcomment -%}
+        {%- comment -%} 1. 顶标签 (Tag) - 紧贴主标题 {%- endcomment -%}
         {%- if section.settings.subheading != blank -%}
           <p style="color: #f287ec !important; font-size: 14px; font-weight: 600; letter-spacing: 0.05em; margin: 0 0 0px 0 !important; padding: 0 !important; line-height: 1.1 !important; display: block;">
             {{ section.settings.subheading | escape }}
