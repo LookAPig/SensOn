@@ -24,11 +24,12 @@
           {%- render 'icon' with section.settings.icon, width: 48, mobile_width: 28 -%}
         {%- endif -%}
 
-        {%- comment -%} 1. 顶标签 (Tag / Subheading) {%- endcomment -%}
-        {%- if section.settings.subheading != blank -%}
-          <p style="color: #f287ec !important; font-size: 14px; font-weight: 600; letter-spacing: 0.05em; margin: 0 0 2px 0; display: block;">
-            {{ section.settings.subheading | escape }}
-          </p>
+        {%- comment -%} 1. Logo 图片 (替代原 Tag 文案) {%- endcomment -%}
+        {%- if section.settings.logo != blank -%}
+          <div class="newsletter-logo-wrapper mb-3 {% if center_content %}flex justify-center{% endif %}">
+            {%- capture logo_style -%}max-width: {{ section.settings.logo_max_width }}px; width: 100%; height: auto; display: block;{%- endcapture -%}
+            {{ section.settings.logo | image_url: width: 600 | image_tag: style: logo_style, class: 'newsletter-logo', loading: 'lazy' }}
+          </div>
         {%- endif -%}
 
         {%- comment -%} 2. 主标题 (Title) {%- endcomment -%}
@@ -240,9 +241,20 @@
       "default": "envelope"
     },
     {
-      "type": "text",
-      "id": "subheading",
-      "label": "顶标签 (Tag / Subheading)"
+      "type": "image_picker",
+      "id": "logo",
+      "label": "顶图 Logo (PNG/SVG)",
+      "info": "用于替代顶部文字，建议上传透明底 PNG 或 SVG 图片。"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": "Logo 最大宽度",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 120
     },
     {
       "type": "inline_richtext",
