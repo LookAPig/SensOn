@@ -16,6 +16,54 @@
   endcase
 -%}
 
+{%- comment -%} CTA 动态交互样式 {%- endcomment -%}
+<style>
+  /* 默认两行形态的输入框与按钮容器布局 */
+  .custom-cta-form .input-with-connected-submit {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* 默认输入框背景与过渡 */
+  .custom-cta-form .input-with-connected-submit input[type="email"] {
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+
+  /* 默认按钮形态 */
+  .custom-cta-form .input-with-connected-submit button,
+  .custom-cta-form .input-with-connected-submit .button {
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+
+  /* 点击/聚焦（Focus）或已填写（Focus-within）状态：切换为单行形态 */
+  .custom-cta-form .input-with-connected-submit:focus-within {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* 单行模式下：左侧输入框放大且背景变透明 */
+  .custom-cta-form .input-with-connected-submit:focus-within input[type="email"] {
+    flex: 1 1 auto;
+    background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.5);
+    color: inherit;
+  }
+
+  /* 单行模式下：右侧按钮自适应内容宽度 */
+  .custom-cta-form .input-with-connected-submit:focus-within button,
+  .custom-cta-form .input-with-connected-submit:focus-within .button {
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+</style>
+
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
   {%- capture section_text_content -%}
     <div class="v-stack max-w-lg {% if center_content %}mx-auto{% endif %} gap-4">
@@ -53,7 +101,7 @@
       <div class="v-stack {% if center_content %}justify-self-center{% endif %} w-full md:max-w-sm gap-4">
         {%- assign has_form_posted_successfully = false -%}
 
-        {%- form 'customer', id: newsletter_form_id, class: 'form' -%}
+        {%- form 'customer', id: newsletter_form_id, class: 'form custom-cta-form' -%}
           {%- if form.posted_successfully? -%}
             {%- assign success_message = 'general.newsletter.subscribed_successfully' | t -%}
             {%- assign has_form_posted_successfully = true -%}
