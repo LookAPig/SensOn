@@ -18,7 +18,8 @@
 
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
   {%- capture section_text_content -%}
-    <div class="v-stack max-w-lg {% if center_content %}mx-auto{% endif %} gap-6 sm:gap-10">
+    {%- comment -%} 将整体垂直间距从 gap-6 sm:gap-10 缩小为 gap-3 sm:gap-5 {%- endcomment -%}
+    <div class="v-stack max-w-lg {% if center_content %}mx-auto{% endif %} gap-3 sm:gap-5">
       <div class="prose {% if center_content %}prose-justify-center{% endif %}">
         {%- if section.settings.icon != 'none' -%}
           {%- render 'icon' with section.settings.icon, width: 48, mobile_width: 28 -%}
@@ -26,7 +27,7 @@
 
         {%- comment -%} 1. Logo 图片 (替代原 Tag 文案) {%- endcomment -%}
         {%- if section.settings.logo != blank -%}
-          <div class="newsletter-logo-wrapper mb-3 {% if center_content %}flex justify-center{% endif %}">
+          <div class="newsletter-logo-wrapper {% if center_content %}flex justify-center{% endif %}" style="margin-bottom: -12px;">
             {%- capture logo_style -%}max-width: {{ section.settings.logo_max_width }}px; width: 100%; height: auto; display: block;{%- endcapture -%}
             {{ section.settings.logo | image_url: width: 600 | image_tag: style: logo_style, class: 'newsletter-logo', loading: 'lazy' }}
           </div>
