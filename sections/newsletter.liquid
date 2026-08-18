@@ -74,10 +74,10 @@
           </div>
         {%- endif -%}
 
-        {%- comment -%} 1. Logo 图片 (固定宽度 50px，紧贴标题) {%- endcomment -%}
+        {%- comment -%} 1. Logo 图片 (固定宽度 70px，紧贴标题) {%- endcomment -%}
         {%- if section.settings.logo != blank -%}
           <div class="newsletter-logo-wrapper {% if center_content %}flex justify-center{% endif %}" style="margin-bottom: 4px;">
-            {{ section.settings.logo | image_url: width: 200 | image_tag: style: 'width: 50px; max-width: 50px; height: auto; display: block;', class: 'newsletter-logo', loading: 'lazy' }}
+            {{ section.settings.logo | image_url: width: 300 | image_tag: style: 'width: 70px; max-width: 70px; height: auto; display: block;', class: 'newsletter-logo', loading: 'lazy' }}
           </div>
         {%- endif -%}
 
