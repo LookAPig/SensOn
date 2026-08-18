@@ -49,6 +49,7 @@
         "mobile_button_height": 42,
         "button_width_type": "match_input",
         "image": "shopify://shop_images/001.jpg",
+        "mobile_image": "shopify://shop_images/001.jpg",
         "image_position": "background",
         "content_position": "top",
         "image_size": "fill",
