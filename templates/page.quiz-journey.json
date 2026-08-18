@@ -18,6 +18,26 @@
         "content_width": "md"
       }
     },
+    "how_it_work_banner_xCKAhn": {
+      "type": "how-it-work-banner",
+      "disabled": true,
+      "name": "How it works banner",
+      "settings": {
+        "allow_transparent_header": true,
+        "disable_overlay": false,
+        "desktop_height": "100svh",
+        "mobile_height": "710px",
+        "tag": "How It Works",
+        "title": "How SensOn S1 Works",
+        "description": "<p>An app-connected intimacy device that brings<br/>the SensOn App, AI companions,</p>",
+        "button_width_desktop": 220,
+        "button_width_mobile": 200,
+        "primary_button_text": "Start in 3 Steps",
+        "primary_button_link": "",
+        "secondary_button_text": "Choose Your Mode",
+        "secondary_button_link": ""
+      }
+    },
     "newsletter_XhbKyD": {
       "type": "newsletter",
       "name": "t:sections.newsletter.name",
@@ -28,10 +48,10 @@
         "image_size": "fill",
         "add_image_spacing": false,
         "icon": "none",
-        "title": "<strong>One email. Five choices.<>See where the night takes you.</strong>",
+        "title": "<strong>One email. Five choices.See where the night takes you.</strong>",
         "heading_tag": "h5",
-        "button_text": "Subscribe",
-        "privacy_policy_text": "Subscribe to our newsletter",
+        "button_text": "UNLOCK",
+        "privacy_policy_text": "Private by design. Unsubscribe anytime.",
         "overlay_color": "#000000",
         "overlay_opacity": 20
       }
@@ -242,6 +262,7 @@
   },
   "order": [
     "main",
+    "how_it_work_banner_xCKAhn",
     "newsletter_XhbKyD",
     "1784773837ab1b2040"
   ]
