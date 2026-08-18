@@ -5,58 +5,64 @@
     assign center_content = true
   endunless
 
-  # 内容垂直对齐样式映射
+  # 内容垂直对齐 (靠上 / 居中 / 靠下)
   case section.settings.content_position
     when 'top'
-      assign position_class = 'self-start py-8 sm:py-12'
+      assign content_align_style = 'align-self: flex-start !important; justify-self: center !important; margin-top: 2rem !important; margin-bottom: auto !important;'
     when 'bottom'
-      assign position_class = 'self-end py-8 sm:py-12'
+      assign content_align_style = 'align-self: flex-end !important; justify-self: center !important; margin-top: auto !important; margin-bottom: 2rem !important;'
     else
-      assign position_class = 'place-self-center py-8'
+      assign content_align_style = 'align-self: center !important; justify-self: center !important; margin-top: auto !important; margin-bottom: auto !important;'
   endcase
 
-  # 表单布局样式映射 (stacked = 上下两行, inline = 单行合并)
-  assign form_layout = section.settings.form_layout | default: 'inline'
+  assign is_stacked = false
+  if section.settings.form_layout == 'stacked'
+    assign is_stacked = true
+  endif
 -%}
 
+{%- if is_stacked -%}
 <style>
-  #shopify-section-{{ section.id }} .newsletter-form-wrapper {
-    width: 100%;
-  }
-
-  /* 上下两行布局 (Stacked) 针对 input-with-connected-submit 样式的覆盖 */
-  #shopify-section-{{ section.id }} .newsletter-form--stacked .input-with-connected-submit {
+  /* 强制拆分两行布局高权重覆盖 */
+  #shopify-section-{{ section.id }} .input-with-connected-submit {
+    display: flex !important;
     flex-direction: column !important;
     gap: 12px !important;
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
+    box-shadow: none !important;
   }
 
-  #shopify-section-{{ section.id }} .newsletter-form--stacked .input-with-connected-submit input {
+  #shopify-section-{{ section.id }} .input-with-connected-submit input {
     width: 100% !important;
-    border-radius: 999px !important;
-    background: #000000 !important;
+    border-radius: 9999px !important;
+    background-color: #000000 !important;
     color: #ffffff !important;
     padding: 14px 20px !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     min-height: 48px !important;
+    font-size: 15px !important;
+    text-align: left !important;
   }
 
-  #shopify-section-{{ section.id }} .newsletter-form--stacked .input-with-connected-submit button,
-  #shopify-section-{{ section.id }} .newsletter-form--stacked .input-with-connected-submit .button {
+  #shopify-section-{{ section.id }} .input-with-connected-submit button,
+  #shopify-section-{{ section.id }} .input-with-connected-submit .button {
     width: 100% !important;
-    border-radius: 999px !important;
-    background: #f287ec !important;
+    border-radius: 9999px !important;
+    background-color: #f287ec !important;
     color: #000000 !important;
     justify-content: center !important;
     min-height: 48px !important;
     font-weight: 600 !important;
+    font-size: 14px !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
     border: none !important;
+    margin: 0 !important;
   }
 </style>
+{%- endif -%}
 
 <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
   {%- capture section_text_content -%}
@@ -66,9 +72,9 @@
           {%- render 'icon' with section.settings.icon, width: 48, mobile_width: 28 -%}
         {%- endif -%}
 
-        {%- comment -%} 1. 顶标签 (Tag) - 紧贴主标题 {%- endcomment -%}
+        {%- comment -%} 1. 顶标签 (Tag) - 紧贴主标题 (margin-bottom: 0) {%- endcomment -%}
         {%- if section.settings.subheading != blank -%}
-          <p style="color: #f287ec !important; font-size: 14px; font-weight: 600; letter-spacing: 0.05em; margin: 0 0 0px 0 !important; line-height: 1.1 !important; display: block;">
+          <p style="color: #f287ec !important; font-size: 14px; font-weight: 600; letter-spacing: 0.05em; margin: 0 0 0px 0 !important; padding: 0 !important; line-height: 1.1 !important; display: block;">
             {{ section.settings.subheading | escape }}
           </p>
         {%- endif -%}
@@ -88,10 +94,10 @@
 
       {%- assign newsletter_form_id = 'newsletter-form-' | append: section.id -%}
 
-      <div class="v-stack {% if center_content %}justify-self-center{% endif %} w-full md:max-w-sm gap-4 newsletter-form-wrapper">
+      <div class="v-stack {% if center_content %}justify-self-center{% endif %} w-full md:max-w-sm gap-4">
         {%- assign has_form_posted_successfully = false -%}
 
-        {%- form 'customer', id: newsletter_form_id, class: 'form newsletter-form--{{ form_layout }}' -%}
+        {%- form 'customer', id: newsletter_form_id, class: 'form' -%}
           {%- if form.posted_successfully? -%}
             {%- assign success_message = 'general.newsletter.subscribed_successfully' | t -%}
             {%- assign has_form_posted_successfully = true -%}
@@ -129,14 +135,12 @@
 
   {%- if section.settings.image == blank or section.settings.image_position == 'background' -%}
     {%- if section.settings.image != blank -%}
-      <div class="content-box grid min-h-{{ section.settings.image_size }}">
-        {%- if section.settings.image != blank -%}
-          <div class="content-box__background-media with-overlay" style="--overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }}">
-            {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: widths: '400,500,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' -}}
-          </div>
-        {%- endif -%}
+      <div class="content-box min-h-{{ section.settings.image_size }}" style="display: flex !important; flex-direction: column !important; position: relative !important;">
+        <div class="content-box__background-media with-overlay" style="--overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }}">
+          {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: widths: '400,500,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' -}}
+        </div>
 
-        <div class="{{ position_class }} w-full z-10">
+        <div style="{{ content_align_style }} width: 100%; z-index: 10; padding: 24px 16px;">
           {{- section_text_content -}}
         </div>
       </div>
@@ -151,7 +155,7 @@
         {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: sizes: '(max-width: 699px) 100vw, 50vw', widths: '400,500,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2600' -}}
       </div>
 
-      <div class="section-split__column {{ position_class }}">
+      <div class="section-split__column" style="display: flex !important; flex-direction: column !important; {{ content_align_style }}">
         {{- section_text_content -}}
       </div>
     </div>
