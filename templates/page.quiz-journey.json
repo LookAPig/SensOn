@@ -42,9 +42,9 @@
       "type": "newsletter",
       "name": "t:sections.newsletter.name",
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-7",
         "image": "shopify://shop_images/001.jpg",
-        "image_position": "split",
+        "image_position": "background",
         "image_size": "md",
         "add_image_spacing": false,
         "icon": "envelope",
