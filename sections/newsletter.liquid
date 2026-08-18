@@ -16,29 +16,40 @@
   endcase
 -%}
 
-{%- comment -%} CTA 静态样式（支持前端自定义输入框和按钮宽度及对齐） {%- endcomment -%}
+{%- comment -%} CTA 静态强覆盖样式（支持前端自定义输入框和按钮宽度及对齐） {%- endcomment -%}
 <style>
-  /* 容器布局控制 */
+  /* 增加组件高权重父级选择器，防止被主题样式覆盖 */
   .custom-cta-form .input-with-connected-submit {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    /* 根据后台设置对齐方式 */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    /* 对齐控制 */
     {% if section.settings.form_alignment == 'center' %}
-      align-items: center;
+      align-items: center !important;
     {% elsif section.settings.form_alignment == 'right' %}
-      align-items: flex-end;
+      align-items: flex-end !important;
     {% else %}
-      align-items: flex-start;
+      align-items: flex-start !important;
     {% endif %}
   }
 
-  /* 1. Email 输入框宽度调整 */
-  .custom-cta-form .input-with-connected-submit input[type="email"] {
-    width: 100%;
-    max-width: {{ section.settings.input_max_width }}px; /* 前端根据设置调整最大宽度 */
+  /* 强行接管输入框包装外层（某些主题 input 渲染带有 relative 包装容器） */
+  .custom-cta-form .input-with-connected-submit > * {
+    width: 100% !important;
+    {% if section.settings.form_alignment == 'center' %}
+      margin-left: auto !important;
+      margin-right: auto !important;
+    {% endif %}
+  }
+
+  /* 1. Email 输入框宽度及外观强行接管 */
+  .custom-cta-form .input-with-connected-submit input[type="email"],
+  .custom-cta-form .input-with-connected-submit .input {
+    width: 100% !important;
+    max-width: {{ section.settings.input_max_width }}px !important;
     transition: border-color 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box !important;
   }
 
   /* 输入框配色：浅灰边框 + 半透明黑底 */
@@ -59,19 +70,22 @@
     }
   {%- endif -%}
 
-  /* 2. Subscribe 按钮宽度调整 */
+  /* 2. Subscribe 按钮宽度强行接管 */
   .custom-cta-form .input-with-connected-submit button,
   .custom-cta-form .input-with-connected-submit .button {
     {% if section.settings.button_width_type == 'custom' %}
-      width: 100%;
-      max-width: {{ section.settings.button_max_width }}px; /* 前端自定义按钮宽度 */
+      width: 100% !important;
+      max-width: {{ section.settings.button_max_width }}px !important;
     {% elsif section.settings.button_width_type == 'fit' %}
-      width: auto; /* 适应文字内容宽度 */
+      width: auto !important;
+      padding-left: 24px !important;
+      padding-right: 24px !important;
     {% else %}
-      width: 100%;
-      max-width: {{ section.settings.input_max_width }}px; /* 默认与输入框同宽 */
+      width: 100% !important;
+      max-width: {{ section.settings.input_max_width }}px !important;
     {% endif %}
     transition: opacity 0.3s ease;
+    box-sizing: border-box !important;
   }
 </style>
 
