@@ -14,7 +14,24 @@
           {%- render 'icon' with section.settings.icon, width: 48, mobile_width: 28 -%}
         {%- endif -%}
 
-        {%- render 'heading', content: section.settings.title, style: section.settings.heading_tag, html_tag: 'h2' -%}
+        {%- comment -%} 1. 顶标签 (Tag / Subheading) {%- endcomment -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="bold text-sm uppercase tracking-wider text-subdued" style="margin-bottom: 8px;">
+            {{ section.settings.subheading | escape }}
+          </p>
+        {%- endif -%}
+
+        {%- comment -%} 2. 主标题 (Title) {%- endcomment -%}
+        {%- if section.settings.title != blank -%}
+          {%- render 'heading', content: section.settings.title, style: section.settings.heading_tag, html_tag: 'h2' -%}
+        {%- endif -%}
+
+        {%- comment -%} 3. 副标题/描述 (Description) {%- endcomment -%}
+        {%- if section.settings.content != blank -%}
+          <div class="description text-subdued" style="margin-top: 12px;">
+            {{ section.settings.content }}
+          </div>
+        {%- endif -%}
       </div>
 
       {%- assign newsletter_form_id = 'newsletter-form-' | append: section.id -%}
@@ -191,10 +208,22 @@
       "default": "envelope"
     },
     {
+      "type": "text",
+      "id": "subheading",
+      "label": "副标题/小标签 (Tag / Subheading)",
+      "default": "NEWSLETTER"
+    },
+    {
       "type": "inline_richtext",
       "id": "title",
       "label": "t:global.text.heading",
       "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "详细描述 (Description / Text)",
+      "default": "<p>Get exclusive updates and special offers directly to your inbox.</p>"
     },
     {
       "type": "select",
