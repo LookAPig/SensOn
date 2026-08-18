@@ -16,9 +16,10 @@
   endcase
 -%}
 
-{%- comment -%} CTA 精简强效样式 (始终居中 & 高度可控) {%- endcomment -%}
+{%- comment -%} CTA 终极全端覆盖样式 (全平台强制居中&高度固定) {%- endcomment -%}
 <style>
-  /* 强制表单容器与子元素全局水平居中 */
+  /* 1. 彻底清空 PC/移动端外层容器的限制 */
+  .custom-cta-form,
   .custom-cta-form .input-with-connected-submit {
     display: flex !important;
     flex-direction: column !important;
@@ -26,29 +27,32 @@
     justify-content: center !important;
     gap: 12px !important;
     width: 100% !important;
-    margin: 0 auto !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
-  /* 输入框外层包装强行居中 */
+  /* 2. 强行重置渲染组件 (render 'input') 的外层包装包裹 */
   .custom-cta-form .input-with-connected-submit > * {
     width: 100% !important;
     max-width: {{ section.settings.input_max_width }}px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    flex: none !important; /* 彻底禁用 flex-grow 导致的宽度拉伸变形 */
   }
 
-  /* 1. Email 输入框：高度 + 居中 + 配色 */
+  /* 3. Email 输入框 (同时覆盖移动端与 PC 端) */
   .custom-cta-form .input-with-connected-submit input[type="email"],
   .custom-cta-form .input-with-connected-submit .input {
     width: 100% !important;
     max-width: {{ section.settings.input_max_width }}px !important;
-    height: {{ section.settings.button_height }}px !important; /* 动态高度 */
+    height: {{ section.settings.button_height }}px !important;
     margin: 0 auto !important;
     background-color: rgba(0, 0, 0, 0.35) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
     color: #ffffff !important;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
     box-sizing: border-box !important;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
   }
 
   .custom-cta-form .input-with-connected-submit input[type="email"]::placeholder {
@@ -60,24 +64,41 @@
     background-color: rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* 2. Subscribe 按钮：高度调整与垂直居中对齐 */
+  /* 4. Subscribe 按钮 (同时覆盖移动端与 PC 端) */
   .custom-cta-form .input-with-connected-submit button,
   .custom-cta-form .input-with-connected-submit .button {
     {% if section.settings.button_width_type == 'fit' %}
       width: auto !important;
+      min-width: 140px !important;
       padding-left: 32px !important;
       padding-right: 32px !important;
     {% else %}
       width: 100% !important;
       max-width: {{ section.settings.input_max_width }}px !important;
     {% endif %}
-    height: {{ section.settings.button_height }}px !important; /* 动态高度 */
+    height: {{ section.settings.button_height }}px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 auto !important;
-    transition: opacity 0.3s ease;
     box-sizing: border-box !important;
+    transition: opacity 0.3s ease;
+  }
+
+  /* 5. 针对 PC 大屏强行干预，压制主题原生媒体查询 */
+  @media screen and (min-width: 700px) {
+    .custom-cta-form .input-with-connected-submit {
+      flex-direction: column !important;
+      grid-template-columns: none !important;
+    }
+    .custom-cta-form .input-with-connected-submit > * {
+      width: 100% !important;
+      max-width: {{ section.settings.input_max_width }}px !important;
+    }
+    .custom-cta-form .input-with-connected-submit button,
+    .custom-cta-form .input-with-connected-submit .button {
+      height: {{ section.settings.button_height }}px !important;
+    }
   }
 </style>
 
