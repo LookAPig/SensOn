@@ -95,11 +95,59 @@
         "show_title": false,
         "content_width": "md"
       }
+    },
+    "web_introduction_rules_card_hyPr78": {
+      "type": "web-introduction-rules-card",
+      "blocks": {
+        "card_t77kHK": {
+          "type": "card",
+          "settings": {
+            "title": "Companions With Memory",
+            "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
+          }
+        },
+        "card_F7wajW": {
+          "type": "card",
+          "settings": {
+            "title": "Voice that pulls you in",
+            "text": "Hear every whisper, pause and breath through immersive voice-led stories and real-time conversation."
+          }
+        },
+        "card_hXdxCe": {
+          "type": "card",
+          "settings": {
+            "title": "Support when needed",
+            "text": "Choose the mood, guide the fantasy and change direction whenever you want. You are always in control."
+          }
+        }
+      },
+      "block_order": [
+        "card_t77kHK",
+        "card_F7wajW",
+        "card_hXdxCe"
+      ],
+      "name": "Web introduction rules",
+      "settings": {
+        "subtitle": "Your Fantasy, Your Rules",
+        "title": "More than an AI chat. A world that responds to you.",
+        "description": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>",
+        "background_top": "#14081f",
+        "background_bottom": "#3a1460",
+        "accent_color": "#e879f9",
+        "title_color": "#ffffff",
+        "description_color": "#b8a4cc",
+        "card_background": "#1a0d2e",
+        "card_title_color": "#ffffff",
+        "card_text_color": "#b8a4cc",
+        "padding_desktop": 80,
+        "padding_mobile": 40
+      }
     }
   },
   "order": [
     "web_introduction_banner",
     "web_introduction_features_tbPMPd",
-    "main"
+    "main",
+    "web_introduction_rules_card_hyPr78"
   ]
 }
