@@ -34,9 +34,15 @@
         "button_width_desktop": 220,
         "button_width_mobile": 200,
         "primary_button_text": "Start in 3 Steps",
+        "primary_button_action": "scroll",
         "primary_button_link": "",
+        "primary_button_scroll_target": "swiper",
+        "primary_button_scroll_custom": "",
         "secondary_button_text": "Choose Your Mode",
-        "secondary_button_link": "shopify://products/senson-s1-wellness-companion"
+        "secondary_button_action": "link",
+        "secondary_button_link": "shopify://products/senson-s1-wellness-companion",
+        "secondary_button_scroll_target": "control-1",
+        "secondary_button_scroll_custom": ""
       }
     },
     "how_it_work_swiper_m8wRHg": {
@@ -354,9 +360,15 @@
         "button_width_desktop": 280,
         "button_width_mobile": 240,
         "primary_button_text": "Shop Senson S1",
+        "primary_button_action": "link",
         "primary_button_link": "shopify://products/senson-s1-wellness-companion",
+        "primary_button_scroll_target": "swiper",
+        "primary_button_scroll_custom": "",
         "secondary_button_text": "Learn More About The App",
-        "secondary_button_link": "https://apps.apple.com/us/app/senson/id6755462239"
+        "secondary_button_action": "link",
+        "secondary_button_link": "https://apps.apple.com/us/app/senson/id6755462239",
+        "secondary_button_scroll_target": "control-1",
+        "secondary_button_scroll_custom": ""
       }
     },
     "text_with_fixed_background_4BQcA8": {
