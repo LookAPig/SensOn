@@ -136,7 +136,7 @@
         "accent_color": "#e879f9",
         "title_color": "#ffffff",
         "description_color": "#b8a4cc",
-        "card_background": "#1a0d2e",
+        "card_background": "#000000",
         "card_title_color": "#ffffff",
         "card_text_color": "#b8a4cc",
         "padding_desktop": 80,
