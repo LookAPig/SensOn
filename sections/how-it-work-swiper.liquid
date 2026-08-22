@@ -145,15 +145,20 @@
     margin-top: 10px;
   }
 
+  #shopify-section-{{ section.id }} .how_it_work_swiper .details_accordion {
+    display: block;
+    margin-top: 28px;
+  }
+
   #shopify-section-{{ section.id }} .how_it_work_swiper .details {
     background: #1d1d1d;
     border-radius: 8px;
-    margin-top: 28px;
     overflow: hidden;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_swiper .details_summary {
     align-items: center;
+    border-bottom: 1px solid transparent;
     color: #ffffff;
     cursor: pointer;
     display: flex;
@@ -164,10 +169,11 @@
     list-style: none;
     min-height: 58px;
     padding: 16px 20px;
+    transition: border-color 0.25s ease;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_swiper .details[open] .details_summary {
-    border-bottom: 1px solid #555555;
+    border-bottom-color: #555555;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_swiper .details_summary::-webkit-details-marker {
@@ -181,7 +187,7 @@
     height: 9px;
     margin-left: 16px;
     transform: rotate(135deg);
-    transition: transform 0.2s ease;
+    transition: transform 0.25s ease;
     width: 9px;
   }
 
@@ -330,8 +336,12 @@
       margin-top: 0;
     }
 
-    #shopify-section-{{ section.id }} .how_it_work_swiper .details {
+    #shopify-section-{{ section.id }} .how_it_work_swiper .details_accordion {
       margin-top: 28px;
+    }
+
+    #shopify-section-{{ section.id }} .how_it_work_swiper .details {
+      margin-top: 0;
     }
 
     #shopify-section-{{ section.id }} .how_it_work_swiper .details_summary {
@@ -444,13 +454,15 @@
     </div>
 
     {%- if section.settings.details_title != blank and section.settings.details_content != blank -%}
-      <details class="details">
-        <summary class="details_summary">
-          <span>{{ section.settings.details_title | escape }}</span>
-          <span class="details_icon" aria-hidden="true"></span>
-        </summary>
-        <div class="details_content">{{ section.settings.details_content }}</div>
-      </details>
+      <accordion-disclosure class="details_accordion">
+        <details class="details">
+          <summary class="details_summary">
+            <span>{{ section.settings.details_title | escape }}</span>
+            <span class="details_icon" aria-hidden="true"></span>
+          </summary>
+          <div class="details_content">{{ section.settings.details_content }}</div>
+        </details>
+      </accordion-disclosure>
     {%- endif -%}
   </div>
 </section>
