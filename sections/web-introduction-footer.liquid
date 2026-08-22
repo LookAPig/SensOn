@@ -10,11 +10,12 @@
     --overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
     --btn-border: {{ section.settings.button_border_color }};
     --product-w: {{ section.settings.product_max_width_mobile }}px;
+    --footer-height: {{ section.settings.mobile_height }};
     background: #0d0b12;
     color: #fff;
+    min-height: var(--footer-height);
     overflow: hidden;
     position: relative;
-    padding: {{ section.settings.padding_mobile }}px 16px;
     text-align: center;
   }
 
@@ -48,12 +49,15 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_footer .inner {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 16px;
+    justify-content: center;
     margin: 0 auto;
     max-width: 720px;
+    min-height: inherit;
+    padding: {{ section.settings.padding_mobile }}px 16px 52px;
     position: relative;
     z-index: 2;
   }
@@ -120,28 +124,39 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_footer .footnote {
+    bottom: 24px;
     color: rgb(255 255 255 / 0.72);
     font-size: 12px;
+    left: 0;
     line-height: 1.4;
-    margin: 4px 0 0;
+    margin: 0;
+    padding: 0 16px;
+    position: absolute;
+    right: 0;
+    z-index: 3;
   }
 
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .web_intro_footer {
+      --footer-height: {{ section.settings.desktop_height }};
       --product-w: {{ section.settings.product_max_width_desktop }}px;
-      padding: {{ section.settings.padding_desktop }}px 24px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_footer .inner {
+      gap: 20px;
+      max-width: 920px;
+      padding: {{ section.settings.padding_desktop }}px 24px 56px;
     }
 
     #shopify-section-{{ section.id }} .web_intro_footer .desktop_image { display: block; }
     #shopify-section-{{ section.id }} .web_intro_footer .mobile_image { display: none; }
 
-    #shopify-section-{{ section.id }} .web_intro_footer .inner { gap: 20px; max-width: 920px; }
     #shopify-section-{{ section.id }} .web_intro_footer .tag { font-size: 24px; }
     #shopify-section-{{ section.id }} .web_intro_footer .title { font-size: 42px; line-height: 1.15; }
     #shopify-section-{{ section.id }} .web_intro_footer .description { font-size: 16px; line-height: 1.45; max-width: 640px; }
     #shopify-section-{{ section.id }} .web_intro_footer .button { font-size: 18px; margin-top: 8px; min-height: 48px; min-width: 280px; padding: 12px 32px; }
     #shopify-section-{{ section.id }} .web_intro_footer .product { margin-top: 16px; }
-    #shopify-section-{{ section.id }} .web_intro_footer .footnote { font-size: 14px; margin-top: 8px; }
+    #shopify-section-{{ section.id }} .web_intro_footer .footnote { font-size: 14px; padding: 0 24px; }
   }
 </style>
 
@@ -208,11 +223,11 @@
         -}}
       </div>
     {%- endif -%}
-
-    {%- if section.settings.footnote != blank -%}
-      <p class="footnote">{{ section.settings.footnote | escape }}</p>
-    {%- endif -%}
   </div>
+
+  {%- if section.settings.footnote != blank -%}
+    <p class="footnote">{{ section.settings.footnote | escape }}</p>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -332,6 +347,32 @@
       "id": "footnote",
       "label": "底部说明",
       "default": "No device required · Cancel anytime"
+    },
+    {
+      "type": "header",
+      "content": "尺寸"
+    },
+    {
+      "type": "select",
+      "id": "desktop_height",
+      "label": "电脑端高度",
+      "options": [
+        { "value": "600px", "label": "中" },
+        { "value": "720px", "label": "大" },
+        { "value": "100svh", "label": "全屏" }
+      ],
+      "default": "720px"
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "移动端高度",
+      "options": [
+        { "value": "640px", "label": "中" },
+        { "value": "710px", "label": "大" },
+        { "value": "100svh", "label": "全屏" }
+      ],
+      "default": "710px"
     },
     {
       "type": "header",
