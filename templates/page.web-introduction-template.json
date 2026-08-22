@@ -40,6 +40,53 @@
         "secondary_button_link": ""
       }
     },
+    "web_introduction_features_tbPMPd": {
+      "type": "web-introduction-features",
+      "blocks": {
+        "feature_iiznna": {
+          "type": "feature",
+          "settings": {
+            "title": "400+",
+            "subtitle": "stories & characters"
+          }
+        },
+        "feature_WUptTk": {
+          "type": "feature",
+          "settings": {
+            "title": "Voice + text",
+            "subtitle": "interaction"
+          }
+        },
+        "feature_JfgHFe": {
+          "type": "feature",
+          "settings": {
+            "title": "Female-POV",
+            "subtitle": "experiences"
+          }
+        },
+        "feature_zFcKp8": {
+          "type": "feature",
+          "settings": {
+            "title": "LGBTQ+",
+            "subtitle": "inclusive"
+          }
+        }
+      },
+      "block_order": [
+        "feature_iiznna",
+        "feature_WUptTk",
+        "feature_JfgHFe",
+        "feature_zFcKp8"
+      ],
+      "name": "Web introduction features",
+      "settings": {
+        "background_color": "#000000",
+        "title_color": "#ffffff",
+        "subtitle_color": "#999999",
+        "padding_desktop": 40,
+        "padding_mobile": 32
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -52,6 +99,7 @@
   },
   "order": [
     "web_introduction_banner",
+    "web_introduction_features_tbPMPd",
     "main"
   ]
 }
