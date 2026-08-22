@@ -11,7 +11,34 @@
   "sections": {
     "web_introduction_banner": {
       "type": "web-introduction-banner",
-      "settings": {}
+      "settings": {
+        "allow_transparent_header": true,
+        "mobile_image": "shopify://shop_images/app_2.webp",
+        "overlay_opacity": 35,
+        "desktop_height": "100svh",
+        "mobile_height": "100svh",
+        "show_phone_desktop": false,
+        "phone_max_width_desktop": 320,
+        "phone_max_width_mobile": 280,
+        "mobile_phone_offset_top": 42,
+        "accent_color": "#f287ec",
+        "tag": "AI Companion App For Women",
+        "title": "listens. Remembers. Responds.",
+        "description": "<p>Meet personalized AI companions, step into immersive voice stories, and shape every interaction around your mood—privately, at your pace.</p>",
+        "mobile_description": "<p>Meet personalized AI companions, step into immersive voice stories,</p>",
+        "desktop_text_offset_top": 12,
+        "mobile_text_offset_top": 10,
+        "desktop_buttons_offset_bottom": 10,
+        "mobile_buttons_offset_bottom": 8,
+        "desktop_buttons_layout": "row",
+        "mobile_buttons_layout": "column",
+        "button_width_desktop": 220,
+        "button_width_mobile": 240,
+        "primary_button_text": "Start your free trial",
+        "primary_button_link": "",
+        "secondary_button_text": "See how it work",
+        "secondary_button_link": ""
+      }
     },
     "main": {
       "type": "main-page",
