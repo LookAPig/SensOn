@@ -9,16 +9,22 @@
  */
 {
   "sections": {
+    "web_introduction_banner": {
+      "type": "web-introduction-banner",
+      "settings": {}
+    },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
-        "show_title": true,
+        "show_title": false,
         "content_width": "md"
       }
     }
   },
   "order": [
+    "web_introduction_banner",
     "main"
   ]
 }
