@@ -1,0 +1,380 @@
+<style>
+  #shopify-section-{{ section.id }} .web_intro_icon_card {
+    --accent: {{ section.settings.accent_color }};
+    --title: {{ section.settings.title_color }};
+    --muted: {{ section.settings.description_color }};
+    --card-title: {{ section.settings.card_title_color }};
+    --card-text: {{ section.settings.card_text_color }};
+    background-color: {{ section.settings.base_background_color }};
+    background-image: linear-gradient(121deg, rgba(242, 135, 236, 0.35) -58.23%, rgba(242, 135, 236, 0.07) 74.95%);
+    color: var(--title);
+    overflow: hidden;
+    padding: {{ section.settings.padding_desktop }}px 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .inner {
+    margin: 0 auto;
+    padding: 0 100px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .header {
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .eyebrow {
+    color: var(--accent);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 12px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .section_title {
+    color: var(--title);
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .section_description {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 16px auto 0;
+    max-width: 720px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .section_description p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .cards_track {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .icon_card {
+    background: rgba(0, 0, 0, 0.30);
+    border-radius: 15px;
+    padding: 28px 24px 32px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .card_head {
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .card_icon {
+    color: var(--accent);
+    height: 32px;
+    margin-bottom: 16px;
+    width: 32px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .card_icon .icon_svg,
+  #shopify-section-{{ section.id }} .web_intro_icon_card .card_icon .icon_img {
+    display: block;
+    height: 32px;
+    width: 32px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .card_icon .icon_img {
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .card_title {
+    color: var(--card-title);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_icon_card .card_text {
+    color: var(--card-text);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.45;
+    margin: 8px 0 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .web_intro_icon_card {
+      padding: {{ section.settings.padding_mobile }}px 0;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .inner {
+      padding: 0 16px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .header {
+      margin: 0 0 32px;
+      text-align: left;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .eyebrow {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .section_title {
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .section_description {
+      font-size: 16px;
+      line-height: 1.4;
+      margin-top: 14px;
+      max-width: none;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .cards_track {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .icon_card {
+      padding: 24px 20px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .card_head {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .card_icon {
+      flex-shrink: 0;
+      margin-bottom: 0;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .card_text {
+      margin-top: 10px;
+      padding-left: 44px;
+    }
+  }
+</style>
+
+<div class="web_intro_icon_card">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="section_description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="cards_track">
+        {%- for block in section.blocks -%}
+          <article class="icon_card" {{ block.shopify_attributes }}>
+            <div class="card_head">
+              <div class="card_icon">
+                {%- if block.settings.icon_image != blank -%}
+                  <img class="icon_img" src="{{ block.settings.icon_image | image_url: width: 64 }}" alt="" width="32" height="32" loading="lazy">
+                {%- else -%}
+                  {%- case block.settings.icon -%}
+                    {%- when 'smile' -%}
+                      <svg class="icon_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M11 19.5c1.2 1.8 2.8 2.7 5 2.7s3.8-.9 5-2.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="12" cy="13.5" r="1" fill="currentColor"/>
+                        <circle cx="20" cy="13.5" r="1" fill="currentColor"/>
+                      </svg>
+                    {%- when 'chat' -%}
+                      <svg class="icon_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <path d="M27 14.5a9.5 9.5 0 0 1-2.1 6 9.6 9.6 0 0 1-7.4 3.5 9.5 9.5 0 0 1-4.4-1L5 26l1.9-5.7a9.5 9.5 0 0 1-1-4.4 9.6 9.6 0 0 1 3.5-7.4 9.5 9.5 0 0 1 6-2.1h.6a9.5 9.5 0 0 1 9 9v.1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                        <circle cx="12" cy="15" r="1" fill="currentColor"/>
+                        <circle cx="16" cy="15" r="1" fill="currentColor"/>
+                        <circle cx="20" cy="15" r="1" fill="currentColor"/>
+                      </svg>
+                    {%- else -%}
+                      <svg class="icon_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <path d="M16 3L6 7v7.2c0 6.2 4.3 12 10 13.8 5.7-1.8 10-7.6 10-13.8V7L16 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                        <rect x="14" y="12" width="4" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="16" cy="10.5" r="1.25" fill="currentColor"/>
+                      </svg>
+                  {%- endcase -%}
+                {%- endif -%}
+              </div>
+              {%- if block.settings.title != blank -%}
+                <h3 class="card_title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.text != blank -%}
+              <p class="card_text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Web introduction icon card",
+  "class": "shopify-section--web-intro-icon-card",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "小标题",
+      "default": "Your Fantasy, Your Rules"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "标题",
+      "default": "More than an AI chat. A world that responds to you."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>"
+    },
+    {
+      "type": "color",
+      "id": "base_background_color",
+      "label": "底色",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "强调色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "描述颜色",
+      "default": "#b8a4cc"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "卡片标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "卡片正文颜色",
+      "default": "#b8a4cc"
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "电脑端上下内边距",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "移动端上下内边距",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "图标卡片",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "图标",
+          "options": [
+            { "value": "shield", "label": "盾牌" },
+            { "value": "smile", "label": "笑脸" },
+            { "value": "chat", "label": "对话" }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "自定义图标（优先于预设图标）"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "Companions With Memory"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "描述",
+          "default": "Return to characters that learn your preferences and make each interaction feel more personal over time."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Web introduction icon card",
+      "category": "Banners",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "Companions With Memory",
+            "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "smile",
+            "title": "Voice that pulls you in",
+            "text": "Hear every whisper, pause and breath through immersive voice-led stories and real-time conversation."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "chat",
+            "title": "Support when needed",
+            "text": "Choose the mood, guide the fantasy and change direction whenever you want. You are always in control."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
