@@ -131,14 +131,68 @@
         "subtitle": "Your Fantasy, Your Rules",
         "title": "More than an AI chat. A world that responds to you.",
         "description": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>",
-        "background_top": "#8543FF",
-        "background_bottom": "#F287EC",
         "accent_color": "#e879f9",
         "title_color": "#ffffff",
         "description_color": "#b8a4cc",
-        "card_background": "#000000",
         "card_title_color": "#ffffff",
         "card_text_color": "#b8a4cc",
+        "padding_desktop": 80,
+        "padding_mobile": 40
+      }
+    },
+    "web_introduction_choose_card_q49jVU": {
+      "type": "web-introduction-choose-card",
+      "blocks": {
+        "card_XxNQyY": {
+          "type": "card",
+          "settings": {
+            "tag": "Mood",
+            "title": "Find your frequency",
+            "text": "Choose a character, mood or voice story that matches how you want to feel.",
+            "button_label": "",
+            "button_url": ""
+          }
+        },
+        "card_XGCNLn": {
+          "type": "card",
+          "settings": {
+            "tag": "Live",
+            "title": "Direct the fantasy",
+            "text": "Speak or type. Shape the scene and let your companion respond in real time.",
+            "button_label": "",
+            "button_url": ""
+          }
+        },
+        "card_8kkJk6": {
+          "type": "card",
+          "settings": {
+            "tag": "Sync",
+            "title": "Feel the story",
+            "text": "Enjoy the experience online—or connect SensOn S1 for synchronized, hands-free sensation.",
+            "button_label": "",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_XxNQyY",
+        "card_XGCNLn",
+        "card_8kkJk6"
+      ],
+      "name": "Web introduction choose",
+      "settings": {
+        "subtitle": "The SensOn Experience",
+        "title": "Choose. Interact. Feel.",
+        "description": "<p>From first spark to full immersion, the experience adapts around you—not the other way around.</p>",
+        "button_label": "Explore AI Companions",
+        "button_url": "",
+        "background_color": "#ffffff",
+        "accent_color": "#f287ec",
+        "title_color": "#000000",
+        "description_color": "#666666",
+        "card_title_color": "#000000",
+        "card_text_color": "#666666",
+        "button_text_color": "#000000",
         "padding_desktop": 80,
         "padding_mobile": 40
       }
@@ -148,6 +202,7 @@
     "web_introduction_banner",
     "web_introduction_features_tbPMPd",
     "main",
-    "web_introduction_rules_card_hyPr78"
+    "web_introduction_rules_card_hyPr78",
+    "web_introduction_choose_card_q49jVU"
   ]
 }
