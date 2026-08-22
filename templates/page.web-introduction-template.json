@@ -199,6 +199,54 @@
         "padding_desktop": 80,
         "padding_mobile": 40
       }
+    },
+    "web_introduction_icon_card_pxFeqU": {
+      "type": "web-introduction-icon-card",
+      "blocks": {
+        "card_gFm8dt": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "Companions With Memory",
+            "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
+          }
+        },
+        "card_hJJ6DN": {
+          "type": "card",
+          "settings": {
+            "icon": "smile",
+            "title": "Voice that pulls you in",
+            "text": "Hear every whisper, pause and breath through immersive voice-led stories and real-time conversation."
+          }
+        },
+        "card_7PKghd": {
+          "type": "card",
+          "settings": {
+            "icon": "chat",
+            "title": "Support when needed",
+            "text": "Choose the mood, guide the fantasy and change direction whenever you want. You are always in control."
+          }
+        }
+      },
+      "block_order": [
+        "card_gFm8dt",
+        "card_hJJ6DN",
+        "card_7PKghd"
+      ],
+      "name": "Web intro icon card",
+      "settings": {
+        "subtitle": "Your Fantasy, Your Rules",
+        "title": "More than an AI chat. A world that responds to you.",
+        "description": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>",
+        "base_background_color": "#000000",
+        "accent_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#b8a4cc",
+        "card_title_color": "#ffffff",
+        "card_text_color": "#b8a4cc",
+        "padding_desktop": 80,
+        "padding_mobile": 40
+      }
     }
   },
   "order": [
@@ -206,6 +254,7 @@
     "web_introduction_features_tbPMPd",
     "main",
     "web_introduction_rules_card_hyPr78",
-    "web_introduction_choose_card_q49jVU"
+    "web_introduction_choose_card_q49jVU",
+    "web_introduction_icon_card_pxFeqU"
   ]
 }
