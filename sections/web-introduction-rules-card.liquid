@@ -3,7 +3,6 @@
     --accent: {{ section.settings.accent_color }};
     --title: {{ section.settings.title_color }};
     --muted: {{ section.settings.description_color }};
-    --card-bg: {{ section.settings.card_background }};
     --card-title: {{ section.settings.card_title_color }};
     --card-text: {{ section.settings.card_text_color }};
     background: linear-gradient(
@@ -66,8 +65,8 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_rules .card {
-    background: var(--card-bg);
-    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.30);
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     min-height: 360px;
@@ -321,12 +320,6 @@
       "id": "description_color",
       "label": "描述颜色",
       "default": "#b8a4cc"
-    },
-    {
-      "type": "color",
-      "id": "card_background",
-      "label": "卡片背景",
-      "default": "#1a0d2e"
     },
     {
       "type": "color",
