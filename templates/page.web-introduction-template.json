@@ -16,7 +16,7 @@
         "mobile_image": "shopify://shop_images/app_2.webp",
         "overlay_opacity": 35,
         "desktop_height": "100svh",
-        "mobile_height": "710px",
+        "mobile_height": "100svh",
         "show_phone_desktop": false,
         "phone_max_width_desktop": 320,
         "phone_max_width_mobile": 280,
