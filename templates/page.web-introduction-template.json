@@ -309,6 +309,27 @@
         "padding_desktop": 80,
         "padding_mobile": 40
       }
+    },
+    "web_introduction_footer_B39PmR": {
+      "type": "web-introduction-footer",
+      "name": "Web introduction footer",
+      "settings": {
+        "desktop_image": "shopify://shop_images/one_seamless_senson_experience.webp",
+        "mobile_image": "shopify://shop_images/36e4d73bf8f328e5aa44651fcdd5af4a_3.webp",
+        "overlay_opacity": 0,
+        "accent_color": "#f287ec",
+        "tag": "Your Mood. Your Fantasy. Your Rhythm.",
+        "title": "Ready to meet the fantasy that meets you back?",
+        "description": "<p>Start exploring personalized AI companions and interactive voice stories today.</p>",
+        "button_text": "Start Your 7-Days Trial",
+        "button_link": "",
+        "button_border_color": "#7dd3fc",
+        "product_max_width_desktop": 360,
+        "product_max_width_mobile": 260,
+        "footnote": "No device required · Cancel anytime",
+        "padding_desktop": 96,
+        "padding_mobile": 64
+      }
     }
   },
   "order": [
@@ -318,6 +339,7 @@
     "web_introduction_rules_card_hyPr78",
     "web_introduction_choose_card_q49jVU",
     "web_introduction_icon_card_pxFeqU",
-    "web_introduction_faq_VHVabA"
+    "web_introduction_faq_VHVabA",
+    "web_introduction_footer_B39PmR"
   ]
 }
