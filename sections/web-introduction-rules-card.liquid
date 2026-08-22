@@ -5,11 +5,7 @@
     --muted: {{ section.settings.description_color }};
     --card-title: {{ section.settings.card_title_color }};
     --card-text: {{ section.settings.card_text_color }};
-    background: linear-gradient(
-      180deg,
-      {{ section.settings.background_top }} 0%,
-      {{ section.settings.background_bottom }} 100%
-    );
+    background: linear-gradient(180deg, rgba(133, 67, 255, 0.40) 0%, rgba(242, 135, 236, 0.40) 100%);
     color: var(--title);
     overflow: hidden;
     padding: {{ section.settings.padding_desktop }}px 0;
@@ -290,18 +286,6 @@
       "id": "description",
       "label": "描述",
       "default": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>"
-    },
-    {
-      "type": "color",
-      "id": "background_top",
-      "label": "背景色（上）",
-      "default": "#14081f"
-    },
-    {
-      "type": "color",
-      "id": "background_bottom",
-      "label": "背景色（下）",
-      "default": "#3a1460"
     },
     {
       "type": "color",
