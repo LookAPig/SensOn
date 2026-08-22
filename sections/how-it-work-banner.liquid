@@ -256,20 +256,108 @@
     {%- if section.settings.primary_button_text != blank or section.settings.secondary_button_text != blank -%}
       <div class="buttons">
         {%- if section.settings.primary_button_text != blank -%}
-          <a class="button button_primary" href="{{ section.settings.primary_button_link | default: '#' }}">
-            {{- section.settings.primary_button_text | escape -}}
-          </a>
+          {%- liquid
+            assign primary_button_action = section.settings.primary_button_action | default: 'link'
+            assign primary_scroll_target = section.settings.primary_button_scroll_target
+            assign primary_scroll_custom = section.settings.primary_button_scroll_custom | strip
+          -%}
+          {%- if primary_button_action == 'scroll' -%}
+            <a
+              class="button button_primary"
+              href="#"
+              data-how-it-work-scroll
+              data-scroll-target="{{ primary_scroll_target }}"
+              {% if primary_scroll_target == 'custom' and primary_scroll_custom != blank %}
+                data-scroll-custom="{{ primary_scroll_custom | escape }}"
+              {% endif %}
+            >
+              {{- section.settings.primary_button_text | escape -}}
+            </a>
+          {%- else -%}
+            <a class="button button_primary" href="{{ section.settings.primary_button_link | default: '#' }}">
+              {{- section.settings.primary_button_text | escape -}}
+            </a>
+          {%- endif -%}
         {%- endif -%}
 
         {%- if section.settings.secondary_button_text != blank -%}
-          <a class="button button_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
-            {{- section.settings.secondary_button_text | escape -}}
-          </a>
+          {%- liquid
+            assign secondary_button_action = section.settings.secondary_button_action | default: 'link'
+            assign secondary_scroll_target = section.settings.secondary_button_scroll_target
+            assign secondary_scroll_custom = section.settings.secondary_button_scroll_custom | strip
+          -%}
+          {%- if secondary_button_action == 'scroll' -%}
+            <a
+              class="button button_secondary"
+              href="#"
+              data-how-it-work-scroll
+              data-scroll-target="{{ secondary_scroll_target }}"
+              {% if secondary_scroll_target == 'custom' and secondary_scroll_custom != blank %}
+                data-scroll-custom="{{ secondary_scroll_custom | escape }}"
+              {% endif %}
+            >
+              {{- section.settings.secondary_button_text | escape -}}
+            </a>
+          {%- else -%}
+            <a class="button button_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
+              {{- section.settings.secondary_button_text | escape -}}
+            </a>
+          {%- endif -%}
         {%- endif -%}
       </div>
     {%- endif -%}
   </div>
 </section>
+
+{%- if section.settings.primary_button_action == 'scroll' or section.settings.secondary_button_action == 'scroll' -%}
+  <script>
+    (() => {
+      const sectionRoot = document.getElementById('shopify-section-{{ section.id }}');
+      if (!sectionRoot) return;
+
+      const selectorMap = {
+        swiper: '.shopify-section--how-it-works-swiper',
+        app: '.shopify-section--how-it-works-app',
+        cards: '.shopify-section--how-it-works-cards',
+        policy: '.shopify-section--how-it-works-policy'
+      };
+
+      function resolveScrollTarget(key, customId) {
+        if (key === 'custom' && customId) {
+          const id = customId.replace(/^#/, '');
+          return document.getElementById(id);
+        }
+
+        if (key === 'control-1' || key === 'control-2') {
+          const controls = document.querySelectorAll('.shopify-section--how-it-works-control');
+          const index = key === 'control-1' ? 0 : 1;
+          return controls[index] || null;
+        }
+
+        const selector = selectorMap[key];
+        return selector ? document.querySelector(selector) : null;
+      }
+
+      sectionRoot.querySelectorAll('[data-how-it-work-scroll]').forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+
+          const target = resolveScrollTarget(
+            button.dataset.scrollTarget,
+            button.dataset.scrollCustom
+          );
+
+          if (!target) return;
+
+          target.scrollIntoView({
+            block: 'start',
+            behavior: window.matchMedia('(prefers-reduced-motion: no-preference)').matches ? 'smooth' : 'auto'
+          });
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -409,9 +497,70 @@
       "default": "Start in 3 Steps"
     },
     {
+      "type": "select",
+      "id": "primary_button_action",
+      "label": "主按钮行为",
+      "options": [
+        {
+          "value": "link",
+          "label": "跳转链接"
+        },
+        {
+          "value": "scroll",
+          "label": "滚动到页面模块"
+        }
+      ],
+      "default": "link"
+    },
+    {
       "type": "url",
       "id": "primary_button_link",
-      "label": "主按钮链接"
+      "label": "主按钮链接",
+      "visible_if": "{{ section.settings.primary_button_action == 'link' }}"
+    },
+    {
+      "type": "select",
+      "id": "primary_button_scroll_target",
+      "label": "主按钮滚动目标",
+      "options": [
+        {
+          "value": "swiper",
+          "label": "3 Steps（步骤 Swiper）"
+        },
+        {
+          "value": "control-1",
+          "label": "Control Modes（第一个控制模块）"
+        },
+        {
+          "value": "control-2",
+          "label": "Why Different（第二个控制模块）"
+        },
+        {
+          "value": "app",
+          "label": "SensOn App"
+        },
+        {
+          "value": "cards",
+          "label": "Interactive Stories（故事卡片）"
+        },
+        {
+          "value": "policy",
+          "label": "Policy（隐私与支持）"
+        },
+        {
+          "value": "custom",
+          "label": "自定义锚点"
+        }
+      ],
+      "default": "swiper",
+      "visible_if": "{{ section.settings.primary_button_action == 'scroll' }}"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_scroll_custom",
+      "label": "主按钮自定义锚点 ID",
+      "info": "不含 #。可在目标模块 HTML 中查看 id，例如 how-it-work-swiper-how_it_work_swiper_m8wRHg。",
+      "visible_if": "{{ section.settings.primary_button_action == 'scroll' and section.settings.primary_button_scroll_target == 'custom' }}"
     },
     {
       "type": "text",
@@ -420,9 +569,70 @@
       "default": "Choose Your Mode"
     },
     {
+      "type": "select",
+      "id": "secondary_button_action",
+      "label": "次按钮行为",
+      "options": [
+        {
+          "value": "link",
+          "label": "跳转链接"
+        },
+        {
+          "value": "scroll",
+          "label": "滚动到页面模块"
+        }
+      ],
+      "default": "link"
+    },
+    {
       "type": "url",
       "id": "secondary_button_link",
-      "label": "次按钮链接"
+      "label": "次按钮链接",
+      "visible_if": "{{ section.settings.secondary_button_action == 'link' }}"
+    },
+    {
+      "type": "select",
+      "id": "secondary_button_scroll_target",
+      "label": "次按钮滚动目标",
+      "options": [
+        {
+          "value": "swiper",
+          "label": "3 Steps（步骤 Swiper）"
+        },
+        {
+          "value": "control-1",
+          "label": "Control Modes（第一个控制模块）"
+        },
+        {
+          "value": "control-2",
+          "label": "Why Different（第二个控制模块）"
+        },
+        {
+          "value": "app",
+          "label": "SensOn App"
+        },
+        {
+          "value": "cards",
+          "label": "Interactive Stories（故事卡片）"
+        },
+        {
+          "value": "policy",
+          "label": "Policy（隐私与支持）"
+        },
+        {
+          "value": "custom",
+          "label": "自定义锚点"
+        }
+      ],
+      "default": "control-1",
+      "visible_if": "{{ section.settings.secondary_button_action == 'scroll' }}"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_scroll_custom",
+      "label": "次按钮自定义锚点 ID",
+      "info": "不含 #。可在目标模块 HTML 中查看 id，例如 how-it-work-control-how_it_work_control_F7F6LC。",
+      "visible_if": "{{ section.settings.secondary_button_action == 'scroll' and section.settings.secondary_button_scroll_target == 'custom' }}"
     }
   ],
   "presets": [
