@@ -60,15 +60,15 @@
 
   #shopify-section-{{ section.id }} .web_intro_faq .faq_summary {
     align-items: flex-start;
+    background: none;
+    border: 0;
+    color: inherit;
     cursor: pointer;
     display: flex;
     gap: 10px;
-    list-style: none;
     padding: 22px 0;
-  }
-
-  #shopify-section-{{ section.id }} .web_intro_faq .faq_summary::-webkit-details-marker {
-    display: none;
+    text-align: left;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .web_intro_faq .faq_num {
@@ -101,12 +101,30 @@
     display: block;
     height: 16px;
     transform: rotate(0deg);
-    transition: transform 0.2s ease;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     width: 16px;
   }
 
-  #shopify-section-{{ section.id }} .web_intro_faq .faq_item[open] .faq_icon svg {
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_item.is_active .faq_icon svg {
     transform: rotate(90deg);
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_panel_inner {
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_item.is_active .faq_panel {
+    grid-template-rows: 1fr;
+    opacity: 1;
   }
 
   #shopify-section-{{ section.id }} .web_intro_faq .faq_answer {
@@ -187,7 +205,7 @@
   }
 </style>
 
-<div class="web_intro_faq">
+<div class="web_intro_faq" id="web-intro-faq-{{ section.id }}">
   <div class="inner">
     <div class="layout">
       <div class="intro">
@@ -206,15 +224,20 @@
           {%- for block in section.blocks -%}
             {%- if block.settings.question != blank -%}
               {%- liquid
-                assign num = forloop.index | prepend: '00' | slice: -2
+                assign num = forloop.index | prepend: '0' | slice: -2, 2
               -%}
-              <details
-                class="faq_item"
-                name="web-intro-faq-{{ section.id }}"
-                {% if forloop.first %}open{% endif %}
+              <article
+                class="faq_item{% if forloop.first %} is_active{% endif %}"
+                data-faq-item="{{ forloop.index0 }}"
                 {{ block.shopify_attributes }}
               >
-                <summary class="faq_summary">
+                <button
+                  class="faq_summary"
+                  type="button"
+                  data-faq-trigger="{{ forloop.index0 }}"
+                  aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                  aria-controls="faq-panel-{{ section.id }}-{{ forloop.index0 }}"
+                >
                   <span class="faq_num">{{ num }}</span>
                   <span class="faq_question">{{ block.settings.question | escape }}</span>
                   <span class="faq_icon" aria-hidden="true">
@@ -222,11 +245,18 @@
                       <path d="M6 3.2 11 8 6 12.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </span>
-                </summary>
-                {%- if block.settings.answer != blank -%}
-                  <div class="faq_answer">{{ block.settings.answer }}</div>
-                {%- endif -%}
-              </details>
+                </button>
+                <div
+                  class="faq_panel"
+                  id="faq-panel-{{ section.id }}-{{ forloop.index0 }}"
+                >
+                  <div class="faq_panel_inner">
+                    {%- if block.settings.answer != blank -%}
+                      <div class="faq_answer">{{ block.settings.answer }}</div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </article>
             {%- endif -%}
           {%- endfor -%}
         </div>
@@ -234,6 +264,32 @@
     </div>
   </div>
 </div>
+
+<script>
+  (() => {
+    const section = document.querySelector("#web-intro-faq-{{ section.id }}");
+
+    if (!section) {
+      return;
+    }
+
+    const setActiveItem = (index) => {
+      section.querySelectorAll("[data-faq-item]").forEach((item) => {
+        item.classList.toggle("is_active", item.dataset.faqItem === index);
+      });
+
+      section.querySelectorAll("[data-faq-trigger]").forEach((trigger) => {
+        trigger.setAttribute("aria-expanded", trigger.dataset.faqTrigger === index ? "true" : "false");
+      });
+    };
+
+    section.querySelectorAll("[data-faq-trigger]").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        setActiveItem(trigger.dataset.faqTrigger);
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
