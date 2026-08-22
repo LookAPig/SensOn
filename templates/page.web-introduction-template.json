@@ -149,6 +149,7 @@
             "tag": "Mood",
             "title": "Find your frequency",
             "text": "Choose a character, mood or voice story that matches how you want to feel.",
+            "image": "shopify://shop_images/download_and_connect.webp",
             "button_label": "",
             "button_url": ""
           }
@@ -159,6 +160,7 @@
             "tag": "Live",
             "title": "Direct the fantasy",
             "text": "Speak or type. Shape the scene and let your companion respond in real time.",
+            "image": "shopify://shop_images/assemble_and_fit.webp",
             "button_label": "",
             "button_url": ""
           }
@@ -169,6 +171,7 @@
             "tag": "Sync",
             "title": "Feel the story",
             "text": "Enjoy the experience online—or connect SensOn S1 for synchronized, hands-free sensation.",
+            "image": "shopify://shop_images/choose_and_begin.webp",
             "button_label": "",
             "button_url": ""
           }
