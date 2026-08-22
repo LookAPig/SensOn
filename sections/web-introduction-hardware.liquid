@@ -16,11 +16,22 @@
 
   #shopify-section-{{ section.id }} .web_intro_hardware .inner {
     margin: 0 auto;
-    max-width: 720px;
+    max-width: 1200px;
     padding: 0 100px;
   }
 
-  #shopify-section-{{ section.id }} .web_intro_hardware .header { text-align: center; }
+  #shopify-section-{{ section.id }} .web_intro_hardware .layout {
+    column-gap: 56px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    row-gap: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .header {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left;
+  }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .eyebrow {
     color: var(--accent);
@@ -49,9 +60,11 @@
   #shopify-section-{{ section.id }} .web_intro_hardware .section_description p { margin: 0; }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .media {
-    aspect-ratio: 16 / 9;
+    align-self: stretch;
     background: #333;
-    margin: 40px 0 0;
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    min-height: 420px;
     overflow: hidden;
     width: 100%;
   }
@@ -64,7 +77,9 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .steps {
-    margin: 32px 0 0;
+    grid-column: 1;
+    grid-row: 2;
+    margin: 8px 0 0;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .step {
@@ -98,8 +113,10 @@
   #shopify-section-{{ section.id }} .web_intro_hardware .actions {
     display: flex;
     gap: 12px;
-    justify-content: center;
-    margin-top: 40px;
+    grid-column: 1;
+    grid-row: 3;
+    justify-content: flex-start;
+    margin-top: 8px;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .btn {
@@ -132,7 +149,16 @@
 
     #shopify-section-{{ section.id }} .web_intro_hardware .inner { padding: 0 16px; }
 
-    #shopify-section-{{ section.id }} .web_intro_hardware .header { text-align: left; }
+    #shopify-section-{{ section.id }} .web_intro_hardware .layout {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .header {
+      grid-column: auto;
+      grid-row: auto;
+    }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .eyebrow {
       font-size: 14px;
@@ -151,9 +177,19 @@
       margin-top: 14px;
     }
 
-    #shopify-section-{{ section.id }} .web_intro_hardware .media { margin-top: 28px; }
+    #shopify-section-{{ section.id }} .web_intro_hardware .media {
+      aspect-ratio: 16 / 10;
+      grid-column: auto;
+      grid-row: auto;
+      margin-top: 28px;
+      min-height: 0;
+    }
 
-    #shopify-section-{{ section.id }} .web_intro_hardware .steps { margin-top: 8px; }
+    #shopify-section-{{ section.id }} .web_intro_hardware .steps {
+      grid-column: auto;
+      grid-row: auto;
+      margin-top: 8px;
+    }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .step {
       gap: 12px;
@@ -165,6 +201,8 @@
 
     #shopify-section-{{ section.id }} .web_intro_hardware .actions {
       gap: 8px;
+      grid-column: auto;
+      grid-row: auto;
       margin-top: 28px;
     }
 
@@ -181,60 +219,62 @@
 
 <div class="web_intro_hardware">
   <div class="inner">
-    <div class="header">
-      {%- if section.settings.subtitle != blank -%}
-        <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
-      {%- endif -%}
-      {%- if section.settings.title != blank -%}
-        <h2 class="section_title">{{ section.settings.title | escape }}</h2>
-      {%- endif -%}
-      {%- if section.settings.description != blank -%}
-        <div class="section_description">{{ section.settings.description }}</div>
-      {%- endif -%}
-    </div>
+    <div class="layout">
+      <div class="header">
+        {%- if section.settings.subtitle != blank -%}
+          <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="section_description">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </div>
 
-    <div class="media">
-      {%- if section.settings.image != blank -%}
-        <img
-          src="{{ section.settings.image | image_url: width: 1200 }}"
-          srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
-          sizes="(min-width: 750px) 720px, calc(100vw - 32px)"
-          alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
-          width="{{ section.settings.image.width }}"
-          height="{{ section.settings.image.height }}"
-          loading="lazy"
-        >
-      {%- endif -%}
-    </div>
+      <div class="media"{% if section.settings.image == blank %} aria-hidden="true"{% endif %}>
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1200 }}"
+            srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
+            sizes="(min-width: 750px) 50vw, calc(100vw - 32px)"
+            alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
 
-    {%- if section.blocks.size > 0 -%}
-      <div class="steps">
-        {%- for block in section.blocks -%}
-          {%- if block.settings.text != blank -%}
-            {%- assign step_index = forloop.index | prepend: '0' | slice: -2, 2 -%}
-            <div class="step" {{ block.shopify_attributes }}>
-              <span class="step_index">{{ step_index }}</span>
-              <p class="step_text">{{ block.settings.text | escape }}</p>
-            </div>
+      {%- if section.blocks.size > 0 -%}
+        <div class="steps">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.text != blank -%}
+              {%- assign step_index = forloop.index | prepend: '0' | slice: -2, 2 -%}
+              <div class="step" {{ block.shopify_attributes }}>
+                <span class="step_index">{{ step_index }}</span>
+                <p class="step_text">{{ block.settings.text | escape }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.primary_button_text != blank or section.settings.secondary_button_text != blank -%}
+        <div class="actions">
+          {%- if section.settings.primary_button_text != blank -%}
+            <a class="btn btn_primary" href="{{ section.settings.primary_button_link | default: '#' }}">
+              {{ section.settings.primary_button_text | escape }}
+            </a>
           {%- endif -%}
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
-
-    {%- if section.settings.primary_button_text != blank or section.settings.secondary_button_text != blank -%}
-      <div class="actions">
-        {%- if section.settings.primary_button_text != blank -%}
-          <a class="btn btn_primary" href="{{ section.settings.primary_button_link | default: '#' }}">
-            {{ section.settings.primary_button_text | escape }}
-          </a>
-        {%- endif -%}
-        {%- if section.settings.secondary_button_text != blank -%}
-          <a class="btn btn_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
-            {{ section.settings.secondary_button_text | escape }}
-          </a>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
+          {%- if section.settings.secondary_button_text != blank -%}
+            <a class="btn btn_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
+              {{ section.settings.secondary_button_text | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 </div>
 
