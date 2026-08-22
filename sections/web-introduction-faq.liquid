@@ -1,0 +1,390 @@
+<style>
+  #shopify-section-{{ section.id }} .web_intro_faq {
+    --accent: {{ section.settings.accent_color }};
+    --title: {{ section.settings.title_color }};
+    --muted: {{ section.settings.description_color }};
+    --question: {{ section.settings.question_color }};
+    --answer: {{ section.settings.answer_color }};
+    --line: {{ section.settings.divider_color }};
+    background: {{ section.settings.background_color }};
+    color: var(--title);
+    overflow: hidden;
+    padding: {{ section.settings.padding_mobile }}px 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .inner {
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .eyebrow {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 10px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .section_title {
+    color: var(--title);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .section_description {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 14px 0 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .section_description p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_list {
+    border-top: 1px solid var(--line);
+    margin-top: 32px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_summary {
+    align-items: flex-start;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 22px 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_summary::-webkit-details-marker {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_num {
+    color: var(--accent);
+    flex: 0 0 auto;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_question {
+    color: var(--question);
+    flex: 1 1 auto;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+    min-width: 0;
+    padding-right: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_icon {
+    color: var(--accent);
+    flex: 0 0 auto;
+    height: 16px;
+    margin-top: 4px;
+    width: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_icon svg {
+    display: block;
+    height: 16px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+    width: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_item[open] .faq_icon svg {
+    transform: rotate(90deg);
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_answer {
+    color: var(--answer);
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 0 0 22px 30px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_faq .faq_answer p {
+    margin: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .web_intro_faq {
+      padding: {{ section.settings.padding_desktop }}px 0;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .inner {
+      padding: 0 100px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .layout {
+      align-items: start;
+      display: grid;
+      gap: 64px;
+      grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1.22fr);
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .eyebrow {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .section_title {
+      font-size: 42px;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .section_description {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-top: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .faq_list {
+      margin-top: 0;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .faq_summary {
+      gap: 16px;
+      padding: 28px 0;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .faq_num,
+    #shopify-section-{{ section.id }} .web_intro_faq .faq_question {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .faq_icon {
+      height: 18px;
+      width: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .faq_icon svg {
+      height: 18px;
+      width: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_faq .faq_answer {
+      font-size: 16px;
+      line-height: 1.55;
+      padding: 0 36px 28px 48px;
+    }
+  }
+</style>
+
+<div class="web_intro_faq">
+  <div class="inner">
+    <div class="layout">
+      <div class="intro">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="section_description">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <div class="faq_list">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.question != blank -%}
+              {%- liquid
+                assign num = forloop.index | prepend: '00' | slice: -2
+              -%}
+              <details
+                class="faq_item"
+                name="web-intro-faq-{{ section.id }}"
+                {% if forloop.first %}open{% endif %}
+                {{ block.shopify_attributes }}
+              >
+                <summary class="faq_summary">
+                  <span class="faq_num">{{ num }}</span>
+                  <span class="faq_question">{{ block.settings.question | escape }}</span>
+                  <span class="faq_icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 3.2 11 8 6 12.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </summary>
+                {%- if block.settings.answer != blank -%}
+                  <div class="faq_answer">{{ block.settings.answer }}</div>
+                {%- endif -%}
+              </details>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Web introduction FAQ",
+  "class": "shopify-section--web-intro-faq",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "眉题",
+      "default": "Questiona,Answered"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "标题",
+      "default": "Before you begin."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>Everything you need to know before stepping into SensOn Web.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景色",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "强调色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "描述颜色",
+      "default": "#b8a4cc"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "问题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "答案颜色",
+      "default": "#b8a4cc"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "分割线颜色",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "电脑端上下内边距",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "移动端上下内边距",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "问题",
+          "default": "What is SensOn App?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "答案",
+          "default": "<p>SensOn is a private AI companion experience built around interactive fantasy, voice and choice.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Web introduction FAQ",
+      "category": "Banners",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What is SensOn App?",
+            "answer": "<p>SensOn is a private AI companion experience built around interactive fantasy, voice and choice. Browse characters, guide the conversation and return to companions that remember your preferences.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need the SensOn S1 device?",
+            "answer": "<p>No. You can explore SensOn Web on its own, or connect SensOn S1 when you want the experience to move with you.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Is there a free trial?",
+            "answer": "<p>Yes. You can start exploring characters and conversations before choosing a plan that fits how you want to play.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Is my experience private?",
+            "answer": "<p>Your sessions are designed to stay private. You stay in control of what you share, save and return to.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Who is SensOn designed for?",
+            "answer": "<p>SensOn is built for adults who want intimate, female-POV and LGBTQ+ inclusive companion experiences.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
