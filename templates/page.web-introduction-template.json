@@ -370,10 +370,12 @@
         "description": "<p>Start exploring personalized AI companions and interactive voice stories today.</p>",
         "button_text": "Start Your 7-Days Trial",
         "button_link": "",
-        "button_border_color": "#7dd3fc",
+        "button_border_color": "#FFFFFF",
         "product_max_width_desktop": 360,
         "product_max_width_mobile": 260,
         "footnote": "No device required · Cancel anytime",
+        "desktop_height": "720px",
+        "mobile_height": "710px",
         "padding_desktop": 96,
         "padding_mobile": 64
       }
