@@ -1,0 +1,622 @@
+{%- liquid
+  assign desktop_image = section.settings.desktop_image
+  assign mobile_image = section.settings.mobile_image | default: desktop_image
+  assign phone_image = section.settings.phone_image
+  assign mobile_description = section.settings.mobile_description
+  if mobile_description == blank
+    assign mobile_description = section.settings.description
+  endif
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .web_intro_banner {
+    --banner-height: {{ section.settings.desktop_height }};
+    --banner-mobile-height: {{ section.settings.mobile_height }};
+    --accent-color: {{ section.settings.accent_color }};
+    --text-offset-top-desktop: {{ section.settings.desktop_text_offset_top }}%;
+    --text-offset-top-mobile: {{ section.settings.mobile_text_offset_top }}%;
+    --buttons-offset-bottom-desktop: {{ section.settings.desktop_buttons_offset_bottom }}%;
+    --buttons-offset-bottom-mobile: {{ section.settings.mobile_buttons_offset_bottom }}%;
+    --button-width-desktop: {{ section.settings.button_width_desktop }}px;
+    --button-width-mobile: {{ section.settings.button_width_mobile }}px;
+    --phone-max-width-desktop: {{ section.settings.phone_max_width_desktop }}px;
+    --phone-max-width-mobile: {{ section.settings.phone_max_width_mobile }}px;
+    --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    background: #0d0b12;
+    color: #ffffff;
+    min-height: var(--banner-height);
+    overflow: hidden;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .media,
+  #shopify-section-{{ section.id }} .web_intro_banner .image,
+  #shopify-section-{{ section.id }} .web_intro_banner .placeholder {
+    height: 100%;
+    inset: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .image {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .media::after {
+    background: rgba(13, 11, 18, var(--overlay-opacity));
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .mobile_image {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .placeholder {
+    background:
+      radial-gradient(ellipse at 50% 40%, rgb(242 135 236 / 0.18) 0%, transparent 55%),
+      linear-gradient(180deg, #1a1224 0%, #0d0b12 100%);
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .inner {
+    display: flex;
+    flex-direction: column;
+    inset: 0;
+    min-height: inherit;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .text_block {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    /* max-width: min(920px, calc(100% - 48px)); */
+    padding: 0 24px;
+    position: absolute;
+    text-align: center;
+    top: var(--text-offset-top-desktop);
+    transform: translateX(-50%);
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .tag {
+    color: var(--accent-color);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 14px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .title {
+    color: #ffffff;
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0;
+    word-wrap: break-word;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .description {
+    color: rgb(255 255 255 / 0.72);
+    font-size: 16px;
+    line-height: 1.45;
+    margin-top: 16px;
+    max-width: 720px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .description p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .description_mobile {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .phone_block {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .buttons {
+    align-items: center;
+    bottom: var(--buttons-offset-bottom-desktop);
+    display: flex;
+    flex-direction: {{ section.settings.desktop_buttons_layout }};
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    width: auto;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .button {
+    align-items: center;
+    border: 1px solid #ffffff;
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: 18px;
+    font-weight: 500;
+    justify-content: center;
+    line-height: 1.2;
+    min-height: 48px;
+    min-width: var(--button-width-desktop);
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .button:hover {
+    opacity: 0.85;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .button_primary {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #09020e;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .button_secondary {
+    background: transparent;
+    color: #ffffff;
+  }
+
+  {%- if section.settings.show_phone_desktop and phone_image != blank -%}
+    #shopify-section-{{ section.id }} .web_intro_banner .phone_block_desktop {
+      display: block;
+      left: 50%;
+      max-width: var(--phone-max-width-desktop);
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .phone_block_desktop .phone_image {
+      display: block;
+      height: auto;
+      margin: 0 auto;
+      width: 100%;
+    }
+  {%- endif -%}
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .web_intro_banner {
+      min-height: var(--banner-mobile-height);
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .desktop_image {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .mobile_image {
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .text_block {
+      /* max-width: min(360px, calc(100% - 32px)); */
+      padding: 0 16px;
+      top: var(--text-offset-top-mobile);
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .tag {
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .title {
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.12;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .description_desktop {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .description_mobile {
+      display: block;
+      font-size: 14px;
+      line-height: 1.35;
+      margin-top: 14px;
+      max-width: 310px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .phone_block_mobile {
+      display: block;
+      left: 50%;
+      max-width: var(--phone-max-width-mobile);
+      position: absolute;
+      top: {{ section.settings.mobile_phone_offset_top }}%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .phone_block_mobile .phone_image {
+      display: block;
+      height: auto;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .buttons {
+      bottom: var(--buttons-offset-bottom-mobile);
+      flex-direction: {{ section.settings.mobile_buttons_layout }};
+      gap: 15px;
+      width: var(--button-width-mobile);
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .button {
+      font-size: 14px;
+      min-height: 44px;
+      min-width: 0;
+      padding: 10px 20px;
+      width: 100%;
+      white-space: normal;
+    }
+  }
+</style>
+
+<section
+  class="web_intro_banner"
+  {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}
+>
+  <div class="media" aria-hidden="true">
+    {%- if desktop_image != blank -%}
+      {{-
+        desktop_image
+        | image_url: width: 2400
+        | image_tag:
+          class: 'image desktop_image',
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '100vw',
+          widths: '750, 1000, 1200, 1600, 2000, 2400'
+      -}}
+    {%- endif -%}
+
+    {%- if mobile_image != blank -%}
+      {{-
+        mobile_image
+        | image_url: width: 1000
+        | image_tag:
+          class: 'image mobile_image',
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '100vw',
+          widths: '375, 550, 750, 1000'
+      -}}
+    {%- endif -%}
+
+    {%- if desktop_image == blank and mobile_image == blank -%}
+      <div class="placeholder"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="inner">
+    <div class="text_block">
+      {%- if section.settings.tag != blank -%}
+        <p class="tag">{{ section.settings.tag | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h1 class="title">{{ section.settings.title | escape | newline_to_br }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="description description_desktop">{{ section.settings.description }}</div>
+      {%- endif -%}
+
+      {%- if mobile_description != blank -%}
+        <div class="description description_mobile">{{ mobile_description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if phone_image != blank -%}
+      <div class="phone_block phone_block_desktop" aria-hidden="true">
+        {{-
+          phone_image
+          | image_url: width: 800
+          | image_tag: class: 'phone_image', loading: 'lazy', sizes: '(max-width: 749px) 90vw, 320px', widths: '320, 480, 640, 800'
+        -}}
+      </div>
+
+      <div class="phone_block phone_block_mobile" aria-hidden="true">
+        {{-
+          phone_image
+          | image_url: width: 800
+          | image_tag: class: 'phone_image', loading: 'lazy', sizes: '(max-width: 749px) 90vw, 320px', widths: '320, 480, 640, 800'
+        -}}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.primary_button_text != blank or section.settings.secondary_button_text != blank -%}
+      <div class="buttons">
+        {%- if section.settings.primary_button_text != blank -%}
+          <a class="button button_primary" href="{{ section.settings.primary_button_link | default: '#' }}">
+            {{- section.settings.primary_button_text | escape -}}
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.secondary_button_text != blank -%}
+          <a class="button button_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
+            {{- section.settings.secondary_button_text | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Web introduction banner",
+  "tag": "section",
+  "class": "shopify-section--web-introduction-banner",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "启用透明页头",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "背景图片"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "电脑端背景图"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "移动端背景图",
+      "info": "未设置时使用电脑端背景图。"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "遮罩不透明度",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "select",
+      "id": "desktop_height",
+      "label": "电脑端高度",
+      "options": [
+        { "value": "600px", "label": "中" },
+        { "value": "720px", "label": "大" },
+        { "value": "100svh", "label": "全屏" }
+      ],
+      "default": "100svh"
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "移动端高度",
+      "options": [
+        { "value": "640px", "label": "中" },
+        { "value": "710px", "label": "大" },
+        { "value": "100svh", "label": "全屏" }
+      ],
+      "default": "710px"
+    },
+    {
+      "type": "header",
+      "content": "手机展示图"
+    },
+    {
+      "type": "image_picker",
+      "id": "phone_image",
+      "label": "手机 Mockup 图片",
+      "info": "移动端默认显示；电脑端可在下方开关开启。"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone_desktop",
+      "label": "电脑端显示手机图",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "phone_max_width_desktop",
+      "label": "电脑端手机图最大宽度",
+      "min": 200,
+      "max": 480,
+      "step": 10,
+      "unit": "px",
+      "default": 320
+    },
+    {
+      "type": "range",
+      "id": "phone_max_width_mobile",
+      "label": "移动端手机图最大宽度",
+      "min": 200,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "mobile_phone_offset_top",
+      "label": "移动端手机图距顶部",
+      "min": 30,
+      "max": 60,
+      "step": 1,
+      "unit": "%",
+      "default": 42
+    },
+    {
+      "type": "header",
+      "content": "文案"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "强调色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "标签",
+      "default": "AI Companion App For Women"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "标题",
+      "default": "listens. Remembers. Responds.",
+      "info": "支持换行。"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述（电脑端）",
+      "default": "<p>Meet personalized AI companions, step into immersive voice stories, and shape every interaction around your mood—privately, at your pace.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "mobile_description",
+      "label": "描述（移动端）",
+      "default": "<p>Meet personalized AI companions, step into immersive voice stories,</p>",
+      "info": "留空时使用电脑端描述。"
+    },
+    {
+      "type": "header",
+      "content": "位置"
+    },
+    {
+      "type": "range",
+      "id": "desktop_text_offset_top",
+      "label": "电脑端文案距顶部",
+      "min": 5,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_offset_top",
+      "label": "移动端文案距顶部",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "desktop_buttons_offset_bottom",
+      "label": "电脑端按钮距底部",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "mobile_buttons_offset_bottom",
+      "label": "移动端按钮距底部",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "unit": "%",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "按钮"
+    },
+    {
+      "type": "select",
+      "id": "desktop_buttons_layout",
+      "label": "电脑端按钮排列",
+      "options": [
+        { "value": "row", "label": "横向" },
+        { "value": "column", "label": "纵向" }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "select",
+      "id": "mobile_buttons_layout",
+      "label": "移动端按钮排列",
+      "options": [
+        { "value": "row", "label": "横向" },
+        { "value": "column", "label": "纵向" }
+      ],
+      "default": "column"
+    },
+    {
+      "type": "range",
+      "id": "button_width_desktop",
+      "label": "电脑端按钮最小宽度",
+      "min": 140,
+      "max": 320,
+      "step": 4,
+      "unit": "px",
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "button_width_mobile",
+      "label": "移动端按钮区域宽度",
+      "min": 160,
+      "max": 360,
+      "step": 4,
+      "unit": "px",
+      "default": 240
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "主按钮文案",
+      "default": "Start your free trial"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "主按钮链接"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "次按钮文案",
+      "default": "See how it work"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "次按钮链接"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Web introduction banner",
+      "category": "Banners"
+    }
+  ]
+}
+{% endschema %}

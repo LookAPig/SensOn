@@ -34,9 +34,15 @@
         "button_width_desktop": 220,
         "button_width_mobile": 200,
         "primary_button_text": "Start in 3 Steps",
+        "primary_button_action": "scroll",
         "primary_button_link": "",
+        "primary_button_scroll_target": "swiper",
+        "primary_button_scroll_custom": "",
         "secondary_button_text": "Choose Your Mode",
-        "secondary_button_link": "shopify://products/senson-s1-wellness-companion"
+        "secondary_button_action": "link",
+        "secondary_button_link": "shopify://products/senson-s1-wellness-companion",
+        "secondary_button_scroll_target": "control-1",
+        "secondary_button_scroll_custom": ""
       }
     },
     "how_it_work_swiper_m8wRHg": {
@@ -133,6 +139,9 @@
         "title": "Choose How You Control SensOn S1",
         "description": "<p>SensOn S1 gives you flexible ways to control the experience, whether you want AI-powered response, direct app control, or simple on-device buttons.</p>",
         "accent_color": "#f287ec",
+        "image_mode": "single",
+        "fixed_desktop_image": "shopify://shop_images/Choose_How_You_Control.gif",
+        "fixed_mobile_image": "shopify://shop_images/Choose_How_You_Control.gif",
         "desktop_layout": "image_left",
         "desktop_padding_top": 72,
         "desktop_padding_bottom": 80,
@@ -230,6 +239,9 @@
         "title": "Designed Around Content, Control, and Response",
         "description": "<p>Compared with many connected sex toys or a basic Bluetooth vibrator, it is built around content-led interaction, AI companion response, and synchronized control.</p>",
         "accent_color": "#f287ec",
+        "image_mode": "single",
+        "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
+        "fixed_mobile_image": "shopify://shop_images/works1.jpg",
         "desktop_layout": "text_left",
         "desktop_padding_top": 72,
         "desktop_padding_bottom": 80,
@@ -354,9 +366,15 @@
         "button_width_desktop": 280,
         "button_width_mobile": 240,
         "primary_button_text": "Shop Senson S1",
+        "primary_button_action": "link",
         "primary_button_link": "shopify://products/senson-s1-wellness-companion",
+        "primary_button_scroll_target": "swiper",
+        "primary_button_scroll_custom": "",
         "secondary_button_text": "Learn More About The App",
-        "secondary_button_link": "https://apps.apple.com/us/app/senson/id6755462239"
+        "secondary_button_action": "link",
+        "secondary_button_link": "https://apps.apple.com/us/app/senson/id6755462239",
+        "secondary_button_scroll_target": "control-1",
+        "secondary_button_scroll_custom": ""
       }
     },
     "text_with_fixed_background_4BQcA8": {

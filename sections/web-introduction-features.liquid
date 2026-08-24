@@ -1,0 +1,129 @@
+{%- if section.blocks.size > 0 -%}
+  {%- render 'web-introduction-features-styles', section: section -%}
+
+  <div class="web_intro_features">
+    <div class="inner">
+      <div class="features_scroll">
+        <div class="features_track">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.title != blank or block.settings.subtitle != blank -%}
+              <div class="feature_item" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}
+                  <p class="feature_title">{{ block.settings.title }}</p>
+                {%- endif -%}
+                {%- if block.settings.subtitle != blank -%}
+                  <p class="feature_subtitle">{{ block.settings.subtitle }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Web introduction features",
+  "class": "shopify-section--web-intro-features",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景色",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "副标题颜色",
+      "default": "#999999"
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "电脑端上下内边距",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "移动端上下内边距",
+      "min": 12,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "特性项",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "400+"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "副标题",
+          "default": "stories & characters"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Web introduction features",
+      "category": "Banners",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "400+",
+            "subtitle": "stories & characters"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Voice + text",
+            "subtitle": "interaction"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Female-POV",
+            "subtitle": "experiences"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "LGBTQ+",
+            "subtitle": "inclusive"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

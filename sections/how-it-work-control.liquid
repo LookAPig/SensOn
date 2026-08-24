@@ -13,8 +13,7 @@
 
   #shopify-section-{{ section.id }} .how_it_work_control .inner {
     margin: 0 auto;
-    max-width: 1440px;
-    padding: 0 24px;
+    padding: 0 100px;
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .header {
@@ -276,13 +275,13 @@
 
     {%- if section.blocks.size > 0 -%}
       <div class="content {% if section.settings.desktop_layout == 'text_left' %}layout_text_left{% else %}layout_image_left{% endif %}">
-        <div class="media">
-          {%- for block in section.blocks -%}
-            {%- assign desktop_control_image = block.settings.desktop_image | default: block.settings.image -%}
-            {%- assign mobile_control_image = block.settings.mobile_image | default: desktop_control_image -%}
+        <div class="media" data-fixed-image="{% if section.settings.image_mode == 'single' %}true{% else %}false{% endif %}">
+          {%- if section.settings.image_mode == 'single' -%}
+            {%- assign desktop_control_image = section.settings.fixed_desktop_image -%}
+            {%- assign mobile_control_image = section.settings.fixed_mobile_image | default: desktop_control_image -%}
 
             {%- if desktop_control_image != blank or mobile_control_image != blank -%}
-              <picture class="media_image">
+              <picture class="media_image is_active">
                 {%- if mobile_control_image != blank -%}
                   <source
                     media="(max-width: 749px)"
@@ -303,13 +302,47 @@
                     loading: 'lazy',
                     sizes: '(min-width: 750px) 50vw, calc(100vw - 32px)',
                     widths: '375, 550, 750, 1000, 1200, 1600',
-                    alt: block.settings.title
+                    alt: section.settings.title
                 }}
               </picture>
             {%- else -%}
-              <div class="media_placeholder"></div>
+              <div class="media_placeholder is_active"></div>
             {%- endif -%}
-          {%- endfor -%}
+          {%- else -%}
+            {%- for block in section.blocks -%}
+              {%- assign desktop_control_image = block.settings.desktop_image | default: block.settings.image -%}
+              {%- assign mobile_control_image = block.settings.mobile_image | default: desktop_control_image -%}
+
+              {%- if desktop_control_image != blank or mobile_control_image != blank -%}
+                <picture class="media_image">
+                  {%- if mobile_control_image != blank -%}
+                    <source
+                      media="(max-width: 749px)"
+                      srcset="
+                        {{ mobile_control_image | image_url: width: 375 }} 375w,
+                        {{ mobile_control_image | image_url: width: 550 }} 550w,
+                        {{ mobile_control_image | image_url: width: 750 }} 750w
+                      "
+                      sizes="calc(100vw - 32px)"
+                    >
+                  {%- endif -%}
+
+                  {%- assign media_image = desktop_control_image | default: mobile_control_image -%}
+                  {{
+                    media_image
+                    | image_url: width: 1600
+                    | image_tag:
+                      loading: 'lazy',
+                      sizes: '(min-width: 750px) 50vw, calc(100vw - 32px)',
+                      widths: '375, 550, 750, 1000, 1200, 1600',
+                      alt: block.settings.title
+                  }}
+                </picture>
+              {%- else -%}
+                <div class="media_placeholder"></div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
         </div>
 
         <div class="accordion">
@@ -356,6 +389,9 @@
       return;
     }
 
+    const media = section.querySelector(".media");
+    const fixedImage = media?.dataset.fixedImage === "true";
+
     const setActiveItem = (index) => {
       section.querySelectorAll("[data-control-item]").forEach((item) => {
         item.classList.toggle("is_active", item.dataset.controlItem === index);
@@ -365,9 +401,11 @@
         trigger.setAttribute("aria-expanded", trigger.dataset.controlTrigger === index ? "true" : "false");
       });
 
-      section.querySelectorAll(".media > *").forEach((image, imageIndex) => {
-        image.classList.toggle("is_active", String(imageIndex) === index);
-      });
+      if (!fixedImage) {
+        section.querySelectorAll(".media > *").forEach((image, imageIndex) => {
+          image.classList.toggle("is_active", String(imageIndex) === index);
+        });
+      }
     };
 
     section.querySelectorAll("[data-control-trigger]").forEach((trigger) => {
@@ -422,6 +460,34 @@
       "id": "accent_color",
       "label": "强调色",
       "default": "#f287ec"
+    },
+    {
+      "type": "select",
+      "id": "image_mode",
+      "label": "图片模式",
+      "options": [
+        {
+          "value": "multiple",
+          "label": "每项切换图片"
+        },
+        {
+          "value": "single",
+          "label": "固定单图"
+        }
+      ],
+      "default": "multiple"
+    },
+    {
+      "type": "image_picker",
+      "id": "fixed_desktop_image",
+      "label": "PC 端固定图片",
+      "visible_if": "{{ section.settings.image_mode == 'single' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "fixed_mobile_image",
+      "label": "移动端固定图片",
+      "visible_if": "{{ section.settings.image_mode == 'single' }}"
     },
     {
       "type": "select",
@@ -492,12 +558,14 @@
         {
           "type": "image_picker",
           "id": "desktop_image",
-          "label": "PC 端图片"
+          "label": "PC 端图片",
+          "visible_if": "{{ section.settings.image_mode == 'multiple' }}"
         },
         {
           "type": "image_picker",
           "id": "mobile_image",
-          "label": "移动端图片"
+          "label": "移动端图片",
+          "visible_if": "{{ section.settings.image_mode == 'multiple' }}"
         },
         {
           "type": "text",

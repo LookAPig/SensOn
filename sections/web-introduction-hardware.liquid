@@ -1,0 +1,413 @@
+<style>
+  #shopify-section-{{ section.id }} .web_intro_hardware {
+    --accent: {{ section.settings.accent_color }};
+    --title: {{ section.settings.title_color }};
+    --muted: {{ section.settings.description_color }};
+    --line: {{ section.settings.divider_color }};
+    --item: {{ section.settings.item_color }};
+    --btn-text: {{ section.settings.primary_button_text_color }};
+    background: {{ section.settings.background_color }};
+    color: var(--title);
+    overflow: hidden;
+    padding: {{ section.settings.padding_desktop }}px 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware * { box-sizing: border-box; }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .inner {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 100px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .header {
+    margin-bottom: 48px;
+    text-align: center;
+    padding:0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .eyebrow {
+    color: var(--accent);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 12px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .section_title {
+    color: var(--title);
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .body {
+    align-items: stretch;
+    column-gap: 56px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .section_description {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .section_description p { margin: 0; }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .media {
+    background: #333;
+    min-height: 360px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .media img {
+    display: block;
+    height: 100%;
+    min-height: 360px;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .steps { margin: 0; }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .step {
+    align-items: center;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .step:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .step_index {
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .step_text {
+    color: var(--item);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .btn {
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 1.2;
+    padding: 14px 28px;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .btn_primary {
+    background: var(--accent);
+    color: var(--btn-text);
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .btn_secondary {
+    border: 1px solid #fff;
+    color: #fff;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .web_intro_hardware {
+      padding: {{ section.settings.padding_mobile }}px 0;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .inner {
+      display: flex;
+      flex-direction: column;
+      padding: 0 16px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .header {
+      margin-bottom: 0;
+      order: 1;
+      text-align: left;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .body {
+      display: contents;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .content {
+      display: contents;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .section_description {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-top: 14px;
+      order: 2;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .media {
+      aspect-ratio: 16 / 10;
+      margin-top: 28px;
+      min-height: 0;
+      order: 3;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .media img { min-height: 0; }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .steps {
+      margin-top: 8px;
+      order: 4;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .eyebrow {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .section_title {
+      font-size: 24px;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      max-width: none;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .step {
+      gap: 12px;
+      padding: 14px 0;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .step_index,
+    #shopify-section-{{ section.id }} .web_intro_hardware .step_text { font-size: 14px; }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .actions {
+      gap: 8px;
+      margin-top: 28px;
+      order: 5;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .btn {
+      flex: 1 1 0;
+      font-size: 13px;
+      min-width: 0;
+      padding: 12px 10px;
+      white-space: normal;
+    }
+  }
+</style>
+
+
+<div class="web_intro_hardware">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="body">
+      <div class="content">
+        {%- if section.settings.description != blank -%}
+          <div class="section_description">{{ section.settings.description }}</div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="steps">
+            {%- for block in section.blocks -%}
+              {%- if block.settings.text != blank -%}
+                {%- assign step_index = forloop.index | prepend: '0' | slice: -2, 2 -%}
+                <div class="step" {{ block.shopify_attributes }}>
+                  <span class="step_index">{{ step_index }}</span>
+                  <p class="step_text">{{ block.settings.text | escape }}</p>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.primary_button_text != blank or section.settings.secondary_button_text != blank -%}
+          <div class="actions">
+            {%- if section.settings.primary_button_text != blank -%}
+              <a class="btn btn_primary" href="{{ section.settings.primary_button_link | default: '#' }}">
+                {{ section.settings.primary_button_text | escape }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.secondary_button_text != blank -%}
+              <a class="btn btn_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
+                {{ section.settings.secondary_button_text | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="media"{% if section.settings.image == blank %} aria-hidden="true"{% endif %}>
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1200 }}"
+            srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
+            sizes="(min-width: 750px) 50vw, calc(100vw - 32px)"
+            alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Web intro hardware",
+  "class": "shopify-section--web-intro-hardware",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "小标题",
+      "default": "Optional Hardware Connection"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "标题",
+      "default": "Enjoy the story online. Feel it with SensOn S1."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>You don't need a device to start. When SensOn S1 is connected, conversation and story cues can synchronize with hands-free, multi-zone sensation—turning fantasy into a complete sensory loop.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "配图"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "主按钮文字",
+      "default": "Try SensOn Web"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "主按钮链接"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text_color",
+      "label": "主按钮文字颜色",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "次按钮文字",
+      "default": "Discover SensOn S1"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "次按钮链接"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景色",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "强调色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "描述颜色",
+      "default": "#b8a4cc"
+    },
+    {
+      "type": "color",
+      "id": "item_color",
+      "label": "列表文字颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "分割线颜色",
+      "default": "#333333"
+    },
+    { "type": "range", "id": "padding_desktop", "label": "电脑端上下内边距", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_mobile", "label": "移动端上下内边距", "min": 16, "max": 80, "step": 2, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "步骤",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "文案",
+          "default": "Use SensOn Web on its own"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Web intro hardware",
+      "category": "Banners",
+      "blocks": [
+        { "type": "step", "settings": { "text": "Use SensOn Web on its own" } },
+        { "type": "step", "settings": { "text": "Connect via Bluetooth when you choose" } },
+        { "type": "step", "settings": { "text": "Keep manual controls at your fingertips" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
