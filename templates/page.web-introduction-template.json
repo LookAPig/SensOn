@@ -13,7 +13,7 @@
       "type": "web-introduction-banner",
       "settings": {
         "allow_transparent_header": true,
-        "mobile_image": "shopify://shop_images/app_2.webp",
+        "mobile_image": "shopify://shop_images/listens.Remembers.Responds..jpg",
         "overlay_opacity": 35,
         "desktop_height": "100svh",
         "mobile_height": "100svh",
@@ -370,7 +370,7 @@
         "description": "<p>Start exploring personalized AI companions and interactive voice stories today.</p>",
         "button_text": "Start Your 7-Days Trial",
         "button_link": "",
-        "button_border_color": "#F287EC",
+        "button_border_color": "#f287ec",
         "product_max_width_desktop": 360,
         "product_max_width_mobile": 260,
         "footnote": "No device required · Cancel anytime",
