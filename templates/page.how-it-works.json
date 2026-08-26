@@ -39,7 +39,7 @@
         "primary_button_scroll_target": "swiper",
         "primary_button_scroll_custom": "",
         "secondary_button_text": "Choose Your Mode",
-        "secondary_button_action": "link",
+        "secondary_button_action": "scroll",
         "secondary_button_link": "shopify://products/senson-s1-wellness-companion",
         "secondary_button_scroll_target": "control-1",
         "secondary_button_scroll_custom": ""
