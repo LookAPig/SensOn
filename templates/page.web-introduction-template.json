@@ -296,7 +296,7 @@
         "title_color": "#ffffff",
         "description_color": "#FFFFFF",
         "card_title_color": "#ffffff",
-        "card_text_color": "#F6F6F6",
+        "card_text_color": "#999999",
         "padding_desktop": 80,
         "padding_mobile": 40
       }
