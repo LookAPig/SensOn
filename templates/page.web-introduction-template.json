@@ -136,9 +136,9 @@
         "description": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>",
         "accent_color": "#e879f9",
         "title_color": "#ffffff",
-        "description_color": "#b8a4cc",
+        "description_color": "#FFFFFF",
         "card_title_color": "#ffffff",
-        "card_text_color": "#b8a4cc",
+        "card_text_color": "#999999",
         "padding_desktop": 80,
         "padding_mobile": 40
       }
