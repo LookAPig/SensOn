@@ -154,6 +154,7 @@
             {%- assign success_message = 'general.newsletter.subscribed_successfully' | t -%}
             {%- assign has_form_posted_successfully = true -%}
 
+            <input type="hidden" data-newsletter-success value="1">
             {%- render 'banner', content: success_message, status: 'success', text_alignment: 'center' -%}
           {%- elsif form.errors -%}
             {%- capture error_message -%}{{ form.errors.translated_fields['email'] }} {{ form.errors.messages['email'] }}{%- endcapture -%}
@@ -175,6 +176,51 @@
             -%}
           </div>
         {%- endform -%}
+
+        <script>
+          (function () {
+            var form = document.getElementById({{ newsletter_form_id | json }});
+            if (!form) return;
+
+            var emailKey = 'newsletter_email_{{ section.id }}';
+            var trackedKey = 'newsletter_ga4_{{ section.id }}';
+
+            form.addEventListener('submit', function () {
+              var emailInput = form.querySelector('input[name="contact[email]"]');
+              if (!emailInput) return;
+              try {
+                sessionStorage.setItem(emailKey, emailInput.value.trim());
+              } catch (e) {}
+            });
+
+            if (!form.querySelector('[data-newsletter-success]')) return;
+
+            try {
+              if (sessionStorage.getItem(trackedKey) === '1') return;
+              sessionStorage.setItem(trackedKey, '1');
+            } catch (e) {}
+
+            var email = null;
+            try {
+              email = sessionStorage.getItem(emailKey) || null;
+              sessionStorage.removeItem(emailKey);
+            } catch (e) {}
+
+            var eventName = 'email_submitted';
+            var payload = {
+              value: email,
+              page_url: window.location.href,
+              items: [{ email: email }]
+            };
+
+            window.dataLayer = window.dataLayer || [];
+            if (typeof window.gtag === 'function') {
+              window.gtag('event', eventName, payload);
+            } else {
+              window.dataLayer.push(Object.assign({ event: eventName }, payload));
+            }
+          })();
+        </script>
 
         {%- if section.settings.privacy_policy_text != blank and has_form_posted_successfully == false -%}
           <p class="text-sm text-center {% unless section.settings.image_position == 'background' and section.settings.image != blank %}text-subdued{% endunless %}">
