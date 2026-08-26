@@ -103,6 +103,7 @@
           "type": "card",
           "settings": {
             "title": "Companions With Memory",
+            "image": "shopify://shop_images/01.png",
             "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
           }
         },
@@ -110,6 +111,7 @@
           "type": "card",
           "settings": {
             "title": "Voice that pulls you in",
+            "image": "shopify://shop_images/02.png",
             "text": "Hear every whisper, pause and breath through immersive voice-led stories and real-time conversation."
           }
         },
@@ -117,6 +119,7 @@
           "type": "card",
           "settings": {
             "title": "Support when needed",
+            "image": "shopify://shop_images/03.png",
             "text": "Choose the mood, guide the fantasy and change direction whenever you want. You are always in control."
           }
         }
@@ -149,7 +152,8 @@
             "tag": "Mood",
             "title": "Find your frequency",
             "text": "Choose a character, mood or voice story that matches how you want to feel.",
-            "image": "shopify://shop_images/download_and_connect.webp",
+            "image": "shopify://shop_images/Find_your_frequency_ec13e83a-c7cc-431e-9bee-34c605746b27.jpg",
+            "mobile_image": "shopify://shop_images/Find_your_frequency_76de3316-13d1-4069-8cea-5263c3d06d60.jpg",
             "button_label": "",
             "button_url": ""
           }
@@ -160,7 +164,8 @@
             "tag": "Live",
             "title": "Direct the fantasy",
             "text": "Speak or type. Shape the scene and let your companion respond in real time.",
-            "image": "shopify://shop_images/assemble_and_fit.webp",
+            "image": "shopify://shop_images/Direct_the_fantasy_7c97a962-0a07-48d8-8901-05cdb1e0ce54.jpg",
+            "mobile_image": "shopify://shop_images/assemble_and_fit.webp",
             "button_label": "",
             "button_url": ""
           }
@@ -171,7 +176,8 @@
             "tag": "Sync",
             "title": "Feel the story",
             "text": "Enjoy the experience online—or connect SensOn S1 for synchronized, hands-free sensation.",
-            "image": "shopify://shop_images/choose_and_begin.webp",
+            "image": "shopify://shop_images/Feel_the_story_49fa7a29-f1dc-40bf-a7d6-8d7738f02f34.jpg",
+            "mobile_image": "shopify://shop_images/Feel_the_story.jpg",
             "button_label": "",
             "button_url": ""
           }
@@ -188,7 +194,7 @@
         "title": "Choose. Interact. Feel.",
         "description": "<p>From first spark to full immersion, the experience adapts around you—not the other way around.</p>",
         "button_label": "Explore AI Companions",
-        "button_url": "",
+        "button_url": "https://app.senson.ai",
         "background_color": "#ffffff",
         "accent_color": "#f287ec",
         "title_color": "#000000",
