@@ -99,20 +99,20 @@
     "web_introduction_rules_card_hyPr78": {
       "type": "web-introduction-rules-card",
       "blocks": {
-        "card_t77kHK": {
-          "type": "card",
-          "settings": {
-            "title": "Companions With Memory",
-            "image": "shopify://shop_images/01.png",
-            "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
-          }
-        },
         "card_F7wajW": {
           "type": "card",
           "settings": {
             "title": "Voice that pulls you in",
-            "image": "shopify://shop_images/02.png",
+            "image": "shopify://shop_images/01.png",
             "text": "Hear every whisper, pause and breath through immersive voice-led stories and real-time conversation."
+          }
+        },
+        "card_t77kHK": {
+          "type": "card",
+          "settings": {
+            "title": "Companions With Memory",
+            "image": "shopify://shop_images/02.png",
+            "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
           }
         },
         "card_hXdxCe": {
@@ -125,8 +125,8 @@
         }
       },
       "block_order": [
-        "card_t77kHK",
         "card_F7wajW",
+        "card_t77kHK",
         "card_hXdxCe"
       ],
       "name": "Web introduction rules",
@@ -355,9 +355,9 @@
         "background_color": "#000000",
         "accent_color": "#f287ec",
         "title_color": "#ffffff",
-        "description_color": "#b8a4cc",
+        "description_color": "#FFFFFF",
         "question_color": "#ffffff",
-        "answer_color": "#b8a4cc",
+        "answer_color": "#FFFFFF",
         "divider_color": "#333333",
         "padding_desktop": 80,
         "padding_mobile": 40
