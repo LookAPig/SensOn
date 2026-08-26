@@ -239,6 +239,7 @@
         "subtitle": "Optional Hardware Connection",
         "title": "Enjoy the story online. Feel it with SensOn S1.",
         "description": "<p>You don't need a device to start. When SensOn S1 is connected, conversation and story cues can synchronize with hands-free, multi-zone sensation—turning fantasy into a complete sensory loop.</p>",
+        "image": "shopify://shop_images/Enjoy_the_story_online.jpg",
         "primary_button_text": "Try SensOn Web",
         "primary_button_link": "https://app.senson.ai",
         "primary_button_text_color": "#000000",
