@@ -5,7 +5,7 @@
     --muted: {{ section.settings.description_color }};
     --card-title: {{ section.settings.card_title_color }};
     --card-text: {{ section.settings.card_text_color }};
-    background: linear-gradient(180deg, #8543FF 0%, #F287EC 100%);
+    background: linear-gradient(180deg, #361B66 0%, #60355E 100%);
     color: var(--title);
     overflow: hidden;
     padding: {{ section.settings.padding_desktop }}px 0;
@@ -61,7 +61,7 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_rules .card {
-    background: rgba(0, 0, 0, 0.30);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -304,7 +304,7 @@
       "type": "color",
       "id": "description_color",
       "label": "描述颜色",
-      "default": "#b8a4cc"
+      "default": "#ffffff"
     },
     {
       "type": "color",
@@ -316,7 +316,7 @@
       "type": "color",
       "id": "card_text_color",
       "label": "卡片正文颜色",
-      "default": "#b8a4cc"
+      "default": "#ffffffff"
     },
     {
       "type": "range",

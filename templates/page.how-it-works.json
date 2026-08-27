@@ -39,7 +39,7 @@
         "primary_button_scroll_target": "swiper",
         "primary_button_scroll_custom": "",
         "secondary_button_text": "Choose Your Mode",
-        "secondary_button_action": "link",
+        "secondary_button_action": "scroll",
         "secondary_button_link": "shopify://products/senson-s1-wellness-companion",
         "secondary_button_scroll_target": "control-1",
         "secondary_button_scroll_custom": ""
@@ -94,7 +94,7 @@
         "mobile_padding_top": 42,
         "mobile_padding_bottom": 48,
         "details_title": "Need more setup details?",
-        "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.Open the charging case and remove the components.</p><p><strong>2. Choose your setup</strong>The parts connect magnetically and separate with a gentle twist. Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Gently insert the vaginal stimulator and let the Core rest naturally between your thighs. Adjust the clitoral stimulator head until it sits comfortably in place.</p><p><strong>4.Wear and fit</strong>Place the nipple stimulators on the nipples. Use the clasp to adjust tension for a secure, comfortable fit.</p><p><strong>5.Power on</strong>Press and hold the Core power button to turn on SensOn S1. The device will enter standby mode.</p><p><strong>6.Connect and play</strong>Follow the on-screen steps to connect through Bluetooth. Choose your audio story and begin. During the experience, you can interact with AI characters anytime by voice or text.</p>"
+        "details_content": "<p><strong>1. Download and prepare</strong>Download the SensOn App and turn on Bluetooth.Open the charging case and remove the components.</p><p><strong>2. Choose your setup</strong>The parts connect magnetically and separate with a gentle twist. Assemble the configuration that feels right for you.</p><p><strong>3. Insert and adjust</strong>Gently insert the vaginal stimulator and let the Core rest naturally between your thighs. Adjust the clitoral stimulator head until it sits comfortably in place.</p><p><strong>4. Wear and fit</strong>Place the nipple stimulators on the nipples. Use the clasp to adjust tension for a secure, comfortable fit.</p><p><strong>5. Power on</strong>Press and hold the Core power button to turn on SensOn S1. The device will enter standby mode.</p><p><strong>6. Connect and play</strong>Follow the on-screen steps to connect through Bluetooth. Choose your audio story and begin. During the experience, you can interact with AI characters anytime by voice or text.</p>"
       }
     },
     "how_it_work_control_F7F6LC": {
@@ -214,7 +214,7 @@
           "settings": {
             "desktop_image": "shopify://shop_images/Design_Around.jpg",
             "mobile_image": "shopify://shop_images/works1.jpg",
-            "title": "AI-powered interaction",
+            "title": "AI-Powered Interaction",
             "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
           }
         },

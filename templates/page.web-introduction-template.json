@@ -13,8 +13,9 @@
       "type": "web-introduction-banner",
       "settings": {
         "allow_transparent_header": true,
-        "mobile_image": "shopify://shop_images/app_2.webp",
-        "overlay_opacity": 35,
+        "desktop_image": "shopify://shop_images/listens._Remembers._Responds.jpg",
+        "mobile_image": "shopify://shop_images/app-int.jpg",
+        "overlay_opacity": 0,
         "desktop_height": "100svh",
         "mobile_height": "100svh",
         "show_phone_desktop": false,
@@ -99,31 +100,34 @@
     "web_introduction_rules_card_hyPr78": {
       "type": "web-introduction-rules-card",
       "blocks": {
-        "card_t77kHK": {
-          "type": "card",
-          "settings": {
-            "title": "Companions With Memory",
-            "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
-          }
-        },
         "card_F7wajW": {
           "type": "card",
           "settings": {
             "title": "Voice that pulls you in",
+            "image": "shopify://shop_images/01.png",
             "text": "Hear every whisper, pause and breath through immersive voice-led stories and real-time conversation."
+          }
+        },
+        "card_t77kHK": {
+          "type": "card",
+          "settings": {
+            "title": "Companions With Memory",
+            "image": "shopify://shop_images/02.png",
+            "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
           }
         },
         "card_hXdxCe": {
           "type": "card",
           "settings": {
             "title": "Support when needed",
+            "image": "shopify://shop_images/03.png",
             "text": "Choose the mood, guide the fantasy and change direction whenever you want. You are always in control."
           }
         }
       },
       "block_order": [
-        "card_t77kHK",
         "card_F7wajW",
+        "card_t77kHK",
         "card_hXdxCe"
       ],
       "name": "Web introduction rules",
@@ -133,9 +137,9 @@
         "description": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>",
         "accent_color": "#e879f9",
         "title_color": "#ffffff",
-        "description_color": "#b8a4cc",
+        "description_color": "#ffffff",
         "card_title_color": "#ffffff",
-        "card_text_color": "#b8a4cc",
+        "card_text_color": "#999999",
         "padding_desktop": 80,
         "padding_mobile": 40
       }
@@ -149,7 +153,8 @@
             "tag": "Mood",
             "title": "Find your frequency",
             "text": "Choose a character, mood or voice story that matches how you want to feel.",
-            "image": "shopify://shop_images/download_and_connect.webp",
+            "image": "shopify://shop_images/Find_your_frequency_ec13e83a-c7cc-431e-9bee-34c605746b27.jpg",
+            "mobile_image": "shopify://shop_images/Find_your_frequency_76de3316-13d1-4069-8cea-5263c3d06d60.jpg",
             "button_label": "",
             "button_url": ""
           }
@@ -160,7 +165,8 @@
             "tag": "Live",
             "title": "Direct the fantasy",
             "text": "Speak or type. Shape the scene and let your companion respond in real time.",
-            "image": "shopify://shop_images/assemble_and_fit.webp",
+            "image": "shopify://shop_images/Direct_the_fantasy_7c97a962-0a07-48d8-8901-05cdb1e0ce54.jpg",
+            "mobile_image": "shopify://shop_images/assemble_and_fit.webp",
             "button_label": "",
             "button_url": ""
           }
@@ -171,7 +177,8 @@
             "tag": "Sync",
             "title": "Feel the story",
             "text": "Enjoy the experience online—or connect SensOn S1 for synchronized, hands-free sensation.",
-            "image": "shopify://shop_images/choose_and_begin.webp",
+            "image": "shopify://shop_images/Feel_the_story_49fa7a29-f1dc-40bf-a7d6-8d7738f02f34.jpg",
+            "mobile_image": "shopify://shop_images/Feel_the_story.jpg",
             "button_label": "",
             "button_url": ""
           }
@@ -188,16 +195,16 @@
         "title": "Choose. Interact. Feel.",
         "description": "<p>From first spark to full immersion, the experience adapts around you—not the other way around.</p>",
         "button_label": "Explore AI Companions",
-        "button_url": "",
+        "button_url": "https://app.senson.ai",
         "background_color": "#ffffff",
         "accent_color": "#f287ec",
         "title_color": "#000000",
-        "description_color": "#666666",
+        "description_color": "#000000",
         "card_title_color": "#000000",
         "card_text_color": "#666666",
         "button_text_color": "#000000",
         "padding_desktop": 80,
-        "padding_mobile": 40
+        "padding_mobile": 50
       }
     },
     "web_introduction_hardware_k8m2Np": {
@@ -232,15 +239,16 @@
         "subtitle": "Optional Hardware Connection",
         "title": "Enjoy the story online. Feel it with SensOn S1.",
         "description": "<p>You don't need a device to start. When SensOn S1 is connected, conversation and story cues can synchronize with hands-free, multi-zone sensation—turning fantasy into a complete sensory loop.</p>",
+        "image": "shopify://shop_images/Enjoy_the_story_online.jpg",
         "primary_button_text": "Try SensOn Web",
-        "primary_button_link": "",
+        "primary_button_link": "https://app.senson.ai",
         "primary_button_text_color": "#000000",
         "secondary_button_text": "Discover SensOn S1",
-        "secondary_button_link": "",
+        "secondary_button_link": "shopify://products/senson-s1-wellness-companion",
         "background_color": "#000000",
         "accent_color": "#f287ec",
         "title_color": "#ffffff",
-        "description_color": "#b8a4cc",
+        "description_color": "#f6f6f6",
         "item_color": "#ffffff",
         "divider_color": "#333333",
         "padding_desktop": 80,
@@ -288,9 +296,9 @@
         "base_background_color": "#000000",
         "accent_color": "#f287ec",
         "title_color": "#ffffff",
-        "description_color": "#b8a4cc",
+        "description_color": "#ffffff",
         "card_title_color": "#ffffff",
-        "card_text_color": "#b8a4cc",
+        "card_text_color": "#999999",
         "padding_desktop": 80,
         "padding_mobile": 40
       }
@@ -349,9 +357,9 @@
         "background_color": "#000000",
         "accent_color": "#f287ec",
         "title_color": "#ffffff",
-        "description_color": "#b8a4cc",
+        "description_color": "#ffffff",
         "question_color": "#ffffff",
-        "answer_color": "#b8a4cc",
+        "answer_color": "#ffffff",
         "divider_color": "#333333",
         "padding_desktop": 80,
         "padding_mobile": 40
@@ -361,8 +369,8 @@
       "type": "web-introduction-footer",
       "name": "Web introduction footer",
       "settings": {
-        "desktop_image": "shopify://shop_images/one_seamless_senson_experience.webp",
-        "mobile_image": "shopify://shop_images/36e4d73bf8f328e5aa44651fcdd5af4a_3.webp",
+        "desktop_image": "shopify://shop_images/Ready_to_meet_the_fantasy_that_meets_you_back_a34a3023-d400-4412-88b8-5cea273ed02e.jpg",
+        "mobile_image": "shopify://shop_images/Ready_to_meet_the_fantasy_that_meets_you_back.jpg",
         "overlay_opacity": 0,
         "accent_color": "#f287ec",
         "tag": "Your Mood. Your Fantasy. Your Rhythm.",
@@ -370,10 +378,12 @@
         "description": "<p>Start exploring personalized AI companions and interactive voice stories today.</p>",
         "button_text": "Start Your 7-Days Trial",
         "button_link": "",
-        "button_border_color": "#7dd3fc",
+        "button_border_color": "#f287ec",
         "product_max_width_desktop": 360,
         "product_max_width_mobile": 260,
         "footnote": "No device required · Cancel anytime",
+        "desktop_height": "720px",
+        "mobile_height": "710px",
         "padding_desktop": 96,
         "padding_mobile": 64
       }
