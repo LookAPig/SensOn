@@ -1545,7 +1545,7 @@
         }
       }
 
-      showSubscribeSuccess(fromStorage) {
+      showSubscribeSuccess(fromStorage, email) {
         this.isSubscribed = true;
 
         this.querySelectorAll("[data-dim-value], [data-locked-text]").forEach((el) => {
@@ -1569,12 +1569,19 @@
           const submitBtn = this.subscribeForm
             ? this.subscribeForm.querySelector("[data-submit-btn]")
             : null;
-          const resultType = this.types[this.resultTypeIndex] || {};
+          const gaEventName = submitBtn ? submitBtn.getAttribute("data-event") : "";
 
-          this.trackDataEvent(submitBtn, {
-            result_type_index: this.resultTypeIndex,
-            result_type_name: resultType.name || ""
-          });
+          if (typeof window.gtag === "function" && gaEventName) {
+            window.gtag("event", gaEventName, {
+              value: email,
+              page_url: window.location.href,
+              items: [
+                {
+                  email: email || null
+                }
+              ]
+            });
+          }
         }
 
         const storageKey = this.getSubscribeStorageKey();
@@ -1634,7 +1641,7 @@
             throw new Error("Subscribe request failed");
           }
 
-          this.showSubscribeSuccess(false);
+          this.showSubscribeSuccess(false, email);
         } catch (error) {
           console.error(error);
           this.showFormError({{ block.settings.results_error_message | json }});

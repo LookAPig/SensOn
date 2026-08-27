@@ -110,7 +110,7 @@
 
   #shopify-section-{{ section.id }} .web_intro_choose .card_overlay_title {
     color: #ffffff;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.25;
     margin: 0;
@@ -118,7 +118,7 @@
 
   #shopify-section-{{ section.id }} .web_intro_choose .card_overlay_text {
     color: rgb(255 255 255 / 0.88);
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.45;
     margin: 0;
@@ -229,7 +229,7 @@
 
     #shopify-section-{{ section.id }} .web_intro_choose .card_body_title {
       color: var(--card-body-title);
-      font-size: 26px;
+      font-size: 18px;
       font-weight: 700;
       line-height: 1.2;
       margin: 0;
@@ -246,19 +246,20 @@
 
     #shopify-section-{{ section.id }} .web_intro_choose .card_body_text {
       color: var(--card-body-text);
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 400;
       line-height: 1.5;
-      margin: 0 0 20px;
-    }
-
-    #shopify-section-{{ section.id }} .web_intro_choose .card_body .choose_btn {
-      font-size: 15px;
-      padding: 12px 24px;
+      margin: 0;
     }
 
     #shopify-section-{{ section.id }} .web_intro_choose .section_footer {
-      display: none;
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_choose .section_footer .choose_btn {
+      font-size: 15px;
+      padding: 12px 24px;
     }
   }
 </style>
@@ -287,14 +288,6 @@
                 assign mobile_card_image = block.settings.mobile_image
               else
                 assign mobile_card_image = card_image
-              endif
-              assign btn_label = block.settings.button_label
-              if btn_label == blank
-                assign btn_label = section.settings.button_label
-              endif
-              assign btn_url = block.settings.button_url
-              if btn_url == blank
-                assign btn_url = section.settings.button_url
               endif
             -%}
             <article class="choose_card" {{ block.shopify_attributes }}>
@@ -361,9 +354,6 @@
                 <span class="card_accent_line" aria-hidden="true"></span>
                 {%- if block.settings.text != blank -%}
                   <p class="card_body_text">{{ block.settings.text | escape }}</p>
-                {%- endif -%}
-                {%- if btn_label != blank -%}
-                  <a class="choose_btn" href="{{ btn_url | default: '#' }}">{{ btn_label | escape }}</a>
                 {%- endif -%}
               </div>
             </article>
@@ -513,16 +503,6 @@
           "type": "image_picker",
           "id": "mobile_image",
           "label": "图片（移动端，可选）"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "移动端按钮文字（留空则用全局按钮）"
-        },
-        {
-          "type": "url",
-          "id": "button_url",
-          "label": "移动端按钮链接（留空则用全局链接）"
         }
       ]
     }

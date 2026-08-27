@@ -1,3 +1,12 @@
+{%- liquid
+  assign desktop_image = section.settings.image
+  assign mobile_image = section.settings.mobile_image | default: desktop_image
+  assign image_alt = section.settings.title | escape
+  if desktop_image.alt != blank
+    assign image_alt = desktop_image.alt | escape
+  endif
+-%}
+
 <style>
   #shopify-section-{{ section.id }} .web_intro_hardware {
     --accent: {{ section.settings.accent_color }};
@@ -8,22 +17,49 @@
     --btn-text: {{ section.settings.primary_button_text_color }};
     background: {{ section.settings.background_color }};
     color: var(--title);
+    min-height: 100vh;
     overflow: hidden;
     padding: {{ section.settings.padding_desktop }}px 0;
+    position: relative;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware * { box-sizing: border-box; }
 
+  #shopify-section-{{ section.id }} .web_intro_hardware .media {
+    background: #333;
+    inset: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: 0;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .media img {
+    display: block;
+    height: 100%;
+    inset: 0;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .media .mobile_image {
+    display: none;
+  }
+
   #shopify-section-{{ section.id }} .web_intro_hardware .inner {
     margin: 0 auto;
     max-width: 1200px;
+    min-height: calc(100vh - {{ section.settings.padding_desktop | times: 2 }}px);
     padding: 0 100px;
+    position: relative;
+    z-index: 1;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .header {
     margin-bottom: 48px;
+    padding: 0;
     text-align: center;
-    padding:0;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .eyebrow {
@@ -41,19 +77,18 @@
     letter-spacing: -0.03em;
     line-height: 1.2;
     margin: 0 auto;
+    max-width: 900px;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .body {
-    align-items: stretch;
-    column-gap: 56px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    display: block;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .content {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    max-width: 520px;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .section_description {
@@ -64,21 +99,6 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .section_description p { margin: 0; }
-
-  #shopify-section-{{ section.id }} .web_intro_hardware .media {
-    background: #333;
-    min-height: 360px;
-    overflow: hidden;
-    width: 100%;
-  }
-
-  #shopify-section-{{ section.id }} .web_intro_hardware .media img {
-    display: block;
-    height: 100%;
-    min-height: 360px;
-    object-fit: cover;
-    width: 100%;
-  }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .steps { margin: 0; }
 
@@ -142,48 +162,42 @@
 
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .web_intro_hardware {
+      --line: #ffffff;
+      min-height: 100vh;
       padding: {{ section.settings.padding_mobile }}px 0;
     }
 
+    #shopify-section-{{ section.id }} .web_intro_hardware .media .desktop_image {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .media .mobile_image {
+      display: block;
+    }
+
     #shopify-section-{{ section.id }} .web_intro_hardware .inner {
-      display: flex;
-      flex-direction: column;
+      min-height: calc(100vh - {{ section.settings.padding_mobile | times: 2 }}px);
       padding: 0 16px;
     }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .header {
       margin-bottom: 0;
-      order: 1;
       text-align: left;
     }
 
-    #shopify-section-{{ section.id }} .web_intro_hardware .body {
-      display: contents;
-    }
-
     #shopify-section-{{ section.id }} .web_intro_hardware .content {
-      display: contents;
+      gap: 0;
+      max-width: none;
     }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .section_description {
       font-size: 14px;
       line-height: 1.4;
       margin-top: 14px;
-      order: 2;
     }
-
-    #shopify-section-{{ section.id }} .web_intro_hardware .media {
-      aspect-ratio: 16 / 10;
-      margin-top: 28px;
-      min-height: 0;
-      order: 3;
-    }
-
-    #shopify-section-{{ section.id }} .web_intro_hardware .media img { min-height: 0; }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .steps {
-      margin-top: 8px;
-      order: 4;
+      margin-top: 100vw;
     }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .eyebrow {
@@ -209,7 +223,6 @@
     #shopify-section-{{ section.id }} .web_intro_hardware .actions {
       gap: 8px;
       margin-top: 28px;
-      order: 5;
     }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .btn {
@@ -224,6 +237,34 @@
 
 
 <div class="web_intro_hardware">
+  <div class="media"{% if desktop_image == blank and mobile_image == blank %} aria-hidden="true"{% endif %}>
+    {%- if desktop_image != blank -%}
+      {{-
+        desktop_image
+        | image_url: width: 2400
+        | image_tag:
+          class: 'desktop_image',
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '800, 1200, 1920, 2400',
+          alt: image_alt
+      -}}
+    {%- endif -%}
+
+    {%- if mobile_image != blank -%}
+      {{-
+        mobile_image
+        | image_url: width: 1200
+        | image_tag:
+          class: 'mobile_image',
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '375, 550, 750, 1000, 1200',
+          alt: image_alt
+      -}}
+    {%- endif -%}
+  </div>
+
   <div class="inner">
     <div class="header">
       {%- if section.settings.subtitle != blank -%}
@@ -269,20 +310,6 @@
           </div>
         {%- endif -%}
       </div>
-
-      <div class="media"{% if section.settings.image == blank %} aria-hidden="true"{% endif %}>
-        {%- if section.settings.image != blank -%}
-          <img
-            src="{{ section.settings.image | image_url: width: 1200 }}"
-            srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
-            sizes="(min-width: 750px) 50vw, calc(100vw - 32px)"
-            alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
-            width="{{ section.settings.image.width }}"
-            height="{{ section.settings.image.height }}"
-            loading="lazy"
-          >
-        {%- endif -%}
-      </div>
     </div>
   </div>
 </div>
@@ -315,7 +342,13 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "配图"
+      "label": "电脑端配图"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "移动端配图",
+      "info": "未上传时使用电脑端配图"
     },
     {
       "type": "text",
