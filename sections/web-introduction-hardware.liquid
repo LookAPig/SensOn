@@ -1,3 +1,12 @@
+{%- liquid
+  assign desktop_image = section.settings.image
+  assign mobile_image = section.settings.mobile_image | default: desktop_image
+  assign image_alt = section.settings.title | escape
+  if desktop_image.alt != blank
+    assign image_alt = desktop_image.alt | escape
+  endif
+-%}
+
 <style>
   #shopify-section-{{ section.id }} .web_intro_hardware {
     --accent: {{ section.settings.accent_color }};
@@ -32,6 +41,10 @@
     object-position: center;
     position: absolute;
     width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_hardware .media .mobile_image {
+    display: none;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .inner {
@@ -190,6 +203,14 @@
       position: static;
     }
 
+    #shopify-section-{{ section.id }} .web_intro_hardware .media .desktop_image {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .media .mobile_image {
+      display: block;
+    }
+
     #shopify-section-{{ section.id }} .web_intro_hardware .media img {
       height: 100%;
       min-height: 0;
@@ -241,17 +262,31 @@
 
 
 <div class="web_intro_hardware">
-  <div class="media"{% if section.settings.image == blank %} aria-hidden="true"{% endif %}>
-    {%- if section.settings.image != blank -%}
-      <img
-        src="{{ section.settings.image | image_url: width: 2400 }}"
-        srcset="{{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 1920 }} 1920w, {{ section.settings.image | image_url: width: 2400 }} 2400w"
-        sizes="100vw"
-        alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
-        width="{{ section.settings.image.width }}"
-        height="{{ section.settings.image.height }}"
-        loading="lazy"
-      >
+  <div class="media"{% if desktop_image == blank and mobile_image == blank %} aria-hidden="true"{% endif %}>
+    {%- if desktop_image != blank -%}
+      {{-
+        desktop_image
+        | image_url: width: 2400
+        | image_tag:
+          class: 'desktop_image',
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '800, 1200, 1920, 2400',
+          alt: image_alt
+      -}}
+    {%- endif -%}
+
+    {%- if mobile_image != blank -%}
+      {{-
+        mobile_image
+        | image_url: width: 1200
+        | image_tag:
+          class: 'mobile_image',
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '375, 550, 750, 1000, 1200',
+          alt: image_alt
+      -}}
     {%- endif -%}
   </div>
 
@@ -332,7 +367,13 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "配图"
+      "label": "电脑端配图"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "移动端配图",
+      "info": "未上传时使用电脑端配图"
     },
     {
       "type": "text",
