@@ -162,45 +162,8 @@
 
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .web_intro_hardware {
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
+      min-height: 100vh;
       padding: {{ section.settings.padding_mobile }}px 0;
-    }
-
-    #shopify-section-{{ section.id }} .web_intro_hardware .inner {
-      display: contents;
-    }
-
-    #shopify-section-{{ section.id }} .web_intro_hardware .header {
-      margin-bottom: 0;
-      order: 1;
-      padding: 0 16px;
-      text-align: left;
-    }
-
-    #shopify-section-{{ section.id }} .web_intro_hardware .body {
-      display: contents;
-    }
-
-    #shopify-section-{{ section.id }} .web_intro_hardware .content {
-      display: contents;
-    }
-
-    #shopify-section-{{ section.id }} .web_intro_hardware .section_description {
-      font-size: 14px;
-      line-height: 1.4;
-      margin-top: 14px;
-      order: 2;
-      padding: 0 16px;
-    }
-
-    #shopify-section-{{ section.id }} .web_intro_hardware .media {
-      aspect-ratio: 16 / 10;
-      margin-top: 28px;
-      min-height: 0;
-      order: 3;
-      position: static;
     }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .media .desktop_image {
@@ -211,16 +174,29 @@
       display: block;
     }
 
-    #shopify-section-{{ section.id }} .web_intro_hardware .media img {
-      height: 100%;
-      min-height: 0;
-      position: static;
+    #shopify-section-{{ section.id }} .web_intro_hardware .inner {
+      min-height: calc(100vh - {{ section.settings.padding_mobile | times: 2 }}px);
+      padding: 0 16px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .header {
+      margin-bottom: 0;
+      text-align: left;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .content {
+      gap: 0;
+      max-width: none;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_hardware .section_description {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-top: 14px;
     }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .steps {
-      margin-top: 8px;
-      order: 4;
-      padding: 0 16px;
+      margin-top: min(42vw, 220px);
     }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .eyebrow {
@@ -246,8 +222,6 @@
     #shopify-section-{{ section.id }} .web_intro_hardware .actions {
       gap: 8px;
       margin-top: 28px;
-      order: 5;
-      padding: 0 16px;
     }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .btn {
