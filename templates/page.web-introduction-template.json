@@ -154,9 +154,7 @@
             "title": "Find your frequency",
             "text": "Choose a character, mood or voice story that matches how you want to feel.",
             "image": "shopify://shop_images/Find_your_frequency_ec13e83a-c7cc-431e-9bee-34c605746b27.jpg",
-            "mobile_image": "shopify://shop_images/Find_your_frequency_76de3316-13d1-4069-8cea-5263c3d06d60.jpg",
-            "button_label": "",
-            "button_url": ""
+            "mobile_image": "shopify://shop_images/Find_your_frequency_76de3316-13d1-4069-8cea-5263c3d06d60.jpg"
           }
         },
         "card_XGCNLn": {
@@ -166,9 +164,7 @@
             "title": "Direct the fantasy",
             "text": "Speak or type. Shape the scene and let your companion respond in real time.",
             "image": "shopify://shop_images/Direct_the_fantasy_7c97a962-0a07-48d8-8901-05cdb1e0ce54.jpg",
-            "mobile_image": "shopify://shop_images/assemble_and_fit.webp",
-            "button_label": "",
-            "button_url": ""
+            "mobile_image": "shopify://shop_images/assemble_and_fit.webp"
           }
         },
         "card_8kkJk6": {
@@ -178,9 +174,7 @@
             "title": "Feel the story",
             "text": "Enjoy the experience online—or connect SensOn S1 for synchronized, hands-free sensation.",
             "image": "shopify://shop_images/Feel_the_story_49fa7a29-f1dc-40bf-a7d6-8d7738f02f34.jpg",
-            "mobile_image": "shopify://shop_images/Feel_the_story.jpg",
-            "button_label": "",
-            "button_url": ""
+            "mobile_image": "shopify://shop_images/Feel_the_story.jpg"
           }
         }
       },
@@ -239,7 +233,8 @@
         "subtitle": "Optional Hardware Connection",
         "title": "Enjoy the story online. Feel it with SensOn S1.",
         "description": "<p>You don't need a device to start. When SensOn S1 is connected, conversation and story cues can synchronize with hands-free, multi-zone sensation—turning fantasy into a complete sensory loop.</p>",
-        "image": "shopify://shop_images/Enjoy_the_story_online.jpg",
+        "image": "shopify://shop_images/Enjoy_the_story_online._Feel_it_with_SensOn_S1.jpg",
+        "mobile_image": "shopify://shop_images/Enjoy_the_story_online.jpg",
         "primary_button_text": "Try SensOn Web",
         "primary_button_link": "https://app.senson.ai",
         "primary_button_text_color": "#000000",
