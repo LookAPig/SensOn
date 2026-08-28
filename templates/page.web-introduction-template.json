@@ -36,7 +36,7 @@
         "button_width_desktop": 220,
         "button_width_mobile": 240,
         "primary_button_text": "Start your free trial",
-        "primary_button_link": "https://web.senson.ai",
+        "primary_button_link": "https://app.senson.ai",
         "secondary_button_text": "See how it work",
         "secondary_button_link": "shopify://pages/how-it-works"
       }
@@ -375,7 +375,7 @@
         "title": "Ready to meet the fantasy that meets you back?",
         "description": "<p>Start exploring personalized AI companions and interactive voice stories today.</p>",
         "button_text": "Start Your 7-Days Trial",
-        "button_link": "",
+        "button_link": "https://app.senson.ai",
         "button_border_color": "#f287ec",
         "product_max_width_desktop": 360,
         "product_max_width_mobile": 260,
