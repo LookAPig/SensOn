@@ -357,7 +357,7 @@
         "title_color": "#ffffff",
         "description_color": "#ffffff",
         "question_color": "#ffffff",
-        "answer_color": "#ffffff",
+        "answer_color": "#999999",
         "divider_color": "#333333",
         "padding_desktop": 80,
         "padding_mobile": 40
