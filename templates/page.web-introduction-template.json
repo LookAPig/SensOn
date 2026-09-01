@@ -14,7 +14,7 @@
       "settings": {
         "allow_transparent_header": true,
         "desktop_image": "shopify://shop_images/listens._Remembers._Responds.jpg",
-        "mobile_image": "shopify://shop_images/app-int.jpg",
+        "mobile_image": "shopify://shop_images/web-intro.jpg",
         "overlay_opacity": 0,
         "desktop_height": "100svh",
         "mobile_height": "100svh",
