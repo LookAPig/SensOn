@@ -104,14 +104,13 @@
 
   #shopify-section-{{ section.id }} .web_intro_hardware .step {
     align-items: center;
-    border-top: 1px solid var(--line);
     display: flex;
     gap: 16px;
     padding: 16px 0;
   }
 
-  #shopify-section-{{ section.id }} .web_intro_hardware .step:last-child {
-    border-bottom: 1px solid var(--line);
+  #shopify-section-{{ section.id }} .web_intro_hardware .step + .step {
+    border-top: 1px solid var(--line);
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .step_index {
@@ -234,7 +233,6 @@
     }
   }
 </style>
-
 
 <div class="web_intro_hardware">
   <div class="media"{% if desktop_image == blank and mobile_image == blank %} aria-hidden="true"{% endif %}>
@@ -412,7 +410,7 @@
       "type": "color",
       "id": "divider_color",
       "label": "分割线颜色",
-      "default": "#333333"
+      "default": "#ffffff"
     },
     { "type": "range", "id": "padding_desktop", "label": "电脑端上下内边距", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 80 },
     { "type": "range", "id": "padding_mobile", "label": "移动端上下内边距", "min": 16, "max": 80, "step": 2, "unit": "px", "default": 40 }
