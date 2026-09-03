@@ -13,7 +13,7 @@
       "type": "web-introduction-banner",
       "settings": {
         "allow_transparent_header": true,
-        "desktop_image": "shopify://shop_images/web-intro.jpg",
+        "desktop_image": "shopify://shop_images/webpc.jpg",
         "mobile_image": "shopify://shop_images/app-int.jpg",
         "overlay_opacity": 0,
         "desktop_height": "100svh",
@@ -39,7 +39,7 @@
         "primary_button_link": "",
         "secondary_button_text": "See how it work",
         "secondary_button_link": "",
-        "video": "shopify://files/videos/silent_final.mp4",
+        "video": "shopify://files/videos/0901-app使用展示视频.mp4",
         "external_video_url": ""
       }
     },
