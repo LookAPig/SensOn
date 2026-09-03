@@ -197,49 +197,63 @@
     width: 12px;
   }
 
+  .web_intro_banner_video_modal-{{ section.id }} {
+    --modal-body-padding-block: 0;
+    --modal-body-padding-inline: 0;
+    --modal-content-margin: 16px;
+    --modal-content-width: fit-content;
+  }
+
   .web_intro_banner_video_modal-{{ section.id }}::part(content) {
     background: #000;
+    display: flex;
+    flex-direction: column;
+    grid-auto-rows: auto;
+    grid-template-columns: none;
+    height: auto;
     margin: 16px;
     max-height: 90vh;
     max-width: min(960px, calc(100vw - 32px));
     overflow: hidden;
     padding: 0;
     place-self: center;
-    width: auto;
+    width: fit-content;
   }
 
   .web_intro_banner_video_modal-{{ section.id }}::part(body) {
+    display: block;
     overflow: hidden;
     padding: 0;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap {
-    aspect-ratio: var(--video-aspect-ratio, 16 / 9);
     background: #000;
+    line-height: 0;
     max-height: 90vh;
-    overflow: hidden;
-    position: relative;
-    width: min(
-      calc(90vh * var(--video-aspect-ratio, 1.777)),
-      min(960px, calc(100vw - 32px))
-    );
+    max-width: min(960px, calc(100vw - 32px));
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }} .video_wrap video {
+    display: block;
+    height: auto;
+    max-height: 90vh;
+    max-width: min(960px, calc(100vw - 32px));
+    object-fit: contain;
+    width: auto;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 90vh;
+    position: relative;
+    width: min(960px, calc(100vw - 32px));
   }
 
-  .web_intro_banner_video_modal-{{ section.id }} .video_wrap video,
-  .web_intro_banner_video_modal-{{ section.id }} .video_wrap iframe {
+  .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed iframe {
     border: 0;
     display: block;
     height: 100%;
     left: 0;
-    object-fit: contain;
     position: absolute;
     top: 0;
     width: 100%;
@@ -250,15 +264,28 @@
       margin: 16px;
       max-height: 85vh;
       place-self: center;
-      width: auto;
+      width: fit-content;
     }
 
-    .web_intro_banner_video_modal-{{ section.id }} .video_wrap {
+    .web_intro_banner_video_modal-{{ section.id }} .video_wrap,
+    .web_intro_banner_video_modal-{{ section.id }} .video_wrap video {
       max-height: 85vh;
-      width: min(
-        calc(85vh * var(--video-aspect-ratio, 1.777)),
-        calc(100vw - 32px)
-      );
+      max-width: calc(100vw - 32px);
+    }
+
+    .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed {
+      max-height: 85vh;
+      width: min(960px, calc(100vw - 32px));
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    .web_intro_banner_video_modal-{{ section.id }}::part(content) {
+      display: flex;
+      grid-auto-flow: row;
+      grid-template-columns: none;
+      place-self: center;
+      width: fit-content;
     }
   }
 
@@ -493,17 +520,10 @@
 
   {%- if section.settings.secondary_button_text != blank -%}
     {%- if section.settings.video != blank or section.settings.external_video_url != blank -%}
-      {%- liquid
-        assign video_modal_id = 'web-intro-banner-video-' | append: section.id
-        assign video_aspect_ratio = 1.777
-        if section.settings.video != blank and section.settings.video.aspect_ratio != blank
-          assign video_aspect_ratio = section.settings.video.aspect_ratio
-        endif
-      -%}
+      {%- assign video_modal_id = 'web-intro-banner-video-' | append: section.id -%}
       <x-modal
         id="{{ video_modal_id }}"
         class="modal web_intro_banner_video_modal-{{ section.id }} color-scheme color-scheme--{{ settings.default_color_scheme.id }}"
-        style="--video-aspect-ratio: {{ video_aspect_ratio }};"
         append-to-body
       >
         <div class="video_wrap">
