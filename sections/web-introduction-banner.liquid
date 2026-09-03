@@ -197,11 +197,19 @@
     width: 12px;
   }
 
+  {%- liquid
+    assign video_aspect_ratio = 1.7777778
+    if section.settings.video != blank and section.settings.video.aspect_ratio != blank
+      assign video_aspect_ratio = section.settings.video.aspect_ratio
+    endif
+  -%}
   .web_intro_banner_video_modal-{{ section.id }} {
     --modal-body-padding-block: 0;
     --modal-body-padding-inline: 0;
-    --modal-content-margin: 16px;
+    --modal-content-margin: 0;
     --modal-content-width: fit-content;
+    --video-aspect-ratio: {{ video_aspect_ratio }};
+    --video-modal-width: min(1120px, calc(100vw - 96px), calc(85vh * var(--video-aspect-ratio)));
   }
 
   .web_intro_banner_video_modal-{{ section.id }}::part(content) {
@@ -211,13 +219,13 @@
     grid-auto-rows: auto;
     grid-template-columns: none;
     height: auto;
-    margin: 16px;
-    max-height: 90vh;
-    max-width: min(960px, calc(100vw - 32px));
-    overflow: hidden;
+    margin: 0;
+    max-height: none;
+    max-width: none;
+    overflow: visible;
     padding: 0;
     place-self: center;
-    width: fit-content;
+    width: var(--video-modal-width);
   }
 
   .web_intro_banner_video_modal-{{ section.id }}::part(body) {
@@ -226,27 +234,57 @@
     padding: 0;
   }
 
+  .web_intro_banner_video_modal-{{ section.id }}::part(close-button) {
+    color: #ffffff;
+    height: 2.75rem;
+    inset-block-end: auto;
+    inset-block-start: 1.25rem;
+    inset-inline-end: 1.25rem;
+    inset-inline-start: auto;
+    position: fixed;
+    width: 2.75rem;
+    z-index: 2;
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }}::part(close-button):before {
+    background: rgb(0 0 0 / 0.55);
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.35), 0 2px 8px rgb(0 0 0 / 0.45);
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }}::part(close-button):hover:before {
+    background: rgb(0 0 0 / 0.75);
+    transform: scale(1.08);
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }}::part(icon) {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap {
+    aspect-ratio: var(--video-aspect-ratio);
     background: #000;
     line-height: 0;
-    max-height: 90vh;
-    max-width: min(960px, calc(100vw - 32px));
+    overflow: hidden;
+    position: relative;
+    width: 100%;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap video {
     display: block;
-    height: auto;
-    max-height: 90vh;
-    max-width: min(960px, calc(100vw - 32px));
+    height: 100%;
+    left: 0;
     object-fit: contain;
-    width: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed {
-    aspect-ratio: 16 / 9;
-    max-height: 90vh;
-    position: relative;
-    width: min(960px, calc(100vw - 32px));
+    height: 100%;
+    inset: 0;
+    position: absolute;
+    width: 100%;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed iframe {
@@ -260,22 +298,15 @@
   }
 
   @media screen and (max-width: 999px) {
-    .web_intro_banner_video_modal-{{ section.id }}::part(content) {
-      margin: 16px;
-      max-height: 85vh;
-      place-self: center;
-      width: fit-content;
+    .web_intro_banner_video_modal-{{ section.id }} {
+      --video-modal-width: min(960px, calc(100vw - 32px), calc(70vh * var(--video-aspect-ratio)));
     }
 
-    .web_intro_banner_video_modal-{{ section.id }} .video_wrap,
-    .web_intro_banner_video_modal-{{ section.id }} .video_wrap video {
-      max-height: 85vh;
-      max-width: calc(100vw - 32px);
-    }
-
-    .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed {
-      max-height: 85vh;
-      width: min(960px, calc(100vw - 32px));
+    .web_intro_banner_video_modal-{{ section.id }}::part(close-button) {
+      height: 2.75rem;
+      inset-block-start: 0.75rem;
+      inset-inline-end: 0.75rem;
+      width: 2.75rem;
     }
   }
 
@@ -285,7 +316,7 @@
       grid-auto-flow: row;
       grid-template-columns: none;
       place-self: center;
-      width: fit-content;
+      width: var(--video-modal-width);
     }
   }
 
