@@ -64,6 +64,8 @@
   #shopify-section-{{ section.id }} .web_intro_choose .choose_card {
     aspect-ratio: 3 / 4;
     border-radius: 0;
+    container-name: choose-card;
+    container-type: inline-size;
     overflow: hidden;
     position: relative;
   }
@@ -87,15 +89,18 @@
     background: linear-gradient(135deg, #c4b5c8, #6b5a72);
   }
 
+  /* 文案按卡片宽度等比缩放（基准约 400px），避免分辨率/缩放变化时比例失调 */
   #shopify-section-{{ section.id }} .web_intro_choose .card_overlay {
     background: linear-gradient(180deg, rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 0.72) 100%);
     bottom: 0;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    gap: clamp(4px, 2cqw, 8px);
     inset: 0;
     justify-content: flex-end;
     padding: 28px 24px;
+    padding: clamp(16px, 7cqw, 28px) clamp(14px, 6cqw, 24px);
     position: absolute;
     z-index: 1;
   }
@@ -103,7 +108,9 @@
   #shopify-section-{{ section.id }} .web_intro_choose .card_tag {
     color: var(--accent);
     font-size: 14px;
+    font-size: clamp(11px, 3.5cqw, 14px);
     font-weight: 600;
+    letter-spacing: normal;
     line-height: 1.2;
     margin: 0;
   }
@@ -111,17 +118,25 @@
   #shopify-section-{{ section.id }} .web_intro_choose .card_overlay_title {
     color: #ffffff;
     font-size: 24px;
+    font-size: clamp(16px, 6cqw, 24px);
     font-weight: 700;
+    letter-spacing: normal;
     line-height: 1.25;
     margin: 0;
+    overflow-wrap: break-word;
+    word-break: normal;
   }
 
   #shopify-section-{{ section.id }} .web_intro_choose .card_overlay_text {
     color: rgb(255 255 255 / 0.88);
     font-size: 16px;
+    font-size: clamp(12px, 4cqw, 16px);
     font-weight: 400;
+    letter-spacing: normal;
     line-height: 1.45;
     margin: 0;
+    overflow-wrap: break-word;
+    word-break: normal;
   }
 
   #shopify-section-{{ section.id }} .web_intro_choose .card_body {
@@ -148,6 +163,16 @@
 
   #shopify-section-{{ section.id }} .web_intro_choose .choose_btn:hover {
     opacity: 0.88;
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 1199px) {
+    #shopify-section-{{ section.id }} .web_intro_choose .inner {
+      padding: 0 40px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_choose .header {
+      margin-bottom: 36px;
+    }
   }
 
   @media screen and (max-width: 749px) {
