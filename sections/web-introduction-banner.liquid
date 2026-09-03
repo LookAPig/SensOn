@@ -200,8 +200,9 @@
   .web_intro_banner_video_modal-{{ section.id }} {
     --modal-body-padding-block: 0;
     --modal-body-padding-inline: 0;
-    --modal-content-margin: 16px;
+    --modal-content-margin: 0;
     --modal-content-width: fit-content;
+    --video-modal-width: min(900px, calc(100vw - 96px), calc(80vh * 16 / 9));
   }
 
   .web_intro_banner_video_modal-{{ section.id }}::part(content) {
@@ -211,13 +212,13 @@
     grid-auto-rows: auto;
     grid-template-columns: none;
     height: auto;
-    margin: 16px;
-    max-height: 90vh;
-    max-width: min(960px, calc(100vw - 32px));
-    overflow: hidden;
+    margin: 0;
+    max-height: none;
+    max-width: none;
+    overflow: visible;
     padding: 0;
     place-self: center;
-    width: fit-content;
+    width: var(--video-modal-width);
   }
 
   .web_intro_banner_video_modal-{{ section.id }}::part(body) {
@@ -228,10 +229,13 @@
 
   .web_intro_banner_video_modal-{{ section.id }}::part(close-button) {
     color: #ffffff;
-    height: 2.5rem;
-    inset-block-start: 0.75rem;
-    inset-inline-end: 0.75rem;
-    width: 2.5rem;
+    height: 2.75rem;
+    inset-block-end: auto;
+    inset-block-start: 1.25rem;
+    inset-inline-end: 1.25rem;
+    inset-inline-start: auto;
+    position: fixed;
+    width: 2.75rem;
     z-index: 2;
   }
 
@@ -246,31 +250,34 @@
   }
 
   .web_intro_banner_video_modal-{{ section.id }}::part(icon) {
-    height: 1.125rem;
-    width: 1.125rem;
+    height: 1.25rem;
+    width: 1.25rem;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap {
+    aspect-ratio: 16 / 9;
     background: #000;
     line-height: 0;
-    max-height: 90vh;
-    max-width: min(960px, calc(100vw - 32px));
+    overflow: hidden;
+    position: relative;
+    width: 100%;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap video {
     display: block;
-    height: auto;
-    max-height: 90vh;
-    max-width: min(960px, calc(100vw - 32px));
+    height: 100%;
+    left: 0;
     object-fit: contain;
-    width: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed {
-    aspect-ratio: 16 / 9;
-    max-height: 90vh;
-    position: relative;
-    width: min(960px, calc(100vw - 32px));
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    width: 100%;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed iframe {
@@ -284,34 +291,15 @@
   }
 
   @media screen and (max-width: 999px) {
-    .web_intro_banner_video_modal-{{ section.id }}::part(content) {
-      margin: 16px;
-      max-height: 85vh;
-      place-self: center;
-      width: fit-content;
+    .web_intro_banner_video_modal-{{ section.id }} {
+      --video-modal-width: min(960px, calc(100vw - 32px), calc(70vh * 16 / 9));
     }
 
     .web_intro_banner_video_modal-{{ section.id }}::part(close-button) {
       height: 2.75rem;
-      inset-block-start: 0.5rem;
-      inset-inline-end: 0.5rem;
+      inset-block-start: 0.75rem;
+      inset-inline-end: 0.75rem;
       width: 2.75rem;
-    }
-
-    .web_intro_banner_video_modal-{{ section.id }}::part(icon) {
-      height: 1.25rem;
-      width: 1.25rem;
-    }
-
-    .web_intro_banner_video_modal-{{ section.id }} .video_wrap,
-    .web_intro_banner_video_modal-{{ section.id }} .video_wrap video {
-      max-height: 85vh;
-      max-width: calc(100vw - 32px);
-    }
-
-    .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed {
-      max-height: 85vh;
-      width: min(960px, calc(100vw - 32px));
     }
   }
 
@@ -321,7 +309,7 @@
       grid-auto-flow: row;
       grid-template-columns: none;
       place-self: center;
-      width: fit-content;
+      width: var(--video-modal-width);
     }
   }
 
