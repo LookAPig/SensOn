@@ -359,7 +359,7 @@
                 aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
                 aria-controls="control-panel-{{ section.id }}-{{ forloop.index0 }}"
               >
-                <span class="item_title">{{ block.settings.title | escape }}</span>
+                <h3 class="item_title">{{ block.settings.title | escape }}</h3>
                 <span class="icon" aria-hidden="true"></span>
               </button>
 
