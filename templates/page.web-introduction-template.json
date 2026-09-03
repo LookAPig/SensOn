@@ -13,7 +13,7 @@
       "type": "web-introduction-banner",
       "settings": {
         "allow_transparent_header": true,
-        "desktop_image": "shopify://shop_images/web-intro.jpg",
+        "desktop_image": "shopify://shop_images/webpc.jpg",
         "mobile_image": "shopify://shop_images/app-int.jpg",
         "overlay_opacity": 0,
         "desktop_height": "100svh",
