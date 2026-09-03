@@ -12,7 +12,7 @@
     --accent: {{ section.settings.accent_color }};
     --title: {{ section.settings.title_color }};
     --muted: {{ section.settings.description_color }};
-    --line: {{ section.settings.divider_color }};
+    --line: #ffffff;
     --item: {{ section.settings.item_color }};
     --btn-text: {{ section.settings.primary_button_text_color }};
     background: {{ section.settings.background_color }};
@@ -111,14 +111,13 @@
 
   #shopify-section-{{ section.id }} .web_intro_hardware .step {
     align-items: center;
-    border-top: 1px solid var(--line);
     display: flex;
     gap: 16px;
     padding: 18px 0;
   }
 
-  #shopify-section-{{ section.id }} .web_intro_hardware .step:last-child {
-    border-bottom: 1px solid var(--line);
+  #shopify-section-{{ section.id }} .web_intro_hardware .step + .step {
+    border-top: 1px solid var(--line);
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .step_index {
@@ -225,7 +224,7 @@
     }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .step_index,
-    #shopify-section-{{ section.id }} .web_intro_hardware .step_text { font-size: 14px; }
+    #shopify-section-{{ section.id }} .web_intro_hardware .step_text { font-size: 16px; }
 
     #shopify-section-{{ section.id }} .web_intro_hardware .actions {
       gap: 8px;
@@ -241,7 +240,6 @@
     }
   }
 </style>
-
 
 <div class="web_intro_hardware">
   <div class="media"{% if desktop_image == blank and mobile_image == blank %} aria-hidden="true"{% endif %}>
@@ -419,7 +417,7 @@
       "type": "color",
       "id": "divider_color",
       "label": "分割线颜色",
-      "default": "#333333"
+      "default": "#ffffff"
     },
     { "type": "range", "id": "padding_desktop", "label": "电脑端上下内边距", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 80 },
     { "type": "range", "id": "padding_mobile", "label": "移动端上下内边距", "min": 16, "max": 80, "step": 2, "unit": "px", "default": 40 }
