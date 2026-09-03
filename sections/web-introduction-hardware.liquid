@@ -48,8 +48,11 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1440px;
     min-height: calc(100vh - {{ section.settings.padding_desktop | times: 2 }}px);
     padding: 0 100px;
     position: relative;
@@ -57,9 +60,11 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .header {
-    margin-bottom: 48px;
+    margin: 0 auto 48px;
+    max-width: 920px;
     padding: 0;
     text-align: center;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .eyebrow {
@@ -82,18 +87,20 @@
 
   #shopify-section-{{ section.id }} .web_intro_hardware .body {
     display: block;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .content {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    max-width: 520px;
+    gap: 28px;
+    max-width: 640px;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .section_description {
     color: var(--muted);
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.5;
     margin: 0;
   }
@@ -107,7 +114,7 @@
     border-top: 1px solid var(--line);
     display: flex;
     gap: 16px;
-    padding: 16px 0;
+    padding: 18px 0;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .step:last-child {
@@ -117,14 +124,14 @@
   #shopify-section-{{ section.id }} .web_intro_hardware .step_index {
     color: var(--accent);
     flex-shrink: 0;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     line-height: 1.2;
   }
 
   #shopify-section-{{ section.id }} .web_intro_hardware .step_text {
     color: var(--item);
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 1.4;
     margin: 0;
@@ -140,7 +147,7 @@
   #shopify-section-{{ section.id }} .web_intro_hardware .btn {
     border-radius: 999px;
     display: inline-flex;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     justify-content: center;
     line-height: 1.2;
