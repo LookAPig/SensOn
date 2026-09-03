@@ -38,7 +38,9 @@
         "primary_button_text": "Start your free trial",
         "primary_button_link": "",
         "secondary_button_text": "See how it work",
-        "secondary_button_link": ""
+        "secondary_button_link": "",
+        "video": "shopify://files/videos/silent_final.mp4",
+        "external_video_url": ""
       }
     },
     "web_introduction_features_tbPMPd": {
