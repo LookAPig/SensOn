@@ -91,6 +91,7 @@
     font-weight: 600;
     line-height: 1.3;
     margin: 0 0 14px;
+    text-transform: none;
   }
 
   #shopify-section-{{ section.id }} .web_intro_banner .title {
@@ -100,6 +101,7 @@
     letter-spacing: -0.02em;
     line-height: 1.15;
     margin: 0;
+    text-transform: none;
     word-wrap: break-word;
   }
 
@@ -109,6 +111,7 @@
     line-height: 1.45;
     margin-top: 16px;
     max-width: 720px;
+    text-transform: none;
   }
 
   #shopify-section-{{ section.id }} .web_intro_banner .description p {
@@ -150,6 +153,7 @@
     min-width: var(--button-width-desktop);
     padding: 12px 28px;
     text-decoration: none;
+    text-transform: none;
     transition: opacity 0.2s ease;
     white-space: nowrap;
   }
@@ -165,8 +169,124 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_banner .button_secondary {
+    appearance: none;
     background: transparent;
     color: #ffffff;
+    cursor: pointer;
+    font-family: inherit;
+    gap: 10px;
+    padding: 6px 24px 6px 8px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .button_secondary .play_icon {
+    align-items: center;
+    background: var(--accent-color);
+    border-radius: 50%;
+    display: inline-flex;
+    flex-shrink: 0;
+    height: 34px;
+    justify-content: center;
+    width: 34px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .button_secondary .play_icon svg {
+    color: #09020e;
+    display: block;
+    height: 12px;
+    margin-left: 2px;
+    width: 12px;
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }} {
+    --modal-body-padding-block: 0;
+    --modal-body-padding-inline: 0;
+    --modal-content-margin: 16px;
+    --modal-content-width: fit-content;
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }}::part(content) {
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    grid-auto-rows: auto;
+    grid-template-columns: none;
+    height: auto;
+    margin: 16px;
+    max-height: 90vh;
+    max-width: min(960px, calc(100vw - 32px));
+    overflow: hidden;
+    padding: 0;
+    place-self: center;
+    width: fit-content;
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }}::part(body) {
+    display: block;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }} .video_wrap {
+    background: #000;
+    line-height: 0;
+    max-height: 90vh;
+    max-width: min(960px, calc(100vw - 32px));
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }} .video_wrap video {
+    display: block;
+    height: auto;
+    max-height: 90vh;
+    max-width: min(960px, calc(100vw - 32px));
+    object-fit: contain;
+    width: auto;
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed {
+    aspect-ratio: 16 / 9;
+    max-height: 90vh;
+    position: relative;
+    width: min(960px, calc(100vw - 32px));
+  }
+
+  .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed iframe {
+    border: 0;
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 999px) {
+    .web_intro_banner_video_modal-{{ section.id }}::part(content) {
+      margin: 16px;
+      max-height: 85vh;
+      place-self: center;
+      width: fit-content;
+    }
+
+    .web_intro_banner_video_modal-{{ section.id }} .video_wrap,
+    .web_intro_banner_video_modal-{{ section.id }} .video_wrap video {
+      max-height: 85vh;
+      max-width: calc(100vw - 32px);
+    }
+
+    .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed {
+      max-height: 85vh;
+      width: min(960px, calc(100vw - 32px));
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    .web_intro_banner_video_modal-{{ section.id }}::part(content) {
+      display: flex;
+      grid-auto-flow: row;
+      grid-template-columns: none;
+      place-self: center;
+      width: fit-content;
+    }
   }
 
   {%- if section.settings.show_phone_desktop and phone_image != blank -%}
@@ -263,6 +383,20 @@
       width: 100%;
       white-space: normal;
     }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .button_secondary {
+      padding: 5px 18px 5px 6px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .button_secondary .play_icon {
+      height: 30px;
+      width: 30px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .button_secondary .play_icon svg {
+      height: 10px;
+      width: 10px;
+    }
   }
 </style>
 
@@ -348,13 +482,114 @@
         {%- endif -%}
 
         {%- if section.settings.secondary_button_text != blank -%}
-          <a class="button button_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
-            {{- section.settings.secondary_button_text | escape -}}
-          </a>
+          {%- liquid
+            assign has_video = false
+            if section.settings.video != blank or section.settings.external_video_url != blank
+              assign has_video = true
+            endif
+            assign video_modal_id = 'web-intro-banner-video-' | append: section.id
+          -%}
+          {%- if has_video -%}
+            <button
+              type="button"
+              class="button button_secondary"
+              aria-controls="{{ video_modal_id }}"
+              aria-expanded="false"
+            >
+              <span class="play_icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 14" fill="currentColor" focusable="false">
+                  <path d="M12 7L0 14V0L12 7Z"/>
+                </svg>
+              </span>
+              {{- section.settings.secondary_button_text | escape -}}
+            </button>
+          {%- else -%}
+            <a class="button button_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
+              <span class="play_icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 14" fill="currentColor" focusable="false">
+                  <path d="M12 7L0 14V0L12 7Z"/>
+                </svg>
+              </span>
+              {{- section.settings.secondary_button_text | escape -}}
+            </a>
+          {%- endif -%}
         {%- endif -%}
       </div>
     {%- endif -%}
   </div>
+
+  {%- if section.settings.secondary_button_text != blank -%}
+    {%- if section.settings.video != blank or section.settings.external_video_url != blank -%}
+      {%- assign video_modal_id = 'web-intro-banner-video-' | append: section.id -%}
+      <x-modal
+        id="{{ video_modal_id }}"
+        class="modal web_intro_banner_video_modal-{{ section.id }} color-scheme color-scheme--{{ settings.default_color_scheme.id }}"
+        append-to-body
+      >
+        <div class="video_wrap">
+          {%- if section.settings.video != blank -%}
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              {% if section.settings.video.preview_image != blank %}
+                poster="{{ section.settings.video.preview_image | image_url: width: 1600 }}"
+              {% endif %}
+            >
+              {%- for source in section.settings.video.sources -%}
+                <source src="{{ source.url }}" type="{{ source.mime_type }}">
+              {%- endfor -%}
+            </video>
+          {%- elsif section.settings.external_video_url != blank -%}
+            {%- liquid
+              if section.settings.external_video_url.type == 'youtube'
+                assign embed_src = 'https://www.youtube.com/embed/' | append: section.settings.external_video_url.id | append: '?autoplay=1&rel=0&modestbranding=1&playsinline=1'
+              elsif section.settings.external_video_url.type == 'vimeo'
+                assign embed_src = 'https://player.vimeo.com/video/' | append: section.settings.external_video_url.id | append: '?autoplay=1'
+              endif
+            -%}
+            <div
+              class="video_embed"
+              data-video-embed
+              data-src="{{ embed_src | escape }}"
+            ></div>
+          {%- endif -%}
+        </div>
+      </x-modal>
+
+      <script>
+        (function () {
+          var modal = document.getElementById({{ video_modal_id | json }});
+          if (!modal) return;
+
+          var video = modal.querySelector('video');
+          var embed = modal.querySelector('[data-video-embed]');
+
+          modal.addEventListener('dialog:after-show', function () {
+            if (video) {
+              video.play().catch(function () {});
+            }
+            if (embed && embed.dataset.src) {
+              embed.innerHTML =
+                '<iframe src="' +
+                embed.dataset.src +
+                '" title="Video" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+            }
+          });
+
+          modal.addEventListener('dialog:after-hide', function () {
+            if (video) {
+              video.pause();
+              video.currentTime = 0;
+            }
+            if (embed) {
+              embed.innerHTML = '';
+            }
+          });
+        })();
+      </script>
+    {%- endif -%}
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -609,7 +844,25 @@
     {
       "type": "url",
       "id": "secondary_button_link",
-      "label": "次按钮链接"
+      "label": "次按钮链接",
+      "info": "未配置视频时作为普通链接使用。"
+    },
+    {
+      "type": "header",
+      "content": "次按钮视频弹窗"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Shopify 视频",
+      "info": "优先使用此视频；未设置时使用下方外部视频链接。"
+    },
+    {
+      "type": "video_url",
+      "id": "external_video_url",
+      "label": "外部视频链接",
+      "accept": ["youtube", "vimeo"],
+      "info": "支持 YouTube / Vimeo。"
     }
   ],
   "presets": [

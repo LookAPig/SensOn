@@ -36,9 +36,11 @@
         "button_width_desktop": 220,
         "button_width_mobile": 240,
         "primary_button_text": "Start your free trial",
-        "primary_button_link": "https://app.senson.ai",
-        "secondary_button_text": "See How It Work",
-        "secondary_button_link": "shopify://pages/how-it-works"
+        "primary_button_link": "",
+        "secondary_button_text": "See how it work",
+        "secondary_button_link": "",
+        "video": "shopify://files/videos/silent_final.mp4",
+        "external_video_url": ""
       }
     },
     "web_introduction_features_tbPMPd": {

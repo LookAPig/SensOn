@@ -151,17 +151,29 @@
     #shopify-section-{{ section.id }} .web_intro_icon_card .card_head {
       align-items: center;
       display: flex;
-      gap: 12px;
+      gap: 8px;
     }
 
     #shopify-section-{{ section.id }} .web_intro_icon_card .card_icon {
       flex-shrink: 0;
+      height: 20px;
       margin-bottom: 0;
+      width: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .card_icon .icon_svg,
+    #shopify-section-{{ section.id }} .web_intro_icon_card .card_icon .icon_img {
+      height: 24px;
+      width: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_icon_card .card_title {
+      font-size: 16px;
     }
 
     #shopify-section-{{ section.id }} .web_intro_icon_card .card_text {
       margin-top: 10px;
-      padding-left: 44px;
+      padding-left: 32px;
     }
   }
 </style>

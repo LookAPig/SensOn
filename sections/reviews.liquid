@@ -34,7 +34,7 @@
 
   .reviews .reviews_wrap {
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   .reviews .reviews_sw {
@@ -42,10 +42,15 @@
     padding-bottom: 8px;
   }
 
+  .reviews .reviews_sw .swiper-wrapper {
+    align-items: stretch;
+  }
+
   .reviews .reviews_cd {
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
     box-sizing: border-box;
   }
 
@@ -153,8 +158,8 @@
     padding-top: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex: 1 1 0;
+    flex: 1 1 auto;
+    min-height: 0;
     gap: 10px;
   }
 
@@ -164,6 +169,11 @@
     color: rgba(255, 255, 255, 0.92);
     margin: 0;
     text-align: left;
+  }
+
+  .reviews .reviews_ft {
+    margin-top: auto;
+    padding-top: 10px;
   }
 
   .reviews .reviews_txt p {
@@ -295,6 +305,8 @@
 
   .reviews_sw .swiper-slide {
     height: auto;
+    display: flex;
+    box-sizing: border-box;
   }
 
   .reviews_pl_ic svg {
@@ -325,6 +337,16 @@
     .reviews_desc,
     .reviews_subs {
       font-size: 12px;
+    }
+    .reviews .reviews_md {
+      max-height: min(48vh, 360px);
+    }
+    .reviews .reviews_bd {
+      padding-top: 14px;
+      gap: 8px;
+    }
+    .reviews .reviews_ft {
+      padding-top: 8px;
     }
   }
 </style>
@@ -462,7 +484,7 @@
                     <div class="reviews_txt rte">{{ block.settings.comment }}</div>
                   {%- endunless -%}
 
-                  <div>
+                  <div class="reviews_ft">
                     <div class="reviews_row">
                       {%- unless section.settings.show_stars == false -%}
                         {%- liquid
