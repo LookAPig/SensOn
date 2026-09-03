@@ -246,7 +246,8 @@
     {%- endif -%}
 
     {%- if section.settings.title != blank -%}
-      <h1 class="title">{{ section.settings.title | escape | newline_to_br }}</h1>
+      {%- assign heading_tag = section.settings.heading_tag | default: 'h1' -%}
+      <{{ heading_tag }} class="title">{{ section.settings.title | escape | newline_to_br }}</{{ heading_tag }}>
     {%- endif -%}
 
     {%- if section.settings.description != blank -%}
@@ -459,6 +460,39 @@
       "label": "标题",
       "default": "How SensOn S1 Works",
       "info": "支持换行；超出内容区最大宽度时自动折行并居中。"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "标题标签",
+      "info": "用于 SEO。同一页面建议只保留一个 H1，复用本组件时请改为 H2 及以下。",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h1"
     },
     {
       "type": "richtext",
