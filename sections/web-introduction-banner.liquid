@@ -199,21 +199,30 @@
 
   .web_intro_banner_video_modal-{{ section.id }}::part(content) {
     background: #000;
+    margin: 16px;
+    max-height: 90vh;
     max-width: min(960px, calc(100vw - 32px));
+    overflow: hidden;
     padding: 0;
-    width: 100%;
+    place-self: center;
+    width: auto;
   }
 
   .web_intro_banner_video_modal-{{ section.id }}::part(body) {
+    overflow: hidden;
     padding: 0;
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: var(--video-aspect-ratio, 16 / 9);
     background: #000;
+    max-height: 90vh;
     overflow: hidden;
     position: relative;
-    width: 100%;
+    width: min(
+      calc(90vh * var(--video-aspect-ratio, 1.777)),
+      min(960px, calc(100vw - 32px))
+    );
   }
 
   .web_intro_banner_video_modal-{{ section.id }} .video_wrap .video_embed {
@@ -230,9 +239,27 @@
     display: block;
     height: 100%;
     left: 0;
+    object-fit: contain;
     position: absolute;
     top: 0;
     width: 100%;
+  }
+
+  @media screen and (max-width: 999px) {
+    .web_intro_banner_video_modal-{{ section.id }}::part(content) {
+      margin: 16px;
+      max-height: 85vh;
+      place-self: center;
+      width: auto;
+    }
+
+    .web_intro_banner_video_modal-{{ section.id }} .video_wrap {
+      max-height: 85vh;
+      width: min(
+        calc(85vh * var(--video-aspect-ratio, 1.777)),
+        calc(100vw - 32px)
+      );
+    }
   }
 
   {%- if section.settings.show_phone_desktop and phone_image != blank -%}
@@ -466,10 +493,17 @@
 
   {%- if section.settings.secondary_button_text != blank -%}
     {%- if section.settings.video != blank or section.settings.external_video_url != blank -%}
-      {%- assign video_modal_id = 'web-intro-banner-video-' | append: section.id -%}
+      {%- liquid
+        assign video_modal_id = 'web-intro-banner-video-' | append: section.id
+        assign video_aspect_ratio = 1.777
+        if section.settings.video != blank and section.settings.video.aspect_ratio != blank
+          assign video_aspect_ratio = section.settings.video.aspect_ratio
+        endif
+      -%}
       <x-modal
         id="{{ video_modal_id }}"
         class="modal web_intro_banner_video_modal-{{ section.id }} color-scheme color-scheme--{{ settings.default_color_scheme.id }}"
+        style="--video-aspect-ratio: {{ video_aspect_ratio }};"
         append-to-body
       >
         <div class="video_wrap">
