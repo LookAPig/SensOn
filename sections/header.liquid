@@ -84,6 +84,20 @@
       }
     }
   {%- endif -%}
+
+  #shopify-section-{{ section.id }} .header__secondary-nav .relative > button .subheading {
+    font-family: var(--text-font-family);
+    font-size: {{ section.settings.desktop_icon_size | times: 0.75 | round: 0 }}px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    text-transform: none;
+  }
+
+  #shopify-section-{{ section.id }} .header__secondary-nav .relative > button .icon {
+    width: {{ section.settings.desktop_icon_size | times: 0.625 | round: 0 }}px;
+    height: auto;
+  }
 </style>
 
 <height-observer variable="header">

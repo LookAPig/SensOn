@@ -439,7 +439,7 @@
         var headerH = header ? header.offsetHeight : 0;
         var nav = document.getElementById('pdp-sticky-nav-section');
         var navH = nav ? nav.offsetHeight : 64;
-        var bar = document.getElementById('sticky-bar-pc');
+        var bar = document.getElementById('sticky-bar-pc') || document.querySelector('.sb-section-pc');
         var barH = bar ? bar.offsetHeight : 74;
         return { headerH: headerH, navH: navH, barH: barH };
       }
