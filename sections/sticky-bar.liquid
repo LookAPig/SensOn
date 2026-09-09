@@ -1,0 +1,191 @@
+{%- liquid
+  assign sb_product = section.settings.product
+  if sb_product == blank and section.settings.product_handle != blank
+    assign sb_product = all_products[section.settings.product_handle]
+  endif
+  assign badge_text = section.settings.badge_text
+  assign button_text = section.settings.button_text | default: 'Shop Now'
+  assign bar_id_pc = 'sticky-bar-pc-' | append: section.id
+  assign bar_id_h5 = 'sticky-bar-h5-' | append: section.id
+-%}
+
+{%- if sb_product != blank -%}
+  <style>
+    #shopify-section-{{ section.id }} { margin:0!important; padding:0!important; height:0; overflow:visible; }
+    .sb-section-pc, .sb-section-h5 {
+      position:fixed; bottom:0; left:0; z-index:999; width:100%; box-sizing:border-box; color:#fff;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1.277px solid rgba(255,255,255,.1);
+      box-shadow:0 12.766px 19.149px -3.83px rgba(0,0,0,.1), 0 5.106px 7.66px -5.106px rgba(0,0,0,.1);
+      background:rgba(0,0,0,.35); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      transition:opacity .35s cubic-bezier(.2,.9,.4,1.1); opacity:0; pointer-events:none;
+    }
+    .sb-section-pc { padding:12px 120px; height:74px; }
+    .sb-section-h5 { padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px)); min-height:58px; }
+    .sb-section-pc .sb-btn, .sb-section-h5 .sb-btn {
+      display:flex; justify-content:center; align-items:center; gap:8px;
+      text-decoration:none; text-transform:none; border-radius:1000px; background:#fff; transition:transform .2s ease;
+    }
+    .sb-section-pc .sb-btn { padding:12px 40px; }
+    .sb-section-h5 .sb-btn { padding:8px 24px; }
+    .sb-section-pc .sb-btn span { color:#000; font-size:24px; font-weight:500; line-height:1.1; }
+    .sb-section-h5 .sb-btn span { color:#000; font-size:16px; font-weight:500; line-height:1.1; }
+    .sb-section-h5 .sb-btn:hover { background:#f0f0f0!important; }
+    @media (max-width:999px) {
+      .sb-section-pc { display:none!important; }
+      body { padding-bottom:calc(58px + env(safe-area-inset-bottom,0px)); }
+    }
+    @media (min-width:1000px) {
+      .sb-section-h5 { display:none!important; }
+      body { padding-bottom:74px; }
+    }
+  </style>
+
+  <section class="sb-section-pc" id="{{ bar_id_pc }}">
+    <p style="margin:0;">{{ sb_product.title }}</p>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <div style="display:flex;align-items:center;gap:16px;">
+        {%- if badge_text != blank -%}
+          <div style="display:flex;padding:4px 8px;background:#c84fb9;">
+            <span style="color:#fff;font-size:14px;font-weight:500;line-height:1.1;">{{ badge_text }}</span>
+          </div>
+        {%- endif -%}
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div style="font-size:24px;font-weight:700;line-height:1.1;">{{ sb_product.price | money }}</div>
+          {%- if sb_product.compare_at_price > sb_product.price -%}
+            <div style="color:rgba(255,255,255,.5);font-size:14px;text-decoration:line-through;">{{ sb_product.compare_at_price | money }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+      <a href="{{ sb_product.url }}" class="button sb-btn"><span class="pre-order-now">{{ button_text }}</span></a>
+    </div>
+  </section>
+
+  <section class="sb-section-h5" id="{{ bar_id_h5 }}">
+    <div style="display:flex;gap:8px;align-items:center;">
+      <h3 style="font-size:18px;font-weight:700;line-height:1.1;margin:0;">{{ sb_product.price | money }}</h3>
+      {%- if sb_product.compare_at_price > sb_product.price -%}
+        <h4 style="color:rgba(255,255,255,.5);font-size:12px;font-weight:400;line-height:1;text-decoration:line-through;margin:0;">{{ sb_product.compare_at_price | money }}</h4>
+      {%- endif -%}
+    </div>
+    <a href="{{ sb_product.url }}" class="button sb-btn"><span class="pre-order-now">{{ button_text }}</span></a>
+  </section>
+
+  <script>
+    (function () {
+      var bp = 1000;
+      var heroSelectors = ['.hero-area', '.hero', '[data-hero]', '.main-banner', '.shopify-section:first-child', '#shopify-section-template--hero'];
+      var hero = null;
+
+      function findHero() {
+        for (var i = 0; i < heroSelectors.length; i++) {
+          var el = document.querySelector(heroSelectors[i]);
+          if (el) return el;
+        }
+        var list = document.querySelectorAll('section, div[class*="hero"], div[class*="banner"]');
+        for (var j = 0; j < list.length; j++) {
+          var r = list[j].getBoundingClientRect();
+          if (r.height > window.innerHeight * 0.7 && list[j].offsetTop < 100) return list[j];
+        }
+        return null;
+      }
+      hero = findHero();
+      new MutationObserver(function () { if (!hero) hero = findHero(); })
+        .observe(document.body, { childList: true, subtree: true });
+
+      function shouldShow() {
+        if (hero) return hero.getBoundingClientRect().bottom <= 0;
+        return (window.pageYOffset || document.documentElement.scrollTop) > window.innerHeight * 0.95;
+      }
+
+      function bindBar(id, desktopOnly) {
+        var bar = document.getElementById(id);
+        if (!bar) return;
+        var shown = false;
+        function update() {
+          var desktop = window.innerWidth >= bp;
+          if (desktopOnly && !desktop) {
+            bar.style.opacity = '0'; bar.style.pointerEvents = 'none'; shown = false; return;
+          }
+          if (!desktopOnly && desktop) return;
+          var need = shouldShow();
+          if (need === shown) return;
+          shown = need;
+          bar.style.opacity = need ? '1' : '0';
+          bar.style.pointerEvents = need ? 'auto' : 'none';
+        }
+        var ticking = false;
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () { update(); ticking = false; });
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', function () { update(); onScroll(); });
+        if (!desktopOnly && window.visualViewport) {
+          window.visualViewport.addEventListener('resize', function () {
+            var vv = window.visualViewport;
+            bar.style.bottom = Math.max(window.innerHeight - vv.height - vv.offsetTop, 0) + 'px';
+            onScroll();
+          });
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', update);
+        else update();
+        window.addEventListener('load', function () { setTimeout(update, 100); });
+      }
+
+      bindBar({{ bar_id_pc | json }}, true);
+      bindBar({{ bar_id_h5 | json }}, false);
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Sticky Bar",
+  "tag": "section",
+  "class": "shopify-section--sticky-bar",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "product_handle",
+      "label": "Product handle (fallback)",
+      "info": "Used only when Product is empty.",
+      "default": "senson-s1-wellness-companion"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text (desktop)",
+      "default": "Limited Time Price"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sticky Bar"
+    }
+  ]
+}
+{% endschema %}
