@@ -387,6 +387,16 @@
         "padding_desktop": 96,
         "padding_mobile": 64
       }
+    },
+    "sticky_bar_wKxwdC": {
+      "type": "sticky-bar",
+      "name": "Sticky Bar",
+      "settings": {
+        "product": "senson-plus",
+        "product_handle": "",
+        "badge_text": "Limited Time Price",
+        "button_text": "Shop Now"
+      }
     }
   },
   "order": [
@@ -398,6 +408,7 @@
     "web_introduction_hardware_k8m2Np",
     "web_introduction_icon_card_pxFeqU",
     "web_introduction_faq_VHVabA",
-    "web_introduction_footer_B39PmR"
+    "web_introduction_footer_B39PmR",
+    "sticky_bar_wKxwdC"
   ]
 }

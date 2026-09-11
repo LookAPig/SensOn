@@ -13,6 +13,7 @@
   "sections": {
     "custom_liquid_EnKPWR": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "Sticky Bar pc",
       "settings": {
         "color_scheme": "",
@@ -24,6 +25,7 @@
     },
     "custom_liquid_wxeCym": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "Sticky Bar h5",
       "settings": {
         "color_scheme": "",
