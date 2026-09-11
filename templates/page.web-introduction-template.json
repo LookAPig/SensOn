@@ -260,8 +260,8 @@
           "settings": {
             "icon": "shield",
             "icon_image": "shopify://shop_images/Private_by_design_2f4dc8bd-71e9-4702-9770-49e8f823e162.png",
-            "title": "Companions With Memory",
-            "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
+            "title": "Behind your sign-in",
+            "text": "Your conversations and saved preferences remain inside your private account."
           }
         },
         "card_hJJ6DN": {
@@ -269,8 +269,8 @@
           "settings": {
             "icon": "smile",
             "icon_image": "shopify://shop_images/Comfort-focused_setup.png",
-            "title": "Voice That Pulls You In",
-            "text": "Hear every whisper, pause and breath through immersive voice-led stories and real-time conversation."
+            "title": "An inclusive adult space",
+            "text": "Female-focused experiences that welcome adult LGBTQ+ users and a spectrum of desires."
           }
         },
         "card_7PKghd": {
@@ -278,8 +278,8 @@
           "settings": {
             "icon": "chat",
             "icon_image": "shopify://shop_images/Support_when_needed.png",
-            "title": "Support When Needed",
-            "text": "Choose the mood, guide the fantasy and change direction whenever you want. You are always in control."
+            "title": "Your choices, always",
+            "text": "You decide the character, pace, voice and whether to connect hardware."
           }
         }
       },
