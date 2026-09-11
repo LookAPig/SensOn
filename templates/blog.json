@@ -83,10 +83,21 @@
         "show_reading_time": false,
         "show_excerpt": true
       }
+    },
+    "sticky_bar_3pbcNV": {
+      "type": "sticky-bar",
+      "name": "Sticky Bar",
+      "settings": {
+        "product": "senson-s1-wellness-companion",
+        "product_handle": "senson-s1-wellness-companion",
+        "badge_text": "Limited Time Price",
+        "button_text": "Shop Now"
+      }
     }
   },
   "order": [
     "image_with_text_overlay_wJjwN6",
-    "main"
+    "main",
+    "sticky_bar_3pbcNV"
   ]
 }
