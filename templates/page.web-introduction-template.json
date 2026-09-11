@@ -352,7 +352,7 @@
       "name": "Web introduction FAQ",
       "settings": {
         "eyebrow": "Question,Answered",
-        "title": "Before you begin.",
+        "title": "Before You Begin.",
         "description": "<p>Everything you need to know before stepping into SensOn Web.</p>",
         "background_color": "#000000",
         "accent_color": "#f287ec",
