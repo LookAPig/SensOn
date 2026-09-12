@@ -72,7 +72,7 @@
       ],
       "name": "t:sections.rich_text.name",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-638f34b5-790c-4c9f-99b0-ef01e713fba8",
         "content_width": "lg",
         "text_alignment": "center"
       }
