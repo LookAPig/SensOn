@@ -13,6 +13,33 @@
     assign second_column = ''
   -%}
 
+  <style>
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign size_mobile = block.settings.font_size_mobile | default: 0 | plus: 0
+        assign size_desktop = block.settings.font_size_desktop | default: 0 | plus: 0
+        if size_mobile == 0
+          assign size_mobile = size_desktop
+        endif
+        if size_desktop == 0
+          assign size_desktop = size_mobile
+        endif
+      -%}
+      {%- if size_mobile > 0 -%}
+        #shopify-block-{{ block.id }},
+        #shopify-block-{{ block.id }} :is(p, li, a, button, .button, .subheading, .heading, .h1, .h2, .h3, .h4, .h5, .h6, .h7, .display-xl, .display-l, .display-m) {
+          font-size: {{ size_mobile }}px;
+        }
+        @media screen and (min-width: 750px) {
+          #shopify-block-{{ block.id }},
+          #shopify-block-{{ block.id }} :is(p, li, a, button, .button, .subheading, .heading, .h1, .h2, .h3, .h4, .h5, .h6, .h7, .display-xl, .display-l, .display-m) {
+            font-size: {{ size_desktop }}px;
+          }
+        }
+      {%- endif -%}
+    {%- endfor -%}
+  </style>
+
   <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
     <div class="container section-spacing">
       <div class="rich-text justify-items-{{ section.settings.text_alignment | replace: 'left', 'start' | replace: 'right', 'end' }}">
@@ -36,7 +63,7 @@
 
               {%- when 'richtext' -%}
                 {%- if block.settings.text != blank -%}
-                  <div {{ block.shopify_attributes }}>
+                  <div id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
                     {{- block.settings.text -}}
                   </div>
                 {%- endif -%}
@@ -188,6 +215,28 @@
           "id": "text",
           "label": "t:global.text.text",
           "default": "Subheading"
+        },
+        {
+          "type": "range",
+          "id": "font_size_desktop",
+          "min": 0,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "t:global.text.desktop_size",
+          "info": "t:sections.rich_text.font_size_info",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min": 0,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "t:global.text.mobile_size",
+          "info": "t:sections.rich_text.font_size_info",
+          "default": 0
         }
       ]
     },
@@ -248,6 +297,28 @@
             }
           ],
           "default": "h2"
+        },
+        {
+          "type": "range",
+          "id": "font_size_desktop",
+          "min": 0,
+          "max": 120,
+          "step": 1,
+          "unit": "px",
+          "label": "t:global.text.desktop_size",
+          "info": "t:sections.rich_text.font_size_info",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min": 0,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "t:global.text.mobile_size",
+          "info": "t:sections.rich_text.font_size_info",
+          "default": 0
         },
         {
           "type": "select",
@@ -347,6 +418,28 @@
           "id": "text",
           "label": "t:global.text.content",
           "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        {
+          "type": "range",
+          "id": "font_size_desktop",
+          "min": 0,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "t:global.text.desktop_size",
+          "info": "t:sections.rich_text.font_size_info",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min": 0,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "t:global.text.mobile_size",
+          "info": "t:sections.rich_text.font_size_info",
+          "default": 0
         }
       ]
     },
@@ -423,6 +516,28 @@
           "type": "url",
           "id": "url",
           "label": "t:global.text.link"
+        },
+        {
+          "type": "range",
+          "id": "font_size_desktop",
+          "min": 0,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "t:global.text.desktop_size",
+          "info": "t:sections.rich_text.font_size_info",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min": 0,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "label": "t:global.text.mobile_size",
+          "info": "t:sections.rich_text.font_size_info",
+          "default": 0
         },
         {
           "type": "checkbox",

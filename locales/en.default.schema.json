@@ -1782,6 +1782,7 @@
     },
     "rich_text": {
       "name": "Rich text",
+      "font_size_info": "Set to 0 to keep the theme default size.",
       "blocks": {
         "subheading": {
           "name": "Subheading"

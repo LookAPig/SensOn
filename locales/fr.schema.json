@@ -1782,6 +1782,7 @@
     },
     "rich_text": {
       "name": "Texte enrichi",
+      "font_size_info": "Réglez sur 0 pour conserver la taille par défaut du thème.",
       "blocks": {
         "subheading": {
           "name": "Sous-titre"
