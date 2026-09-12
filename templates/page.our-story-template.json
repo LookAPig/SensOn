@@ -37,10 +37,50 @@
         "description": "<p>A revolutionary women's technology brand, built on intelligent human–machine interaction and bionic innovation.</p>",
         "description_color": "#FFFFFF"
       }
+    },
+    "rich_text_kznHzx": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_FF8Ux7": {
+          "type": "subheading",
+          "settings": {
+            "text": "Our Core Truths"
+          }
+        },
+        "heading_NCK6LD": {
+          "type": "heading",
+          "settings": {
+            "text": "AI is for pleasure",
+            "heading_tag": "h2",
+            "indent": "none",
+            "highlight_effect": "default",
+            "highlight_accent_color": "",
+            "highlight_text_color": ""
+          }
+        },
+        "richtext_UPX3T6": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>We were taught to believe that the best human–AI connections should resemble love. They shouldn’t. AI is not here to replace relationships. It’s here to serve pleasure—without loyalty, expectation or judgment.<br/><br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_FF8Ux7",
+        "heading_NCK6LD",
+        "richtext_UPX3T6"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "lg",
+        "text_alignment": "center"
+      }
     }
   },
   "order": [
     "main",
-    "our_story_banner_hMygXT"
+    "our_story_banner_hMygXT",
+    "rich_text_kznHzx"
   ]
 }
