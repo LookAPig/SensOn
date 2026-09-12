@@ -29,13 +29,20 @@
         "desktop_height": 524,
         "mobile_height_mode": "custom",
         "mobile_height": 470,
+        "text_align": "center",
         "subtitle": "About SensOn",
-        "subtitle_color": "#F287EC",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
         "heading": "Why SensOn",
-        "heading_color": "#FFFFFF",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
         "heading_tag": "h1",
         "description": "<p>A revolutionary women's technology brand, built on intelligent human–machine interaction and bionic innovation.</p>",
-        "description_color": "#FFFFFF"
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff"
       }
     },
     "rich_text_kznHzx": {
@@ -70,17 +77,46 @@
         "heading_NCK6LD",
         "richtext_UPX3T6"
       ],
+      "custom_css": [],
       "name": "t:sections.rich_text.name",
       "settings": {
         "color_scheme": "scheme-638f34b5-790c-4c9f-99b0-ef01e713fba8",
         "content_width": "lg",
         "text_alignment": "center"
       }
+    },
+    "our_story_banner_P6KDez": {
+      "type": "our-story-banner",
+      "name": "Our story banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/mask_group.webp",
+        "mobile_image": "shopify://shop_images/260110_senson2394_1.webp",
+        "desktop_height_mode": "custom",
+        "desktop_height": 645,
+        "mobile_height_mode": "custom",
+        "mobile_height": 550,
+        "text_align": "left",
+        "subtitle": "Entirely Yours",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "We create a sex experience that reflects you",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h1",
+        "description": "<p>Desire isn’t one-size-fits-all. What we crave is not simply more content, but anexperience that understands our curiosity, kinks and imagination.We don’t build hardware and software as separate things. We build a seamless, responsive and deeply personal experience of sex.<br/><br/></p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff"
+      }
     }
   },
   "order": [
     "main",
     "our_story_banner_hMygXT",
-    "rich_text_kznHzx"
+    "rich_text_kznHzx",
+    "our_story_banner_P6KDez"
   ]
 }
