@@ -119,6 +119,62 @@
         "mobile_padding_bottom": 40
       }
     },
+    "creator_reviews_cards2_EiNs01": {
+      "type": "creator-reviews-cards2",
+      "blocks": {
+        "card_ei_01": {
+          "type": "card",
+          "settings": {
+            "name": "Dr. Tara",
+            "role": "Sex and relationship expert\nProfessor · Author",
+            "quote": "SensOn is not just a chatbot online, but a tangible AI-powered intimate partner that can interact with you."
+          }
+        },
+        "card_ei_02": {
+          "type": "card",
+          "settings": {
+            "name": "Dr. Lexiinks",
+            "role": "Sex and relationship expert\nProfessor · Author",
+            "quote": "SensOn S1 brings AI-powered interactive storytelling and adaptive stimulation to regional news audiences."
+          }
+        },
+        "card_ei_03": {
+          "type": "card",
+          "settings": {
+            "name": "Dr. Tara",
+            "role": "Sex and relationship expert\nProfessor · Author",
+            "quote": "“SensOn is not just a chatbot online, but a tangible AI-powered intimate partner that can interact with you.”"
+          }
+        }
+      },
+      "block_order": [
+        "card_ei_01",
+        "card_ei_02",
+        "card_ei_03"
+      ],
+      "name": "Expert insights",
+      "settings": {
+        "color_background": "#000000",
+        "subtitle": "Expert insights",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#F287EC",
+        "heading": "Professional Perspectives On Technology and Pleasure.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#FFFFFF",
+        "heading_tag": "h2",
+        "card_bg": "#1C1C1C",
+        "avatar_bg": "#4A4A4A",
+        "name_color": "#FFFFFF",
+        "role_color": "#A0A0A0",
+        "quote_color": "#FFFFFF",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40
+      }
+    },
     "our_story_banner_mMe6X6": {
       "type": "our-story-banner",
       "name": "Our story banner",
@@ -162,6 +218,7 @@
     "main",
     "our_story_banner_wdNwTf",
     "creator_reviews_cards_PARE63",
+    "creator_reviews_cards2_EiNs01",
     "our_story_banner_mMe6X6"
   ]
 }
