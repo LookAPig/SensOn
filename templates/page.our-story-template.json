@@ -42,7 +42,9 @@
         "description": "<p>A revolutionary women's technology brand, built on intelligent human–machine interaction and bionic innovation.</p>",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
-        "description_color": "#ffffff"
+        "description_color": "#ffffff",
+        "button_label": "Know More",
+        "button_url": ""
       }
     },
     "rich_text_kznHzx": {
@@ -109,7 +111,9 @@
         "description": "<p>Desire isn’t one-size-fits-all. What we crave is not simply more content, but anexperience that understands our curiosity, kinks and imagination.We don’t build hardware and software as separate things. We build a seamless, responsive and deeply personal experience of sex.<br/><br/></p>",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
-        "description_color": "#ffffff"
+        "description_color": "#ffffff",
+        "button_label": "Know More",
+        "button_url": ""
       }
     },
     "our_story_faq_YhAnA3": {
@@ -145,24 +149,26 @@
       "name": "Our story FAQ",
       "settings": {
         "enable_accordion": false,
-        "background_color": "#1A1224",
-        "accent_color": "#F287EC",
-        "divider_color": "#4A3A55",
-        "padding_desktop": 96,
-        "padding_mobile": 40,
+        "color_background": "linear-gradient(180deg, rgba(42, 22, 56, 1), rgba(26, 18, 36, 1) 100%)",
+        "accent_color": "#f287ec",
+        "divider_color": "#4a3a55",
+        "desktop_padding_top": 152,
+        "desktop_padding_bottom": 152,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40,
         "subtitle": "What We Actually Build",
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
-        "subtitle_color": "#F287EC",
+        "subtitle_color": "#f287ec",
         "heading": "Fantasy, made tangible",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
-        "heading_color": "#FFFFFF",
+        "heading_color": "#ffffff",
         "heading_tag": "h2",
         "description": "",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
-        "description_color": "#FFFFFF"
+        "description_color": "#ffffff"
       }
     }
   },
