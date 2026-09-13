@@ -56,6 +56,69 @@
         "stat_divider_color": "#f287ec"
       }
     },
+    "creator_reviews_cards_PARE63": {
+      "type": "creator-reviews-cards",
+      "blocks": {
+        "card_y63JRg": {
+          "type": "card",
+          "settings": {
+            "role": "Actress · Creator",
+            "name": "Lilly Singh",
+            "followers": "14.2M",
+            "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
+          }
+        },
+        "card_JibQgg": {
+          "type": "card",
+          "settings": {
+            "role": "Actress · Creator",
+            "name": "Lilly Singh",
+            "followers": "14.2M",
+            "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
+          }
+        },
+        "card_PpGnpR": {
+          "type": "card",
+          "settings": {
+            "role": "Actress · Creator",
+            "name": "Lilly Singh",
+            "followers": "14.2M",
+            "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
+          }
+        }
+      },
+      "block_order": [
+        "card_y63JRg",
+        "card_JibQgg",
+        "card_PpGnpR"
+      ],
+      "name": "Creator reviews",
+      "settings": {
+        "color_background": "#FFFFFF",
+        "subtitle": "Creator Stories",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#F287EC",
+        "heading": "See SensOn S1 Through Their Eyes.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#000000",
+        "heading_tag": "h2",
+        "description": "<p>First impressions, honest reactions and personal takes on a new kind of AI-powered intimate experience.</p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#000000",
+        "card_bg": "#F7E9F8",
+        "role_color": "#000000",
+        "name_color": "#000000",
+        "followers_color": "#000000",
+        "quote_color": "#000000",
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40
+      }
+    },
     "our_story_banner_mMe6X6": {
       "type": "our-story-banner",
       "name": "Our story banner",
@@ -98,6 +161,7 @@
   "order": [
     "main",
     "our_story_banner_wdNwTf",
+    "creator_reviews_cards_PARE63",
     "our_story_banner_mMe6X6"
   ]
 }
