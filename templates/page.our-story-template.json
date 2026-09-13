@@ -111,12 +111,66 @@
         "description_font_size_mobile": 14,
         "description_color": "#ffffff"
       }
+    },
+    "our_story_faq_YhAnA3": {
+      "type": "our-story-faq",
+      "blocks": {
+        "faq_P73w4e": {
+          "type": "faq",
+          "settings": {
+            "question": "A premium, female-focused fantasy world",
+            "answer": "<p>Choose the scenario, the character and the direction. Stories are designed for women and welcome all sexual orientations.</p>"
+          }
+        },
+        "faq_F9Pg8d": {
+          "type": "faq",
+          "settings": {
+            "question": "Bionic reality you can feel",
+            "answer": "<p>Hardware engineered to reproduce the complexity of human touch across multiple sensitive zones—with precision and intention.</p>"
+          }
+        },
+        "faq_Uj9AzC": {
+          "type": "faq",
+          "settings": {
+            "question": "Effortless immersion",
+            "answer": "<p>Hands-free, stable and naturally held in place, so technology disappears and your body can stay present.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_P73w4e",
+        "faq_F9Pg8d",
+        "faq_Uj9AzC"
+      ],
+      "name": "Our story FAQ",
+      "settings": {
+        "enable_accordion": false,
+        "background_color": "#1A1224",
+        "accent_color": "#F287EC",
+        "divider_color": "#4A3A55",
+        "padding_desktop": 96,
+        "padding_mobile": 40,
+        "subtitle": "What We Actually Build",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#F287EC",
+        "heading": "Fantasy, made tangible",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#FFFFFF",
+        "heading_tag": "h2",
+        "description": "",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#FFFFFF"
+      }
     }
   },
   "order": [
     "main",
     "our_story_banner_hMygXT",
     "rich_text_kznHzx",
-    "our_story_banner_P6KDez"
+    "our_story_banner_P6KDez",
+    "our_story_faq_YhAnA3"
   ]
 }
