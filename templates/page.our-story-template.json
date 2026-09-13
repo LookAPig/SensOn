@@ -42,7 +42,9 @@
         "description": "<p>A revolutionary women's technology brand, built on intelligent human–machine interaction and bionic innovation.</p>",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
-        "description_color": "#ffffff"
+        "description_color": "#ffffff",
+        "button_label": "",
+        "button_url": ""
       }
     },
     "rich_text_kznHzx": {
@@ -91,7 +93,7 @@
       "settings": {
         "allow_transparent_header": false,
         "desktop_image": "shopify://shop_images/mask_group.webp",
-        "mobile_image": "shopify://shop_images/260110_senson2394_1.webp",
+        "mobile_image": "shopify://shop_images/260110_senson2661_1.webp",
         "desktop_height_mode": "custom",
         "desktop_height": 645,
         "mobile_height_mode": "custom",
@@ -109,7 +111,9 @@
         "description": "<p>Desire isn’t one-size-fits-all. What we crave is not simply more content, but anexperience that understands our curiosity, kinks and imagination.We don’t build hardware and software as separate things. We build a seamless, responsive and deeply personal experience of sex.<br/><br/></p>",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
-        "description_color": "#ffffff"
+        "description_color": "#ffffff",
+        "button_label": "",
+        "button_url": ""
       }
     },
     "our_story_faq_YhAnA3": {
@@ -145,24 +149,139 @@
       "name": "Our story FAQ",
       "settings": {
         "enable_accordion": false,
-        "background_color": "#1A1224",
-        "accent_color": "#F287EC",
-        "divider_color": "#4A3A55",
-        "padding_desktop": 96,
-        "padding_mobile": 40,
+        "color_background": "linear-gradient(180deg, rgba(42, 22, 56, 1), rgba(26, 18, 36, 1) 100%)",
+        "accent_color": "#f287ec",
+        "divider_color": "#4a3a55",
+        "desktop_padding_top": 152,
+        "desktop_padding_bottom": 152,
+        "mobile_padding_top": 68,
+        "mobile_padding_bottom": 68,
         "subtitle": "What We Actually Build",
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
-        "subtitle_color": "#F287EC",
+        "subtitle_color": "#f287ec",
         "heading": "Fantasy, made tangible",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
-        "heading_color": "#FFFFFF",
+        "heading_color": "#ffffff",
         "heading_tag": "h2",
         "description": "",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
-        "description_color": "#FFFFFF"
+        "description_color": "#ffffff"
+      }
+    },
+    "our_story_banner_dANGeh": {
+      "type": "our-story-banner",
+      "name": "Our story banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/mask_group_1.webp",
+        "mobile_image": "shopify://shop_images/0cbd292f2413e1435017c07b0a38aff28e7f4458ed802f4c08705bd85f49afe1_1_1.webp",
+        "desktop_height_mode": "custom",
+        "desktop_height": 614,
+        "mobile_height_mode": "custom",
+        "mobile_height": 470,
+        "text_align": "left",
+        "subtitle": "Seen. Heard. Felt.",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Any Lover She Wants.\nAny Story She Imagines. \nA Fantasy She Can Feel.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h1",
+        "description": "<p>SensOn connects story, voice and touch in one uninterrupted experience—so technology follows her rhythm instead of asking her to follow it.<br/><br/></p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff",
+        "button_label": "",
+        "button_url": ""
+      }
+    },
+    "our_story_faq_LJr7Lx": {
+      "type": "our-story-faq",
+      "blocks": {
+        "faq_QnLq3e": {
+          "type": "faq",
+          "settings": {
+            "question": "A premium, female-focused fantasy world",
+            "answer": "<p>Choose the scenario, the character and the direction. Stories are designed for women and welcome all sexual orientations.</p>"
+          }
+        },
+        "faq_JqTHRV": {
+          "type": "faq",
+          "settings": {
+            "question": "Bionic reality you can feel",
+            "answer": "<p>Hardware engineered to reproduce the complexity of human touch across multiple sensitive zones—with precision and intention.</p>"
+          }
+        },
+        "faq_rgceXH": {
+          "type": "faq",
+          "settings": {
+            "question": "Effortless immersion",
+            "answer": "<p>Hands-free, stable and naturally held in place, so technology disappears and your body can stay present.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_QnLq3e",
+        "faq_JqTHRV",
+        "faq_rgceXH"
+      ],
+      "name": "Our story FAQ",
+      "settings": {
+        "enable_accordion": true,
+        "color_background": "linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 100%)",
+        "accent_color": "#f287ec",
+        "divider_color": "#4a3a55",
+        "desktop_padding_top": 152,
+        "desktop_padding_bottom": 152,
+        "mobile_padding_top": 68,
+        "mobile_padding_bottom": 68,
+        "subtitle": "Our Future",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Not a one-product idea. A new \nplatform for female pleasure.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h2",
+        "description": "<p>AI should not replace love or real relationships. Its role here is different: to create more freedom for fantasy, curiosity and self-knowledge.</p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff"
+      }
+    },
+    "our_story_banner_EAgjM3": {
+      "type": "our-story-banner",
+      "name": "Our story banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/mask_group_2.webp",
+        "mobile_image": "shopify://shop_images/mask_group_3.webp",
+        "desktop_height_mode": "custom",
+        "desktop_height": 524,
+        "mobile_height_mode": "custom",
+        "mobile_height": 470,
+        "text_align": "center",
+        "subtitle": "SensOn S1",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "An AI Companion \nYou Can Feel and Touch.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h1",
+        "description": "",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff",
+        "button_label": "Know More",
+        "button_url": "shopify://pages/contact-us"
       }
     }
   },
@@ -171,6 +290,9 @@
     "our_story_banner_hMygXT",
     "rich_text_kznHzx",
     "our_story_banner_P6KDez",
-    "our_story_faq_YhAnA3"
+    "our_story_faq_YhAnA3",
+    "our_story_banner_dANGeh",
+    "our_story_faq_LJr7Lx",
+    "our_story_banner_EAgjM3"
   ]
 }
