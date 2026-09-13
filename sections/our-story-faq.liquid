@@ -18,7 +18,7 @@
     --line: {{ section.settings.divider_color }};
     background: {{ section.settings.color_background }};
     overflow: hidden;
-    padding: {{ section.settings.padding_mobile }}px 16px;
+    padding: {{ section.settings.mobile_padding_top | default: 40 }}px 16px {{ section.settings.mobile_padding_bottom | default: 40 }}px;
   }
   #shopify-section-{{ section.id }} .our_story_faq * { box-sizing: border-box; }
   #shopify-section-{{ section.id }} .our_story_faq .inner { margin: 0 auto; max-width: 1440px; }
@@ -65,7 +65,9 @@
   #shopify-section-{{ section.id }} .our_story_faq .faq_answer p { margin: 0; }
   #shopify-section-{{ section.id }} .our_story_faq .faq_answer p + p { margin-top: 0.6em; }
   @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .our_story_faq { padding: {{ section.settings.padding_desktop }}px 100px; }
+    #shopify-section-{{ section.id }} .our_story_faq {
+      padding: {{ section.settings.desktop_padding_top | default: 96 }}px 100px {{ section.settings.desktop_padding_bottom | default: 96 }}px;
+    }
     #shopify-section-{{ section.id }} .our_story_faq .layout {
       align-items: start; display: grid; gap: 64px; grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr);
     }
@@ -212,8 +214,11 @@
     { "type": "color_background", "id": "color_background", "label": "背景色", "default": "linear-gradient(180deg, #2A1638 0%, #1A1224 100%)" },
     { "type": "color", "id": "accent_color", "label": "序号/箭头颜色", "default": "#F287EC" },
     { "type": "color", "id": "divider_color", "label": "分割线颜色", "default": "#4A3A55" },
-    { "type": "range", "id": "padding_desktop", "label": "电脑端上下内边距", "min": 24, "max": 160, "step": 4, "unit": "px", "default": 96 },
-    { "type": "range", "id": "padding_mobile", "label": "移动端上下内边距", "min": 16, "max": 80, "step": 2, "unit": "px", "default": 40 },
+    { "type": "header", "content": "模块间距" },
+    { "type": "range", "id": "desktop_padding_top", "label": "电脑端上内边距", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "desktop_padding_bottom", "label": "电脑端下内边距", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "mobile_padding_top", "label": "移动端上内边距", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "mobile_padding_bottom", "label": "移动端下内边距", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 },
     { "type": "header", "content": "文案" },
     { "type": "text", "id": "subtitle", "label": "副标题", "default": "What We Actually Build" },
     { "type": "range", "id": "subtitle_font_size", "label": "副标题字号（电脑）", "min": 12, "max": 48, "step": 1, "unit": "px", "default": 24 },
