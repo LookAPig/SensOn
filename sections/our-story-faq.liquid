@@ -16,7 +16,7 @@
     --description-size-m: {{ section.settings.description_font_size_mobile | default: 14 }}px;
     --accent: {{ section.settings.accent_color }};
     --line: {{ section.settings.divider_color }};
-    background: {{ section.settings.background_color }};
+    background: {{ section.settings.color_background }};
     overflow: hidden;
     padding: {{ section.settings.padding_mobile }}px 16px;
   }
@@ -209,7 +209,7 @@
   "max_blocks": 12,
   "settings": [
     { "type": "checkbox", "id": "enable_accordion", "label": "点击问题展开答案", "info": "打开后电脑端为手风琴；关闭后电脑端全部展开。移动端始终为手风琴。", "default": false },
-    { "type": "color", "id": "background_color", "label": "背景色", "default": "#1A1224" },
+    { "type": "color_background", "id": "color_background", "label": "背景色", "default": "linear-gradient(180deg, #2A1638 0%, #1A1224 100%)" },
     { "type": "color", "id": "accent_color", "label": "序号/箭头颜色", "default": "#F287EC" },
     { "type": "color", "id": "divider_color", "label": "分割线颜色", "default": "#4A3A55" },
     { "type": "range", "id": "padding_desktop", "label": "电脑端上下内边距", "min": 24, "max": 160, "step": 4, "unit": "px", "default": 96 },
