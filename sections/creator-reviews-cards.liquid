@@ -1,0 +1,306 @@
+{%- liquid
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .crc {
+    --subtitle-color: {{ section.settings.subtitle_color }};
+    --heading-color: {{ section.settings.heading_color }};
+    --description-color: {{ section.settings.description_color }};
+    --subtitle-size: {{ section.settings.subtitle_font_size | default: 24 }}px;
+    --heading-size: {{ section.settings.heading_font_size | default: 42 }}px;
+    --description-size: {{ section.settings.description_font_size | default: 16 }}px;
+    --subtitle-size-m: {{ section.settings.subtitle_font_size_mobile | default: 16 }}px;
+    --heading-size-m: {{ section.settings.heading_font_size_mobile | default: 28 }}px;
+    --description-size-m: {{ section.settings.description_font_size_mobile | default: 14 }}px;
+    --card-bg: {{ section.settings.card_bg }};
+    --role-color: {{ section.settings.role_color }};
+    --name-color: {{ section.settings.name_color }};
+    --quote-color: {{ section.settings.quote_color }};
+    --followers-color: {{ section.settings.followers_color }};
+    background: {{ section.settings.color_background }};
+    overflow: hidden;
+    padding: {{ section.settings.mobile_padding_top | default: 40 }}px 16px {{ section.settings.mobile_padding_bottom | default: 40 }}px;
+  }
+  #shopify-section-{{ section.id }} .crc * { box-sizing: border-box; }
+  #shopify-section-{{ section.id }} .crc .inner { margin: 0 auto; max-width: 1440px; }
+  #shopify-section-{{ section.id }} .crc .header {
+    display: flex; flex-direction: column; gap: 16px; margin: 0 auto 24px; max-width: 820px; text-align: center;
+  }
+  #shopify-section-{{ section.id }} .crc .subtitle {
+    color: var(--subtitle-color); font-size: var(--subtitle-size-m); font-weight: 500; line-height: 1.3; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .crc .title {
+    color: var(--heading-color); font-size: var(--heading-size-m); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .crc .description {
+    color: var(--description-color); font-size: var(--description-size-m); line-height: 1.45; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .crc .description p { margin: 0; }
+  #shopify-section-{{ section.id }} .crc .description p + p { margin-top: 0.75em; }
+  #shopify-section-{{ section.id }} .crc .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  #shopify-section-{{ section.id }} .crc .card {
+    background: var(--card-bg); border-radius: 16px; display: flex; flex-direction: column; overflow: hidden;
+  }
+  #shopify-section-{{ section.id }} .crc .media {
+    aspect-ratio: 3 / 2; background: #111; overflow: hidden; position: relative; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .crc .poster,
+  #shopify-section-{{ section.id }} .crc .player,
+  #shopify-section-{{ section.id }} .crc .media img,
+  #shopify-section-{{ section.id }} .crc .media video,
+  #shopify-section-{{ section.id }} .crc .media iframe {
+    display: block; height: 100%; object-fit: cover; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .crc .poster,
+  #shopify-section-{{ section.id }} .crc .player { inset: 0; position: absolute; }
+  #shopify-section-{{ section.id }} .crc .player > * { display: block; height: 100%; width: 100%; }
+  #shopify-section-{{ section.id }} .crc .player { opacity: 0; pointer-events: none; z-index: 1; }
+  #shopify-section-{{ section.id }} .crc .media.is-playing .poster,
+  #shopify-section-{{ section.id }} .crc .media.is-playing .play { opacity: 0; pointer-events: none; }
+  #shopify-section-{{ section.id }} .crc .media.is-playing .player { opacity: 1; pointer-events: auto; z-index: 2; }
+  #shopify-section-{{ section.id }} .crc .play {
+    align-items: center; background: rgb(0 0 0 / 0.28); border: 0; border-radius: 100px; color: #fff; cursor: pointer;
+    display: flex; height: 52px; justify-content: center; left: 50%; padding: 0; position: absolute; top: 50%;
+    transform: translate(-50%, -50%); width: 52px; z-index: 3;
+  }
+  #shopify-section-{{ section.id }} .crc .play svg { display: block; margin-left: 2px; }
+  #shopify-section-{{ section.id }} .crc .body { display: flex; flex-direction: column; flex: 1 1 auto; padding: 20px 16px 22px; }
+  #shopify-section-{{ section.id }} .crc .role {
+    color: var(--role-color); font-size: 14px; font-weight: 400; line-height: 1.3; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .crc .meta {
+    align-items: center; display: flex; gap: 12px; justify-content: space-between; margin-top: 8px;
+  }
+  #shopify-section-{{ section.id }} .crc .name {
+    color: var(--name-color); flex: 1 1 auto; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; margin: 0; min-width: 0;
+  }
+  #shopify-section-{{ section.id }} .crc .followers {
+    align-items: center; color: var(--followers-color); display: inline-flex; flex: 0 0 auto; font-size: 14px; font-weight: 500; gap: 6px; line-height: 1;
+  }
+  #shopify-section-{{ section.id }} .crc .followers svg { display: block; flex: 0 0 auto; height: 17px; width: 17px; }
+  #shopify-section-{{ section.id }} .crc .quote {
+    color: var(--quote-color); font-size: 14px; font-weight: 400; line-height: 1.45; margin: 16px 0 0;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .crc {
+      padding: {{ section.settings.desktop_padding_top | default: 80 }}px 100px {{ section.settings.desktop_padding_bottom | default: 80 }}px;
+    }
+    #shopify-section-{{ section.id }} .crc .header { margin-bottom: 48px; }
+    #shopify-section-{{ section.id }} .crc .subtitle { font-size: var(--subtitle-size); }
+    #shopify-section-{{ section.id }} .crc .title { font-size: var(--heading-size); }
+    #shopify-section-{{ section.id }} .crc .description { font-size: var(--description-size); }
+    #shopify-section-{{ section.id }} .crc .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #shopify-section-{{ section.id }} .crc .body { padding: 24px 24px 28px; }
+    #shopify-section-{{ section.id }} .crc .role { font-size: 16px; }
+    #shopify-section-{{ section.id }} .crc .name { font-size: 28px; }
+    #shopify-section-{{ section.id }} .crc .followers { font-size: 16px; }
+    #shopify-section-{{ section.id }} .crc .quote { font-size: 16px; }
+  }
+</style>
+
+<section class="crc">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <{{ heading_tag }} class="title">{{ section.settings.heading | escape }}</{{ heading_tag }}>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign has_video = false
+            assign embed_src = ''
+            if block.settings.video != blank
+              assign has_video = true
+            endif
+            if block.settings.video_url != blank
+              assign has_video = true
+              if block.settings.video_url.type == 'youtube'
+                assign embed_src = 'https://www.youtube.com/embed/' | append: block.settings.video_url.id | append: '?autoplay=1&rel=0&modestbranding=1&playsinline=1'
+              elsif block.settings.video_url.type == 'vimeo'
+                assign embed_src = 'https://player.vimeo.com/video/' | append: block.settings.video_url.id | append: '?autoplay=1'
+              endif
+            endif
+            assign poster = block.settings.image
+            if poster == blank and block.settings.video != blank
+              assign poster = block.settings.video.preview_image
+            endif
+            assign poster_alt = block.settings.name | default: block.settings.role
+          -%}
+          <article class="card" {{ block.shopify_attributes }}>
+            <div
+              class="media"
+              {% if has_video %}
+                data-crc-player
+                {% if embed_src != blank %}data-embed="{{ embed_src | escape }}"{% endif %}
+              {% endif %}
+            >
+              <div class="poster">
+                {%- if poster != blank -%}
+                  {{ poster | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 750px) 30vw, 100vw', alt: poster_alt }}
+                {%- endif -%}
+              </div>
+              {%- if has_video -%}
+                <div class="player">
+                  {%- if block.settings.video != blank -%}
+                    {{ block.settings.video | video_tag: playsinline: true, controls: true, preload: 'none', image_size: '800x' }}
+                  {%- endif -%}
+                </div>
+                <button class="play" type="button" aria-label="Play video">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              {%- endif -%}
+            </div>
+            <div class="body">
+              {%- if block.settings.role != blank -%}
+                <p class="role">{{ block.settings.role | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.name != blank or block.settings.followers != blank -%}
+                <div class="meta">
+                  {%- if block.settings.name != blank -%}
+                    <h3 class="name">{{ block.settings.name | escape }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.followers != blank -%}
+                    <span class="followers">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true">
+                        <path d="M3.92873 5.62527C1.22703 7.97466 0.940567 12.0688 3.28936 14.7707C5.63815 17.4726 9.73209 17.7577 12.4345 15.4101C15.137 13.0624 15.422 8.96733 13.0732 6.26543C10.7244 3.56353 8.30203 1.57648 8.33424 0C7.38855 1.40516 4.53348 4.43639 5.87349 8.15288C4.50054 7.77318 4.21519 6.46576 3.92873 5.62529V5.62527Z" fill="#F287EC"/>
+                      </svg>
+                      {{ block.settings.followers | escape }}
+                    </span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.quote != blank -%}
+                <p class="quote">{{ block.settings.quote | escape | newline_to_br }}</p>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+
+    function pauseAll(except) {
+      root.querySelectorAll('[data-crc-player]').forEach(function (wrap) {
+        if (wrap === except) return;
+        wrap.classList.remove('is-playing');
+        var video = wrap.querySelector('video');
+        if (video) {
+          video.pause();
+        }
+        var iframe = wrap.querySelector('iframe');
+        if (iframe) iframe.remove();
+      });
+    }
+
+    function play(wrap) {
+      if (wrap.classList.contains('is-playing')) return;
+      pauseAll(wrap);
+      wrap.classList.add('is-playing');
+      var video = wrap.querySelector('video');
+      if (video) {
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+        return;
+      }
+      var src = wrap.getAttribute('data-embed');
+      if (!src) return;
+      var host = wrap.querySelector('.player');
+      if (!host || host.querySelector('iframe')) return;
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.setAttribute('allow', 'autoplay; encrypted-media');
+      iframe.setAttribute('allowfullscreen', 'allowfullscreen');
+      iframe.setAttribute('title', 'Creator review video');
+      host.appendChild(iframe);
+    }
+
+    root.querySelectorAll('[data-crc-player]').forEach(function (wrap) {
+      wrap.querySelectorAll('.play, .poster').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          play(wrap);
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Creator reviews",
+  "tag": "section",
+  "class": "shopify-section--creator-reviews",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "color", "id": "color_background", "label": "背景色", "default": "#FFFFFF" },
+    { "type": "header", "content": "文案" },
+    { "type": "text", "id": "subtitle", "label": "副标题", "default": "Creator Stories" },
+    { "type": "range", "id": "subtitle_font_size", "label": "副标题字号（电脑）", "min": 12, "max": 48, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "subtitle_font_size_mobile", "label": "副标题字号（移动）", "min": 12, "max": 36, "step": 1, "unit": "px", "default": 16 },
+    { "type": "color", "id": "subtitle_color", "label": "副标题颜色", "default": "#F287EC" },
+    { "type": "text", "id": "heading", "label": "标题", "default": "See SensOn S1 Through Their Eyes." },
+    { "type": "range", "id": "heading_font_size", "label": "标题字号（电脑）", "min": 20, "max": 80, "step": 1, "unit": "px", "default": 42 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "标题字号（移动）", "min": 16, "max": 48, "step": 1, "unit": "px", "default": 28 },
+    { "type": "color", "id": "heading_color", "label": "标题颜色", "default": "#000000" },
+    { "type": "select", "id": "heading_tag", "label": "标题标签", "options": [
+      { "value": "h1", "label": "H1" },
+      { "value": "h2", "label": "H2" },
+      { "value": "h3", "label": "H3" }
+    ], "default": "h2" },
+    { "type": "richtext", "id": "description", "label": "描述", "default": "<p>First impressions, honest reactions and personal takes on a new kind of AI-powered intimate experience.</p>" },
+    { "type": "range", "id": "description_font_size", "label": "描述字号（电脑）", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "description_font_size_mobile", "label": "描述字号（移动）", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "color", "id": "description_color", "label": "描述颜色", "default": "#000000" },
+    { "type": "header", "content": "卡片样式" },
+    { "type": "color", "id": "card_bg", "label": "卡片底色", "default": "#F7E9F8" },
+    { "type": "color", "id": "role_color", "label": "身份颜色", "default": "#000000" },
+    { "type": "color", "id": "name_color", "label": "姓名颜色", "default": "#000000" },
+    { "type": "color", "id": "followers_color", "label": "数据颜色", "default": "#000000" },
+    { "type": "color", "id": "quote_color", "label": "评价颜色", "default": "#000000" },
+    { "type": "header", "content": "模块间距" },
+    { "type": "range", "id": "desktop_padding_top", "label": "电脑端顶部间距", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "desktop_padding_bottom", "label": "电脑端底部间距", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "mobile_padding_top", "label": "移动端顶部间距", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "mobile_padding_bottom", "label": "移动端底部间距", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "评价卡片",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "封面图", "info": "仅图片时展示静态封面；有视频时作为播放前封面。" },
+        { "type": "video", "id": "video", "label": "Shopify 视频" },
+        { "type": "video_url", "id": "video_url", "label": "外部视频", "accept": ["youtube", "vimeo"], "info": "未上传 Shopify 视频时可使用 YouTube / Vimeo，点击后在卡片内播放。" },
+        { "type": "text", "id": "role", "label": "身份", "default": "Actress · Creator" },
+        { "type": "text", "id": "name", "label": "姓名", "default": "Lilly Singh" },
+        { "type": "text", "id": "followers", "label": "数据", "default": "14.2M" },
+        { "type": "textarea", "id": "quote", "label": "评价", "default": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Creator reviews",
+      "category": "Content",
+      "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}
