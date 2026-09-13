@@ -44,7 +44,16 @@
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
         "button_label": "",
-        "button_url": ""
+        "button_url": "",
+        "show_stat_bar": false,
+        "stat_bar_bg": "#000000",
+        "stat_number": "17M+",
+        "stat_number_color": "#ffffff",
+        "stat_caption": "SensOn S1 creator content reach",
+        "stat_caption_color": "#ffffff",
+        "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
       }
     },
     "rich_text_kznHzx": {
@@ -113,7 +122,16 @@
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
         "button_label": "",
-        "button_url": ""
+        "button_url": "",
+        "show_stat_bar": false,
+        "stat_bar_bg": "#000000",
+        "stat_number": "17M+",
+        "stat_number_color": "#ffffff",
+        "stat_caption": "SensOn S1 creator content reach",
+        "stat_caption_color": "#ffffff",
+        "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
       }
     },
     "our_story_faq_YhAnA3": {
@@ -197,7 +215,16 @@
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
         "button_label": "",
-        "button_url": ""
+        "button_url": "",
+        "show_stat_bar": false,
+        "stat_bar_bg": "#000000",
+        "stat_number": "17M+",
+        "stat_number_color": "#ffffff",
+        "stat_caption": "SensOn S1 creator content reach",
+        "stat_caption_color": "#ffffff",
+        "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
       }
     },
     "our_story_faq_LJr7Lx": {
@@ -282,7 +309,7 @@
         "description_color": "#ffffff",
         "button_label": "Know More",
         "button_url": "shopify://pages/contact-us",
-        "show_stat_bar": true,
+        "show_stat_bar": false,
         "stat_bar_bg": "#000000",
         "stat_number": "17M+",
         "stat_number_color": "#ffffff",
