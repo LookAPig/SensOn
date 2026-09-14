@@ -117,27 +117,27 @@
         "subtitle": "Independent editorial review",
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 14,
-        "subtitle_color": "#F287EC",
+        "subtitle_color": "#f287ec",
         "heading": "I Tried a Sex Toy With Built-In, Personalized AI Erotica—It Was the Most Unhinged Tech I’ve Ever Tested",
         "heading_mobile": "",
         "heading_font_size": 42,
         "heading_font_size_mobile": 22,
-        "heading_color": "#FFFFFF",
+        "heading_color": "#ffffff",
         "heading_tag": "h2",
         "description": "<p>SheKnows writer Delilah Gray tested the SensOn S1 experience firsthand, from AI storytelling and voice interaction to synchronized stimulation.</p>",
         "description_font_size": 16,
         "description_font_size_mobile": 13,
-        "description_color": "#FFFFFF",
+        "description_color": "#ffffff",
         "button_label": "Know More",
         "button_url": "",
-        "button_bg": "#F287EC",
+        "button_bg": "#f287ec",
         "button_text_color": "#000000"
       }
     },
-    "press_media_info_cards": {
+    "press_media_info_cards_RqJhFm": {
       "type": "press-media-info-cards",
       "blocks": {
-        "card_kwwl": {
+        "card_Uhfwr9": {
           "type": "card",
           "settings": {
             "category": "Regional News",
@@ -147,7 +147,7 @@
             "link_url": ""
           }
         },
-        "card_hackmd": {
+        "card_P8Mr3D": {
           "type": "card",
           "settings": {
             "category": "Technology Community",
@@ -157,7 +157,7 @@
             "link_url": ""
           }
         },
-        "card_bitglobal": {
+        "card_qnQLeF": {
           "type": "card",
           "settings": {
             "category": "Business & Innovation",
@@ -168,28 +168,32 @@
           }
         }
       },
-      "block_order": ["card_kwwl", "card_hackmd", "card_bitglobal"],
+      "block_order": [
+        "card_Uhfwr9",
+        "card_P8Mr3D",
+        "card_qnQLeF"
+      ],
       "name": "Press media info cards",
       "settings": {
         "subtitle": "Company News",
         "subtitle_font_size": 18,
         "subtitle_font_size_mobile": 14,
-        "subtitle_color": "#f287ec",
+        "subtitle_color": "#F287EC",
         "heading": "SensOn S1 Launch Coverage.",
         "heading_font_size": 42,
         "heading_font_size_mobile": 24,
-        "heading_color": "#ffffff",
+        "heading_color": "#FFFFFF",
         "heading_tag": "h2",
         "description": "<p>Three perspectives on the launch—spanning regional news, the technology community and business innovation.</p>",
         "description_font_size": 16,
         "description_font_size_mobile": 13,
-        "description_color": "#ffffff",
+        "description_color": "#FFFFFF",
         "background_color": "#000000",
-        "card_bg": "#1c1c1c",
-        "category_color": "#b3b3b3",
-        "card_title_color": "#ffffff",
-        "card_desc_color": "#c8c8c8",
-        "link_color": "#f287ec",
+        "card_bg": "#1C1C1C",
+        "category_color": "#B3B3B3",
+        "card_title_color": "#FFFFFF",
+        "card_desc_color": "#C8C8C8",
+        "link_color": "#F287EC",
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_desktop": 80,
@@ -202,6 +206,7 @@
     "main",
     "our_story_banner_tq7X3K",
     "press_media_icons_nRjiLU",
-    "press_media_text_over_image_egzzXT"
+    "press_media_text_over_image_egzzXT",
+    "press_media_info_cards_RqJhFm"
   ]
 }
