@@ -194,11 +194,11 @@
         "card_title_color": "#ffffff",
         "card_desc_color": "#c8c8c8",
         "link_color": "#f287ec",
-        "padding_top": 68,
-        "padding_bottom": 68,
+        "padding_top": 80,
+        "padding_bottom": 80,
         "padding_top_desktop": 152,
         "padding_bottom_desktop": 152,
-        "padding_x_desktop": 80
+        "padding_x_desktop": 100
       }
     },
     "press_media_videos_b48X4a": {
@@ -271,7 +271,7 @@
         "subtitle_color": "#f287ec",
         "heading": "Beyond The Headlines: Pleasure, Education and Context.",
         "heading_font_size": 42,
-        "heading_font_size_mobile": 32,
+        "heading_font_size_mobile": 24,
         "heading_color": "#000000",
         "heading_tag": "h2",
         "description": "<p>Sexologists and educators explore how AI intimacy, erotic storytelling and adaptive stimulation reshape desire, connection and sexual wellness.</p>",
@@ -290,11 +290,11 @@
         "article_label_color": "#b3b3b3",
         "article_title_color": "#000000",
         "link_color": "#f287ec",
-        "padding_top": 48,
-        "padding_bottom": 48,
-        "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80,
-        "padding_x_desktop": 80
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_desktop": 152,
+        "padding_bottom_desktop": 152,
+        "padding_x_desktop": 100
       }
     }
   },
