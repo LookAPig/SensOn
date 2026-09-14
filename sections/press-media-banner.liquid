@@ -27,7 +27,6 @@
   #shopify-section-{{ section.id }} .pmb_bar {
     background: var(--bar-bg); padding: 28px 16px 32px;
   }
-  #shopify-section-{{ section.id }} .pmb_bar .inner { margin: 0 auto; max-width: 1440px; }
   #shopify-section-{{ section.id }} .pmb_bar .number {
     color: var(--bar-n); font-size: {{ section.settings.stat_number_size_mobile }}px; font-weight: 500;
     letter-spacing: -0.02em; line-height: 1.1; margin: 0;
@@ -79,7 +78,7 @@
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .pmb_bar { padding: 28px 80px; }
     #shopify-section-{{ section.id }} .pmb_bar .inner {
-      align-items: center; display: flex; gap: 40px; justify-content: center;
+      align-items: center; display: flex; gap: 40px; justify-content: space-between;
     }
     #shopify-section-{{ section.id }} .pmb_bar .stat { flex: 0 0 auto; }
     #shopify-section-{{ section.id }} .pmb_bar .number { font-size: {{ section.settings.stat_number_size }}px; }
