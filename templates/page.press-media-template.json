@@ -323,8 +323,8 @@
       "settings": {
         "desktop_image": "shopify://shop_images/20260530_sens_on1706_2_1.webp",
         "mobile_image": "shopify://shop_images/20260530_sens_on1706_11.webp",
-        "desktop_height": 640,
-        "mobile_height": 560,
+        "desktop_height": 690,
+        "mobile_height": 500,
         "content_offset_top": 80,
         "subtitle": "Press Inquiries",
         "subtitle_font_size": 24,
