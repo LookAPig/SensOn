@@ -97,11 +97,41 @@
       "name": "Press media icons",
       "settings": {
         "heading": "FEATURED & DISTRIBUTED ACROSS",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "padding_top": 40,
         "padding_bottom": 40,
+        "padding_x": 16,
         "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80
+        "padding_bottom_desktop": 80,
+        "padding_x_desktop": 100
+      }
+    },
+    "press_media_text_over_image_egzzXT": {
+      "type": "press-media-text-over-image",
+      "name": "Press media overlay",
+      "settings": {
+        "desktop_image": "shopify://shop_images/mask_group_4.webp",
+        "mobile_image": "shopify://shop_images/mask_group_5_bf4075d3-e018-4e7b-ad9a-4b96b586d796.webp",
+        "desktop_height": 600,
+        "mobile_height": 550,
+        "subtitle": "Independent editorial review",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 14,
+        "subtitle_color": "#F287EC",
+        "heading": "I Tried a Sex Toy With Built-In, Personalized AI Erotica—It Was the Most Unhinged Tech I’ve Ever Tested",
+        "heading_mobile": "",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 22,
+        "heading_color": "#FFFFFF",
+        "heading_tag": "h2",
+        "description": "<p>SheKnows writer Delilah Gray tested the SensOn S1 experience firsthand, from AI storytelling and voice interaction to synchronized stimulation.</p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 13,
+        "description_color": "#FFFFFF",
+        "button_label": "Know More",
+        "button_url": "",
+        "button_bg": "#F287EC",
+        "button_text_color": "#000000"
       }
     },
     "press_media_info_cards": {
@@ -172,6 +202,6 @@
     "main",
     "our_story_banner_tq7X3K",
     "press_media_icons_nRjiLU",
-    "press_media_info_cards"
+    "press_media_text_over_image_egzzXT"
   ]
 }
