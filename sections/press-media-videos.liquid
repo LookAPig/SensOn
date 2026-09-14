@@ -23,7 +23,9 @@
   }
   #shopify-section-{{ section.id }} .pmv * { box-sizing: border-box; }
   #shopify-section-{{ section.id }} .pmv .inner { margin: 0 auto; }
-  #shopify-section-{{ section.id }} .pmv .header { margin: 0 0 28px; text-align: left; }
+  #shopify-section-{{ section.id }} .pmv .pmv-head {
+    display: block; margin: 0 0 28px; text-align: left;
+  }
   #shopify-section-{{ section.id }} .pmv .subtitle {
     color: var(--subtitle-color); font-size: {{ section.settings.subtitle_font_size_mobile }}px;
     font-weight: 500; line-height: 1.3; margin: 0 0 8px;
@@ -120,7 +122,7 @@
     #shopify-section-{{ section.id }} .pmv {
       padding: {{ section.settings.padding_top_desktop }}px {{ section.settings.padding_x_desktop }}px {{ section.settings.padding_bottom_desktop }}px;
     }
-    #shopify-section-{{ section.id }} .pmv .header { margin-bottom: 60px; text-align: left; }
+    #shopify-section-{{ section.id }} .pmv .pmv-head { margin-bottom: 60px; }
     #shopify-section-{{ section.id }} .pmv .subtitle { font-size: {{ section.settings.subtitle_font_size }}px; margin-bottom: 12px; text-align: left; }
     #shopify-section-{{ section.id }} .pmv .title { font-size: {{ section.settings.heading_font_size }}px; max-width: 720px; text-align: left; }
     #shopify-section-{{ section.id }} .pmv .intro { font-size: {{ section.settings.description_font_size }}px; margin-top: 16px; }
@@ -150,7 +152,7 @@
 
 <div class="pmv">
   <div class="inner">
-    <div class="header">
+    <div class="pmv-head">
       {%- if section.settings.subtitle != blank -%}
         <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
       {%- endif -%}
