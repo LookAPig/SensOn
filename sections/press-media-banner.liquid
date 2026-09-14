@@ -14,6 +14,13 @@
   if show_bar and stats.size == 0 and section.settings.stat_text == blank
     assign show_bar = false
   endif
+  assign bar_cols = stats.size
+  if section.settings.stat_text != blank
+    assign bar_cols = bar_cols | plus: 1
+  endif
+  if bar_cols < 1
+    assign bar_cols = 1
+  endif
 -%}
 <style>
   #shopify-section-{{ section.id }} .pmb {
@@ -85,27 +92,27 @@
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .pmb_bar { padding: 28px 80px; }
     #shopify-section-{{ section.id }} .pmb_bar .inner {
-      align-items: center; display: flex; width: 100%;
+      align-items: center; display: grid; gap: 0;
+      grid-template-columns: repeat({{ bar_cols }}, minmax(0, 1fr));
+      margin: 0 auto; max-width: 1440px; width: 100%;
     }
     #shopify-section-{{ section.id }} .pmb_bar .stats { display: contents; }
+    #shopify-section-{{ section.id }} .pmb_bar .divider--v,
+    #shopify-section-{{ section.id }} .pmb_bar .divider--h { display: none; }
     #shopify-section-{{ section.id }} .pmb_bar .stat {
-      flex: 1 1 0; min-width: 0; padding: 0 40px; text-align: left;
+      align-self: stretch; border-right: 1px solid var(--bar-line); display: flex;
+      flex-direction: column; justify-content: center; min-width: 0; padding: 0 48px; text-align: left;
     }
     #shopify-section-{{ section.id }} .pmb_bar .stats .stat:first-child { padding-left: 0; }
     #shopify-section-{{ section.id }} .pmb_bar .number { font-size: {{ section.settings.stat_number_size }}px; }
     #shopify-section-{{ section.id }} .pmb_bar .caption { font-size: {{ section.settings.stat_caption_size }}px; margin-top: 6px; }
-    #shopify-section-{{ section.id }} .pmb_bar .divider--v {
-      align-self: stretch; background: var(--bar-line); display: block; flex: 0 0 1px;
-      height: auto; margin: 4px 0; min-height: 48px; width: 1px;
-    }
-    #shopify-section-{{ section.id }} .pmb_bar .divider--h {
-      align-self: stretch; background: var(--bar-line); flex: 0 0 1px; height: auto;
-      margin: 4px 0; min-height: 48px; width: 1px;
-    }
     #shopify-section-{{ section.id }} .pmb_bar .copy {
-      flex: 1 1 0; font-size: {{ section.settings.stat_text_size }}px; min-width: 0;
-      max-width: none; padding-left: 40px;
+      align-self: center; font-size: {{ section.settings.stat_text_size }}px; min-width: 0;
+      max-width: none; padding: 0 0 0 48px;
     }
+    {%- unless section.settings.stat_text != blank -%}
+    #shopify-section-{{ section.id }} .pmb_bar .stats .stat:last-child { border-right: 0; padding-right: 0; }
+    {%- endunless -%}
     #shopify-section-{{ section.id }} .pmb_hero { min-height: {{ section.settings.desktop_height | default: 640 }}px; }
     #shopify-section-{{ section.id }} .pmb_hero .desktop_image { display: block; }
     #shopify-section-{{ section.id }} .pmb_hero .mobile_image { display: none; }
