@@ -1,0 +1,406 @@
+{%- liquid
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+  assign video_blocks = section.blocks | where: 'type', 'video'
+  assign article_blocks = section.blocks | where: 'type', 'article'
+-%}
+<style>
+  #shopify-section-{{ section.id }} .pmv {
+    --subtitle-color: {{ section.settings.subtitle_color }};
+    --heading-color: {{ section.settings.heading_color }};
+    --description-color: {{ section.settings.description_color }};
+    --eyebrow-color: {{ section.settings.eyebrow_color }};
+    --video-bg: {{ section.settings.video_card_bg }};
+    --name-color: {{ section.settings.name_color }};
+    --role-color: {{ section.settings.role_color }};
+    --quote-color: {{ section.settings.quote_color }};
+    --article-bg: {{ section.settings.article_card_bg }};
+    --article-label-color: {{ section.settings.article_label_color }};
+    --article-title-color: {{ section.settings.article_title_color }};
+    --link-color: {{ section.settings.link_color }};
+    background: {{ section.settings.background_color }};
+    overflow: hidden;
+    padding: {{ section.settings.padding_top }}px 16px {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .pmv * { box-sizing: border-box; }
+  #shopify-section-{{ section.id }} .pmv .inner { margin: 0 auto; max-width: 1200px; }
+  #shopify-section-{{ section.id }} .pmv .header { margin: 0 0 28px; text-align: left; }
+  #shopify-section-{{ section.id }} .pmv .subtitle {
+    color: var(--subtitle-color); font-size: {{ section.settings.subtitle_font_size_mobile }}px;
+    font-weight: 500; line-height: 1.3; margin: 0 0 8px;
+  }
+  #shopify-section-{{ section.id }} .pmv .title {
+    color: var(--heading-color); font-size: {{ section.settings.heading_font_size_mobile }}px;
+    font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .pmv .intro {
+    color: var(--description-color); font-size: {{ section.settings.description_font_size_mobile }}px;
+    line-height: 1.45; margin: 10px 0 0; max-width: 640px;
+  }
+  #shopify-section-{{ section.id }} .pmv .intro p { margin: 0; }
+  #shopify-section-{{ section.id }} .pmv .group { margin-top: 8px; }
+  #shopify-section-{{ section.id }} .pmv .group + .group { margin-top: 32px; }
+  #shopify-section-{{ section.id }} .pmv .eyebrow {
+    color: var(--eyebrow-color); font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+    line-height: 1.3; margin: 0 0 12px; text-transform: uppercase;
+  }
+  #shopify-section-{{ section.id }} .pmv .track {
+    display: flex; gap: 12px; margin-right: -16px; overflow-x: auto; overscroll-behavior-x: contain;
+    padding-right: 16px; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  #shopify-section-{{ section.id }} .pmv .track::-webkit-scrollbar { display: none; }
+  #shopify-section-{{ section.id }} .pmv .vcard {
+    background: var(--video-bg); border-radius: 16px; display: flex; flex: 0 0 calc(100% - 40px);
+    flex-direction: column; overflow: hidden; scroll-snap-align: start;
+  }
+  #shopify-section-{{ section.id }} .pmv .media {
+    aspect-ratio: 16 / 10; background: #111; overflow: hidden; position: relative; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .pmv .poster,
+  #shopify-section-{{ section.id }} .pmv .player,
+  #shopify-section-{{ section.id }} .pmv .media img,
+  #shopify-section-{{ section.id }} .pmv .media video,
+  #shopify-section-{{ section.id }} .pmv .media iframe {
+    display: block; height: 100%; object-fit: cover; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .pmv .poster,
+  #shopify-section-{{ section.id }} .pmv .player { inset: 0; position: absolute; }
+  #shopify-section-{{ section.id }} .pmv .player > * { display: block; height: 100%; width: 100%; }
+  #shopify-section-{{ section.id }} .pmv .player { opacity: 0; pointer-events: none; z-index: 1; }
+  #shopify-section-{{ section.id }} .pmv .media.is-playing .poster,
+  #shopify-section-{{ section.id }} .pmv .media.is-playing .play { opacity: 0; pointer-events: none; }
+  #shopify-section-{{ section.id }} .pmv .media.is-playing .player { opacity: 1; pointer-events: auto; z-index: 2; }
+  #shopify-section-{{ section.id }} .pmv .play {
+    align-items: center; background: rgb(90 90 90 / 0.72); border: 0; border-radius: 100px; color: #fff;
+    cursor: pointer; display: flex; height: 44px; justify-content: center; left: 50%; padding: 0;
+    position: absolute; top: 50%; transform: translate(-50%, -50%); width: 44px; z-index: 3;
+  }
+  #shopify-section-{{ section.id }} .pmv .play svg { display: block; margin-left: 2px; }
+  #shopify-section-{{ section.id }} .pmv .vbody { padding: 16px 16px 20px; }
+  #shopify-section-{{ section.id }} .pmv .expert {
+    align-items: center; display: flex; gap: 12px; margin: 0 0 12px;
+  }
+  #shopify-section-{{ section.id }} .pmv .avatar {
+    border: 2px solid #f287ec; border-radius: 50%; flex: 0 0 56px; height: 56px; object-fit: cover; width: 56px;
+  }
+  #shopify-section-{{ section.id }} .pmv .avatar-ph {
+    background: #e8cce8; border: 2px solid #f287ec; border-radius: 50%; flex: 0 0 56px; height: 56px; width: 56px;
+  }
+  #shopify-section-{{ section.id }} .pmv .name {
+    color: var(--name-color); font-size: 16px; font-weight: 600; line-height: 1.25; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .pmv .role {
+    color: var(--role-color); font-size: 12px; font-weight: 400; line-height: 1.35; margin: 2px 0 0;
+  }
+  #shopify-section-{{ section.id }} .pmv .quote {
+    color: var(--quote-color); font-size: 13px; font-weight: 400; line-height: 1.45; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .pmv .acard {
+    background: var(--article-bg); border-radius: 16px; display: flex; flex: 0 0 calc(100% - 40px);
+    flex-direction: column; overflow: hidden; scroll-snap-align: start;
+  }
+  #shopify-section-{{ section.id }} .pmv .athumb {
+    aspect-ratio: 16 / 10; background: #d4d4d4; overflow: hidden; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .pmv .athumb img { display: block; height: 100%; object-fit: cover; width: 100%; }
+  #shopify-section-{{ section.id }} .pmv .abody {
+    display: flex; flex: 1; flex-direction: column; padding: 16px 18px 18px;
+  }
+  #shopify-section-{{ section.id }} .pmv .alabel {
+    color: var(--article-label-color); font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+    line-height: 1.3; margin: 0; text-transform: uppercase;
+  }
+  #shopify-section-{{ section.id }} .pmv .atitle {
+    color: var(--article-title-color); font-size: 14px; font-weight: 500; line-height: 1.4; margin: 10px 0 0;
+  }
+  #shopify-section-{{ section.id }} .pmv .amore {
+    color: var(--link-color); display: inline-block; font-size: 14px; font-weight: 500; margin-top: auto;
+    padding-top: 16px; text-decoration: underline; text-underline-offset: 3px;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .pmv {
+      padding: {{ section.settings.padding_top_desktop }}px {{ section.settings.padding_x_desktop }}px {{ section.settings.padding_bottom_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .pmv .header { margin-bottom: 40px; }
+    #shopify-section-{{ section.id }} .pmv .subtitle { font-size: {{ section.settings.subtitle_font_size }}px; margin-bottom: 12px; }
+    #shopify-section-{{ section.id }} .pmv .title { font-size: {{ section.settings.heading_font_size }}px; max-width: 720px; }
+    #shopify-section-{{ section.id }} .pmv .intro { font-size: {{ section.settings.description_font_size }}px; margin-top: 16px; }
+    #shopify-section-{{ section.id }} .pmv .group + .group { margin-top: 48px; }
+    #shopify-section-{{ section.id }} .pmv .eyebrow { font-size: 14px; margin-bottom: 16px; }
+    #shopify-section-{{ section.id }} .pmv .track {
+      display: grid; gap: 16px; margin: 0; overflow: visible; padding: 0; scroll-snap-type: none;
+    }
+    #shopify-section-{{ section.id }} .pmv .vtrack { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #shopify-section-{{ section.id }} .pmv .atrack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #shopify-section-{{ section.id }} .pmv .vcard,
+    #shopify-section-{{ section.id }} .pmv .acard { flex: none; width: auto; }
+    #shopify-section-{{ section.id }} .pmv .play { height: 48px; width: 48px; }
+    #shopify-section-{{ section.id }} .pmv .vbody { padding: 20px 20px 24px; }
+    #shopify-section-{{ section.id }} .pmv .name { font-size: 18px; }
+    #shopify-section-{{ section.id }} .pmv .role { font-size: 13px; }
+    #shopify-section-{{ section.id }} .pmv .quote { font-size: 14px; }
+    #shopify-section-{{ section.id }} .pmv .acard { align-items: stretch; flex-direction: row; gap: 20px; padding: 16px; }
+    #shopify-section-{{ section.id }} .pmv .athumb {
+      aspect-ratio: 1; border-radius: 12px; flex: 0 0 148px; width: 148px;
+    }
+    #shopify-section-{{ section.id }} .pmv .abody { padding: 8px 8px 8px 0; }
+    #shopify-section-{{ section.id }} .pmv .alabel { font-size: 13px; }
+    #shopify-section-{{ section.id }} .pmv .atitle { font-size: 16px; margin-top: 12px; }
+  }
+</style>
+
+<div class="pmv">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <{{ heading_tag }} class="title">{{ section.settings.heading | escape }}</{{ heading_tag }}>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="intro">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if video_blocks.size > 0 -%}
+      <div class="group">
+        {%- if section.settings.videos_eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.videos_eyebrow | escape }}</p>
+        {%- endif -%}
+        <div class="track vtrack">
+          {%- for block in video_blocks -%}
+            {%- liquid
+              assign has_video = false
+              assign embed_src = ''
+              if block.settings.video != blank
+                assign has_video = true
+              endif
+              if block.settings.video_url != blank
+                assign has_video = true
+                if block.settings.video_url.type == 'youtube'
+                  assign embed_src = 'https://www.youtube.com/embed/' | append: block.settings.video_url.id | append: '?autoplay=1&rel=0&modestbranding=1&playsinline=1'
+                elsif block.settings.video_url.type == 'vimeo'
+                  assign embed_src = 'https://player.vimeo.com/video/' | append: block.settings.video_url.id | append: '?autoplay=1'
+                endif
+              endif
+              assign poster = block.settings.poster
+              if poster == blank and block.settings.video != blank
+                assign poster = block.settings.video.preview_image
+              endif
+              assign poster_alt = block.settings.name | default: 'Expert video'
+            -%}
+            <article class="vcard" {{ block.shopify_attributes }}>
+              <div
+                class="media"
+                {% if has_video %}
+                  data-pmv-player
+                  {% if embed_src != blank %}data-embed="{{ embed_src | escape }}"{% endif %}
+                {% endif %}
+              >
+                <div class="poster">
+                  {%- if poster != blank -%}
+                    {{ poster | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 750px) 30vw, 85vw', alt: poster_alt }}
+                  {%- endif -%}
+                </div>
+                {%- if has_video -%}
+                  <div class="player">
+                    {%- if block.settings.video != blank -%}
+                      {{ block.settings.video | video_tag: playsinline: true, controls: true, preload: 'none', image_size: '800x' }}
+                    {%- endif -%}
+                  </div>
+                  <button class="play" type="button" aria-label="Play video">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                  </button>
+                {%- endif -%}
+              </div>
+              <div class="vbody">
+                <div class="expert">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 112 | image_tag: class: 'avatar', loading: 'lazy', widths: '56, 112', alt: block.settings.name }}
+                  {%- else -%}
+                    <span class="avatar-ph" aria-hidden="true"></span>
+                  {%- endif -%}
+                  <div>
+                    {%- if block.settings.name != blank -%}
+                      <h3 class="name">{{ block.settings.name | escape }}</h3>
+                    {%- endif -%}
+                    {%- if block.settings.role != blank -%}
+                      <p class="role">{{ block.settings.role | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+                {%- if block.settings.quote != blank -%}
+                  <p class="quote">“{{ block.settings.quote | escape | newline_to_br }}”</p>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if article_blocks.size > 0 -%}
+      <div class="group">
+        {%- if section.settings.articles_eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.articles_eyebrow | escape }}</p>
+        {%- endif -%}
+        <div class="track atrack">
+          {%- for block in article_blocks -%}
+            <article class="acard" {{ block.shopify_attributes }}>
+              <div class="athumb">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '200, 400, 600, 800', sizes: '(min-width: 750px) 148px, 85vw', alt: block.settings.title }}
+                {%- endif -%}
+              </div>
+              <div class="abody">
+                {%- if block.settings.label != blank -%}
+                  <p class="alabel">{{ block.settings.label | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.title != blank -%}
+                  <h3 class="atitle">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.link_label != blank -%}
+                  <a class="amore" href="{{ block.settings.link_url }}">{{ block.settings.link_label | escape }}</a>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+
+    function pauseAll(except) {
+      root.querySelectorAll('[data-pmv-player]').forEach(function (wrap) {
+        if (wrap === except) return;
+        wrap.classList.remove('is-playing');
+        var video = wrap.querySelector('video');
+        if (video) video.pause();
+        var iframe = wrap.querySelector('iframe');
+        if (iframe) iframe.remove();
+      });
+    }
+
+    function play(wrap) {
+      if (wrap.classList.contains('is-playing')) return;
+      pauseAll(wrap);
+      wrap.classList.add('is-playing');
+      var video = wrap.querySelector('video');
+      if (video) {
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+        return;
+      }
+      var src = wrap.getAttribute('data-embed');
+      if (!src) return;
+      var host = wrap.querySelector('.player');
+      if (!host || host.querySelector('iframe')) return;
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.setAttribute('allow', 'autoplay; encrypted-media');
+      iframe.setAttribute('allowfullscreen', 'allowfullscreen');
+      iframe.setAttribute('title', 'Expert video');
+      host.appendChild(iframe);
+    }
+
+    root.querySelectorAll('[data-pmv-player]').forEach(function (wrap) {
+      wrap.querySelectorAll('.play, .poster').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          play(wrap);
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Press media videos",
+  "tag": "section",
+  "class": "shopify-section--press-media-videos",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "subtitle", "label": "副标题", "default": "Expert Perspectives" },
+    { "type": "range", "id": "subtitle_font_size", "label": "副标题字号（电脑）", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "subtitle_font_size_mobile", "label": "副标题字号（移动）", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "color", "id": "subtitle_color", "label": "副标题颜色", "default": "#F287EC" },
+    { "type": "text", "id": "heading", "label": "大标题", "default": "Beyond The Headlines: Pleasure, Education and Context." },
+    { "type": "range", "id": "heading_font_size", "label": "大标题字号（电脑）", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 42 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "大标题字号（移动）", "min": 16, "max": 36, "step": 1, "unit": "px", "default": 24 },
+    { "type": "color", "id": "heading_color", "label": "大标题颜色", "default": "#000000" },
+    { "type": "select", "id": "heading_tag", "label": "标题标签", "options": [
+      { "value": "h1", "label": "H1" },
+      { "value": "h2", "label": "H2" },
+      { "value": "h3", "label": "H3" }
+    ], "default": "h2" },
+    { "type": "richtext", "id": "description", "label": "描述", "default": "<p>Sexologists and educators explore how AI intimacy, erotic storytelling and adaptive stimulation reshape desire, connection and sexual wellness.</p>" },
+    { "type": "range", "id": "description_font_size", "label": "描述字号（电脑）", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "description_font_size_mobile", "label": "描述字号（移动）", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "color", "id": "description_color", "label": "描述颜色", "default": "#000000" },
+    { "type": "text", "id": "videos_eyebrow", "label": "视频区小标题", "default": "EXPERT VIDEO PERSPECTIVES" },
+    { "type": "text", "id": "articles_eyebrow", "label": "图文区小标题", "default": "CONTRIBUTED EXPERT ARTICLES" },
+    { "type": "color", "id": "eyebrow_color", "label": "分区小标题颜色", "default": "#B3B3B3" },
+    { "type": "color", "id": "background_color", "label": "背景色", "default": "#FFFFFF" },
+    { "type": "color", "id": "video_card_bg", "label": "视频卡片背景", "default": "#F7E9F8" },
+    { "type": "color", "id": "name_color", "label": "专家姓名颜色", "default": "#000000" },
+    { "type": "color", "id": "role_color", "label": "专家身份颜色", "default": "#6B6B6B" },
+    { "type": "color", "id": "quote_color", "label": "引言颜色", "default": "#000000" },
+    { "type": "color", "id": "article_card_bg", "label": "图文卡片背景", "default": "#F5F5F5" },
+    { "type": "color", "id": "article_label_color", "label": "图文标签颜色", "default": "#B3B3B3" },
+    { "type": "color", "id": "article_title_color", "label": "图文标题颜色", "default": "#000000" },
+    { "type": "color", "id": "link_color", "label": "链接颜色", "default": "#F287EC" },
+    { "type": "range", "id": "padding_top", "label": "上边距（移动）", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "下边距（移动）", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_top_desktop", "label": "上边距（电脑）", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom_desktop", "label": "下边距（电脑）", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_x_desktop", "label": "左右边距（电脑）", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "专家视频",
+      "settings": [
+        { "type": "image_picker", "id": "poster", "label": "视频封面", "info": "有视频时作为播放前封面；未上传视频时也可单独展示。" },
+        { "type": "video", "id": "video", "label": "Shopify 视频" },
+        { "type": "video_url", "id": "video_url", "label": "外部视频", "accept": ["youtube", "vimeo"], "info": "未上传 Shopify 视频时可使用 YouTube / Vimeo。" },
+        { "type": "image_picker", "id": "avatar", "label": "头像" },
+        { "type": "text", "id": "name", "label": "姓名", "default": "Dr. Tara" },
+        { "type": "text", "id": "role", "label": "身份", "default": "Sex and relationship expert, Tenured professor, Author, TV host" },
+        { "type": "textarea", "id": "quote", "label": "引言", "default": "SensOn is not just a chatbot online that you chat to and fall in love with and it’s also not just a vibrator it’s mixed between the two!!" }
+      ]
+    },
+    {
+      "type": "article",
+      "name": "专家图文",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "图片" },
+        { "type": "text", "id": "label", "label": "标签", "default": "DR. AMARI EXPERT ARTICLE" },
+        { "type": "textarea", "id": "title", "label": "标题", "default": "A sex-positive look at more personal, ethical and imaginative ways to explore erotic content." },
+        { "type": "text", "id": "link_label", "label": "链接文案", "default": "Read expert article" },
+        { "type": "url", "id": "link_url", "label": "链接" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press media videos",
+      "category": "Media",
+      "blocks": [
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "article" },
+        { "type": "article" }
+      ]
+    }
+  ]
+}
+{% endschema %}
