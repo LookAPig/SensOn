@@ -1,0 +1,234 @@
+{%- liquid
+  assign desktop_image = section.settings.desktop_image
+  assign mobile_image = section.settings.mobile_image
+  if desktop_image == blank
+    assign desktop_image = mobile_image
+  endif
+  if mobile_image == blank
+    assign mobile_image = desktop_image
+  endif
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+  assign show_bar = section.settings.show_stat_bar
+  assign bar_pos = section.settings.stat_bar_position | default: 'above'
+  assign stats = section.blocks | where: 'type', 'stat'
+  if show_bar and stats.size == 0 and section.settings.stat_text == blank
+    assign show_bar = false
+  endif
+-%}
+<style>
+  #shopify-section-{{ section.id }} .pmb {
+    --sub-c: {{ section.settings.subtitle_color }}; --h-c: {{ section.settings.heading_color }};
+    --btn-bg: {{ section.settings.button_bg }}; --btn-c: {{ section.settings.button_text_color }};
+    --bar-bg: {{ section.settings.stat_bar_bg }}; --bar-n: {{ section.settings.stat_number_color }};
+    --bar-cap: {{ section.settings.stat_caption_color }}; --bar-t: {{ section.settings.stat_text_color }};
+    --bar-line: {{ section.settings.stat_divider_color }};
+  }
+  #shopify-section-{{ section.id }} .pmb * { box-sizing: border-box; }
+  #shopify-section-{{ section.id }} .pmb_bar {
+    background: var(--bar-bg); padding: 28px 16px 32px;
+  }
+  #shopify-section-{{ section.id }} .pmb_bar .inner { margin: 0 auto; max-width: 1440px; }
+  #shopify-section-{{ section.id }} .pmb_bar .number {
+    color: var(--bar-n); font-size: {{ section.settings.stat_number_size_mobile }}px; font-weight: 500;
+    letter-spacing: -0.02em; line-height: 1.1; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .pmb_bar .caption {
+    color: var(--bar-cap); font-size: {{ section.settings.stat_caption_size_mobile }}px; font-weight: 400;
+    line-height: 1.3; margin: 8px 0 0;
+  }
+  #shopify-section-{{ section.id }} .pmb_bar .divider {
+    background: var(--bar-line); height: 1px; margin: 20px 0; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .pmb_bar .copy {
+    color: var(--bar-t); font-size: {{ section.settings.stat_text_size_mobile }}px; line-height: 1.4; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .pmb_bar .copy p { margin: 0; }
+  #shopify-section-{{ section.id }} .pmb_bar .copy p + p { margin-top: 0.75em; }
+  #shopify-section-{{ section.id }} .pmb_hero {
+    background: #1a1218; min-height: {{ section.settings.mobile_height | default: 560 }}px;
+    overflow: hidden; position: relative;
+  }
+  #shopify-section-{{ section.id }} .pmb_hero .media,
+  #shopify-section-{{ section.id }} .pmb_hero .image,
+  #shopify-section-{{ section.id }} .pmb_hero .placeholder {
+    height: 100%; inset: 0; position: absolute; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .pmb_hero .image { object-fit: cover; object-position: center; }
+  #shopify-section-{{ section.id }} .pmb_hero .desktop_image { display: none; }
+  #shopify-section-{{ section.id }} .pmb_hero .placeholder {
+    background: linear-gradient(180deg, #2a1a24 0%, #8a6a78 55%, #d8c8c0 100%);
+  }
+  #shopify-section-{{ section.id }} .pmb_hero .content {
+    align-items: center; display: flex; flex-direction: column; left: 50%;
+    padding: 40px 16px 0; position: absolute; text-align: center;
+    transform: translateX(-50%); width: calc(100% - 32px); z-index: 2;
+  }
+  #shopify-section-{{ section.id }} .pmb_hero .subtitle {
+    color: var(--sub-c); font-size: {{ section.settings.subtitle_font_size_mobile }}px; font-weight: 500;
+    line-height: 1.3; margin: 0 0 10px;
+  }
+  #shopify-section-{{ section.id }} .pmb_hero .title {
+    color: var(--h-c); font-size: {{ section.settings.heading_font_size_mobile }}px; font-weight: 500;
+    letter-spacing: -0.02em; line-height: 1.25; margin: 0; max-width: 340px;
+  }
+  #shopify-section-{{ section.id }} .pmb_hero .cta {
+    align-items: center; background: var(--btn-bg); border-radius: 100px; color: var(--btn-c);
+    display: inline-flex; font-size: {{ section.settings.button_font_size_mobile }}px; font-weight: 500;
+    height: 36px; justify-content: center; margin-top: 20px; text-decoration: none; width: 162px;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .pmb_bar { padding: 28px 80px; }
+    #shopify-section-{{ section.id }} .pmb_bar .inner {
+      align-items: center; display: flex; gap: 40px; justify-content: center;
+    }
+    #shopify-section-{{ section.id }} .pmb_bar .stat { flex: 0 0 auto; }
+    #shopify-section-{{ section.id }} .pmb_bar .number { font-size: {{ section.settings.stat_number_size }}px; }
+    #shopify-section-{{ section.id }} .pmb_bar .caption { font-size: {{ section.settings.stat_caption_size }}px; margin-top: 6px; }
+    #shopify-section-{{ section.id }} .pmb_bar .divider {
+      align-self: stretch; flex: 0 0 1px; height: auto; margin: 4px 0; min-height: 48px; width: 1px;
+    }
+    #shopify-section-{{ section.id }} .pmb_bar .copy {
+      flex: 0 1 420px; font-size: {{ section.settings.stat_text_size }}px; max-width: 420px;
+    }
+    #shopify-section-{{ section.id }} .pmb_hero { min-height: {{ section.settings.desktop_height | default: 640 }}px; }
+    #shopify-section-{{ section.id }} .pmb_hero .desktop_image { display: block; }
+    #shopify-section-{{ section.id }} .pmb_hero .mobile_image { display: none; }
+    #shopify-section-{{ section.id }} .pmb_hero .content {
+      max-width: min(720px, calc(100% - 48px)); padding-top: {{ section.settings.content_offset_top | default: 80 }}px;
+      width: calc(100% - 48px);
+    }
+    #shopify-section-{{ section.id }} .pmb_hero .subtitle { font-size: {{ section.settings.subtitle_font_size }}px; margin-bottom: 12px; }
+    #shopify-section-{{ section.id }} .pmb_hero .title { font-size: {{ section.settings.heading_font_size }}px; max-width: 680px; }
+    #shopify-section-{{ section.id }} .pmb_hero .cta {
+      font-size: {{ section.settings.button_font_size }}px; height: 48px; margin-top: 24px; width: 220px;
+    }
+  }
+</style>
+
+{%- capture stats_bar -%}
+  {%- if show_bar -%}
+    <div class="pmb_bar">
+      <div class="inner">
+        {%- for block in stats -%}
+          {%- if forloop.index > 1 -%}<div class="divider" aria-hidden="true"></div>{%- endif -%}
+          <div class="stat" {{ block.shopify_attributes }}>
+            {%- if block.settings.number != blank -%}
+              <p class="number">{{ block.settings.number | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.caption != blank -%}
+              <p class="caption">{{ block.settings.caption | escape }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+        {%- if section.settings.stat_text != blank -%}
+          {%- if stats.size > 0 -%}<div class="divider" aria-hidden="true"></div>{%- endif -%}
+          <div class="copy">{{ section.settings.stat_text }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+<div class="pmb">
+  {%- if bar_pos == 'above' -%}{{ stats_bar }}{%- endif -%}
+  <section class="pmb_hero">
+    <div class="media" aria-hidden="true">
+      {%- if desktop_image != blank -%}
+        {{- desktop_image | image_url: width: 2400 | image_tag: class: 'image desktop_image', loading: 'lazy', sizes: '100vw', widths: '750, 1000, 1200, 1600, 2000, 2400' -}}
+      {%- endif -%}
+      {%- if mobile_image != blank -%}
+        {{- mobile_image | image_url: width: 1000 | image_tag: class: 'image mobile_image', loading: 'lazy', sizes: '100vw', widths: '375, 550, 750, 1000' -}}
+      {%- endif -%}
+      {%- if desktop_image == blank and mobile_image == blank -%}<div class="placeholder"></div>{%- endif -%}
+    </div>
+    <div class="content">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <{{ heading_tag }} class="title">{{ section.settings.heading | escape | newline_to_br }}</{{ heading_tag }}>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a class="cta" href="{{ section.settings.button_url }}">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- if bar_pos == 'below' -%}{{ stats_bar }}{%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Press media banner",
+  "tag": "section",
+  "class": "shopify-section--press-media-banner",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 4,
+  "settings": [
+    { "type": "header", "content": "图片" },
+    { "type": "image_picker", "id": "desktop_image", "label": "电脑端图片" },
+    { "type": "image_picker", "id": "mobile_image", "label": "移动端图片", "info": "未设置时使用电脑端图片。" },
+    { "type": "number", "id": "desktop_height", "label": "电脑端高度（px）", "default": 640 },
+    { "type": "number", "id": "mobile_height", "label": "移动端高度（px）", "default": 560 },
+    { "type": "number", "id": "content_offset_top", "label": "文案距顶部（电脑 px）", "default": 80 },
+    { "type": "header", "content": "文案" },
+    { "type": "text", "id": "subtitle", "label": "副标题", "default": "Press Inquiries" },
+    { "type": "range", "id": "subtitle_font_size", "label": "副标题字号（电脑）", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "subtitle_font_size_mobile", "label": "副标题字号（移动）", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "color", "id": "subtitle_color", "label": "副标题颜色", "default": "#F287EC" },
+    { "type": "textarea", "id": "heading", "label": "大标题", "default": "For interviews, product information\nand review requests." },
+    { "type": "range", "id": "heading_font_size", "label": "大标题字号（电脑）", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 42 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "大标题字号（移动）", "min": 16, "max": 36, "step": 1, "unit": "px", "default": 24 },
+    { "type": "color", "id": "heading_color", "label": "大标题颜色", "default": "#FFFFFF" },
+    { "type": "select", "id": "heading_tag", "label": "标题标签", "options": [
+      { "value": "h1", "label": "H1" },
+      { "value": "h2", "label": "H2" },
+      { "value": "h3", "label": "H3" }
+    ], "default": "h2" },
+    { "type": "header", "content": "按钮" },
+    { "type": "text", "id": "button_label", "label": "按钮文案", "default": "Contact PR" },
+    { "type": "url", "id": "button_url", "label": "按钮链接" },
+    { "type": "color", "id": "button_bg", "label": "按钮背景", "default": "#F287EC" },
+    { "type": "color", "id": "button_text_color", "label": "按钮文字", "default": "#000000" },
+    { "type": "range", "id": "button_font_size", "label": "按钮字号（电脑）", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 20 },
+    { "type": "range", "id": "button_font_size_mobile", "label": "按钮字号（移动）", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "header", "content": "数据展示" },
+    { "type": "checkbox", "id": "show_stat_bar", "label": "显示数据板块", "default": true },
+    { "type": "select", "id": "stat_bar_position", "label": "数据板块位置", "options": [
+      { "value": "above", "label": "Banner 上方" },
+      { "value": "below", "label": "Banner 下方" }
+    ], "default": "above" },
+    { "type": "color", "id": "stat_bar_bg", "label": "背景色", "default": "#000000" },
+    { "type": "color", "id": "stat_number_color", "label": "数字颜色", "default": "#FFFFFF" },
+    { "type": "range", "id": "stat_number_size", "label": "数字字号（电脑）", "min": 20, "max": 64, "step": 1, "unit": "px", "default": 42 },
+    { "type": "range", "id": "stat_number_size_mobile", "label": "数字字号（移动）", "min": 20, "max": 48, "step": 1, "unit": "px", "default": 32 },
+    { "type": "color", "id": "stat_caption_color", "label": "说明颜色", "default": "#FFFFFF" },
+    { "type": "range", "id": "stat_caption_size", "label": "说明字号（电脑）", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "stat_caption_size_mobile", "label": "说明字号（移动）", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "richtext", "id": "stat_text", "label": "描述", "default": "<p>SensOn S1 launch coverage across media, news distribution and technology channels.</p>" },
+    { "type": "color", "id": "stat_text_color", "label": "描述颜色", "default": "#FFFFFF" },
+    { "type": "range", "id": "stat_text_size", "label": "描述字号（电脑）", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "stat_text_size_mobile", "label": "描述字号（移动）", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "color", "id": "stat_divider_color", "label": "分隔线颜色", "default": "#F287EC" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "数据项",
+      "settings": [
+        { "type": "text", "id": "number", "label": "数字", "default": "420+" },
+        { "type": "text", "id": "caption", "label": "说明", "default": "media placements" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press media banner",
+      "category": "Banners",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "420+", "caption": "media placements" } },
+        { "type": "stat", "settings": { "number": "650M+", "caption": "potential reach" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
