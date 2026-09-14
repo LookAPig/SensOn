@@ -194,11 +194,11 @@
         "card_title_color": "#ffffff",
         "card_desc_color": "#c8c8c8",
         "link_color": "#f287ec",
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 68,
+        "padding_bottom": 68,
         "padding_top_desktop": 152,
         "padding_bottom_desktop": 152,
-        "padding_x_desktop": 100
+        "padding_x_desktop": 80
       }
     },
     "press_media_videos_b48X4a": {
@@ -271,7 +271,7 @@
         "subtitle_color": "#f287ec",
         "heading": "Beyond The Headlines: Pleasure, Education and Context.",
         "heading_font_size": 42,
-        "heading_font_size_mobile": 24,
+        "heading_font_size_mobile": 32,
         "heading_color": "#000000",
         "heading_tag": "h2",
         "description": "<p>Sexologists and educators explore how AI intimacy, erotic storytelling and adaptive stimulation reshape desire, connection and sexual wellness.</p>",
@@ -290,11 +290,71 @@
         "article_label_color": "#b3b3b3",
         "article_title_color": "#000000",
         "link_color": "#f287ec",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "padding_top_desktop": 152,
-        "padding_bottom_desktop": 152,
-        "padding_x_desktop": 100
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_x_desktop": 80
+      }
+    },
+    "press_media_banner_TDfem9": {
+      "type": "press-media-banner",
+      "blocks": {
+        "stat_AceRnw": {
+          "type": "stat",
+          "settings": {
+            "number": "420+",
+            "caption": "media placements"
+          }
+        },
+        "stat_MYgD7N": {
+          "type": "stat",
+          "settings": {
+            "number": "650M+",
+            "caption": "potential reach"
+          }
+        }
+      },
+      "block_order": [
+        "stat_AceRnw",
+        "stat_MYgD7N"
+      ],
+      "name": "Press media banner",
+      "settings": {
+        "desktop_image": "shopify://shop_images/20260530_sens_on1706_2_1.webp",
+        "mobile_image": "shopify://shop_images/20260530_sens_on1706_11.webp",
+        "desktop_height": 690,
+        "mobile_height": 500,
+        "content_offset_top": 80,
+        "subtitle": "Press Inquiries",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 14,
+        "subtitle_color": "#F287EC",
+        "heading": "For interviews, product information\nand review requests.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#FFFFFF",
+        "heading_tag": "h2",
+        "button_label": "Contact PR",
+        "button_url": "",
+        "button_bg": "#F287EC",
+        "button_text_color": "#000000",
+        "button_font_size": 20,
+        "button_font_size_mobile": 14,
+        "show_stat_bar": true,
+        "stat_bar_position": "above",
+        "stat_bar_bg": "#000000",
+        "stat_number_color": "#FFFFFF",
+        "stat_number_size": 42,
+        "stat_number_size_mobile": 32,
+        "stat_caption_color": "#FFFFFF",
+        "stat_caption_size": 14,
+        "stat_caption_size_mobile": 14,
+        "stat_text": "<p>SensOn S1 launch coverage across media, news distribution and technology channels.</p>",
+        "stat_text_color": "#FFFFFF",
+        "stat_text_size": 16,
+        "stat_text_size_mobile": 14,
+        "stat_divider_color": "#F287EC"
       }
     }
   },
@@ -304,6 +364,7 @@
     "press_media_icons_nRjiLU",
     "press_media_text_over_image_egzzXT",
     "press_media_info_cards_RqJhFm",
-    "press_media_videos_b48X4a"
+    "press_media_videos_b48X4a",
+    "press_media_banner_TDfem9"
   ]
 }
