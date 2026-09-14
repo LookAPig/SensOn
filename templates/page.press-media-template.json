@@ -176,7 +176,7 @@
       "name": "Press media info cards",
       "settings": {
         "subtitle": "Company News",
-        "subtitle_font_size": 18,
+        "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 14,
         "subtitle_color": "#F287EC",
         "heading": "SensOn S1 Launch Coverage.",
