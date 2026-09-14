@@ -33,32 +33,81 @@
         "subtitle": "Press & Media",
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
-        "subtitle_color": "#F287EC",
+        "subtitle_color": "#f287ec",
         "heading": "Stories About a New Language Of Pleasure.",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
-        "heading_color": "#FFFFFF",
+        "heading_color": "#ffffff",
         "heading_tag": "h1",
         "description": "<p>Independent reviews, expert perspectives and company news about SensOn’s vision for AI-powered intimate wellness.</p>",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
-        "description_color": "#FFFFFF",
+        "description_color": "#ffffff",
         "button_label": "",
         "button_url": "",
         "show_stat_bar": false,
         "stat_bar_bg": "#000000",
         "stat_number": "17M+",
-        "stat_number_color": "#FFFFFF",
+        "stat_number_color": "#ffffff",
         "stat_caption": "SensOn S1 creator content reach",
-        "stat_caption_color": "#FFFFFF",
+        "stat_caption_color": "#ffffff",
         "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
-        "stat_text_color": "#FFFFFF",
-        "stat_divider_color": "#F287EC"
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
+      }
+    },
+    "press_media_icons_nRjiLU": {
+      "type": "press-media-icons",
+      "blocks": {
+        "logo_4HNg9C": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": ""
+          }
+        },
+        "logo_7CHGr4": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": ""
+          }
+        },
+        "logo_XmTkxb": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": ""
+          }
+        },
+        "logo_m4JaCc": {
+          "type": "logo",
+          "settings": {
+            "alt": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_4HNg9C",
+        "logo_7CHGr4",
+        "logo_XmTkxb",
+        "logo_m4JaCc"
+      ],
+      "name": "Press media icons",
+      "settings": {
+        "heading": "FEATURED & DISTRIBUTED ACROSS",
+        "background_color": "#FFFFFF",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80
       }
     }
   },
   "order": [
     "main",
-    "our_story_banner_tq7X3K"
+    "our_story_banner_tq7X3K",
+    "press_media_icons_nRjiLU"
   ]
 }
