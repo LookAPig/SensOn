@@ -194,11 +194,11 @@
         "card_title_color": "#ffffff",
         "card_desc_color": "#c8c8c8",
         "link_color": "#f287ec",
-        "padding_top": 120,
-        "padding_bottom": 48,
-        "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80,
-        "padding_x_desktop": 80
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_desktop": 152,
+        "padding_bottom_desktop": 152,
+        "padding_x_desktop": 100
       }
     },
     "press_media_videos_b48X4a": {
@@ -208,6 +208,7 @@
           "type": "video",
           "settings": {
             "video": "shopify://files/videos/产品图.mp4",
+            "video_url": "",
             "avatar": "shopify://shop_images/jan.jpg",
             "name": "Dr. Tara",
             "role": "Sex and relationship expert, Tenured professor, Author, TV host",
@@ -218,6 +219,7 @@
           "type": "video",
           "settings": {
             "video": "shopify://files/videos/silent_final.mp4",
+            "video_url": "",
             "avatar": "shopify://shop_images/bxsassy2_c48189f4-6cee-4c01-a7c3-2c3500476c5c.jpg",
             "name": "Dr. Tara",
             "role": "Sex and relationship expert, Tenured professor, Author, TV host",
@@ -228,6 +230,7 @@
           "type": "video",
           "settings": {
             "video": "shopify://files/videos/Bionic Reality-001.mp4",
+            "video_url": "",
             "avatar": "shopify://shop_images/jaskn_jpg.jpg",
             "name": "Dr. Tara",
             "role": "Sex and relationship expert, Tenured professor, Author, TV host",
@@ -265,10 +268,10 @@
         "subtitle": "Expert Perspectives",
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
-        "subtitle_color": "#F287EC",
+        "subtitle_color": "#f287ec",
         "heading": "Beyond The Headlines: Pleasure, Education and Context.",
         "heading_font_size": 42,
-        "heading_font_size_mobile": 32,
+        "heading_font_size_mobile": 24,
         "heading_color": "#000000",
         "heading_tag": "h2",
         "description": "<p>Sexologists and educators explore how AI intimacy, erotic storytelling and adaptive stimulation reshape desire, connection and sexual wellness.</p>",
@@ -277,21 +280,21 @@
         "description_color": "#000000",
         "videos_eyebrow": "EXPERT VIDEO PERSPECTIVES",
         "articles_eyebrow": "CONTRIBUTED EXPERT ARTICLES",
-        "eyebrow_color": "#B3B3B3",
-        "background_color": "#FFFFFF",
-        "video_card_bg": "#F7E9F8",
+        "eyebrow_color": "#b3b3b3",
+        "background_color": "#ffffff",
+        "video_card_bg": "#f7e9f8",
         "name_color": "#000000",
-        "role_color": "#6B6B6B",
+        "role_color": "#6b6b6b",
         "quote_color": "#000000",
-        "article_card_bg": "#F5F5F5",
-        "article_label_color": "#B3B3B3",
+        "article_card_bg": "#f5f5f5",
+        "article_label_color": "#b3b3b3",
         "article_title_color": "#000000",
-        "link_color": "#F287EC",
-        "padding_top": 48,
-        "padding_bottom": 48,
-        "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80,
-        "padding_x_desktop": 80
+        "link_color": "#f287ec",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_desktop": 152,
+        "padding_bottom_desktop": 152,
+        "padding_x_desktop": 100
       }
     }
   },
