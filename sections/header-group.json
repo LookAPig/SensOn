@@ -109,7 +109,7 @@
         "secondary_menu": "",
         "desktop_dropdown_menu_style": "below",
         "menu_open_trigger": "hover",
-        "desktop_icon_size": 16,
+        "desktop_icon_size": 18,
         "drawer_show_nested_menu_indicator": false,
         "show_country_selector": true,
         "show_country_name": false,
