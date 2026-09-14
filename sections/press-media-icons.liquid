@@ -1,0 +1,122 @@
+{%- liquid
+  assign heading = section.settings.heading
+  assign defaults = 'https://cdn.shopify.com/s/files/1/0775/2446/7967/files/2_1_1.webp?v=1789380361,https://cdn.shopify.com/s/files/1/0775/2446/7967/files/0_1_c871efc4-7699-4c45-9058-50d6cf162622.webp?v=1789380361,https://cdn.shopify.com/s/files/1/0775/2446/7967/files/3_1_9bfef598-6eb6-4c02-92a8-cfa23430c8a6.webp?v=1789380361,https://cdn.shopify.com/s/files/1/0775/2446/7967/files/vice_1.webp?v=1789380361' | split: ','
+-%}
+<style>
+  #shopify-section-{{ section.id }} .press_media_icons {
+    background: {{ section.settings.background_color }};
+    box-sizing: border-box;
+    padding: {{ section.settings.padding_top }}px 16px {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .press_media_icons * { box-sizing: border-box; }
+  #shopify-section-{{ section.id }} .press_media_icons .title {
+    color: #000; font-size: 16px; font-style: normal; font-weight: 500; line-height: 120%;
+    margin: 0 0 28px; text-align: center;
+  }
+  #shopify-section-{{ section.id }} .press_media_icons .list {
+    display: grid; grid-template-columns: 1fr 1fr; margin: 0 auto; max-width: 360px; position: relative;
+  }
+  #shopify-section-{{ section.id }} .press_media_icons .list::before {
+    background: #F287EC; bottom: 8px; content: ''; left: 50%; position: absolute; top: 8px; width: 1px;
+  }
+  #shopify-section-{{ section.id }} .press_media_icons .item {
+    align-items: center; display: flex; justify-content: center; min-height: 56px; padding: 12px 16px;
+  }
+  #shopify-section-{{ section.id }} .press_media_icons .logo {
+    display: block; height: auto; max-height: 40px; max-width: 140px; object-fit: contain; width: auto;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .press_media_icons {
+      padding: {{ section.settings.padding_top_desktop }}px 24px {{ section.settings.padding_bottom_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .press_media_icons .title {
+      font-size: 24px; margin-bottom: 40px;
+    }
+    #shopify-section-{{ section.id }} .press_media_icons .list {
+      align-items: center; display: flex; flex-wrap: wrap; justify-content: center; max-width: 1100px;
+    }
+    #shopify-section-{{ section.id }} .press_media_icons .list::before { display: none; }
+    #shopify-section-{{ section.id }} .press_media_icons .item {
+      min-height: 64px; padding: 8px 40px; position: relative;
+    }
+    #shopify-section-{{ section.id }} .press_media_icons .item:not(:last-child)::after {
+      background: #F287EC; content: ''; height: 48px; position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%); width: 1px;
+    }
+    #shopify-section-{{ section.id }} .press_media_icons .logo { max-height: 56px; max-width: 180px; }
+  }
+</style>
+
+<div class="press_media_icons">
+  {%- if heading != blank -%}
+    <h2 class="title">{{ heading | escape }}</h2>
+  {%- endif -%}
+  {%- if section.blocks.size > 0 -%}
+    <div class="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign logo = block.settings.image
+          assign fallback = defaults[forloop.index0]
+          assign alt = block.settings.alt | default: logo.alt | default: heading
+        -%}
+        {%- if logo != blank or fallback != blank -%}
+          <div class="item" {{ block.shopify_attributes }}>
+            {%- capture logo_html -%}
+              {%- if logo != blank -%}
+                {{- logo | image_url: width: 360 | image_tag: class: 'logo', loading: 'lazy', alt: alt -}}
+              {%- else -%}
+                <img class="logo" src="{{ fallback }}" alt="{{ alt | escape }}" loading="lazy" width="180" height="56">
+              {%- endif -%}
+            {%- endcapture -%}
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}">{{ logo_html }}</a>
+            {%- else -%}
+              {{ logo_html }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Press media icons",
+  "tag": "section",
+  "class": "shopify-section--press-media-icons",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "标题", "default": "FEATURED & DISTRIBUTED ACROSS" },
+    { "type": "color", "id": "background_color", "label": "背景色", "default": "#FFFFFF" },
+    { "type": "range", "id": "padding_top", "label": "上边距（移动）", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "下边距（移动）", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_top_desktop", "label": "上边距（电脑）", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom_desktop", "label": "下边距（电脑）", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "媒体图片",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "图片" },
+        { "type": "text", "id": "alt", "label": "替代文本" },
+        { "type": "url", "id": "link", "label": "链接" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press media icons",
+      "category": "Media",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

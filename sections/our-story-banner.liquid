@@ -76,6 +76,7 @@
   #shopify-section-{{ section.id }} .our_story_banner .title {
     color: var(--heading-color); font-size: var(--heading-size-m); font-weight: 500;
     letter-spacing: -0.02em; line-height: 1.2; margin: 0; max-width: 100%;
+    text-wrap: balance;
   }
   #shopify-section-{{ section.id }} .our_story_banner .description {
     color: var(--description-color); font-size: var(--description-size-m); line-height: 1.45; margin: 12px 0 0; max-width: 100%;
@@ -117,21 +118,25 @@
     #shopify-section-{{ section.id }} .our_story_banner .desktop_image { display: block; }
     #shopify-section-{{ section.id }} .our_story_banner .mobile_image { display: none; }
     #shopify-section-{{ section.id }} .our_story_banner .content {
-      max-width: 780px; padding: 48px 100px;
+      max-width: 1100px; padding: 48px 100px;
     }
     #shopify-section-{{ section.id }} .our_story_banner .content--left {
       align-items: flex-start; justify-content: center; margin-right: auto; text-align: left;
     }
     #shopify-section-{{ section.id }} .our_story_banner .content--center {
-      left: 50%; margin: 0; max-width: 720px; padding-left: 24px; padding-right: 24px;
+      left: 50%; margin: 0; max-width: min(1100px, calc(100% - 48px)); padding-left: 24px; padding-right: 24px;
       transform: translateX(-50%); width: calc(100% - 48px);
     }
     #shopify-section-{{ section.id }} .our_story_banner .content--right {
       align-items: flex-end; justify-content: center; margin-left: auto; text-align: right;
     }
     #shopify-section-{{ section.id }} .our_story_banner .subtitle { font-size: var(--subtitle-size); margin-bottom: 12px; }
-    #shopify-section-{{ section.id }} .our_story_banner .title { font-size: var(--heading-size); }
-    #shopify-section-{{ section.id }} .our_story_banner .description { font-size: var(--description-size); margin-top: 16px; }
+    #shopify-section-{{ section.id }} .our_story_banner .title {
+      font-size: clamp(28px, 3.2vw, var(--heading-size));
+    }
+    #shopify-section-{{ section.id }} .our_story_banner .description {
+      font-size: var(--description-size); margin-top: 16px; max-width: 720px;
+    }
     #shopify-section-{{ section.id }} .our_story_banner .cta { font-size: 24px; height: 49px; max-width: 310px; width: 100%; }
     #shopify-section-{{ section.id }} .our_story_stat_bar { padding: 36px 100px; }
     #shopify-section-{{ section.id }} .our_story_stat_bar .inner {
@@ -144,6 +149,9 @@
       align-self: stretch; flex: 0 0 1px; height: auto; margin: 8px 0; min-height: 56px; width: 1px;
     }
     #shopify-section-{{ section.id }} .our_story_stat_bar .copy { flex: 0 1 520px; font-size: 16px; max-width: 520px; }
+  }
+  @media screen and (min-width: 1100px) {
+    #shopify-section-{{ section.id }} .our_story_banner .title { white-space: nowrap; }
   }
 </style>
 
