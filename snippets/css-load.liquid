@@ -1,0 +1,28 @@
+{%- comment -%}
+  首屏：theme-critical.css 同步。
+  非首屏：theme.css、checkout-compat.css 异步，避免阻塞 FCP/LCP。
+  主题编辑器内全部同步，避免自定义时闪烁。
+{%- endcomment -%}
+{{- 'theme-critical.css' | asset_url | stylesheet_tag -}}
+{%- if request.design_mode -%}
+  {{- 'theme.css' | asset_url | stylesheet_tag -}}
+  {{- 'checkout-compat.css' | asset_url | stylesheet_tag -}}
+{%- else -%}
+  <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
+  <link
+    rel="stylesheet"
+    href="{{ 'theme.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'; this.onload=null"
+  >
+  <link
+    rel="stylesheet"
+    href="{{ 'checkout-compat.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'; this.onload=null"
+  >
+  <noscript>
+    {{- 'theme.css' | asset_url | stylesheet_tag -}}
+    {{- 'checkout-compat.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+{%- endif -%}

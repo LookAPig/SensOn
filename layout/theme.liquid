@@ -55,8 +55,8 @@
       <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
     {%- endif -%}
 
-    {%- comment -%} 主题 CSS 放在 content_for_header 之前，更早发现，减少被 App 资源抢占连接 {%- endcomment -%}
-    {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
+    {%- comment -%} 关键 CSS 同步；完整 theme.css / 结账兼容样式异步，减少首屏阻塞 {%- endcomment -%}
+    {%- render 'css-load' -%}
 
     <script type="importmap">
       {%- comment -%}On Safari 16.3 and lower, a polyfill is used to load importmap{%- endcomment -%}
