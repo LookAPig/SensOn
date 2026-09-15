@@ -299,10 +299,6 @@
                 endif
               endfor
 
-              if video_src == blank and video.sources.size > 0
-                assign video_src = video.sources.first.url
-              endif
-
               assign poster_url = blank
 
               if image != blank
@@ -323,6 +319,8 @@
                   src="{{ poster_url }}"
                   alt="{{ image.alt | default: video.alt | escape }}"
                   loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
                   width="800"
                   {% if video.aspect_ratio != blank and video.aspect_ratio > 0 %}
                     height="{{ 800 | divided_by: video.aspect_ratio | round }}"
@@ -339,16 +337,21 @@
                 </div>
               {% endif %}
 
-              <video
-                class="ai-app-intro-video-{{ ai_gen_id }}"
-                data-app-intro-video
-                data-src="{{ video_src | escape }}"
-                {% if poster_url != blank %}poster="{{ poster_url }}"{% endif %}
-                preload="none"
-                playsinline
-                muted
-                loop
-              ></video>
+              {%- comment -%}
+                非首屏：仅 poster 占位。无 src/autoplay，preload=none；
+                接近视口后再由 JS 注入 MP4 并播放，避免首屏抢带宽。
+              {%- endcomment -%}
+              {% if video_src != blank %}
+                <video
+                  class="ai-app-intro-video-{{ ai_gen_id }}"
+                  data-app-intro-video
+                  data-src="{{ video_src | escape }}"
+                  preload="none"
+                  playsinline
+                  muted
+                  loop
+                ></video>
+              {% endif %}
             </div>
           {% elsif image %}
             <img
@@ -520,11 +523,10 @@
         }
 
         if (!("IntersectionObserver" in window)) {
-          this.isInView = true;
-          this.playActiveVideo();
           return;
         }
 
+        // 接近视口时再加载并播放；远离时暂停并回到 poster
         this.videoObserver = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             this.isInView = entry.isIntersecting;
@@ -536,8 +538,8 @@
             }
           });
         }, {
-          threshold: 0.35,
-          rootMargin: "0px 0px -10% 0px"
+          threshold: 0.15,
+          rootMargin: "120px 0px 120px 0px"
         });
 
         this.videoObserver.observe(this);
@@ -561,20 +563,29 @@
         }
 
         const loadPromise = new Promise((resolve) => {
-          const source = document.createElement("source");
+          if (!video.querySelector("source")) {
+            const source = document.createElement("source");
+            source.src = videoSrc;
+            source.type = "video/mp4";
+            video.appendChild(source);
+          }
 
-          source.src = videoSrc;
-          source.type = "video/mp4";
-          video.appendChild(source);
-          video.load();
-
-          video.addEventListener("loadeddata", () => {
+          const onReady = () => {
             this.videoLoadStates.set(video, {
               hasLoaded: true,
               loadPromise: null
             });
             resolve();
-          }, { once: true });
+          };
+
+          if (video.readyState >= 2) {
+            onReady();
+            return;
+          }
+
+          video.addEventListener("loadeddata", onReady, { once: true });
+          video.addEventListener("error", () => resolve(), { once: true });
+          video.load();
         });
 
         this.videoLoadStates.set(video, {
@@ -597,6 +608,10 @@
         }
 
         this.loadVideo(video).then(() => {
+          if (!this.isInView || !videoItem.classList.contains("active")) {
+            return;
+          }
+
           const playPromise = video.play();
 
           if (playPromise !== undefined) {
@@ -614,6 +629,8 @@
           if (video && !video.paused) {
             video.pause();
           }
+
+          videoItem.classList.remove("is-playing");
         });
       }
 
