@@ -340,7 +340,17 @@
               </div>
               {%- if cr_image != blank -%}
                 <div class="pdp-customer-reviews__panel-right">
-                  <img src="{{ cr_image | image_url: width: 400 }}" alt="Review image" loading="lazy" width="120" height="120">
+                  {{
+                    cr_image
+                    | image_url: width: 400
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '240,320,400',
+                      sizes: '(max-width: 749px) 100px, 120px',
+                      alt: 'Review image',
+                      width: 120,
+                      height: 160
+                  }}
                 </div>
               {%- endif -%}
             </div>
@@ -361,6 +371,39 @@
           .replace(/</g, "&lt;")
           .replace(/>/g, "&gt;")
           .replace(/"/g, "&quot;");
+      }
+
+      /* Thumbnail: display ~100–120px; serve 240–400w for 1x–3x DPR */
+      var CR_THUMB_WIDTHS = [240, 320, 400];
+      var CR_THUMB_SIZES = "(max-width: 749px) 100px, 120px";
+
+      function shopifySizedUrl(url, width) {
+        if (!url) return "";
+
+        try {
+          var parsed = new URL(url, window.location.origin);
+          parsed.searchParams.set("width", String(width));
+          return parsed.toString();
+        } catch (error) {
+          return url;
+        }
+      }
+
+      function buildThumbImgHtml(imageUrl) {
+        var src = shopifySizedUrl(imageUrl, CR_THUMB_WIDTHS[0]);
+        var srcset = CR_THUMB_WIDTHS.map(function (w) {
+          return shopifySizedUrl(imageUrl, w) + " " + w + "w";
+        }).join(", ");
+
+        return (
+          '<img src="' +
+          escapeHtml(src) +
+          '" srcset="' +
+          escapeHtml(srcset) +
+          '" sizes="' +
+          CR_THUMB_SIZES +
+          '" alt="Review image" loading="lazy" width="120" height="160">'
+        );
       }
 
       function isMobileViewport() {
@@ -582,11 +625,10 @@
 
           var rightContent = '';
           if (item.image) {
-            rightContent = `
-              <div class="pdp-customer-reviews__panel-right">
-                <img src="${escapeHtml(item.image)}" alt="Review image" loading="lazy" width="120" height="120">
-              </div>
-            `;
+            rightContent =
+              '<div class="pdp-customer-reviews__panel-right">' +
+              buildThumbImgHtml(item.image) +
+              '</div>';
           }
 
           panel.innerHTML = leftContent + rightContent;
