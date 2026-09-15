@@ -233,29 +233,37 @@
         "faq_QnLq3e": {
           "type": "faq",
           "settings": {
-            "question": "A premium, female-focused fantasy world",
-            "answer": "<p>Choose the scenario, the character and the direction. Stories are designed for women and welcome all sexual orientations.</p>"
+            "question": "Create your own fantasies—freely",
+            "answer": "<p>With UGC character creation planned for Q4 2026, users will be able to shape characters, scenes and pacing around their own imagination.</p>"
           }
         },
         "faq_JqTHRV": {
           "type": "faq",
           "settings": {
-            "question": "Bionic reality you can feel",
-            "answer": "<p>Hardware engineered to reproduce the complexity of human touch across multiple sensitive zones—with precision and intention.</p>"
+            "question": "An experience that keeps evolving",
+            "answer": "<p>Today, more than 400 interactive scripts and characters create distinct paths into fantasy. Preference memory makes returning feel more personal and familiar.</p>"
           }
         },
         "faq_rgceXH": {
           "type": "faq",
           "settings": {
-            "question": "Effortless immersion",
-            "answer": "<p>Hands-free, stable and naturally held in place, so technology disappears and your body can stay present.</p>"
+            "question": "Robotics made for warmth, not coldness",
+            "answer": "<p>We imagine intimate technology that offers presence, comfort and connection—built to feel human in the ways that matter.</p>"
+          }
+        },
+        "faq_TzJTAM": {
+          "type": "faq",
+          "settings": {
+            "question": "Femtech, with women at the center",
+            "answer": "<p>Women engineers, researchers, designers, creators and founders should help decide what the future of pleasure technology becomes.</p>"
           }
         }
       },
       "block_order": [
         "faq_QnLq3e",
         "faq_JqTHRV",
-        "faq_rgceXH"
+        "faq_rgceXH",
+        "faq_TzJTAM"
       ],
       "name": "Our story FAQ",
       "settings": {
@@ -307,8 +315,8 @@
         "description_font_size": 16,
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
-        "button_label": "Know More",
-        "button_url": "shopify://pages/contact-us",
+        "button_label": "Discover SensOn S1",
+        "button_url": "shopify://products/senson-s1-wellness-companion",
         "show_stat_bar": false,
         "stat_bar_bg": "#000000",
         "stat_number": "17M+",
