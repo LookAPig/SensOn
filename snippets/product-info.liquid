@@ -195,17 +195,7 @@
               {%- if block.settings.collapse_content -%}
                 {%- assign accordion_title = 'product.general.description' | t -%}
 
-                {%- render 'accordion', 
-                  title: accordion_title, 
-                  custom_icon: block.settings.custom_icon,
-                  content: product_description,
-                  prose_content: true, 
-                  uppercase_title: block.settings.uppercase_title,
-                  block: block,
-                  class: block.settings.class_name,
-                  open: block.settings.class_name == "product-features" | default: '' == "product-features",
-                  disable_close: block.settings.class_name == "product-features | default: '' == "product-features","
-                -%}
+                {%- render 'accordion', title: accordion_title, custom_icon: block.settings.custom_icon, content: product_description, prose_content: true, uppercase_title: block.settings.uppercase_title, block: block, class: block.settings.class_name, open: block.settings.class_name, default: '', disable_close: block.settings.class_name -%}
               {%- else -%}
                 <div class="prose prose-justify-{{ alignment }}">
                   {{- product_description -}}
@@ -681,3 +671,22 @@
     {%- endform -%}
   {%- endunless -%}
 </safe-sticky>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'accordion', \n                  title: accordion_title, \n                  custom_icon:
+    block.settings.custom_icon,\n                  content: product_description,\n
+    \                 prose_content: true, \n                  uppercase_title: block.settings.uppercase_title,\n
+    \                 block: block,\n                  class: block.settings.class_name,\n
+    \                 open: block.settings.class_name == \"product-features\" | default:
+    '' == \"product-features\",\n                  disable_close: block.settings.class_name
+    == \"product-features | default: '' == \"product-features\",\"\n                -%}"
+  to: "{%- render 'accordion', title: accordion_title, custom_icon: block.settings.custom_icon,
+    content: product_description, prose_content: true, uppercase_title: block.settings.uppercase_title,
+    block: block, class: block.settings.class_name, open: block.settings.class_name,
+    default: '', disable_close: block.settings.class_name -%}"
+  position: 9211..9538
+{% endcomment %}
