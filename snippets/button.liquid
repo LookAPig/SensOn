@@ -145,11 +145,11 @@ Supported variables
   {%- endcapture -%}
 
   {%- if href != blank -%}
-    <a {{ attributes }} {{ block.shopify_attributes }}>
+    <a {% if block %}id="shopify-block-{{ block.id }}"{% endif %} {{ attributes }} {{ block.shopify_attributes }}>
       {{- button_content -}}
     </a>
   {%- else -%}
-    <button type="{{ type | default: 'button' }}" {{ attributes }} {{ block.shopify_attributes }} data-event="email_submitted">
+    <button {% if block %}id="shopify-block-{{ block.id }}"{% endif %} type="{{ type | default: 'button' }}" {{ attributes }} {{ block.shopify_attributes }} data-event="email_submitted">
       {{- button_content -}}
     </button>
   {%- endif -%}

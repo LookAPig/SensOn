@@ -18,7 +18,7 @@ Supported variables
 {%- endcomment -%}
 
 {%- if content != blank -%}
-  <span class="subheading subheading-badge {% if settings.subheading_icon != 'none' %}subheading-badge--with-icon subheading-badge--icon-{{ settings.subheading_icon }}{% endif %} {{ class }}" {{ block.shopify_attributes }}>
+  <span {% if block %}id="shopify-block-{{ block.id }}"{% endif %} class="subheading subheading-badge {% if settings.subheading_icon != 'none' %}subheading-badge--with-icon subheading-badge--icon-{{ settings.subheading_icon }}{% endif %} {{ class }}" {{ block.shopify_attributes }}>
     {{- content -}}
   </span>
 {%- endif -%}

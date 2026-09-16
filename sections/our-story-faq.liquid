@@ -1,0 +1,281 @@
+{%- liquid
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+  assign enable_accordion = section.settings.enable_accordion
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .our_story_faq {
+    --subtitle-color: {{ section.settings.subtitle_color }};
+    --heading-color: {{ section.settings.heading_color }};
+    --description-color: {{ section.settings.description_color }};
+    --subtitle-size: {{ section.settings.subtitle_font_size | default: 24 }}px;
+    --heading-size: {{ section.settings.heading_font_size | default: 42 }}px;
+    --description-size: {{ section.settings.description_font_size | default: 16 }}px;
+    --subtitle-size-m: {{ section.settings.subtitle_font_size_mobile | default: 16 }}px;
+    --heading-size-m: {{ section.settings.heading_font_size_mobile | default: 28 }}px;
+    --description-size-m: {{ section.settings.description_font_size_mobile | default: 14 }}px;
+    --accent: {{ section.settings.accent_color }};
+    --line: {{ section.settings.divider_color }};
+    background: {{ section.settings.color_background }};
+    overflow: hidden;
+    padding: {{ section.settings.mobile_padding_top | default: 40 }}px 16px {{ section.settings.mobile_padding_bottom | default: 40 }}px;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq * { box-sizing: border-box; }
+  #shopify-section-{{ section.id }} .our_story_faq .inner { margin: 0 auto; max-width: 1440px; }
+  #shopify-section-{{ section.id }} .our_story_faq .subtitle {
+    color: var(--subtitle-color); font-size: var(--subtitle-size-m); font-weight: 500; line-height: 1.3; margin: 0 0 10px;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .title {
+    color: var(--heading-color); font-size: var(--heading-size-m); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .description {
+    color: var(--description-color); font-size: var(--description-size-m); line-height: 1.45; margin: 12px 0 0;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .description p { margin: 0; }
+  #shopify-section-{{ section.id }} .our_story_faq .description p + p { margin-top: 0.75em; }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_list { margin-top: 28px; }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_item { border-bottom: 1px solid var(--line); }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_item:first-child { border-top: 1px solid var(--line); }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_summary {
+    align-items: flex-start; background: none; border: 0; color: inherit; cursor: pointer;
+    display: flex; gap: 10px; padding: 20px 0; text-align: left; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_num {
+    color: var(--accent); flex: 0 0 auto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 120%;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_question {
+    color: #fff; flex: 1 1 auto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 120%; min-width: 0; padding-right: 8px;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_icon {
+    color: var(--accent); display: block; flex: 0 0 auto; height: 16px; margin-top: 2px; width: 16px;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_icon svg {
+    display: block; height: 16px; transform: rotate(0deg); transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); width: 16px;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_item.is_active .faq_icon svg { transform: rotate(90deg); }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_panel {
+    display: grid; grid-template-rows: 0fr; opacity: 0;
+    transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_panel_inner { overflow: hidden; }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_item.is_active .faq_panel { grid-template-rows: 1fr; opacity: 1; }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_answer {
+    color: rgba(255, 255, 255, 0.6); font-size: 14px; font-style: normal; font-weight: 400; line-height: 120%; padding: 0 0 20px;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_answer p { margin: 0; }
+  #shopify-section-{{ section.id }} .our_story_faq .faq_answer p + p { margin-top: 0.6em; }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .our_story_faq {
+      padding: {{ section.settings.desktop_padding_top | default: 96 }}px 100px {{ section.settings.desktop_padding_bottom | default: 96 }}px;
+    }
+    #shopify-section-{{ section.id }} .our_story_faq .layout {
+      align-items: start; display: grid; gap: 64px; grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr);
+    }
+    #shopify-section-{{ section.id }} .our_story_faq .subtitle { font-size: var(--subtitle-size); margin-bottom: 12px; }
+    #shopify-section-{{ section.id }} .our_story_faq .title { font-size: var(--heading-size); }
+    #shopify-section-{{ section.id }} .our_story_faq .description { font-size: var(--description-size); margin-top: 16px; }
+    #shopify-section-{{ section.id }} .our_story_faq .faq_list { margin-top: 0; }
+    #shopify-section-{{ section.id }} .our_story_faq .faq_item:first-child { border-top: 0; }
+    #shopify-section-{{ section.id }} .our_story_faq .faq_summary { gap: 12px; padding: 24px 0; }
+    #shopify-section-{{ section.id }} .our_story_faq .faq_num,
+    #shopify-section-{{ section.id }} .our_story_faq .faq_question {
+      font-size: 24px; font-weight: 500; line-height: 120%;
+    }
+    #shopify-section-{{ section.id }} .our_story_faq .faq_icon,
+    #shopify-section-{{ section.id }} .our_story_faq .faq_icon svg { height: 18px; width: 18px; }
+    #shopify-section-{{ section.id }} .our_story_faq .faq_answer { font-size: 16px; line-height: 120%; padding: 0 0 24px; }
+    #shopify-section-{{ section.id }} .our_story_faq:not(.is_accordion) .faq_icon { display: none; }
+    #shopify-section-{{ section.id }} .our_story_faq:not(.is_accordion) .faq_summary { cursor: default; pointer-events: none; }
+    #shopify-section-{{ section.id }} .our_story_faq:not(.is_accordion) .faq_panel { grid-template-rows: 1fr; opacity: 1; }
+  }
+</style>
+
+<section
+  class="our_story_faq{% if enable_accordion %} is_accordion{% endif %}"
+  id="our-story-faq-{{ section.id }}"
+  data-accordion="{% if enable_accordion %}true{% else %}false{% endif %}"
+>
+  <div class="inner">
+    <div class="layout">
+      <div class="intro">
+        {%- if section.settings.subtitle != blank -%}
+          <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <{{ heading_tag }} class="title">{{ section.settings.heading | escape | newline_to_br }}</{{ heading_tag }}>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="description">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <div class="faq_list">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.question != blank -%}
+              {%- assign num = forloop.index | prepend: '0' | slice: -2, 2 -%}
+              <article
+                class="faq_item{% if forloop.first %} is_active{% endif %}"
+                data-faq-item="{{ forloop.index0 }}"
+                {{ block.shopify_attributes }}
+              >
+                <button
+                  class="faq_summary"
+                  type="button"
+                  data-faq-trigger="{{ forloop.index0 }}"
+                  aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                  aria-controls="our-story-faq-panel-{{ section.id }}-{{ forloop.index0 }}"
+                >
+                  <span class="faq_num">{{ num }}</span>
+                  <span class="faq_question">{{ block.settings.question | escape }}</span>
+                  <span class="faq_icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 3.2 11 8 6 12.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </button>
+                <div class="faq_panel" id="our-story-faq-panel-{{ section.id }}-{{ forloop.index0 }}">
+                  <div class="faq_panel_inner">
+                    {%- if block.settings.answer != blank -%}
+                      <div class="faq_answer">{{ block.settings.answer }}</div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.querySelector("#our-story-faq-{{ section.id }}");
+    if (!section) return;
+
+    const accordionEnabled = section.dataset.accordion === "true";
+    const mq = window.matchMedia("(max-width: 749px)");
+    const items = section.querySelectorAll("[data-faq-item]");
+    const triggers = section.querySelectorAll("[data-faq-trigger]");
+
+    const isAccordionMode = () => accordionEnabled || mq.matches;
+
+    const setExpanded = (item, expanded) => {
+      item.classList.toggle("is_active", expanded);
+      const trigger = item.querySelector("[data-faq-trigger]");
+      if (trigger) trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
+    };
+
+    const expandAll = () => items.forEach((item) => setExpanded(item, true));
+
+    const setActiveItem = (index) => {
+      items.forEach((item) => setExpanded(item, item.dataset.faqItem === index));
+    };
+
+    const syncMode = () => {
+      if (!isAccordionMode()) {
+        expandAll();
+        return;
+      }
+      const hasActive = Array.from(items).some((item) => item.classList.contains("is_active"));
+      if (!hasActive && items[0]) setActiveItem(items[0].dataset.faqItem);
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        if (!isAccordionMode()) return;
+        const item = trigger.closest("[data-faq-item]");
+        if (item && item.classList.contains("is_active")) {
+          setExpanded(item, false);
+          return;
+        }
+        setActiveItem(trigger.dataset.faqTrigger);
+      });
+    });
+
+    syncMode();
+    mq.addEventListener("change", () => {
+      if (mq.matches || accordionEnabled) setActiveItem(items[0] ? items[0].dataset.faqItem : "");
+      syncMode();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Our story FAQ",
+  "tag": "section",
+  "class": "shopify-section--our-story-faq",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 12,
+  "settings": [
+    { "type": "checkbox", "id": "enable_accordion", "label": "点击问题展开答案", "info": "打开后电脑端为手风琴；关闭后电脑端全部展开。移动端始终为手风琴。", "default": false },
+    { "type": "color_background", "id": "color_background", "label": "背景色", "default": "linear-gradient(180deg, #2A1638 0%, #1A1224 100%)" },
+    { "type": "color", "id": "accent_color", "label": "序号/箭头颜色", "default": "#F287EC" },
+    { "type": "color", "id": "divider_color", "label": "分割线颜色", "default": "#4A3A55" },
+    { "type": "header", "content": "模块间距" },
+    { "type": "range", "id": "desktop_padding_top", "label": "电脑端上内边距", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "desktop_padding_bottom", "label": "电脑端下内边距", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "mobile_padding_top", "label": "移动端上内边距", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "mobile_padding_bottom", "label": "移动端下内边距", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 },
+    { "type": "header", "content": "文案" },
+    { "type": "text", "id": "subtitle", "label": "副标题", "default": "What We Actually Build" },
+    { "type": "range", "id": "subtitle_font_size", "label": "副标题字号（电脑）", "min": 12, "max": 48, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "subtitle_font_size_mobile", "label": "副标题字号（移动）", "min": 12, "max": 36, "step": 1, "unit": "px", "default": 16 },
+    { "type": "color", "id": "subtitle_color", "label": "副标题颜色", "default": "#F287EC" },
+    { "type": "textarea", "id": "heading", "label": "标题", "default": "Fantasy, made tangible" },
+    { "type": "range", "id": "heading_font_size", "label": "标题字号（电脑）", "min": 20, "max": 80, "step": 1, "unit": "px", "default": 42 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "标题字号（移动）", "min": 16, "max": 48, "step": 1, "unit": "px", "default": 28 },
+    { "type": "color", "id": "heading_color", "label": "标题颜色", "default": "#FFFFFF" },
+    { "type": "select", "id": "heading_tag", "label": "标题标签", "info": "用于 SEO。同一页面建议只保留一个 H1。", "options": [
+      { "value": "h1", "label": "H1" },
+      { "value": "h2", "label": "H2" },
+      { "value": "h3", "label": "H3" }
+    ], "default": "h2" },
+    { "type": "richtext", "id": "description", "label": "描述" },
+    { "type": "range", "id": "description_font_size", "label": "描述字号（电脑）", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "description_font_size_mobile", "label": "描述字号（移动）", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "color", "id": "description_color", "label": "描述颜色", "default": "#FFFFFF" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "问答",
+      "settings": [
+        { "type": "text", "id": "question", "label": "问题", "default": "A premium, female-focused fantasy world" },
+        { "type": "richtext", "id": "answer", "label": "答案", "default": "<p>Choose the scenario, the character and the direction. Stories are designed for women and welcome all sexual orientations.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our story FAQ",
+      "category": "Story",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "A premium, female-focused fantasy world",
+            "answer": "<p>Choose the scenario, the character and the direction. Stories are designed for women and welcome all sexual orientations.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Bionic reality you can feel",
+            "answer": "<p>Hardware engineered to reproduce the complexity of human touch across multiple sensitive zones—with precision and intention.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Effortless immersion",
+            "answer": "<p>Hands-free, stable and naturally held in place, so technology disappears and your body can stay present.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -215,6 +215,23 @@
           "input_background": "#ffffff",
           "input_text_color": "#321e1e"
         }
+      },
+      "scheme-638f34b5-790c-4c9f-99b0-ef01e713fba8": {
+        "settings": {
+          "text_color": "#000000",
+          "background": "#FFFFFF",
+          "background_gradient": "",
+          "secondary_background": "#ffffff",
+          "primary_button_background": "#000000",
+          "primary_button_text_color": "#ffffff",
+          "subheading_background": "",
+          "subheading_border_color": "",
+          "subheading_text_color": "#F287EC",
+          "heading_highlight_accent_color": "#000000",
+          "heading_highlight_text_color": "#000000",
+          "input_background": "#ffffff",
+          "input_text_color": "#321e1e"
+        }
       }
     }
   },

@@ -11,14 +11,332 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "show_title": true,
         "content_width": "md"
       }
+    },
+    "our_story_banner_hMygXT": {
+      "type": "our-story-banner",
+      "name": "Our story banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/Why_SensOn_35e192ce-8b37-40f4-9aa2-f86bc21a8f3d.jpg",
+        "mobile_image": "shopify://shop_images/Why_SensOn.jpg",
+        "desktop_height_mode": "custom",
+        "desktop_height": 524,
+        "mobile_height_mode": "custom",
+        "mobile_height": 470,
+        "text_align": "center",
+        "subtitle": "About SensOn",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Why SensOn",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h1",
+        "description": "<p>A revolutionary women's technology brand, built on intelligent human–machine interaction and bionic innovation.</p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff",
+        "button_label": "",
+        "button_url": "",
+        "show_stat_bar": false,
+        "stat_bar_bg": "#000000",
+        "stat_number": "17M+",
+        "stat_number_color": "#ffffff",
+        "stat_caption": "SensOn S1 creator content reach",
+        "stat_caption_color": "#ffffff",
+        "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
+      }
+    },
+    "rich_text_kznHzx": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_FF8Ux7": {
+          "type": "subheading",
+          "settings": {
+            "text": "Our Core Truths"
+          }
+        },
+        "heading_NCK6LD": {
+          "type": "heading",
+          "settings": {
+            "text": "AI is for pleasure",
+            "heading_tag": "h2",
+            "indent": "none",
+            "highlight_effect": "default",
+            "highlight_accent_color": "",
+            "highlight_text_color": ""
+          }
+        },
+        "richtext_UPX3T6": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>We were taught to believe that the best human–AI connections should resemble love. They shouldn’t. AI is not here to replace relationships. It’s here to serve pleasure—without loyalty, expectation or judgment.<br/><br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_FF8Ux7",
+        "heading_NCK6LD",
+        "richtext_UPX3T6"
+      ],
+      "custom_css": [],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-638f34b5-790c-4c9f-99b0-ef01e713fba8",
+        "content_width": "lg",
+        "text_alignment": "center"
+      }
+    },
+    "our_story_banner_P6KDez": {
+      "type": "our-story-banner",
+      "name": "Our story banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/We_create_a_sex_experience_that_reflects_you_b58b4f92-e544-4593-85b9-9b7bb3d05266.jpg",
+        "mobile_image": "shopify://shop_images/We_create_a_sex_experience_that_reflects_you.jpg",
+        "desktop_height_mode": "custom",
+        "desktop_height": 645,
+        "mobile_height_mode": "custom",
+        "mobile_height": 550,
+        "text_align": "left",
+        "subtitle": "Entirely Yours",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "We create a sex experience that reflects you",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h1",
+        "description": "<p>Desire isn’t one-size-fits-all. What we crave is not simply more content, but anexperience that understands our curiosity, kinks and imagination.We don’t build hardware and software as separate things. We build a seamless, responsive and deeply personal experience of sex.<br/><br/></p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff",
+        "button_label": "",
+        "button_url": "",
+        "show_stat_bar": false,
+        "stat_bar_bg": "#000000",
+        "stat_number": "17M+",
+        "stat_number_color": "#ffffff",
+        "stat_caption": "SensOn S1 creator content reach",
+        "stat_caption_color": "#ffffff",
+        "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
+      }
+    },
+    "our_story_faq_YhAnA3": {
+      "type": "our-story-faq",
+      "blocks": {
+        "faq_P73w4e": {
+          "type": "faq",
+          "settings": {
+            "question": "A premium, female-focused fantasy world",
+            "answer": "<p>Choose the scenario, the character and the direction. Stories are designed for women and welcome all sexual orientations.</p>"
+          }
+        },
+        "faq_F9Pg8d": {
+          "type": "faq",
+          "settings": {
+            "question": "Bionic reality you can feel",
+            "answer": "<p>Hardware engineered to reproduce the complexity of human touch across multiple sensitive zones—with precision and intention.</p>"
+          }
+        },
+        "faq_Uj9AzC": {
+          "type": "faq",
+          "settings": {
+            "question": "Effortless immersion",
+            "answer": "<p>Hands-free, stable and naturally held in place, so technology disappears and your body can stay present.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_P73w4e",
+        "faq_F9Pg8d",
+        "faq_Uj9AzC"
+      ],
+      "name": "Our story FAQ",
+      "settings": {
+        "enable_accordion": false,
+        "color_background": "linear-gradient(180deg, rgba(42, 22, 56, 1), rgba(26, 18, 36, 1) 100%)",
+        "accent_color": "#f287ec",
+        "divider_color": "#4a3a55",
+        "desktop_padding_top": 152,
+        "desktop_padding_bottom": 152,
+        "mobile_padding_top": 68,
+        "mobile_padding_bottom": 68,
+        "subtitle": "What We Actually Build",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Fantasy, made tangible",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h2",
+        "description": "",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff"
+      }
+    },
+    "our_story_banner_dANGeh": {
+      "type": "our-story-banner",
+      "name": "Our story banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/Any_Lover_She_Wants_f1bc5344-d981-4637-a484-79c18aa11859.jpg",
+        "mobile_image": "shopify://shop_images/Any_Lover_She_Wants.jpg",
+        "desktop_height_mode": "custom",
+        "desktop_height": 614,
+        "mobile_height_mode": "custom",
+        "mobile_height": 470,
+        "text_align": "left",
+        "subtitle": "Seen. Heard. Felt.",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Any Lover She Wants.\nAny Story She Imagines. \nA Fantasy She Can Feel.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h1",
+        "description": "<p>SensOn connects story, voice and touch in one uninterrupted experience—so technology follows her rhythm instead of asking her to follow it.<br/><br/></p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff",
+        "button_label": "",
+        "button_url": "",
+        "show_stat_bar": false,
+        "stat_bar_bg": "#000000",
+        "stat_number": "17M+",
+        "stat_number_color": "#ffffff",
+        "stat_caption": "SensOn S1 creator content reach",
+        "stat_caption_color": "#ffffff",
+        "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
+      }
+    },
+    "our_story_faq_LJr7Lx": {
+      "type": "our-story-faq",
+      "blocks": {
+        "faq_QnLq3e": {
+          "type": "faq",
+          "settings": {
+            "question": "Create your own fantasies—freely",
+            "answer": "<p>With UGC character creation planned for Q4 2026, users will be able to shape characters, scenes and pacing around their own imagination.</p>"
+          }
+        },
+        "faq_JqTHRV": {
+          "type": "faq",
+          "settings": {
+            "question": "An experience that keeps evolving",
+            "answer": "<p>Today, more than 400 interactive scripts and characters create distinct paths into fantasy. Preference memory makes returning feel more personal and familiar.</p>"
+          }
+        },
+        "faq_rgceXH": {
+          "type": "faq",
+          "settings": {
+            "question": "Robotics made for warmth, not coldness",
+            "answer": "<p>We imagine intimate technology that offers presence, comfort and connection—built to feel human in the ways that matter.</p>"
+          }
+        },
+        "faq_TzJTAM": {
+          "type": "faq",
+          "settings": {
+            "question": "Femtech, with women at the center",
+            "answer": "<p>Women engineers, researchers, designers, creators and founders should help decide what the future of pleasure technology becomes.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_QnLq3e",
+        "faq_JqTHRV",
+        "faq_rgceXH",
+        "faq_TzJTAM"
+      ],
+      "name": "Our story FAQ",
+      "settings": {
+        "enable_accordion": true,
+        "color_background": "linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 100%)",
+        "accent_color": "#f287ec",
+        "divider_color": "#4a3a55",
+        "desktop_padding_top": 152,
+        "desktop_padding_bottom": 152,
+        "mobile_padding_top": 68,
+        "mobile_padding_bottom": 68,
+        "subtitle": "Our Future",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Not a one-product idea. A new \nplatform for female pleasure.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h2",
+        "description": "<p>AI should not replace love or real relationships. Its role here is different: to create more freedom for fantasy, curiosity and self-knowledge.</p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff"
+      }
+    },
+    "our_story_banner_EAgjM3": {
+      "type": "our-story-banner",
+      "name": "Our story banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/An_AI_Companion_You_Can_Feel_and_Touch_0e9e5983-73bc-49fe-bde9-3372345286aa.jpg",
+        "mobile_image": "shopify://shop_images/An_AI_Companion_You_Can_Feel_and_Touch.jpg",
+        "desktop_height_mode": "custom",
+        "desktop_height": 524,
+        "mobile_height_mode": "custom",
+        "mobile_height": 470,
+        "text_align": "center",
+        "subtitle": "SensOn S1",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "An AI Companion \nYou Can Feel and Touch.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h1",
+        "description": "",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff",
+        "button_label": "Discover SensOn S1",
+        "button_url": "shopify://products/senson-s1-wellness-companion",
+        "show_stat_bar": false,
+        "stat_bar_bg": "#000000",
+        "stat_number": "17M+",
+        "stat_number_color": "#ffffff",
+        "stat_caption": "SensOn S1 creator content reach",
+        "stat_caption_color": "#ffffff",
+        "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "our_story_banner_hMygXT",
+    "rich_text_kznHzx",
+    "our_story_banner_P6KDez",
+    "our_story_faq_YhAnA3",
+    "our_story_banner_dANGeh",
+    "our_story_faq_LJr7Lx",
+    "our_story_banner_EAgjM3"
   ]
 }

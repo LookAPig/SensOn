@@ -1,7 +1,35 @@
 {%- if block.settings.text != blank -%}
-  <div class="{% if block.settings.content_width != 'full' %}max-w-{{ block.settings.content_width }}{% endif %}" {{ block.shopify_attributes }}>
+  {%- liquid
+    assign size_mobile = block.settings.font_size_mobile | default: 0 | plus: 0
+    assign size_desktop = block.settings.font_size_desktop | default: 0 | plus: 0
+    if size_mobile == 0
+      assign size_mobile = size_desktop
+    endif
+    if size_desktop == 0
+      assign size_desktop = size_mobile
+    endif
+  -%}
+  <div
+    id="shopify-block-{{ block.id }}"
+    class="{% if block.settings.content_width != 'full' %}max-w-{{ block.settings.content_width }}{% endif %}"
+    {{ block.shopify_attributes }}
+  >
     {{- block.settings.text -}}
   </div>
+  {%- if size_mobile > 0 -%}
+    <style>
+      #shopify-block-{{ block.id }},
+      #shopify-block-{{ block.id }} :is(p, li) {
+        font-size: {{ size_mobile }}px;
+      }
+      @media screen and (min-width: 750px) {
+        #shopify-block-{{ block.id }},
+        #shopify-block-{{ block.id }} :is(p, li) {
+          font-size: {{ size_desktop }}px;
+        }
+      }
+    </style>
+  {%- endif -%}
 {%- endif -%}
 
 {% schema %}
@@ -42,6 +70,32 @@
         }
       ],
       "default": "sm"
+    },
+    {
+      "type": "header",
+      "content": "字体大小"
+    },
+    {
+      "type": "range",
+      "id": "font_size_desktop",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "电脑端字号",
+      "info": "设为 0 表示沿用主题默认字号",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "移动端字号",
+      "info": "设为 0 表示沿用主题默认字号",
+      "default": 0
     }
   ],
   "presets": [

@@ -1,0 +1,206 @@
+{%- liquid
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .crc2 {
+    --subtitle-color: {{ section.settings.subtitle_color }};
+    --heading-color: {{ section.settings.heading_color }};
+    --subtitle-size: {{ section.settings.subtitle_font_size | default: 24 }}px;
+    --heading-size: {{ section.settings.heading_font_size | default: 42 }}px;
+    --subtitle-size-m: {{ section.settings.subtitle_font_size_mobile | default: 16 }}px;
+    --heading-size-m: {{ section.settings.heading_font_size_mobile | default: 28 }}px;
+    --card-bg: {{ section.settings.card_bg }};
+    --name-color: {{ section.settings.name_color }};
+    --role-color: {{ section.settings.role_color }};
+    --quote-color: {{ section.settings.quote_color }};
+    --avatar-bg: {{ section.settings.avatar_bg }};
+    background: {{ section.settings.color_background }};
+    overflow: hidden;
+    padding: {{ section.settings.mobile_padding_top | default: 40 }}px 16px {{ section.settings.mobile_padding_bottom | default: 40 }}px;
+  }
+  #shopify-section-{{ section.id }} .crc2 * { box-sizing: border-box; }
+  #shopify-section-{{ section.id }} .crc2 .inner { margin: 0 auto; max-width: 1440px; }
+  #shopify-section-{{ section.id }} .crc2 .header {
+    align-items: flex-start; display: flex; flex-direction: column; gap: 16px; margin: 0 0 24px; text-align: left;
+  }
+  #shopify-section-{{ section.id }} .crc2 .subtitle {
+    color: var(--subtitle-color); font-size: var(--subtitle-size-m); font-weight: 500; line-height: 1.3; margin: 0; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .crc2 .title {
+    color: var(--heading-color); font-size: var(--heading-size-m); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; margin: 0; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .crc2 .grid {
+    display: flex; gap: 12px; margin-right: -16px; overflow-x: auto; overscroll-behavior-x: contain;
+    padding-right: 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  #shopify-section-{{ section.id }} .crc2 .grid::-webkit-scrollbar { display: none; }
+  #shopify-section-{{ section.id }} .crc2 .card {
+    background: var(--card-bg); border-radius: 16px; display: flex; flex: 0 0 calc(100vw - 64px);
+    flex-direction: column; gap: 20px; max-width: 320px; padding: 24px 20px;
+  }
+  #shopify-section-{{ section.id }} .crc2 .profile {
+    align-items: center; display: flex; gap: 14px; min-width: 0;
+  }
+  #shopify-section-{{ section.id }} .crc2 .avatar {
+    background: var(--avatar-bg); border-radius: 50%; flex: 0 0 auto; height: 64px; overflow: hidden; width: 64px;
+  }
+  #shopify-section-{{ section.id }} .crc2 .avatar img {
+    display: block; height: 100%; object-fit: cover; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .crc2 .identity { flex: 1 1 auto; min-width: 0; }
+  #shopify-section-{{ section.id }} .crc2 .name {
+    color: var(--name-color); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .crc2 .role {
+    color: var(--role-color); font-size: 13px; font-weight: 400; line-height: 1.35; margin: 6px 0 0;
+  }
+  #shopify-section-{{ section.id }} .crc2 .quote {
+    color: var(--quote-color); font-size: 14px; font-weight: 400; line-height: 1.5; margin: 0;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .crc2 {
+      padding: {{ section.settings.desktop_padding_top | default: 80 }}px 100px {{ section.settings.desktop_padding_bottom | default: 80 }}px;
+    }
+    #shopify-section-{{ section.id }} .crc2 .header {
+      align-items: center; margin: 0 auto 48px; max-width: 820px; text-align: center;
+    }
+    #shopify-section-{{ section.id }} .crc2 .subtitle,
+    #shopify-section-{{ section.id }} .crc2 .title { text-align: center; }
+    #shopify-section-{{ section.id }} .crc2 .subtitle { font-size: var(--subtitle-size); }
+    #shopify-section-{{ section.id }} .crc2 .title { font-size: var(--heading-size); }
+    #shopify-section-{{ section.id }} .crc2 .grid {
+      display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-right: 0; overflow: visible; padding-right: 0;
+    }
+    #shopify-section-{{ section.id }} .crc2 .card {
+      flex: none; gap: 24px; max-width: none; padding: 28px 24px; width: auto;
+    }
+    #shopify-section-{{ section.id }} .crc2 .avatar { height: 72px; width: 72px; }
+    #shopify-section-{{ section.id }} .crc2 .name { font-size: 22px; }
+    #shopify-section-{{ section.id }} .crc2 .role { font-size: 14px; }
+    #shopify-section-{{ section.id }} .crc2 .quote { font-size: 16px; }
+  }
+</style>
+
+<section class="crc2">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <{{ heading_tag }} class="title">{{ section.settings.heading | escape }}</{{ heading_tag }}>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="grid">
+        {%- for block in section.blocks -%}
+          <article class="card" {{ block.shopify_attributes }}>
+            <div class="profile">
+              <div class="avatar">
+                {%- if block.settings.avatar != blank -%}
+                  {{ block.settings.avatar | image_url: width: 200 | image_tag: loading: 'lazy', widths: '64, 128, 200', sizes: '72px', alt: block.settings.name }}
+                {%- endif -%}
+              </div>
+              <div class="identity">
+                {%- if block.settings.name != blank -%}
+                  <h3 class="name">{{ block.settings.name | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.role != blank -%}
+                  <p class="role">{{ block.settings.role | escape | newline_to_br }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+            {%- if block.settings.quote != blank -%}
+              <p class="quote">{{ block.settings.quote | escape | newline_to_br }}</p>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Expert insights",
+  "tag": "section",
+  "class": "shopify-section--expert-insights",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "color", "id": "color_background", "label": "背景色", "default": "#000000" },
+    { "type": "header", "content": "文案" },
+    { "type": "text", "id": "subtitle", "label": "副标题", "default": "Expert insights" },
+    { "type": "range", "id": "subtitle_font_size", "label": "副标题字号（电脑）", "min": 12, "max": 48, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "subtitle_font_size_mobile", "label": "副标题字号（移动）", "min": 12, "max": 36, "step": 1, "unit": "px", "default": 16 },
+    { "type": "color", "id": "subtitle_color", "label": "副标题颜色", "default": "#F287EC" },
+    { "type": "text", "id": "heading", "label": "标题", "default": "Professional Perspectives On Technology and Pleasure." },
+    { "type": "range", "id": "heading_font_size", "label": "标题字号（电脑）", "min": 20, "max": 80, "step": 1, "unit": "px", "default": 42 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "标题字号（移动）", "min": 16, "max": 48, "step": 1, "unit": "px", "default": 28 },
+    { "type": "color", "id": "heading_color", "label": "标题颜色", "default": "#FFFFFF" },
+    { "type": "select", "id": "heading_tag", "label": "标题标签", "options": [
+      { "value": "h1", "label": "H1" },
+      { "value": "h2", "label": "H2" },
+      { "value": "h3", "label": "H3" }
+    ], "default": "h2" },
+    { "type": "header", "content": "卡片样式" },
+    { "type": "color", "id": "card_bg", "label": "卡片底色", "default": "#1C1C1C" },
+    { "type": "color", "id": "avatar_bg", "label": "头像占位色", "default": "#4A4A4A" },
+    { "type": "color", "id": "name_color", "label": "姓名颜色", "default": "#FFFFFF" },
+    { "type": "color", "id": "role_color", "label": "身份颜色", "default": "#A0A0A0" },
+    { "type": "color", "id": "quote_color", "label": "评价颜色", "default": "#FFFFFF" },
+    { "type": "header", "content": "模块间距" },
+    { "type": "range", "id": "desktop_padding_top", "label": "电脑端顶部间距", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "desktop_padding_bottom", "label": "电脑端底部间距", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "mobile_padding_top", "label": "移动端顶部间距", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "mobile_padding_bottom", "label": "移动端底部间距", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "专家卡片",
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "头像" },
+        { "type": "text", "id": "name", "label": "姓名", "default": "Dr. Tara" },
+        { "type": "textarea", "id": "role", "label": "身份", "default": "Sex and relationship expert\nProfessor · Author" },
+        { "type": "textarea", "id": "quote", "label": "评价", "default": "SensOn S1 brings AI-powered interactive storytelling and adaptive stimulation to regional news audiences." }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Expert insights",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "name": "Dr. Tara",
+            "role": "Sex and relationship expert\nProfessor · Author",
+            "quote": "SensOn is not just a chatbot online, but a tangible AI-powered intimate partner that can interact with you."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "name": "Dr. Lexiinks",
+            "role": "Sex and relationship expert\nProfessor · Author",
+            "quote": "SensOn S1 brings AI-powered interactive storytelling and adaptive stimulation to regional news audiences."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "name": "Dr. Tara",
+            "role": "Sex and relationship expert\nProfessor · Author",
+            "quote": "“SensOn is not just a chatbot online, but a tangible AI-powered intimate partner that can interact with you.”"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,267 @@
+{%- liquid
+  assign desktop_image = section.settings.desktop_image
+  assign mobile_image = section.settings.mobile_image
+  if desktop_image == blank
+    assign desktop_image = mobile_image
+  endif
+  if mobile_image == blank
+    assign mobile_image = desktop_image
+  endif
+  assign heading_tag = section.settings.heading_tag | default: 'h1'
+  assign text_align = section.settings.text_align | default: 'center'
+
+  if section.settings.desktop_height_mode == 'fullscreen'
+    assign desktop_height = '100svh'
+  else
+    assign desktop_height = section.settings.desktop_height | default: 560 | append: 'px'
+  endif
+
+  if section.settings.mobile_height_mode == 'fullscreen'
+    assign mobile_height = '100svh'
+  else
+    assign mobile_height = section.settings.mobile_height | default: 480 | append: 'px'
+  endif
+
+  assign show_bar = section.settings.show_stat_bar
+  assign stat_number = section.settings.stat_number
+  assign stat_caption = section.settings.stat_caption
+  assign stat_text = section.settings.stat_text
+  if show_bar and stat_number == blank and stat_caption == blank and stat_text == blank
+    assign show_bar = false
+  endif
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .our_story_banner {
+    --banner-height: {{ desktop_height }};
+    --banner-mobile-height: {{ mobile_height }};
+    --subtitle-color: {{ section.settings.subtitle_color }};
+    --heading-color: {{ section.settings.heading_color }};
+    --description-color: {{ section.settings.description_color }};
+    --subtitle-size: {{ section.settings.subtitle_font_size | default: 24 }}px;
+    --heading-size: {{ section.settings.heading_font_size | default: 42 }}px;
+    --description-size: {{ section.settings.description_font_size | default: 16 }}px;
+    --subtitle-size-m: {{ section.settings.subtitle_font_size_mobile | default: 16 }}px;
+    --heading-size-m: {{ section.settings.heading_font_size_mobile | default: 28 }}px;
+    --description-size-m: {{ section.settings.description_font_size_mobile | default: 14 }}px;
+    background: #1a1a1a;
+    min-height: var(--banner-mobile-height);
+    overflow: hidden;
+    position: relative;
+  }
+  #shopify-section-{{ section.id }} .our_story_banner .media,
+  #shopify-section-{{ section.id }} .our_story_banner .image,
+  #shopify-section-{{ section.id }} .our_story_banner .placeholder {
+    height: 100%; inset: 0; position: absolute; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .our_story_banner .image { object-fit: cover; object-position: center; }
+  #shopify-section-{{ section.id }} .our_story_banner .desktop_image { display: none; }
+  #shopify-section-{{ section.id }} .our_story_banner .placeholder {
+    background: linear-gradient(180deg, #3a4a4f 0%, #6a8a8e 100%);
+  }
+  #shopify-section-{{ section.id }} .our_story_banner .content {
+    box-sizing: border-box; display: flex; flex-direction: column; inset: 0;
+    padding: 32px 16px; position: absolute; width: 100%; z-index: 2;
+  }
+  #shopify-section-{{ section.id }} .our_story_banner .content--left,
+  #shopify-section-{{ section.id }} .our_story_banner .content--right {
+    align-items: flex-start; justify-content: flex-start; text-align: left;
+  }
+  #shopify-section-{{ section.id }} .our_story_banner .content--center {
+    align-items: center; justify-content: center; text-align: center;
+  }
+  #shopify-section-{{ section.id }} .our_story_banner .subtitle {
+    color: var(--subtitle-color); font-size: var(--subtitle-size-m); font-weight: 500; line-height: 1.3; margin: 0 0 10px;
+  }
+  #shopify-section-{{ section.id }} .our_story_banner .title {
+    color: var(--heading-color); font-size: var(--heading-size-m); font-weight: 500;
+    letter-spacing: -0.02em; line-height: 1.2; margin: 0; max-width: 100%;
+    text-wrap: balance;
+  }
+  #shopify-section-{{ section.id }} .our_story_banner .description {
+    color: var(--description-color); font-size: var(--description-size-m); line-height: 1.45; margin: 12px 0 0; max-width: 100%;
+  }
+  #shopify-section-{{ section.id }} .our_story_banner .description p { margin: 0; }
+  #shopify-section-{{ section.id }} .our_story_banner .description p + p { margin-top: 0.75em; }
+  #shopify-section-{{ section.id }} .our_story_banner .cta {
+    align-items: center; background: #F287EC; border-radius: 100px; box-sizing: border-box; color: #000;
+    display: inline-flex; font-size: 14px; font-style: normal; font-weight: 500; height: 30px;
+    justify-content: center; line-height: normal; margin-top: 24px; text-decoration: none; width: 162px;
+  }
+  #shopify-section-{{ section.id }} .our_story_stat_bar {
+    --stat-bg: {{ section.settings.stat_bar_bg }};
+    --stat-number: {{ section.settings.stat_number_color }};
+    --stat-caption: {{ section.settings.stat_caption_color }};
+    --stat-text: {{ section.settings.stat_text_color }};
+    --stat-line: {{ section.settings.stat_divider_color }};
+    background: var(--stat-bg);
+    padding: 36px 16px 44px;
+  }
+  #shopify-section-{{ section.id }} .our_story_stat_bar * { box-sizing: border-box; }
+  #shopify-section-{{ section.id }} .our_story_stat_bar .inner { margin: 0 auto; max-width: 1440px; }
+  #shopify-section-{{ section.id }} .our_story_stat_bar .number {
+    color: var(--stat-number); font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .our_story_stat_bar .caption {
+    color: var(--stat-caption); font-size: 16px; font-weight: 400; line-height: 1.3; margin: 10px 0 0;
+  }
+  #shopify-section-{{ section.id }} .our_story_stat_bar .divider {
+    background: var(--stat-line); height: 1px; margin: 20px 0; width: 100%;
+  }
+  #shopify-section-{{ section.id }} .our_story_stat_bar .copy {
+    color: var(--stat-text); font-size: 16px; font-weight: 400; line-height: 1.4; margin: 0;
+  }
+  #shopify-section-{{ section.id }} .our_story_stat_bar .copy p { margin: 0; }
+  #shopify-section-{{ section.id }} .our_story_stat_bar .copy p + p { margin-top: 0.75em; }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .our_story_banner { min-height: var(--banner-height); }
+    #shopify-section-{{ section.id }} .our_story_banner .desktop_image { display: block; }
+    #shopify-section-{{ section.id }} .our_story_banner .mobile_image { display: none; }
+    #shopify-section-{{ section.id }} .our_story_banner .content {
+      max-width: 1100px; padding: 48px 100px;
+    }
+    #shopify-section-{{ section.id }} .our_story_banner .content--left {
+      align-items: flex-start; justify-content: center; margin-right: auto; text-align: left;
+    }
+    #shopify-section-{{ section.id }} .our_story_banner .content--center {
+      left: 50%; margin: 0; max-width: min(1100px, calc(100% - 48px)); padding-left: 24px; padding-right: 24px;
+      transform: translateX(-50%); width: calc(100% - 48px);
+    }
+    #shopify-section-{{ section.id }} .our_story_banner .content--right {
+      align-items: flex-end; justify-content: center; margin-left: auto; text-align: right;
+    }
+    #shopify-section-{{ section.id }} .our_story_banner .subtitle { font-size: var(--subtitle-size); margin-bottom: 12px; }
+    #shopify-section-{{ section.id }} .our_story_banner .title {
+      font-size: clamp(28px, 3.2vw, var(--heading-size));
+    }
+    #shopify-section-{{ section.id }} .our_story_banner .description {
+      font-size: var(--description-size); margin-top: 16px; max-width: 720px;
+    }
+    #shopify-section-{{ section.id }} .our_story_banner .cta { font-size: 24px; height: 49px; max-width: 310px; width: 100%; }
+    #shopify-section-{{ section.id }} .our_story_stat_bar { padding: 36px 100px; }
+    #shopify-section-{{ section.id }} .our_story_stat_bar .inner {
+      align-items: center; display: flex; gap: 48px; justify-content: center;
+    }
+    #shopify-section-{{ section.id }} .our_story_stat_bar .stat { flex: 0 1 auto; }
+    #shopify-section-{{ section.id }} .our_story_stat_bar .number { font-size: 42px; }
+    #shopify-section-{{ section.id }} .our_story_stat_bar .caption { font-size: 14px; margin-top: 8px; }
+    #shopify-section-{{ section.id }} .our_story_stat_bar .divider {
+      align-self: stretch; flex: 0 0 1px; height: auto; margin: 8px 0; min-height: 56px; width: 1px;
+    }
+    #shopify-section-{{ section.id }} .our_story_stat_bar .copy { flex: 0 1 520px; font-size: 16px; max-width: 520px; }
+  }
+  @media screen and (min-width: 1100px) {
+    #shopify-section-{{ section.id }} .our_story_banner .title { white-space: nowrap; }
+  }
+</style>
+
+<section class="our_story_banner" {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}>
+  <div class="media" aria-hidden="true">
+    {%- if desktop_image != blank -%}
+      {{- desktop_image | image_url: width: 2400 | image_tag: class: 'image desktop_image', loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1000, 1200, 1600, 2000, 2400' -}}
+    {%- endif -%}
+    {%- if mobile_image != blank -%}
+      {{- mobile_image | image_url: width: 1000 | image_tag: class: 'image mobile_image', loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '375, 550, 750, 1000' -}}
+    {%- endif -%}
+    {%- if desktop_image == blank and mobile_image == blank -%}<div class="placeholder"></div>{%- endif -%}
+  </div>
+  <div class="content content--{{ text_align }}">
+    {%- if section.settings.subtitle != blank -%}
+      <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <{{ heading_tag }} class="title">{{ section.settings.heading | escape | newline_to_br }}</{{ heading_tag }}>
+    {%- endif -%}
+    {%- if section.settings.description != blank -%}
+      <div class="description">{{ section.settings.description }}</div>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="cta" href="{{ section.settings.button_url }}">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- if show_bar -%}
+<div class="our_story_stat_bar">
+  <div class="inner">
+    <div class="stat">
+      {%- if stat_number != blank -%}
+        <p class="number">{{ stat_number | escape }}</p>
+      {%- endif -%}
+      {%- if stat_caption != blank -%}
+        <p class="caption">{{ stat_caption | escape }}</p>
+      {%- endif -%}
+    </div>
+    {%- if stat_number != blank or stat_caption != blank -%}
+      {%- if stat_text != blank -%}<div class="divider" aria-hidden="true"></div>{%- endif -%}
+    {%- endif -%}
+    {%- if stat_text != blank -%}
+      <div class="copy">{{ stat_text }}</div>
+    {%- endif -%}
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Our story banner",
+  "tag": "section",
+  "class": "shopify-section--our-story-banner",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "checkbox", "id": "allow_transparent_header", "label": "启用透明页头", "default": true },
+    { "type": "header", "content": "图片" },
+    { "type": "image_picker", "id": "desktop_image", "label": "电脑端图片" },
+    { "type": "image_picker", "id": "mobile_image", "label": "移动端图片", "info": "未设置时使用电脑端图片。" },
+    { "type": "header", "content": "高度" },
+    { "type": "select", "id": "desktop_height_mode", "label": "电脑端高度", "options": [
+      { "value": "custom", "label": "自定义高度" },
+      { "value": "fullscreen", "label": "全屏" }
+    ], "default": "custom" },
+    { "type": "number", "id": "desktop_height", "label": "电脑端高度（px）", "default": 560, "visible_if": "{{ section.settings.desktop_height_mode == 'custom' }}" },
+    { "type": "select", "id": "mobile_height_mode", "label": "移动端高度", "options": [
+      { "value": "custom", "label": "自定义高度" },
+      { "value": "fullscreen", "label": "全屏" }
+    ], "default": "custom" },
+    { "type": "number", "id": "mobile_height", "label": "移动端高度（px）", "default": 480, "visible_if": "{{ section.settings.mobile_height_mode == 'custom' }}" },
+    { "type": "header", "content": "布局" },
+    { "type": "select", "id": "text_align", "label": "文案位置", "info": "选择左或右时，移动端文案会自动置顶，避免遮挡图片主体。", "options": [
+      { "value": "left", "label": "左" },
+      { "value": "center", "label": "中" },
+      { "value": "right", "label": "右" }
+    ], "default": "center" },
+    { "type": "header", "content": "文案" },
+    { "type": "text", "id": "subtitle", "label": "副标题", "default": "About SensOn" },
+    { "type": "range", "id": "subtitle_font_size", "label": "副标题字号（电脑）", "min": 12, "max": 48, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "subtitle_font_size_mobile", "label": "副标题字号（移动）", "min": 12, "max": 36, "step": 1, "unit": "px", "default": 16 },
+    { "type": "color", "id": "subtitle_color", "label": "副标题颜色", "default": "#F287EC" },
+    { "type": "textarea", "id": "heading", "label": "大标题", "default": "Why SensOn" },
+    { "type": "range", "id": "heading_font_size", "label": "大标题字号（电脑）", "min": 20, "max": 80, "step": 1, "unit": "px", "default": 42 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "大标题字号（移动）", "min": 16, "max": 48, "step": 1, "unit": "px", "default": 28 },
+    { "type": "color", "id": "heading_color", "label": "大标题颜色", "default": "#FFFFFF" },
+    { "type": "select", "id": "heading_tag", "label": "标题标签", "info": "用于 SEO。同一页面建议只保留一个 H1。", "options": [
+      { "value": "h1", "label": "H1" },
+      { "value": "h2", "label": "H2" },
+      { "value": "h3", "label": "H3" }
+    ], "default": "h1" },
+    { "type": "richtext", "id": "description", "label": "描述", "default": "<p>A revolutionary women's technology brand, built on intelligent human–machine interaction and bionic innovation.</p>" },
+    { "type": "range", "id": "description_font_size", "label": "描述字号（电脑）", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "description_font_size_mobile", "label": "描述字号（移动）", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "color", "id": "description_color", "label": "描述颜色", "default": "#FFFFFF" },
+    { "type": "header", "content": "按钮" },
+    { "type": "text", "id": "button_label", "label": "按钮文案", "default": "Know More" },
+    { "type": "url", "id": "button_url", "label": "按钮链接" },
+    { "type": "header", "content": "信息条" },
+    { "type": "checkbox", "id": "show_stat_bar", "label": "显示信息条", "default": false },
+    { "type": "color", "id": "stat_bar_bg", "label": "信息条背景", "default": "#000000", "visible_if": "{{ section.settings.show_stat_bar == true }}" },
+    { "type": "text", "id": "stat_number", "label": "数字", "default": "17M+", "visible_if": "{{ section.settings.show_stat_bar == true }}" },
+    { "type": "color", "id": "stat_number_color", "label": "数字颜色", "default": "#FFFFFF", "visible_if": "{{ section.settings.show_stat_bar == true }}" },
+    { "type": "text", "id": "stat_caption", "label": "数字说明", "default": "SensOn S1 creator content reach", "visible_if": "{{ section.settings.show_stat_bar == true }}" },
+    { "type": "color", "id": "stat_caption_color", "label": "数字说明颜色", "default": "#FFFFFF", "visible_if": "{{ section.settings.show_stat_bar == true }}" },
+    { "type": "richtext", "id": "stat_text", "label": "描述", "default": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>", "visible_if": "{{ section.settings.show_stat_bar == true }}" },
+    { "type": "color", "id": "stat_text_color", "label": "描述颜色", "default": "#FFFFFF", "visible_if": "{{ section.settings.show_stat_bar == true }}" },
+    { "type": "color", "id": "stat_divider_color", "label": "分隔线颜色", "default": "#F287EC", "visible_if": "{{ section.settings.show_stat_bar == true }}" }
+  ],
+  "presets": [{ "name": "Our story banner", "category": "Banners" }]
+}
+{% endschema %}

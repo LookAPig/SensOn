@@ -5,6 +5,7 @@
   endif
   assign badge_text = section.settings.badge_text
   assign button_text = section.settings.button_text | default: 'Shop Now'
+  assign button_url = section.settings.button_url | default: sb_product.url
   assign bar_id_pc = 'sticky-bar-pc-' | append: section.id
   assign bar_id_h5 = 'sticky-bar-h5-' | append: section.id
 -%}
@@ -57,7 +58,7 @@
           {%- endif -%}
         </div>
       </div>
-      <a href="{{ sb_product.url }}" class="button sb-btn"><span class="pre-order-now">{{ button_text }}</span></a>
+      <a href="{{ button_url }}" class="button sb-btn"><span class="pre-order-now">{{ button_text }}</span></a>
     </div>
   </section>
 
@@ -68,7 +69,7 @@
         <h4 style="color:rgba(255,255,255,.5);font-size:12px;font-weight:400;line-height:1;text-decoration:line-through;margin:0;">{{ sb_product.compare_at_price | money }}</h4>
       {%- endif -%}
     </div>
-    <a href="{{ sb_product.url }}" class="button sb-btn"><span class="pre-order-now">{{ button_text }}</span></a>
+    <a href="{{ button_url }}" class="button sb-btn"><span class="pre-order-now">{{ button_text }}</span></a>
   </section>
 
   <script>
@@ -180,6 +181,12 @@
       "id": "button_text",
       "label": "Button text",
       "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link",
+      "info": "Leave blank to use the product page URL."
     }
   ],
   "presets": [

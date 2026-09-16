@@ -11,14 +11,217 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "show_title": true,
         "content_width": "md"
       }
+    },
+    "our_story_banner_wdNwTf": {
+      "type": "our-story-banner",
+      "name": "Our story banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/Real_people._Real_reactions_ee9043aa-2651-4d11-94ca-911c7b9239b8.jpg",
+        "mobile_image": "shopify://shop_images/20260916-161254.jpg",
+        "desktop_height_mode": "custom",
+        "desktop_height": 630,
+        "mobile_height_mode": "custom",
+        "mobile_height": 430,
+        "text_align": "center",
+        "subtitle": "What Creators Are Saying",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 14,
+        "subtitle_color": "#f287ec",
+        "heading": "Real people. Real reactions.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h1",
+        "description": "<p>Creators, performers, wellness advocates and sex educators experience SensOn S1 in their own words.<br/></p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff",
+        "button_label": "Know More",
+        "button_url": "",
+        "show_stat_bar": true,
+        "stat_bar_bg": "#000000",
+        "stat_number": "17M+",
+        "stat_number_color": "#ffffff",
+        "stat_caption": "SensOn S1 creator content reach",
+        "stat_caption_color": "#ffffff",
+        "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
+      }
+    },
+    "creator_reviews_cards_PARE63": {
+      "type": "creator-reviews-cards",
+      "blocks": {
+        "card_y63JRg": {
+          "type": "card",
+          "settings": {
+            "video_url": "",
+            "role": "Actress · Creator",
+            "name": "Lilly Singh",
+            "followers": "14.2M",
+            "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
+          }
+        },
+        "card_JibQgg": {
+          "type": "card",
+          "settings": {
+            "video_url": "",
+            "role": "Actress · Creator",
+            "name": "Lilly Singh",
+            "followers": "14.2M",
+            "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
+          }
+        },
+        "card_PpGnpR": {
+          "type": "card",
+          "settings": {
+            "video_url": "",
+            "role": "Actress · Creator",
+            "name": "Lilly Singh",
+            "followers": "14.2M",
+            "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
+          }
+        }
+      },
+      "block_order": [
+        "card_y63JRg",
+        "card_JibQgg",
+        "card_PpGnpR"
+      ],
+      "name": "Creator reviews",
+      "settings": {
+        "color_background": "#ffffff",
+        "subtitle": "Creator Stories",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "See SensOn S1 Through Their Eyes.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#000000",
+        "heading_tag": "h2",
+        "description": "<p>First impressions, honest reactions and personal takes on a new kind of AI-powered intimate experience.</p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#000000",
+        "card_bg": "#f7e9f8",
+        "role_color": "#000000",
+        "name_color": "#000000",
+        "followers_color": "#000000",
+        "quote_color": "#000000",
+        "desktop_padding_top": 152,
+        "desktop_padding_bottom": 152,
+        "mobile_padding_top": 68,
+        "mobile_padding_bottom": 68
+      }
+    },
+    "creator_reviews_cards2_EiNs01": {
+      "type": "creator-reviews-cards2",
+      "blocks": {
+        "card_ei_01": {
+          "type": "card",
+          "settings": {
+            "name": "Dr. Tara",
+            "role": "Sex and relationship expert\nProfessor · Author",
+            "quote": "SensOn is not just a chatbot online, but a tangible AI-powered intimate partner that can interact with you."
+          }
+        },
+        "card_ei_02": {
+          "type": "card",
+          "settings": {
+            "name": "Dr. Lexiinks",
+            "role": "Sex and relationship expert\nProfessor · Author",
+            "quote": "SensOn S1 brings AI-powered interactive storytelling and adaptive stimulation to regional news audiences."
+          }
+        },
+        "card_ei_03": {
+          "type": "card",
+          "settings": {
+            "name": "Dr. Tara",
+            "role": "Sex and relationship expert\nProfessor · Author",
+            "quote": "“SensOn is not just a chatbot online, but a tangible AI-powered intimate partner that can interact with you.”"
+          }
+        }
+      },
+      "block_order": [
+        "card_ei_01",
+        "card_ei_02",
+        "card_ei_03"
+      ],
+      "name": "Expert insights",
+      "settings": {
+        "color_background": "#000000",
+        "subtitle": "Expert insights",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Professional Perspectives On Technology and Pleasure.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h2",
+        "card_bg": "#1c1c1c",
+        "avatar_bg": "#4a4a4a",
+        "name_color": "#ffffff",
+        "role_color": "#a0a0a0",
+        "quote_color": "#ffffff",
+        "desktop_padding_top": 152,
+        "desktop_padding_bottom": 152,
+        "mobile_padding_top": 68,
+        "mobile_padding_bottom": 68
+      }
+    },
+    "our_story_banner_mMe6X6": {
+      "type": "our-story-banner",
+      "name": "Our story banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/Curious_What_You_ll_Discover_76f77c1f-7dc9-4258-b893-0d4804229ebf.jpg",
+        "mobile_image": "shopify://shop_images/Curious_What_You_ll_Discover.jpg",
+        "desktop_height_mode": "custom",
+        "desktop_height": 517,
+        "mobile_height_mode": "custom",
+        "mobile_height": 251,
+        "text_align": "center",
+        "subtitle": "",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 14,
+        "subtitle_color": "#f287ec",
+        "heading": "Curious What You’ll Discover?",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h1",
+        "description": "",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff",
+        "button_label": "Know More",
+        "button_url": "",
+        "show_stat_bar": false,
+        "stat_bar_bg": "#000000",
+        "stat_number": "17M+",
+        "stat_number_color": "#ffffff",
+        "stat_caption": "SensOn S1 creator content reach",
+        "stat_caption_color": "#ffffff",
+        "stat_text": "<p>One growing community of creators, educators and pleasure-positive voices bringing a new kind of intimate technology into the conversation.</p>",
+        "stat_text_color": "#ffffff",
+        "stat_divider_color": "#f287ec"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "our_story_banner_wdNwTf",
+    "creator_reviews_cards_PARE63",
+    "creator_reviews_cards2_EiNs01",
+    "our_story_banner_mMe6X6"
   ]
 }

@@ -1,0 +1,35 @@
+/* Accelerated checkout / Shop Pay button skin.
+   Not first-screen on homepage; loaded async. Cart drawer still uses it. */
+
+.shopify-payment-button__button {
+  width: 100%;
+  min-height: calc(1lh + var(--button-padding-block) * 2);
+  vertical-align: top;
+}
+
+.shopify-payment-button__button--unbranded {
+  border-radius: var(--button-border-radius) !important;
+  background-color: rgb(var(--button-background)) !important;
+  color: rgb(var(--button-text-color)) !important;
+  font: var(--button-font) !important;
+}
+
+.shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: rgb(var(--button-background-primary)) !important;
+  color: rgb(var(--button-text-primary)) !important;
+}
+
+shopify-accelerated-checkout,
+shopify-accelerated-checkout-cart {
+  --shopify-accelerated-checkout-button-block-size: 44px;
+  --shopify-accelerated-checkout-button-border-radius: var(--button-border-radius);
+  --shopify-accelerated-checkout-button-box-shadow: none;
+}
+
+.product-buy-buttons .accelerated-checkout-button {
+  background-color: #f287ec;
+}
+
+:host([page-type="product"]) .accelerated-checkout-button {
+  background-color: #f287ec;
+}
