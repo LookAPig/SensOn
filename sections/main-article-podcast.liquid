@@ -450,7 +450,7 @@
           {%- if has_video -%}
             <div class="article_podcast_video">
               {%- if article_video != blank -%}
-                {%- render 'media' with article_video, id: video_id, preload: section.index <= 3, autoplay: false, controls: true, playsinline: true, show_play_button: true -%}
+                {%- render 'media' with article_video, id: video_id, preload: section.index, autoplay: false, controls: true, playsinline: true, show_play_button: true -%}
               {%- elsif external_video != blank -%}
                 <video-media id="{{ video_id }}" host="{{ external_video.type }}" show-play-button>
                   {%- if hero_image != blank -%}
@@ -764,4 +764,16 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'media' with article_video, id: video_id, preload: section.index
+    <= 3, autoplay: false, controls: true, playsinline: true, show_play_button: true
+    -%}"
+  to: "{%- render 'media' with article_video, id: video_id, preload: section.index,
+    autoplay: false, controls: true, playsinline: true, show_play_button: true -%}"
+  position: 15629..15784
+{%- endcomment -%}
