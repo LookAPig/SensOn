@@ -23,6 +23,7 @@
       "name": "Our story banner",
       "settings": {
         "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/Real_people._Real_reactions_ee9043aa-2651-4d11-94ca-911c7b9239b8.jpg",
         "mobile_image": "shopify://shop_images/Real_people._Real_reactions.jpg",
         "desktop_height_mode": "custom",
         "desktop_height": 630,
@@ -182,6 +183,7 @@
       "name": "Our story banner",
       "settings": {
         "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/Curious_What_You_ll_Discover_76f77c1f-7dc9-4258-b893-0d4804229ebf.jpg",
         "mobile_image": "shopify://shop_images/Curious_What_You_ll_Discover.jpg",
         "desktop_height_mode": "custom",
         "desktop_height": 517,
