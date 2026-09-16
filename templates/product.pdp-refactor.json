@@ -1028,6 +1028,16 @@
       "settings": {
         "heading": "How to Use"
       }
+    },
+    "sticky_bar_MJgFCi": {
+      "type": "sticky-bar",
+      "name": "Sticky Bar",
+      "settings": {
+        "product": "senson-s1-wellness-companion",
+        "product_handle": "senson-s1-wellness-companion",
+        "badge_text": "Limited Time Price",
+        "button_text": "Shop Now"
+      }
     }
   },
   "order": [
@@ -1041,6 +1051,7 @@
     "scroll_images_TjAexy",
     "ss_comparison_table_22_Uhm4pg",
     "1777538267162d7a7c",
-    "how_works_aErNkp"
+    "how_works_aErNkp",
+    "sticky_bar_MJgFCi"
   ]
 }

@@ -998,6 +998,16 @@
         "overlay_color": "#000000",
         "overlay_opacity": 0
       }
+    },
+    "sticky_bar_WFLBDt": {
+      "type": "sticky-bar",
+      "name": "Sticky Bar",
+      "settings": {
+        "product": "senson-s1-wellness-companion",
+        "product_handle": "senson-s1-wellness-companion",
+        "badge_text": "Limited Time Price",
+        "button_text": "Shop Now"
+      }
     }
   },
   "order": [
@@ -1009,6 +1019,7 @@
     "blocks_WJG6Bc",
     "reviews_49wHXX",
     "quize_dBPiQp",
-    "newsletter_mBFWeB"
+    "newsletter_mBFWeB",
+    "sticky_bar_WFLBDt"
   ]
 }

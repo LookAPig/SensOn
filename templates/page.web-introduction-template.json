@@ -24,9 +24,9 @@
         "mobile_phone_offset_top": 42,
         "accent_color": "#f287ec",
         "tag": "AI Companion App For Women",
-        "title": "listens. Remembers. Responds.",
+        "title": "Listens. Remembers. Responds.",
         "description": "<p>Meet personalized AI companions, step into immersive voice stories, and shape every interaction around your mood—privately, at your pace.</p>",
-        "mobile_description": "<p>Meet personalized AI companions, step into immersive voice stories,</p>",
+        "mobile_description": "<p>Meet personalized AI companions, step into immersive voice stories, and shape every interaction around your mood—privately, at your pace.</p>",
         "desktop_text_offset_top": 12,
         "mobile_text_offset_top": 10,
         "desktop_buttons_offset_bottom": 10,
@@ -35,9 +35,9 @@
         "mobile_buttons_layout": "column",
         "button_width_desktop": 220,
         "button_width_mobile": 240,
-        "primary_button_text": "Start your free trial",
+        "primary_button_text": "Start Your Free Trial",
         "primary_button_link": "https://app.senson.ai/?utm_source=Shopify&utm_medium=web&utm_campaign=web_introduction",
-        "secondary_button_text": "See how it work",
+        "secondary_button_text": "See How It Works",
         "secondary_button_link": "",
         "video": "shopify://files/videos/0901-app使用展示视频.mp4",
         "external_video_url": ""
@@ -105,7 +105,7 @@
         "card_F7wajW": {
           "type": "card",
           "settings": {
-            "title": "Voice that pulls you in",
+            "title": "Voice That Pulls You In",
             "image": "shopify://shop_images/01.png",
             "text": "Hear every whisper, pause and breath through immersive voice-led stories and real-time conversation."
           }
@@ -121,7 +121,7 @@
         "card_hXdxCe": {
           "type": "card",
           "settings": {
-            "title": "Support when needed",
+            "title": "Always In Your Hands",
             "image": "shopify://shop_images/03.png",
             "text": "Choose the mood, guide the fantasy and change direction whenever you want. You are always in control."
           }
@@ -135,7 +135,7 @@
       "name": "Web introduction rules",
       "settings": {
         "subtitle": "Your Fantasy, Your Rules",
-        "title": "More than an AI chat. A world that responds to you.",
+        "title": "More Than an AI Chat. A World That Responds to You.",
         "description": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>",
         "accent_color": "#e879f9",
         "title_color": "#ffffff",
@@ -153,7 +153,7 @@
           "type": "card",
           "settings": {
             "tag": "Mood",
-            "title": "Find your frequency",
+            "title": "Find Your Frequency",
             "text": "Choose a character, mood or voice story that matches how you want to feel.",
             "image": "shopify://shop_images/Find_your_frequency_ec13e83a-c7cc-431e-9bee-34c605746b27.jpg",
             "mobile_image": "shopify://shop_images/Find_your_frequency_76de3316-13d1-4069-8cea-5263c3d06d60.jpg"
@@ -163,17 +163,17 @@
           "type": "card",
           "settings": {
             "tag": "Live",
-            "title": "Direct the fantasy",
+            "title": "Direct The Fantasy",
             "text": "Speak or type. Shape the scene and let your companion respond in real time.",
-            "image": "shopify://shop_images/Direct_the_fantasy_7c97a962-0a07-48d8-8901-05cdb1e0ce54.jpg",
-            "mobile_image": "shopify://shop_images/assemble_and_fit.webp"
+            "image": "shopify://shop_images/Direct_the_fantasy-pc.jpg",
+            "mobile_image": "shopify://shop_images/Direct_the_fantasy-h5.jpg"
           }
         },
         "card_8kkJk6": {
           "type": "card",
           "settings": {
             "tag": "Sync",
-            "title": "Feel the story",
+            "title": "Feel The Story",
             "text": "Enjoy the experience online—or connect SensOn S1 for synchronized, hands-free sensation.",
             "image": "shopify://shop_images/Feel_the_story_49fa7a29-f1dc-40bf-a7d6-8d7738f02f34.jpg",
             "mobile_image": "shopify://shop_images/Feel_the_story.jpg"
@@ -233,7 +233,7 @@
       "name": "Web intro hardware",
       "settings": {
         "subtitle": "Optional Hardware Connection",
-        "title": "Enjoy the story online. Feel it with SensOn S1.",
+        "title": "Enjoy The Story Online. Feel It With SensOn S1.",
         "description": "<p>You don't need a device to start. When SensOn S1 is connected, conversation and story cues can synchronize with hands-free, multi-zone sensation—turning fantasy into a complete sensory loop.</p>",
         "image": "shopify://shop_images/Enjoy_the_story_online._Feel_it_with_SensOn_S1.jpg",
         "mobile_image": "shopify://shop_images/Enjoy_the_story_online.jpg",
@@ -260,8 +260,8 @@
           "settings": {
             "icon": "shield",
             "icon_image": "shopify://shop_images/Private_by_design_2f4dc8bd-71e9-4702-9770-49e8f823e162.png",
-            "title": "Companions With Memory",
-            "text": "Return to characters that learn your preferences and make each interaction feel more personal over time."
+            "title": "Behind your sign-in",
+            "text": "Your conversations and saved preferences remain inside your private account."
           }
         },
         "card_hJJ6DN": {
@@ -269,8 +269,8 @@
           "settings": {
             "icon": "smile",
             "icon_image": "shopify://shop_images/Comfort-focused_setup.png",
-            "title": "Voice that pulls you in",
-            "text": "Hear every whisper, pause and breath through immersive voice-led stories and real-time conversation."
+            "title": "An inclusive adult space",
+            "text": "Female-focused experiences that welcome adult LGBTQ+ users and a spectrum of desires."
           }
         },
         "card_7PKghd": {
@@ -278,8 +278,8 @@
           "settings": {
             "icon": "chat",
             "icon_image": "shopify://shop_images/Support_when_needed.png",
-            "title": "Support when needed",
-            "text": "Choose the mood, guide the fantasy and change direction whenever you want. You are always in control."
+            "title": "Your choices, always",
+            "text": "You decide the character, pace, voice and whether to connect hardware."
           }
         }
       },
@@ -290,9 +290,9 @@
       ],
       "name": "Web intro icon card",
       "settings": {
-        "subtitle": "Your Fantasy, Your Rules",
-        "title": "More than an AI chat. A world that responds to you.",
-        "description": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>",
+        "subtitle": "Private By Design",
+        "title": "Your Fantasy Stays Yours.",
+        "description": "<p>Intimacy needs trust. SensOn is designed to keep the experience personal, adult and under your control.</p>",
         "base_background_color": "#000000",
         "accent_color": "#f287ec",
         "title_color": "#ffffff",
@@ -351,8 +351,8 @@
       ],
       "name": "Web introduction FAQ",
       "settings": {
-        "eyebrow": "Questiona,Answered",
-        "title": "Before you begin.",
+        "eyebrow": "Question,Answered",
+        "title": "Before You Begin.",
         "description": "<p>Everything you need to know before stepping into SensOn Web.</p>",
         "background_color": "#000000",
         "accent_color": "#f287ec",
@@ -374,9 +374,9 @@
         "overlay_opacity": 0,
         "accent_color": "#f287ec",
         "tag": "Your Mood. Your Fantasy. Your Rhythm.",
-        "title": "Ready to meet the fantasy that meets you back?",
+        "title": "Ready To Meet The Fantasy That Meets You Back?",
         "description": "<p>Start exploring personalized AI companions and interactive voice stories today.</p>",
-        "button_text": "Start Your 7-Days Trial",
+        "button_text": "Start Your 7-Day Trial",
         "button_link": "https://app.senson.ai/?utm_source=Shopify&utm_medium=web&utm_campaign=web_introduction",
         "button_border_color": "#f287ec",
         "product_max_width_desktop": 360,
@@ -386,6 +386,16 @@
         "mobile_height": "710px",
         "padding_desktop": 96,
         "padding_mobile": 64
+      }
+    },
+    "sticky_bar_wKxwdC": {
+      "type": "sticky-bar",
+      "name": "Sticky Bar",
+      "settings": {
+        "product": "senson-plus",
+        "product_handle": "",
+        "badge_text": "Limited Time Price",
+        "button_text": "Shop Now"
       }
     }
   },
@@ -398,6 +408,7 @@
     "web_introduction_hardware_k8m2Np",
     "web_introduction_icon_card_pxFeqU",
     "web_introduction_faq_VHVabA",
-    "web_introduction_footer_B39PmR"
+    "web_introduction_footer_B39PmR",
+    "sticky_bar_wKxwdC"
   ]
 }
