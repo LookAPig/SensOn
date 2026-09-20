@@ -233,6 +233,7 @@
         "video_z6aqLg": {
           "type": "video",
           "settings": {
+            "poster": "shopify://shop_images/aaamari.jpg",
             "video_url": "",
             "avatar": "shopify://shop_images/amari.jpg",
             "name": "Dr.Amari",
