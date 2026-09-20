@@ -207,7 +207,7 @@
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
         "button_label": "Know More",
-        "button_url": "",
+        "button_url": "shopify://products/senson-s1-wellness-companion",
         "show_stat_bar": false,
         "stat_bar_bg": "#000000",
         "stat_number": "17M+",
