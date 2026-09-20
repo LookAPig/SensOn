@@ -250,23 +250,13 @@
             "link_label": "Read expert article",
             "link_url": "https://www.adminbyamariagency.com/blog/alternatives-to-mainstream-porn"
           }
-        },
-        "article_PVVBBk": {
-          "type": "article",
-          "settings": {
-            "label": "DR. AMARI EXPERT ARTICLE",
-            "title": "A sex-positive look at more personal, ethical and imaginative ways to explore erotic content.",
-            "link_label": "Read expert article",
-            "link_url": ""
-          }
         }
       },
       "block_order": [
         "video_GWMrtH",
         "video_inVzyp",
         "video_z6aqLg",
-        "article_cicXjW",
-        "article_PVVBBk"
+        "article_cicXjW"
       ],
       "name": "Press media videos",
       "settings": {
