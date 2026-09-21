@@ -285,9 +285,10 @@
             }, {});
         
             let result;
-            let max = 0;
-            
+            let max = -Infinity;
+
             Object.keys(ret).forEach((key) => {
+              if (!key || key === "undefined") return;
               const { count, score } = ret[key];
               let temp = sortType === "count" ? count : score;
               if (temp > max) {
@@ -314,8 +315,8 @@
 
             // show result
             setTimeout(()=>{
-              questionWrapper.classList.toggle("is-show-result");
-              resultWrapper.classList.toggle("is-show-result");
+              questionWrapper.classList.add("is-show-result");
+              resultWrapper.classList.add("is-show-result");
             }, 10);
           }
         }
