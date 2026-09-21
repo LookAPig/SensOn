@@ -300,16 +300,17 @@
         
           let mode = innerFn('mode');
           let option = innerFn('option');
-          if (quizeResultData) {
+          if (quizeResultData && mode && option) {
             const key = [mode, option].map(v => v.toLowerCase()).join("_");
             const ret = quizeResultData[key];
            
             const img = resultWrapper.querySelector("img");
-            const title = resultWrapper.querySelector("h3");
+            const title = resultWrapper.querySelector(".h3");
             const desc = resultWrapper.querySelector("p");
-            img.src = ret.img;
-            title.innerText = ret.title;
-            desc.innerHTML = ret.desc;
+            if (!ret || !img || !title || !desc) return;
+            img.src = ret.img || "";
+            title.innerText = ret.title || "";
+            desc.innerHTML = ret.desc || "";
 
             // show result
             setTimeout(()=>{
@@ -320,20 +321,25 @@
         }
       
         questionWrapper.addEventListener('click', (e) => {
+          const answerEl = e.target.closest('.js-quize-question-answer');
+          const navLeft = e.target.closest('.js-quize-nav-left');
+          const navRight = e.target.closest('.js-quize-nav-right');
+          const resetEl = e.target.closest('.js-quize-question-reset');
+
           // 算分
-          if (e.target.classList.contains('js-quize-question-answer')) {
-            const { step, index, mode, score, option, optionScore } = e.target.dataset;
+          if (answerEl) {
+            const { step, index, mode, score, option, optionScore } = answerEl.dataset;
             const indexNum = +step;
             scoreMap[indexNum] = { step, index, mode, score, option, optionScore };
             console.log("scoreMap",scoreMap)
             questionBtnWrapper.querySelectorAll(".js-quize-question-answer").forEach((v, i) => v.dataset.index !== index && v.classList.remove('is-active-answer'));
-            e.target.classList.add("is-active-answer");
+            answerEl.classList.add("is-active-answer");
       
             indexNum !== 0 && questionWrapper.querySelector('.js-quize-nav-left')?.classList?.remove('is-disabled-nav');
             questionWrapper.querySelector('.js-quize-nav-right')?.classList?.remove('is-disabled-nav');
           }
       
-          if (e.target.classList.contains('js-quize-nav-left')) {
+          if (navLeft) {
             if (curIndex === 0) return;
             scoreMap = scoreMap.slice(0, curIndex);
             curIndex = curIndex - 1 < 0 ? 0 : curIndex - 1;
@@ -343,7 +349,7 @@
             el.click();
           }
       
-          if (e.target.classList.contains('js-quize-nav-right')) {
+          if (navRight) {
             if (!scoreMap[curIndex]) return;
             if (curIndex + 1 >= quizeData.length) {
               // 展示结果y
@@ -354,7 +360,7 @@
             fn();
           }
 
-          if(e.target.classList.contains("js-quize-question-reset")) {
+          if (resetEl) {
             curIndex = 0;
             scoreMap = [];
 
