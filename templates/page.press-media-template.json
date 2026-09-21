@@ -222,6 +222,7 @@
         },
         "video_inVzyp": {
           "type": "video",
+          "disabled": true,
           "settings": {
             "video_url": "",
             "avatar": "shopify://shop_images/lex_jpg.jpg",
@@ -232,6 +233,7 @@
         },
         "video_z6aqLg": {
           "type": "video",
+          "disabled": true,
           "settings": {
             "poster": "shopify://shop_images/aaamari.jpg",
             "video_url": "",
