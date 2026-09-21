@@ -90,7 +90,7 @@
   }
 
   /* 文案按卡片宽度等比缩放（基准约 400px），避免分辨率/缩放变化时比例失调 */
-  #shopify-section-{{ section.id }} .web_intro_choose .card_overlay {
+  #shopify-section-{{ section.id }} .web_intro_choose .card_content {
     background: linear-gradient(180deg, rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 0.72) 100%);
     bottom: 0;
     display: flex;
@@ -115,7 +115,7 @@
     margin: 0;
   }
 
-  #shopify-section-{{ section.id }} .web_intro_choose .card_overlay_title {
+  #shopify-section-{{ section.id }} .web_intro_choose .card_title {
     color: #ffffff;
     font-size: 24px;
     font-size: clamp(16px, 6cqw, 24px);
@@ -127,7 +127,11 @@
     word-break: normal;
   }
 
-  #shopify-section-{{ section.id }} .web_intro_choose .card_overlay_text {
+  #shopify-section-{{ section.id }} .web_intro_choose .card_accent_line {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_choose .card_text {
     color: rgb(255 255 255 / 0.88);
     font-size: 16px;
     font-size: clamp(12px, 4cqw, 16px);
@@ -137,10 +141,6 @@
     margin: 0;
     overflow-wrap: break-word;
     word-break: normal;
-  }
-
-  #shopify-section-{{ section.id }} .web_intro_choose .card_body {
-    display: none;
   }
 
   #shopify-section-{{ section.id }} .web_intro_choose .section_footer {
@@ -243,21 +243,22 @@
       width: 100%;
     }
 
-    #shopify-section-{{ section.id }} .web_intro_choose .card_overlay {
+    #shopify-section-{{ section.id }} .web_intro_choose .card_content {
+      background: none;
+      display: block;
+      inset: auto;
+      padding: 20px 0 0;
+      position: static;
+    }
+
+    #shopify-section-{{ section.id }} .web_intro_choose .card_tag {
       display: none;
     }
 
-    #shopify-section-{{ section.id }} .web_intro_choose .card_body {
-      display: block;
-      padding-top: 20px;
-    }
-
-    #shopify-section-{{ section.id }} .web_intro_choose .card_body_title {
+    #shopify-section-{{ section.id }} .web_intro_choose .card_title {
       color: var(--card-body-title);
       font-size: 18px;
-      font-weight: 700;
       line-height: 1.2;
-      margin: 0;
     }
 
     #shopify-section-{{ section.id }} .web_intro_choose .card_accent_line {
@@ -269,12 +270,10 @@
       width: 70px;
     }
 
-    #shopify-section-{{ section.id }} .web_intro_choose .card_body_text {
+    #shopify-section-{{ section.id }} .web_intro_choose .card_text {
       color: var(--card-body-text);
       font-size: 14px;
-      font-weight: 400;
       line-height: 1.5;
-      margin: 0;
     }
 
     #shopify-section-{{ section.id }} .web_intro_choose .section_footer {
@@ -360,25 +359,16 @@
                 {%- endif -%}
               </div>
 
-              <div class="card_overlay">
+              <div class="card_content">
                 {%- if block.settings.tag != blank -%}
                   <p class="card_tag">{{ block.settings.tag | escape }}</p>
                 {%- endif -%}
                 {%- if block.settings.title != blank -%}
-                  <h3 class="card_overlay_title">{{ block.settings.title | escape }}</h3>
-                {%- endif -%}
-                {%- if block.settings.text != blank -%}
-                  <p class="card_overlay_text">{{ block.settings.text | escape }}</p>
-                {%- endif -%}
-              </div>
-
-              <div class="card_body">
-                {%- if block.settings.title != blank -%}
-                  <h3 class="card_body_title">{{ block.settings.title | escape }}</h3>
+                  <h3 class="card_title">{{ block.settings.title | escape }}</h3>
                 {%- endif -%}
                 <span class="card_accent_line" aria-hidden="true"></span>
                 {%- if block.settings.text != blank -%}
-                  <p class="card_body_text">{{ block.settings.text | escape }}</p>
+                  <p class="card_text">{{ block.settings.text | escape }}</p>
                 {%- endif -%}
               </div>
             </article>
