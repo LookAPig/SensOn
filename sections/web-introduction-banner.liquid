@@ -470,11 +470,11 @@
   <div class="inner">
     <div class="text_block">
       {%- if section.settings.tag != blank -%}
-        <p class="tag">{{ section.settings.tag | escape }}</p>
+        <h1 class="tag">{{ section.settings.tag | escape }}</h1>
       {%- endif -%}
 
       {%- if section.settings.title != blank -%}
-        <h1 class="title">{{ section.settings.title | escape | newline_to_br }}</h1>
+        <div class="title">{{ section.settings.title | escape | newline_to_br }}</div>
       {%- endif -%}
 
       {%- if section.settings.description != blank -%}
