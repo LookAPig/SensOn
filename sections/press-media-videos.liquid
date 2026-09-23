@@ -16,6 +16,7 @@
     --article-bg: {{ section.settings.article_card_bg }};
     --article-label-color: {{ section.settings.article_label_color }};
     --article-title-color: {{ section.settings.article_title_color }};
+    --article-subtitle-color: {{ section.settings.article_subtitle_color }};
     --link-color: {{ section.settings.link_color }};
     background: {{ section.settings.background_color }};
     overflow: hidden;
@@ -113,8 +114,12 @@
     line-height: 1.3; margin: 0; text-align: left; text-transform: uppercase;
   }
   #shopify-section-{{ section.id }} .pmv .atitle {
-    color: var(--article-title-color); font-size: 16px; font-weight: 500; line-height: 1.4;
+    color: var(--article-title-color); font-size: 22px; font-weight: 500; line-height: 1.25;
     margin: 10px 0 0; text-align: left;
+  }
+  #shopify-section-{{ section.id }} .pmv .asubtitle {
+    color: var(--article-subtitle-color); font-size: 14px; font-weight: 400; line-height: 1.45;
+    margin: 8px 0 0; text-align: left;
   }
   #shopify-section-{{ section.id }} .pmv .amore {
     color: var(--link-color); display: inline-block; font-size: 16px; font-weight: 500; margin-top: auto;
@@ -148,7 +153,8 @@
     }
     #shopify-section-{{ section.id }} .pmv .abody { padding: 8px 8px 8px 0; }
     #shopify-section-{{ section.id }} .pmv .alabel { font-size: 16px; }
-    #shopify-section-{{ section.id }} .pmv .atitle { font-size: 16px; margin-top: 12px; }
+    #shopify-section-{{ section.id }} .pmv .atitle { font-size: 24px; margin-top: 12px; }
+    #shopify-section-{{ section.id }} .pmv .asubtitle { font-size: 16px; }
   }
 </style>
 
@@ -263,6 +269,9 @@
                 {%- if block.settings.title != blank -%}
                   <h3 class="atitle">{{ block.settings.title | escape }}</h3>
                 {%- endif -%}
+                {%- if block.settings.subtitle != blank -%}
+                  <p class="asubtitle">{{ block.settings.subtitle | escape | newline_to_br }}</p>
+                {%- endif -%}
                 {%- if block.settings.link_label != blank -%}
                   <a class="amore" href="{{ block.settings.link_url }}">{{ block.settings.link_label | escape }}</a>
                 {%- endif -%}
@@ -360,6 +369,7 @@
     { "type": "color", "id": "article_card_bg", "label": "图文卡片背景", "default": "#F5F5F5" },
     { "type": "color", "id": "article_label_color", "label": "图文标签颜色", "default": "#B3B3B3" },
     { "type": "color", "id": "article_title_color", "label": "图文标题颜色", "default": "#000000" },
+    { "type": "color", "id": "article_subtitle_color", "label": "图文副标题颜色", "default": "#000000" },
     { "type": "color", "id": "link_color", "label": "链接颜色", "default": "#F287EC" },
     { "type": "range", "id": "padding_top", "label": "上边距（移动）", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 48 },
     { "type": "range", "id": "padding_bottom", "label": "下边距（移动）", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 48 },
@@ -387,7 +397,8 @@
       "settings": [
         { "type": "image_picker", "id": "image", "label": "图片" },
         { "type": "text", "id": "label", "label": "标签", "default": "DR. AMARI EXPERT ARTICLE" },
-        { "type": "textarea", "id": "title", "label": "标题", "default": "A sex-positive look at more personal, ethical and imaginative ways to explore erotic content." },
+        { "type": "text", "id": "title", "label": "标题", "default": "Alternatives to Mainstream Porn" },
+        { "type": "textarea", "id": "subtitle", "label": "副标题", "default": "A sex-positive look at more personal, ethical and imaginative ways to explore erotic content." },
         { "type": "text", "id": "link_label", "label": "链接文案", "default": "Read expert article" },
         { "type": "url", "id": "link_url", "label": "链接" }
       ]

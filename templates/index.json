@@ -597,7 +597,6 @@
       "blocks": {
         "quize_result_6HgCEk": {
           "type": "quize_result",
-          "disabled": true,
           "settings": {
             "result_img_dom_gentle": "shopify://shop_images/2b4cc21b595d7d2540eeb735dcfeb6be.png",
             "result_title_dom_gentle": "Gentle Dominant",

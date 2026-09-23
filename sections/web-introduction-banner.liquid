@@ -6,6 +6,14 @@
   if mobile_description == blank
     assign mobile_description = section.settings.description
   endif
+  assign tag_html = section.settings.tag_html_tag | default: 'div'
+  unless tag_html == 'h1' or tag_html == 'h2' or tag_html == 'h3'
+    assign tag_html = 'div'
+  endunless
+  assign title_html = section.settings.title_html_tag | default: 'div'
+  unless title_html == 'h1' or title_html == 'h2' or title_html == 'h3'
+    assign title_html = 'div'
+  endunless
 -%}
 
 <style>
@@ -470,11 +478,11 @@
   <div class="inner">
     <div class="text_block">
       {%- if section.settings.tag != blank -%}
-        <p class="tag">{{ section.settings.tag | escape }}</p>
+        <{{ tag_html }} class="tag">{{ section.settings.tag | escape }}</{{ tag_html }}>
       {%- endif -%}
 
       {%- if section.settings.title != blank -%}
-        <h1 class="title">{{ section.settings.title | escape | newline_to_br }}</h1>
+        <{{ title_html }} class="title">{{ section.settings.title | escape | newline_to_br }}</{{ title_html }}>
       {%- endif -%}
 
       {%- if section.settings.description != blank -%}
@@ -748,11 +756,37 @@
       "default": "AI Companion App For Women"
     },
     {
+      "type": "select",
+      "id": "tag_html_tag",
+      "label": "标签 HTML",
+      "info": "用于 SEO。同一页面建议只保留一个 H1。",
+      "options": [
+        { "value": "div", "label": "DIV" },
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ],
+      "default": "div"
+    },
+    {
       "type": "textarea",
       "id": "title",
       "label": "标题",
       "default": "listens. Remembers. Responds.",
       "info": "支持换行。"
+    },
+    {
+      "type": "select",
+      "id": "title_html_tag",
+      "label": "标题 HTML",
+      "info": "用于 SEO。同一页面建议只保留一个 H1。",
+      "options": [
+        { "value": "div", "label": "DIV" },
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ],
+      "default": "div"
     },
     {
       "type": "richtext",

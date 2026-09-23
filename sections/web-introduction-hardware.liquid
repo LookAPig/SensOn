@@ -293,7 +293,7 @@
                 {%- assign step_index = forloop.index | prepend: '0' | slice: -2, 2 -%}
                 <div class="step" {{ block.shopify_attributes }}>
                   <span class="step_index">{{ step_index }}</span>
-                  <p class="step_text">{{ block.settings.text | escape }}</p>
+                  <h3 class="step_text">{{ block.settings.text | escape }}</h3>
                 </div>
               {%- endif -%}
             {%- endfor -%}
