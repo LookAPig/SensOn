@@ -223,6 +223,7 @@
         "video_inVzyp": {
           "type": "video",
           "settings": {
+            "poster": "shopify://shop_images/ChatGPT_Image_Sep_23_2026_06_03_47_PM.png",
             "video_url": "",
             "avatar": "shopify://shop_images/lex_jpg.jpg",
             "name": "Dr. Lexiinks",
