@@ -243,6 +243,7 @@
         },
         "article_cicXjW": {
           "type": "article",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/aaamari.jpg",
             "label": "DR. AMARI EXPERT ARTICLE",
