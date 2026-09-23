@@ -74,6 +74,8 @@
         "card_JibQgg": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/02_17fe275b-19d7-4399-bc48-8cd7b6a6ff19.jpg",
+            "video": "shopify://files/videos/snaptik.monster_d6b968db_57f3_499c_9f4c_c508470bffbf.mp4",
             "video_url": "",
             "role": "Actor · Live show host",
             "name": "jamesjoseph",
@@ -84,6 +86,8 @@
         "card_PpGnpR": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/janes.jpg",
+            "video": "shopify://files/videos/jans.mp4",
             "video_url": "",
             "role": "Comedy Creator",
             "name": "janessadanielle__",
