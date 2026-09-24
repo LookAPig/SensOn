@@ -62,7 +62,7 @@
         "logo_4HNg9C": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/2_1.png",
+            "image": "shopify://shop_images/she_konws.png",
             "alt": "",
             "link": ""
           }
@@ -70,7 +70,7 @@
         "logo_7CHGr4": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/0_1.png",
+            "image": "shopify://shop_images/yohoo.png",
             "alt": "",
             "link": ""
           }
@@ -86,7 +86,7 @@
         "logo_m4JaCc": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/she_konws.png",
+            "image": "shopify://shop_images/2_1.png",
             "alt": "",
             "link": ""
           }
@@ -122,7 +122,7 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 14,
         "subtitle_color": "#f287ec",
-        "heading": "The Most Unhinged Tech I’ve Ever Tested",
+        "heading": "“ The Most Unhinged Tech I’ve Ever Tested ”",
         "heading_mobile": "",
         "heading_font_size": 42,
         "heading_font_size_mobile": 22,
@@ -272,7 +272,7 @@
         "heading_font_size_mobile": 32,
         "heading_color": "#000000",
         "heading_tag": "h2",
-        "description": "<p>Sexologists, educators and relationship experts explore SensOn S1 from professional perspectives. Partnership videos and contributed articles are clearly labeled and intentionally separated from independent media coverage.</p>",
+        "description": "<p>Sexologists, educators and relationship experts explore SensOn S1 from professional perspectives.&nbsp;</p>",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
         "description_color": "#000000",
