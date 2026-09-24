@@ -98,6 +98,34 @@
     width: {{ section.settings.desktop_icon_size | times: 0.625 | round: 0 }}px;
     height: auto;
   }
+
+  /* Keep header (and its dropdowns) above page sticky navs / section stacking */
+  .shopify-section-group-header-group:has(#shopify-section-{{ section.id }}),
+  #shopify-section-{{ section.id }} {
+    z-index: 1000;
+  }
+
+  #shopify-section-{{ section.id }},
+  #shopify-section-{{ section.id }} height-observer,
+  #shopify-section-{{ section.id }} .x-header-wrapper {
+    overflow: visible;
+  }
+
+  /* Position dropdown relative to its nav item and center under the label */
+  #shopify-section-{{ section.id }} .header__primary-nav li:has(> .header__dropdown-menu) {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .header__dropdown-menu {
+    z-index: 10;
+    inset-inline-start: 50%;
+    transform: translateX(calc(-1 * var(--transform-logical-flip, 1) * 50%));
+  }
+
+  #shopify-section-{{ section.id }} .header__dropdown-menu .header__dropdown-menu {
+    inset-inline-start: calc(100% - 1px);
+    transform: none;
+  }
 </style>
 
 <height-observer variable="header">
