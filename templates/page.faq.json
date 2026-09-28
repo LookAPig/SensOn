@@ -26,7 +26,7 @@
           "type": "question",
           "settings": {
             "question": "How does the 3-in-1 system work?",
-            "answer": "<p>Open the Charging Case and remove all components. Gently insert the Vaginal Stimulator, position the Core comfortably between your thighs, align the Clitoral Stimulator, and secure the Nipple Stimulator with the clasp. See <a href=\"/pages/how-it-works\" title=\"How It Works\"><strong>How SensOn S1 Works</strong></a> for more details on setup and AI Sync.</p>",
+            "answer": "<p>Open the Charging Case and remove all components. Gently insert the Vaginal Stimulator, position the Core comfortably between your thighs, align the Clitoral Stimulator, and secure the Nipple Stimulator with the clasp. See <a href=\"/pages/how-it-works\" title=\"How It Works\">How SensOn S1 Works</a> for more details on setup and AI Sync.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -36,7 +36,7 @@
           "type": "question",
           "settings": {
             "question": "Can each attachment be used independently?",
-            "answer": "<p>The <strong>Vaginal and Clitoral Stimulators</strong> are removable, but they must be attached to the <strong>Core</strong> to function and cannot be used on their own. The <strong>Nipple Stimulator </strong>can be used independently.</p>",
+            "answer": "<p>The Vaginal and Clitoral Stimulators are removable, but they must be attached to the Core to function and cannot be used on their own. The Nipple Stimulator can be used independently.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -46,7 +46,7 @@
           "type": "question",
           "settings": {
             "question": "Is it truly hands-free?",
-            "answer": "<p>Yes! Users can gently hold the <strong>Core</strong> between their thighs, freeing their hands. And our product senses changes in pressure and responds with adaptive, real-time feedback.</p>",
+            "answer": "<p>Yes! Users can gently hold the Core between their thighs, freeing their hands. And our product senses changes in pressure and responds with adaptive, real-time feedback.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -56,7 +56,7 @@
           "type": "question",
           "settings": {
             "question": "How flexible or adjustable is the positioning?",
-            "answer": "<p>Because the relative position of the clitoris and vagina varies from person to person, we have specially designed an adjustable <strong>Clitoral Stimulator</strong>. By moving the stimulator head up or down, users can easily find the position that feels most natural and comfortable for them.</p>",
+            "answer": "<p>Because the relative position of the clitoris and vagina varies from person to person, we have specially designed an adjustable Clitoral Stimulator. By moving the stimulator head up or down, users can easily find the position that feels most natural and comfortable for them.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -85,7 +85,7 @@
         "question_7HLqWc": {
           "type": "question",
           "settings": {
-            "question": "<strong>How noisy is SensOn S1 during use?</strong>",
+            "question": "How noisy is SensOn S1 during use?",
             "answer": "<p>SensOn S1 operates at under 55 dB during use, approximately the volume of a quiet conversation.</p>",
             "icon": "none",
             "icon_width": 24,
