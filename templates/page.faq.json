@@ -226,7 +226,7 @@
           "type": "question",
           "settings": {
             "question": "Is the AI platform accessible via mobile app or desktop?",
-            "answer": "<p>Yes. SensOn is currently available through the SensOn App and Web, including access on desktop browsers. Android support is coming soon.</p>",
+            "answer": "<p>Yes. SensOn is currently available through the <a href=\"/pages/senson-app\" title=\"senson-app\">SensOn App and Web</a>, including access on desktop browsers. Android support is coming soon.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -266,7 +266,7 @@
           "type": "question",
           "settings": {
             "question": "How is my data protected when I use the AI platform?",
-            "answer": "<p>User data is handled in accordance with SensOn’s Privacy Policy. We take privacy seriously and use appropriate safeguards to protect personal information. For details on how your information is collected, used, protected, and disclosed, please refer to our Privacy Policy.</p>",
+            "answer": "<p>User data is handled in accordance with SensOn’s Privacy Policy, which explains how personal information is used, protected, and disclosed. Please refer to the <a href=\"/policies/privacy-policy\" title=\"Privacy Policy\"><strong>Privacy Policy</strong></a> for full details.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -396,7 +396,7 @@
           "type": "question",
           "settings": {
             "question": "Can I get a refund if it doesn’t meet my expectations?",
-            "answer": "<p>Due to the intimate nature of our products and for health and hygiene protection, <strong>all sales are final once the product has shipped</strong>. Returns or refunds are not accepted, whether the product is sealed or unsealed, unless the item is defective.</p>",
+            "answer": "<p>Due to the intimate nature of our products, all sales are final once the product has shipped, unless the item is defective. See our <a href=\"/policies/shipping-policy\" title=\"Shipping Policy\"><strong>Shipping & Returns Policy</strong></a> for full details.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
