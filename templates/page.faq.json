@@ -146,7 +146,7 @@
           "type": "question",
           "settings": {
             "question": "How long does it take to fully charge?",
-            "answer": "<p>Approximately <strong>2–3 hours</strong>. After each use, all components may be placed back into the charging case while it is connected to power.  Continuous charging is supported and unplugging is not required.</p>",
+            "answer": "<p>A full charge takes approximately 2 hours. After use, place all components back into the charging case for charging.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -275,7 +275,7 @@
         "question_cntAAq": {
           "type": "question",
           "settings": {
-            "question": "What materials is the product made from — is it body-safe and hypoallergenic?",
+            "question": "<strong>What materials is SensOn S1 made from, and are they body-safe?</strong>",
             "answer": "<p>We use<strong> FDA-compliant, medical-grade silicone</strong>.</p>",
             "icon": "none",
             "icon_width": 24,
