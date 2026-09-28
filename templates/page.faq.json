@@ -275,7 +275,7 @@
         "question_cntAAq": {
           "type": "question",
           "settings": {
-            "question": "<strong>What materials is SensOn S1 made from, and are they body-safe?</strong>",
+            "question": "What materials is SensOn S1 made from, and are they body-safe?",
             "answer": "<p>SensOn S1 is made from FDA-grade, REACH-compliant body-safe silicone and ABS.</p>",
             "icon": "none",
             "icon_width": 24,
@@ -296,7 +296,7 @@
           "type": "question",
           "settings": {
             "question": "How do I clean it safely without damaging the hardware?",
-            "answer": "<p>Clean the device before and after each use with warm water and mild, unscented soap, avoiding alcohol, solvents, or abrasive cleaners. Ensure all components are completely dry before storage, and do not immerse any part of the device for extended periods. The <strong>Charging Case </strong>and USB-C charging cable <strong>must not</strong> be exposed to water.</p>",
+            "answer": "<p>Clean the device before and after each use with warm water and mild, unscented soap, avoiding alcohol, solvents, or abrasive cleaners. Ensure all components are completely dry before storage, and do not immerse any part of the device for extended periods. The Charging Case and USB-C charging cable must not be exposed to water.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -325,8 +325,8 @@
         "question_hxqQTe": {
           "type": "question",
           "settings": {
-            "question": "<strong>How does SensOn S1 connect to the AI platform?</strong>",
-            "answer": "<p><strong>You can connect your SensOn S1 through either the SensOn App or SensOn Web.</strong></p><ol><li>Download the <a href=\"https://apps.apple.com/us/app/senson/id6755462239\" title=\"https://apps.apple.com/us/app/senson/id6755462239\">SensOn app from the App Store</a>, enable Bluetooth, and follow the in-app instructions to connect your S1.</li><li>Connect your S1 to Wi-Fi, then follow the instructions on <a href=\"https://app.senson.ai/?utm_source=Shopify&utm_medium=web&utm_campaign=web_introduction\" title=\"https://app.senson.ai/?utm_source=Shopify&utm_medium=web&utm_campaign=web_introduction\">SensOn Web</a> to link your device to your account.</li></ol>",
+            "question": "How does SensOn S1 connect to the AI platform?",
+            "answer": "<p>You can connect your SensOn S1 through either the SensOn App or SensOn Web.</p><ol><li>Download the <a href=\"https://apps.apple.com/us/app/senson/id6755462239\" title=\"https://apps.apple.com/us/app/senson/id6755462239\">SensOn app from the App Store</a>, enable Bluetooth, and follow the in-app instructions to connect your S1.</li><li>Connect your S1 to Wi-Fi, then follow the instructions on <a href=\"https://app.senson.ai/?utm_source=Shopify&utm_medium=web&utm_campaign=web_introduction\" title=\"https://app.senson.ai/?utm_source=Shopify&utm_medium=web&utm_campaign=web_introduction\">SensOn Web</a> to link your device to your account.</li></ol>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -396,7 +396,7 @@
           "type": "question",
           "settings": {
             "question": "Can I get a refund if it doesn’t meet my expectations?",
-            "answer": "<p>Due to the intimate nature of our products, all sales are final once the product has shipped, unless the item is defective. See our <a href=\"/policies/shipping-policy\" title=\"Shipping Policy\"><strong>Shipping & Returns Policy</strong></a> for full details.</p>",
+            "answer": "<p>Due to the intimate nature of our products, all sales are final once the product has shipped, unless the item is defective. See our <a href=\"/policies/shipping-policy\" title=\"Shipping Policy\">Shipping & Returns Policy</a> for full details.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
