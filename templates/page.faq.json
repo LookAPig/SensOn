@@ -366,7 +366,7 @@
           "type": "question",
           "settings": {
             "question": "Is the AI content free or subscription-based?",
-            "answer": "<p>The AI content is <strong>subscription-based</strong>. Pre-order customers will receive <strong>7 days of free access</strong> as a complimentary trial.</p>",
+            "answer": "<p>SensOn AI content is subscription-based. New users can start with a 7-day free trial, and current plan details are shown before you confirm a subscription.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -376,7 +376,7 @@
           "type": "question",
           "settings": {
             "question": "Are there premium AI features?",
-            "answer": "<p>Yes. Our subscription includes a <strong>Basic</strong> and a <strong>Premium</strong> tier. The Premium plan offers extended conversation limits and access to advanced features.</p>",
+            "answer": "<p>Yes. SensOn currently offers Plus and Premium subscription plans. Current features and pricing for each plan are shown before you subscribe.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
