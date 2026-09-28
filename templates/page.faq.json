@@ -406,7 +406,7 @@
           "type": "question",
           "settings": {
             "question": "Does the product come with a warranty?",
-            "answer": "<p>Yes. SensOn provides a <strong>one-year limited warranty</strong> on all rechargeable and battery-powered products purchased directly from senson.ai or from an authorized reseller. Please refer to our warranty policy for full terms and conditions.</p>",
+            "answer": "<p>Yes. SensOn provides a one-year limited warranty on rechargeable and battery-powered products purchased directly from senson.ai or from an authorized reseller. Please refer to our <a href=\"https://senson.ai/pages/warranty-return-policy\" title=\"https://senson.ai/pages/warranty-return-policy\">Warranty Policy</a> for full terms and conditions.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
