@@ -325,7 +325,7 @@
         "question_hxqQTe": {
           "type": "question",
           "settings": {
-            "question": "How does the device connect to the AI platform?",
+            "question": "<strong>How does SensOn S1 connect to the AI platform?</strong>",
             "answer": "<p><strong>You can connect your SensOn S1 through either the SensOn App or SensOn Web.</strong></p><ol><li>Download the SensOn app from the App Store, enable Bluetooth, and follow the in-app instructions to connect your S1.</li><li>Connect your S1 to Wi-Fi, then follow the instructions on SensOn Web to link your device to your account.</li></ol>",
             "icon": "none",
             "icon_width": 24,
