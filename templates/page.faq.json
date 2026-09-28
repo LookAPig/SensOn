@@ -226,7 +226,7 @@
           "type": "question",
           "settings": {
             "question": "Is the AI platform accessible via mobile app or desktop?",
-            "answer": "<p>At present, it supports <strong>IOS mobile app </strong>only.  Android and web versions will be available soon.</p>",
+            "answer": "<p>Yes. SensOn is currently available through the SensOn App and Web, including access on desktop browsers. Android support is coming soon.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -501,7 +501,8 @@
         "product": "",
         "product_handle": "senson-s1-wellness-companion",
         "badge_text": "Limited Time Price",
-        "button_text": "Shop Now"
+        "button_text": "Shop Now",
+        "button_url": ""
       }
     }
   },
