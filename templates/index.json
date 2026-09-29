@@ -461,7 +461,7 @@
             "stars": 5,
             "avatar": "shopify://shop_images/e.jpg",
             "creator_name": "eliseabell",
-            "creator_desc": "Wellness Advocate,LGBTQ+ Creator  ,Ballerina",
+            "creator_desc": "Wellness Advocate,LGBTQ+,Ballerina",
             "creator_subs": "97K Subscribers"
           }
         },
@@ -1005,7 +1005,8 @@
         "product": "senson-s1-wellness-companion",
         "product_handle": "senson-s1-wellness-companion",
         "badge_text": "Limited Time Price",
-        "button_text": "Shop Now"
+        "button_text": "Shop Now",
+        "button_url": ""
       }
     }
   },
