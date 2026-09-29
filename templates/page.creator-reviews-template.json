@@ -94,12 +94,51 @@
             "followers": "229K",
             "quote": "“AI getting a little too smart for me these days. I was definitely not expecting all of this, but the technology behind it actually is really impressive.”"
           }
+        },
+        "card_KFFk3U": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/just-lex.jpg",
+            "video": "shopify://files/videos/just-lex.mp4",
+            "video_url": "",
+            "role": "Wellness Intimacy Guide",
+            "name": "just-lex",
+            "followers": "780K",
+            "quote": "“It literally reads your body and adjust on its own. No buttons, no interruptions.”"
+          }
+        },
+        "card_htGG7H": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/kat.jpg",
+            "video": "shopify://files/videos/file_v3_00128_9c5d571a-2656-4d04-861a-21317756cf6g.mp4",
+            "video_url": "",
+            "role": "Female-focused creator",
+            "name": "misskaterinar",
+            "followers": "21K",
+            "quote": "“All accessories are magnetic, like grown‑up Lego. Connect to the app, pick your content, and the character responds to you in real time!”"
+          }
+        },
+        "card_njDB3V": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/adhd.jpg",
+            "video": "shopify://files/videos/eliseabell.mp4",
+            "video_url": "",
+            "role": "Renowned Ballerina",
+            "name": "eliseabell",
+            "followers": "97K",
+            "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
+          }
         }
       },
       "block_order": [
         "card_y63JRg",
         "card_JibQgg",
-        "card_PpGnpR"
+        "card_PpGnpR",
+        "card_KFFk3U",
+        "card_htGG7H",
+        "card_njDB3V"
       ],
       "name": "Creator reviews",
       "settings": {
