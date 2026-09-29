@@ -154,6 +154,18 @@
             "followers": "80K",
             "quote": "“SensOn S1: One of the world's FIRST AI intimate experiencesthat redefines pleasure. Ladies, would you try this? Unbox with usand see!”"
           }
+        },
+        "card_AULGCi": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/jask.jpg",
+            "video": "shopify://files/videos/jasknot.mp4",
+            "video_url": "",
+            "role": "LGBTQ+ · Comedy Influencer",
+            "name": "jasknotjaz",
+            "followers": "33K",
+            "quote": "“All you need to do is lie down, that's it.The app is interactive, and the more you use it, it's gonna get to know your body, it's gonna get to know what you like.”"
+          }
         }
       },
       "block_order": [
@@ -164,7 +176,8 @@
         "card_htGG7H",
         "card_njDB3V",
         "card_cEL9Cy",
-        "card_aXAbjm"
+        "card_aXAbjm",
+        "card_AULGCi"
       ],
       "name": "Creator reviews",
       "settings": {
