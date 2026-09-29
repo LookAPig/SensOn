@@ -166,6 +166,42 @@
             "followers": "33K",
             "quote": "“All you need to do is lie down, that's it.The app is interactive, and the more you use it, it's gonna get to know your body, it's gonna get to know what you like.”"
           }
+        },
+        "card_JHYrfi": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/bxsassy2.jpg",
+            "video": "shopify://files/videos/bxsassy.mp4",
+            "video_url": "",
+            "role": "Influencer Manager",
+            "name": "bxsassy2",
+            "followers": "9.3K",
+            "quote": "“I can find a story on the app that helps me play out my deepest desire sand choose from over 300 characters to find the woman of my dreams in a role play scenario.”"
+          }
+        },
+        "card_aWPxiN": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/f.jpg",
+            "video": "shopify://files/videos/florencebark.mp4",
+            "video_url": "",
+            "role": "Women’s Wellness Host",
+            "name": "florencebark",
+            "followers": "30K",
+            "quote": "“Place between your thighs and let all three zones sync with your body, while connecting with the fantacies made for you.”"
+          }
+        },
+        "card_VwHJny": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/vvaishnavi04.jpg",
+            "video": "shopify://files/videos/file_v3_00128_db51e244-e376-48a8-b2ea-3003020570eg.mp4",
+            "video_url": "",
+            "role": "AI enthusiast",
+            "name": "vvaishnavi04",
+            "followers": "694K",
+            "quote": "“This might be the most futuristic thing I've unboxed — not a chatbot, but the first AI-driven sensory experience you can physically enjoy.”"
+          }
         }
       },
       "block_order": [
@@ -177,7 +213,10 @@
         "card_njDB3V",
         "card_cEL9Cy",
         "card_aXAbjm",
-        "card_AULGCi"
+        "card_AULGCi",
+        "card_JHYrfi",
+        "card_aWPxiN",
+        "card_VwHJny"
       ],
       "name": "Creator reviews",
       "settings": {
