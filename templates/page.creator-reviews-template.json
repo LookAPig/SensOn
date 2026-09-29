@@ -130,6 +130,16 @@
             "followers": "97K",
             "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
           }
+        },
+        "card_cEL9Cy": {
+          "type": "card",
+          "settings": {
+            "video_url": "",
+            "role": "Actress · Creator",
+            "name": "Lilly Singh",
+            "followers": "14.2M",
+            "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
+          }
         }
       },
       "block_order": [
@@ -138,7 +148,8 @@
         "card_PpGnpR",
         "card_KFFk3U",
         "card_htGG7H",
-        "card_njDB3V"
+        "card_njDB3V",
+        "card_cEL9Cy"
       ],
       "name": "Creator reviews",
       "settings": {
