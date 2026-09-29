@@ -134,6 +134,18 @@
         "card_cEL9Cy": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/jkiillem.jpg",
+            "video": "shopify://files/videos/file_v3_00128_26b6c7c2-7a56-42f1-a05c-81bb7b995feg.mp4",
+            "video_url": "",
+            "role": "LGBTQ+ Performer",
+            "name": "jkiillem",
+            "followers": "150K",
+            "quote": "“This is an AI fantasy software that you can actually feel. The device pairs with a premium AI character app which has synched hardware.”"
+          }
+        },
+        "card_aXAbjm": {
+          "type": "card",
+          "settings": {
             "video_url": "",
             "role": "Actress · Creator",
             "name": "Lilly Singh",
@@ -149,7 +161,8 @@
         "card_KFFk3U",
         "card_htGG7H",
         "card_njDB3V",
-        "card_cEL9Cy"
+        "card_cEL9Cy",
+        "card_aXAbjm"
       ],
       "name": "Creator reviews",
       "settings": {
