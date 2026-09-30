@@ -1,6 +1,7 @@
 {%- liquid
   assign heading_tag = section.settings.heading_tag | default: 'h2'
   assign enable_accordion = section.settings.enable_accordion
+  assign module_anchor = section.settings.module_id | strip | remove: '#' | replace: ' ', '-' | downcase
 -%}
 
 <style>
@@ -93,6 +94,7 @@
 <section
   class="our_story_faq{% if enable_accordion %} is_accordion{% endif %}"
   id="our-story-faq-{{ section.id }}"
+  {% if module_anchor != blank %}data-module-anchor="{{ module_anchor | escape }}"{% endif %}
   data-accordion="{% if enable_accordion %}true{% else %}false{% endif %}"
 >
   <div class="inner">
@@ -210,6 +212,7 @@
   "disabled_on": { "groups": ["header", "footer"] },
   "max_blocks": 12,
   "settings": [
+    { "type": "text", "id": "module_id", "label": "模块标识", "info": "供 Our story banner 按钮滚动定位。同一页面请保持唯一，例如 story-faq。不需要加 #。" },
     { "type": "checkbox", "id": "enable_accordion", "label": "点击问题展开答案", "info": "打开后电脑端为手风琴；关闭后电脑端全部展开。移动端始终为手风琴。", "default": false },
     { "type": "color_background", "id": "color_background", "label": "背景色", "default": "linear-gradient(180deg, #2A1638 0%, #1A1224 100%)" },
     { "type": "color", "id": "accent_color", "label": "序号/箭头颜色", "default": "#F287EC" },
