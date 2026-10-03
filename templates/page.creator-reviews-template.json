@@ -43,7 +43,9 @@
         "description_font_size": 16,
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
+        "module_id": "Expert insights",
         "button_label": "Know More",
+        "button_scroll_id": "",
         "button_url": "",
         "show_stat_bar": true,
         "stat_bar_bg": "#000000",
@@ -306,6 +308,9 @@
     },
     "our_story_banner_mMe6X6": {
       "type": "our-story-banner",
+      "custom_css": [
+        ".our_story_banner .content--center {justify-content: center;}"
+      ],
       "name": "Our story banner",
       "settings": {
         "allow_transparent_header": false,
@@ -329,7 +334,9 @@
         "description_font_size": 16,
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
+        "module_id": "",
         "button_label": "Know More",
+        "button_scroll_id": "",
         "button_url": "shopify://products/senson-s1-wellness-companion",
         "show_stat_bar": false,
         "stat_bar_bg": "#000000",
