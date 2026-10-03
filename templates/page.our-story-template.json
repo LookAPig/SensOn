@@ -43,7 +43,9 @@
         "description_font_size": 16,
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
+        "module_id": "",
         "button_label": "",
+        "button_scroll_id": "",
         "button_url": "",
         "show_stat_bar": false,
         "stat_bar_bg": "#000000",
@@ -62,7 +64,9 @@
         "subheading_FF8Ux7": {
           "type": "subheading",
           "settings": {
-            "text": "Our Core Truths"
+            "text": "Our Core Truths",
+            "font_size_desktop": 0,
+            "font_size_mobile": 0
           }
         },
         "heading_NCK6LD": {
@@ -70,6 +74,8 @@
           "settings": {
             "text": "AI is for pleasure",
             "heading_tag": "h2",
+            "font_size_desktop": 0,
+            "font_size_mobile": 0,
             "indent": "none",
             "highlight_effect": "default",
             "highlight_accent_color": "",
@@ -79,7 +85,9 @@
         "richtext_UPX3T6": {
           "type": "richtext",
           "settings": {
-            "text": "<p>We were taught to believe that the best human–AI connections should resemble love. They shouldn’t. AI is not here to replace relationships. It’s here to serve pleasure—without loyalty, expectation or judgment.<br/><br/></p>"
+            "text": "<p>We were taught to believe that the best human–AI connections should resemble love. They shouldn’t. AI is not here to replace relationships. It’s here to serve pleasure—without loyalty, expectation or judgment.<br/><br/></p>",
+            "font_size_desktop": 0,
+            "font_size_mobile": 0
           }
         }
       },
@@ -93,7 +101,11 @@
       "settings": {
         "color_scheme": "scheme-638f34b5-790c-4c9f-99b0-ef01e713fba8",
         "content_width": "lg",
-        "text_alignment": "center"
+        "text_alignment": "center",
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60,
+        "desktop_padding_top": 80,
+        "desktop_padding_bottom": 80
       }
     },
     "our_story_banner_P6KDez": {
@@ -121,7 +133,9 @@
         "description_font_size": 16,
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
+        "module_id": "",
         "button_label": "",
+        "button_scroll_id": "",
         "button_url": "",
         "show_stat_bar": false,
         "stat_bar_bg": "#000000",
@@ -166,6 +180,7 @@
       ],
       "name": "Our story FAQ",
       "settings": {
+        "module_id": "",
         "enable_accordion": false,
         "color_background": "linear-gradient(180deg, rgba(42, 22, 56, 1), rgba(26, 18, 36, 1) 100%)",
         "accent_color": "#f287ec",
@@ -214,7 +229,9 @@
         "description_font_size": 16,
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
+        "module_id": "",
         "button_label": "",
+        "button_scroll_id": "",
         "button_url": "",
         "show_stat_bar": false,
         "stat_bar_bg": "#000000",
@@ -267,6 +284,7 @@
       ],
       "name": "Our story FAQ",
       "settings": {
+        "module_id": "",
         "enable_accordion": true,
         "color_background": "linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 100%)",
         "accent_color": "#f287ec",
@@ -315,7 +333,9 @@
         "description_font_size": 16,
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
+        "module_id": "",
         "button_label": "Discover SensOn S1",
+        "button_scroll_id": "",
         "button_url": "shopify://products/senson-s1-wellness-companion",
         "show_stat_bar": false,
         "stat_bar_bg": "#000000",
