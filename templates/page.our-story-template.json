@@ -74,7 +74,7 @@
           "settings": {
             "text": "AI is for pleasure",
             "heading_tag": "h2",
-            "font_size_desktop": 0,
+            "font_size_desktop": 42,
             "font_size_mobile": 0,
             "indent": "none",
             "highlight_effect": "default",
