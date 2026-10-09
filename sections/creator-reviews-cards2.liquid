@@ -83,7 +83,7 @@
   }
 </style>
 
-<section class="crc2">
+<section class="crc2" data-module-anchor="{{ section.settings.section_id }}">
   <div class="inner">
     <div class="header">
       {%- if section.settings.subtitle != blank -%}
@@ -130,6 +130,7 @@
   "class": "shopify-section--expert-insights",
   "disabled_on": { "groups": ["header", "footer"] },
   "settings": [
+    { "type": "text", "id": "section_id", "label": "section_id" },
     { "type": "color", "id": "color_background", "label": "背景色", "default": "#000000" },
     { "type": "header", "content": "文案" },
     { "type": "text", "id": "subtitle", "label": "副标题", "default": "Expert insights" },
