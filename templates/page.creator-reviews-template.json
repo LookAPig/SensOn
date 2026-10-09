@@ -45,7 +45,7 @@
         "description_color": "#ffffff",
         "module_id": "Expert insights",
         "button_label": "Know More",
-        "button_scroll_id": "",
+        "button_scroll_id": "123",
         "button_url": "",
         "show_stat_bar": true,
         "stat_bar_bg": "#000000",
@@ -222,6 +222,7 @@
       ],
       "name": "Creator reviews",
       "settings": {
+        "section_id": "",
         "color_background": "#ffffff",
         "subtitle": "Creator Stories",
         "subtitle_font_size": 24,
@@ -286,6 +287,7 @@
       ],
       "name": "Expert insights",
       "settings": {
+        "section_id": "123",
         "color_background": "#000000",
         "subtitle": "Expert insights",
         "subtitle_font_size": 24,
