@@ -242,10 +242,10 @@
         "name_color": "#000000",
         "followers_color": "#000000",
         "quote_color": "#000000",
-        "desktop_padding_top": 152,
-        "desktop_padding_bottom": 152,
-        "mobile_padding_top": 68,
-        "mobile_padding_bottom": 68
+        "desktop_padding_top": 148,
+        "desktop_padding_bottom": 148,
+        "mobile_padding_top": 80,
+        "mobile_padding_bottom": 80
       }
     },
     "creator_reviews_cards2_EiNs01": {
@@ -301,10 +301,10 @@
         "name_color": "#ffffff",
         "role_color": "#a0a0a0",
         "quote_color": "#ffffff",
-        "desktop_padding_top": 152,
-        "desktop_padding_bottom": 152,
-        "mobile_padding_top": 68,
-        "mobile_padding_bottom": 68
+        "desktop_padding_top": 148,
+        "desktop_padding_bottom": 148,
+        "mobile_padding_top": 80,
+        "mobile_padding_bottom": 80
       }
     },
     "our_story_banner_mMe6X6": {
