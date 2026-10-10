@@ -30,6 +30,8 @@
         "mobile_height_mode": "custom",
         "mobile_height": 527,
         "text_align": "center",
+        "mobile_text_align": "center",
+        "mobile_text_offset_top": 80,
         "subtitle": "Press & Media",
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
