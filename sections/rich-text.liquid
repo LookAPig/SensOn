@@ -14,6 +14,16 @@
   -%}
 
   <style>
+    #shopify-section-{{ section.id }} .section-spacing {
+      padding-block-start: {{ section.settings.mobile_padding_top | default: 30 }}px;
+      padding-block-end: {{ section.settings.mobile_padding_bottom | default: 30 }}px;
+    }
+    @media screen and (min-width: 750px) {
+      #shopify-section-{{ section.id }} .section-spacing {
+        padding-block-start: {{ section.settings.desktop_padding_top | default: 75 }}px;
+        padding-block-end: {{ section.settings.desktop_padding_bottom | default: 75 }}px;
+      }
+    }
     {%- for block in section.blocks -%}
       {%- liquid
         assign size_mobile = block.settings.font_size_mobile | default: 0 | plus: 0
@@ -203,6 +213,42 @@
       "id": "text_alignment",
       "label": "t:global.position.content_position",
       "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "上下边距"
+    },
+    {
+      "type": "header",
+      "content": "移动端"
+    },
+    {
+      "type": "number",
+      "id": "mobile_padding_top",
+      "label": "上边距（px）",
+      "default": 30
+    },
+    {
+      "type": "number",
+      "id": "mobile_padding_bottom",
+      "label": "下边距（px）",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "电脑端"
+    },
+    {
+      "type": "number",
+      "id": "desktop_padding_top",
+      "label": "上边距（px）",
+      "default": 75
+    },
+    {
+      "type": "number",
+      "id": "desktop_padding_bottom",
+      "label": "下边距（px）",
+      "default": 75
     }
   ],
   "blocks": [
@@ -306,7 +352,7 @@
           "type": "range",
           "id": "font_size_desktop",
           "min": 0,
-          "max": 120,
+          "max": 100,
           "step": 1,
           "unit": "px",
           "label": "电脑端字号",
