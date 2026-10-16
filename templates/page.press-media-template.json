@@ -338,7 +338,7 @@
         "heading_font_size": 42,
         "heading_font_size_mobile": 24,
         "heading_color": "#ffffff",
-        "heading_tag": "h2",
+        "heading_tag": "h3",
         "button_label": "Contact PR",
         "button_url": "shopify://pages/contact-us",
         "button_bg": "#f287ec",
