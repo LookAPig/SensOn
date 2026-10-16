@@ -7,6 +7,7 @@
   if mobile_image == blank
     assign mobile_image = desktop_image
   endif
+  assign sub_tag = section.settings.sub_tag | default: 'h2'
   assign heading_tag = section.settings.heading_tag | default: 'h1'
   assign text_align = section.settings.text_align | default: 'center'
   assign mobile_text_align = section.settings.mobile_text_align | default: 'left'
@@ -177,7 +178,8 @@
   </div>
   <div class="content content--{{ text_align }} content-m--{{ mobile_text_align }}">
     {%- if section.settings.subtitle != blank -%}
-      <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
+      {% comment %} <p class="subtitle">{{ section.settings.subtitle | escape }}</p> {% endcomment %}
+      <{{ sub_tag }} class="subtitle">{{ section.settings.subtitle | escape }}</{{ sub_tag }}>
     {%- endif -%}
     {%- if section.settings.heading != blank -%}
       <{{ heading_tag }} class="title">{{ section.settings.heading | escape | newline_to_br }}</{{ heading_tag }}>
@@ -274,6 +276,11 @@
     { "type": "range", "id": "subtitle_font_size", "label": "副标题字号（电脑）", "min": 12, "max": 48, "step": 1, "unit": "px", "default": 24 },
     { "type": "range", "id": "subtitle_font_size_mobile", "label": "副标题字号（移动）", "min": 12, "max": 36, "step": 1, "unit": "px", "default": 16 },
     { "type": "color", "id": "subtitle_color", "label": "副标题颜色", "default": "#F287EC" },
+    { "type": "select", "id": "sub_tag", "label": "副标题标签", "info": "用于 SEO。同一页面建议只保留一个 H1。", "options": [
+      { "value": "h1", "label": "H1" },
+      { "value": "h2", "label": "H2" },
+      { "value": "h3", "label": "H3" }
+    ], "default": "h1" },
     { "type": "textarea", "id": "heading", "label": "大标题", "default": "Why SensOn" },
     { "type": "range", "id": "heading_font_size", "label": "大标题字号（电脑）", "min": 20, "max": 80, "step": 1, "unit": "px", "default": 42 },
     { "type": "range", "id": "heading_font_size_mobile", "label": "大标题字号（移动）", "min": 16, "max": 48, "step": 1, "unit": "px", "default": 28 },
