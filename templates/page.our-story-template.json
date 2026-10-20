@@ -36,6 +36,7 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
         "subtitle_color": "#f287ec",
+        "sub_tag": "h1",
         "heading": "Why SensOn",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
@@ -128,6 +129,7 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
         "subtitle_color": "#f287ec",
+        "sub_tag": "h1",
         "heading": "We create a sex experience that reflects you",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
@@ -226,6 +228,7 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
         "subtitle_color": "#f287ec",
+        "sub_tag": "h1",
         "heading": "Any Lover She Wants.\nAny Story She Imagines. \nA Fantasy She Can Feel.",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
@@ -332,6 +335,7 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
         "subtitle_color": "#f287ec",
+        "sub_tag": "h1",
         "heading": "An AI Companion \nYou Can Feel and Touch.",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
@@ -355,6 +359,17 @@
         "stat_text_color": "#ffffff",
         "stat_divider_color": "#f287ec"
       }
+    },
+    "sticky_bar_ARajBA": {
+      "type": "sticky-bar",
+      "name": "Sticky Bar",
+      "settings": {
+        "product": "senson-s1-wellness-companion",
+        "product_handle": "senson-s1",
+        "badge_text": "Limited Time Price",
+        "button_text": "Shop Now",
+        "button_url": "shopify://products/senson-s1-wellness-companion"
+      }
     }
   },
   "order": [
@@ -365,6 +380,7 @@
     "our_story_faq_YhAnA3",
     "our_story_banner_dANGeh",
     "our_story_faq_LJr7Lx",
-    "our_story_banner_EAgjM3"
+    "our_story_banner_EAgjM3",
+    "sticky_bar_ARajBA"
   ]
 }
