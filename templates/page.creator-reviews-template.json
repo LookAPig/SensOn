@@ -36,6 +36,7 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 14,
         "subtitle_color": "#f287ec",
+        "sub_tag": "h1",
         "heading": "Real people. Real reactions.",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
@@ -332,6 +333,7 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 14,
         "subtitle_color": "#f287ec",
+        "sub_tag": "h1",
         "heading": "Curious What Lies Beyond the Reviews? Meet SensOn S1.",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
@@ -355,6 +357,17 @@
         "stat_text_color": "#ffffff",
         "stat_divider_color": "#f287ec"
       }
+    },
+    "sticky_bar_6kbXFf": {
+      "type": "sticky-bar",
+      "name": "Sticky Bar",
+      "settings": {
+        "product": "senson-s1-wellness-companion",
+        "product_handle": "senson-s1",
+        "badge_text": "Limited Time Price",
+        "button_text": "Shop Now",
+        "button_url": "shopify://products/senson-s1-wellness-companion"
+      }
     }
   },
   "order": [
@@ -362,6 +375,7 @@
     "our_story_banner_wdNwTf",
     "creator_reviews_cards_PARE63",
     "creator_reviews_cards2_EiNs01",
-    "our_story_banner_mMe6X6"
+    "our_story_banner_mMe6X6",
+    "sticky_bar_6kbXFf"
   ]
 }
