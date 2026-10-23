@@ -292,6 +292,56 @@
         "description_font_size_mobile": 14,
         "description_color": "#ffffff"
       }
+    },
+    "seo_text_icons_8atcYa": {
+      "type": "seo-text-icons",
+      "blocks": {
+        "item_GVakaW": {
+          "type": "item",
+          "settings": {
+            "icon_style": "confidence",
+            "text": "Confidence"
+          }
+        },
+        "item_BQgRUr": {
+          "type": "item",
+          "settings": {
+            "icon_style": "meditation",
+            "text": "Self-Understanding"
+          }
+        },
+        "item_LTkTgM": {
+          "type": "item",
+          "settings": {
+            "icon_style": "connection",
+            "text": "Connection"
+          }
+        }
+      },
+      "block_order": [
+        "item_GVakaW",
+        "item_BQgRUr",
+        "item_LTkTgM"
+      ],
+      "name": "SEO text icons",
+      "settings": {
+        "title": "Knowing Yourself More Deeply Can Help You Feel More Confident, Comfortable, And Connected.",
+        "title_gradient": "linear-gradient(100deg, rgba(255, 255, 255, 1), rgba(248, 228, 246, 1) 36%, rgba(244, 166, 238, 1) 68%, rgba(242, 135, 236, 1) 100%)",
+        "title_font_size": 40,
+        "title_font_size_mobile": 22,
+        "icon_color_start": "#FFFFFF",
+        "icon_color_end": "#F5A8EF",
+        "icon_size": 72,
+        "icon_size_mobile": 56,
+        "label_color": "#FFFFFF",
+        "label_font_size": 15,
+        "label_font_size_mobile": 13,
+        "background": "linear-gradient(180deg, rgba(53, 27, 76, 1), rgba(30, 18, 46, 1) 46%, rgba(20, 12, 32, 1) 100%)",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
+      }
     }
   },
   "order": [
@@ -300,6 +350,7 @@
     "seo_show_card_yYGcpj",
     "seo_choose_way_346CEV",
     "how_it_work_control_LTy4Az",
-    "our_story_faq_RQkeGN"
+    "our_story_faq_RQkeGN",
+    "seo_text_icons_8atcYa"
   ]
 }
