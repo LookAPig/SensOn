@@ -1,0 +1,644 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card {
+    --subtitle-color: {{ section.settings.subtitle_color | default: '#f287ec' }};
+    --title-color: {{ section.settings.title_color | default: '#ffffff' }};
+    --description-color: {{ section.settings.description_color | default: '#ffffff' }};
+    --hint-color: {{ section.settings.hint_color | default: '#9a9a9a' }};
+    --card-gap: 12px;
+    --card-columns: 2;
+    background: {{ section.settings.background_color | default: '#000000' }};
+    color: var(--title-color);
+    max-width: 100%;
+    overflow: hidden;
+    padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .inner {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .header {
+    display: block;
+    margin: 0 0 18px;
+    max-width: none;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .eyebrow {
+    color: var(--subtitle-color);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 13px;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .section_title {
+    color: var(--title-color);
+    font-size: 27px;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    margin: 0;
+    max-width: 390px;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .section_description {
+    color: var(--description-color);
+    font-size: 16px;
+    line-height: 1.27;
+    margin: 17px 0 0;
+    max-width: none;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .section_description p,
+  #shopify-section-{{ section.id }} .seo_show_card .section_description a,
+  #shopify-section-{{ section.id }} .seo_show_card .card_desc p,
+  #shopify-section-{{ section.id }} .seo_show_card .card_desc a {
+    color: inherit;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_desc p + p {
+    margin-top: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--card-gap);
+    justify-content: center;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card {
+    appearance: none;
+    background: #1a1024;
+    border: 0;
+    border-radius: 16px;
+    color: inherit;
+    cursor: pointer;
+    flex: 0 0 calc((100% - (var(--card-columns) - 1) * var(--card-gap)) / var(--card-columns) - 0.5px);
+    font-family: inherit;
+    max-width: calc((100% - (var(--card-columns) - 1) * var(--card-gap)) / var(--card-columns) - 0.5px);
+    min-width: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    width: calc((100% - (var(--card-columns) - 1) * var(--card-gap)) / var(--card-columns) - 0.5px);
+    aspect-ratio: 1;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card:focus {
+    outline: none;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card:focus-visible {
+    outline: 2px solid var(--subtitle-color);
+    outline-offset: 3px;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_media,
+  #shopify-section-{{ section.id }} .seo_show_card .card_shade {
+    inset: 0;
+    position: absolute;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_image,
+  #shopify-section-{{ section.id }} .seo_show_card .card_placeholder {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.7s ease;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_placeholder {
+    background: linear-gradient(160deg, #7c3aed 0%, #4c1d95 48%, #1e1033 100%);
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_shade {
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.08) 10%, rgb(0 0 0 / 0.28) 52%, rgb(0 0 0 / 0.5) 100%);
+    pointer-events: none;
+    transition: background 0.35s ease;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    inset: 0;
+    justify-content: center;
+    padding: 14px 12px;
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_title {
+    color: var(--card-text, #ffffff);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_desc_wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.35s ease;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_desc_inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card_desc {
+    color: var(--card-text, #ffffff);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+    padding-top: 8px;
+    transform: translateY(8px);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card.is_open .card_desc_wrap {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card.is_open .card_desc {
+    transform: translateY(0);
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .card.is_open .card_shade {
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.18), rgb(0 0 0 / 0.62));
+  }
+
+  #shopify-section-{{ section.id }} .seo_show_card .hint {
+    color: var(--hint-color);
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 18px 0 0;
+    text-align: left;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .seo_show_card {
+      --card-gap: 16px;
+      --card-columns: 4;
+      padding: {{ section.settings.desktop_padding_top }}px 0 {{ section.settings.desktop_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .inner {
+      padding: 0 100px;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .header {
+      margin: 0 0 48px;
+      text-align: center;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .eyebrow {
+      font-size: 24px;
+      margin: 0 0 12px;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .section_title {
+      font-size: 42px;
+      line-height: 1.1;
+      margin: 0 auto;
+      max-width: none;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .section_description {
+      font-size: 16px;
+      line-height: 1.4;
+      margin: 16px auto 0;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .card {
+      border-radius: 12px;
+      cursor: default;
+      text-align: left;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .card_shade {
+      background: linear-gradient(180deg, transparent 48%, rgb(0 0 0 / 0.62) 100%);
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .card_content {
+      align-items: flex-start;
+      inset: auto 0 0;
+      justify-content: flex-end;
+      padding: 20px 18px;
+      text-align: left;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .card_title {
+      font-size: clamp(16px, 1.25vw, 22px);
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .card_desc {
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .hint {
+      font-size: 14px;
+      margin-top: 28px;
+      text-align: center;
+    }
+  }
+
+  @media (hover: hover) and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .seo_show_card .card:hover .card_desc_wrap,
+    #shopify-section-{{ section.id }} .seo_show_card .card:focus-visible .card_desc_wrap,
+    #shopify-section-{{ section.id }} .seo_show_card .card.is_open .card_desc_wrap {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .card:hover .card_desc,
+    #shopify-section-{{ section.id }} .seo_show_card .card:focus-visible .card_desc,
+    #shopify-section-{{ section.id }} .seo_show_card .card.is_open .card_desc {
+      transform: translateY(0);
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .card:hover .card_image,
+    #shopify-section-{{ section.id }} .seo_show_card .card:focus-visible .card_image,
+    #shopify-section-{{ section.id }} .seo_show_card .card.is_open .card_image {
+      transform: scale(1.06);
+    }
+
+    #shopify-section-{{ section.id }} .seo_show_card .card:hover .card_shade,
+    #shopify-section-{{ section.id }} .seo_show_card .card:focus-visible .card_shade,
+    #shopify-section-{{ section.id }} .seo_show_card .card.is_open .card_shade {
+      background: linear-gradient(180deg, transparent 30%, rgb(0 0 0 / 0.72) 100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .seo_show_card .card_desc_wrap,
+    #shopify-section-{{ section.id }} .seo_show_card .card_desc,
+    #shopify-section-{{ section.id }} .seo_show_card .card_image,
+    #shopify-section-{{ section.id }} .seo_show_card .card_shade {
+      transition: none;
+    }
+  }
+</style>
+
+<section class="seo_show_card" id="seo-show-card-{{ section.id }}">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="section_description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="card_grid">
+        {%- for block in section.blocks -%}
+          <article
+            class="card"
+            data-seo-card
+            role="button"
+            tabindex="0"
+            aria-expanded="false"
+            style="--card-text: {{ block.settings.text_color | default: '#ffffff' }};"
+            {{ block.shopify_attributes }}
+          >
+            <div class="card_media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1000
+                  | image_tag:
+                    class: 'card_image',
+                    loading: 'lazy',
+                    widths: '200, 360, 540, 720, 1000',
+                    sizes: '(min-width: 750px) calc((100vw - 248px) / 4), calc((100vw - 44px) / 2)',
+                    alt: block.settings.title
+                }}
+              {%- else -%}
+                <div class="card_placeholder"></div>
+              {%- endif -%}
+            </div>
+            <div class="card_shade"></div>
+            <div class="card_content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="card_title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.description != blank -%}
+                <div class="card_desc_wrap">
+                  <div class="card_desc_inner">
+                    <div class="card_desc">{{ block.settings.description }}</div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.hint != blank -%}
+      <p class="hint">{{ section.settings.hint | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const root = document.getElementById("seo-show-card-{{ section.id }}");
+
+    if (!root) {
+      return;
+    }
+
+    const mobileQuery = window.matchMedia("(max-width: 749px)");
+
+    const setOpen = (card, open) => {
+      card.classList.toggle("is_open", open);
+      card.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+
+    const closeAll = () => {
+      root.querySelectorAll("[data-seo-card]").forEach((card) => {
+        setOpen(card, false);
+      });
+    };
+
+    const toggleCard = (card) => {
+      const willOpen = !card.classList.contains("is_open");
+
+      closeAll();
+      setOpen(card, willOpen);
+    };
+
+    root.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-seo-card]");
+
+      if (!card || !root.contains(card) || !mobileQuery.matches) {
+        return;
+      }
+
+      toggleCard(card);
+    });
+
+    root.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") {
+        return;
+      }
+
+      const card = event.target.closest("[data-seo-card]");
+
+      if (!card || event.target !== card || !mobileQuery.matches) {
+        return;
+      }
+
+      event.preventDefault();
+      toggleCard(card);
+    });
+
+    mobileQuery.addEventListener("change", () => {
+      if (!mobileQuery.matches) {
+        closeAll();
+      }
+    });
+
+    if (window.Shopify && window.Shopify.designMode) {
+      document.addEventListener("shopify:block:select", (event) => {
+        const card = event.target.closest("[data-seo-card]");
+
+        if (!card || !root.contains(card)) {
+          return;
+        }
+
+        closeAll();
+        setOpen(card, true);
+      });
+
+      document.addEventListener("shopify:block:deselect", (event) => {
+        const card = event.target.closest("[data-seo-card]");
+
+        if (card && root.contains(card)) {
+          setOpen(card, false);
+        }
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEO show card",
+  "tag": "section",
+  "class": "shopify-section--seo-show-card",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题",
+      "default": "Understanding Sensual Wellness"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "主标题",
+      "default": "What Shapes Your Sensual Wellness Experience"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>Sensual wellness is shaped by self-awareness, emotional connection, personal exploration, and mindful experiences that help you better understand yourself.</p>"
+    },
+    {
+      "type": "header",
+      "content": "文案颜色"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "副标题颜色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "主标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "描述颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "底部提示",
+      "default": "Hover for motion. Click a dimension to expand it."
+    },
+    {
+      "type": "color",
+      "id": "hint_color",
+      "label": "底部提示颜色",
+      "default": "#9a9a9a"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景颜色",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "模块间距"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "label": "PC 端顶部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "label": "PC 端底部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "移动端顶部间距",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "移动端底部间距",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "卡片",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "Self-Awareness"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "描述",
+          "default": "<p>Build greater body awareness and body confidence by understanding your emotions, needs, and personal references.</p>"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "文案颜色",
+          "default": "#ffffff"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "SEO show card",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Intimacy & Connection",
+            "description": "<p>Create deeper emotional closeness through trust, communication, and shared moments that help you feel connected.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Personal Exploration",
+            "description": "<p>Explore your curiosity at your own pace and learn what feels comfortable, meaningful, and true to you.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Mindful Experiences",
+            "description": "<p>Slow down with calming practices that bring attention back to your body, breath, and present feelings.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
