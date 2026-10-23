@@ -1,0 +1,669 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    max-width: 100%;
+    overflow-x: clip;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card {
+    --subtitle-color: {{ section.settings.subtitle_color | default: '#f287ec' }};
+    --title-color: {{ section.settings.title_color | default: '#ffffff' }};
+    --description-color: {{ section.settings.description_color | default: '#d0d0d0' }};
+    --card-bg: {{ section.settings.card_background_color | default: '#3f3f3f' }};
+    --tag-color: {{ section.settings.tag_color | default: '#ffffff' }};
+    --card-title-color: {{ section.settings.card_title_color | default: '#ffffff' }};
+    --card-description-color: {{ section.settings.card_description_color | default: '#c8c8c8' }};
+    --link-color: {{ section.settings.link_color | default: '#f287ec' }};
+    --bleed: 16px;
+    --card-x: 20px;
+    background: {{ section.settings.background_color | default: '#000000' }};
+    color: var(--title-color);
+    padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .inner {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .header {
+    margin: 0 0 24px;
+    text-align: left;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .eyebrow {
+    color: var(--subtitle-color);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 8px;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .section_title {
+    color: var(--title-color);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin: 0;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .section_description {
+    color: var(--description-color);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.45;
+    margin: 12px 0 0;
+    max-width: none;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .section_description p,
+  #shopify-section-{{ section.id }} .seo_guide_card .section_description a,
+  #shopify-section-{{ section.id }} .seo_guide_card .card_desc p,
+  #shopify-section-{{ section.id }} .seo_guide_card .card_desc a {
+    color: inherit;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .section_description p + p,
+  #shopify-section-{{ section.id }} .seo_guide_card .card_desc p + p {
+    margin-top: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .track {
+    cursor: grab;
+    display: flex;
+    gap: 12px;
+    margin-right: calc(var(--bleed) * -1);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-right: var(--bleed);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    user-select: none;
+    -webkit-overflow-scrolling: touch;
+    width: calc(100% + var(--bleed));
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .track.is_dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .track.is_dragging .card_link {
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .card {
+    background: var(--card-bg);
+    display: flex;
+    flex: 0 0 calc(100% - 96px);
+    flex-direction: column;
+    max-width: 440px;
+    min-height: 500px;
+    min-width: 0;
+    overflow: hidden;
+    padding: 22px var(--card-x) 24px;
+    scroll-snap-align: start;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .tag {
+    color: var(--tag-color);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .media {
+    flex: 1 1 auto;
+    margin: 16px calc(var(--card-x) * -1) 18px;
+    min-height: 160px;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .card_image {
+    display: block;
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .card_title {
+    color: var(--card-title-color);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .card_desc {
+    color: var(--card-description-color);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.45;
+    margin: 8px 0 0;
+    overflow-wrap: break-word;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card .card_link {
+    color: var(--link-color);
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-top: 16px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card a.card_link {
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card a.card_link:hover {
+    opacity: 0.82;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card a.card_link:focus {
+    outline: none;
+  }
+
+  #shopify-section-{{ section.id }} .seo_guide_card a.card_link:focus-visible {
+    outline: 2px solid var(--link-color);
+    outline-offset: 3px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .seo_guide_card {
+      --bleed: 0px;
+      --card-x: 22px;
+      padding: {{ section.settings.desktop_padding_top }}px 0 {{ section.settings.desktop_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .seo_guide_card .inner {
+      padding: 0 100px;
+    }
+
+    #shopify-section-{{ section.id }} .seo_guide_card .header {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    #shopify-section-{{ section.id }} .seo_guide_card .eyebrow {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .seo_guide_card .section_title {
+      font-size: 36px;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+    }
+
+    #shopify-section-{{ section.id }} .seo_guide_card .section_description {
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 16px auto 0;
+      max-width: 920px;
+    }
+
+    #shopify-section-{{ section.id }} .seo_guide_card .track {
+      cursor: auto;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-right: 0;
+      overflow: visible;
+      padding-right: 0;
+      scroll-snap-type: none;
+      user-select: text;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .seo_guide_card .card {
+      flex: none;
+      height: 100%;
+      max-width: none;
+      min-height: 520px;
+      scroll-snap-align: none;
+      width: auto;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .seo_guide_card .header {
+      margin-bottom: 48px;
+    }
+
+    #shopify-section-{{ section.id }} .seo_guide_card .section_title {
+      font-size: 48px;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    #shopify-section-{{ section.id }} .seo_guide_card .track {
+      gap: 20px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #shopify-section-{{ section.id }} .seo_guide_card .card {
+      --card-x: 22px;
+      min-height: 560px;
+      padding: 24px var(--card-x) 26px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .seo_guide_card a.card_link {
+      transition: none;
+    }
+  }
+</style>
+
+<section class="seo_guide_card" id="seo-guide-card-{{ section.id }}">
+  <div class="inner">
+    <div class="header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="eyebrow">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="section_description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="track" data-guide-track>
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign card_alt = block.settings.title | default: block.settings.tag | default: 'Guide'
+          -%}
+          <article class="card" data-guide-card {{ block.shopify_attributes }}>
+            {%- if block.settings.tag != blank -%}
+              <p class="tag">{{ block.settings.tag | escape }}</p>
+            {%- endif -%}
+
+            <div class="media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1200
+                  | image_tag:
+                    class: 'card_image',
+                    loading: 'lazy',
+                    widths: '360, 540, 720, 900, 1200',
+                    sizes: '(min-width: 1200px) calc((100vw - 260px) / 4), (min-width: 750px) calc((100vw - 216px) / 2), calc(100vw - 112px)',
+                    alt: card_alt,
+                    draggable: false
+                }}
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="card_title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.description != blank -%}
+              <div class="card_desc">{{ block.settings.description }}</div>
+            {%- endif -%}
+
+            {%- if block.settings.link_label != blank -%}
+              {%- if block.settings.link != blank -%}
+                <a class="card_link" href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>
+              {%- else -%}
+                <span class="card_link">{{ block.settings.link_label | escape }}</span>
+              {%- endif -%}
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const root = document.getElementById("seo-guide-card-{{ section.id }}");
+
+    if (!root) {
+      return;
+    }
+
+    const track = root.querySelector("[data-guide-track]");
+
+    if (!track) {
+      return;
+    }
+
+    const mobileQuery = window.matchMedia("(max-width: 749px)");
+    let pointerId = null;
+    let startX = 0;
+    let startScroll = 0;
+    let dragged = false;
+
+    const canDrag = () => mobileQuery.matches;
+
+    track.addEventListener("pointerdown", (event) => {
+      if (!canDrag() || event.pointerType !== "mouse" || event.button !== 0) {
+        return;
+      }
+
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startScroll = track.scrollLeft;
+      dragged = false;
+    });
+
+    track.addEventListener("pointermove", (event) => {
+      if (pointerId !== event.pointerId) {
+        return;
+      }
+
+      const delta = event.clientX - startX;
+
+      if (!dragged) {
+        if (Math.abs(delta) <= 5) {
+          return;
+        }
+
+        dragged = true;
+        track.classList.add("is_dragging");
+
+        if (track.setPointerCapture) {
+          track.setPointerCapture(event.pointerId);
+        }
+      }
+
+      track.scrollLeft = startScroll - delta;
+    });
+
+    const endDrag = (event) => {
+      if (pointerId === null || event.pointerId !== pointerId) {
+        return;
+      }
+
+      pointerId = null;
+      track.classList.remove("is_dragging");
+    };
+
+    track.addEventListener("pointerup", endDrag);
+    track.addEventListener("pointercancel", endDrag);
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
+
+    track.addEventListener("click", (event) => {
+      if (!dragged) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      dragged = false;
+    }, true);
+
+    track.addEventListener("dragstart", (event) => {
+      event.preventDefault();
+    });
+
+    if (window.Shopify && window.Shopify.designMode) {
+      document.addEventListener("shopify:block:select", (event) => {
+        const card = event.target.closest("[data-guide-card]");
+
+        if (!card || !root.contains(card) || !canDrag()) {
+          return;
+        }
+
+        card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEO guide card",
+  "tag": "section",
+  "class": "shopify-section--seo-guide-card",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题",
+      "default": "Continue Your Exploration"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "主标题",
+      "default": "Explore Sensual Wellness Topics"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "描述",
+      "default": "<p>Continue learning about connection, self-awareness, and personalized experiences through curated guides.</p>"
+    },
+    {
+      "type": "header",
+      "content": "顶部文案颜色"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "副标题颜色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "主标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "描述颜色",
+      "default": "#d0d0d0"
+    },
+    {
+      "type": "header",
+      "content": "卡片颜色"
+    },
+    {
+      "type": "color",
+      "id": "tag_color",
+      "label": "标签颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "卡片标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_description_color",
+      "label": "卡片描述颜色",
+      "default": "#c8c8c8"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "链接颜色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "header",
+      "content": "背景"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景颜色",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "卡片背景颜色",
+      "default": "#3f3f3f"
+    },
+    {
+      "type": "header",
+      "content": "模块间距"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "label": "PC 端顶部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "label": "PC 端底部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "移动端顶部间距",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "移动端底部间距",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "卡片",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "标签",
+          "default": "AI & Connection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片",
+          "info": "显示在标签和标题之间，不上传时保留空白区域"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "Understanding AI Companions"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "描述",
+          "default": "<p>Learn how AI companions create personalized interactions and new ways to connect.</p>"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "链接文案",
+          "default": "Read Guide →"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "链接"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "SEO guide card",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tag": "Intimacy",
+            "title": "Building Meaningful Connections",
+            "description": "<p>Explore how communication and personal experiences can support deeper intimacy.</p>",
+            "link_label": "Read Guide →"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tag": "Mindfulness",
+            "title": "Practicing Mindful Self-Exploration",
+            "description": "<p>Discover how mindfulness supports self-awareness and personal reflection.</p>",
+            "link_label": "Read Guide →"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tag": "Your Experience",
+            "title": "Understanding Your Personal Experience",
+            "description": "<p>Learn why individual experiences differ and how self-understanding shapes your journey.</p>",
+            "link_label": "Read Guide →"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
