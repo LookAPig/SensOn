@@ -1,8 +1,13 @@
 <style>
   #shopify-section-{{ section.id }} .how_it_work_control {
     --accent-color: {{ section.settings.accent_color }};
+    --subtitle-color: {{ section.settings.subtitle_color | default: section.settings.accent_color }};
+    --title-color: {{ section.settings.title_color | default: '#ffffff' }};
+    --description-color: {{ section.settings.description_color | default: '#ffffff' }};
+    --item-title-color: {{ section.settings.item_title_color | default: '#ffffff' }};
+    --item-description-color: {{ section.settings.item_description_color | default: '#ffffff' }};
     background: #000000;
-    color: #ffffff;
+    color: var(--title-color);
     overflow: hidden;
     padding: {{ section.settings.desktop_padding_top }}px 0 {{ section.settings.desktop_padding_bottom }}px;
   }
@@ -26,7 +31,7 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .eyebrow {
-    color: var(--accent-color);
+    color: var(--subtitle-color);
     font-size: 24px;
     font-weight: 600;
     line-height: 1.25;
@@ -34,7 +39,7 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .section_title {
-    color: #ffffff;
+    color: var(--title-color);
     font-size: 42px;
     font-weight: 500;
     letter-spacing: -0.035em;
@@ -44,7 +49,7 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .section_description {
-    color: #ffffff;
+    color: var(--description-color);
     font-size: 16px;
     line-height: 1.4;
     margin: 16px auto 0;
@@ -52,7 +57,10 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .section_description p,
-  #shopify-section-{{ section.id }} .how_it_work_control .item_description p {
+  #shopify-section-{{ section.id }} .how_it_work_control .section_description a,
+  #shopify-section-{{ section.id }} .how_it_work_control .item_description p,
+  #shopify-section-{{ section.id }} .how_it_work_control .item_description a {
+    color: inherit;
     margin: 0;
   }
 
@@ -121,7 +129,7 @@
     align-items: center;
     background: transparent;
     border: 0;
-    color: #ffffff;
+    color: var(--item-title-color);
     cursor: pointer;
     display: flex;
     font-family: inherit;
@@ -133,7 +141,7 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .item_title {
-    color: #ffffff;
+    color: var(--item-title-color);
     display: block;
     font-size: 24px;
     font-weight: 600;
@@ -175,6 +183,7 @@
   }
 
   #shopify-section-{{ section.id }} .how_it_work_control .item_description {
+    color: var(--item-description-color);
     font-size: 16px;
     line-height: 1.4;
     padding: 0 0 24px;
@@ -456,9 +465,43 @@
       "default": "<p>SensOn S1 gives you flexible ways to control the experience, whether you want AI-powered response, direct app control, or simple on-device buttons.</p>"
     },
     {
+      "type": "header",
+      "content": "文案颜色"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "副标题颜色",
+      "default": "#f287ec"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "主标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "描述颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "item_title_color",
+      "label": "条目标题颜色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "item_description_color",
+      "label": "展开内容颜色",
+      "default": "#ffffff"
+    },
+    {
       "type": "color",
       "id": "accent_color",
-      "label": "强调色",
+      "label": "箭头强调色",
       "default": "#f287ec"
     },
     {
