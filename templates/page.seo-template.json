@@ -104,11 +104,76 @@
         "mobile_padding_top": 42,
         "mobile_padding_bottom": 48
       }
+    },
+    "our_story_faq_RQkeGN": {
+      "type": "our-story-faq",
+      "blocks": {
+        "faq_p4QWAU": {
+          "type": "faq",
+          "settings": {
+            "question": "Create your own fantasies—freely",
+            "answer": "<p>With UGC character creation planned for Q4 2026, users will be able to shape characters, scenes and pacing around their own imagination.</p>"
+          }
+        },
+        "faq_AMeyCN": {
+          "type": "faq",
+          "settings": {
+            "question": "An experience that keeps evolving",
+            "answer": "<p>Today, more than 400 interactive scripts and characters create distinct paths into fantasy. Preference memory makes returning feel more personal and familiar.</p>"
+          }
+        },
+        "faq_Wh8RbT": {
+          "type": "faq",
+          "settings": {
+            "question": "Robotics made for warmth, not coldness",
+            "answer": "<p>We imagine intimate technology that offers presence, comfort and connection—built to feel human in the ways that matter.</p>"
+          }
+        },
+        "faq_Dfn4Bm": {
+          "type": "faq",
+          "settings": {
+            "question": "Femtech, with women at the center",
+            "answer": "<p>Women engineers, researchers, designers, creators and founders should help decide what the future of pleasure technology becomes.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_p4QWAU",
+        "faq_AMeyCN",
+        "faq_Wh8RbT",
+        "faq_Dfn4Bm"
+      ],
+      "name": "Our story FAQ",
+      "settings": {
+        "module_id": "",
+        "enable_accordion": true,
+        "color_background": "linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 100%)",
+        "accent_color": "#f287ec",
+        "divider_color": "#4a3a55",
+        "desktop_padding_top": 152,
+        "desktop_padding_bottom": 152,
+        "mobile_padding_top": 68,
+        "mobile_padding_bottom": 68,
+        "subtitle": "Our Future",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Not a one-product idea. A new platform for female pleasure.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h2",
+        "description": "<p>AI should not replace love or real relationships. Its role here is different: to create more freedom for fantasy, curiosity and self-knowledge.</p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff"
+      }
     }
   },
   "order": [
     "main",
     "web_introduction_banner_Nk9zyy",
-    "how_it_work_control_LTy4Az"
+    "how_it_work_control_LTy4Az",
+    "our_story_faq_RQkeGN"
   ]
 }
