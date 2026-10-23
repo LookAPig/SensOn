@@ -53,6 +53,69 @@
         "external_video_url": ""
       }
     },
+    "seo_show_card_yYGcpj": {
+      "type": "seo-show-card",
+      "blocks": {
+        "card_xERyQ7": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/mask_group_7.webp",
+            "title": "Self-Awareness",
+            "description": "<p>Build greater body awareness and body confidence by understanding your emotions, needs, and personal references.</p>",
+            "text_color": "#ffffff"
+          }
+        },
+        "card_R9937k": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/mask_group_6.webp",
+            "title": "Intimacy & Connection",
+            "description": "<p>Create deeper emotional closeness through trust, communication, and shared moments that help you feel connected.</p>",
+            "text_color": "#ffffff"
+          }
+        },
+        "card_rVcta6": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/mask_group_8.webp",
+            "title": "Personal Exploration",
+            "description": "<p>Explore your curiosity at your own pace and learn what feels comfortable, meaningful, and true to you.</p>",
+            "text_color": "#ffffff"
+          }
+        },
+        "card_LTUXKR": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/mask_group_9.webp",
+            "title": "Mindful Experiences",
+            "description": "<p>Slow down with calming practices that bring attention back to your body, breath, and present feelings.</p>",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "card_xERyQ7",
+        "card_R9937k",
+        "card_rVcta6",
+        "card_LTUXKR"
+      ],
+      "name": "SEO show card",
+      "settings": {
+        "subtitle": "Understanding Sensual Wellness",
+        "title": "What Shapes Your Sensual Wellness Experience",
+        "description": "<p>Sensual wellness is shaped by self-awareness, emotional connection, personal exploration, and mindful experiences that help you better understand yourself.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#B3B3B3",
+        "hint": "Hover for motion. Click a dimension to expand it.",
+        "hint_color": "#9a9a9a",
+        "background_color": "#000000",
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 42,
+        "mobile_padding_bottom": 48
+      }
+    },
     "how_it_work_control_LTy4Az": {
       "type": "how-it-work-control",
       "blocks": {
@@ -94,6 +157,11 @@
         "subtitle": "The SensOn Experience",
         "title": "How SensOn Supports Your Sensual Wellness Journey",
         "description": "<p>SensOn brings personalization, privacy, and AI-powered interaction together to create experiences that adapt to how you connect and explore.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#ffffff",
+        "item_title_color": "#ffffff",
+        "item_description_color": "#ffffff",
         "accent_color": "#f287ec",
         "image_mode": "multiple",
         "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
@@ -146,8 +214,9 @@
       "name": "Our story FAQ",
       "settings": {
         "module_id": "",
+        "layout": "stack",
         "enable_accordion": true,
-        "color_background": "linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 100%)",
+        "color_background": "linear-gradient(137deg, rgba(55, 31, 54, 1) 43.49%, rgba(17, 10, 17, 1) 76.69%)",
         "accent_color": "#f287ec",
         "divider_color": "#4a3a55",
         "desktop_padding_top": 152,
@@ -173,6 +242,7 @@
   "order": [
     "main",
     "web_introduction_banner_Nk9zyy",
+    "seo_show_card_yYGcpj",
     "how_it_work_control_LTy4Az",
     "our_story_faq_RQkeGN"
   ]
