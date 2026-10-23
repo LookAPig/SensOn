@@ -159,11 +159,11 @@
         "title_gradient": "linear-gradient(100deg, rgba(255, 255, 255, 1), rgba(248, 228, 246, 1) 36%, rgba(244, 166, 238, 1) 68%, rgba(242, 135, 236, 1) 100%)",
         "title_font_size": 40,
         "title_font_size_mobile": 22,
-        "icon_color_start": "#FFFFFF",
-        "icon_color_end": "#F5A8EF",
+        "icon_color_start": "#ffffff",
+        "icon_color_end": "#f5a8ef",
         "icon_size": 72,
         "icon_size_mobile": 56,
-        "label_color": "#FFFFFF",
+        "label_color": "#ffffff",
         "label_font_size": 15,
         "label_font_size_mobile": 13,
         "background": "linear-gradient(180deg, rgba(53, 27, 76, 1), rgba(30, 18, 46, 1) 46%, rgba(20, 12, 32, 1) 100%)",
@@ -345,6 +345,76 @@
         "description_font_size_mobile": 14,
         "description_color": "#ffffff"
       }
+    },
+    "seo_guide_card_KxhWPj": {
+      "type": "seo-guide-card",
+      "blocks": {
+        "card_gCQGAD": {
+          "type": "card",
+          "settings": {
+            "tag": "AI & Connection",
+            "title": "Understanding AI Companions",
+            "description": "<p>Learn how AI companions create personalized interactions and new ways to connect.</p>",
+            "link_label": "Read Guide →",
+            "link": ""
+          }
+        },
+        "card_NcCATi": {
+          "type": "card",
+          "settings": {
+            "tag": "Intimacy",
+            "title": "Building Meaningful Connections",
+            "description": "<p>Explore how communication and personal experiences can support deeper intimacy.</p>",
+            "link_label": "Read Guide →",
+            "link": ""
+          }
+        },
+        "card_GxCiYf": {
+          "type": "card",
+          "settings": {
+            "tag": "Mindfulness",
+            "title": "Practicing Mindful Self-Exploration",
+            "description": "<p>Discover how mindfulness supports self-awareness and personal reflection.</p>",
+            "link_label": "Read Guide →",
+            "link": ""
+          }
+        },
+        "card_qJzpgr": {
+          "type": "card",
+          "settings": {
+            "tag": "Your Experience",
+            "title": "Understanding Your Personal Experience",
+            "description": "<p>Learn why individual experiences differ and how self-understanding shapes your journey.</p>",
+            "link_label": "Read Guide →",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_gCQGAD",
+        "card_NcCATi",
+        "card_GxCiYf",
+        "card_qJzpgr"
+      ],
+      "name": "SEO guide card",
+      "settings": {
+        "subtitle": "Continue Your Exploration",
+        "title": "Explore Sensual Wellness Topics",
+        "description": "<p>Continue learning about connection, self-awareness, and personalized experiences through curated guides.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#d0d0d0",
+        "tag_color": "#ffffff",
+        "card_title_color": "#ffffff",
+        "card_description_color": "#c8c8c8",
+        "link_color": "#f287ec",
+        "background_color": "#000000",
+        "card_background_color": "#3f3f3f",
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 48
+      }
     }
   },
   "order": [
@@ -354,6 +424,7 @@
     "seo_text_icons_8atcYa",
     "seo_choose_way_346CEV",
     "how_it_work_control_LTy4Az",
+    "seo_guide_card_KxhWPj",
     "our_story_faq_RQkeGN"
   ]
 }
