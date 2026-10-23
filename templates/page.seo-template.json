@@ -62,7 +62,8 @@
             "image": "shopify://shop_images/mask_group_7.webp",
             "title": "Self-Awareness",
             "description": "<p>Build greater body awareness and body confidence by understanding your emotions, needs, and personal references.</p>",
-            "text_color": "#ffffff"
+            "text_color": "#ffffff",
+            "description_color": "#ffffff"
           }
         },
         "card_R9937k": {
@@ -71,7 +72,8 @@
             "image": "shopify://shop_images/mask_group_6.webp",
             "title": "Intimacy & Connection",
             "description": "<p>Create deeper emotional closeness through trust, communication, and shared moments that help you feel connected.</p>",
-            "text_color": "#ffffff"
+            "text_color": "#ffffff",
+            "description_color": "#ffffff"
           }
         },
         "card_rVcta6": {
@@ -80,7 +82,8 @@
             "image": "shopify://shop_images/mask_group_8.webp",
             "title": "Personal Exploration",
             "description": "<p>Explore your curiosity at your own pace and learn what feels comfortable, meaningful, and true to you.</p>",
-            "text_color": "#ffffff"
+            "text_color": "#ffffff",
+            "description_color": "#ffffff"
           }
         },
         "card_LTUXKR": {
@@ -89,7 +92,8 @@
             "image": "shopify://shop_images/mask_group_9.webp",
             "title": "Mindful Experiences",
             "description": "<p>Slow down with calming practices that bring attention back to your body, breath, and present feelings.</p>",
-            "text_color": "#ffffff"
+            "text_color": "#ffffff",
+            "description_color": "#ffffff"
           }
         }
       },
@@ -106,13 +110,64 @@
         "description": "<p>Sensual wellness is shaped by self-awareness, emotional connection, personal exploration, and mindful experiences that help you better understand yourself.</p>",
         "subtitle_color": "#f287ec",
         "title_color": "#ffffff",
-        "description_color": "#B3B3B3",
+        "description_color": "#b3b3b3",
         "hint": "Hover for motion. Click a dimension to expand it.",
         "hint_color": "#9a9a9a",
         "background_color": "#000000",
         "desktop_padding_top": 72,
         "desktop_padding_bottom": 80,
         "mobile_padding_top": 42,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "seo_choose_way_346CEV": {
+      "type": "seo-choose-way",
+      "blocks": {
+        "card_DtWRPb": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/sens-on-device-with-accessories-warm-light.jpg",
+            "subtitle": "Connected Physical Experience",
+            "title": "Meet SensOn S1",
+            "description": "<p>A connected companion device that brings app experiences, interactive audio, and synchronized responses together.</p>",
+            "button_label": "Discover SensOn S1",
+            "button_link": ""
+          }
+        },
+        "card_nMpNPV": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/sens-on-device-on-pedestal-with-fruits.jpg",
+            "subtitle": "Digital AI Companion Experience",
+            "title": "Explore SensOn App",
+            "description": "<p>Meet AI companions, enjoy personalized conversations, and discover interactive experiences that evolve with you.</p>",
+            "button_label": "Explore App",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_DtWRPb",
+        "card_nMpNPV"
+      ],
+      "name": "SEO choose way",
+      "settings": {
+        "subtitle": "Explore SensOn",
+        "title": "Choose Your Way To Connect",
+        "description": "<p>Move from digital companionship to connected physical experiences with SensOn App and SensOn S1.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#e8e8e8",
+        "card_subtitle_color": "#f287ec",
+        "card_title_color": "#ffffff",
+        "card_description_color": "#d2d2d2",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "background_color": "#161616",
+        "card_background_color": "#4a4a4a",
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 40,
         "mobile_padding_bottom": 48
       }
     },
@@ -243,6 +298,7 @@
     "main",
     "web_introduction_banner_Nk9zyy",
     "seo_show_card_yYGcpj",
+    "seo_choose_way_346CEV",
     "how_it_work_control_LTy4Az",
     "our_story_faq_RQkeGN"
   ]
