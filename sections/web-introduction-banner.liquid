@@ -205,6 +205,10 @@
     width: 12px;
   }
 
+  #shopify-section-{{ section.id }} .web_intro_banner .button_secondary.button_secondary_plain {
+    padding: 12px 28px;
+  }
+
   {%- liquid
     assign video_aspect_ratio = 1.7777778
     if section.settings.video != blank and section.settings.video.aspect_ratio != blank
@@ -436,6 +440,10 @@
       height: 10px;
       width: 10px;
     }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .button_secondary.button_secondary_plain {
+      padding: 10px 20px;
+    }
   }
 </style>
 
@@ -543,12 +551,7 @@
               {{- section.settings.secondary_button_text | escape -}}
             </button>
           {%- else -%}
-            <a class="button button_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
-              <span class="play_icon" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 14" fill="currentColor" focusable="false">
-                  <path d="M12 7L0 14V0L12 7Z"/>
-                </svg>
-              </span>
+            <a class="button button_secondary button_secondary_plain" href="{{ section.settings.secondary_button_link | default: '#' }}">
               {{- section.settings.secondary_button_text | escape -}}
             </a>
           {%- endif -%}
