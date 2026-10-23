@@ -177,7 +177,7 @@
   }
 
   #shopify-section-{{ section.id }} .seo_show_card .card_desc {
-    color: var(--card-text, #ffffff);
+    color: var(--card-desc, #ffffff);
     font-size: 13px;
     font-weight: 400;
     line-height: 1.4;
@@ -202,7 +202,7 @@
 
   #shopify-section-{{ section.id }} .seo_show_card .hint {
     color: var(--hint-color);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.4;
     margin: 18px 0 0;
     text-align: left;
@@ -271,7 +271,7 @@
 
     #shopify-section-{{ section.id }} .seo_show_card .hint {
       font-size: 14px;
-      margin-top: 28px;
+      margin-top: 96px;
       text-align: center;
     }
   }
@@ -338,7 +338,7 @@
             role="button"
             tabindex="0"
             aria-expanded="false"
-            style="--card-text: {{ block.settings.text_color | default: '#ffffff' }};"
+            style="--card-text: {{ block.settings.text_color | default: '#ffffff' }}; --card-desc: {{ block.settings.description_color | default: '#ffffff' }};"
             {{ block.shopify_attributes }}
           >
             <div class="card_media">
@@ -601,7 +601,13 @@
         {
           "type": "color",
           "id": "text_color",
-          "label": "文案颜色",
+          "label": "标题颜色",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "description_color",
+          "label": "描述颜色",
           "default": "#ffffff"
         }
       ]
