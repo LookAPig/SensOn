@@ -114,10 +114,63 @@
         "hint": "Hover for motion. Click a dimension to expand it.",
         "hint_color": "#9a9a9a",
         "background_color": "#000000",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 42,
-        "mobile_padding_bottom": 48
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
+      }
+    },
+    "seo_text_icons_8atcYa": {
+      "type": "seo-text-icons",
+      "blocks": {
+        "item_GVakaW": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/self_understanding.webp",
+            "icon_style": "confidence",
+            "text": "Confidence"
+          }
+        },
+        "item_BQgRUr": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/self_understanding.webp",
+            "icon_style": "meditation",
+            "text": "Self-Understanding"
+          }
+        },
+        "item_LTkTgM": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/connection.webp",
+            "icon_style": "connection",
+            "text": "Connection"
+          }
+        }
+      },
+      "block_order": [
+        "item_GVakaW",
+        "item_BQgRUr",
+        "item_LTkTgM"
+      ],
+      "name": "SEO text icons",
+      "settings": {
+        "title": "Knowing Yourself More Deeply Can Help You Feel More Confident, Comfortable, And Connected.",
+        "title_gradient": "linear-gradient(100deg, rgba(255, 255, 255, 1), rgba(248, 228, 246, 1) 36%, rgba(244, 166, 238, 1) 68%, rgba(242, 135, 236, 1) 100%)",
+        "title_font_size": 40,
+        "title_font_size_mobile": 22,
+        "icon_color_start": "#FFFFFF",
+        "icon_color_end": "#F5A8EF",
+        "icon_size": 72,
+        "icon_size_mobile": 56,
+        "label_color": "#FFFFFF",
+        "label_font_size": 15,
+        "label_font_size_mobile": 13,
+        "background": "linear-gradient(180deg, rgba(53, 27, 76, 1), rgba(30, 18, 46, 1) 46%, rgba(20, 12, 32, 1) 100%)",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
       }
     },
     "seo_choose_way_346CEV": {
@@ -165,10 +218,10 @@
         "button_border_color": "#ffffff",
         "background_color": "#161616",
         "card_background_color": "#4a4a4a",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 48
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
       }
     },
     "how_it_work_control_LTy4Az": {
@@ -222,10 +275,10 @@
         "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
         "fixed_mobile_image": "shopify://shop_images/works1.jpg",
         "desktop_layout": "text_left",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 42,
-        "mobile_padding_bottom": 48
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
       }
     },
     "our_story_faq_RQkeGN": {
@@ -274,10 +327,10 @@
         "color_background": "linear-gradient(137deg, rgba(55, 31, 54, 1) 43.49%, rgba(17, 10, 17, 1) 76.69%)",
         "accent_color": "#f287ec",
         "divider_color": "#4a3a55",
-        "desktop_padding_top": 152,
-        "desktop_padding_bottom": 152,
-        "mobile_padding_top": 68,
-        "mobile_padding_bottom": 68,
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60,
         "subtitle": "Our Future",
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
@@ -298,6 +351,7 @@
     "main",
     "web_introduction_banner_Nk9zyy",
     "seo_show_card_yYGcpj",
+    "seo_text_icons_8atcYa",
     "seo_choose_way_346CEV",
     "how_it_work_control_LTy4Az",
     "our_story_faq_RQkeGN"
