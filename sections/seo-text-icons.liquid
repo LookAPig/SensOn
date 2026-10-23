@@ -1,0 +1,429 @@
+{%- liquid
+  assign title_gradient = section.settings.title_gradient
+  if title_gradient == blank
+    assign title_gradient = 'linear-gradient(100deg, #FFFFFF 0%, #F8E4F6 36%, #F4A6EE 68%, #F287EC 100%)'
+  endif
+  assign section_background = section.settings.background
+  if section_background == blank
+    assign section_background = 'linear-gradient(180deg, #351B4C 0%, #1E122E 46%, #140C20 100%)'
+  endif
+  assign icon_start = section.settings.icon_color_start | default: '#FFFFFF'
+  assign icon_end = section.settings.icon_color_end | default: '#F5A8EF'
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons {
+    --title-gradient: {{ title_gradient }};
+    --title-size: {{ section.settings.title_font_size_mobile }}px;
+    --title-lh: 1.35;
+    --label-color: {{ section.settings.label_color }};
+    --label-size: {{ section.settings.label_font_size_mobile }}px;
+    --label-mt: 10px;
+    --icon-size: {{ section.settings.icon_size_mobile }}px;
+    --pad-y-top: {{ section.settings.mobile_padding_top }}px;
+    --pad-y-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    --inner-x: 20px;
+    --list-gap-y: 18px;
+    --list-gap-x: 8px;
+    --list-mt: 36px;
+    --item-flex: 1 1 28%;
+    --item-max: 34%;
+    background: {{ section_background }};
+    box-sizing: border-box;
+    color: var(--label-color);
+    padding: var(--pad-y-top) var(--inner-x) var(--pad-y-bottom);
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons .inner {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons .title {
+    background: var(--title-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: var(--heading-font-family), sans-serif;
+    font-size: var(--title-size);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: var(--title-lh);
+    margin: 0 auto;
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+    -webkit-text-fill-color: transparent;
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons .list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--list-gap-y) var(--list-gap-x);
+    justify-content: center;
+    list-style: none;
+    margin: var(--list-mt) 0 0;
+    padding: 0;
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons .item {
+    flex: var(--item-flex);
+    max-width: var(--item-max);
+    min-width: 0;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons .icon {
+    aspect-ratio: 1;
+    height: auto;
+    margin: 0 auto;
+    width: min(100%, var(--icon-size));
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons .icon_svg,
+  #shopify-section-{{ section.id }} .seo_text_icons .icon_img {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons .icon_img {
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .seo_text_icons .label {
+    color: var(--label-color);
+    font-size: var(--label-size);
+    font-weight: 400;
+    line-height: 1.3;
+    margin: var(--label-mt) 0 0;
+    overflow-wrap: break-word;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .seo_text_icons {
+      --title-size: {{ section.settings.title_font_size }}px;
+      --title-lh: 1.25;
+      --label-size: {{ section.settings.label_font_size }}px;
+      --label-mt: 14px;
+      --icon-size: {{ section.settings.icon_size }}px;
+      --pad-y-top: {{ section.settings.desktop_padding_top }}px;
+      --pad-y-bottom: {{ section.settings.desktop_padding_bottom }}px;
+      --inner-x: 40px;
+      --list-gap-y: 28px;
+      --list-gap-x: 80px;
+      --list-mt: 64px;
+      --item-flex: 0 0 180px;
+      --item-max: 200px;
+    }
+
+    #shopify-section-{{ section.id }} .seo_text_icons .title {
+      max-width: 1100px;
+      width: fit-content;
+    }
+  }
+</style>
+
+<div class="seo_text_icons">
+  <div class="inner">
+    {%- if section.settings.title != blank -%}
+      <h2 class="title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="list">
+        {%- for block in section.blocks -%}
+          {%- assign grad_id = section.id | append: '-' | append: forloop.index | replace: '--', '-' | replace: '__', '-' | prepend: 'seo-ti-' -%}
+          <li class="item" {{ block.shopify_attributes }}>
+            <div class="icon">
+              {%- if block.settings.icon != blank -%}
+                <img
+                  class="icon_img"
+                  src="{{ block.settings.icon | image_url: width: 240 }}"
+                  alt=""
+                  width="{{ section.settings.icon_size }}"
+                  height="{{ section.settings.icon_size }}"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <svg class="icon_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="{{ grad_id }}" x1="10" y1="8" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="{{ icon_start }}"/>
+                      <stop offset="100%" stop-color="{{ icon_end }}"/>
+                    </linearGradient>
+                  </defs>
+                  <g stroke="url(#{{ grad_id }})" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                    {%- case block.settings.icon_style -%}
+                      {%- when 'meditation' -%}
+                        <path d="M15 13.2v4.6M12.7 15.5h4.6"/>
+                        <path d="M46.2 10.2v4M44.2 12.2h4"/>
+                        <path d="M51.5 19v3.4M49.8 20.7h3.4"/>
+                        <circle cx="32" cy="15.5" r="5"/>
+                        <path d="M32 20.6v3.6"/>
+                        <path d="M29 26.2 32 30.2 35 26.2"/>
+                        <path d="M29.2 24.2C21 27 14.5 33 13.2 41"/>
+                        <path d="M34.8 24.2C43 27 49.5 33 50.8 41"/>
+                        <path d="M13.2 41c3.4 6.2 10 10.4 18.8 10.4"/>
+                        <path d="M50.8 41c-3.4 6.2-10 10.4-18.8 10.4"/>
+                        <path d="M21 45.5c3.2 3.6 6.8 5.4 11 5.4s7.8-1.8 11-5.4"/>
+                      {%- when 'connection' -%}
+                        <path d="M11.5 16.5 7.6 13.4"/>
+                        <path d="M10 22.2 6.2 22"/>
+                        <path d="M52.5 16.5 56.4 13.4"/>
+                        <path d="M54 22.2 57.8 22"/>
+                        <circle cx="24" cy="18" r="6"/>
+                        <circle cx="40" cy="18" r="6"/>
+                        <path d="M15 50.5V34.5c0-6 3.2-9.8 9-9.8"/>
+                        <path d="M49 50.5V34.5c0-6-3.2-9.8-9-9.8"/>
+                        <path d="M17 36.5c6 1.2 11 1 16.5-1.6"/>
+                        <path d="M18.5 43.5c7.4 5.2 15.2 5.6 27-2"/>
+                      {%- else -%}
+                        <path d="M19.2 12.4 15 8.6"/>
+                        <path d="M16.6 18 12.2 17"/>
+                        <path d="M44.8 12.4 49 8.6"/>
+                        <path d="M47.4 18 51.8 17"/>
+                        <circle cx="32" cy="16" r="6"/>
+                        <path d="M24.2 31.5c.5-5.4 3.8-8.8 7.8-8.8s7.3 3.4 7.8 8.8c3.8 1 6.8 4 7.6 8.2L46 54.2c-.2 2-1.9 3.5-3.9 3.5H21.9c-2 0-3.7-1.5-3.9-3.5l-1.4-14.5c.8-4.2 3.8-7.2 7.6-8.2z"/>
+                    {%- endcase -%}
+                  </g>
+                </svg>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.text != blank -%}
+              <p class="label">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SEO text icons",
+  "tag": "section",
+  "class": "shopify-section--seo-text-icons",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "标题",
+      "default": "Knowing Yourself More Deeply Can Help You Feel More Confident, Comfortable, And Connected."
+    },
+    {
+      "type": "color_background",
+      "id": "title_gradient",
+      "label": "标题渐变色",
+      "default": "linear-gradient(100deg, #FFFFFF 0%, #F8E4F6 36%, #F4A6EE 68%, #F287EC 100%)",
+      "info": "支持纯色或渐变。渐变沿标题区域从左向右铺开，换行后的短句会落在中间色段。"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "标题字号（电脑）",
+      "min": 24,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "标题字号（移动）",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "header",
+      "content": "图标与描述"
+    },
+    {
+      "type": "color",
+      "id": "icon_color_start",
+      "label": "预设图标渐变起始色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "icon_color_end",
+      "label": "预设图标渐变结束色",
+      "default": "#F5A8EF"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "图标尺寸（电脑）",
+      "min": 40,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "图标尺寸（移动）",
+      "min": 32,
+      "max": 88,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "描述颜色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "描述字号（电脑）",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "label_font_size_mobile",
+      "label": "描述字号（移动）",
+      "min": 11,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "背景与间距"
+    },
+    {
+      "type": "color_background",
+      "id": "background",
+      "label": "背景色",
+      "default": "linear-gradient(180deg, #351B4C 0%, #1E122E 46%, #140C20 100%)"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "label": "PC 端顶部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "label": "PC 端底部间距",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "移动端顶部间距",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "移动端底部间距",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "图标项",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "图标",
+          "info": "上传后会替换预设线稿。建议使用透明背景的 PNG 或 SVG。"
+        },
+        {
+          "type": "select",
+          "id": "icon_style",
+          "label": "预设图标",
+          "options": [
+            { "value": "confidence", "label": "自信" },
+            { "value": "meditation", "label": "自我理解" },
+            { "value": "connection", "label": "连接" }
+          ],
+          "default": "confidence"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "描述",
+          "default": "Confidence"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEO text icons",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "icon_style": "confidence",
+            "text": "Confidence"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon_style": "meditation",
+            "text": "Self-Understanding"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon_style": "connection",
+            "text": "Connection"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
