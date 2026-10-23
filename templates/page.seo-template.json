@@ -153,7 +153,7 @@
         "module_id": "",
         "layout": "stack",
         "enable_accordion": true,
-        "color_background": "linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 100%)",
+        "color_background": "linear-gradient(137deg, rgba(55, 31, 54, 1) 43.49%, rgba(17, 10, 17, 1) 76.69%)",
         "accent_color": "#f287ec",
         "divider_color": "#4a3a55",
         "desktop_padding_top": 152,
