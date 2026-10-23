@@ -114,183 +114,10 @@
         "hint": "Hover for motion. Click a dimension to expand it.",
         "hint_color": "#9a9a9a",
         "background_color": "#000000",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 42,
-        "mobile_padding_bottom": 48
-      }
-    },
-    "seo_choose_way_346CEV": {
-      "type": "seo-choose-way",
-      "blocks": {
-        "card_DtWRPb": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/sens-on-device-with-accessories-warm-light.jpg",
-            "subtitle": "Connected Physical Experience",
-            "title": "Meet SensOn S1",
-            "description": "<p>A connected companion device that brings app experiences, interactive audio, and synchronized responses together.</p>",
-            "button_label": "Discover SensOn S1",
-            "button_link": ""
-          }
-        },
-        "card_nMpNPV": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/sens-on-device-on-pedestal-with-fruits.jpg",
-            "subtitle": "Digital AI Companion Experience",
-            "title": "Explore SensOn App",
-            "description": "<p>Meet AI companions, enjoy personalized conversations, and discover interactive experiences that evolve with you.</p>",
-            "button_label": "Explore App",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "card_DtWRPb",
-        "card_nMpNPV"
-      ],
-      "name": "SEO choose way",
-      "settings": {
-        "subtitle": "Explore SensOn",
-        "title": "Choose Your Way To Connect",
-        "description": "<p>Move from digital companionship to connected physical experiences with SensOn App and SensOn S1.</p>",
-        "subtitle_color": "#f287ec",
-        "title_color": "#ffffff",
-        "description_color": "#e8e8e8",
-        "card_subtitle_color": "#f287ec",
-        "card_title_color": "#ffffff",
-        "card_description_color": "#d2d2d2",
-        "button_text_color": "#ffffff",
-        "button_border_color": "#ffffff",
-        "background_color": "#161616",
-        "card_background_color": "#4a4a4a",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 48
-      }
-    },
-    "how_it_work_control_LTy4Az": {
-      "type": "how-it-work-control",
-      "blocks": {
-        "control_wrcJKd": {
-          "type": "control",
-          "settings": {
-            "desktop_image": "shopify://shop_images/Design_Around.jpg",
-            "mobile_image": "shopify://shop_images/works1.jpg",
-            "title": "Personalized Experiences That Adapt To You",
-            "description": "<p>Interactions evolve with your preferences, conversations, and personal pace.</p>"
-          }
-        },
-        "control_c9F6TN": {
-          "type": "control",
-          "settings": {
-            "desktop_image": "shopify://shop_images/Design_Around.jpg",
-            "mobile_image": "shopify://shop_images/works1.jpg",
-            "title": "A Private Space For Personal Exploration",
-            "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
-          }
-        },
-        "control_ARLXRk": {
-          "type": "control",
-          "settings": {
-            "desktop_image": "shopify://shop_images/Design_Around.jpg",
-            "mobile_image": "shopify://shop_images/works1.jpg",
-            "title": "Meaningful Connections Through AI",
-            "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "control_wrcJKd",
-        "control_c9F6TN",
-        "control_ARLXRk"
-      ],
-      "name": "How it works control",
-      "settings": {
-        "subtitle": "The SensOn Experience",
-        "title": "How SensOn Supports Your Sensual Wellness Journey",
-        "description": "<p>SensOn brings personalization, privacy, and AI-powered interaction together to create experiences that adapt to how you connect and explore.</p>",
-        "subtitle_color": "#f287ec",
-        "title_color": "#ffffff",
-        "description_color": "#ffffff",
-        "item_title_color": "#ffffff",
-        "item_description_color": "#ffffff",
-        "accent_color": "#f287ec",
-        "image_mode": "multiple",
-        "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
-        "fixed_mobile_image": "shopify://shop_images/works1.jpg",
-        "desktop_layout": "text_left",
-        "desktop_padding_top": 72,
-        "desktop_padding_bottom": 80,
-        "mobile_padding_top": 42,
-        "mobile_padding_bottom": 48
-      }
-    },
-    "our_story_faq_RQkeGN": {
-      "type": "our-story-faq",
-      "blocks": {
-        "faq_p4QWAU": {
-          "type": "faq",
-          "settings": {
-            "question": "Create your own fantasies—freely",
-            "answer": "<p>With UGC character creation planned for Q4 2026, users will be able to shape characters, scenes and pacing around their own imagination.</p>"
-          }
-        },
-        "faq_AMeyCN": {
-          "type": "faq",
-          "settings": {
-            "question": "An experience that keeps evolving",
-            "answer": "<p>Today, more than 400 interactive scripts and characters create distinct paths into fantasy. Preference memory makes returning feel more personal and familiar.</p>"
-          }
-        },
-        "faq_Wh8RbT": {
-          "type": "faq",
-          "settings": {
-            "question": "Robotics made for warmth, not coldness",
-            "answer": "<p>We imagine intimate technology that offers presence, comfort and connection—built to feel human in the ways that matter.</p>"
-          }
-        },
-        "faq_Dfn4Bm": {
-          "type": "faq",
-          "settings": {
-            "question": "Femtech, with women at the center",
-            "answer": "<p>Women engineers, researchers, designers, creators and founders should help decide what the future of pleasure technology becomes.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "faq_p4QWAU",
-        "faq_AMeyCN",
-        "faq_Wh8RbT",
-        "faq_Dfn4Bm"
-      ],
-      "name": "Our story FAQ",
-      "settings": {
-        "module_id": "",
-        "layout": "stack",
-        "enable_accordion": true,
-        "color_background": "linear-gradient(137deg, rgba(55, 31, 54, 1) 43.49%, rgba(17, 10, 17, 1) 76.69%)",
-        "accent_color": "#f287ec",
-        "divider_color": "#4a3a55",
-        "desktop_padding_top": 152,
-        "desktop_padding_bottom": 152,
-        "mobile_padding_top": 68,
-        "mobile_padding_bottom": 68,
-        "subtitle": "Our Future",
-        "subtitle_font_size": 24,
-        "subtitle_font_size_mobile": 16,
-        "subtitle_color": "#f287ec",
-        "heading": "Not a one-product idea. A new platform for female pleasure.",
-        "heading_font_size": 42,
-        "heading_font_size_mobile": 28,
-        "heading_color": "#ffffff",
-        "heading_tag": "h2",
-        "description": "<p>AI should not replace love or real relationships. Its role here is different: to create more freedom for fantasy, curiosity and self-knowledge.</p>",
-        "description_font_size": 16,
-        "description_font_size_mobile": 14,
-        "description_color": "#ffffff"
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
       }
     },
     "seo_text_icons_8atcYa": {
@@ -345,15 +172,188 @@
         "mobile_padding_top": 60,
         "mobile_padding_bottom": 60
       }
+    },
+    "seo_choose_way_346CEV": {
+      "type": "seo-choose-way",
+      "blocks": {
+        "card_DtWRPb": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/sens-on-device-with-accessories-warm-light.jpg",
+            "subtitle": "Connected Physical Experience",
+            "title": "Meet SensOn S1",
+            "description": "<p>A connected companion device that brings app experiences, interactive audio, and synchronized responses together.</p>",
+            "button_label": "Discover SensOn S1",
+            "button_link": ""
+          }
+        },
+        "card_nMpNPV": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/sens-on-device-on-pedestal-with-fruits.jpg",
+            "subtitle": "Digital AI Companion Experience",
+            "title": "Explore SensOn App",
+            "description": "<p>Meet AI companions, enjoy personalized conversations, and discover interactive experiences that evolve with you.</p>",
+            "button_label": "Explore App",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_DtWRPb",
+        "card_nMpNPV"
+      ],
+      "name": "SEO choose way",
+      "settings": {
+        "subtitle": "Explore SensOn",
+        "title": "Choose Your Way To Connect",
+        "description": "<p>Move from digital companionship to connected physical experiences with SensOn App and SensOn S1.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#e8e8e8",
+        "card_subtitle_color": "#f287ec",
+        "card_title_color": "#ffffff",
+        "card_description_color": "#d2d2d2",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "background_color": "#161616",
+        "card_background_color": "#4a4a4a",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
+      }
+    },
+    "how_it_work_control_LTy4Az": {
+      "type": "how-it-work-control",
+      "blocks": {
+        "control_wrcJKd": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Design_Around.jpg",
+            "mobile_image": "shopify://shop_images/works1.jpg",
+            "title": "Personalized Experiences That Adapt To You",
+            "description": "<p>Interactions evolve with your preferences, conversations, and personal pace.</p>"
+          }
+        },
+        "control_c9F6TN": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Design_Around.jpg",
+            "mobile_image": "shopify://shop_images/works1.jpg",
+            "title": "A Private Space For Personal Exploration",
+            "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
+          }
+        },
+        "control_ARLXRk": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Design_Around.jpg",
+            "mobile_image": "shopify://shop_images/works1.jpg",
+            "title": "Meaningful Connections Through AI",
+            "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "control_wrcJKd",
+        "control_c9F6TN",
+        "control_ARLXRk"
+      ],
+      "name": "How it works control",
+      "settings": {
+        "subtitle": "The SensOn Experience",
+        "title": "How SensOn Supports Your Sensual Wellness Journey",
+        "description": "<p>SensOn brings personalization, privacy, and AI-powered interaction together to create experiences that adapt to how you connect and explore.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#ffffff",
+        "item_title_color": "#ffffff",
+        "item_description_color": "#ffffff",
+        "accent_color": "#f287ec",
+        "image_mode": "multiple",
+        "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
+        "fixed_mobile_image": "shopify://shop_images/works1.jpg",
+        "desktop_layout": "text_left",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
+      }
+    },
+    "our_story_faq_RQkeGN": {
+      "type": "our-story-faq",
+      "blocks": {
+        "faq_p4QWAU": {
+          "type": "faq",
+          "settings": {
+            "question": "Create your own fantasies—freely",
+            "answer": "<p>With UGC character creation planned for Q4 2026, users will be able to shape characters, scenes and pacing around their own imagination.</p>"
+          }
+        },
+        "faq_AMeyCN": {
+          "type": "faq",
+          "settings": {
+            "question": "An experience that keeps evolving",
+            "answer": "<p>Today, more than 400 interactive scripts and characters create distinct paths into fantasy. Preference memory makes returning feel more personal and familiar.</p>"
+          }
+        },
+        "faq_Wh8RbT": {
+          "type": "faq",
+          "settings": {
+            "question": "Robotics made for warmth, not coldness",
+            "answer": "<p>We imagine intimate technology that offers presence, comfort and connection—built to feel human in the ways that matter.</p>"
+          }
+        },
+        "faq_Dfn4Bm": {
+          "type": "faq",
+          "settings": {
+            "question": "Femtech, with women at the center",
+            "answer": "<p>Women engineers, researchers, designers, creators and founders should help decide what the future of pleasure technology becomes.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_p4QWAU",
+        "faq_AMeyCN",
+        "faq_Wh8RbT",
+        "faq_Dfn4Bm"
+      ],
+      "name": "Our story FAQ",
+      "settings": {
+        "module_id": "",
+        "layout": "stack",
+        "enable_accordion": true,
+        "color_background": "linear-gradient(137deg, rgba(55, 31, 54, 1) 43.49%, rgba(17, 10, 17, 1) 76.69%)",
+        "accent_color": "#f287ec",
+        "divider_color": "#4a3a55",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60,
+        "subtitle": "Our Future",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Not a one-product idea. A new platform for female pleasure.",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h2",
+        "description": "<p>AI should not replace love or real relationships. Its role here is different: to create more freedom for fantasy, curiosity and self-knowledge.</p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff"
+      }
     }
   },
   "order": [
     "main",
     "web_introduction_banner_Nk9zyy",
     "seo_show_card_yYGcpj",
+    "seo_text_icons_8atcYa",
     "seo_choose_way_346CEV",
     "how_it_work_control_LTy4Az",
-    "our_story_faq_RQkeGN",
-    "seo_text_icons_8atcYa"
+    "our_story_faq_RQkeGN"
   ]
 }
