@@ -299,6 +299,7 @@
         "item_GVakaW": {
           "type": "item",
           "settings": {
+            "icon": "shopify://shop_images/self_understanding.webp",
             "icon_style": "confidence",
             "text": "Confidence"
           }
@@ -306,6 +307,7 @@
         "item_BQgRUr": {
           "type": "item",
           "settings": {
+            "icon": "shopify://shop_images/self_understanding.webp",
             "icon_style": "meditation",
             "text": "Self-Understanding"
           }
@@ -313,6 +315,7 @@
         "item_LTkTgM": {
           "type": "item",
           "settings": {
+            "icon": "shopify://shop_images/connection.webp",
             "icon_style": "connection",
             "text": "Connection"
           }
