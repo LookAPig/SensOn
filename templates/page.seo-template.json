@@ -52,10 +52,63 @@
         "secondary_button_link": "shopify://pages/contact-us",
         "external_video_url": ""
       }
+    },
+    "how_it_work_control_LTy4Az": {
+      "type": "how-it-work-control",
+      "blocks": {
+        "control_wrcJKd": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Design_Around.jpg",
+            "mobile_image": "shopify://shop_images/works1.jpg",
+            "title": "Personalized Experiences That Adapt To You",
+            "description": "<p>Interactions evolve with your preferences, conversations, and personal pace.</p>"
+          }
+        },
+        "control_c9F6TN": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Design_Around.jpg",
+            "mobile_image": "shopify://shop_images/works1.jpg",
+            "title": "A Private Space For Personal Exploration",
+            "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
+          }
+        },
+        "control_ARLXRk": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Design_Around.jpg",
+            "mobile_image": "shopify://shop_images/works1.jpg",
+            "title": "Meaningful Connections Through AI",
+            "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "control_wrcJKd",
+        "control_c9F6TN",
+        "control_ARLXRk"
+      ],
+      "name": "How it works control",
+      "settings": {
+        "subtitle": "The SensOn Experience",
+        "title": "How SensOn Supports Your Sensual Wellness Journey",
+        "description": "<p>SensOn brings personalization, privacy, and AI-powered interaction together to create experiences that adapt to how you connect and explore.</p>",
+        "accent_color": "#f287ec",
+        "image_mode": "multiple",
+        "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
+        "fixed_mobile_image": "shopify://shop_images/works1.jpg",
+        "desktop_layout": "text_left",
+        "desktop_padding_top": 72,
+        "desktop_padding_bottom": 80,
+        "mobile_padding_top": 42,
+        "mobile_padding_bottom": 48
+      }
     }
   },
   "order": [
     "main",
-    "web_introduction_banner_Nk9zyy"
+    "web_introduction_banner_Nk9zyy",
+    "how_it_work_control_LTy4Az"
   ]
 }
