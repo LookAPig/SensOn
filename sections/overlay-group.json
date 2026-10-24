@@ -38,16 +38,6 @@
         "featured_products": []
       }
     },
-    "early-access-dialog": {
-      "type": "early-access-dialog",
-      "settings": {
-        "enabled": true,
-        "delay": 4,
-        "cooldown_days": 1,
-        "show_only_on_index": false,
-        "preview_state": "subscribe"
-      }
-    },
     "newsletter-popup": {
       "type": "newsletter-popup",
       "disabled": true,
@@ -65,6 +55,46 @@
         "button_text": "Subscribe",
         "content": "Be the first to know about new arrivals. Unlock exclusive offers & perks",
         "conditions": "By signing up, you agree with our privacy policy."
+      }
+    },
+    "early-access-dialog": {
+      "type": "early-access-dialog",
+      "settings": {
+        "enabled": true,
+        "delay": 4,
+        "cooldown_days": 1,
+        "show_only_on_index": false,
+        "preview_state": "subscribe",
+        "close_label": "Close",
+        "eyebrow": "Black Friday Early Access",
+        "title": "Get Black Friday early access",
+        "content": "Enter your email to unlock SensOn S1 at $159 before the public sale.",
+        "placeholder": "Email address",
+        "button_text": "Unlock $159 access",
+        "privacy": "By continuing, you agree to receive SensOn emails. Unsubscribe anytime.",
+        "invalid_email": "Enter a valid email address.",
+        "submit_error": "We couldn't add you just now. Please try again.",
+        "pending_text": "Joining...",
+        "image": "shopify://shop_images/37.jpg",
+        "image_alt": "SensOn S1 Black Friday early access",
+        "klaviyo_company_id": "",
+        "klaviyo_list_id": "",
+        "klaviyo_source": "Black Friday Early Access",
+        "klaviyo_revision": "2026-10-15",
+        "klaviyo_property": "bf_early_access",
+        "klaviyo_property_value": "true",
+        "success_eyebrow": "Early Access Unlocked",
+        "success_title": "SensOn S1 is ready when you are",
+        "price_text": "$159",
+        "success_note": "Your Black Friday early-access price.",
+        "benefit_1": "Locked $159 price before the public drop",
+        "benefit_2": "A private product page that is not linked on the site",
+        "benefit_3": "This email signup will not appear again",
+        "buy_label": "Shop S1 for $159",
+        "buy_url": "",
+        "product": "",
+        "variant_id": "",
+        "success_image_alt": "SensOn S1 at the $159 early-access price"
       }
     }
   },
