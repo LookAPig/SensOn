@@ -38,6 +38,16 @@
         "featured_products": []
       }
     },
+    "early-access-dialog": {
+      "type": "early-access-dialog",
+      "settings": {
+        "enabled": true,
+        "delay": 4,
+        "cooldown_days": 1,
+        "show_only_on_index": false,
+        "preview_state": "subscribe"
+      }
+    },
     "newsletter-popup": {
       "type": "newsletter-popup",
       "disabled": true,
@@ -61,6 +71,7 @@
   "order": [
     "cart-drawer",
     "search-drawer",
-    "newsletter-popup"
+    "newsletter-popup",
+    "early-access-dialog"
   ]
 }
