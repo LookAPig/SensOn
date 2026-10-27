@@ -308,18 +308,25 @@
     "web_introduction_faq_VHVabA": {
       "type": "web-introduction-faq",
       "blocks": {
+        "faq_F3RJYD": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need SensOn S1 to use the app?",
+            "answer": "<p>No. You can use SensOn App without SensOn S1 to interact with AI companions and enjoy voice-led stories. Connecting SensOn S1 adds synchronized physical sensations.</p>"
+          }
+        },
+        "faq_YczLFb": {
+          "type": "faq",
+          "settings": {
+            "question": "What is SensOn App?",
+            "answer": "<p>SensOn is a private AI companion experience built around interactive fantasy, voice and choice.</p>"
+          }
+        },
         "faq_GGBFdY": {
           "type": "faq",
           "settings": {
             "question": "What is SensOn App?",
             "answer": "<p>SensOn is a private AI companion experience built around interactive fantasy, voice and choice. Browse characters, guide the conversation and return to companions that remember your preferences.</p>"
-          }
-        },
-        "faq_F3RJYD": {
-          "type": "faq",
-          "settings": {
-            "question": "Do I need the SensOn S1 device?",
-            "answer": "<p>No. You can use SensOn App without SensOn S1 to interact with AI companions and enjoy voice-led stories. Connecting SensOn S1 adds synchronized physical sensations.</p>"
           }
         },
         "faq_VVmXtN": {
@@ -345,8 +352,9 @@
         }
       },
       "block_order": [
-        "faq_GGBFdY",
         "faq_F3RJYD",
+        "faq_YczLFb",
+        "faq_GGBFdY",
         "faq_VVmXtN",
         "faq_aTkLhf",
         "faq_DxgBQD"
