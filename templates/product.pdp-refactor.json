@@ -670,7 +670,7 @@
       ],
       "name": "creator-buzz-slider",
       "settings": {
-        "heading": "What Creators are Saying",
+        "heading": "What Creators are Saying  About SensOn S1",
         "slider_type": "creator-buzz-slider"
       }
     },
@@ -1036,7 +1036,8 @@
         "product": "senson-s1-wellness-companion",
         "product_handle": "senson-s1-wellness-companion",
         "badge_text": "Limited Time Price",
-        "button_text": "Shop Now"
+        "button_text": "Shop Now",
+        "button_url": ""
       }
     }
   },
