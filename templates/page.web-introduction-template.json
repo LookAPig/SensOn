@@ -138,7 +138,7 @@
       "settings": {
         "subtitle": "Your Fantasy, Your Rules",
         "title": "More Than an AI Chat. A World That Responds to You.",
-        "description": "<p>SensOn brings character, voice, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 when you want to feel the experience move with you.</p>",
+        "description": "<p>SensOn App brings AI companions, voice chat, memory and interactive storytelling into one intimate space. Explore without a device, or connect SensOn S1 for synchronized sensations.</p>",
         "accent_color": "#e879f9",
         "title_color": "#ffffff",
         "description_color": "#ffffff",
@@ -211,7 +211,7 @@
         "step_01": {
           "type": "step",
           "settings": {
-            "text": "Use SensOn Web on its own"
+            "text": "Use SensOn App on its own"
           }
         },
         "step_02": {
@@ -239,7 +239,7 @@
         "description": "<p>You don't need a device to start. When SensOn S1 is connected, conversation and story cues can synchronize with hands-free, multi-zone sensation—turning fantasy into a complete sensory loop.</p>",
         "image": "shopify://shop_images/Enjoy_the_story_online._Feel_it_with_SensOn_S1.jpg",
         "mobile_image": "shopify://shop_images/Enjoy_the_story_online.jpg",
-        "primary_button_text": "Try SensOn Web",
+        "primary_button_text": "Try Online",
         "primary_button_link": "https://app.senson.ai/?utm_source=Shopify&utm_medium=web&utm_campaign=web_introduction",
         "primary_button_text_color": "#000000",
         "secondary_button_text": "Discover SensOn S1",
