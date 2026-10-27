@@ -318,46 +318,38 @@
         "faq_YczLFb": {
           "type": "faq",
           "settings": {
-            "question": "What is SensOn App?",
-            "answer": "<p>SensOn is a private AI companion experience built around interactive fantasy, voice and choice.</p>"
+            "question": "Can I use SensOn App on my phone or desktop?",
+            "answer": "<p>Yes. SensOn App is available on iPhone and through desktop web browsers. An Android app is not currently available.</p>"
           }
         },
-        "faq_GGBFdY": {
+        "faq_jP8K9m": {
           "type": "faq",
           "settings": {
-            "question": "What is SensOn App?",
-            "answer": "<p>SensOn is a private AI companion experience built around interactive fantasy, voice and choice. Browse characters, guide the conversation and return to companions that remember your preferences.</p>"
+            "question": "Do SensOn AI companions remember past conversations?",
+            "answer": "<p>Yes. SensOn AI companions can remember details such as your name, preferences and past interactions, helping make future conversations more personal.</p>"
           }
         },
-        "faq_VVmXtN": {
+        "faq_DJ64CJ": {
           "type": "faq",
           "settings": {
-            "question": "Is there a free trial?",
-            "answer": "<p>Yes. New users can start with a 7-day free trial. Current plan details are shown before you confirm a subscription.</p>"
+            "question": "What happens after the 7-day free trial?",
+            "answer": "<p>Continued access to SensOn AI content requires a paid subscription after the 7-day trial. Available plans and pricing are displayed before subscription confirmation.</p>"
           }
         },
-        "faq_aTkLhf": {
+        "faq_ydBj8j": {
           "type": "faq",
           "settings": {
-            "question": "Is my experience private?",
-            "answer": "<p>SensOn is designed for private, adult use. Your account, conversations and preferences remain behind sign-in, and the Web experience can be used discreetly on desktop.</p>"
-          }
-        },
-        "faq_DxgBQD": {
-          "type": "faq",
-          "settings": {
-            "question": "Who is SensOn designed for?",
-            "answer": "<p>SensOn is built from a female perspective and welcomes adult women and LGBTQ+ users across a wide spectrum of moods, identities and fantasies.</p>"
+            "question": "Are my conversations and preferences private?",
+            "answer": "<p>SensOn App is designed for private, account-based use. For details on how personal information is collected and handled, please refer to our <a href=\"https://senson.ai/policies/privacy-policy\" title=\"https://senson.ai/policies/privacy-policy\"><span style=\"text-decoration:underline\"><strong>Privacy Policy</strong></span>.</a></p>"
           }
         }
       },
       "block_order": [
         "faq_F3RJYD",
         "faq_YczLFb",
-        "faq_GGBFdY",
-        "faq_VVmXtN",
-        "faq_aTkLhf",
-        "faq_DxgBQD"
+        "faq_jP8K9m",
+        "faq_DJ64CJ",
+        "faq_ydBj8j"
       ],
       "name": "Web introduction FAQ",
       "settings": {
