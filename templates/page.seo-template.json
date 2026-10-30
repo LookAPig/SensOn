@@ -171,13 +171,65 @@
         "mobile_padding_bottom": 60
       }
     },
+    "how_it_work_control_LTy4Az": {
+      "type": "how-it-work-control",
+      "blocks": {
+        "control_wrcJKd": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Personalized_Experiences_That_Adapt_To_You.jpg",
+            "title": "Personalized Experiences That Adapt To You",
+            "description": "<p>Interactions evolve with your preferences, conversations, and personal pace.</p>"
+          }
+        },
+        "control_c9F6TN": {
+          "type": "control",
+          "settings": {
+            "title": "A Private Space For Personal Exploration",
+            "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
+          }
+        },
+        "control_ARLXRk": {
+          "type": "control",
+          "settings": {
+            "title": "Meaningful Connections Through AI",
+            "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "control_wrcJKd",
+        "control_c9F6TN",
+        "control_ARLXRk"
+      ],
+      "name": "How it works control",
+      "settings": {
+        "subtitle": "The SensOn Experience",
+        "title": "How SensOn Supports Your Sensual Wellness Journey",
+        "description": "<p>SensOn brings personalization, privacy, and AI-powered interaction together to create experiences that adapt to how you connect and explore.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#ffffff",
+        "item_title_color": "#ffffff",
+        "item_description_color": "#ffffff",
+        "accent_color": "#f287ec",
+        "image_mode": "multiple",
+        "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
+        "fixed_mobile_image": "shopify://shop_images/works1.jpg",
+        "desktop_layout": "text_left",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
+      }
+    },
     "seo_choose_way_346CEV": {
       "type": "seo-choose-way",
       "blocks": {
         "card_DtWRPb": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/sens-on-device-with-accessories-warm-light.jpg",
+            "image": "shopify://shop_images/Meet_SensOn_S1.jpg",
             "subtitle": "Connected Physical Experience",
             "title": "Meet SensOn S1",
             "description": "<p>A connected companion device that brings app experiences, interactive audio, and synchronized responses together.</p>",
@@ -188,7 +240,7 @@
         "card_nMpNPV": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/sens-on-device-on-pedestal-with-fruits.jpg",
+            "image": "shopify://shop_images/Explore_SensOn_App.jpg",
             "subtitle": "Digital AI Companion Experience",
             "title": "Explore SensOn App",
             "description": "<p>Meet AI companions, enjoy personalized conversations, and discover interactive experiences that evolve with you.</p>",
@@ -222,63 +274,6 @@
         "mobile_padding_bottom": 60
       }
     },
-    "how_it_work_control_LTy4Az": {
-      "type": "how-it-work-control",
-      "blocks": {
-        "control_wrcJKd": {
-          "type": "control",
-          "settings": {
-            "desktop_image": "shopify://shop_images/Design_Around.jpg",
-            "mobile_image": "shopify://shop_images/works1.jpg",
-            "title": "Personalized Experiences That Adapt To You",
-            "description": "<p>Interactions evolve with your preferences, conversations, and personal pace.</p>"
-          }
-        },
-        "control_c9F6TN": {
-          "type": "control",
-          "settings": {
-            "desktop_image": "shopify://shop_images/Design_Around.jpg",
-            "mobile_image": "shopify://shop_images/works1.jpg",
-            "title": "A Private Space For Personal Exploration",
-            "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
-          }
-        },
-        "control_ARLXRk": {
-          "type": "control",
-          "settings": {
-            "desktop_image": "shopify://shop_images/Design_Around.jpg",
-            "mobile_image": "shopify://shop_images/works1.jpg",
-            "title": "Meaningful Connections Through AI",
-            "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "control_wrcJKd",
-        "control_c9F6TN",
-        "control_ARLXRk"
-      ],
-      "name": "How it works control",
-      "settings": {
-        "subtitle": "The SensOn Experience",
-        "title": "How SensOn Supports Your Sensual Wellness Journey",
-        "description": "<p>SensOn brings personalization, privacy, and AI-powered interaction together to create experiences that adapt to how you connect and explore.</p>",
-        "subtitle_color": "#f287ec",
-        "title_color": "#ffffff",
-        "description_color": "#ffffff",
-        "item_title_color": "#ffffff",
-        "item_description_color": "#ffffff",
-        "accent_color": "#f287ec",
-        "image_mode": "multiple",
-        "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
-        "fixed_mobile_image": "shopify://shop_images/works1.jpg",
-        "desktop_layout": "text_left",
-        "desktop_padding_top": 120,
-        "desktop_padding_bottom": 120,
-        "mobile_padding_top": 60,
-        "mobile_padding_bottom": 60
-      }
-    },
     "seo_guide_card_KxhWPj": {
       "type": "seo-guide-card",
       "blocks": {
@@ -286,6 +281,7 @@
           "type": "card",
           "settings": {
             "tag": "AI & Connection",
+            "image": "shopify://shop_images/Understanding_AI_Companions.jpg",
             "title": "Understanding AI Companions",
             "description": "<p>Learn how AI companions create personalized interactions and new ways to connect.</p>",
             "link_label": "Read Guide →",
@@ -296,6 +292,7 @@
           "type": "card",
           "settings": {
             "tag": "Intimacy",
+            "image": "shopify://shop_images/Building_Meaningful_Connectionsz.jpg",
             "title": "Building Meaningful Connections",
             "description": "<p>Explore how communication and personal experiences can support deeper intimacy.</p>",
             "link_label": "Read Guide →",
@@ -306,6 +303,7 @@
           "type": "card",
           "settings": {
             "tag": "Mindfulness",
+            "image": "shopify://shop_images/Practicing_Mindful_Self-Exploration.jpg",
             "title": "Practicing Mindful Self-Exploration",
             "description": "<p>Discover how mindfulness supports self-awareness and personal reflection.</p>",
             "link_label": "Read Guide →",
@@ -316,6 +314,7 @@
           "type": "card",
           "settings": {
             "tag": "Your Experience",
+            "image": "shopify://shop_images/Understanding_Your_Personal_Experience.jpg",
             "title": "Understanding Your Personal Experience",
             "description": "<p>Learn why individual experiences differ and how self-understanding shapes your journey.</p>",
             "link_label": "Read Guide →",
@@ -420,8 +419,8 @@
     "web_introduction_banner_Nk9zyy",
     "seo_show_card_yYGcpj",
     "seo_text_icons_8atcYa",
-    "seo_choose_way_346CEV",
     "how_it_work_control_LTy4Az",
+    "seo_choose_way_346CEV",
     "seo_guide_card_KxhWPj",
     "our_story_faq_RQkeGN"
   ]
