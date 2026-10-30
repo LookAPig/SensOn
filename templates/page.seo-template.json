@@ -186,6 +186,7 @@
         "control_c9F6TN": {
           "type": "control",
           "settings": {
+            "desktop_image": "shopify://shop_images/A_Private_Space_For_Personal_Exploration.jpg",
             "title": "A Private Space For Personal Exploration",
             "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
           }
@@ -193,6 +194,7 @@
         "control_ARLXRk": {
           "type": "control",
           "settings": {
+            "desktop_image": "shopify://shop_images/Meaningful_Connections_Through_AI.jpg",
             "title": "Meaningful Connections Through AI",
             "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
           }
