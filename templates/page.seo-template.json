@@ -124,7 +124,7 @@
         "item_GVakaW": {
           "type": "item",
           "settings": {
-            "icon": "shopify://shop_images/self_understanding.webp",
+            "icon": "shopify://shop_images/Confidence.png",
             "icon_style": "confidence",
             "text": "Confidence"
           }
@@ -140,7 +140,7 @@
         "item_LTkTgM": {
           "type": "item",
           "settings": {
-            "icon": "shopify://shop_images/connection.webp",
+            "icon": "shopify://shop_images/Connection.png",
             "icon_style": "connection",
             "text": "Connection"
           }
