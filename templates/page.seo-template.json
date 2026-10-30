@@ -22,8 +22,6 @@
       "type": "web-introduction-banner",
       "settings": {
         "allow_transparent_header": true,
-        "desktop_image": "shopify://shop_images/webpc.jpg",
-        "mobile_image": "shopify://shop_images/app-int.jpg",
         "overlay_opacity": 0,
         "desktop_height": "100svh",
         "mobile_height": "100svh",
@@ -59,7 +57,7 @@
         "card_xERyQ7": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/mask_group_7.webp",
+            "image": "shopify://shop_images/Soft_Romantic_407dedd6-2e6a-4417-9a67-9a2ba9c7821b.jpg",
             "title": "Self-Awareness",
             "description": "<p>Build greater body awareness and body confidence by understanding your emotions, needs, and personal references.</p>",
             "text_color": "#ffffff",
@@ -69,7 +67,7 @@
         "card_R9937k": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/mask_group_6.webp",
+            "image": "shopify://shop_images/Intimacy_Connection.jpg",
             "title": "Intimacy & Connection",
             "description": "<p>Create deeper emotional closeness through trust, communication, and shared moments that help you feel connected.</p>",
             "text_color": "#ffffff",
@@ -79,7 +77,7 @@
         "card_rVcta6": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/mask_group_8.webp",
+            "image": "shopify://shop_images/Personal_Exploration.jpg",
             "title": "Personal Exploration",
             "description": "<p>Explore your curiosity at your own pace and learn what feels comfortable, meaningful, and true to you.</p>",
             "text_color": "#ffffff",
@@ -89,7 +87,7 @@
         "card_LTUXKR": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/mask_group_9.webp",
+            "image": "shopify://shop_images/Mindful_Experiences.jpg",
             "title": "Mindful Experiences",
             "description": "<p>Slow down with calming practices that bring attention back to your body, breath, and present feelings.</p>",
             "text_color": "#ffffff",
