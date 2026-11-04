@@ -382,13 +382,21 @@
             "question": "How can someone practice sensual wellness?",
             "answer": "<p>It can start with simple habits such as self-reflection, paying attention to personal preferences, creating intentional moments for yourself, and communicating openly in relationships.</p>"
           }
+        },
+        "faq_natmMp": {
+          "type": "faq",
+          "settings": {
+            "question": "Can AI companions support sensual wellness?",
+            "answer": "<p>Yes. AI companions can offer personalized conversations and interactive experiences that respond to individual preferences, giving users a private way to reflect, connect, and explore at their own pace.</p>"
+          }
         }
       },
       "block_order": [
         "faq_p4QWAU",
         "faq_AMeyCN",
         "faq_Wh8RbT",
-        "faq_Dfn4Bm"
+        "faq_Dfn4Bm",
+        "faq_natmMp"
       ],
       "name": "Our story FAQ",
       "settings": {
