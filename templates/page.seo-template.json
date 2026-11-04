@@ -60,6 +60,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Soft_Romantic_407dedd6-2e6a-4417-9a67-9a2ba9c7821b.jpg",
+            "mobile_image": "shopify://shop_images/Self-Awareness.jpg",
             "title": "Self-Awareness",
             "description": "<p>Build greater body awareness and body confidence by understanding your emotions, needs, and personal references.</p>",
             "text_color": "#ffffff",
@@ -70,6 +71,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Intimacy_Connection.jpg",
+            "mobile_image": "shopify://shop_images/Intimacy_Connection_5ddde2ba-d2e1-4419-bfc8-371ec1146b30.jpg",
             "title": "Intimacy & Connection",
             "description": "<p>Create deeper emotional closeness through trust, communication, and shared moments that help you feel connected.</p>",
             "text_color": "#ffffff",
@@ -80,6 +82,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Personal_Exploration.jpg",
+            "mobile_image": "shopify://shop_images/Personal_Exploration_adc6e4fb-f797-4595-b835-fed962ecda21.jpg",
             "title": "Personal Exploration",
             "description": "<p>Explore your curiosity at your own pace and learn what feels comfortable, meaningful, and true to you.</p>",
             "text_color": "#ffffff",
@@ -90,6 +93,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Mindful_Experiences.jpg",
+            "mobile_image": "shopify://shop_images/Mindful_Experiences_d11f9c2d-5cd0-4d70-b584-c90675e3c7f2.jpg",
             "title": "Mindful Experiences",
             "description": "<p>Slow down with calming practices that bring attention back to your body, breath, and present feelings.</p>",
             "text_color": "#ffffff",
