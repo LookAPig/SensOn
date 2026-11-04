@@ -238,7 +238,7 @@
             "title": "Meet SensOn S1",
             "description": "<p>A connected companion device that brings app experiences, interactive audio, and synchronized responses together.</p>",
             "button_label": "Discover SensOn S1",
-            "button_link": ""
+            "button_link": "shopify://products/senson-s1-wellness-companion"
           }
         },
         "card_nMpNPV": {
@@ -249,7 +249,7 @@
             "title": "Explore SensOn App",
             "description": "<p>Meet AI companions, enjoy personalized conversations, and discover interactive experiences that evolve with you.</p>",
             "button_label": "Explore App",
-            "button_link": ""
+            "button_link": "shopify://pages/senson-app"
           }
         }
       },
