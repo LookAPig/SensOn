@@ -115,9 +115,9 @@
         "hint_color": "#9a9a9a",
         "background_color": "#000000",
         "desktop_padding_top": 120,
-        "desktop_padding_bottom": 120,
+        "desktop_padding_bottom": 48,
         "mobile_padding_top": 60,
-        "mobile_padding_bottom": 60
+        "mobile_padding_bottom": 48
       }
     },
     "seo_text_icons_8atcYa": {
