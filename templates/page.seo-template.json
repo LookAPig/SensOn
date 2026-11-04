@@ -47,9 +47,9 @@
         "button_width_desktop": 220,
         "button_width_mobile": 240,
         "primary_button_text": "Understand Sensual Wellness",
-        "primary_button_link": "https://app.senson.ai/?utm_source=Shopify&utm_medium=web&utm_campaign=web_introduction",
+        "primary_button_link": "",
         "secondary_button_text": "Choose Your Way To Connect",
-        "secondary_button_link": "shopify://pages/contact-us",
+        "secondary_button_link": "",
         "external_video_url": ""
       }
     },
@@ -189,7 +189,7 @@
           "settings": {
             "desktop_image": "shopify://shop_images/A_Private_Space_For_Personal_Exploration.jpg",
             "title": "A Private Space For Personal Exploration",
-            "description": "<p>For users comparing it with an AI vibrator, SensOn S1 adds AI companion response, story, and app-guided pacing.</p>"
+            "description": "<p>Take time to reflect, interact, and explore in a comfortable private space.</p>"
           }
         },
         "control_ARLXRk": {
@@ -197,7 +197,7 @@
           "settings": {
             "desktop_image": "shopify://shop_images/Meaningful_Connections_Through_AI.jpg",
             "title": "Meaningful Connections Through AI",
-            "description": "<p>Unlike many connected sex toys or a basic Bluetooth vibrator, SensOn S1 connects erotic audio stories, app control, and AI interaction.</p>"
+            "description": "<p>Create more personalized connections through digital intimacy and adaptive AI interactions.</p>"
           }
         }
       },
