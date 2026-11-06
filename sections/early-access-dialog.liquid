@@ -1,0 +1,752 @@
+{%- liquid
+  assign allow = false
+  if section.settings.enabled or request.design_mode
+    assign allow = true
+  endif
+  if request.page_type == 'captcha'
+    assign allow = false
+  endif
+  if section.settings.klaviyo_company_id == blank or section.settings.klaviyo_list_id == blank
+    unless request.design_mode
+      assign allow = false
+    endunless
+  endif
+  if section.settings.show_only_on_index and template != 'index' and request.design_mode == false
+    assign allow = false
+  endif
+
+  assign buy_href = section.settings.buy_url | strip
+  if buy_href == blank and section.settings.product != blank
+    assign buy_href = section.settings.product.url
+  endif
+  assign variant_id = section.settings.variant_id | strip
+  if buy_href != blank and variant_id != blank
+    unless buy_href contains 'variant='
+      if buy_href contains '?'
+        assign buy_href = buy_href | append: '&variant=' | append: variant_id
+      else
+        assign buy_href = buy_href | append: '?variant=' | append: variant_id
+      endif
+    endunless
+  endif
+
+  assign buy_path = buy_href | split: '?' | first | replace: shop.url, ''
+  assign localized_path = buy_path
+  if request.locale.root_url != '/' and buy_path != blank
+    assign localized_path = request.locale.root_url | append: buy_path
+  endif
+  if buy_path != blank and request.design_mode == false
+    if request.path == buy_path or request.path == localized_path
+      assign allow = false
+    endif
+  endif
+
+  assign success_image = section.settings.success_image
+  if success_image == blank
+    assign success_image = section.settings.image
+  endif
+  assign subscribe_alt = section.settings.image_alt | default: section.settings.title
+  assign success_alt = section.settings.success_image_alt | default: section.settings.success_title
+-%}
+
+{%- if allow -%}
+  <style>
+.shopify-section--early-access {
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+html.ea-dialog-lock,
+html.ea-dialog-lock body {
+  overflow: hidden;
+}
+
+.ea[hidden] {
+  display: none !important;
+}
+
+.ea,
+.ea * {
+  box-sizing: border-box;
+}
+
+.ea {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.ea__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 8, 8, 0.72);
+}
+
+.ea__panel {
+  position: relative;
+  z-index: 1;
+  width: 343px;
+  max-width: 100%;
+  max-height: min(92vh, 860px);
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: #111;
+  color: #fff;
+  color-scheme: dark;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  scrollbar-width: thin;
+  animation: ea-rise 0.35s ease;
+}
+
+.ea__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  cursor: pointer;
+}
+
+.ea__view {
+  display: flex;
+  flex-direction: column;
+}
+
+.ea__view[hidden] {
+  display: none !important;
+}
+
+.ea__media {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background: #161616;
+}
+
+.ea__img,
+.ea__fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ea__img {
+  display: block;
+  object-fit: cover;
+}
+
+.ea__fallback {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(242, 135, 236, 0.5), transparent 46%),
+    linear-gradient(180deg, #2b1230, #111);
+  color: #fff;
+  font-family: MabryPro-Medium, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.ea__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 20px 20px;
+}
+
+.ea__eyebrow,
+.ea__title,
+.ea__copy,
+.ea__privacy,
+.ea__price,
+.ea__note {
+  margin: 0;
+}
+
+.ea__eyebrow {
+  color: #f287ec;
+  font-family: MabryPro-Medium, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.ea__title {
+  color: #fff;
+  font-family: MabryPro-Medium, sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+.ea__copy,
+.ea__note,
+.ea__benefits {
+  color: rgba(255, 255, 255, 0.78);
+  font-family: MabryPro-Regular, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.ea__privacy {
+  color: rgba(255, 255, 255, 0.48);
+  font-family: MabryPro-Regular, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.ea__copy a,
+.ea__privacy a,
+.ea__note a {
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ea__panel {
+    animation: none;
+  }
+}
+
+@keyframes ea-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.ea__price {
+  margin: 0;
+  color: #fff;
+  font-family: MabryPro-Medium, sans-serif;
+  font-size: 56px;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.ea__benefits {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ea__benefits li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.ea__benefits li::before {
+  content: "";
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: #f287ec url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.2 4.6 9 10 3' fill='none' stroke='%23111' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 10px no-repeat;
+}
+
+.ea__form {
+  display: grid;
+  gap: 10px;
+}
+
+.ea__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.ea__input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  outline: none;
+  background: #1b1b1b;
+  color: #fff;
+  font: 15px/1 MabryPro-Regular, sans-serif;
+}
+
+.ea__input:focus {
+  border-color: #f287ec;
+}
+
+.ea__error {
+  margin: 0;
+  color: #ffb4b4;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.ea__error[hidden] {
+  display: none;
+}
+
+.ea__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: #f287ec;
+  color: #141414;
+  font: 600 15px/1 MabryPro-Medium, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ea__button:hover {
+  background: #ff9cf4;
+}
+
+.ea__button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.ea__button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .ea {
+    padding: 24px;
+  }
+
+  .ea__panel {
+    width: 720px;
+  }
+
+  .ea__view {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    min-height: 460px;
+  }
+
+  .ea__media {
+    height: auto;
+    min-height: 100%;
+  }
+
+  .ea__body {
+    justify-content: center;
+    gap: 14px;
+    padding: 40px 36px 36px;
+  }
+
+  .ea__title {
+    font-size: 34px;
+  }
+
+  .ea__price {
+    font-size: 72px;
+  }
+}
+</style>
+<early-access-dialog
+    class="ea"
+    hidden
+    data-section-id="{{ section.id }}"
+    data-enabled="{% if section.settings.enabled %}true{% else %}false{% endif %}"
+    data-delay="{{ section.settings.delay }}"
+    data-cooldown="{{ section.settings.cooldown_days }}"
+    data-preview="{{ section.settings.preview_state }}"
+    data-company-id="{{ section.settings.klaviyo_company_id | escape }}"
+    data-list-id="{{ section.settings.klaviyo_list_id | escape }}"
+    data-source="{{ section.settings.klaviyo_source | escape }}"
+    data-revision="{{ section.settings.klaviyo_revision | escape }}"
+    data-property-key="{{ section.settings.klaviyo_property | escape }}"
+    data-property-value="{{ section.settings.klaviyo_property_value | escape }}"
+    data-price="{{ section.settings.price_text | escape }}"
+    data-msg-invalid="{{ section.settings.invalid_email | escape }}"
+    data-msg-error="{{ section.settings.submit_error | escape }}"
+    data-msg-pending="{{ section.settings.pending_text | escape }}"
+    data-msg-submit="{{ section.settings.button_text | escape }}"
+  >
+    <div class="ea__overlay" data-ea-close></div>
+    <div class="ea__panel" role="dialog" aria-modal="true" aria-labelledby="ea-subscribe-title-{{ section.id }}" data-ea-panel>
+      <button class="ea__close" type="button" data-ea-close aria-label="{{ section.settings.close_label | escape }}">
+        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <div class="ea__view" data-ea-view="subscribe">
+        <div class="ea__media">
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'ea__img', widths: '343,480,720,960,1400', sizes: '(min-width: 768px) 280px, 343px', alt: subscribe_alt }}
+          {%- else -%}
+            <div class="ea__fallback" aria-hidden="true"><span>BLACK<br>FRIDAY</span></div>
+          {%- endif -%}
+        </div>
+        <div class="ea__body">
+          {%- if section.settings.eyebrow != blank -%}<p class="ea__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+          <h2 class="ea__title" id="ea-subscribe-title-{{ section.id }}" data-ea-title>{{ section.settings.title }}</h2>
+          {%- if section.settings.content != blank -%}<div class="ea__copy">{{ section.settings.content }}</div>{%- endif -%}
+          <form class="ea__form" data-ea-form method="post" action="#" novalidate>
+            <label class="ea__sr" for="ea-email-{{ section.id }}">{{ section.settings.placeholder | escape }}</label>
+            <input class="ea__input" id="ea-email-{{ section.id }}" data-ea-email type="email" name="email" inputmode="email" autocomplete="email" spellcheck="false" required placeholder="{{ section.settings.placeholder | escape }}">
+            <p class="ea__error" data-ea-error hidden role="alert"></p>
+            <button class="ea__button" type="submit" data-ea-submit><span data-ea-submit-label>{{ section.settings.button_text }}</span></button>
+          </form>
+          {%- if section.settings.privacy != blank -%}<div class="ea__privacy">{{ section.settings.privacy }}</div>{%- endif -%}
+        </div>
+      </div>
+
+      <div class="ea__view" data-ea-view="success" hidden>
+        <div class="ea__media">
+          {%- if success_image != blank -%}
+            {{ success_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'ea__img', widths: '343,480,720,960,1400', sizes: '(min-width: 768px) 280px, 343px', alt: success_alt }}
+          {%- else -%}
+            <div class="ea__fallback" aria-hidden="true"><span>{{ section.settings.price_text }}</span></div>
+          {%- endif -%}
+        </div>
+        <div class="ea__body">
+          {%- if section.settings.success_eyebrow != blank -%}<p class="ea__eyebrow">{{ section.settings.success_eyebrow }}</p>{%- endif -%}
+          <h2 class="ea__title" id="ea-success-title-{{ section.id }}" data-ea-title>{{ section.settings.success_title }}</h2>
+          {%- if section.settings.price_text != blank -%}<p class="ea__price">{{ section.settings.price_text }}</p>{%- endif -%}
+          {%- if section.settings.success_note != blank -%}<div class="ea__note">{{ section.settings.success_note }}</div>{%- endif -%}
+          <ul class="ea__benefits">
+            {%- if section.settings.benefit_1 != blank -%}<li>{{ section.settings.benefit_1 }}</li>{%- endif -%}
+            {%- if section.settings.benefit_2 != blank -%}<li>{{ section.settings.benefit_2 }}</li>{%- endif -%}
+            {%- if section.settings.benefit_3 != blank -%}<li>{{ section.settings.benefit_3 }}</li>{%- endif -%}
+          </ul>
+          <a class="ea__button" data-ea-buy href="{% if buy_href != blank %}{{ buy_href | escape }}{% else %}#{% endif %}" {% if buy_href == blank %}aria-disabled="true"{% endif %} rel="nofollow">{{ section.settings.buy_label }}</a>
+        </div>
+      </div>
+    </div>
+  </early-access-dialog>
+  <script>
+(() => {
+  if (customElements.get("early-access-dialog")) return;
+
+  class EarlyAccessDialog extends HTMLElement {
+    connectedCallback() {
+      if (this.parentElement !== document.body) {
+        document.body.appendChild(this);
+        return;
+      }
+      document.querySelectorAll("early-access-dialog").forEach((node) => {
+        if (node !== this && node.dataset.sectionId === this.dataset.sectionId) node.remove();
+      });
+      if (this.dataset.mounted === "true") return;
+      this.dataset.mounted = "true";
+      this.panel = this.querySelector("[data-ea-panel]");
+      this.abort = new AbortController();
+      this.pending = false;
+      this.bind();
+      if (this.designMode()) {
+        this.open(this.dataset.preview || "subscribe");
+        return;
+      }
+      if (!this.canAutoOpen()) return;
+      const delay = Math.max(0, Number(this.dataset.delay || 0)) * 1000;
+      this.timer = window.setTimeout(() => {
+        if (this.canAutoOpen()) this.open();
+      }, delay);
+    }
+
+    disconnectedCallback() {
+      this.abort?.abort();
+      window.clearTimeout(this.timer);
+      if (!this.isConnected) this.unlock();
+    }
+
+    bind() {
+      const signal = this.abort.signal;
+      this.addEventListener("click", (event) => this.onClick(event), { signal });
+      this.addEventListener("submit", (event) => this.onSubmit(event), { signal });
+      document.addEventListener("keydown", (event) => this.onKeydown(event), { signal });
+      document.addEventListener("shopify:section:select", (event) => {
+        if (this.matchesSection(event)) this.open(this.dataset.preview || "subscribe");
+      }, { signal });
+      document.addEventListener("shopify:section:deselect", (event) => {
+        if (this.matchesSection(event)) this.close(true);
+      }, { signal });
+      document.addEventListener("shopify:section:unload", (event) => {
+        if (this.matchesSection(event)) this.remove();
+      }, { signal });
+    }
+
+    matchesSection(event) {
+      return event.detail?.sectionId === this.dataset.sectionId;
+    }
+
+    designMode() {
+      return Boolean(window.Shopify && window.Shopify.designMode);
+    }
+
+    key(name) {
+      return `ea-dialog:${this.dataset.sectionId}:${name}`;
+    }
+
+    read(name) {
+      try { return localStorage.getItem(this.key(name)); } catch (error) { return null; }
+    }
+
+    write(name, value) {
+      if (this.designMode()) return;
+      try { localStorage.setItem(this.key(name), value); } catch (error) { /* ignore */ }
+    }
+
+    seenThisSession() {
+      try { return sessionStorage.getItem(this.key("seen")) === "1"; } catch (error) { return false; }
+    }
+
+    markSeen() {
+      try { sessionStorage.setItem(this.key("seen"), "1"); } catch (error) { /* ignore */ }
+    }
+
+    inCooldown() {
+      const dismissed = Number(this.read("dismissed") || 0);
+      const days = Number(this.dataset.cooldown || 0);
+      if (!dismissed || days <= 0) return false;
+      return Date.now() - dismissed < days * 86400000;
+    }
+
+    canAutoOpen() {
+      if (this.designMode() || this.dataset.enabled !== "true") return false;
+      if (this.read("bought") === "1" || this.seenThisSession() || this.inCooldown()) return false;
+      if (this.read("subscribed") === "1") return true;
+      return Boolean((this.dataset.companyId || "").trim() && (this.dataset.listId || "").trim());
+    }
+
+    open(view) {
+      const subscribed = this.read("subscribed") === "1";
+      const next = this.designMode() ? (view || "subscribe") : (subscribed ? "success" : "subscribe");
+      this.showView(next);
+      this.hidden = false;
+      this.lock();
+      if (!this.designMode()) this.markSeen();
+      const current = this.querySelector(`[data-ea-view="${next}"]`);
+      const target = current?.querySelector("input, [data-ea-buy], button");
+      window.setTimeout(() => target?.focus(), 40);
+    }
+
+    close(silent) {
+      this.hidden = true;
+      this.unlock();
+      window.clearTimeout(this.timer);
+      if (!silent && !this.designMode()) this.write("dismissed", String(Date.now()));
+    }
+
+    showView(view) {
+      this.querySelectorAll("[data-ea-view]").forEach((node) => {
+        node.hidden = node.dataset.eaView !== view;
+      });
+      const title = this.querySelector(`[data-ea-view="${view}"] [data-ea-title]`);
+      if (title && this.panel) this.panel.setAttribute("aria-labelledby", title.id);
+    }
+
+    lock() {
+      document.documentElement.classList.add("ea-dialog-lock");
+    }
+
+    unlock() {
+      document.documentElement.classList.remove("ea-dialog-lock");
+    }
+
+    onClick(event) {
+      if (event.target.closest("[data-ea-close]")) {
+        this.close(false);
+        return;
+      }
+      const buy = event.target.closest("[data-ea-buy]");
+      if (!buy) return;
+      if (buy.getAttribute("aria-disabled") === "true" || buy.getAttribute("href") === "#") {
+        event.preventDefault();
+        return;
+      }
+      if (!this.designMode()) this.write("bought", "1");
+    }
+
+    onKeydown(event) {
+      if (this.hidden) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        this.close(false);
+        return;
+      }
+      if (event.key !== "Tab" || !this.panel) return;
+      const items = [...this.panel.querySelectorAll("a[href], button:not([disabled]), input:not([disabled])")]
+        .filter((node) => !node.closest("[hidden]") && node.getAttribute("aria-disabled") !== "true");
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    async onSubmit(event) {
+      event.preventDefault();
+      if (this.pending) return;
+      const input = this.querySelector("[data-ea-email]");
+      const email = (input?.value || "").trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        this.setError(this.dataset.msgInvalid || "Enter a valid email address.");
+        input?.focus();
+        return;
+      }
+      this.setPending(true);
+      this.setError("");
+      try {
+        await this.syncKlaviyo(email);
+        this.write("subscribed", "1");
+        this.showView("success");
+        this.querySelector("[data-ea-view='success'] [data-ea-buy]")?.focus();
+      } catch (error) {
+        this.setError(this.dataset.msgError || "Please try again.");
+      } finally {
+        this.setPending(false);
+      }
+    }
+
+    async syncKlaviyo(email) {
+      const companyId = (this.dataset.companyId || "").trim();
+      const listId = (this.dataset.listId || "").trim();
+      if (!companyId || !listId) throw new Error("missing-klaviyo");
+      const properties = {};
+      if (this.dataset.propertyKey) properties[this.dataset.propertyKey] = this.dataset.propertyValue || "true";
+      if (this.dataset.price) properties.early_access_price = this.dataset.price;
+      const response = await fetch("https://a.klaviyo.com/client/subscriptions?company_id=" + encodeURIComponent(companyId), {
+        method: "POST",
+        headers: {
+          revision: (this.dataset.revision || "2026-10-15").trim(),
+          accept: "application/vnd.api+json",
+          "content-type": "application/vnd.api+json"
+        },
+        body: JSON.stringify({
+          data: {
+            type: "subscription",
+            attributes: {
+              custom_source: this.dataset.source || "Black Friday Early Access",
+              profile: {
+                data: {
+                  type: "profile",
+                  attributes: {
+                    email,
+                    properties,
+                    subscriptions: { email: { marketing: { consent: "SUBSCRIBED" } } }
+                  }
+                }
+              }
+            },
+            relationships: { list: { data: { type: "list", id: listId } } }
+          }
+        })
+      });
+      if (response.status !== 202) throw new Error("klaviyo");
+    }
+
+    setPending(pending) {
+      this.pending = pending;
+      const button = this.querySelector("[data-ea-submit]");
+      const label = button?.querySelector("[data-ea-submit-label]");
+      if (button) button.disabled = pending;
+      if (label) label.textContent = pending ? (this.dataset.msgPending || "Joining...") : (this.dataset.msgSubmit || "Unlock early access");
+    }
+
+    setError(message) {
+      const node = this.querySelector("[data-ea-error]");
+      if (!node) return;
+      node.textContent = message || "";
+      node.hidden = !message;
+    }
+
+  }
+
+  customElements.define("early-access-dialog", EarlyAccessDialog);
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "黑五 Early Access",
+  "class": "shopify-section--early-access",
+  "enabled_on": { "groups": ["custom.overlay"] },
+  "limit": 1,
+  "settings": [
+    { "type": "paragraph", "content": "填写 Klaviyo Public API Key 和 List ID 后，前台才会自动弹出。邮箱校验通过且接口返回 202 后进入 $159 购买态，之后不再出现邮箱表单。关闭后按冷却天数才会再出现，同一会话只自动弹出一次；点击购买按钮后不再自动弹出。" },
+    { "type": "checkbox", "id": "enabled", "label": "启用弹窗", "default": true },
+    { "type": "range", "id": "delay", "min": 0, "max": 20, "step": 1, "unit": "s", "label": "延迟出现", "default": 4 },
+    { "type": "range", "id": "cooldown_days", "min": 0, "max": 30, "step": 1, "unit": "d", "label": "关闭后冷却天数", "info": "0 表示每个新会话都可以再出现。", "default": 1 },
+    { "type": "checkbox", "id": "show_only_on_index", "label": "仅首页显示", "default": false },
+    { "type": "select", "id": "preview_state", "label": "编辑器预览状态", "default": "subscribe", "options": [{ "value": "subscribe", "label": "订阅前" }, { "value": "success", "label": "订阅成功" }] },
+    { "type": "text", "id": "close_label", "label": "关闭按钮无障碍文案", "default": "Close" },
+    { "type": "header", "content": "订阅前文案" },
+    { "type": "text", "id": "eyebrow", "label": "角标", "default": "Black Friday Early Access" },
+    { "type": "text", "id": "title", "label": "标题", "default": "Get Black Friday early access" },
+    { "type": "inline_richtext", "id": "content", "label": "说明", "default": "Enter your email to unlock SensOn S1 at $159 before the public sale." },
+    { "type": "text", "id": "placeholder", "label": "邮箱占位", "default": "Email address" },
+    { "type": "text", "id": "button_text", "label": "提交按钮", "default": "Unlock $159 access" },
+    { "type": "inline_richtext", "id": "privacy", "label": "隐私说明", "default": "By continuing, you agree to receive SensOn emails. Unsubscribe anytime." },
+    { "type": "text", "id": "invalid_email", "label": "邮箱错误提示", "default": "Enter a valid email address." },
+    { "type": "text", "id": "submit_error", "label": "提交失败提示", "default": "We couldn't add you just now. Please try again." },
+    { "type": "text", "id": "pending_text", "label": "提交中文案", "default": "Joining..." },
+    { "type": "header", "content": "订阅前图片" },
+    { "type": "image_picker", "id": "image", "label": "图片", "info": "建议 1200×1500。未上传时使用默认黑五底图。" },
+    { "type": "text", "id": "image_alt", "label": "图片替代文本", "default": "SensOn S1 Black Friday early access" },
+    { "type": "header", "content": "Klaviyo" },
+    { "type": "text", "id": "klaviyo_company_id", "label": "Public API Key", "info": "Klaviyo 的 6 位 Public API Key / Company ID。不要填写 Private API Key。" },
+    { "type": "text", "id": "klaviyo_list_id", "label": "List ID", "info": "接收 Early Access 的列表。接口返回 202 才进入成功态。列表若开启双重确认，用户还需在邮件中确认。" },
+    { "type": "text", "id": "klaviyo_source", "label": "Custom source", "default": "Black Friday Early Access" },
+    { "type": "text", "id": "klaviyo_revision", "label": "API revision", "default": "2026-10-15" },
+    { "type": "text", "id": "klaviyo_property", "label": "档案属性名", "default": "bf_early_access" },
+    { "type": "text", "id": "klaviyo_property_value", "label": "档案属性值", "default": "true" },
+    { "type": "header", "content": "订阅成功" },
+    { "type": "text", "id": "success_eyebrow", "label": "角标", "default": "Early Access Unlocked" },
+    { "type": "text", "id": "success_title", "label": "标题", "default": "SensOn S1 is ready when you are" },
+    { "type": "text", "id": "price_text", "label": "价格", "default": "$159" },
+    { "type": "inline_richtext", "id": "success_note", "label": "价格说明", "default": "Your Black Friday early-access price." },
+    { "type": "text", "id": "benefit_1", "label": "权益 1", "default": "Locked $159 price before the public drop" },
+    { "type": "text", "id": "benefit_2", "label": "权益 2", "default": "A private product page that is not linked on the site" },
+    { "type": "text", "id": "benefit_3", "label": "权益 3", "default": "This email signup will not appear again" },
+    { "type": "text", "id": "buy_label", "label": "购买按钮", "default": "Shop S1 for $159" },
+    { "type": "text", "id": "buy_url", "label": "$159 价格页链接", "info": "未在导航公开的 S1 页面，例如 /products/senson-s1-wellness-companion?variant=123。留空时使用下方产品。" },
+    { "type": "product", "id": "product", "label": "S1 产品" },
+    { "type": "text", "id": "variant_id", "label": "变体 ID", "info": "可选。会追加到购买链接，用于打开 $159 变体。" },
+    { "type": "image_picker", "id": "success_image", "label": "成功态图片", "info": "留空时沿用订阅前图片。" },
+    { "type": "text", "id": "success_image_alt", "label": "成功态图片替代文本", "default": "SensOn S1 at the $159 early-access price" }
+  ],
+  "presets": [{ "name": "黑五 Early Access" }]
+}
+{% endschema %}

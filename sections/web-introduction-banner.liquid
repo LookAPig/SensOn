@@ -150,9 +150,13 @@
 
   #shopify-section-{{ section.id }} .web_intro_banner .button {
     align-items: center;
+    appearance: none;
+    background: transparent;
     border: 1px solid #ffffff;
     border-radius: 999px;
+    cursor: pointer;
     display: inline-flex;
+    font-family: inherit;
     font-size: 18px;
     font-weight: 500;
     justify-content: center;
@@ -203,6 +207,10 @@
     height: 12px;
     margin-left: 2px;
     width: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .web_intro_banner .button_secondary.button_secondary_plain {
+    padding: 12px 28px;
   }
 
   {%- liquid
@@ -436,6 +444,10 @@
       height: 10px;
       width: 10px;
     }
+
+    #shopify-section-{{ section.id }} .web_intro_banner .button_secondary.button_secondary_plain {
+      padding: 10px 20px;
+    }
   }
 </style>
 
@@ -512,27 +524,75 @@
       </div>
     {%- endif -%}
 
+    {%- liquid
+      assign primary_action = section.settings.primary_button_action | default: 'link'
+      assign secondary_action = section.settings.secondary_button_action | default: 'link'
+      assign primary_has_video = false
+      if section.settings.primary_video != blank or section.settings.primary_external_video_url != blank
+        assign primary_has_video = true
+      endif
+      assign secondary_has_video = false
+      if section.settings.video != blank or section.settings.external_video_url != blank
+        assign secondary_has_video = true
+      endif
+      assign primary_video_modal_id = 'web-intro-banner-video-primary-' | append: section.id
+      assign secondary_video_modal_id = 'web-intro-banner-video-' | append: section.id
+      assign primary_scroll_target = section.settings.primary_button_scroll_target | default: 'custom'
+      assign secondary_scroll_target = section.settings.secondary_button_scroll_target | default: 'custom'
+      assign primary_scroll_custom = section.settings.primary_button_scroll_custom | strip | remove: '#'
+      assign secondary_scroll_custom = section.settings.secondary_button_scroll_custom | strip | remove: '#'
+      assign show_video_modal = false
+      if section.settings.primary_button_text != blank and primary_action == 'video' and primary_has_video
+        assign show_video_modal = true
+      endif
+      if section.settings.secondary_button_text != blank and secondary_action == 'video' and secondary_has_video
+        assign show_video_modal = true
+      endif
+      assign show_scroll = false
+      if section.settings.primary_button_text != blank and primary_action == 'scroll'
+        assign show_scroll = true
+      endif
+      if section.settings.secondary_button_text != blank and secondary_action == 'scroll'
+        assign show_scroll = true
+      endif
+    -%}
     {%- if section.settings.primary_button_text != blank or section.settings.secondary_button_text != blank -%}
       <div class="buttons">
         {%- if section.settings.primary_button_text != blank -%}
-          <a class="button button_primary" href="{{ section.settings.primary_button_link | default: '#' }}">
-            {{- section.settings.primary_button_text | escape -}}
-          </a>
+          {%- if primary_action == 'video' and primary_has_video -%}
+            <button
+              type="button"
+              class="button button_primary"
+              aria-controls="{{ primary_video_modal_id }}"
+              aria-expanded="false"
+            >
+              {{- section.settings.primary_button_text | escape -}}
+            </button>
+          {%- elsif primary_action == 'scroll' -%}
+            <a
+              class="button button_primary"
+              href="{% if primary_scroll_target == 'custom' and primary_scroll_custom != blank %}#{{ primary_scroll_custom | escape }}{% else %}#{% endif %}"
+              data-web-intro-scroll
+              data-scroll-target="{{ primary_scroll_target }}"
+              {% if primary_scroll_target == 'custom' and primary_scroll_custom != blank %}
+                data-scroll-custom="{{ primary_scroll_custom | escape }}"
+              {% endif %}
+            >
+              {{- section.settings.primary_button_text | escape -}}
+            </a>
+          {%- else -%}
+            <a class="button button_primary" href="{{ section.settings.primary_button_link | default: '#' }}">
+              {{- section.settings.primary_button_text | escape -}}
+            </a>
+          {%- endif -%}
         {%- endif -%}
 
         {%- if section.settings.secondary_button_text != blank -%}
-          {%- liquid
-            assign has_video = false
-            if section.settings.video != blank or section.settings.external_video_url != blank
-              assign has_video = true
-            endif
-            assign video_modal_id = 'web-intro-banner-video-' | append: section.id
-          -%}
-          {%- if has_video -%}
+          {%- if secondary_action == 'video' and secondary_has_video -%}
             <button
               type="button"
               class="button button_secondary"
-              aria-controls="{{ video_modal_id }}"
+              aria-controls="{{ secondary_video_modal_id }}"
               aria-expanded="false"
             >
               <span class="play_icon" aria-hidden="true">
@@ -542,13 +602,20 @@
               </span>
               {{- section.settings.secondary_button_text | escape -}}
             </button>
+          {%- elsif secondary_action == 'scroll' -%}
+            <a
+              class="button button_secondary button_secondary_plain"
+              href="{% if secondary_scroll_target == 'custom' and secondary_scroll_custom != blank %}#{{ secondary_scroll_custom | escape }}{% else %}#{% endif %}"
+              data-web-intro-scroll
+              data-scroll-target="{{ secondary_scroll_target }}"
+              {% if secondary_scroll_target == 'custom' and secondary_scroll_custom != blank %}
+                data-scroll-custom="{{ secondary_scroll_custom | escape }}"
+              {% endif %}
+            >
+              {{- section.settings.secondary_button_text | escape -}}
+            </a>
           {%- else -%}
-            <a class="button button_secondary" href="{{ section.settings.secondary_button_link | default: '#' }}">
-              <span class="play_icon" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 14" fill="currentColor" focusable="false">
-                  <path d="M12 7L0 14V0L12 7Z"/>
-                </svg>
-              </span>
+            <a class="button button_secondary button_secondary_plain" href="{{ section.settings.secondary_button_link | default: '#' }}">
               {{- section.settings.secondary_button_text | escape -}}
             </a>
           {%- endif -%}
@@ -557,50 +624,29 @@
     {%- endif -%}
   </div>
 
-  {%- if section.settings.secondary_button_text != blank -%}
-    {%- if section.settings.video != blank or section.settings.external_video_url != blank -%}
-      {%- assign video_modal_id = 'web-intro-banner-video-' | append: section.id -%}
-      <x-modal
-        id="{{ video_modal_id }}"
-        class="modal web_intro_banner_video_modal-{{ section.id }} color-scheme color-scheme--{{ settings.default_color_scheme.id }}"
-        append-to-body
-      >
-        <div class="video_wrap">
-          {%- if section.settings.video != blank -%}
-            <video
-              controls
-              playsinline
-              preload="metadata"
-              {% if section.settings.video.preview_image != blank %}
-                poster="{{ section.settings.video.preview_image | image_url: width: 1600 }}"
-              {% endif %}
-            >
-              {%- for source in section.settings.video.sources -%}
-                <source src="{{ source.url }}" type="{{ source.mime_type }}">
-              {%- endfor -%}
-            </video>
-          {%- elsif section.settings.external_video_url != blank -%}
-            {%- liquid
-              if section.settings.external_video_url.type == 'youtube'
-                assign embed_src = 'https://www.youtube.com/embed/' | append: section.settings.external_video_url.id | append: '?autoplay=1&rel=0&modestbranding=1&playsinline=1'
-              elsif section.settings.external_video_url.type == 'vimeo'
-                assign embed_src = 'https://player.vimeo.com/video/' | append: section.settings.external_video_url.id | append: '?autoplay=1'
-              endif
-            -%}
-            <div
-              class="video_embed"
-              data-video-embed
-              data-src="{{ embed_src | escape }}"
-            ></div>
-          {%- endif -%}
-        </div>
-      </x-modal>
+  {%- if section.settings.primary_button_text != blank and primary_action == 'video' and primary_has_video -%}
+    {% render 'web-intro-banner-video-modal',
+      modal_id: primary_video_modal_id,
+      section_id: section.id,
+      shopify_video: section.settings.primary_video,
+      external_video_url: section.settings.primary_external_video_url
+    %}
+  {%- endif -%}
 
-      <script>
-        (function () {
-          var modal = document.getElementById({{ video_modal_id | json }});
-          if (!modal) return;
+  {%- if section.settings.secondary_button_text != blank and secondary_action == 'video' and secondary_has_video -%}
+    {% render 'web-intro-banner-video-modal',
+      modal_id: secondary_video_modal_id,
+      section_id: section.id,
+      shopify_video: section.settings.video,
+      external_video_url: section.settings.external_video_url
+    %}
+  {%- endif -%}
 
+  {%- if show_video_modal -%}
+    <script>
+      (function () {
+        var modals = document.querySelectorAll('.web_intro_banner_video_modal-{{ section.id }}');
+        modals.forEach(function (modal) {
           var video = modal.querySelector('video');
           var embed = modal.querySelector('[data-video-embed]');
 
@@ -625,9 +671,109 @@
               embed.innerHTML = '';
             }
           });
-        })();
-      </script>
-    {%- endif -%}
+        });
+      })();
+    </script>
+  {%- endif -%}
+
+  {%- if show_scroll -%}
+    <script>
+      (function () {
+        var sectionRoot = document.getElementById({{ section.id | prepend: 'shopify-section-' | json }});
+        if (!sectionRoot) return;
+
+        var selectorMap = {
+          'seo-show': '.shopify-section--seo-show-card',
+          'seo-icons': '.shopify-section--seo-text-icons',
+          'control': '.shopify-section--how-it-works-control',
+          'seo-choose': '.shopify-section--seo-choose-way',
+          'seo-guide': '.shopify-section--seo-guide-card',
+          'story-faq': '.shopify-section--our-story-faq',
+          'web-features': '.shopify-section--web-intro-features',
+          'web-rules': '.shopify-section--web-intro-rules',
+          'web-choose': '.shopify-section--web-intro-choose',
+          'web-hardware': '.shopify-section--web-intro-hardware',
+          'web-icons': '.shopify-section--web-intro-icon-card',
+          'web-faq': '.shopify-section--web-intro-faq',
+          'web-footer': '.shopify-section--web-introduction-footer'
+        };
+
+        function resolveCustom(value) {
+          if (!value) return null;
+          var raw = value.trim();
+          if (raw.charAt(0) === '.' || raw.charAt(0) === '[') {
+            return document.querySelector(raw);
+          }
+          var id = raw.replace(/^#/, '');
+          var byId = document.getElementById(id);
+          if (byId) return byId;
+          var safe = window.CSS && CSS.escape ? CSS.escape(id) : id.replace(/"/g, '');
+          return document.querySelector('[data-module-anchor="' + safe + '"]');
+        }
+
+        function findBelow(selector) {
+          var node = sectionRoot.nextElementSibling;
+          while (node) {
+            if (node.matches && node.matches(selector)) return node;
+            node = node.nextElementSibling;
+          }
+          return document.querySelector(selector);
+        }
+
+        function resolveScrollTarget(key, customId) {
+          if (key === 'custom') return resolveCustom(customId);
+          var selector = selectorMap[key];
+          return selector ? findBelow(selector) : null;
+        }
+
+        var scrollFrame = 0;
+
+        function stickyOffset() {
+          var styles = getComputedStyle(document.documentElement);
+          var padding = parseFloat(styles.scrollPaddingTop);
+          if (!isNaN(padding) && padding > 0) return padding;
+          var sticky = parseFloat(styles.getPropertyValue('--sticky-area-height')) || 0;
+          return sticky + 20;
+        }
+
+        function smoothScrollTo(target) {
+          var start = window.pageYOffset || document.documentElement.scrollTop || 0;
+          var maxTop = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+          var destination = target.getBoundingClientRect().top + start - stickyOffset();
+          destination = Math.max(0, Math.min(destination, maxTop));
+          var distance = destination - start;
+          if (Math.abs(distance) < 2) return;
+
+          var duration = Math.min(1100, Math.max(550, Math.abs(distance) * 0.45));
+          var startTime = 0;
+          cancelAnimationFrame(scrollFrame);
+
+          function ease(progress) {
+            return progress < 0.5
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+          }
+
+          function step(now) {
+            if (!startTime) startTime = now;
+            var progress = Math.min(1, (now - startTime) / duration);
+            window.scrollTo(0, start + distance * ease(progress));
+            if (progress < 1) scrollFrame = requestAnimationFrame(step);
+          }
+
+          scrollFrame = requestAnimationFrame(step);
+        }
+
+        sectionRoot.querySelectorAll('[data-web-intro-scroll]').forEach(function (button) {
+          button.addEventListener('click', function (event) {
+            event.preventDefault();
+            var target = resolveScrollTarget(button.dataset.scrollTarget, button.dataset.scrollCustom);
+            if (!target) return;
+            smoothScrollTo(target);
+          });
+        });
+      })();
+    </script>
   {%- endif -%}
 </section>
 
@@ -890,15 +1036,81 @@
       "default": 240
     },
     {
+      "type": "header",
+      "content": "主按钮"
+    },
+    {
       "type": "text",
       "id": "primary_button_text",
       "label": "主按钮文案",
       "default": "Start your free trial"
     },
     {
+      "type": "select",
+      "id": "primary_button_action",
+      "label": "主按钮类型",
+      "options": [
+        { "value": "link", "label": "跳转链接" },
+        { "value": "video", "label": "打开视频" },
+        { "value": "scroll", "label": "滚动到模块" }
+      ],
+      "default": "link"
+    },
+    {
       "type": "url",
       "id": "primary_button_link",
-      "label": "主按钮链接"
+      "label": "主按钮链接",
+      "visible_if": "{{ section.settings.primary_button_action == 'link' }}"
+    },
+    {
+      "type": "video",
+      "id": "primary_video",
+      "label": "主按钮视频",
+      "info": "优先使用此视频；未设置时使用下方外部视频链接。",
+      "visible_if": "{{ section.settings.primary_button_action == 'video' }}"
+    },
+    {
+      "type": "video_url",
+      "id": "primary_external_video_url",
+      "label": "主按钮外部视频",
+      "accept": ["youtube", "vimeo"],
+      "info": "支持 YouTube / Vimeo。",
+      "visible_if": "{{ section.settings.primary_button_action == 'video' }}"
+    },
+    {
+      "type": "select",
+      "id": "primary_button_scroll_target",
+      "label": "主按钮滚动目标",
+      "info": "同一类型有多个时，滚到本横幅下面的第一个。",
+      "options": [
+        { "value": "seo-show", "label": "SEO 展示卡片" },
+        { "value": "seo-icons", "label": "SEO 图标文案" },
+        { "value": "control", "label": "How it works 控制模块" },
+        { "value": "seo-choose", "label": "SEO 选择方式" },
+        { "value": "seo-guide", "label": "SEO 指南卡片" },
+        { "value": "story-faq", "label": "FAQ（Our story）" },
+        { "value": "web-features", "label": "Web 特性条" },
+        { "value": "web-rules", "label": "Web 规则卡片" },
+        { "value": "web-choose", "label": "Web 选择卡片" },
+        { "value": "web-hardware", "label": "Web 硬件步骤" },
+        { "value": "web-icons", "label": "Web 图标卡片" },
+        { "value": "web-faq", "label": "Web FAQ" },
+        { "value": "web-footer", "label": "Web 页尾横幅" },
+        { "value": "custom", "label": "自定义锚点" }
+      ],
+      "default": "custom",
+      "visible_if": "{{ section.settings.primary_button_action == 'scroll' }}"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_scroll_custom",
+      "label": "主按钮锚点",
+      "info": "不含 #。可填元素 id、模块标识，或以 . 开头的区块 class。",
+      "visible_if": "{{ section.settings.primary_button_action == 'scroll' and section.settings.primary_button_scroll_target == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "次按钮"
     },
     {
       "type": "text",
@@ -907,27 +1119,67 @@
       "default": "See how it work"
     },
     {
+      "type": "select",
+      "id": "secondary_button_action",
+      "label": "次按钮类型",
+      "options": [
+        { "value": "link", "label": "跳转链接" },
+        { "value": "video", "label": "打开视频" },
+        { "value": "scroll", "label": "滚动到模块" }
+      ],
+      "default": "link"
+    },
+    {
       "type": "url",
       "id": "secondary_button_link",
       "label": "次按钮链接",
-      "info": "未配置视频时作为普通链接使用。"
-    },
-    {
-      "type": "header",
-      "content": "次按钮视频弹窗"
+      "visible_if": "{{ section.settings.secondary_button_action == 'link' }}"
     },
     {
       "type": "video",
       "id": "video",
-      "label": "Shopify 视频",
-      "info": "优先使用此视频；未设置时使用下方外部视频链接。"
+      "label": "次按钮视频",
+      "info": "优先使用此视频；未设置时使用下方外部视频链接。",
+      "visible_if": "{{ section.settings.secondary_button_action == 'video' }}"
     },
     {
       "type": "video_url",
       "id": "external_video_url",
-      "label": "外部视频链接",
+      "label": "次按钮外部视频",
       "accept": ["youtube", "vimeo"],
-      "info": "支持 YouTube / Vimeo。"
+      "info": "支持 YouTube / Vimeo。",
+      "visible_if": "{{ section.settings.secondary_button_action == 'video' }}"
+    },
+    {
+      "type": "select",
+      "id": "secondary_button_scroll_target",
+      "label": "次按钮滚动目标",
+      "info": "同一类型有多个时，滚到本横幅下面的第一个。",
+      "options": [
+        { "value": "seo-show", "label": "SEO 展示卡片" },
+        { "value": "seo-icons", "label": "SEO 图标文案" },
+        { "value": "control", "label": "How it works 控制模块" },
+        { "value": "seo-choose", "label": "SEO 选择方式" },
+        { "value": "seo-guide", "label": "SEO 指南卡片" },
+        { "value": "story-faq", "label": "FAQ（Our story）" },
+        { "value": "web-features", "label": "Web 特性条" },
+        { "value": "web-rules", "label": "Web 规则卡片" },
+        { "value": "web-choose", "label": "Web 选择卡片" },
+        { "value": "web-hardware", "label": "Web 硬件步骤" },
+        { "value": "web-icons", "label": "Web 图标卡片" },
+        { "value": "web-faq", "label": "Web FAQ" },
+        { "value": "web-footer", "label": "Web 页尾横幅" },
+        { "value": "custom", "label": "自定义锚点" }
+      ],
+      "default": "custom",
+      "visible_if": "{{ section.settings.secondary_button_action == 'scroll' }}"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_scroll_custom",
+      "label": "次按钮锚点",
+      "info": "不含 #。可填元素 id、模块标识，或以 . 开头的区块 class。",
+      "visible_if": "{{ section.settings.secondary_button_action == 'scroll' and section.settings.secondary_button_scroll_target == 'custom' }}"
     }
   ],
   "presets": [

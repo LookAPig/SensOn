@@ -11,14 +11,440 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "show_title": true,
         "content_width": "md"
       }
+    },
+    "web_introduction_banner_Nk9zyy": {
+      "type": "web-introduction-banner",
+      "settings": {
+        "allow_transparent_header": false,
+        "desktop_image": "shopify://shop_images/Sensual_Wellness_Your_Way.jpg",
+        "mobile_image": "shopify://shop_images/Sensual_Wellness_Your_Way_3cec9366-282f-47b2-a863-47c9ff120b39.jpg",
+        "overlay_opacity": 0,
+        "desktop_height": "100svh",
+        "mobile_height": "100svh",
+        "show_phone_desktop": false,
+        "phone_max_width_desktop": 320,
+        "phone_max_width_mobile": 280,
+        "mobile_phone_offset_top": 42,
+        "accent_color": "#f287ec",
+        "tag": "Reconnect With Yourself",
+        "tag_html_tag": "h1",
+        "title": "Sensual Wellness, Your Way",
+        "title_html_tag": "div",
+        "description": "<p>Sensual wellness is about building a deeper connection with yourself, your emotions, and your personal experiences through self-awareness, mindful exploration, and meaningful connection.</p>",
+        "mobile_description": "<p>Sensual wellness is about building a deeper connection with yourself, your emotions, and your personal experiences through self-awareness, mindful exploration, and meaningful connection.</p>",
+        "desktop_text_offset_top": 12,
+        "mobile_text_offset_top": 10,
+        "desktop_buttons_offset_bottom": 10,
+        "mobile_buttons_offset_bottom": 8,
+        "desktop_buttons_layout": "row",
+        "mobile_buttons_layout": "column",
+        "button_width_desktop": 220,
+        "button_width_mobile": 240,
+        "primary_button_text": "Understand Sensual Wellness",
+        "primary_button_action": "scroll",
+        "primary_button_link": "",
+        "primary_external_video_url": "",
+        "primary_button_scroll_target": "seo-show",
+        "primary_button_scroll_custom": "",
+        "secondary_button_text": "Choose Your Way To Connect",
+        "secondary_button_action": "scroll",
+        "secondary_button_link": "",
+        "external_video_url": "",
+        "secondary_button_scroll_target": "seo-choose",
+        "secondary_button_scroll_custom": ""
+      }
+    },
+    "seo_show_card_yYGcpj": {
+      "type": "seo-show-card",
+      "blocks": {
+        "card_xERyQ7": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Soft_Romantic_407dedd6-2e6a-4417-9a67-9a2ba9c7821b.jpg",
+            "mobile_image": "shopify://shop_images/Self-Awareness.jpg",
+            "title": "Self-Awareness",
+            "description": "<p>Build greater body awareness and body confidence by understanding your emotions, needs, and personal references.</p>",
+            "text_color": "#ffffff",
+            "description_color": "#ffffff"
+          }
+        },
+        "card_R9937k": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Intimacy_Connection.jpg",
+            "mobile_image": "shopify://shop_images/Intimacy_Connection_5ddde2ba-d2e1-4419-bfc8-371ec1146b30.jpg",
+            "title": "Intimacy & Connection",
+            "description": "<p>Create deeper emotional closeness through trust, communication, and shared moments that help you feel connected.</p>",
+            "text_color": "#ffffff",
+            "description_color": "#ffffff"
+          }
+        },
+        "card_rVcta6": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Personal_Exploration.jpg",
+            "mobile_image": "shopify://shop_images/Personal_Exploration_adc6e4fb-f797-4595-b835-fed962ecda21.jpg",
+            "title": "Personal Exploration",
+            "description": "<p>Explore your curiosity at your own pace and learn what feels comfortable, meaningful, and true to you.</p>",
+            "text_color": "#ffffff",
+            "description_color": "#ffffff"
+          }
+        },
+        "card_LTUXKR": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Mindful_Experiences.jpg",
+            "mobile_image": "shopify://shop_images/Mindful_Experiences_d11f9c2d-5cd0-4d70-b584-c90675e3c7f2.jpg",
+            "title": "Mindful Experiences",
+            "description": "<p>Slow down with calming practices that bring attention back to your body, breath, and present feelings.</p>",
+            "text_color": "#ffffff",
+            "description_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "card_xERyQ7",
+        "card_R9937k",
+        "card_rVcta6",
+        "card_LTUXKR"
+      ],
+      "name": "SEO show card",
+      "settings": {
+        "subtitle": "Understanding Sensual Wellness",
+        "title": "What Shapes Your Sensual Wellness Experience",
+        "description": "<p>Sensual wellness is shaped by self-awareness, emotional connection, personal exploration, and mindful experiences that help you better understand yourself.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#b3b3b3",
+        "hint": "Hover for motion.",
+        "hint_color": "#9a9a9a",
+        "background_color": "#000000",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 48,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 80
+      }
+    },
+    "seo_text_icons_8atcYa": {
+      "type": "seo-text-icons",
+      "blocks": {
+        "item_GVakaW": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Confidence.png",
+            "icon_style": "confidence",
+            "text": "Confidence"
+          }
+        },
+        "item_BQgRUr": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/self_understanding.webp",
+            "icon_style": "meditation",
+            "text": "Self-Understanding"
+          }
+        },
+        "item_LTkTgM": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/Connection.png",
+            "icon_style": "connection",
+            "text": "Connection"
+          }
+        }
+      },
+      "block_order": [
+        "item_GVakaW",
+        "item_BQgRUr",
+        "item_LTkTgM"
+      ],
+      "name": "SEO text icons",
+      "settings": {
+        "title": "Knowing Yourself More Deeply Can Help You Feel More Confident, Comfortable, And Connected.",
+        "title_gradient": "linear-gradient(100deg, rgba(255, 255, 255, 1), rgba(248, 228, 246, 1) 36%, rgba(244, 166, 238, 1) 68%, rgba(242, 135, 236, 1) 100%)",
+        "title_font_size": 40,
+        "title_font_size_mobile": 22,
+        "icon_color_start": "#ffffff",
+        "icon_color_end": "#f5a8ef",
+        "icon_size": 72,
+        "icon_size_mobile": 56,
+        "label_color": "#ffffff",
+        "label_font_size": 16,
+        "label_font_size_mobile": 12,
+        "background": "linear-gradient(180deg, rgba(53, 27, 76, 1), rgba(30, 18, 46, 1) 46%, rgba(20, 12, 32, 1) 100%)",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
+      }
+    },
+    "how_it_work_control_LTy4Az": {
+      "type": "how-it-work-control",
+      "blocks": {
+        "control_wrcJKd": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Personalized_Experiences_That_Adapt_To_You.jpg",
+            "title": "Personalized Experiences That Adapt To You",
+            "description": "<p>Interactions evolve with your preferences, conversations, and personal pace.</p>"
+          }
+        },
+        "control_c9F6TN": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/A_Private_Space_For_Personal_Exploration.jpg",
+            "title": "A Private Space For Personal Exploration",
+            "description": "<p>Take time to reflect, interact, and explore in a comfortable private space.</p>"
+          }
+        },
+        "control_ARLXRk": {
+          "type": "control",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Meaningful_Connections_Through_AI.jpg",
+            "title": "Meaningful Connections Through AI",
+            "description": "<p>Create more personalized connections through digital intimacy and adaptive AI interactions.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "control_wrcJKd",
+        "control_c9F6TN",
+        "control_ARLXRk"
+      ],
+      "name": "How it works control",
+      "settings": {
+        "subtitle": "The SensOn Experience",
+        "title": "How SensOn Supports Your Sensual Wellness Journey",
+        "description": "<p>SensOn brings personalization, privacy, and AI-powered interaction together to create experiences that adapt to how you connect and explore.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#ffffff",
+        "item_title_color": "#ffffff",
+        "item_description_color": "#ffffff",
+        "accent_color": "#f287ec",
+        "image_mode": "multiple",
+        "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
+        "fixed_mobile_image": "shopify://shop_images/works1.jpg",
+        "desktop_layout": "text_left",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
+      }
+    },
+    "seo_choose_way_346CEV": {
+      "type": "seo-choose-way",
+      "blocks": {
+        "card_DtWRPb": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Meet_SensOn_S1.jpg",
+            "subtitle": "Connected Physical Experience",
+            "title": "Meet SensOn S1",
+            "description": "<p>A connected companion device that brings app experiences, interactive audio, and synchronized responses together.</p>",
+            "button_label": "Discover SensOn S1",
+            "button_link": "shopify://products/senson-s1-wellness-companion"
+          }
+        },
+        "card_nMpNPV": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Explore_SensOn_App.jpg",
+            "subtitle": "Digital AI Companion Experience",
+            "title": "Explore SensOn App",
+            "description": "<p>Meet AI companions, enjoy personalized conversations, and discover interactive experiences that evolve with you.</p>",
+            "button_label": "Explore App",
+            "button_link": "shopify://pages/senson-app"
+          }
+        }
+      },
+      "block_order": [
+        "card_DtWRPb",
+        "card_nMpNPV"
+      ],
+      "name": "SEO choose way",
+      "settings": {
+        "subtitle": "Explore SensOn",
+        "title": "Choose Your Way To Connect",
+        "description": "<p>Move from digital companionship to connected physical experiences with SensOn App and SensOn S1.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#e8e8e8",
+        "card_subtitle_color": "#f287ec",
+        "card_title_color": "#ffffff",
+        "card_description_color": "#d2d2d2",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "background_color": "#161616",
+        "card_background_color": "#4a4a4a",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
+      }
+    },
+    "seo_guide_card_KxhWPj": {
+      "type": "seo-guide-card",
+      "blocks": {
+        "card_gCQGAD": {
+          "type": "card",
+          "settings": {
+            "tag": "AI & Connection",
+            "image": "shopify://shop_images/Understanding_AI_Companions.jpg",
+            "title": "Understanding AI Companions",
+            "description": "<p>Learn how AI companions create personalized interactions and new ways to connect.</p>",
+            "link_label": "Read Guide →",
+            "link": "https://senson.ai/blogs/articles/what-is-an-ai-companion"
+          }
+        },
+        "card_NcCATi": {
+          "type": "card",
+          "settings": {
+            "tag": "Intimacy",
+            "image": "shopify://shop_images/Building_Meaningful_Connectionsz.jpg",
+            "title": "Building Meaningful Connections",
+            "description": "<p>Explore how communication and personal experiences can support deeper intimacy.</p>",
+            "link_label": "Read Guide →",
+            "link": "https://senson.ai/blogs/articles/how-to-improve-intimacy"
+          }
+        },
+        "card_GxCiYf": {
+          "type": "card",
+          "settings": {
+            "tag": "Mindfulness",
+            "image": "shopify://shop_images/Practicing_Mindful_Self-Exploration.jpg",
+            "title": "Practicing Mindful Self-Exploration",
+            "description": "<p>Discover how mindfulness supports self-awareness and personal reflection.</p>",
+            "link_label": "Read Guide →",
+            "link": "https://senson.ai/blogs/articles/mindful-masturbation"
+          }
+        },
+        "card_qJzpgr": {
+          "type": "card",
+          "settings": {
+            "tag": "Your Experience",
+            "image": "shopify://shop_images/Understanding_Your_Personal_Experience.jpg",
+            "title": "Understanding Your Personal Experience",
+            "description": "<p>Learn why individual experiences differ and how self-understanding shapes your journey.</p>",
+            "link_label": "Read Guide →",
+            "link": "https://senson.ai/blogs/articles/turn-ons"
+          }
+        }
+      },
+      "block_order": [
+        "card_gCQGAD",
+        "card_NcCATi",
+        "card_GxCiYf",
+        "card_qJzpgr"
+      ],
+      "name": "SEO guide card",
+      "settings": {
+        "subtitle": "Continue Your Exploration",
+        "title": "Explore Sensual Wellness Topics",
+        "description": "<p>Continue learning about connection, self-awareness, and personalized experiences through curated guides.</p>",
+        "subtitle_color": "#f287ec",
+        "title_color": "#ffffff",
+        "description_color": "#d0d0d0",
+        "tag_color": "#ffffff",
+        "card_title_color": "#ffffff",
+        "card_description_color": "#c8c8c8",
+        "link_color": "#f287ec",
+        "background_color": "#000000",
+        "card_background_color": "#3f3f3f",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60
+      }
+    },
+    "our_story_faq_RQkeGN": {
+      "type": "our-story-faq",
+      "blocks": {
+        "faq_p4QWAU": {
+          "type": "faq",
+          "settings": {
+            "question": "What is sensual wellness?",
+            "answer": "<p>Sensual wellness is about developing a more intentional understanding of your emotions, body, preferences, and personal experiences. It can help you become more aware of what feels comfortable and meaningful to you.What is the difference between sensual wellness and sexual wellness?Why is sensual wellness important?How can someone practice sensual wellness?Can AI companions support sensual wellness?SensOn — high-fidelity sensual wellness preview</p>"
+          }
+        },
+        "faq_AMeyCN": {
+          "type": "faq",
+          "settings": {
+            "question": "What is the difference between sensual wellness and sexual wellness?",
+            "answer": "<p>Sensual wellness takes a broader view of personal awareness, emotional connection, and individual experiences. Sexual wellness focuses more specifically on sexual health, safety, and related wellbeing.Why is sensual wellness important?How can someone practice sensual wellness?Can AI companions support sensual wellness?SensOn — high-fidelity sensual wellness preview</p>"
+          }
+        },
+        "faq_Wh8RbT": {
+          "type": "faq",
+          "settings": {
+            "question": "Why is sensual wellness important?",
+            "answer": "<p>It can help you better understand your preferences, feel more confident in your own experiences, and build stronger connections with yourself and others.</p>"
+          }
+        },
+        "faq_Dfn4Bm": {
+          "type": "faq",
+          "settings": {
+            "question": "How can someone practice sensual wellness?",
+            "answer": "<p>It can start with simple habits such as self-reflection, paying attention to personal preferences, creating intentional moments for yourself, and communicating openly in relationships.</p>"
+          }
+        },
+        "faq_natmMp": {
+          "type": "faq",
+          "settings": {
+            "question": "Can AI companions support sensual wellness?",
+            "answer": "<p>Yes. AI companions can offer personalized conversations and interactive experiences that respond to individual preferences, giving users a private way to reflect, connect, and explore at their own pace.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_p4QWAU",
+        "faq_AMeyCN",
+        "faq_Wh8RbT",
+        "faq_Dfn4Bm",
+        "faq_natmMp"
+      ],
+      "name": "Our story FAQ",
+      "settings": {
+        "module_id": "",
+        "layout": "stack",
+        "enable_accordion": true,
+        "color_background": "linear-gradient(137deg, rgba(55, 31, 54, 1) 43.49%, rgba(17, 10, 17, 1) 76.69%)",
+        "accent_color": "#f287ec",
+        "divider_color": "#4a3a55",
+        "desktop_padding_top": 120,
+        "desktop_padding_bottom": 120,
+        "mobile_padding_top": 60,
+        "mobile_padding_bottom": 60,
+        "subtitle": "Common Questions",
+        "subtitle_font_size": 24,
+        "subtitle_font_size_mobile": 16,
+        "subtitle_color": "#f287ec",
+        "heading": "Frequently Asked Questions About Sensual Wellness",
+        "heading_font_size": 42,
+        "heading_font_size_mobile": 28,
+        "heading_color": "#ffffff",
+        "heading_tag": "h2",
+        "description": "<p>AI should not replace love or real relationships. Its role here is different: to create more freedom for fantasy, curiosity and self-knowledge.</p>",
+        "description_font_size": 16,
+        "description_font_size_mobile": 14,
+        "description_color": "#ffffff"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "web_introduction_banner_Nk9zyy",
+    "seo_show_card_yYGcpj",
+    "seo_text_icons_8atcYa",
+    "how_it_work_control_LTy4Az",
+    "seo_choose_way_346CEV",
+    "seo_guide_card_KxhWPj",
+    "our_story_faq_RQkeGN"
   ]
 }

@@ -1,6 +1,7 @@
 {%- liquid
   assign heading_tag = section.settings.heading_tag | default: 'h2'
   assign enable_accordion = section.settings.enable_accordion
+  assign layout_mode = section.settings.layout | default: 'split'
   assign module_anchor = section.settings.module_id | strip | remove: '#' | replace: ' ', '-' | downcase
 -%}
 
@@ -65,17 +66,34 @@
   }
   #shopify-section-{{ section.id }} .our_story_faq .faq_answer p { margin: 0; }
   #shopify-section-{{ section.id }} .our_story_faq .faq_answer p + p { margin-top: 0.6em; }
+  #shopify-section-{{ section.id }} .our_story_faq.layout_stack {
+    --faq-num-size: 18px; --faq-answer-size: 14px; --faq-gap: 10px;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq.layout_stack .faq_list { margin-top: 32px; }
+  #shopify-section-{{ section.id }} .our_story_faq.layout_stack .faq_item:first-child { border-top: 0; }
+  #shopify-section-{{ section.id }} .our_story_faq.layout_stack .faq_summary { gap: var(--faq-gap); }
+  #shopify-section-{{ section.id }} .our_story_faq.layout_stack .faq_num {
+    flex: 0 0 2ch; font-size: var(--faq-num-size); font-variant-numeric: tabular-nums; width: 2ch;
+  }
+  #shopify-section-{{ section.id }} .our_story_faq.layout_stack .faq_answer {
+    line-height: 1.45; padding-left: calc(2ch * var(--faq-num-size) / var(--faq-answer-size) + var(--faq-gap));
+  }
+  #shopify-section-{{ section.id }} .our_story_faq.layout_stack .faq_item.is_active .faq_summary { padding-bottom: 8px; }
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .our_story_faq {
       padding: {{ section.settings.desktop_padding_top | default: 96 }}px 100px {{ section.settings.desktop_padding_bottom | default: 96 }}px;
     }
-    #shopify-section-{{ section.id }} .our_story_faq .layout {
+    #shopify-section-{{ section.id }} .our_story_faq:not(.layout_stack) .layout {
       align-items: start; display: grid; gap: 64px; grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr);
     }
     #shopify-section-{{ section.id }} .our_story_faq .subtitle { font-size: var(--subtitle-size); margin-bottom: 12px; }
     #shopify-section-{{ section.id }} .our_story_faq .title { font-size: var(--heading-size); }
     #shopify-section-{{ section.id }} .our_story_faq .description { font-size: var(--description-size); margin-top: 16px; }
-    #shopify-section-{{ section.id }} .our_story_faq .faq_list { margin-top: 0; }
+    #shopify-section-{{ section.id }} .our_story_faq:not(.layout_stack) .faq_list { margin-top: 0; }
+    #shopify-section-{{ section.id }} .our_story_faq.layout_stack {
+      --faq-num-size: 24px; --faq-answer-size: 16px; --faq-gap: 12px;
+    }
+    #shopify-section-{{ section.id }} .our_story_faq.layout_stack .faq_list { margin-top: 48px; }
     #shopify-section-{{ section.id }} .our_story_faq .faq_item:first-child { border-top: 0; }
     #shopify-section-{{ section.id }} .our_story_faq .faq_summary { gap: 12px; padding: 24px 0; }
     #shopify-section-{{ section.id }} .our_story_faq .faq_num,
@@ -92,7 +110,7 @@
 </style>
 
 <section
-  class="our_story_faq{% if enable_accordion %} is_accordion{% endif %}"
+  class="our_story_faq{% if enable_accordion %} is_accordion{% endif %}{% if layout_mode == 'stack' %} layout_stack{% endif %}"
   id="our-story-faq-{{ section.id }}"
   {% if module_anchor != blank %}data-module-anchor="{{ module_anchor | escape }}"{% endif %}
   data-accordion="{% if enable_accordion %}true{% else %}false{% endif %}"
@@ -213,6 +231,10 @@
   "max_blocks": 12,
   "settings": [
     { "type": "text", "id": "module_id", "label": "模块标识", "info": "供 Our story banner 按钮滚动定位。同一页面请保持唯一，例如 story-faq。不需要加 #。" },
+    { "type": "select", "id": "layout", "label": "布局", "info": "左右布局：标题在左、问答在右。上下布局：标题在上、问答通栏在下。", "options": [
+      { "value": "split", "label": "左右布局" },
+      { "value": "stack", "label": "上下布局" }
+    ], "default": "split" },
     { "type": "checkbox", "id": "enable_accordion", "label": "点击问题展开答案", "info": "打开后电脑端为手风琴；关闭后电脑端全部展开。移动端始终为手风琴。", "default": false },
     { "type": "color_background", "id": "color_background", "label": "背景色", "default": "linear-gradient(180deg, #2A1638 0%, #1A1224 100%)" },
     { "type": "color", "id": "accent_color", "label": "序号/箭头颜色", "default": "#F287EC" },

@@ -210,6 +210,13 @@
             "description": "<p>More than a basic smart vibrator, SensOn S1 is built around content-led interaction and synchronized control.<br/><br/></p>"
           }
         },
+        "control_mxtmH4": {
+          "type": "control",
+          "settings": {
+            "title": "AI Mode",
+            "description": "<p>Select AI Mode in the SensOn App and set minimum and maximum intensity limits. SensOn S1 then responds automatically to interactive audio, AI voice, and character interaction.</p>"
+          }
+        },
         "control_JkYpKM": {
           "type": "control",
           "settings": {
@@ -231,6 +238,7 @@
       },
       "block_order": [
         "control_am6mT4",
+        "control_mxtmH4",
         "control_JkYpKM",
         "control_NXhiL8"
       ],
@@ -240,7 +248,7 @@
         "title": "Designed Around Content, Control, and Response",
         "description": "<p>Compared with many connected sex toys or a basic Bluetooth vibrator, it is built around content-led interaction, AI companion response, and synchronized control.</p>",
         "accent_color": "#f287ec",
-        "image_mode": "single",
+        "image_mode": "multiple",
         "fixed_desktop_image": "shopify://shop_images/Design_Around.jpg",
         "fixed_mobile_image": "shopify://shop_images/works1.jpg",
         "desktop_layout": "text_left",
@@ -467,7 +475,9 @@
           "type": "rich-text",
           "settings": {
             "text": "<p>An app-connected intimacy device that brings the SensOn App, AI companions,</p>",
-            "content_width": "sm"
+            "content_width": "sm",
+            "font_size_desktop": 0,
+            "font_size_mobile": 0
           },
           "blocks": {}
         },
@@ -949,7 +959,8 @@
         "product": "senson-s1-wellness-companion",
         "product_handle": "senson-s1-wellness-companion",
         "badge_text": "Limited Time Price",
-        "button_text": "Shop Now"
+        "button_text": "Shop Now",
+        "button_url": ""
       }
     }
   },
