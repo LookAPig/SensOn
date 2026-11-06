@@ -260,7 +260,7 @@
             "title": "Explore SensOn App",
             "description": "<p>Meet AI companions, enjoy personalized conversations, and discover interactive experiences that evolve with you.</p>",
             "button_label": "Explore App",
-            "button_link": "shopify://pages/senson-app"
+            "button_link": "https://app.senson.ai/?utm_source=Shopify&utm_medium=web&utm_campaign=web_introduction"
           }
         }
       },
