@@ -36,11 +36,12 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 14,
         "subtitle_color": "#f287ec",
+        "sub_tag": "h1",
         "heading": "Real people. Real reactions.",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
         "heading_color": "#ffffff",
-        "heading_tag": "h1",
+        "heading_tag": "h2",
         "description": "<p>Creators, performers, wellness advocates and sex educators experience SensOn S1 in their own words.<br/></p>",
         "description_font_size": 16,
         "description_font_size_mobile": 12,
@@ -108,7 +109,7 @@
             "role": "Wellness Intimacy Guide",
             "name": "just-lex",
             "followers": "780K",
-            "quote": "“It literally reads your body and adjust on its own. No buttons, no interruptions.”"
+            "quote": "“It literally reads your body and adjusts on its own. No buttons, no interruptions.”"
           }
         },
         "card_htGG7H": {
@@ -132,7 +133,7 @@
             "role": "Renowned Ballerina",
             "name": "eliseabell",
             "followers": "97K",
-            "quote": "“Girls!! I'm LIVING for this tech revolution. SensOn is an AI intimate experience syncing audio erotica with hardware response.”"
+            "quote": "“I'm trying out the SensOn intimate wellness device designed with woman in mind which is awesome!”"
           }
         },
         "card_cEL9Cy": {
@@ -153,10 +154,10 @@
             "image": "shopify://shop_images/03_c9455c7b-bffe-4cb2-89a6-f7842b77b78a.jpg",
             "video": "shopify://files/videos/First the teaser, now we have The Goods! 😮 from @senson_official one of the worlds FIRST AI int.mp4",
             "video_url": "",
-            "role": "Female Entrepreneurs· Couple",
+            "role": "Female Entrepreneurs · Couple",
             "name": "theinnovatorwives",
             "followers": "80K",
-            "quote": "“SensOn S1: One of the world's FIRST AI intimate experiencesthat redefines pleasure. Ladies, would you try this? Unbox with usand see!”"
+            "quote": "“SensOn S1: One of the world's FIRST AI intimate experiences that redefine pleasure. Ladies, would you try this? Unbox with us and see!”"
           }
         },
         "card_AULGCi": {
@@ -168,7 +169,7 @@
             "role": "LGBTQ+ · Comedy Influencer",
             "name": "jasknotjaz",
             "followers": "33K",
-            "quote": "“All you need to do is lie down, that's it.The app is interactive, and the more you use it, it's gonna get to know your body, it's gonna get to know what you like.”"
+            "quote": "“All you need to do is lie down, that's it. The app is interactive, and the more you use it, it's gonna get to know your body, it's gonna get to know what you like.”"
           }
         },
         "card_JHYrfi": {
@@ -180,7 +181,7 @@
             "role": "Influencer Manager",
             "name": "bxsassy2",
             "followers": "9.3K",
-            "quote": "“I can find a story on the app that helps me play out my deepest desire sand choose from over 300 characters to find the woman of my dreams in a role play scenario.”"
+            "quote": "“I can find a story on the app that helps me play out my deepest desires and choose from over 300 characters to find the woman of my dreams in a role play scenario.”"
           }
         },
         "card_aWPxiN": {
@@ -192,7 +193,7 @@
             "role": "Women’s Wellness Host",
             "name": "florencebark",
             "followers": "30K",
-            "quote": "“Place between your thighs and let all three zones sync with your body, while connecting with the fantacies made for you.”"
+            "quote": "“Place between your thighs and let all three zones sync with your body, while connecting with the fantasies made for you.”"
           }
         },
         "card_VwHJny": {
@@ -269,7 +270,7 @@
             "avatar": "shopify://shop_images/lex_jpg.jpg",
             "name": "Dr. Lexiinks",
             "role": "ABS certified sexologist\nAuthor",
-            "quote": "“You'll get triple zone stimulation and the device syncs up to the AI powered audio storyline you'll hear as you're doing your thing.”This device actually responds in real time when you squeeze. Your thighs together for an insanely customized experience.”"
+            "quote": "“You'll get triple zone stimulation and the device syncs up to the AI powered audio storyline you'll hear as you're doing your thing. This device actually responds in real time when you squeeze your thighs together for an insanely customized experience.”"
           }
         },
         "card_ei_03": {
@@ -278,7 +279,7 @@
             "avatar": "shopify://shop_images/amari.jpg",
             "name": "Dr. Amari",
             "role": "Clinical Sexologist\nCertified Sex Coach",
-            "quote": "“Pleasure doesn’t begin with the body alone.It begins in the mind — with imagination, emotion, and the ability to feel fully present. When technology can understand your voice, your mood, and your desires, it creates a deeper connection between the mind and body.”"
+            "quote": "“Pleasure doesn’t begin with the body alone. It begins in the mind — with imagination, emotion, and the ability to feel fully present. When technology can understand your voice, your mood, and your desires, it creates a deeper connection between the mind and body.”"
           }
         }
       },
@@ -332,17 +333,18 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 14,
         "subtitle_color": "#f287ec",
-        "heading": "Curious What You’ll Discover?",
+        "sub_tag": "h1",
+        "heading": "Curious What Lies Beyond the Reviews? Meet SensOn S1.",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
         "heading_color": "#ffffff",
-        "heading_tag": "h1",
+        "heading_tag": "h2",
         "description": "",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
         "description_color": "#ffffff",
         "module_id": "",
-        "button_label": "Know More",
+        "button_label": "Learn More",
         "button_scroll_id": "",
         "button_url": "shopify://products/senson-s1-wellness-companion",
         "show_stat_bar": false,
@@ -355,6 +357,17 @@
         "stat_text_color": "#ffffff",
         "stat_divider_color": "#f287ec"
       }
+    },
+    "sticky_bar_6kbXFf": {
+      "type": "sticky-bar",
+      "name": "Sticky Bar",
+      "settings": {
+        "product": "senson-s1-wellness-companion",
+        "product_handle": "senson-s1",
+        "badge_text": "Limited Time Price",
+        "button_text": "Shop Now",
+        "button_url": "shopify://products/senson-s1-wellness-companion"
+      }
     }
   },
   "order": [
@@ -362,6 +375,7 @@
     "our_story_banner_wdNwTf",
     "creator_reviews_cards_PARE63",
     "creator_reviews_cards2_EiNs01",
-    "our_story_banner_mMe6X6"
+    "our_story_banner_mMe6X6",
+    "sticky_bar_6kbXFf"
   ]
 }

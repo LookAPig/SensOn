@@ -36,11 +36,12 @@
         "subtitle_font_size": 24,
         "subtitle_font_size_mobile": 16,
         "subtitle_color": "#f287ec",
+        "sub_tag": "h1",
         "heading": "Stories About a New Language Of Pleasure.",
         "heading_font_size": 42,
         "heading_font_size_mobile": 28,
         "heading_color": "#ffffff",
-        "heading_tag": "h1",
+        "heading_tag": "h2",
         "description": "<p>Independent reviews, expert perspectives and company news about SensOn’s vision for AI-powered intimate wellness.</p>",
         "description_font_size": 16,
         "description_font_size_mobile": 14,
@@ -104,7 +105,7 @@
       ],
       "name": "Press media icons",
       "settings": {
-        "heading": "FEATURED & DISTRIBUTED ACROSS",
+        "heading": "FEATURED & DISTRIBUTED ACROSS MEDIA",
         "background_color": "#ffffff",
         "padding_top": 60,
         "padding_bottom": 60,
@@ -131,12 +132,12 @@
         "heading_font_size": 42,
         "heading_font_size_mobile": 22,
         "heading_color": "#ffffff",
-        "heading_tag": "h2",
+        "heading_tag": "h3",
         "description": "<p>SheKnows writer Delilah Gray tried the SensOn S1 firsthand — a sex toy with built-in personalized AI erotica, voice interaction, and synchronized stimulation.</p>",
         "description_font_size": 16,
         "description_font_size_mobile": 13,
         "description_color": "#ffffff",
-        "button_label": "Know More",
+        "button_label": "Read The Review",
         "button_url": "https://www.sheknows.com/health-and-wellness/articles/1235038082/senson-s1-ai-sex-toy-review/",
         "button_bg": "#f287ec",
         "button_text_color": "#000000"
@@ -220,7 +221,7 @@
             "video_url": "",
             "avatar": "shopify://shop_images/channels4_profile.jpg",
             "name": "Dr. Tara",
-            "role": "Sex and relationship expert, Tenured professor, Author, TV host",
+            "role": "Sex and relationship expert & Tenured professor & TV host",
             "quote": "SensOn is not just a chatbot online that you chat to and fall in love with and it’s also not just a vibrator it’s mixed between the two!!"
           }
         },
@@ -232,7 +233,7 @@
             "avatar": "shopify://shop_images/lex_jpg.jpg",
             "name": "Dr. Lexiinks",
             "role": "ABS certified sexologist & writer",
-            "quote": "You'll get triple zone stimulation and the device syncs up to the AI powered audio storyline you'll hear as you're doing your thing.This device actually responds in real time when you squeeze. Your thighs together for an insanely customized experience."
+            "quote": "You'll get triple zone stimulation and the device syncs up to the AI powered audio storyline you'll hear as you're doing your thing. This device actually responds in real time when you squeeze your thighs together for an insanely customized experience."
           }
         },
         "video_z6aqLg": {
@@ -241,9 +242,9 @@
             "poster": "shopify://shop_images/aaamari.jpg",
             "video_url": "",
             "avatar": "shopify://shop_images/amari.jpg",
-            "name": "Dr.Amari",
+            "name": "Dr. Amari",
             "role": "Clinical Sexologist & Certified Sex Coach",
-            "quote": "Pleasure doesn’t begin with the body alone.It begins in the mind — with imagination, emotion, and the ability to feel fully present. When technology can understand your voice, your mood, and your desires, it creates a deeper connection between the mind and body."
+            "quote": "Pleasure doesn’t begin with the body alone. It begins in the mind — with imagination, emotion, and the ability to feel fully present. When technology can understand your voice, your mood, and your desires, it creates a deeper connection between the mind and body."
           }
         },
         "article_cicXjW": {
@@ -337,7 +338,7 @@
         "heading_font_size": 42,
         "heading_font_size_mobile": 24,
         "heading_color": "#ffffff",
-        "heading_tag": "h2",
+        "heading_tag": "h3",
         "button_label": "Contact PR",
         "button_url": "shopify://pages/contact-us",
         "button_bg": "#f287ec",

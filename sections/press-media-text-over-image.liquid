@@ -103,7 +103,7 @@
   <div class="shade" aria-hidden="true"></div>
   <div class="content">
     {%- if section.settings.subtitle != blank -%}
-      <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
+      <h2 class="subtitle">{{ section.settings.subtitle | escape }}</h2>
     {%- endif -%}
     {%- if heading != blank or heading_mobile != blank -%}
       {%- if heading_mobile != heading -%}

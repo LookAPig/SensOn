@@ -255,7 +255,7 @@
     </div>
     <div class="content">
       {%- if section.settings.subtitle != blank -%}
-        <p class="subtitle">{{ section.settings.subtitle | escape }}</p>
+        <h2 class="subtitle">{{ section.settings.subtitle | escape }}</h2>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
         <{{ heading_tag }} class="title">{{ section.settings.heading | escape | newline_to_br }}</{{ heading_tag }}>
