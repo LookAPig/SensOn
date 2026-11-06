@@ -56,7 +56,7 @@
         "secondary_button_action": "scroll",
         "secondary_button_link": "",
         "external_video_url": "",
-        "secondary_button_scroll_target": "seo-icons",
+        "secondary_button_scroll_target": "seo-choose",
         "secondary_button_scroll_custom": ""
       }
     },
