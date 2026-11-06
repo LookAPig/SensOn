@@ -115,7 +115,7 @@
         "subtitle_color": "#f287ec",
         "title_color": "#ffffff",
         "description_color": "#b3b3b3",
-        "hint": "Hover for motion. Click a dimension to expand it.",
+        "hint": "Hover for motion.",
         "hint_color": "#9a9a9a",
         "background_color": "#000000",
         "desktop_padding_top": 120,
