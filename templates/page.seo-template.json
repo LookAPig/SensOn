@@ -47,10 +47,17 @@
         "button_width_desktop": 220,
         "button_width_mobile": 240,
         "primary_button_text": "Understand Sensual Wellness",
+        "primary_button_action": "scroll",
         "primary_button_link": "",
+        "primary_external_video_url": "",
+        "primary_button_scroll_target": "seo-show",
+        "primary_button_scroll_custom": "",
         "secondary_button_text": "Choose Your Way To Connect",
+        "secondary_button_action": "scroll",
         "secondary_button_link": "",
-        "external_video_url": ""
+        "external_video_url": "",
+        "secondary_button_scroll_target": "seo-icons",
+        "secondary_button_scroll_custom": ""
       }
     },
     "seo_show_card_yYGcpj": {
