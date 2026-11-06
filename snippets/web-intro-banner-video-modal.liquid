@@ -1,0 +1,38 @@
+{%- liquid
+  assign modal_ratio = 1.7777778
+  if shopify_video != blank and shopify_video.aspect_ratio != blank
+    assign modal_ratio = shopify_video.aspect_ratio
+  endif
+-%}
+<x-modal
+  id="{{ modal_id }}"
+  class="modal web_intro_banner_video_modal-{{ section_id }} color-scheme color-scheme--{{ settings.default_color_scheme.id }}"
+  style="--video-aspect-ratio: {{ modal_ratio }}"
+  append-to-body
+>
+  <div class="video_wrap">
+    {%- if shopify_video != blank -%}
+      <video
+        controls
+        playsinline
+        preload="metadata"
+        {% if shopify_video.preview_image != blank %}
+          poster="{{ shopify_video.preview_image | image_url: width: 1600 }}"
+        {% endif %}
+      >
+        {%- for source in shopify_video.sources -%}
+          <source src="{{ source.url }}" type="{{ source.mime_type }}">
+        {%- endfor -%}
+      </video>
+    {%- elsif external_video_url != blank -%}
+      {%- liquid
+        if external_video_url.type == 'youtube'
+          assign embed_src = 'https://www.youtube.com/embed/' | append: external_video_url.id | append: '?autoplay=1&rel=0&modestbranding=1&playsinline=1'
+        elsif external_video_url.type == 'vimeo'
+          assign embed_src = 'https://player.vimeo.com/video/' | append: external_video_url.id | append: '?autoplay=1'
+        endif
+      -%}
+      <div class="video_embed" data-video-embed data-src="{{ embed_src | escape }}"></div>
+    {%- endif -%}
+  </div>
+</x-modal>
