@@ -1037,6 +1037,68 @@
         "button_text": "Shop Now",
         "button_url": ""
       }
+    },
+    "web_introduction_faq_dnb3eK": {
+      "type": "web-introduction-faq",
+      "blocks": {
+        "faq_eXPkgf": {
+          "type": "faq",
+          "settings": {
+            "question": "What is SensOn App?",
+            "answer": "<p>SensOn is a private AI companion experience built around interactive fantasy, voice and choice. Browse characters, guide the conversation and return to companions that remember your preferences.</p>"
+          }
+        },
+        "faq_HC4APn": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need the SensOn S1 device?",
+            "answer": "<p>No. You can explore SensOn Web on its own, or connect SensOn S1 when you want the experience to move with you.</p>"
+          }
+        },
+        "faq_GDbjcV": {
+          "type": "faq",
+          "settings": {
+            "question": "Is there a free trial?",
+            "answer": "<p>Yes. You can start exploring characters and conversations before choosing a plan that fits how you want to play.</p>"
+          }
+        },
+        "faq_q477RT": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my experience private?",
+            "answer": "<p>Your sessions are designed to stay private. You stay in control of what you share, save and return to.</p>"
+          }
+        },
+        "faq_bWaTga": {
+          "type": "faq",
+          "settings": {
+            "question": "Who is SensOn designed for?",
+            "answer": "<p>SensOn is built for adults who want intimate, female-POV and LGBTQ+ inclusive companion experiences.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_eXPkgf",
+        "faq_HC4APn",
+        "faq_GDbjcV",
+        "faq_q477RT",
+        "faq_bWaTga"
+      ],
+      "name": "Web introduction FAQ",
+      "settings": {
+        "eyebrow": "Questiona,Answered",
+        "title": "Before you begin.",
+        "description": "<p>Everything you need to know before stepping into SensOn Web.</p>",
+        "background_color": "#FFFFFF",
+        "accent_color": "#f287ec",
+        "title_color": "#000000",
+        "description_color": "#121212",
+        "question_color": "#121212",
+        "answer_color": "#121212",
+        "divider_color": "#121212",
+        "padding_desktop": 40,
+        "padding_mobile": 80
+      }
     }
   },
   "order": [
@@ -1051,6 +1113,7 @@
     "ss_comparison_table_22_Uhm4pg",
     "1777538267162d7a7c",
     "how_works_aErNkp",
-    "sticky_bar_MJgFCi"
+    "sticky_bar_MJgFCi",
+    "web_introduction_faq_dnb3eK"
   ]
 }
