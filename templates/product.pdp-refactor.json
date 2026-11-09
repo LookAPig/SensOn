@@ -12,19 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "offer_countdown_H9XrFm": {
-          "type": "offer_countdown",
-          "settings": {
-            "heading": "BLACK FRIDAY SPECIAL",
-            "sale_price": "",
-            "compare_price": "",
-            "discount_label": "",
-            "units_text": "100 UNITS",
-            "ends_label": "OFFER ENDS IN",
-            "expiration_date": "2026-11-11 00:00:00",
-            "expiration_behavior": "hide"
-          }
-        },
         "liquid_PMKK83": {
           "type": "liquid",
           "disabled": true,
@@ -84,6 +71,33 @@
             "offer_3_content": "",
             "offer_3_background": "#f9f9f9",
             "offer_3_text_color": "#000000"
+          }
+        },
+        "offer_countdown_H9XrFm": {
+          "type": "offer_countdown",
+          "settings": {
+            "heading": "BLACK FRIDAY SPECIAL",
+            "sale_price": "",
+            "compare_price": "",
+            "discount_label": "",
+            "units_text": "100 UNITS",
+            "ends_label": "OFFER ENDS IN",
+            "expiration_date": "2026-11-11 00:00:00",
+            "expiration_behavior": "hide",
+            "heading_background": "#ebd491",
+            "heading_color": "#111111",
+            "body_background": "#000000",
+            "sale_color_start": "#ffffff",
+            "sale_color_end": "#e3c27a",
+            "compare_color": "#a1a1a1",
+            "discount_color": "#ffffff",
+            "units_color": "#f6edd4",
+            "ends_color": "#ffffff",
+            "divider_color": "#ffffff",
+            "timer_background_start": "#ffffff",
+            "timer_background_end": "#e6c98a",
+            "timer_color": "#111111",
+            "colon_color": "#ffffff"
           }
         },
         "price": {
@@ -305,13 +319,13 @@
         }
       },
       "block_order": [
-        "offer_countdown_H9XrFm",
         "liquid_PMKK83",
         "image_nmjnjV",
         "yotpo_product_reviews_star_rating_Xzjcy3",
         "title",
         "text_7nhMc6",
         "offers_xqqJzH",
+        "offer_countdown_H9XrFm",
         "price",
         "countdown_H8fV6E",
         "featured_in_Gwxwf8",
@@ -446,7 +460,12 @@
       "disabled": true,
       "name": "expert-insights-slider",
       "settings": {
+        "full_width": false,
+        "max_width": 1160,
         "heading": "Expert Insights",
+        "tags": "",
+        "button_label": "See More Creator Reviews >",
+        "button_link": "",
         "slider_type": "expert-insights-slider"
       }
     },
@@ -682,7 +701,12 @@
       ],
       "name": "creator-buzz-slider",
       "settings": {
+        "full_width": false,
+        "max_width": 1160,
         "heading": "What Creators are Saying  About SensOn S1",
+        "tags": "",
+        "button_label": "See More Creator Reviews >",
+        "button_link": "",
         "slider_type": "creator-buzz-slider"
       }
     },
