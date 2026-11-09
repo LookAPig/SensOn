@@ -701,8 +701,8 @@
       ],
       "name": "creator-buzz-slider",
       "settings": {
-        "full_width": true,
-        "max_width": 1160,
+        "full_width": false,
+        "max_width": 1200,
         "heading": "What Creators are Saying  About SensOn S1",
         "tags": "",
         "button_label": "See More Creator Reviews >",
