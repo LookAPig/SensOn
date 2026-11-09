@@ -42,14 +42,22 @@
         {% endif %}
       </div>
 
-      <div class="swiper creators-saying-swiper">
-        <div class="swiper-wrapper">
-          {%- for block in section.blocks -%}
-            <div class="swiper-slide" {{ block.shopify_attributes }}>
-              {% render 'user-saying-card', block: block %}
-            </div>
-          {%- endfor -%}
+      <div class="cs-swiper-wrap">
+        <button type="button" class="cs-nav cs-nav--prev" aria-label="Previous slide">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="swiper creators-saying-swiper">
+          <div class="swiper-wrapper">
+            {%- for block in section.blocks -%}
+              <div class="swiper-slide" {{ block.shopify_attributes }}>
+                {% render 'user-saying-card', block: block %}
+              </div>
+            {%- endfor -%}
+          </div>
         </div>
+        <button type="button" class="cs-nav cs-nav--next" aria-label="Next slide">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
 
       {% unless section.settings.button_label == blank %}

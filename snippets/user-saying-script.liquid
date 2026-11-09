@@ -50,6 +50,11 @@
         speed: 450,
         grabCursor: true,
         watchOverflow: true,
+        navigation: {
+          prevEl: root.querySelector('.cs-nav--prev'),
+          nextEl: root.querySelector('.cs-nav--next'),
+          disabledClass: 'is-disabled'
+        },
         breakpoints: {
           1000: { slidesPerView: 3, spaceBetween: 20 }
         },
