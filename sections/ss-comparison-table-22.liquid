@@ -21,10 +21,17 @@
     assign content_align_mobile = section.settings.content_align_mobile
     assign content_max_width = section.settings.content_max_width
     assign section_title = section.settings.section_title
+    assign section_title_color = section.settings.section_title_color | default: '#000000'
+    assign section_title_size = section.settings.section_title_size | default: 32
+    assign section_title_size_mobile = section.settings.section_title_size_mobile | default: 24
     assign section_subtitle = section.settings.section_subtitle
     assign section_subtitle_color = section.settings.section_subtitle_color | default: '#f287ec'
     assign section_subtitle_size = section.settings.section_subtitle_size | default: 14
     assign section_subtitle_size_mobile = section.settings.section_subtitle_size_mobile | default: 12
+    assign section_description = section.settings.section_description
+    assign section_description_color = section.settings.section_description_color | default: '#666666'
+    assign section_description_size = section.settings.section_description_size | default: 16
+    assign section_description_size_mobile = section.settings.section_description_size_mobile | default: 14
 
     assign table_columns = section.settings.table_columns
     assign table_column_bg_color = section.settings.table_column_bg_color
@@ -148,11 +155,21 @@
 
     .comparison-section-title-{{ section.id }} {
       margin: 0;
-      color: #000;
-      font-size: 24px;
+      color: {{ section_title_color }};
+      font-size: {{ section_title_size_mobile }}px;
       font-style: normal;
       font-weight: 500;
       line-height: 110%;
+      text-align: inherit;
+    }
+
+    .comparison-section-description-{{ section.id }} {
+      margin: 12px 0 0;
+      color: {{ section_description_color }};
+      font-size: {{ section_description_size_mobile }}px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
       text-align: inherit;
     }
 
@@ -581,7 +598,13 @@
       }
 
       .comparison-section-title-{{ section.id }} {
-        font-size: 32px;
+        font-size: {{ section_title_size }}px;
+      }
+
+      .comparison-section-description-{{ section.id }} {
+        margin: 16px auto 0;
+        max-width: 720px;
+        font-size: {{ section_description_size }}px;
       }
 
       .comparison-mobile-{{ section.id }} {
@@ -848,13 +871,16 @@
         {% endcase %}
       {% endfor %}
 
-      {% if section_subtitle != blank or section_title != blank %}
+      {% if section_subtitle != blank or section_title != blank or section_description != blank %}
         <div class="comparison-section-head-{{ section.id }}">
           {% if section_subtitle != blank %}
             <p class="comparison-section-subtitle-{{ section.id }}">{{ section_subtitle | escape }}</p>
           {% endif %}
           {% if section_title != blank %}
             <h2 class="comparison-section-title-{{ section.id }}">{{ section_title }}</h2>
+          {% endif %}
+          {% if section_description != blank %}
+            <p class="comparison-section-description-{{ section.id }}">{{ section_description | escape | newline_to_br }}</p>
           {% endif %}
         </div>
       {% endif %}
@@ -1010,6 +1036,64 @@
       "id": "section_title",
       "label": "Section title",
       "default": "Why SensOn Goes Further"
+    },
+    {
+      "type": "color",
+      "id": "section_title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "min": 12,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Title font size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "section_title_size_mobile",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Title font size - mobile",
+      "default": 24
+    },
+    {
+      "type": "textarea",
+      "id": "section_description",
+      "label": "Description",
+      "default": "A side-by-side comparison of hands-free design, synchronized sensations, and AI interaction, highlighting what sets SensOn S1 apart."
+    },
+    {
+      "type": "color",
+      "id": "section_description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "section_description_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Description font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "section_description_size_mobile",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Description font size - mobile",
+      "default": 14
     },
     {
       "type": "range",
