@@ -12,6 +12,19 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "offer_countdown_H9XrFm": {
+          "type": "offer_countdown",
+          "settings": {
+            "heading": "BLACK FRIDAY SPECIAL",
+            "sale_price": "",
+            "compare_price": "",
+            "discount_label": "",
+            "units_text": "100 UNITS",
+            "ends_label": "OFFER ENDS IN",
+            "expiration_date": "2026-11-11 00:00:00",
+            "expiration_behavior": "hide"
+          }
+        },
         "liquid_PMKK83": {
           "type": "liquid",
           "disabled": true,
@@ -292,6 +305,7 @@
         }
       },
       "block_order": [
+        "offer_countdown_H9XrFm",
         "liquid_PMKK83",
         "image_nmjnjV",
         "yotpo_product_reviews_star_rating_Xzjcy3",
