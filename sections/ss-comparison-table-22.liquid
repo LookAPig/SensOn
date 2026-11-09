@@ -21,6 +21,10 @@
     assign content_align_mobile = section.settings.content_align_mobile
     assign content_max_width = section.settings.content_max_width
     assign section_title = section.settings.section_title
+    assign section_subtitle = section.settings.section_subtitle
+    assign section_subtitle_color = section.settings.section_subtitle_color | default: '#f287ec'
+    assign section_subtitle_size = section.settings.section_subtitle_size | default: 14
+    assign section_subtitle_size_mobile = section.settings.section_subtitle_size_mobile | default: 12
 
     assign table_columns = section.settings.table_columns
     assign table_column_bg_color = section.settings.table_column_bg_color
@@ -122,14 +126,34 @@
       padding-right: 16px;
     }
 
-    .comparison-section-title-{{ section.id }} {
+    .comparison-section-head-{{ section.id }} {
       margin: 0 0 24px;
+      text-align: left;
+    }
+
+    .comparison-section-subtitle-{{ section.id }} {
+      margin: 0 0 8px;
+      color: {{ section_subtitle_color }};
+      font-size: {{ section_subtitle_size_mobile }}px;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 120%;
+      text-align: inherit;
+    }
+
+    .comparison-section-subtitle-{{ section.id }}:last-child {
+      margin-bottom: 0;
+    }
+
+    .comparison-section-title-{{ section.id }} {
+      margin: 0;
       color: #000;
       font-size: 24px;
       font-style: normal;
       font-weight: 500;
       line-height: 110%;
-      text-align: left;
+      text-align: inherit;
     }
 
     .comparison-heading-{{ section.id }} {
@@ -542,10 +566,22 @@
     }
 
     @media(min-width: 1024px) {
-      .comparison-section-title-{{ section.id }} {
-        font-size: 32px;
+      .comparison-section-head-{{ section.id }} {
         margin-bottom: 40px;
         text-align: center;
+      }
+
+      .comparison-section-subtitle-{{ section.id }} {
+        margin-bottom: 12px;
+        font-size: {{ section_subtitle_size }}px;
+      }
+
+      .comparison-section-subtitle-{{ section.id }}:last-child {
+        margin-bottom: 0;
+      }
+
+      .comparison-section-title-{{ section.id }} {
+        font-size: 32px;
       }
 
       .comparison-mobile-{{ section.id }} {
@@ -812,8 +848,15 @@
         {% endcase %}
       {% endfor %}
 
-      {% if section_title != blank %}
-        <h2 class="comparison-section-title-{{ section.id }}">{{ section_title }}</h2>
+      {% if section_subtitle != blank or section_title != blank %}
+        <div class="comparison-section-head-{{ section.id }}">
+          {% if section_subtitle != blank %}
+            <p class="comparison-section-subtitle-{{ section.id }}">{{ section_subtitle | escape }}</p>
+          {% endif %}
+          {% if section_title != blank %}
+            <h2 class="comparison-section-title-{{ section.id }}">{{ section_title }}</h2>
+          {% endif %}
+        </div>
       {% endif %}
      
       <div class="comparison-mobile-{{ section.id }}">
@@ -929,6 +972,38 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Subtitle",
+      "default": "SENSON S1 VS. TRADITIONAL DEVICES"
+    },
+    {
+      "type": "color",
+      "id": "section_subtitle_color",
+      "label": "Subtitle color",
+      "default": "#f287ec"
+    },
+    {
+      "type": "range",
+      "id": "section_subtitle_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "section_subtitle_size_mobile",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle font size - mobile",
+      "default": 12
     },
     {
       "type": "text",
