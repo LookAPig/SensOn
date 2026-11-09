@@ -2362,6 +2362,76 @@
   ]
 },
     {
+      "type": "offer_countdown",
+      "name": "促销倒计时",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "标题",
+          "default": "BLACK FRIDAY SPECIAL"
+        },
+        {
+          "type": "text",
+          "id": "sale_price",
+          "label": "现价",
+          "info": "例如 $159。留空则使用当前变体售价。"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "原价",
+          "info": "例如 $299。留空则使用当前变体原价；没有更高原价时不显示。"
+        },
+        {
+          "type": "text",
+          "id": "discount_label",
+          "label": "折扣文案",
+          "info": "例如 47% OFF。留空则按现价和原价自动计算。"
+        },
+        {
+          "type": "text",
+          "id": "units_text",
+          "label": "库存文案",
+          "default": "100 UNITS",
+          "info": "留空则不显示。"
+        },
+        {
+          "type": "text",
+          "id": "ends_label",
+          "label": "倒计时文案",
+          "default": "OFFER ENDS IN"
+        },
+        {
+          "type": "header",
+          "content": "结束时间"
+        },
+        {
+          "type": "text",
+          "id": "expiration_date",
+          "label": "结束时间",
+          "placeholder": "2026-12-31 23:59",
+          "info": "格式 YYYY-MM-DD HH:MM，按店铺时区。倒计时显示剩余时、分、秒。"
+        },
+        {
+          "type": "select",
+          "id": "expiration_behavior",
+          "label": "结束后",
+          "options": [
+            {
+              "value": "hide",
+              "label": "隐藏组件"
+            },
+            {
+              "value": "leave",
+              "label": "停在 00:00:00"
+            }
+          ],
+          "default": "hide"
+        }
+      ]
+    },
+    {
       "type": "share_buttons",
       "name": "t:sections.main_product.blocks.share_buttons.name",
       "settings": [

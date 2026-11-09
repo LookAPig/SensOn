@@ -606,6 +606,9 @@
           {%- when 'featured_in' -%}
             {%- render 'product-block-featured-in', block: block -%}
 
+          {%- when 'offer_countdown' -%}
+            {%- render 'product-block-offer-countdown', block: block, product: product -%}
+
           {%- when 'share_buttons' -%}
             <share-button>
               <button class="h-stack gap-2 justify-{{ alignment }} share-buttons--native" hidden>
@@ -627,7 +630,7 @@
       {%- endif -%}
 
       {%- liquid
-        assign block_types_allowing_partial_rerender = 'sku,badges,price,payment_terms,volume_pricing,variant_picker,inventory,buy_buttons,pickup_availability,liquid' | split: ','
+        assign block_types_allowing_partial_rerender = 'sku,badges,price,payment_terms,volume_pricing,variant_picker,inventory,buy_buttons,pickup_availability,liquid,offer_countdown' | split: ','
         assign allow_partial_rerender = false
 
         if block_types_allowing_partial_rerender contains block.type

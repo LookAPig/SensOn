@@ -1,0 +1,120 @@
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign sale_text = block.settings.sale_price | strip
+  assign compare_text = block.settings.compare_price | strip
+  assign units_text = block.settings.units_text | strip
+  assign ends_label = block.settings.ends_label | default: 'OFFER ENDS IN' | strip
+  assign sale_cents = 0
+  assign compare_cents = 0
+
+  if sale_text != blank
+    assign sale_cents = sale_text | remove: '$' | remove: ',' | remove: ' ' | times: 100
+  elsif variant != nil
+    assign sale_text = variant.price | money_without_trailing_zeros
+    assign sale_cents = variant.price
+  endif
+
+  if compare_text != blank
+    assign compare_cents = compare_text | remove: '$' | remove: ',' | remove: ' ' | times: 100
+  elsif variant != nil and variant.compare_at_price > sale_cents
+    assign compare_text = variant.compare_at_price | money_without_trailing_zeros
+    assign compare_cents = variant.compare_at_price
+  endif
+
+  assign off_text = block.settings.discount_label | strip
+  if off_text == blank and compare_cents > sale_cents and compare_cents > 0
+    assign off_pct = compare_cents | minus: sale_cents | times: 100.0 | divided_by: compare_cents | round
+    assign off_text = off_pct | append: '% OFF'
+  endif
+
+  assign expires_at = ''
+  if block.settings.expiration_date != blank
+    assign expires_at = block.settings.expiration_date | date: '%FT%T%:z'
+  endif
+-%}
+
+<bf-offer-countdown
+  id="bf-offer-{{ block.id }}"
+  class="bf-offer"
+  {% if expires_at != blank %}expires-at="{{ expires_at | escape }}"{% endif %}
+  expiration-behavior="{{ block.settings.expiration_behavior | escape }}"
+  {% if request.design_mode %}data-design-mode{% endif %}
+>
+  <div class="bf-offer__banner">{{ block.settings.heading | default: 'BLACK FRIDAY SPECIAL' | escape }}</div>
+  <div class="bf-offer__body">
+    {%- if units_text != blank -%}
+      <span class="bf-offer__sr">{{ units_text | escape }}</span>
+      <span class="bf-offer__units" aria-hidden="true">{{ units_text | escape }}</span>
+    {%- endif -%}
+    <p class="bf-offer__sale">{{ sale_text | escape }}</p>
+    <div class="bf-offer__deal">
+      {%- if compare_text != blank -%}
+        <span class="bf-offer__compare">{{ compare_text | escape }}</span>
+      {%- endif -%}
+      {%- if units_text != blank -%}
+        <span class="bf-offer__units-inline" aria-hidden="true">{{ units_text | escape }}</span>
+      {%- endif -%}
+      {%- if compare_text != blank and off_text != blank -%}
+        <span class="bf-offer__vdiv" aria-hidden="true"></span>
+      {%- endif -%}
+      {%- if off_text != blank -%}
+        <span class="bf-offer__off">{{ off_text | escape }}</span>
+      {%- endif -%}
+    </div>
+    <div class="bf-offer__timer" role="timer">
+      <span class="bf-offer__ends">{{ ends_label | escape }} :</span>
+      <span class="bf-offer__clock">
+        <span class="bf-offer__box" data-unit="hours">00</span>
+        <span class="bf-offer__colon" aria-hidden="true">:</span>
+        <span class="bf-offer__box" data-unit="minutes">00</span>
+        <span class="bf-offer__colon" aria-hidden="true">:</span>
+        <span class="bf-offer__box" data-unit="seconds">00</span>
+      </span>
+    </div>
+  </div>
+</bf-offer-countdown>
+
+{%- render 'product-block-offer-countdown-style', block: block -%}
+
+<script>
+  if (!customElements.get('bf-offer-countdown')) {
+    customElements.define('bf-offer-countdown', class extends HTMLElement {
+      connectedCallback() {
+        const raw = this.getAttribute('expires-at');
+        if (!raw) return;
+        const end = new Date(raw).getTime();
+        if (Number.isNaN(end)) return;
+        const paint = (left) => {
+          const total = Math.max(0, left);
+          const hours = Math.floor(total / 3600);
+          const minutes = Math.floor((total % 3600) / 60);
+          const seconds = total % 60;
+          const set = (unit, value) => {
+            const node = this.querySelector('[data-unit="' + unit + '"]');
+            if (node) node.textContent = String(value).padStart(2, '0');
+          };
+          set('hours', hours);
+          set('minutes', minutes);
+          set('seconds', seconds);
+        };
+        const tick = () => {
+          const left = Math.floor((end - Date.now()) / 1000);
+          if (left <= 0) {
+            paint(0);
+            clearInterval(this._timer);
+            if (this.getAttribute('expiration-behavior') === 'hide' && !this.hasAttribute('data-design-mode')) {
+              (this.closest('[data-block-id]') || this).remove();
+            }
+            return;
+          }
+          paint(left);
+        };
+        tick();
+        this._timer = setInterval(tick, 1000);
+      }
+      disconnectedCallback() {
+        clearInterval(this._timer);
+      }
+    });
+  }
+</script>
