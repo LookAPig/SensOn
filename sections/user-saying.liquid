@@ -19,9 +19,10 @@
     endfor
   endif
   assign tag_lines = tag_source | newline_to_br | replace: '<br />', '|||' | replace: '<br>', '|||' | split: '|||'
+  assign cs_max_width = section.settings.max_width | default: 1160
 -%}
 
-<div id="creators-saying-{{ section.id }}" class="creators-saying cs-root {{ section.settings.slider_type }}">
+<div id="creators-saying-{{ section.id }}" class="creators-saying cs-root {{ section.settings.slider_type }}{% if section.settings.full_width %} is-full{% endif %}" style="--cs-max-width: {{ cs_max_width }}px;">
   {% render 'user-saying-style', section_id: section.id %}
   <div class="cs-section">
     <div class="cs-container">
@@ -77,6 +78,20 @@
   "tag": "section",
   "class": "section-creators-saying",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false,
+      "info": "Full screen with 16px side padding on mobile and 100px on desktop."
+    },
+    {
+      "type": "number",
+      "id": "max_width",
+      "label": "Max width (px)",
+      "default": 1160,
+      "visible_if": "{{ section.settings.full_width == false }}"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -134,24 +149,9 @@
         { "type": "header", "content": "Creator profile" },
         { "type": "image_picker", "id": "avatar", "label": "Avatar image" },
         { "type": "text", "id": "creator_name", "label": "Name", "default": "Lilly Singh" },
-        {
-          "type": "text",
-          "id": "creator_desc",
-          "label": "Subtitle line",
-          "default": "Actress, Self-Growth Nerd, Goofball"
-        },
-        {
-          "type": "text",
-          "id": "creator_subs",
-          "label": "Subscribers / stats line",
-          "default": "14.2M Subscribers"
-        },
-        {
-          "type": "url",
-          "id": "profile_url",
-          "label": "Profile link (optional)",
-          "info": "Leave blank to disable the profile link."
-        },
+        { "type": "text", "id": "creator_desc", "label": "Subtitle line", "default": "Actress, Self-Growth Nerd, Goofball" },
+        { "type": "text", "id": "creator_subs", "label": "Subscribers / stats line", "default": "14.2M Subscribers" },
+        { "type": "url", "id": "profile_url", "label": "Profile link (optional)" },
         { "type": "header", "content": "Video" },
         {
           "type": "video",
