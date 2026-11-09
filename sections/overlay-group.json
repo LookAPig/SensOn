@@ -59,7 +59,6 @@
     },
     "early-access-dialog": {
       "type": "early-access-dialog",
-      "disabled": true,
       "settings": {
         "enabled": true,
         "delay": 4,
