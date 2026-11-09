@@ -1,0 +1,83 @@
+<script>
+  (function () {
+    var root = document.getElementById('creators-saying-{{ section_id }}');
+    if (!root || root.dataset.csBound === '1') return;
+    root.dataset.csBound = '1';
+
+    var slideCount = {{ slide_count | json }};
+
+    function pauseAll() {
+      root.querySelectorAll('.cs-video video').forEach(function (video) {
+        video.pause();
+      });
+    }
+
+    function bindVideos() {
+      root.querySelectorAll('[data-cs-inline-video]').forEach(function (wrap) {
+        if (wrap.dataset.csVideoBound === '1') return;
+        wrap.dataset.csVideoBound = '1';
+        var poster = wrap.querySelector('.cs-video-poster');
+        var video = wrap.querySelector('video');
+        if (!poster || !video) return;
+
+        function play() {
+          if (wrap.classList.contains('is-playing')) return;
+          wrap.classList.add('is-playing');
+          video.controls = true;
+          var pending = video.play();
+          if (pending && pending.catch) pending.catch(function () {});
+        }
+
+        poster.addEventListener('click', function (event) {
+          event.preventDefault();
+          play();
+        });
+        wrap.addEventListener('keydown', function (event) {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          play();
+        });
+      });
+    }
+
+    function init() {
+      if (typeof Swiper === 'undefined') return false;
+      var el = root.querySelector('.creators-saying-swiper');
+      if (!el || el.swiper) return true;
+      new Swiper(el, {
+        slidesPerView: slideCount > 1 ? 1.15 : 1,
+        spaceBetween: 12,
+        speed: 450,
+        grabCursor: true,
+        watchOverflow: true,
+        breakpoints: {
+          1000: { slidesPerView: 3, spaceBetween: 20 }
+        },
+        on: { slideChange: pauseAll }
+      });
+      bindVideos();
+      return true;
+    }
+
+    function tryInit() {
+      if (init()) return;
+      var source = document.getElementById('swiper-creators-{{ section_id }}');
+      if (source) source.addEventListener('load', init);
+      setTimeout(init, 120);
+      setTimeout(init, 480);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tryInit);
+    } else {
+      tryInit();
+    }
+
+    document.addEventListener('shopify:section:load', function (event) {
+      if (!event.detail || event.detail.sectionId !== '{{ section_id }}' || !root.isConnected) return;
+      var el = root.querySelector('.creators-saying-swiper');
+      if (el && el.swiper) el.swiper.destroy(true, true);
+      tryInit();
+    });
+  })();
+</script>
