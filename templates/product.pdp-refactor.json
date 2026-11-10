@@ -1093,22 +1093,22 @@
         "faq_eXPkgf": {
           "type": "faq",
           "settings": {
-            "question": "What is SensOn App?",
-            "answer": "<p>SensOn is a private AI companion experience built around interactive fantasy, voice and choice. Browse characters, guide the conversation and return to companions that remember your preferences.</p>"
+            "question": "Can I use SensOn S1 without the app?",
+            "answer": "<p>Yes. SensOn S1 can be controlled through its physical buttons, offering five adjustable intensity levels. Connecting to the SensOn App enables AI interaction and synchronized sensations.</p>"
           }
         },
         "faq_HC4APn": {
           "type": "faq",
           "settings": {
-            "question": "Do I need the SensOn S1 device?",
-            "answer": "<p>No. You can explore SensOn Web on its own, or connect SensOn S1 when you want the experience to move with you.</p>"
+            "question": "Is SensOn S1 truly hands-free, and can I adjust the fit?",
+            "answer": "<p>Yes. SensOn S1 is designed for hands-free use, with the Core resting comfortably between the thighs. The adjustable stimulator head allows users to fine-tune its position for a more personalized fit.</p>"
           }
         },
         "faq_GDbjcV": {
           "type": "faq",
           "settings": {
-            "question": "Is there a free trial?",
-            "answer": "<p>Yes. You can start exploring characters and conversations before choosing a plan that fits how you want to play.</p>"
+            "question": "How long does SensOn S1 last on a full charge?",
+            "answer": "<p>SensOn S1 lasts up to 90 minutes at the highest intensity. A full charge takes approximately 2 hours using the included charging case and USB-C cable.</p>"
           }
         },
         "faq_q477RT": {
@@ -1135,9 +1135,9 @@
       ],
       "name": "Web introduction FAQ",
       "settings": {
-        "eyebrow": "Questiona,Answered",
-        "title": "Before you begin.",
-        "description": "<p>Everything you need to know before stepping into SensOn Web.</p>",
+        "eyebrow": "FAQ",
+        "title": "What to Know About SensOn S1",
+        "description": "<p>From hands-free comfort to AI access, find clear answers to help you make an informed choice.</p>",
         "background_color": "#ffffff",
         "accent_color": "#f287ec",
         "title_color": "#000000",
