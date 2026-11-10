@@ -154,8 +154,8 @@
           "type": "offer_countdown",
           "settings": {
             "heading": "BLACK FRIDAY SPECIAL",
-            "sale_price": "",
-            "compare_price": "",
+            "sale_price": "159",
+            "compare_price": "299",
             "discount_label": "",
             "units_text": "100 UNITS",
             "ends_label": "OFFER ENDS IN",
@@ -1138,13 +1138,13 @@
         "eyebrow": "FAQ",
         "title": "What to Know About <br>SensOn S1",
         "description": "<p>From hands-free comfort to AI access, find clear answers to help you make an informed choice.</p>",
-        "background_color": "#FEF3FE",
+        "background_color": "#fef3fe",
         "accent_color": "#f287ec",
         "title_color": "#000000",
         "description_color": "#121212",
         "question_color": "#121212",
         "answer_color": "#121212",
-        "divider_color": "#807A80",
+        "divider_color": "#807a80",
         "padding_desktop": 120,
         "padding_mobile": 80
       }
