@@ -76,6 +76,7 @@
         "submit_error": "We couldn't add you just now. Please try again.",
         "pending_text": "Joining...",
         "image": "shopify://shop_images/pc-720x1000.jpg",
+        "image_mobile": "shopify://shop_images/h5-686x480_ae03f2cd-3a17-4c35-bd69-d1e310661aee.jpg",
         "image_alt": "SensOn S1 Black Friday early access",
         "klaviyo_company_id": "",
         "klaviyo_list_id": "",
@@ -95,6 +96,7 @@
         "product": "",
         "variant_id": "",
         "success_image": "shopify://shop_images/pc-720x1000_e46545f5-b848-4303-b980-27bdaf6b7921.jpg",
+        "success_image_mobile": "shopify://shop_images/h5-686x480.jpg",
         "success_image_alt": "SensOn S1 at the $159 early-access price"
       }
     }
