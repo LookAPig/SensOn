@@ -1136,7 +1136,7 @@
       "name": "Web introduction FAQ",
       "settings": {
         "eyebrow": "FAQ",
-        "title": "What to Know About SensOn S1",
+        "title": "What to Know About <br>SensOn S1",
         "description": "<p>From hands-free comfort to AI access, find clear answers to help you make an informed choice.</p>",
         "background_color": "#FEF3FE",
         "accent_color": "#f287ec",
