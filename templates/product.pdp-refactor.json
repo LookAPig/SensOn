@@ -73,33 +73,6 @@
             "offer_3_text_color": "#000000"
           }
         },
-        "offer_countdown_H9XrFm": {
-          "type": "offer_countdown",
-          "settings": {
-            "heading": "BLACK FRIDAY SPECIAL",
-            "sale_price": "",
-            "compare_price": "",
-            "discount_label": "",
-            "units_text": "100 UNITS",
-            "ends_label": "OFFER ENDS IN",
-            "expiration_date": "2026-11-11 00:00:00",
-            "expiration_behavior": "hide",
-            "heading_background": "#ebd491",
-            "heading_color": "#111111",
-            "body_background": "#000000",
-            "sale_color_start": "#ffffff",
-            "sale_color_end": "#e3c27a",
-            "compare_color": "#a1a1a1",
-            "discount_color": "#ffffff",
-            "units_color": "#f6edd4",
-            "ends_color": "#ffffff",
-            "divider_color": "#ffffff",
-            "timer_background_start": "#ffffff",
-            "timer_background_end": "#e6c98a",
-            "timer_color": "#111111",
-            "colon_color": "#ffffff"
-          }
-        },
         "price": {
           "type": "price",
           "settings": {
@@ -175,6 +148,33 @@
             "icon_4_text_size": 12,
             "icon_4_width": 36,
             "icon_4_text": "Body-safe materials"
+          }
+        },
+        "offer_countdown_H9XrFm": {
+          "type": "offer_countdown",
+          "settings": {
+            "heading": "BLACK FRIDAY SPECIAL",
+            "sale_price": "",
+            "compare_price": "",
+            "discount_label": "",
+            "units_text": "100 UNITS",
+            "ends_label": "OFFER ENDS IN",
+            "expiration_date": "2026-11-11 00:00:00",
+            "expiration_behavior": "hide",
+            "heading_background": "#ebd491",
+            "heading_color": "#111111",
+            "body_background": "#000000",
+            "sale_color_start": "#ffffff",
+            "sale_color_end": "#e3c27a",
+            "compare_color": "#a1a1a1",
+            "discount_color": "#ffffff",
+            "units_color": "#f6edd4",
+            "ends_color": "#ffffff",
+            "divider_color": "#ffffff",
+            "timer_background_start": "#ffffff",
+            "timer_background_end": "#e6c98a",
+            "timer_color": "#111111",
+            "colon_color": "#ffffff"
           }
         },
         "liquid_B9y7Yq": {
@@ -325,7 +325,6 @@
         "title",
         "text_7nhMc6",
         "offers_xqqJzH",
-        "offer_countdown_H9XrFm",
         "price",
         "countdown_H8fV6E",
         "featured_in_Gwxwf8",
@@ -333,6 +332,7 @@
         "feature_cards_NddJBd",
         "text_VcpKPp",
         "icons_with_text_ANpmKR",
+        "offer_countdown_H9XrFm",
         "liquid_B9y7Yq",
         "payment_terms",
         "description",
@@ -484,7 +484,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/ea34a6af4103371d4ec3ea635775ed4d.mp4",
             "video_cover": "shopify://shop_images/01_3d08d2d1-de5c-4855-89e0-7335f38087f1.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_WHVR3q": {
@@ -499,7 +499,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/snaptik.monster_d6b968db_57f3_499c_9f4c_c508470bffbf.mp4",
             "video_cover": "shopify://shop_images/02_17fe275b-19d7-4399-bc48-8cd7b6a6ff19.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_BYJhKB": {
@@ -514,7 +514,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/just-lex.mp4",
             "video_cover": "shopify://shop_images/just-lex.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_gbVTNd": {
@@ -529,7 +529,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/jans.mp4",
             "video_cover": "shopify://shop_images/janes.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_exrhef": {
@@ -544,7 +544,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/file_v3_00128_9c5d571a-2656-4d04-861a-21317756cf6g.mp4",
             "video_cover": "shopify://shop_images/kat.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_tHjVL8": {
@@ -559,7 +559,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/eliseabell.mp4",
             "video_cover": "shopify://shop_images/adhd.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_Dzbpkt": {
@@ -574,14 +574,14 @@
             "profile_url": "",
             "video": "shopify://files/videos/file_v3_00128_26b6c7c2-7a56-42f1-a05c-81bb7b995feg.mp4",
             "video_cover": "shopify://shop_images/jkiillem.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_g8grbA": {
           "type": "creator_slide",
           "settings": {
             "tags": "World-First AI\nLady-Centric",
-            "quote": "<p>\"SensOn S1: One of the world's FIRST AI intimate experiences that redefines pleasure. Ladies, would you try this? Unbox with usand see!\" </p>",
+            "quote": "<p>\"SensOn S1: One of the world's FIRST AI intimate experiences that redefines pleasure. Ladies, would you try this? Unbox with usand see!\"&nbsp;</p>",
             "avatar": "shopify://shop_images/20260528-180029.jpg",
             "creator_name": "theinnovatorwives",
             "creator_desc": "Female Entrepreneurs，Leo couple",
@@ -589,7 +589,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/First the teaser, now we have The Goods! 😮 from @senson_official one of the worlds FIRST AI int.mp4",
             "video_cover": "shopify://shop_images/03_c9455c7b-bffe-4cb2-89a6-f7842b77b78a.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_Fqg6Mg": {
@@ -604,7 +604,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/bxsassy.mp4",
             "video_cover": "shopify://shop_images/bxsassy2.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_DHJDHY": {
@@ -619,7 +619,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/jasknot.mp4",
             "video_cover": "shopify://shop_images/jask.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_9LYMDn": {
@@ -634,7 +634,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/florencebark.mp4",
             "video_cover": "shopify://shop_images/f.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_XRnUxa": {
@@ -649,7 +649,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/Single mom life means I do everything… bills, kids, work, content… so yes, sometimes mama deserv.mp4",
             "video_cover": "shopify://shop_images/04.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_kpcnax": {
@@ -664,7 +664,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/file_v3_00128_db51e244-e376-48a8-b2ea-3003020570eg.mp4",
             "video_cover": "shopify://shop_images/vvaishnavi04.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         },
         "creator_slide_7GVnpL": {
@@ -679,7 +679,7 @@
             "profile_url": "",
             "video": "shopify://files/videos/6月2日 (4)-1 (1) (1).mp4",
             "video_cover": "shopify://shop_images/6_2_4.jpg",
-            "video_aspect_ratio": "3-4"
+            "video_aspect_ratio": "16-9"
           }
         }
       },
