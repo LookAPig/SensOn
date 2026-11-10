@@ -1144,8 +1144,8 @@
         "description_color": "#121212",
         "question_color": "#121212",
         "answer_color": "#121212",
-        "divider_color": "#121212",
-        "padding_desktop": 40,
+        "divider_color": "#807A80",
+        "padding_desktop": 120,
         "padding_mobile": 80
       }
     }
