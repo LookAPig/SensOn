@@ -706,7 +706,7 @@
         "heading": "What Creators are Saying  About SensOn S1",
         "tags": "",
         "button_label": "See More Creator Reviews >",
-        "button_link": "",
+        "button_link": "shopify://pages/creator-reviews",
         "slider_type": "creator-buzz-slider"
       }
     },
