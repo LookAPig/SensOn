@@ -6,10 +6,43 @@
 
     var slideCount = {{ slide_count | json }};
 
+    function isVideoFullscreen(video) {
+      return document.fullscreenElement === video
+        || document.webkitFullscreenElement === video
+        || video.webkitDisplayingFullscreen === true;
+    }
+
+    function restorePoster(wrap, video) {
+      video.pause();
+      video.controls = false;
+      video.playsInline = true;
+      wrap.classList.remove('is-playing');
+    }
+
     function pauseAll() {
       root.querySelectorAll('.cs-video video').forEach(function (video) {
-        video.pause();
+        var wrap = video.closest('[data-cs-inline-video]');
+        if (!wrap) {
+          video.pause();
+          return;
+        }
+        restorePoster(wrap, video);
       });
+    }
+
+    function openFullscreen(video) {
+      if (typeof video.webkitEnterFullscreen === 'function') {
+        try {
+          video.webkitEnterFullscreen();
+          return;
+        } catch (error) {}
+      }
+      var request = video.requestFullscreen || video.webkitRequestFullscreen;
+      if (!request) return;
+      try {
+        var pending = request.call(video);
+        if (pending && pending.catch) pending.catch(function () {});
+      } catch (error) {}
     }
 
     function bindVideos() {
@@ -20,12 +53,32 @@
         var video = wrap.querySelector('video');
         if (!poster || !video) return;
 
+        function leaveFullscreen() {
+          if (!root.isConnected) {
+            document.removeEventListener('fullscreenchange', leaveFullscreen);
+            document.removeEventListener('webkitfullscreenchange', leaveFullscreen);
+            return;
+          }
+          if (!wrap.classList.contains('is-playing')) return;
+          if (isVideoFullscreen(video)) return;
+          restorePoster(wrap, video);
+        }
+
         function play() {
           if (wrap.classList.contains('is-playing')) return;
+          pauseAll();
           wrap.classList.add('is-playing');
           video.controls = true;
+          video.playsInline = false;
+          video.removeAttribute('playsinline');
+          video.removeAttribute('webkit-playsinline');
           var pending = video.play();
-          if (pending && pending.catch) pending.catch(function () {});
+          openFullscreen(video);
+          if (pending && pending.then) {
+            pending.then(function () {
+              if (!isVideoFullscreen(video)) openFullscreen(video);
+            }).catch(function () {});
+          }
         }
 
         poster.addEventListener('click', function (event) {
@@ -36,6 +89,21 @@
           if (event.key !== 'Enter' && event.key !== ' ') return;
           event.preventDefault();
           play();
+        });
+        document.addEventListener('fullscreenchange', leaveFullscreen);
+        document.addEventListener('webkitfullscreenchange', leaveFullscreen);
+        video.addEventListener('webkitendfullscreen', function () {
+          restorePoster(wrap, video);
+        });
+        video.addEventListener('ended', function () {
+          if (typeof video.webkitExitFullscreen === 'function' && video.webkitDisplayingFullscreen) {
+            video.webkitExitFullscreen();
+          }
+          if (document.fullscreenElement && document.exitFullscreen) {
+            document.exitFullscreen().catch(function () {});
+          }
+          restorePoster(wrap, video);
+          try { video.currentTime = 0; } catch (error) {}
         });
       });
     }
