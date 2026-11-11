@@ -1,35 +1,16 @@
 {%- liquid
-  assign variant = product.selected_or_first_available_variant
-  assign sale_text = block.settings.sale_price | strip
-  assign compare_text = block.settings.compare_price | strip
-  assign units_text = block.settings.units_text | strip
-  assign ends_label = block.settings.ends_label | default: 'OFFER ENDS IN' | strip
-  assign sale_cents = 0
-  assign compare_cents = 0
-
-  if sale_text != blank
-    assign sale_cents = sale_text | remove: '$' | remove: ',' | remove: ' ' | times: 100
-  elsif variant != nil
-    assign sale_text = variant.price | money_without_trailing_zeros
-    assign sale_cents = variant.price
-  endif
-
-  if compare_text != blank
-    assign compare_cents = compare_text | remove: '$' | remove: ',' | remove: ' ' | times: 100
-  elsif variant != nil and variant.compare_at_price > sale_cents
-    assign compare_text = variant.compare_at_price | money_without_trailing_zeros
-    assign compare_cents = variant.compare_at_price
-  endif
-
-  assign off_text = block.settings.discount_label | strip
-  if off_text == blank and compare_cents > sale_cents and compare_cents > 0
-    assign off_pct = compare_cents | minus: sale_cents | times: 100.0 | divided_by: compare_cents | round
-    assign off_text = off_pct | append: '% OFF'
-  endif
-
   assign expires_at = ''
   if block.settings.expiration_date != blank
     assign expires_at = block.settings.expiration_date | date: '%FT%T%:z'
+  endif
+
+  assign image_pc = block.settings.image_pc
+  assign image_h5 = block.settings.image_h5
+  assign image_single = image_h5 | default: image_pc
+
+  assign image_alt = block.settings.image_alt | strip
+  if image_alt == blank
+    assign image_alt = 'Offer countdown'
   endif
 -%}
 
@@ -40,37 +21,44 @@
   expiration-behavior="{{ block.settings.expiration_behavior | escape }}"
   {% if request.design_mode %}data-design-mode{% endif %}
 >
-  <div class="bf-offer__banner">{{ block.settings.heading | default: 'BLACK FRIDAY SPECIAL' | escape }}</div>
-  <div class="bf-offer__body">
-    {%- if units_text != blank -%}
-      <span class="bf-offer__sr">{{ units_text | escape }}</span>
-      <span class="bf-offer__units" aria-hidden="true">{{ units_text | escape }}</span>
-    {%- endif -%}
-    <p class="bf-offer__sale">{{ sale_text | escape }}</p>
-    <div class="bf-offer__deal">
-      {%- if compare_text != blank -%}
-        <span class="bf-offer__compare">{{ compare_text | escape }}</span>
-      {%- endif -%}
-      {%- if units_text != blank -%}
-        <span class="bf-offer__units-inline" aria-hidden="true">{{ units_text | escape }}</span>
-      {%- endif -%}
-      {%- if compare_text != blank and off_text != blank -%}
-        <span class="bf-offer__vdiv" aria-hidden="true"></span>
-      {%- endif -%}
-      {%- if off_text != blank -%}
-        <span class="bf-offer__off">{{ off_text | escape }}</span>
-      {%- endif -%}
-    </div>
-    <div class="bf-offer__timer" role="timer">
-      <span class="bf-offer__ends">{{ ends_label | escape }} :</span>
-      <span class="bf-offer__clock">
-        <span class="bf-offer__box" data-unit="hours">00</span>
-        <span class="bf-offer__colon" aria-hidden="true">:</span>
-        <span class="bf-offer__box" data-unit="minutes">00</span>
-        <span class="bf-offer__colon" aria-hidden="true">:</span>
-        <span class="bf-offer__box" data-unit="seconds">00</span>
-      </span>
-    </div>
+  {%- if image_pc != blank and image_h5 != blank -%}
+    <img
+      class="bf-offer__img bf-offer__img--h5"
+      src="{{ image_h5 | image_url: width: 1200 }}"
+      alt="{{ image_alt | escape }}"
+      width="{{ image_h5.width }}"
+      height="{{ image_h5.height }}"
+      loading="lazy"
+    >
+    <img
+      class="bf-offer__img bf-offer__img--pc"
+      src="{{ image_pc | image_url: width: 1600 }}"
+      alt="{{ image_alt | escape }}"
+      width="{{ image_pc.width }}"
+      height="{{ image_pc.height }}"
+      loading="lazy"
+    >
+  {%- elsif image_single != blank -%}
+    <img
+      class="bf-offer__img"
+      src="{{ image_single | image_url: width: 1600 }}"
+      alt="{{ image_alt | escape }}"
+      width="{{ image_single.width }}"
+      height="{{ image_single.height }}"
+      loading="lazy"
+    >
+  {%- else -%}
+    <div class="bf-offer__empty">{%- if request.design_mode -%}上传 PC 图片和 H5 图片{%- endif -%}</div>
+  {%- endif -%}
+
+  <div class="bf-offer__timer" role="timer">
+    <span class="bf-offer__clock">
+      <span class="bf-offer__box" data-unit="hours">00</span>
+      <span class="bf-offer__colon" aria-hidden="true">:</span>
+      <span class="bf-offer__box" data-unit="minutes">00</span>
+      <span class="bf-offer__colon" aria-hidden="true">:</span>
+      <span class="bf-offer__box" data-unit="seconds">00</span>
+    </span>
   </div>
 </bf-offer-countdown>
 

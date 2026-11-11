@@ -76,16 +76,18 @@
     }
 
     #shopify-section-{{ section.id }} .ifi-card {
-      width: 320px;
+      width: min(320px, calc(100vw - 48px));
       display: flex;
       flex-direction: column;
       gap: 16px;
       scroll-snap-align: start;
+      flex-shrink: 0;
     }
 
     #shopify-section-{{ section.id }} .ifi-card-img-wrapper {
-      width: 320px;
-      height: 320px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      height: auto;
       position: relative;
       flex-shrink: 0;
     }
@@ -155,6 +157,7 @@
         margin: 0 auto 32px;
         max-width: 1400px;
         width: 100%;
+        flex-shrink: 0;
       }
 
       #shopify-section-{{ section.id }} .ifi-label {
@@ -177,6 +180,7 @@
         max-width: 1400px;
         margin: 0 auto;
         gap: 80px;
+        flex-shrink: 0;
       }
 
       #shopify-section-{{ section.id }} .ifi-pc-left {
@@ -185,7 +189,8 @@
         gap: 48px;
         justify-content: center;
         align-self: stretch;
-        flex: 1;
+        flex: 1 1 auto;
+        min-height: max-content;
       }
 
       #shopify-section-{{ section.id }} .ifi-accordion-item {
@@ -194,6 +199,7 @@
         align-items: flex-start;
         cursor: pointer;
         padding: 12px 0;
+        flex-shrink: 0;
       }
 
       #shopify-section-{{ section.id }} .ifi-accordion-line-wrapper {
@@ -243,6 +249,7 @@
         display: grid;
         grid-template-rows: 0fr;
         transition: grid-template-rows 0.4s ease;
+        flex-shrink: 0;
       }
 
       #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-desc-wrapper {
@@ -263,12 +270,13 @@
       #shopify-section-{{ section.id }} .ifi-accordion-item.is-active .ifi-accordion-desc {
         opacity: 1;
         padding-top: 24px;
+        overflow: visible;
         transition: opacity 0.4s ease 0.1s, padding-top 0.4s ease;
       }
 
       #shopify-section-{{ section.id }} .ifi-pc-right {
-        flex: 0 0 clamp(280px, 30vw, 420px);
-        width: clamp(280px, 30vw, 420px);
+        flex: 0 0 auto;
+        width: min(clamp(140px, 30vw, 420px), var(--ifi-img-max, 420px));
         aspect-ratio: 1 / 1;
         height: auto;
         background-color: #f5f5f5;
@@ -291,6 +299,44 @@
       #shopify-section-{{ section.id }} .ifi-pc-img.is-active {
         opacity: 1;
         z-index: 1;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container.is-compact {
+        padding: 12px 40px;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container.is-compact .ifi-header {
+        gap: 4px;
+        margin-bottom: 8px;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container.is-compact .ifi-title {
+        font-size: 24px;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container.is-compact .ifi-pc-layout {
+        gap: 32px;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container.is-compact .ifi-pc-left {
+        gap: 8px;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container.is-compact .ifi-accordion-item {
+        padding: 2px 0;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container.is-compact .ifi-accordion-title {
+        font-size: 18px;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container.is-compact .ifi-accordion-desc {
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      #shopify-section-{{ section.id }} .ifi-container.is-compact .ifi-accordion-item.is-active .ifi-accordion-desc {
+        padding-top: 6px;
       }
     }
   </style>
@@ -444,18 +490,88 @@
         return { headerH: headerH, navH: navH, barH: barH };
       }
 
+      function descExtraHeight() {
+        var col = container.querySelector('.ifi-accordion-content');
+        var width = col ? col.clientWidth : 0;
+        if (!width) return 0;
+        var open = container.querySelector('.ifi-accordion-item.is-active .ifi-accordion-desc');
+        var openBody = 0;
+        if (open) {
+          var openStyle = getComputedStyle(open);
+          openBody = open.scrollHeight - parseFloat(openStyle.paddingTop) - parseFloat(openStyle.paddingBottom);
+        }
+        var maxBody = openBody;
+        container.querySelectorAll('.ifi-accordion-desc').forEach(function (el) {
+          if (el === open) return;
+          var clone = el.cloneNode(true);
+          clone.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;height:auto;width:' + width + 'px;padding:0;margin:0;overflow:visible;';
+          container.appendChild(clone);
+          maxBody = Math.max(maxBody, clone.offsetHeight);
+          clone.remove();
+        });
+        return Math.max(0, maxBody - openBody);
+      }
+
+      function layoutMetrics() {
+        var header = container.querySelector('.ifi-header');
+        var layout = container.querySelector('.ifi-pc-layout');
+        var cs = getComputedStyle(container);
+        var pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+        var headerBlock = 0;
+        if (header) {
+          headerBlock = header.offsetHeight + parseFloat(getComputedStyle(header).marginBottom);
+        }
+        var row = layout ? layout.offsetHeight : 0;
+        return {
+          pad: pad,
+          headerBlock: headerBlock,
+          row: row,
+          used: pad + headerBlock + row + descExtraHeight(),
+          room: container.clientHeight - pad - headerBlock
+        };
+      }
+
+      function contentOverflows() {
+        return layoutMetrics().used > container.clientHeight - 4;
+      }
+
+      function fitToViewport() {
+        var layout = container.querySelector('.ifi-pc-layout');
+        container.classList.remove('is-compact');
+        container.style.removeProperty('--ifi-img-max');
+        if (layout) layout.style.transform = '';
+        if (window.innerWidth < 1000) return;
+        if (contentOverflows()) container.classList.add('is-compact');
+        if (contentOverflows()) {
+          var room = layoutMetrics().room;
+          var cap = Math.max(100, Math.min(420, Math.floor(room)));
+          container.style.setProperty('--ifi-img-max', cap + 'px');
+        }
+        if (!layout || !contentOverflows()) return;
+        var metrics = layoutMetrics();
+        var needed = metrics.used - metrics.pad - metrics.headerBlock;
+        if (metrics.room > 0 && needed > metrics.room) {
+          var scale = Math.max(0.72, (metrics.room - 4) / needed);
+          layout.style.transformOrigin = 'center top';
+          layout.style.transform = 'scale(' + scale + ')';
+        }
+      }
+
       function updateStickyLayout() {
         if (window.innerWidth < 1000) {
           container.style.height = '';
           container.style.minHeight = '';
           container.style.top = '';
+          fitToViewport();
           return;
         }
         var o = getOffsets();
         var available = window.innerHeight - o.headerH - o.navH - o.barH;
+        if (available < 80) available = 80;
         container.style.height = available + 'px';
         container.style.minHeight = available + 'px';
         container.style.top = (o.headerH + o.navH) + 'px';
+        fitToViewport();
       }
 
       function setActive(index) {
@@ -468,7 +584,11 @@
       }
 
       window.addEventListener('resize', updateStickyLayout);
+      window.addEventListener('load', updateStickyLayout);
       updateStickyLayout();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(updateStickyLayout);
+      }
 
       window.addEventListener('scroll', function () {
         if (window.innerWidth < 1000 || isClicking) return;

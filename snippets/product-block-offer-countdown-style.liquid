@@ -1,188 +1,72 @@
 <style>
   #bf-offer-{{ block.id }} {
-    --bf-banner-bg: {{ block.settings.heading_background | default: '#ebd491' }};
-    --bf-banner-color: {{ block.settings.heading_color | default: '#111111' }};
-    --bf-body-bg: {{ block.settings.body_background | default: '#000000' }};
-    --bf-sale-start: {{ block.settings.sale_color_start | default: '#ffffff' }};
-    --bf-sale-end: {{ block.settings.sale_color_end | default: '#e3c27a' }};
-    --bf-compare: {{ block.settings.compare_color | default: '#a1a1a1' }};
-    --bf-discount: {{ block.settings.discount_color | default: '#ffffff' }};
-    --bf-units: {{ block.settings.units_color | default: '#f6edd4' }};
-    --bf-ends: {{ block.settings.ends_color | default: '#ffffff' }};
-    --bf-divider: {{ block.settings.divider_color | default: '#ffffff' }};
     --bf-timer-start: {{ block.settings.timer_background_start | default: '#ffffff' }};
     --bf-timer-end: {{ block.settings.timer_background_end | default: '#e6c98a' }};
     --bf-timer-color: {{ block.settings.timer_color | default: '#111111' }};
     --bf-colon: {{ block.settings.colon_color | default: '#ffffff' }};
+    --bf-x: {{ block.settings.timer_x_h5 | default: 4 }}%;
+    --bf-y: {{ block.settings.timer_y_h5 | default: 72 }}%;
+    --bf-size: {{ block.settings.timer_size_h5 | default: 15 }}px;
     position: relative;
     display: block;
     width: 100%;
     max-width: 100%;
-    background: var(--bf-body-bg);
-    color: var(--bf-ends);
-    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
     line-height: 1;
-    overflow: hidden;
   }
-  #bf-offer-{{ block.id }} .bf-offer__banner {
-    margin: 0;
-    padding: 8px 10px;
-    background: var(--bf-banner-bg);
-    color: var(--bf-banner-color);
-    text-align: center;
-    font-size: clamp(16px, 5.8cqi, 32px);
-    font-weight: 900;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+  #bf-offer-{{ block.id }} .bf-offer__img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
-  #bf-offer-{{ block.id }} .bf-offer__body {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    grid-template-areas: "sale deal" "timer timer";
-    gap: 8px 10px;
-    align-items: center;
-    padding: 10px 12px 12px;
-  }
-  #bf-offer-{{ block.id }} .bf-offer__sr {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-  }
-  #bf-offer-{{ block.id }} .bf-offer__units { display: none; }
-  #bf-offer-{{ block.id }} .bf-offer__sale {
-    grid-area: sale;
-    margin: 0;
-    font-size: clamp(48px, 16.5cqi, 72px);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 0.84;
-    background: linear-gradient(180deg, var(--bf-sale-start) 0%, color-mix(in srgb, var(--bf-sale-start) 55%, var(--bf-sale-end)) 46%, var(--bf-sale-end) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-  #bf-offer-{{ block.id }} .bf-offer__deal {
-    grid-area: deal;
+  #bf-offer-{{ block.id }} .bf-offer__img--pc { display: none; }
+  #bf-offer-{{ block.id }} .bf-offer__empty {
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    column-gap: 8px;
-    min-width: 0;
-  }
-  #bf-offer-{{ block.id }} .bf-offer__compare {
-    color: var(--bf-compare);
-    font-size: 18px;
-    font-weight: 700;
-    text-decoration: line-through;
-  }
-  #bf-offer-{{ block.id }} .bf-offer__units-inline {
-    color: var(--bf-units);
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    padding: 48px 16px 16px;
+    background: #111111;
+    color: #f6edd4;
     font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-  }
-  #bf-offer-{{ block.id }} .bf-offer__vdiv { display: none; }
-  #bf-offer-{{ block.id }} .bf-offer__off {
-    flex: 1 0 100%;
-    color: var(--bf-discount);
-    font-size: clamp(20px, 7.2cqi, 32px);
-    white-space: nowrap;
-    font-weight: 900;
-    letter-spacing: 0.01em;
+    text-align: center;
   }
   #bf-offer-{{ block.id }} .bf-offer__timer {
-    grid-area: timer;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    border-top: 1px solid color-mix(in srgb, var(--bf-divider) 45%, transparent);
-    padding-top: 8px;
-  }
-  #bf-offer-{{ block.id }} .bf-offer__ends {
-    color: var(--bf-ends);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
+    position: absolute;
+    left: var(--bf-x);
+    top: var(--bf-y);
+    z-index: 1;
   }
   #bf-offer-{{ block.id }} .bf-offer__clock {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 0.25em;
+    font-size: var(--bf-size);
   }
   #bf-offer-{{ block.id }} .bf-offer__box {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 34px;
-    height: 30px;
-    padding: 0 6px;
-    border-radius: 8px;
+    min-width: 2.15em;
+    height: 1.9em;
+    padding: 0 0.35em;
+    border-radius: 0.4em;
     background: linear-gradient(180deg, var(--bf-timer-start) 0%, color-mix(in srgb, var(--bf-timer-start) 42%, var(--bf-timer-end)) 58%, var(--bf-timer-end) 100%);
     color: var(--bf-timer-color);
-    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: 800;
     font-variant-numeric: tabular-nums;
   }
   #bf-offer-{{ block.id }} .bf-offer__colon {
     color: var(--bf-colon);
-    font-size: 16px;
     font-weight: 700;
   }
   @media screen and (min-width: 1000px) {
-    #bf-offer-{{ block.id }} { width: max-content; }
-    #bf-offer-{{ block.id }} .bf-offer__banner { font-size: 26px; padding: 10px 12px; }
-    #bf-offer-{{ block.id }} .bf-offer__body {
-      grid-template-columns: auto auto max-content;
-      grid-template-areas: "units sale deal" "units sale timer";
-      justify-content: start;
-      width: max-content;
-      column-gap: 12px;
-      row-gap: 4px;
-      padding: 8px 14px 10px;
+    #bf-offer-{{ block.id }} {
+      --bf-x: {{ block.settings.timer_x_pc | default: 46 }}%;
+      --bf-y: {{ block.settings.timer_y_pc | default: 58 }}%;
+      --bf-size: {{ block.settings.timer_size_pc | default: 14 }}px;
     }
-    #bf-offer-{{ block.id }} .bf-offer__units {
-      display: flex;
-      grid-area: units;
-      align-items: center;
-      justify-content: center;
-      align-self: stretch;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      color: var(--bf-units);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-    }
-    #bf-offer-{{ block.id }} .bf-offer__sale { font-size: 64px; }
-    #bf-offer-{{ block.id }} .bf-offer__deal {
-      flex-wrap: nowrap;
-      align-items: center;
-      justify-content: flex-start;
-      width: auto;
-    }
-    #bf-offer-{{ block.id }} .bf-offer__units-inline { display: none; }
-    #bf-offer-{{ block.id }} .bf-offer__vdiv {
-      display: block;
-      width: 1px;
-      height: 22px;
-      background: var(--bf-divider);
-    }
-    #bf-offer-{{ block.id }} .bf-offer__off { flex: 0 0 auto; font-size: 28px; }
-    #bf-offer-{{ block.id }} .bf-offer__compare { font-size: 20px; }
-    #bf-offer-{{ block.id }} .bf-offer__timer {
-      border-top: 0;
-      padding-top: 0;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      width: auto;
-    }
-    #bf-offer-{{ block.id }} .bf-offer__ends { font-size: 11px; }
-    #bf-offer-{{ block.id }} .bf-offer__box { min-width: 32px; height: 26px; border-radius: 4px; font-size: 14px; }
+    #bf-offer-{{ block.id }} .bf-offer__img--h5 { display: none; }
+    #bf-offer-{{ block.id }} .bf-offer__img--pc { display: block; }
   }
 </style>
