@@ -152,6 +152,7 @@
         },
         "offer_countdown_H9XrFm": {
           "type": "offer_countdown",
+          "disabled": true,
           "settings": {
             "image_pc": "shopify://shop_images/PC_1260_360.jpg",
             "image_h5": "shopify://shop_images/686x320.jpg",
