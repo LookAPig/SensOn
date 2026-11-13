@@ -25,46 +25,16 @@
     background: #000000 !important;
     color: #FFFFFF !important;
     border: 1px solid #E5C77A !important;
-    border-radius: 8px !important;
-    overflow: hidden !important;
-  }
-
-  .product-info__block-item[data-block-type="countdown"] .product-countdown-discount-percentage {
-    display: flex !important;
-    width: 100% !important;
-    align-items: stretch !important;
-    gap: 0 !important;
-    border-radius: 0 !important;
-    overflow: hidden !important;
   }
 
   .product-info__block-item[data-block-type="countdown"] .discount-percentage {
-    flex: 0 0 40% !important;
-    width: 40% !important;
-    max-width: 40% !important;
-    min-width: 0 !important;
     background: #E9D18E !important;
     color: #000000 !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
   }
 
   .product-info__block-item[data-block-type="countdown"] .product-countdown__text {
-    flex: 1 1 60% !important;
-    width: 60% !important;
-    min-width: 0 !important;
-    margin: 0 !important;
     background: #000000 !important;
     color: #FFFFFF !important;
-    border-radius: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
   }
 </style>
 
@@ -385,7 +355,7 @@
                     render 'checkbox', label: block.settings.label, name: name, form: product_form_id, value: block.settings.checkbox_value, required: block.settings.required
                   elsif block.settings.type == 'dropdown' and block.settings.select_values != blank
                     assign option_values = block.settings.select_values | split: ','
-                    render 'select', label: block.settings.label, show_label_as_block: true, option_values: option_values, show_empty_value: true, name: name, alignment: alignment, form: product_form_id, required: block.settings.required
+                    render 'select', label: block.settings.label, show_empty_value: true, option_values: option_values, name: name, alignment: alignment, form: product_form_id, required: block.settings.required
                   endif
                 -%}
               </div>
