@@ -1,3 +1,4 @@
+
 {%- comment -%}
   ----------------------------------------------------------------------------------------------------------------------
   PRODUCT INFO
@@ -18,6 +19,52 @@
 {%- endcomment -%}
 
 {%- assign alignment = content_alignment | replace: 'left', 'start' | replace: 'right', 'end' | default: 'start' -%}
+
+<style>
+  .product-info__block-item[data-block-type="countdown"] .product-countdown {
+    width: 100% !important;
+    max-width: 608px !important;
+    background: #000000 !important;
+    color: #FFFFFF !important;
+    border: 1px solid #E5C77A !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+  }
+
+  .product-info__block-item[data-block-type="countdown"] .product-countdown-discount-percentage {
+    display: flex !important;
+    width: 100% !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+  }
+
+  .product-info__block-item[data-block-type="countdown"] .discount-percentage {
+    flex: 0 0 38% !important;
+    width: 38% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    background: #E9D18E !important;
+    color: #000000 !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .product-info__block-item[data-block-type="countdown"] .product-countdown__text {
+    flex: 1 1 62% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    background: #000000 !important;
+    color: #FFFFFF !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+</style>
 
 <safe-sticky class="product-info text-{{ alignment }}">
   <div class="product-info__block-list">
@@ -218,7 +265,7 @@
                   block_selector_style: block.settings.block_selector_style,
                   variant_image_options: block.settings.variant_image_options,
                   size_chart_page: block.settings.size_chart_page 
-                -%}
+              -%}
             {%- endif -%}
 
           {%- when 'product_variations' -%}
@@ -613,7 +660,7 @@
             <share-button>
               <button class="h-stack gap-2 justify-{{ alignment }} share-buttons--native" hidden>
                 <span class="subheading">{{- 'general.social.share' | t -}}</span>
-                {%- render 'icon' with 'share' -%}
+                {%- render 'icon' with 'big-arrow-left', width: 9, direction_aware: true -%}
               </button>
 
               <div class="h-stack gap-6 justify-{{ alignment }}">
@@ -630,7 +677,7 @@
       {%- endif -%}
 
       {%- liquid
-        assign block_types_allowing_partial_rerender = 'sku,badges,price,payment_terms,volume_pricing,variant_picker,inventory,buy_buttons,pickup_availability,liquid,offer_countdown' | split: ','
+        assign block_types_allowing_partial_rerender = 'sku,badges,price,payment_terms,volume_pricing,variant_picker,inventory,buy_buttons,pickup-availability,liquid,offer_countdown' | split: ','
         assign allow_partial_rerender = false
 
         if block_types_allowing_partial_rerender contains block.type
