@@ -1,4 +1,3 @@
-
 {%- comment -%}
   ----------------------------------------------------------------------------------------------------------------------
   PRODUCT INFO
@@ -19,24 +18,6 @@
 {%- endcomment -%}
 
 {%- assign alignment = content_alignment | replace: 'left', 'start' | replace: 'right', 'end' | default: 'start' -%}
-
-<style>
-  .product-info__block-item[data-block-type="countdown"] .product-countdown {
-    background: #000000 !important;
-    color: #FFFFFF !important;
-    border: 1px solid #E5C77A !important;
-  }
-
-  .product-info__block-item[data-block-type="countdown"] .discount-percentage {
-    background: #E9D18E !important;
-    color: #000000 !important;
-  }
-
-  .product-info__block-item[data-block-type="countdown"] .product-countdown__text {
-    background: #000000 !important;
-    color: #FFFFFF !important;
-  }
-</style>
 
 <safe-sticky class="product-info text-{{ alignment }}">
   <div class="product-info__block-list">
@@ -237,7 +218,7 @@
                   block_selector_style: block.settings.block_selector_style,
                   variant_image_options: block.settings.variant_image_options,
                   size_chart_page: block.settings.size_chart_page 
-              -%}
+                -%}
             {%- endif -%}
 
           {%- when 'product_variations' -%}
@@ -355,7 +336,7 @@
                     render 'checkbox', label: block.settings.label, name: name, form: product_form_id, value: block.settings.checkbox_value, required: block.settings.required
                   elsif block.settings.type == 'dropdown' and block.settings.select_values != blank
                     assign option_values = block.settings.select_values | split: ','
-                    render 'select', label: block.settings.label, show_empty_value: true, option_values: option_values, name: name, alignment: alignment, form: product_form_id, required: block.settings.required
+                    render 'select', label: block.settings.label, show_label_as_block: true, option_values: option_values, show_empty_value: true, name: name, alignment: alignment, form: product_form_id, required: block.settings.required
                   endif
                 -%}
               </div>
@@ -632,7 +613,7 @@
             <share-button>
               <button class="h-stack gap-2 justify-{{ alignment }} share-buttons--native" hidden>
                 <span class="subheading">{{- 'general.social.share' | t -}}</span>
-                {%- render 'icon' with 'big-arrow-left', width: 9, direction_aware: true -%}
+                {%- render 'icon' with 'share' -%}
               </button>
 
               <div class="h-stack gap-6 justify-{{ alignment }}">
