@@ -59,12 +59,13 @@
     },
     "early-access-dialog": {
       "type": "early-access-dialog",
+      "disabled": true,
       "settings": {
         "enabled": true,
         "delay": 4,
         "cooldown_days": 1,
         "show_only_on_index": false,
-        "preview_state": "subscribe",
+        "preview_state": "success",
         "close_label": "Close",
         "eyebrow": "Black Friday Early Access",
         "title": "Get Black Friday early access",
