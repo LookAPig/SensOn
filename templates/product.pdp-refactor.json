@@ -153,8 +153,8 @@
         "offer_countdown_H9XrFm": {
           "type": "offer_countdown",
           "settings": {
-            "image_pc": "shopify://shop_images/h5-686x480_ae03f2cd-3a17-4c35-bd69-d1e310661aee.jpg",
-            "image_h5": "shopify://shop_images/pc-720x1000.jpg",
+            "image_pc": "shopify://shop_images/PC_1260_360.jpg",
+            "image_h5": "shopify://shop_images/686x320.jpg",
             "image_alt": "",
             "expiration_date": "2026-11-11 00:00:00",
             "expiration_behavior": "hide",
