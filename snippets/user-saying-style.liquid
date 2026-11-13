@@ -1,0 +1,60 @@
+<style>
+  #creators-saying-{{ section_id }} { --cs-pink: #f15cce; --cs-tag: #fde7f8; --cs-card: #fbe6f8; background: #fff; width: 100%; overflow: hidden; }
+  #creators-saying-{{ section_id }} * { box-sizing: border-box; }
+  #creators-saying-{{ section_id }} .cs-container { width: 100%; margin: 0 auto; padding: 28px 16px 36px; }
+  #creators-saying-{{ section_id }} .cs-title { margin: 0 0 12px; color: #000; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; text-align: left; }
+  #creators-saying-{{ section_id }} .cs-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start; margin: 0 0 16px; }
+  #creators-saying-{{ section_id }} .cs-tag { display: inline-flex; align-items: center; background: var(--cs-tag); color: var(--cs-pink); border-radius: 999px; padding: 5px 10px; font-size: 14px; font-weight: 500; line-height: 1.2; }
+  #creators-saying-{{ section_id }} .creators-saying-swiper { width: 100%; overflow: hidden; }
+  #creators-saying-{{ section_id }} .swiper-slide { display: flex; height: auto; }
+  #creators-saying-{{ section_id }} .cs-card { display: flex; flex-direction: column; width: 100%; height: 100%; margin: 0; overflow: hidden; border-radius: 16px; background: var(--cs-card); }
+  #creators-saying-{{ section_id }} .cs-video { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 0; background: #000; }
+  #creators-saying-{{ section_id }} .cs-video--portrait { aspect-ratio: 3 / 4; }
+  #creators-saying-{{ section_id }} .cs-video-poster,
+  #creators-saying-{{ section_id }} .cs-video-host { position: absolute; inset: 0; }
+  #creators-saying-{{ section_id }} .cs-video-poster { z-index: 2; cursor: pointer; }
+  #creators-saying-{{ section_id }} .cs-video-host { z-index: 1; }
+  #creators-saying-{{ section_id }} .cs-video-poster img,
+  #creators-saying-{{ section_id }} .cs-video-host video { display: block; width: 100%; height: 100%; margin: 0; object-fit: cover; }
+  #creators-saying-{{ section_id }} .cs-video-host video:fullscreen,
+  #creators-saying-{{ section_id }} .cs-video-host video:-webkit-full-screen { object-fit: contain; background: #000; }
+  #creators-saying-{{ section_id }} .cs-video.is-playing .cs-video-poster { display: none; }
+  #creators-saying-{{ section_id }} .cs-video.is-playing .cs-video-host { z-index: 2; }
+  #creators-saying-{{ section_id }} .cs-play { position: absolute; top: 50%; left: 50%; z-index: 3; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin: 0; padding: 0; border: 0; border-radius: 50%; background: rgba(0, 0, 0, 0.35); color: #fff; cursor: pointer; transform: translate(-50%, -50%); }
+  #creators-saying-{{ section_id }} .cs-play svg { display: block; margin-left: 2px; }
+  #creators-saying-{{ section_id }} .cs-play:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  #creators-saying-{{ section_id }} .cs-card-body { display: flex; flex: 1 1 auto; flex-direction: column; gap: 12px; margin: 0; padding: 14px; border-radius: 0; background: var(--cs-card); }
+  #creators-saying-{{ section_id }} .cs-profile { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; }
+  #creators-saying-{{ section_id }} .cs-avatar { flex: 0 0 auto; width: 44px; height: 44px; overflow: hidden; border-radius: 50%; }
+  #creators-saying-{{ section_id }} .cs-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  #creators-saying-{{ section_id }} .cs-profile-info { min-width: 0; flex: 1; }
+  #creators-saying-{{ section_id }} .cs-name { margin: 0; color: #000; font-size: 14px; font-weight: 700; line-height: 1.25; }
+  #creators-saying-{{ section_id }} .cs-desc { margin: 2px 0 0; color: #222; font-size: 12px; font-weight: 400; line-height: 1.35; }
+  #creators-saying-{{ section_id }} .cs-quote { margin: 0; color: #111; font-size: 13px; font-weight: 400; line-height: 1.45; }
+  #creators-saying-{{ section_id }} .cs-quote p { margin: 0; }
+  #creators-saying-{{ section_id }} .cs-nav { display: none; }
+  #creators-saying-{{ section_id }} .cs-more-wrap { display: flex; justify-content: flex-start; margin-top: 20px; }
+  #creators-saying-{{ section_id }} .cs-more { display: inline-flex; align-items: center; justify-content: center; width: 314px; height: 37px; padding: 0; border-radius: 999px; background: #f287ec; color: #000; font-size: 18px; font-weight: 600; line-height: 1; text-decoration: none; }
+  #creators-saying-{{ section_id }} a.cs-more:hover { filter: brightness(0.96); }
+
+  @media (min-width: 1000px) {
+    #creators-saying-{{ section_id }} .cs-container { width: min(100% - 48px, var(--cs-max-width, 1160px)); padding: 72px 0 80px; }
+    #creators-saying-{{ section_id }}.is-full .cs-container { width: 100%; max-width: none; padding: 72px 100px 80px; }
+    #creators-saying-{{ section_id }} .cs-title { margin-bottom: 16px; font-size: 40px; text-align: center; }
+    #creators-saying-{{ section_id }} .cs-tags { gap: 10px; justify-content: center; margin-bottom: 28px; }
+    #creators-saying-{{ section_id }} .cs-tag { padding: 8px 14px; font-size: 28px; }
+    #creators-saying-{{ section_id }} .cs-card-body { gap: 14px; padding: 16px; }
+    #creators-saying-{{ section_id }} .cs-avatar { width: 48px; height: 48px; }
+    #creators-saying-{{ section_id }} .cs-name { font-size: 16px; }
+    #creators-saying-{{ section_id }} .cs-desc { font-size: 13px; }
+    #creators-saying-{{ section_id }} .cs-quote { font-size: 14px; }
+    #creators-saying-{{ section_id }} .cs-swiper-wrap { position: relative; }
+    #creators-saying-{{ section_id }} .cs-nav { position: absolute; top: 50%; z-index: 5; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #111; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16); cursor: pointer; transform: translateY(-50%); }
+    #creators-saying-{{ section_id }} .cs-nav--prev { left: -22px; }
+    #creators-saying-{{ section_id }} .cs-nav--next { right: -22px; }
+    #creators-saying-{{ section_id }} .cs-nav.is-disabled { opacity: 0.35; cursor: default; }
+    #creators-saying-{{ section_id }} .cs-nav:hover:not(.is-disabled) { background: #f7f7f7; }
+    #creators-saying-{{ section_id }} .cs-more-wrap { justify-content: center; margin-top: 36px; }
+    #creators-saying-{{ section_id }} .cs-more { width: 381px; height: 49px; font-size: 24px; }
+  }
+</style>

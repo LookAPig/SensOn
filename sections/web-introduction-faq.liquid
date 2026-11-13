@@ -50,7 +50,6 @@
   }
 
   #shopify-section-{{ section.id }} .web_intro_faq .faq_list {
-    border-top: 1px solid var(--line);
     margin-top: 32px;
   }
 
@@ -176,7 +175,6 @@
     }
 
     #shopify-section-{{ section.id }} .web_intro_faq .faq_list {
-      border-top: 0;
       margin-top: 0;
     }
 
@@ -215,10 +213,10 @@
     <div class="layout">
       <div class="intro">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          <p class="eyebrow">{{ section.settings.eyebrow | escape | newline_to_br }}</p>
         {%- endif -%}
         {%- if section.settings.title != blank -%}
-          <h2 class="section_title">{{ section.settings.title | escape }}</h2>
+          <h2 class="section_title">{{ section.settings.title | escape | newline_to_br }}</h2>
         {%- endif -%}
         {%- if section.settings.description != blank -%}
           <div class="section_description">{{ section.settings.description }}</div>
@@ -304,13 +302,13 @@
   "max_blocks": 12,
   "settings": [
     {
-      "type": "text",
+      "type": "textarea",
       "id": "eyebrow",
       "label": "眉题",
       "default": "Questiona,Answered"
     },
     {
-      "type": "text",
+      "type": "textarea",
       "id": "title",
       "label": "标题",
       "default": "Before you begin."

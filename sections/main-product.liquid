@@ -2362,6 +2362,156 @@
   ]
 },
     {
+      "type": "offer_countdown",
+      "name": "促销倒计时",
+      "settings": [
+        {
+          "type": "header",
+          "content": "图片"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_pc",
+          "label": "PC 图片",
+          "info": "除倒计时数字外的整张视觉。未上传时使用 H5 图片。"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_h5",
+          "label": "H5 图片",
+          "info": "手机端图片。未上传时使用 PC 图片。图片里预留数字位置。"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "图片替代文字"
+        },
+        {
+          "type": "header",
+          "content": "结束时间"
+        },
+        {
+          "type": "text",
+          "id": "expiration_date",
+          "label": "结束时间",
+          "placeholder": "2026-12-31 23:59",
+          "info": "格式 YYYY-MM-DD HH:MM，按店铺时区。倒计时显示剩余时、分、秒。"
+        },
+        {
+          "type": "select",
+          "id": "expiration_behavior",
+          "label": "结束后",
+          "options": [
+            {
+              "value": "hide",
+              "label": "隐藏组件"
+            },
+            {
+              "value": "leave",
+              "label": "停在 00:00:00"
+            }
+          ],
+          "default": "hide"
+        },
+        {
+          "type": "header",
+          "content": "倒计时位置"
+        },
+        {
+          "type": "range",
+          "id": "timer_x_h5",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "H5 距右侧",
+          "info": "0 为贴齐右边缘，数值越大越往左。",
+          "default": 4
+        },
+        {
+          "type": "range",
+          "id": "timer_y_h5",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "H5 距底部",
+          "info": "0 为贴齐下边缘，数值越大越往上。",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "timer_size_h5",
+          "min": 10,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "label": "H5 数字大小",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "timer_x_pc",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "PC 距右侧",
+          "info": "0 为贴齐右边缘，数值越大越往左。",
+          "default": 4
+        },
+        {
+          "type": "range",
+          "id": "timer_y_pc",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "PC 距底部",
+          "info": "0 为贴齐下边缘，数值越大越往上。",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "timer_size_pc",
+          "min": 10,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "label": "PC 数字大小",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "倒计时颜色"
+        },
+        {
+          "type": "color",
+          "id": "timer_background_start",
+          "label": "倒计时背景起始",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "timer_background_end",
+          "label": "倒计时背景结束",
+          "default": "#e6c98a"
+        },
+        {
+          "type": "color",
+          "id": "timer_color",
+          "label": "倒计时数字",
+          "default": "#111111"
+        },
+        {
+          "type": "color",
+          "id": "colon_color",
+          "label": "倒计时冒号",
+          "default": "#ffffff"
+        }
+      ]
+    },
+    {
       "type": "share_buttons",
       "name": "t:sections.main_product.blocks.share_buttons.name",
       "settings": [

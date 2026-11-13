@@ -1,0 +1,156 @@
+<script>
+  (function () {
+    var root = document.getElementById('creators-saying-{{ section_id }}');
+    if (!root || root.dataset.csBound === '1') return;
+    root.dataset.csBound = '1';
+
+    var slideCount = {{ slide_count | json }};
+
+    function isVideoFullscreen(video) {
+      return document.fullscreenElement === video
+        || document.webkitFullscreenElement === video
+        || video.webkitDisplayingFullscreen === true;
+    }
+
+    function restorePoster(wrap, video) {
+      video.pause();
+      video.controls = false;
+      video.playsInline = true;
+      wrap.classList.remove('is-playing');
+    }
+
+    function pauseAll() {
+      root.querySelectorAll('.cs-video video').forEach(function (video) {
+        var wrap = video.closest('[data-cs-inline-video]');
+        if (!wrap) {
+          video.pause();
+          return;
+        }
+        restorePoster(wrap, video);
+      });
+    }
+
+    function openFullscreen(video) {
+      if (typeof video.webkitEnterFullscreen === 'function') {
+        try {
+          video.webkitEnterFullscreen();
+          return;
+        } catch (error) {}
+      }
+      var request = video.requestFullscreen || video.webkitRequestFullscreen;
+      if (!request) return;
+      try {
+        var pending = request.call(video);
+        if (pending && pending.catch) pending.catch(function () {});
+      } catch (error) {}
+    }
+
+    function bindVideos() {
+      root.querySelectorAll('[data-cs-inline-video]').forEach(function (wrap) {
+        if (wrap.dataset.csVideoBound === '1') return;
+        wrap.dataset.csVideoBound = '1';
+        var poster = wrap.querySelector('.cs-video-poster');
+        var video = wrap.querySelector('video');
+        if (!poster || !video) return;
+
+        function leaveFullscreen() {
+          if (!root.isConnected) {
+            document.removeEventListener('fullscreenchange', leaveFullscreen);
+            document.removeEventListener('webkitfullscreenchange', leaveFullscreen);
+            return;
+          }
+          if (!wrap.classList.contains('is-playing')) return;
+          if (isVideoFullscreen(video)) return;
+          restorePoster(wrap, video);
+        }
+
+        function play() {
+          if (wrap.classList.contains('is-playing')) return;
+          pauseAll();
+          wrap.classList.add('is-playing');
+          video.controls = true;
+          video.playsInline = false;
+          video.removeAttribute('playsinline');
+          video.removeAttribute('webkit-playsinline');
+          var pending = video.play();
+          openFullscreen(video);
+          if (pending && pending.then) {
+            pending.then(function () {
+              if (!isVideoFullscreen(video)) openFullscreen(video);
+            }).catch(function () {});
+          }
+        }
+
+        poster.addEventListener('click', function (event) {
+          event.preventDefault();
+          play();
+        });
+        wrap.addEventListener('keydown', function (event) {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          play();
+        });
+        document.addEventListener('fullscreenchange', leaveFullscreen);
+        document.addEventListener('webkitfullscreenchange', leaveFullscreen);
+        video.addEventListener('webkitendfullscreen', function () {
+          restorePoster(wrap, video);
+        });
+        video.addEventListener('ended', function () {
+          if (typeof video.webkitExitFullscreen === 'function' && video.webkitDisplayingFullscreen) {
+            video.webkitExitFullscreen();
+          }
+          if (document.fullscreenElement && document.exitFullscreen) {
+            document.exitFullscreen().catch(function () {});
+          }
+          restorePoster(wrap, video);
+          try { video.currentTime = 0; } catch (error) {}
+        });
+      });
+    }
+
+    function init() {
+      if (typeof Swiper === 'undefined') return false;
+      var el = root.querySelector('.creators-saying-swiper');
+      if (!el || el.swiper) return true;
+      new Swiper(el, {
+        slidesPerView: slideCount > 1 ? 1.15 : 1,
+        spaceBetween: 12,
+        speed: 450,
+        grabCursor: true,
+        watchOverflow: true,
+        navigation: {
+          prevEl: root.querySelector('.cs-nav--prev'),
+          nextEl: root.querySelector('.cs-nav--next'),
+          disabledClass: 'is-disabled'
+        },
+        breakpoints: {
+          1000: { slidesPerView: 3, spaceBetween: 20 }
+        },
+        on: { slideChange: pauseAll }
+      });
+      bindVideos();
+      return true;
+    }
+
+    function tryInit() {
+      if (init()) return;
+      var source = document.getElementById('swiper-creators-{{ section_id }}');
+      if (source) source.addEventListener('load', init);
+      setTimeout(init, 120);
+      setTimeout(init, 480);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tryInit);
+    } else {
+      tryInit();
+    }
+
+    document.addEventListener('shopify:section:load', function (event) {
+      if (!event.detail || event.detail.sectionId !== '{{ section_id }}' || !root.isConnected) return;
+      var el = root.querySelector('.creators-saying-swiper');
+      if (el && el.swiper) el.swiper.destroy(true, true);
+      tryInit();
+    });
+  })();
+</script>

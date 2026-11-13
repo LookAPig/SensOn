@@ -41,10 +41,32 @@
     endif
   endif
 
-  assign success_image = section.settings.success_image
-  if success_image == blank
-    assign success_image = section.settings.image
+  assign subscribe_desktop = section.settings.image
+  assign subscribe_mobile = section.settings.image_mobile
+  assign subscribe_has_pair = false
+  if subscribe_desktop != blank and subscribe_mobile != blank
+    assign subscribe_has_pair = true
+  elsif subscribe_desktop == blank
+    assign subscribe_desktop = subscribe_mobile
+  elsif subscribe_mobile == blank
+    assign subscribe_mobile = subscribe_desktop
   endif
+
+  assign success_desktop = section.settings.success_image
+  assign success_mobile = section.settings.success_image_mobile
+  assign success_has_pair = false
+  if success_desktop != blank and success_mobile != blank
+    assign success_has_pair = true
+  elsif success_desktop == blank and success_mobile == blank
+    assign success_desktop = subscribe_desktop
+    assign success_mobile = subscribe_mobile
+    assign success_has_pair = subscribe_has_pair
+  elsif success_desktop == blank
+    assign success_desktop = success_mobile
+  else
+    assign success_mobile = success_desktop
+  endif
+
   assign subscribe_alt = section.settings.image_alt | default: section.settings.title
   assign success_alt = section.settings.success_image_alt | default: section.settings.success_title
 -%}
@@ -138,12 +160,17 @@ html.ea-dialog-lock body {
   background: #161616;
 }
 
+.ea__media picture,
 .ea__img,
 .ea__fallback {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+.ea__media picture {
+  display: block;
 }
 
 .ea__img {
@@ -405,8 +432,13 @@ html.ea-dialog-lock body {
 
       <div class="ea__view" data-ea-view="subscribe">
         <div class="ea__media">
-          {%- if section.settings.image != blank -%}
-            {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'ea__img', widths: '343,480,720,960,1400', sizes: '(min-width: 768px) 280px, 343px', alt: subscribe_alt }}
+          {%- if subscribe_desktop != blank -%}
+            <picture>
+              {%- if subscribe_has_pair -%}
+                <source media="(max-width: 767px)" srcset="{{ subscribe_mobile | image_url: width: 343 }} 343w, {{ subscribe_mobile | image_url: width: 686 }} 686w, {{ subscribe_mobile | image_url: width: 960 }} 960w" sizes="343px">
+              {%- endif -%}
+              {{ subscribe_desktop | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'ea__img', widths: '343,480,720,960,1400', sizes: '(min-width: 768px) 280px, 343px', alt: subscribe_alt }}
+            </picture>
           {%- else -%}
             <div class="ea__fallback" aria-hidden="true"><span>BLACK<br>FRIDAY</span></div>
           {%- endif -%}
@@ -427,8 +459,13 @@ html.ea-dialog-lock body {
 
       <div class="ea__view" data-ea-view="success" hidden>
         <div class="ea__media">
-          {%- if success_image != blank -%}
-            {{ success_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'ea__img', widths: '343,480,720,960,1400', sizes: '(min-width: 768px) 280px, 343px', alt: success_alt }}
+          {%- if success_desktop != blank -%}
+            <picture>
+              {%- if success_has_pair -%}
+                <source media="(max-width: 767px)" srcset="{{ success_mobile | image_url: width: 343 }} 343w, {{ success_mobile | image_url: width: 686 }} 686w, {{ success_mobile | image_url: width: 960 }} 960w" sizes="343px">
+              {%- endif -%}
+              {{ success_desktop | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'ea__img', widths: '343,480,720,960,1400', sizes: '(min-width: 768px) 280px, 343px', alt: success_alt }}
+            </picture>
           {%- else -%}
             <div class="ea__fallback" aria-hidden="true"><span>{{ section.settings.price_text }}</span></div>
           {%- endif -%}
@@ -723,7 +760,8 @@ html.ea-dialog-lock body {
     { "type": "text", "id": "submit_error", "label": "提交失败提示", "default": "We couldn't add you just now. Please try again." },
     { "type": "text", "id": "pending_text", "label": "提交中文案", "default": "Joining..." },
     { "type": "header", "content": "订阅前图片" },
-    { "type": "image_picker", "id": "image", "label": "图片", "info": "建议 1200×1500。未上传时使用默认黑五底图。" },
+    { "type": "image_picker", "id": "image", "label": "电脑端图片", "info": "768px 及以上显示。建议 1200×1500。未上传时，若有移动端图片则两端共用。" },
+    { "type": "image_picker", "id": "image_mobile", "label": "移动端图片", "info": "767px 及以下显示。未上传时使用电脑端图片。" },
     { "type": "text", "id": "image_alt", "label": "图片替代文本", "default": "SensOn S1 Black Friday early access" },
     { "type": "header", "content": "Klaviyo" },
     { "type": "text", "id": "klaviyo_company_id", "label": "Public API Key", "info": "Klaviyo 的 6 位 Public API Key / Company ID。不要填写 Private API Key。" },
@@ -744,7 +782,8 @@ html.ea-dialog-lock body {
     { "type": "text", "id": "buy_url", "label": "$159 价格页链接", "info": "未在导航公开的 S1 页面，例如 /products/senson-s1-wellness-companion?variant=123。留空时使用下方产品。" },
     { "type": "product", "id": "product", "label": "S1 产品" },
     { "type": "text", "id": "variant_id", "label": "变体 ID", "info": "可选。会追加到购买链接，用于打开 $159 变体。" },
-    { "type": "image_picker", "id": "success_image", "label": "成功态图片", "info": "留空时沿用订阅前图片。" },
+    { "type": "image_picker", "id": "success_image", "label": "电脑端图片", "info": "订阅成功后，768px 及以上显示。留空时沿用订阅前电脑端图片。" },
+    { "type": "image_picker", "id": "success_image_mobile", "label": "移动端图片", "info": "订阅成功后，767px 及以下显示。留空时：已上传电脑端成功图则两端共用该图，否则沿用订阅前移动端图片。" },
     { "type": "text", "id": "success_image_alt", "label": "成功态图片替代文本", "default": "SensOn S1 at the $159 early-access price" }
   ],
   "presets": [{ "name": "黑五 Early Access" }]

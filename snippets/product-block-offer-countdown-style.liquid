@@ -1,0 +1,72 @@
+<style>
+  #bf-offer-{{ block.id }} {
+    --bf-timer-start: {{ block.settings.timer_background_start | default: '#ffffff' }};
+    --bf-timer-end: {{ block.settings.timer_background_end | default: '#e6c98a' }};
+    --bf-timer-color: {{ block.settings.timer_color | default: '#111111' }};
+    --bf-colon: {{ block.settings.colon_color | default: '#ffffff' }};
+    --bf-x: {{ block.settings.timer_x_h5 | default: 4 }}%;
+    --bf-y: {{ block.settings.timer_y_h5 | default: 8 }}%;
+    --bf-size: {{ block.settings.timer_size_h5 | default: 15 }}px;
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    line-height: 1;
+  }
+  #bf-offer-{{ block.id }} .bf-offer__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  #bf-offer-{{ block.id }} .bf-offer__img--pc { display: none; }
+  #bf-offer-{{ block.id }} .bf-offer__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    padding: 48px 16px 16px;
+    background: #111111;
+    color: #f6edd4;
+    font-size: 13px;
+    text-align: center;
+  }
+  #bf-offer-{{ block.id }} .bf-offer__timer {
+    position: absolute;
+    right: var(--bf-x);
+    bottom: var(--bf-y);
+    z-index: 1;
+  }
+  #bf-offer-{{ block.id }} .bf-offer__clock {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    font-size: var(--bf-size);
+  }
+  #bf-offer-{{ block.id }} .bf-offer__box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.15em;
+    height: 1.9em;
+    padding: 0 0.35em;
+    border-radius: 0.4em;
+    background: linear-gradient(180deg, var(--bf-timer-start) 0%, color-mix(in srgb, var(--bf-timer-start) 42%, var(--bf-timer-end)) 58%, var(--bf-timer-end) 100%);
+    color: var(--bf-timer-color);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+  #bf-offer-{{ block.id }} .bf-offer__colon {
+    color: var(--bf-colon);
+    font-weight: 700;
+  }
+  @media screen and (min-width: 1000px) {
+    #bf-offer-{{ block.id }} {
+      --bf-x: {{ block.settings.timer_x_pc | default: 4 }}%;
+      --bf-y: {{ block.settings.timer_y_pc | default: 8 }}%;
+      --bf-size: {{ block.settings.timer_size_pc | default: 14 }}px;
+    }
+    #bf-offer-{{ block.id }} .bf-offer__img--h5 { display: none; }
+    #bf-offer-{{ block.id }} .bf-offer__img--pc { display: block; }
+  }
+</style>
