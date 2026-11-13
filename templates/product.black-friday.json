@@ -997,6 +997,7 @@
       "blocks": {
         "yotpo_product_reviews_reviews_fjjCWN": {
           "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "disabled": true,
           "settings": {
             "product": "{{product}}"
           }
