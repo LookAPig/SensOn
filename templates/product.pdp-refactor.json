@@ -150,27 +150,6 @@
             "icon_4_text": "Body-safe materials"
           }
         },
-        "offer_countdown_H9XrFm": {
-          "type": "offer_countdown",
-          "disabled": true,
-          "settings": {
-            "image_pc": "shopify://shop_images/PC_1260_360_be502690-1a6d-4f58-ac27-2383e6526eae.jpg",
-            "image_h5": "shopify://shop_images/H5_686_320.jpg",
-            "image_alt": "",
-            "expiration_date": "2026-11-11 00:00:00",
-            "expiration_behavior": "hide",
-            "timer_x_h5": 4,
-            "timer_y_h5": 8,
-            "timer_size_h5": 15,
-            "timer_x_pc": 3,
-            "timer_y_pc": 10,
-            "timer_size_pc": 18,
-            "timer_background_start": "#ffffff",
-            "timer_background_end": "#e6c98a",
-            "timer_color": "#111111",
-            "colon_color": "#ffffff"
-          }
-        },
         "liquid_B9y7Yq": {
           "type": "liquid",
           "settings": {
@@ -187,6 +166,27 @@
           "settings": {
             "collapse_content": false,
             "uppercase_title": false
+          }
+        },
+        "offer_countdown_H9XrFm": {
+          "type": "offer_countdown",
+          "disabled": true,
+          "settings": {
+            "image_pc": "shopify://shop_images/PC_1260_360_be502690-1a6d-4f58-ac27-2383e6526eae.jpg",
+            "image_h5": "shopify://shop_images/H5_686_320.jpg",
+            "image_alt": "",
+            "expiration_date": "2026-12-07 00:00:00",
+            "expiration_behavior": "hide",
+            "timer_x_h5": 4,
+            "timer_y_h5": 8,
+            "timer_size_h5": 15,
+            "timer_x_pc": 3,
+            "timer_y_pc": 10,
+            "timer_size_pc": 18,
+            "timer_background_start": "#ffffff",
+            "timer_background_end": "#e6c98a",
+            "timer_color": "#111111",
+            "colon_color": "#ffffff"
           }
         },
         "variant_picker": {
@@ -326,10 +326,10 @@
         "feature_cards_NddJBd",
         "text_VcpKPp",
         "icons_with_text_ANpmKR",
-        "offer_countdown_H9XrFm",
         "liquid_B9y7Yq",
         "payment_terms",
         "description",
+        "offer_countdown_H9XrFm",
         "variant_picker",
         "buy_buttons",
         "image_UHJ7Gd",
