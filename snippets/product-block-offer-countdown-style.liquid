@@ -5,7 +5,7 @@
     --bf-timer-color: {{ block.settings.timer_color | default: '#111111' }};
     --bf-colon: {{ block.settings.colon_color | default: '#ffffff' }};
     --bf-x: {{ block.settings.timer_x_h5 | default: 4 }}%;
-    --bf-y: {{ block.settings.timer_y_h5 | default: 72 }}%;
+    --bf-y: {{ block.settings.timer_y_h5 | default: 8 }}%;
     --bf-size: {{ block.settings.timer_size_h5 | default: 15 }}px;
     position: relative;
     display: block;
@@ -32,8 +32,8 @@
   }
   #bf-offer-{{ block.id }} .bf-offer__timer {
     position: absolute;
-    left: var(--bf-x);
-    top: var(--bf-y);
+    right: var(--bf-x);
+    bottom: var(--bf-y);
     z-index: 1;
   }
   #bf-offer-{{ block.id }} .bf-offer__clock {
@@ -62,8 +62,8 @@
   }
   @media screen and (min-width: 1000px) {
     #bf-offer-{{ block.id }} {
-      --bf-x: {{ block.settings.timer_x_pc | default: 46 }}%;
-      --bf-y: {{ block.settings.timer_y_pc | default: 58 }}%;
+      --bf-x: {{ block.settings.timer_x_pc | default: 4 }}%;
+      --bf-y: {{ block.settings.timer_y_pc | default: 8 }}%;
       --bf-size: {{ block.settings.timer_size_pc | default: 14 }}px;
     }
     #bf-offer-{{ block.id }} .bf-offer__img--h5 { display: none; }
