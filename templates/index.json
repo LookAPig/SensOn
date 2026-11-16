@@ -15,6 +15,7 @@
         "slideshow_video_slide_rPcwgT": {
           "type": "_slideshow-video-slide",
           "name": "t:sections.slideshow.blocks.video.name",
+          "disabled": true,
           "settings": {
             "color_scheme": "scheme-7",
             "video": "shopify://files/videos/飞书20260509-145631.mp4",
