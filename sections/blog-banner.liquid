@@ -1,12 +1,60 @@
 <style>
+  /* 整图跳转 */
+  #shopify-section-{{ section.id }} .blog-banner-clickable {
+    position: relative;
+    isolation: isolate;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-clickable > .content-box__background-media {
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-image-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    border-radius: inherit;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-image-link:focus-visible {
+    outline: 3px solid #F287EC;
+    outline-offset: -3px;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-clickable > .blog-banner-content {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* 保留内容中原有按钮、链接及控件的独立交互 */
+  #shopify-section-{{ section.id }} .blog-banner-clickable .blog-banner-content :is(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    label,
+    summary,
+    [role="button"],
+    [tabindex]
+  ) {
+    pointer-events: auto;
+  }
+
   #shopify-section-{{ section.id }} .blog_banner_section .button-group .button .button__content .icon {
     margin: 0;
     margin-block-start: 0;
     margin-top: 0;
   }
+
   #shopify-section-{{ section.id }} .blog_banner_section > *:nth-child(1) p {
     color: #c8a0e8;
   }
+
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .blog_banner_section {
       width: 100%;
@@ -15,7 +63,6 @@
     }
 
     #shopify-section-{{ section.id }} .blog_banner_section > *:nth-child(1) p {
-     
       font-size: 0.6875rem;
       font-weight: 500;
       letter-spacing: 0.18em;
@@ -109,9 +156,25 @@
   }
 </style>
 
-<div {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %} class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
-  <div class="content-box min-h-{{ section.settings.image_size }}">
-    <div class="content-box__background-media with-overlay" style="--overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }}">
+{%- liquid
+  assign whole_image_link_enabled = false
+
+  if section.settings.enable_whole_image_link and section.settings.whole_image_link != blank
+    assign whole_image_link_enabled = true
+  endif
+
+  assign whole_image_link_label = section.settings.whole_image_link_label | default: '查看详情'
+-%}
+
+<div
+  {% if section.settings.allow_transparent_header %}
+    allow-transparent-header
+  {% endif %}
+  class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}"
+>
+  <div class="content-box min-h-{{ section.settings.image_size }}{% if whole_image_link_enabled %} blog-banner-clickable{% endif %}">
+
+    <div class="content-box__background-media">
       {%- liquid
         if section.settings.image != blank
           render 'media' with section.settings.image, mobile_media: section.settings.mobile_image, preload: true
@@ -121,14 +184,24 @@
       -%}
     </div>
 
-    {%- capture blocks -%}{% content_for 'blocks' %}{%- endcapture -%}
+    {%- if whole_image_link_enabled -%}
+      <a
+        class="blog-banner-image-link"
+        href="{{ section.settings.whole_image_link | escape }}"
+        aria-label="{{ whole_image_link_label | escape }}"
+      ></a>
+    {%- endif -%}
+
+    {%- capture blocks -%}
+      {% content_for 'blocks' %}
+    {%- endcapture -%}
 
     {%- if section.blocks.size > 0 -%}
       {%- assign mobile_text_alignment = section.settings.mobile_text_position | split: '-' | last -%}
       {%- assign desktop_text_alignment = section.settings.desktop_text_position | split: '-' | last -%}
 
       {%- if section.settings.enable_sticky_content -%}
-        <div class="justify-self-{{ mobile_text_alignment }} sm:justify-self-{{ desktop_text_alignment }}">
+        <div class="blog-banner-content justify-self-{{ mobile_text_alignment }} sm:justify-self-{{ desktop_text_alignment }}">
           <div class="sticky">
             <div class="blog_banner_section max-w-{{ section.settings.content_width }} prose prose-justify-{{ mobile_text_alignment }} sm:prose-justify-{{ desktop_text_alignment }}">
               {{- blocks -}}
@@ -136,13 +209,14 @@
           </div>
         </div>
       {%- else -%}
-        <div class="{{ section.settings.mobile_text_position }} {{ section.settings.desktop_text_position }}">
+        <div class="blog-banner-content {{ section.settings.mobile_text_position }} {{ section.settings.desktop_text_position }}">
           <div class="blog_banner_section max-w-{{ section.settings.content_width }} prose prose-justify-{{ mobile_text_alignment }} sm:prose-justify-{{ desktop_text_alignment }}">
             {{- blocks -}}
           </div>
         </div>
-      {% endif %}
+      {%- endif -%}
     {%- endif -%}
+
   </div>
 </div>
 
@@ -219,20 +293,27 @@
       "info": "t:sections.image_with_text_overlay.mobile_image_size_recommendation"
     },
     {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "t:global.colors.image_overlay_color",
-      "default": "#000000"
+      "type": "header",
+      "content": "整图跳转"
     },
     {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "t:global.colors.image_overlay_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 20
+      "type": "checkbox",
+      "id": "enable_whole_image_link",
+      "label": "开启整图跳转",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "whole_image_link",
+      "label": "跳转链接",
+      "info": "开启后，点击图片或文字区域跳转；原有按钮保留各自链接。"
+    },
+    {
+      "type": "text",
+      "id": "whole_image_link_label",
+      "label": "链接说明",
+      "default": "查看详情",
+      "info": "供屏幕阅读器识别，例如：查看黑五活动。"
     },
     {
       "type": "header",
@@ -359,14 +440,30 @@
     }
   ],
   "blocks": [
-    { "type": "@app" },
-    { "type": "icon" },
-    { "type": "subheading" },
-    { "type": "heading" },
-    { "type": "button-group" },
-    { "type": "button" },
-    { "type": "rich-text" },
-    { "type": "liquid" }
+    {
+      "type": "@app"
+    },
+    {
+      "type": "icon"
+    },
+    {
+      "type": "subheading"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "button-group"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "rich-text"
+    },
+    {
+      "type": "liquid"
+    }
   ],
   "presets": [
     {
