@@ -48,11 +48,17 @@
       loading="lazy"
     >
   {%- else -%}
-    <div class="bf-offer__empty">{%- if request.design_mode -%}上传 PC 图片和 H5 图片{%- endif -%}</div>
+    <div class="bf-offer__empty">
+      {%- if request.design_mode -%}
+        上传 PC 图片和 H5 图片
+      {%- endif -%}
+    </div>
   {%- endif -%}
 
-  <div class="bf-offer__timer" role="timer">
+  <div class="bf-offer__timer" role="timer" aria-live="off">
     <span class="bf-offer__clock">
+      <span class="bf-offer__box" data-unit="days">00</span>
+      <span class="bf-offer__colon" aria-hidden="true">:</span>
       <span class="bf-offer__box" data-unit="hours">00</span>
       <span class="bf-offer__colon" aria-hidden="true">:</span>
       <span class="bf-offer__box" data-unit="minutes">00</span>
@@ -68,38 +74,69 @@
   if (!customElements.get('bf-offer-countdown')) {
     customElements.define('bf-offer-countdown', class extends HTMLElement {
       connectedCallback() {
+        clearInterval(this._timer);
+
         const raw = this.getAttribute('expires-at');
         if (!raw) return;
+
         const end = new Date(raw).getTime();
         if (Number.isNaN(end)) return;
+
         const paint = (left) => {
-          const total = Math.max(0, left);
-          const hours = Math.floor(total / 3600);
+          const total = Math.max(0, Math.floor(left));
+          const days = Math.floor(total / 86400);
+          const hours = Math.floor((total % 86400) / 3600);
           const minutes = Math.floor((total % 3600) / 60);
           const seconds = total % 60;
+
           const set = (unit, value) => {
             const node = this.querySelector('[data-unit="' + unit + '"]');
-            if (node) node.textContent = String(value).padStart(2, '0');
+            if (node) {
+              node.textContent = String(value).padStart(2, '0');
+            }
           };
+
+          set('days', days);
           set('hours', hours);
           set('minutes', minutes);
           set('seconds', seconds);
+
+          const timer = this.querySelector('[role="timer"]');
+          if (timer) {
+            timer.setAttribute(
+              'aria-label',
+              days + ' days, ' +
+              hours + ' hours, ' +
+              minutes + ' minutes, ' +
+              seconds + ' seconds remaining'
+            );
+          }
         };
+
         const tick = () => {
           const left = Math.floor((end - Date.now()) / 1000);
+
           if (left <= 0) {
             paint(0);
             clearInterval(this._timer);
-            if (this.getAttribute('expiration-behavior') === 'hide' && !this.hasAttribute('data-design-mode')) {
+
+            if (
+              this.getAttribute('expiration-behavior') === 'hide' &&
+              !this.hasAttribute('data-design-mode')
+            ) {
               (this.closest('[data-block-id]') || this).remove();
             }
+
             return;
           }
+
           paint(left);
         };
-        tick();
+
         this._timer = setInterval(tick, 1000);
+        tick();
       }
+
       disconnectedCallback() {
         clearInterval(this._timer);
       }
