@@ -326,21 +326,28 @@
           "type": "faq",
           "settings": {
             "question": "Can I use SensOn App on my phone or desktop?",
-            "answer": "<p>Yes. SensOn App is available on iPhone and through desktop web browsers. An Android app is not currently available.</p>"
+            "answer": "<p>Yes. SensOn App is available on<a href=\"https://apps.apple.com/us/app/senson/id6755462239\" title=\"https://apps.apple.com/us/app/senson/id6755462239\"> iPhone</a> and through desktop <a href=\"https://app.senson.ai\" title=\"https://app.senson.ai\">web</a> browsers. An Android app is not currently available.</p>"
           }
         },
         "faq_jP8K9m": {
           "type": "faq",
           "settings": {
+            "question": "What's the difference between SensOn Plus and Premium?",
+            "answer": "<p>Plus includes 200 conversations per month, multiple relationships, text and voice interactions, an ad-free experience, and 300 monthly Sens creation credits.</p><p>Premium includes everything in Plus, plus long-term memory, 500 conversations per month, 800 monthly Sens creation credits, and early access to new features.</p>"
+          }
+        },
+        "faq_mfCxFt": {
+          "type": "faq",
+          "settings": {
             "question": "Do SensOn AI companions remember past conversations?",
-            "answer": "<p>Yes. SensOn AI companions can remember details such as your name, preferences and past interactions, helping make future conversations more personal.</p>"
+            "answer": "<p>Long-term memory is a Premium feature. It allows your AI companions to retain important details and preferences across conversations, helping your connections feel more personal over time.</p>"
           }
         },
         "faq_DJ64CJ": {
           "type": "faq",
           "settings": {
-            "question": "What happens after the 7-day free trial?",
-            "answer": "<p>Continued access to SensOn AI content requires a paid subscription after the 7-day trial. Available plans and pricing are displayed before subscription confirmation.</p>"
+            "question": "What happens when I use up my monthly plan allowances?",
+            "answer": "<p>Your included conversations and Sens creation credits reset each billing cycle. If you run out of Sens for creating content, you can purchase additional Sens to keep creating. Conversation limits remain tied to your subscription plan.</p>"
           }
         },
         "faq_ydBj8j": {
@@ -355,6 +362,7 @@
         "faq_F3RJYD",
         "faq_YczLFb",
         "faq_jP8K9m",
+        "faq_mfCxFt",
         "faq_DJ64CJ",
         "faq_ydBj8j"
       ],
