@@ -4,8 +4,7 @@
 
     <style>
       :root {
-        --announcement-bar-is-sticky:
-          {% if section.settings.enable_sticky %}1{% else %}0{% endif %};
+        --announcement-bar-is-sticky: {% if section.settings.enable_sticky %}1{% else %}0{% endif %};
       }
 
       {%- if section.settings.enable_sticky -%}
@@ -24,7 +23,7 @@
         }
       {%- endif -%}
 
-      /* ========== BLACK FRIDAY ANNOUNCEMENT BAR ========== */
+      /* SensOn Black Friday Announcement Bar */
 
       #shopify-section-{{ section.id }} .announcement-bar {
         position: relative;
@@ -43,15 +42,14 @@
         color: #000000 !important;
       }
 
-      /* Continuous moving track */
+      /* Marquee */
+
       #shopify-section-{{ section.id }} .marquee {
         display: flex;
         align-items: center;
-
         width: max-content;
         min-width: 100%;
         white-space: nowrap;
-
         will-change: transform;
 
         animation-name: sensonMarquee-{{ section.id }};
@@ -63,29 +61,26 @@
         opacity: 0;
       }
 
-      /* Only display once enough content is ready */
-      #shopify-section-{{ section.id }}
-      .marquee.is-ready {
+      #shopify-section-{{ section.id }} .marquee.is-ready {
         opacity: 1;
       }
 
-      /* Identical message sequence */
       #shopify-section-{{ section.id }} .marquee-group {
         display: flex;
         align-items: center;
-
         flex: 0 0 auto;
         width: max-content;
         white-space: nowrap;
       }
 
-      /* Individual announcement */
       #shopify-section-{{ section.id }} .marquee-item {
         display: inline-flex;
         flex: 0 0 auto;
         align-items: center;
         white-space: nowrap;
       }
+
+      /* PC Typography - Compact */
 
       #shopify-section-{{ section.id }}
       .marquee-item .subheading {
@@ -94,10 +89,10 @@
         flex: 0 0 auto;
 
         margin: 0;
-        padding: 0.7rem 0;
+        padding: 6px 0;
 
         font-family: "Mabry Pro", Arial, sans-serif;
-        font-size: 13px;
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.025em;
         line-height: 1.3;
@@ -106,7 +101,8 @@
         color: #000000 !important;
       }
 
-      /* Black text */
+      /* Black Text */
+
       #shopify-section-{{ section.id }} .announcement-bar,
       #shopify-section-{{ section.id }} .announcement-bar p,
       #shopify-section-{{ section.id }} .announcement-bar span,
@@ -117,35 +113,36 @@
         -webkit-text-fill-color: #000000 !important;
       }
 
-      /* Existing optional icons */
+      /* Optional Icons */
+
       #shopify-section-{{ section.id }} .marquee-item svg {
         display: inline-block;
         flex: 0 0 auto;
-        margin-right: 6px;
-
+        margin-right: 5px;
         color: #000000 !important;
         stroke: currentColor;
       }
 
-      /* Automatic diamond between messages */
+      /* Automatic Diamond Separator */
+
       #shopify-section-{{ section.id }}
       .marquee-item::after {
         content: "✦";
-
         display: inline-flex;
         align-items: center;
         justify-content: center;
         flex: 0 0 auto;
 
-        margin: 0 28px;
+        margin: 0 22px;
 
         color: #000000;
-        font-size: 13px;
+        font-size: 10px;
         font-weight: 400;
         line-height: 1;
       }
 
-      /* Animation distance is calculated using JS */
+      /* Seamless Animation */
+
       @keyframes sensonMarquee-{{ section.id }} {
         from {
           transform: translate3d(0, 0, 0);
@@ -160,22 +157,25 @@
         }
       }
 
-      /* Mobile */
+      /* Mobile Compact Layout */
+
       @media screen and (max-width: 740px) {
         #shopify-section-{{ section.id }}
         .marquee-item .subheading {
-          padding: 0.6rem 0;
-          font-size: 12px;
+          padding: 5px 0;
+          font-size: 10px;
+          line-height: 1.3;
         }
 
         #shopify-section-{{ section.id }}
         .marquee-item::after {
-          margin: 0 19px;
-          font-size: 12px;
+          margin: 0 16px;
+          font-size: 9px;
         }
       }
 
-      /* Reduced motion */
+      /* Reduced Motion */
+
       @media (prefers-reduced-motion: reduce) {
         #shopify-section-{{ section.id }} .marquee {
           animation: none !important;
@@ -277,18 +277,21 @@
 
           function rebuildMarquee() {
 
-            /* Temporarily stop animation while measuring */
+            /* Stop animation while measuring */
+
             marquee.style.animation = 'none';
             marquee.classList.remove('is-ready');
 
-            /* Remove old generated duplicate groups */
+            /* Remove generated duplicates */
+
             var groups = marquee.querySelectorAll('.marquee-group');
 
             for (var i = groups.length - 1; i >= 1; i--) {
               groups[i].remove();
             }
 
-            /* Measure actual original content */
+            /* Measure original content */
+
             var originalWidth = originalGroup.getBoundingClientRect().width;
             var containerWidth = bar.getBoundingClientRect().width;
 
@@ -300,17 +303,11 @@
             }
 
             /*
-              The track must cover the entire visible bar
-              even when it moves left by one complete group.
-
-              Required:
-              totalWidth >= viewportWidth + originalWidth
-
-              Add one extra group for a safe buffer.
+              Generate enough copies to fill the viewport
+              throughout the complete animation cycle.
             */
 
             var requiredWidth = containerWidth + originalWidth * 2;
-
             var totalWidth = originalWidth;
 
             var copyCount = 0;
@@ -326,10 +323,8 @@
               clone.removeAttribute('data-original');
               clone.setAttribute('aria-hidden', 'true');
 
-              /*
-                Shopify editor block IDs and attributes
-                should not appear on visual duplicates.
-              */
+              /* Remove duplicate Shopify editor attributes */
+
               var cloneBlocks = clone.querySelectorAll(
                 '[data-shopify-editor-block]'
               );
@@ -349,20 +344,20 @@
             }
 
             /*
-              Move exactly ONE original group width.
-              The next identical group replaces it seamlessly.
+              Move by the precise width of
+              one original announcement group.
             */
+
             marquee.style.setProperty(
               '--marquee-distance',
               originalWidth + 'px'
             );
 
-            /* Restore user-selected speed */
-            marquee.style.animation = '';
+            /* Restore selected speed */
 
+            marquee.style.animation = '';
             marquee.style.animationDuration = speed + 's';
 
-            /* Restart from the first frame */
             void marquee.offsetWidth;
 
             marquee.classList.add('is-ready');
@@ -382,22 +377,26 @@
           }
 
           /* Initial build */
+
           scheduleRebuild();
 
-          /* Font loading can change width */
+          /* Rebuild after fonts load */
+
           if (document.fonts && document.fonts.ready) {
             document.fonts.ready.then(function() {
               scheduleRebuild();
             });
           }
 
-          /* Recalculate when viewport changes */
+          /* Resize handling */
+
           if (!bar.dataset.resizeBound) {
             bar.dataset.resizeBound = 'true';
             window.addEventListener('resize', scheduleRebuild);
           }
 
-          /* Optional pause on hover */
+          /* Optional hover pause */
+
           {% if section.settings.pause_on_hover %}
 
             if (!bar.dataset.hoverBound) {
@@ -417,28 +416,28 @@
         }
 
         if (document.readyState === 'loading') {
-
           document.addEventListener(
             'DOMContentLoaded',
             initAnnouncementBar
           );
-
         } else {
-
           initAnnouncementBar();
-
         }
 
-        /* Shopify theme editor support */
+        /* Shopify Theme Editor */
+
         document.addEventListener(
           'shopify:section:load',
           function(event) {
+
             var section = document.getElementById(sectionId);
 
             if (
               section &&
-              (section === event.target ||
-               section.contains(event.target))
+              (
+                section === event.target ||
+                section.contains(event.target)
+              )
             ) {
               initAnnouncementBar();
             }
