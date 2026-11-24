@@ -1,6 +1,6 @@
 <style>
-  /* 整图跳转 */
-  #shopify-section-{{ section.id }} .blog-banner-clickable {
+  #shopify-section-{{ section.id }} .blog-banner-clickable,
+  #shopify-section-{{ section.id }} .blog-banner-carousel {
     position: relative;
     isolation: isolate;
   }
@@ -24,13 +24,16 @@
     outline-offset: -3px;
   }
 
-  #shopify-section-{{ section.id }} .blog-banner-clickable > .blog-banner-content {
+  #shopify-section-{{ section.id }} .blog-banner-clickable > .blog-banner-content,
+  #shopify-section-{{ section.id }} .blog-banner-carousel > .blog-banner-content {
     position: relative;
     z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-clickable > .blog-banner-content {
     pointer-events: none;
   }
 
-  /* 保留内容中原有按钮、链接及控件的独立交互 */
   #shopify-section-{{ section.id }} .blog-banner-clickable .blog-banner-content :is(
     a,
     button,
@@ -155,11 +158,6 @@
     }
   }
 
-  #shopify-section-{{ section.id }} .blog-banner-carousel {
-    position: relative;
-    isolation: isolate;
-  }
-
   #shopify-section-{{ section.id }} .blog-banner-carousel > .blog-banner-slide {
     z-index: 0;
     pointer-events: none;
@@ -176,11 +174,6 @@
     inset: 0;
     width: 100%;
     height: 100%;
-  }
-
-  #shopify-section-{{ section.id }} .blog-banner-carousel > .blog-banner-content {
-    position: relative;
-    z-index: 2;
   }
 
   #shopify-section-{{ section.id }} senson-blog-banner-rotation {
@@ -214,24 +207,31 @@
 </style>
 
 {%- liquid
-  assign banner_image = section.settings.image
-  assign banner_mobile_image = section.settings.mobile_image
-  assign carousel_enabled = false
+  assign banner_image_keys = 'image,image_2,image_3' | split: ','
+  assign banner_image_count = 0
 
-  if banner_image != blank and section.settings.image_2 != blank and section.settings.image_3 != blank
-    assign carousel_enabled = true
-  elsif banner_image == blank
-    if section.settings.image_2 != blank
-      assign banner_image = section.settings.image_2
-      assign banner_mobile_image = section.settings.mobile_image_2
-    elsif section.settings.image_3 != blank
-      assign banner_image = section.settings.image_3
-      assign banner_mobile_image = section.settings.mobile_image_3
+  for image_key in banner_image_keys
+    assign selected_image = section.settings[image_key]
+    if selected_image == blank
+      continue
     endif
+
+    if banner_image_count == 0
+      assign first_banner_key = image_key
+      assign mobile_image_key = 'mobile_' | append: image_key
+      assign banner_image = selected_image
+      assign banner_mobile_image = section.settings[mobile_image_key]
+    endif
+
+    assign banner_image_count = banner_image_count | plus: 1
+  endfor
+
+  assign carousel_enabled = false
+  if banner_image_count > 1
+    assign carousel_enabled = true
   endif
 
   assign whole_image_link_enabled = false
-
   if section.settings.enable_whole_image_link and section.settings.whole_image_link != blank
     assign whole_image_link_enabled = true
   endif
@@ -258,12 +258,17 @@
     </div>
 
     {%- if carousel_enabled -%}
-      <div class="content-box__background-media blog-banner-slide blog-banner-slide--overlay" aria-hidden="true">
-        {%- render 'media' with section.settings.image_2, mobile_media: section.settings.mobile_image_2, preload: false -%}
-      </div>
-      <div class="content-box__background-media blog-banner-slide blog-banner-slide--overlay" aria-hidden="true">
-        {%- render 'media' with section.settings.image_3, mobile_media: section.settings.mobile_image_3, preload: false -%}
-      </div>
+      {%- for image_key in banner_image_keys -%}
+        {%- assign slide_image = section.settings[image_key] -%}
+        {%- if image_key == first_banner_key or slide_image == blank -%}
+          {%- continue -%}
+        {%- endif -%}
+        {%- assign mobile_image_key = 'mobile_' | append: image_key -%}
+        {%- assign slide_mobile_image = section.settings[mobile_image_key] -%}
+        <div class="content-box__background-media blog-banner-slide blog-banner-slide--overlay" aria-hidden="true">
+          {%- render 'media' with slide_image, mobile_media: slide_mobile_image, preload: false -%}
+        </div>
+      {%- endfor -%}
     {%- endif -%}
 
     {%- if whole_image_link_enabled -%}
@@ -299,7 +304,6 @@
       {%- endif -%}
     {%- endif -%}
 
-
     {%- if carousel_enabled -%}
       <senson-blog-banner-rotation>
         <button class="blog-banner-rotation-toggle" type="button" aria-label="Pause slideshow" hidden>
@@ -324,6 +328,7 @@
         const setPlaying = (playing) => {
           window.clearInterval(this.timer);
           this.timer = null;
+
           if (playing) {
             this.timer = window.setInterval(() => {
               slides[current].classList.remove('is-active');
@@ -333,16 +338,19 @@
               slides[current].removeAttribute('aria-hidden');
             }, 5000);
           }
+
           toggle.setAttribute('aria-label', playing ? 'Pause slideshow' : 'Play slideshow');
           indicator.textContent = playing ? '❚❚' : '▶';
         };
 
         this.listeners = new AbortController();
         const options = { signal: this.listeners.signal };
+
         toggle.addEventListener('click', () => setPlaying(this.timer === null), options);
         motion.addEventListener('change', () => {
           if (motion.matches) setPlaying(false);
         }, options);
+
         toggle.hidden = false;
         setPlaying(!motion.matches);
       }
@@ -387,30 +395,12 @@
       "id": "image_size",
       "label": "t:global.image.size",
       "options": [
-        {
-          "value": "auto",
-          "label": "t:global.sizes.original_image_ratio"
-        },
-        {
-          "value": "xs",
-          "label": "t:global.sizes.x_small"
-        },
-        {
-          "value": "sm",
-          "label": "t:global.sizes.small"
-        },
-        {
-          "value": "md",
-          "label": "t:global.sizes.medium"
-        },
-        {
-          "value": "lg",
-          "label": "t:global.sizes.large"
-        },
-        {
-          "value": "fill",
-          "label": "t:global.sizes.fit_screen"
-        }
+        { "value": "auto", "label": "t:global.sizes.original_image_ratio" },
+        { "value": "xs", "label": "t:global.sizes.x_small" },
+        { "value": "sm", "label": "t:global.sizes.small" },
+        { "value": "md", "label": "t:global.sizes.medium" },
+        { "value": "lg", "label": "t:global.sizes.large" },
+        { "value": "fill", "label": "t:global.sizes.fit_screen" }
       ],
       "info": "t:global.image.ratio_avoid_cropping_info",
       "default": "auto"
@@ -431,7 +421,7 @@
       "type": "image_picker",
       "id": "image_2",
       "label": "轮播第 2 张图",
-      "info": "三张主图都已上传时，每 5 秒自动切换一次。"
+      "info": "上传至少两张主图后，每 5 秒自动切换一次。"
     },
     {
       "type": "image_picker",
@@ -487,22 +477,10 @@
       "id": "content_width",
       "label": "t:global.sizes.content_width",
       "options": [
-        {
-          "value": "sm",
-          "label": "t:global.sizes.small"
-        },
-        {
-          "value": "md",
-          "label": "t:global.sizes.medium"
-        },
-        {
-          "value": "lg",
-          "label": "t:global.sizes.large"
-        },
-        {
-          "value": "full",
-          "label": "t:global.sizes.full_width"
-        }
+        { "value": "sm", "label": "t:global.sizes.small" },
+        { "value": "md", "label": "t:global.sizes.medium" },
+        { "value": "lg", "label": "t:global.sizes.large" },
+        { "value": "full", "label": "t:global.sizes.full_width" }
       ],
       "default": "md"
     },
@@ -511,42 +489,15 @@
       "id": "desktop_text_position",
       "label": "t:global.position.desktop_content_position",
       "options": [
-        {
-          "value": "sm:place-self-start",
-          "label": "t:global.position.top_left"
-        },
-        {
-          "value": "sm:place-self-start-center",
-          "label": "t:global.position.top_center"
-        },
-        {
-          "value": "sm:place-self-start-end",
-          "label": "t:global.position.top_right"
-        },
-        {
-          "value": "sm:place-self-center-start",
-          "label": "t:global.position.middle_left"
-        },
-        {
-          "value": "sm:place-self-center",
-          "label": "t:global.position.middle_center"
-        },
-        {
-          "value": "sm:place-self-center-end",
-          "label": "t:global.position.middle_right"
-        },
-        {
-          "value": "sm:place-self-end-start",
-          "label": "t:global.position.bottom_left"
-        },
-        {
-          "value": "sm:place-self-end-center",
-          "label": "t:global.position.bottom_center"
-        },
-        {
-          "value": "sm:place-self-end",
-          "label": "t:global.position.bottom_right"
-        }
+        { "value": "sm:place-self-start", "label": "t:global.position.top_left" },
+        { "value": "sm:place-self-start-center", "label": "t:global.position.top_center" },
+        { "value": "sm:place-self-start-end", "label": "t:global.position.top_right" },
+        { "value": "sm:place-self-center-start", "label": "t:global.position.middle_left" },
+        { "value": "sm:place-self-center", "label": "t:global.position.middle_center" },
+        { "value": "sm:place-self-center-end", "label": "t:global.position.middle_right" },
+        { "value": "sm:place-self-end-start", "label": "t:global.position.bottom_left" },
+        { "value": "sm:place-self-end-center", "label": "t:global.position.bottom_center" },
+        { "value": "sm:place-self-end", "label": "t:global.position.bottom_right" }
       ],
       "default": "sm:place-self-center"
     },
@@ -555,71 +506,28 @@
       "id": "mobile_text_position",
       "label": "t:global.position.mobile_content_position",
       "options": [
-        {
-          "value": "place-self-start",
-          "label": "t:global.position.top_left"
-        },
-        {
-          "value": "place-self-start-center",
-          "label": "t:global.position.top_center"
-        },
-        {
-          "value": "place-self-start-end",
-          "label": "t:global.position.top_right"
-        },
-        {
-          "value": "place-self-center-start",
-          "label": "t:global.position.middle_left"
-        },
-        {
-          "value": "place-self-center",
-          "label": "t:global.position.middle_center"
-        },
-        {
-          "value": "place-self-center-end",
-          "label": "t:global.position.middle_right"
-        },
-        {
-          "value": "place-self-end-start",
-          "label": "t:global.position.bottom_left"
-        },
-        {
-          "value": "place-self-end-center",
-          "label": "t:global.position.bottom_center"
-        },
-        {
-          "value": "place-self-end",
-          "label": "t:global.position.bottom_right"
-        }
+        { "value": "place-self-start", "label": "t:global.position.top_left" },
+        { "value": "place-self-start-center", "label": "t:global.position.top_center" },
+        { "value": "place-self-start-end", "label": "t:global.position.top_right" },
+        { "value": "place-self-center-start", "label": "t:global.position.middle_left" },
+        { "value": "place-self-center", "label": "t:global.position.middle_center" },
+        { "value": "place-self-center-end", "label": "t:global.position.middle_right" },
+        { "value": "place-self-end-start", "label": "t:global.position.bottom_left" },
+        { "value": "place-self-end-center", "label": "t:global.position.bottom_center" },
+        { "value": "place-self-end", "label": "t:global.position.bottom_right" }
       ],
       "default": "place-self-center"
     }
   ],
   "blocks": [
-    {
-      "type": "@app"
-    },
-    {
-      "type": "icon"
-    },
-    {
-      "type": "subheading"
-    },
-    {
-      "type": "heading"
-    },
-    {
-      "type": "button-group"
-    },
-    {
-      "type": "button"
-    },
-    {
-      "type": "rich-text"
-    },
-    {
-      "type": "liquid"
-    }
+    { "type": "@app" },
+    { "type": "icon" },
+    { "type": "subheading" },
+    { "type": "heading" },
+    { "type": "button-group" },
+    { "type": "button" },
+    { "type": "rich-text" },
+    { "type": "liquid" }
   ],
   "presets": [
     {
@@ -628,19 +536,13 @@
       "blocks": [
         {
           "type": "subheading",
-          "settings": {
-            "text": "Subheading"
-          }
+          "settings": { "text": "Subheading" }
         },
         {
           "type": "heading",
-          "settings": {
-            "text": "Image with text overlay"
-          }
+          "settings": { "text": "Image with text overlay" }
         },
-        {
-          "type": "rich-text"
-        }
+        { "type": "rich-text" }
       ]
     }
   ]
