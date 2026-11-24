@@ -18,59 +18,36 @@
       {%- endif -%}
 
       /* 跑马灯容器 */
-      #shopify-section-{{ section.id }} .announcement-bar {
+      .announcement-bar {
         padding: 0;
         overflow: hidden;
         white-space: nowrap;
-
-        /* SensOn Black Friday 金底 */
-        background: #EBD391 !important;
-        background-image: none !important;
-        color: #000000 !important;
       }
 
       /* 滚动内容包装器 */
-      #shopify-section-{{ section.id }} .marquee {
+      .marquee {
         display: inline-block;
         white-space: nowrap;
         animation: marqueeScroll linear infinite;
         animation-duration: {{ section.settings.scroll_speed }}s;
       }
 
-      /* 消息块 */
-      #shopify-section-{{ section.id }} .marquee-item {
+      /* 每个消息块样式 */
+      .marquee-item {
         display: inline-flex;
         align-items: center;
         margin-right: 60px;
       }
 
-      #shopify-section-{{ section.id }} .marquee-item .subheading {
+      .marquee-item .subheading {
         display: flex;
         align-items: center;
         margin: 0;
         padding: 0.7rem 0;
-        color: #000000 !important;
       }
 
-      /* 保持文字全部为黑色 */
-      #shopify-section-{{ section.id }} .announcement-bar,
-      #shopify-section-{{ section.id }} .announcement-bar .subheading,
-      #shopify-section-{{ section.id }} .announcement-bar span,
-      #shopify-section-{{ section.id }} .announcement-bar p,
-      #shopify-section-{{ section.id }} .announcement-bar .subheading span,
-      #shopify-section-{{ section.id }} .announcement-bar strong,
-      #shopify-section-{{ section.id }} .announcement-bar b,
-      #shopify-section-{{ section.id }} .announcement-bar a {
-        color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-      }
-
-      /* Icon 统一黑色 */
-      #shopify-section-{{ section.id }} .announcement-bar svg {
+      .marquee-item svg {
         margin-right: 4px;
-        fill: none;
-        stroke: currentColor;
-        color: #000000 !important;
       }
 
       /* 无限滚动关键帧 */
@@ -78,52 +55,50 @@
         0% {
           transform: translateX(0);
         }
-
         100% {
           transform: translateX(-50%);
         }
       }
 
-      /* 减少动态效果偏好 */
-      @media (prefers-reduced-motion: reduce) {
-        #shopify-section-{{ section.id }} .marquee {
-          animation-play-state: paused;
-        }
+      /* SensOn Black Friday 金底黑字 */
+      #shopify-section-{{ section.id }} .announcement-bar {
+        background: #EBD391 !important;
+        color: #000000 !important;
+      }
+
+      #shopify-section-{{ section.id }} .announcement-bar,
+      #shopify-section-{{ section.id }} .announcement-bar .subheading,
+      #shopify-section-{{ section.id }} .announcement-bar span,
+      #shopify-section-{{ section.id }} .announcement-bar p,
+      #shopify-section-{{ section.id }} .announcement-bar .subheading span {
+        color: #000000 !important;
+      }
+
+      #shopify-section-{{ section.id }} .announcement-bar svg {
+        fill: none;
+        stroke: currentColor;
+        color: #000000 !important;
       }
     </style>
 
     <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
       <height-observer variable="announcement-bar">
-        <div
-          class="announcement-bar"
-          id="announcement-bar-{{ section.id }}"
-        >
-          <div
-            class="marquee"
-            id="marquee-{{ section.id }}"
-          >
+        <div class="announcement-bar" id="announcement-bar-{{ section.id }}">
+          <div class="marquee" id="marquee-{{ section.id }}">
             {%- capture marquee_content -%}
               {%- for block in section.blocks -%}
                 {%- if block.settings.text != blank -%}
-                  <span
-                    class="marquee-item"
-                    {{ block.shopify_attributes }}
-                  >
+                  <span class="marquee-item" {{ block.shopify_attributes }}>
                     <p class="subheading subheading-xs">
                       {%- if block.settings.icon and block.settings.icon != 'null' -%}
-                        {%- render 'icon'
-                          with block.settings.icon,
-                          width: block.settings.icon_size
-                        -%}
+                        {%- render 'icon' with block.settings.icon, width: block.settings.icon_size -%}
                       {%- endif -%}
-
                       <span>{{ block.settings.text }}</span>
                     </p>
                   </span>
                 {%- endif -%}
               {%- endfor -%}
             {%- endcapture -%}
-
             {{ marquee_content }}
             {{ marquee_content }}
           </div>
@@ -133,65 +108,44 @@
 
     <script>
       (function() {
-        const marquee = document.getElementById(
-          'marquee-{{ section.id }}'
-        );
-
+        const marquee = document.getElementById('marquee-{{ section.id }}');
         if (!marquee) return;
 
         const items = marquee.children;
-
         if (items.length === 0) return;
 
         const halfLength = items.length / 2;
-
         let originalWidth = 0;
 
         for (let i = 0; i < halfLength; i++) {
           originalWidth += items[i].offsetWidth;
-
-          if (i < halfLength - 1) {
-            originalWidth += 60;
-          }
+          if (i < halfLength - 1) originalWidth += 60;
         }
 
         let speed = {{ section.settings.scroll_speed | default: 20 }};
-
         if (speed < 5) speed = 5;
         if (speed > 60) speed = 60;
 
         marquee.style.animationDuration = speed + 's';
 
-        const bar = document.getElementById(
-          'announcement-bar-{{ section.id }}'
-        );
+        const bar = document.getElementById('announcement-bar-{{ section.id }}');
 
         {% if section.settings.pause_on_hover %}
-          bar.addEventListener('mouseenter', () => {
-            marquee.style.animationPlayState = 'paused';
-          });
-
-          bar.addEventListener('mouseleave', () => {
-            marquee.style.animationPlayState = 'running';
-          });
+        bar.addEventListener('mouseenter', () => {
+          marquee.style.animationPlayState = 'paused';
+        });
+        bar.addEventListener('mouseleave', () => {
+          marquee.style.animationPlayState = 'running';
+        });
         {% endif %}
       })();
     </script>
 
     <script>
-      /* 公告栏高度计算 */
-      (function() {
-        const sectionElement = document.getElementById(
-          'shopify-section-{{ section.id }}'
-        );
-
-        if (!sectionElement) return;
-
-        document.documentElement.style.setProperty(
-          '--announcement-bar-height',
-          Math.round(sectionElement.clientHeight) + 'px'
-        );
-      })();
+      document.documentElement.style.setProperty(
+        '--announcement-bar-height',
+        `${Math.round(document.getElementById('shopify-section-{{ section.id }}').clientHeight)}px`
+      );
     </script>
   {%- endunless -%}
 {%- endif -%}
@@ -255,26 +209,11 @@
           "id": "icon",
           "label": "Icon选项",
           "options": [
-            {
-              "value": "null",
-              "label": "不显示 Icon"
-            },
-            {
-              "value": "global",
-              "label": "global"
-            },
-            {
-              "value": "warranty",
-              "label": "warranty"
-            },
-            {
-              "value": "package",
-              "label": "package"
-            },
-            {
-              "value": "award",
-              "label": "award"
-            }
+            { "value": "null", "label": "不显示 Icon" },
+            { "value": "global", "label": "global" },
+            { "value": "warranty", "label": "warranty" },
+            { "value": "package", "label": "package" },
+            { "value": "award", "label": "award" }
           ],
           "default": "null"
         },
