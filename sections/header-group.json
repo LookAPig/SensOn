@@ -14,26 +14,44 @@
     "announcement_bar_LbA99x": {
       "type": "announcement-bar",
       "blocks": {
-        "message_yntTNt": {
+        "message_3RWAf9": {
           "type": "message",
           "settings": {
             "icon": "null",
             "icon_size": 14,
-            "text": "✨  Pleasure Is Personal"
+            "text": "<strong>LOWEST PRICE OF THE YEAR</strong>"
           }
         },
-        "message_bnLEiU": {
+        "message_capYax": {
           "type": "message",
           "settings": {
             "icon": "null",
             "icon_size": 14,
-            "text": "🎉 Celebrate Your Experience This Orgasm Day"
+            "text": "<strong>50% OFF</strong>"
+          }
+        },
+        "message_MK8inK": {
+          "type": "message",
+          "settings": {
+            "icon": "null",
+            "icon_size": 14,
+            "text": "<strong>DON'T MISS OUT！</strong>"
+          }
+        },
+        "message_7iTiAz": {
+          "type": "message",
+          "settings": {
+            "icon": "null",
+            "icon_size": 14,
+            "text": "<strong>LIMITED STOCK</strong>"
           }
         }
       },
       "block_order": [
-        "message_yntTNt",
-        "message_bnLEiU"
+        "message_3RWAf9",
+        "message_capYax",
+        "message_MK8inK",
+        "message_7iTiAz"
       ],
       "disabled": true,
       "name": "t:sections.announcement_bar.name",
