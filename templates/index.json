@@ -18,6 +18,8 @@
         "image_size": "fill",
         "image": "shopify://shop_images/BF_16_2800_1400_2f187a3c-5bc0-49e6-9cb5-bce375864b12.jpg",
         "mobile_image": "shopify://shop_images/BF_16_750_1500_6f06c56f-cdfb-4361-bd09-2e43fb81ca98.jpg",
+        "image_2": "shopify://shop_images/web_banner_2800_x_1400_-_pc.jpg",
+        "mobile_image_2": "shopify://shop_images/web_banner_750_x_1500_-_h5.jpg",
         "enable_whole_image_link": true,
         "whole_image_link": "shopify://products/s1-early-access",
         "whole_image_link_label": "SensOn S1 Early Access",
