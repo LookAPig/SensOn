@@ -154,9 +154,82 @@
       color: rgb(var(--button-text-color));
     }
   }
+
+  #shopify-section-{{ section.id }} .blog-banner-carousel {
+    position: relative;
+    isolation: isolate;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-carousel > .blog-banner-slide {
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 450ms ease;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-carousel > .blog-banner-slide.is-active {
+    opacity: 1;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-carousel > .blog-banner-slide--overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-carousel > .blog-banner-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} senson-blog-banner-rotation {
+    position: absolute;
+    inset-inline-end: 0.75rem;
+    inset-block-end: 0.75rem;
+    z-index: 3;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-rotation-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid rgb(255 255 255 / 0.5);
+    border-radius: 50%;
+    background: rgb(0 0 0 / 0.65);
+    color: white;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-rotation-toggle[hidden] {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .blog-banner-carousel > .blog-banner-slide {
+      transition: none;
+    }
+  }
 </style>
 
 {%- liquid
+  assign banner_image = section.settings.image
+  assign banner_mobile_image = section.settings.mobile_image
+  assign carousel_enabled = false
+
+  if banner_image != blank and section.settings.image_2 != blank and section.settings.image_3 != blank
+    assign carousel_enabled = true
+  elsif banner_image == blank
+    if section.settings.image_2 != blank
+      assign banner_image = section.settings.image_2
+      assign banner_mobile_image = section.settings.mobile_image_2
+    elsif section.settings.image_3 != blank
+      assign banner_image = section.settings.image_3
+      assign banner_mobile_image = section.settings.mobile_image_3
+    endif
+  endif
+
   assign whole_image_link_enabled = false
 
   if section.settings.enable_whole_image_link and section.settings.whole_image_link != blank
@@ -172,17 +245,26 @@
   {% endif %}
   class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}"
 >
-  <div class="content-box min-h-{{ section.settings.image_size }}{% if whole_image_link_enabled %} blog-banner-clickable{% endif %}">
+  <div class="content-box min-h-{{ section.settings.image_size }}{% if carousel_enabled %} blog-banner-carousel{% endif %}{% if whole_image_link_enabled %} blog-banner-clickable{% endif %}">
 
-    <div class="content-box__background-media">
+    <div class="content-box__background-media{% if carousel_enabled %} blog-banner-slide is-active{% endif %}">
       {%- liquid
-        if section.settings.image != blank
-          render 'media' with section.settings.image, mobile_media: section.settings.mobile_image, preload: true
+        if banner_image != blank
+          render 'media' with banner_image, mobile_media: banner_mobile_image, preload: true
         else
           echo 'hero-apparel-1' | placeholder_svg_tag: 'size-full'
         endif
       -%}
     </div>
+
+    {%- if carousel_enabled -%}
+      <div class="content-box__background-media blog-banner-slide blog-banner-slide--overlay" aria-hidden="true">
+        {%- render 'media' with section.settings.image_2, mobile_media: section.settings.mobile_image_2, preload: false -%}
+      </div>
+      <div class="content-box__background-media blog-banner-slide blog-banner-slide--overlay" aria-hidden="true">
+        {%- render 'media' with section.settings.image_3, mobile_media: section.settings.mobile_image_3, preload: false -%}
+      </div>
+    {%- endif -%}
 
     {%- if whole_image_link_enabled -%}
       <a
@@ -217,8 +299,61 @@
       {%- endif -%}
     {%- endif -%}
 
+
+    {%- if carousel_enabled -%}
+      <senson-blog-banner-rotation>
+        <button class="blog-banner-rotation-toggle" type="button" aria-label="Pause slideshow" hidden>
+          <span aria-hidden="true">❚❚</span>
+        </button>
+      </senson-blog-banner-rotation>
+    {%- endif -%}
   </div>
 </div>
+
+{% javascript %}
+  if (!customElements.get('senson-blog-banner-rotation')) {
+    customElements.define('senson-blog-banner-rotation', class extends HTMLElement {
+      connectedCallback() {
+        const carousel = this.closest('.blog-banner-carousel');
+        const slides = [...carousel.querySelectorAll(':scope > .blog-banner-slide')];
+        const toggle = this.querySelector('button');
+        const indicator = toggle.querySelector('span');
+        const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let current = slides.findIndex(slide => slide.classList.contains('is-active'));
+
+        const setPlaying = (playing) => {
+          window.clearInterval(this.timer);
+          this.timer = null;
+          if (playing) {
+            this.timer = window.setInterval(() => {
+              slides[current].classList.remove('is-active');
+              slides[current].setAttribute('aria-hidden', 'true');
+              current = (current + 1) % slides.length;
+              slides[current].classList.add('is-active');
+              slides[current].removeAttribute('aria-hidden');
+            }, 5000);
+          }
+          toggle.setAttribute('aria-label', playing ? 'Pause slideshow' : 'Play slideshow');
+          indicator.textContent = playing ? '❚❚' : '▶';
+        };
+
+        this.listeners = new AbortController();
+        const options = { signal: this.listeners.signal };
+        toggle.addEventListener('click', () => setPlaying(this.timer === null), options);
+        motion.addEventListener('change', () => {
+          if (motion.matches) setPlaying(false);
+        }, options);
+        toggle.hidden = false;
+        setPlaying(!motion.matches);
+      }
+
+      disconnectedCallback() {
+        window.clearInterval(this.timer);
+        this.listeners.abort();
+      }
+    });
+  }
+{% endjavascript %}
 
 {% schema %}
 {
@@ -293,6 +428,27 @@
       "info": "t:sections.image_with_text_overlay.mobile_image_size_recommendation"
     },
     {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "轮播第 2 张图",
+      "info": "三张主图都已上传时，每 5 秒自动切换一次。"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image_2",
+      "label": "第 2 张图 · 移动端（选填）"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "轮播第 3 张图"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image_3",
+      "label": "第 3 张图 · 移动端（选填）"
+    },
+    {
       "type": "header",
       "content": "整图跳转"
     },
@@ -322,8 +478,8 @@
     {
       "type": "checkbox",
       "id": "enable_sticky_content",
-      "label": "t:sections.image_with_text_overlay.content_follows_on_scroll",
-      "info": "t:sections.image_with_text_overlay.content_follows_on_scroll_info",
+      "label": "t:global.section.content_follows_on_scroll",
+      "info": "t:global.section.content_follows_on_scroll_info",
       "default": false
     },
     {
