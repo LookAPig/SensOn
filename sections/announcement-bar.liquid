@@ -24,14 +24,15 @@
         }
       {%- endif -%}
 
-      /* SensOn Black Friday announcement bar */
+      /* ========== BLACK FRIDAY ANNOUNCEMENT BAR ========== */
+
       #shopify-section-{{ section.id }} .announcement-bar {
+        position: relative;
         width: 100%;
-        padding: 0;
         overflow: hidden;
+        padding: 0;
         white-space: nowrap;
 
-        /* 上金下白 */
         background: linear-gradient(
           to bottom,
           #EBD391 0%,
@@ -42,37 +43,52 @@
         color: #000000 !important;
       }
 
-      /* Marquee track */
+      /* Continuous moving track */
       #shopify-section-{{ section.id }} .marquee {
         display: flex;
         align-items: center;
+
         width: max-content;
+        min-width: 100%;
         white-space: nowrap;
 
-        animation: sensonMarquee-{{ section.id }}
-          {{ section.settings.scroll_speed | default: 20 }}s
-          linear infinite;
-
         will-change: transform;
+
+        animation-name: sensonMarquee-{{ section.id }};
+        animation-duration: {{ section.settings.scroll_speed | default: 20 }}s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-play-state: running;
+
+        opacity: 0;
       }
 
-      /* Each identical content group */
+      /* Only display once enough content is ready */
+      #shopify-section-{{ section.id }}
+      .marquee.is-ready {
+        opacity: 1;
+      }
+
+      /* Identical message sequence */
       #shopify-section-{{ section.id }} .marquee-group {
         display: flex;
         align-items: center;
+
         flex: 0 0 auto;
         width: max-content;
-      }
-
-      /* Individual message */
-      #shopify-section-{{ section.id }} .marquee-item {
-        display: inline-flex;
-        align-items: center;
-        flex: 0 0 auto;
         white-space: nowrap;
       }
 
-      #shopify-section-{{ section.id }} .marquee-item .subheading {
+      /* Individual announcement */
+      #shopify-section-{{ section.id }} .marquee-item {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        white-space: nowrap;
+      }
+
+      #shopify-section-{{ section.id }}
+      .marquee-item .subheading {
         display: inline-flex;
         align-items: center;
         flex: 0 0 auto;
@@ -80,40 +96,45 @@
         margin: 0;
         padding: 0.7rem 0;
 
-        color: #000000 !important;
         font-family: "Mabry Pro", Arial, sans-serif;
         font-size: 13px;
         font-weight: 700;
-        line-height: 1.3;
         letter-spacing: 0.025em;
+        line-height: 1.3;
         white-space: nowrap;
+
+        color: #000000 !important;
       }
 
-      #shopify-section-{{ section.id }} .marquee-item span,
-      #shopify-section-{{ section.id }} .marquee-item p,
-      #shopify-section-{{ section.id }} .marquee-item a,
-      #shopify-section-{{ section.id }} .marquee-item strong,
-      #shopify-section-{{ section.id }} .marquee-item b {
+      /* Black text */
+      #shopify-section-{{ section.id }} .announcement-bar,
+      #shopify-section-{{ section.id }} .announcement-bar p,
+      #shopify-section-{{ section.id }} .announcement-bar span,
+      #shopify-section-{{ section.id }} .announcement-bar a,
+      #shopify-section-{{ section.id }} .announcement-bar strong,
+      #shopify-section-{{ section.id }} .announcement-bar b {
         color: #000000 !important;
         -webkit-text-fill-color: #000000 !important;
       }
 
-      /* Icons */
+      /* Existing optional icons */
       #shopify-section-{{ section.id }} .marquee-item svg {
         display: inline-block;
         flex: 0 0 auto;
         margin-right: 6px;
+
         color: #000000 !important;
         stroke: currentColor;
       }
 
-      /* Automatic diamond separator */
-      #shopify-section-{{ section.id }} .marquee-item::after {
+      /* Automatic diamond between messages */
+      #shopify-section-{{ section.id }}
+      .marquee-item::after {
         content: "✦";
 
         display: inline-flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         flex: 0 0 auto;
 
         margin: 0 28px;
@@ -124,14 +145,18 @@
         line-height: 1;
       }
 
-      /* Seamless marquee loop */
+      /* Animation distance is calculated using JS */
       @keyframes sensonMarquee-{{ section.id }} {
         from {
           transform: translate3d(0, 0, 0);
         }
 
         to {
-          transform: translate3d(-50%, 0, 0);
+          transform: translate3d(
+            calc(-1 * var(--marquee-distance, 0px)),
+            0,
+            0
+          );
         }
       }
 
@@ -150,12 +175,14 @@
         }
       }
 
-      /* Accessibility */
+      /* Reduced motion */
       @media (prefers-reduced-motion: reduce) {
         #shopify-section-{{ section.id }} .marquee {
           animation: none !important;
+          transform: none !important;
         }
       }
+
     </style>
 
     <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
@@ -179,6 +206,7 @@
                     class="marquee-item"
                     {{ block.shopify_attributes }}
                   >
+
                     <p class="subheading subheading-xs">
 
                       {%- if block.settings.icon != blank and block.settings.icon != 'null' -%}
@@ -191,13 +219,14 @@
                       <span>{{ block.settings.text }}</span>
 
                     </p>
+
                   </div>
 
                 {%- endif -%}
               {%- endfor -%}
             {%- endcapture -%}
 
-            <div class="marquee-group">
+            <div class="marquee-group" data-original="true">
               {{ marquee_content }}
             </div>
 
@@ -206,6 +235,7 @@
             </div>
 
           </div>
+
         </div>
 
       </height-observer>
@@ -213,29 +243,164 @@
 
     <script>
       (function() {
+
+        var sectionId = 'shopify-section-{{ section.id }}';
+        var marqueeId = 'marquee-{{ section.id }}';
+        var barId = 'announcement-bar-{{ section.id }}';
+
         function initAnnouncementBar() {
-          var marquee = document.getElementById(
-            'marquee-{{ section.id }}'
+
+          var sectionElement = document.getElementById(sectionId);
+          var marquee = document.getElementById(marqueeId);
+          var bar = document.getElementById(barId);
+
+          if (!sectionElement || !marquee || !bar) return;
+
+          var originalGroup = marquee.querySelector(
+            '.marquee-group[data-original="true"]'
           );
 
-          if (!marquee) return;
-
-          var bar = document.getElementById(
-            'announcement-bar-{{ section.id }}'
-          );
-
-          var group = marquee.querySelector('.marquee-group');
-
-          if (!bar || !group) return;
+          if (!originalGroup) return;
 
           var speed = {{ section.settings.scroll_speed | default: 20 }};
 
           speed = Math.max(5, Math.min(60, speed));
 
-          marquee.style.animationDuration = speed + 's';
+          var resizeFrame = null;
 
+          function updateHeight() {
+            document.documentElement.style.setProperty(
+              '--announcement-bar-height',
+              Math.round(sectionElement.clientHeight) + 'px'
+            );
+          }
+
+          function rebuildMarquee() {
+
+            /* Temporarily stop animation while measuring */
+            marquee.style.animation = 'none';
+            marquee.classList.remove('is-ready');
+
+            /* Remove old generated duplicate groups */
+            var groups = marquee.querySelectorAll('.marquee-group');
+
+            for (var i = groups.length - 1; i >= 1; i--) {
+              groups[i].remove();
+            }
+
+            /* Measure actual original content */
+            var originalWidth = originalGroup.getBoundingClientRect().width;
+            var containerWidth = bar.getBoundingClientRect().width;
+
+            if (originalWidth <= 0 || containerWidth <= 0) {
+              marquee.style.animation = 'none';
+              marquee.classList.add('is-ready');
+              updateHeight();
+              return;
+            }
+
+            /*
+              The track must cover the entire visible bar
+              even when it moves left by one complete group.
+
+              Required:
+              totalWidth >= viewportWidth + originalWidth
+
+              Add one extra group for a safe buffer.
+            */
+
+            var requiredWidth = containerWidth + originalWidth * 2;
+
+            var totalWidth = originalWidth;
+
+            var copyCount = 0;
+            var maxCopies = 100;
+
+            while (
+              totalWidth < requiredWidth &&
+              copyCount < maxCopies
+            ) {
+
+              var clone = originalGroup.cloneNode(true);
+
+              clone.removeAttribute('data-original');
+              clone.setAttribute('aria-hidden', 'true');
+
+              /*
+                Shopify editor block IDs and attributes
+                should not appear on visual duplicates.
+              */
+              var cloneBlocks = clone.querySelectorAll(
+                '[data-shopify-editor-block]'
+              );
+
+              cloneBlocks.forEach(function(block) {
+                block.removeAttribute('data-shopify-editor-block');
+              });
+
+              clone.querySelectorAll('[id]').forEach(function(el) {
+                el.removeAttribute('id');
+              });
+
+              marquee.appendChild(clone);
+
+              totalWidth += originalWidth;
+              copyCount++;
+            }
+
+            /*
+              Move exactly ONE original group width.
+              The next identical group replaces it seamlessly.
+            */
+            marquee.style.setProperty(
+              '--marquee-distance',
+              originalWidth + 'px'
+            );
+
+            /* Restore user-selected speed */
+            marquee.style.animation = '';
+
+            marquee.style.animationDuration = speed + 's';
+
+            /* Restart from the first frame */
+            void marquee.offsetWidth;
+
+            marquee.classList.add('is-ready');
+
+            updateHeight();
+          }
+
+          function scheduleRebuild() {
+            if (resizeFrame !== null) {
+              cancelAnimationFrame(resizeFrame);
+            }
+
+            resizeFrame = requestAnimationFrame(function() {
+              resizeFrame = null;
+              rebuildMarquee();
+            });
+          }
+
+          /* Initial build */
+          scheduleRebuild();
+
+          /* Font loading can change width */
+          if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(function() {
+              scheduleRebuild();
+            });
+          }
+
+          /* Recalculate when viewport changes */
+          if (!bar.dataset.resizeBound) {
+            bar.dataset.resizeBound = 'true';
+            window.addEventListener('resize', scheduleRebuild);
+          }
+
+          /* Optional pause on hover */
           {% if section.settings.pause_on_hover %}
-            if (bar.dataset.hoverBound !== 'true') {
+
+            if (!bar.dataset.hoverBound) {
               bar.dataset.hoverBound = 'true';
 
               bar.addEventListener('mouseenter', function() {
@@ -246,39 +411,40 @@
                 marquee.style.animationPlayState = 'running';
               });
             }
+
           {% endif %}
 
-          function updateHeight() {
-            var sectionElement = document.getElementById(
-              'shopify-section-{{ section.id }}'
-            );
-
-            if (!sectionElement) return;
-
-            document.documentElement.style.setProperty(
-              '--announcement-bar-height',
-              Math.round(sectionElement.clientHeight) + 'px'
-            );
-          }
-
-          updateHeight();
-
-          window.addEventListener('resize', updateHeight);
         }
 
         if (document.readyState === 'loading') {
+
           document.addEventListener(
             'DOMContentLoaded',
             initAnnouncementBar
           );
+
         } else {
+
           initAnnouncementBar();
+
         }
 
+        /* Shopify theme editor support */
         document.addEventListener(
           'shopify:section:load',
-          initAnnouncementBar
+          function(event) {
+            var section = document.getElementById(sectionId);
+
+            if (
+              section &&
+              (section === event.target ||
+               section.contains(event.target))
+            ) {
+              initAnnouncementBar();
+            }
+          }
         );
+
       })();
     </script>
 
