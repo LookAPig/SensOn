@@ -1,8 +1,11 @@
+
 {%- if section.blocks.size > 0 -%}
   {%- unless request.page_type != 'index' and section.settings.show_on_homepage_only -%}
+
     <style>
       :root {
-        --announcement-bar-is-sticky: {% if section.settings.enable_sticky %}1{% else %}0{% endif %};
+        --announcement-bar-is-sticky:
+          {% if section.settings.enable_sticky %}1{% else %}0{% endif %};
       }
 
       {%- if section.settings.enable_sticky -%}
@@ -13,166 +16,272 @@
         }
 
         .shopify-section--header ~ #shopify-section-{{ section.id }} {
-          top: calc(var(--header-is-sticky, 0) * var(--header-is-visible, 0) * var(--header-height, 0px));
+          top: calc(
+            var(--header-is-sticky, 0) *
+            var(--header-is-visible, 0) *
+            var(--header-height, 0px)
+          );
         }
       {%- endif -%}
 
-      /* 跑马灯容器 */
-      .announcement-bar {
+      /* SensOn Black Friday announcement bar */
+      #shopify-section-{{ section.id }} .announcement-bar {
+        width: 100%;
         padding: 0;
         overflow: hidden;
         white-space: nowrap;
+
+        /* 上金下白 */
+        background: linear-gradient(
+          to bottom,
+          #EBD391 0%,
+          #F3E4B6 48%,
+          #FFF9E9 100%
+        ) !important;
+
+        color: #000000 !important;
       }
 
-      /* 滚动内容包装器 */
-      .marquee {
-        display: inline-flex;
+      /* Marquee track */
+      #shopify-section-{{ section.id }} .marquee {
+        display: flex;
         align-items: center;
+        width: max-content;
         white-space: nowrap;
-        animation: marqueeScroll linear infinite;
-        animation-duration: {{ section.settings.scroll_speed }}s;
+
+        animation: sensonMarquee-{{ section.id }}
+          {{ section.settings.scroll_speed | default: 20 }}s
+          linear infinite;
+
         will-change: transform;
       }
 
-      /* 每个消息块 */
-      .marquee-item {
+      /* Each identical content group */
+      #shopify-section-{{ section.id }} .marquee-group {
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+        width: max-content;
+      }
+
+      /* Individual message */
+      #shopify-section-{{ section.id }} .marquee-item {
         display: inline-flex;
         align-items: center;
         flex: 0 0 auto;
-        margin-right: 0;
+        white-space: nowrap;
       }
 
-      .marquee-item .subheading {
+      #shopify-section-{{ section.id }} .marquee-item .subheading {
         display: inline-flex;
         align-items: center;
+        flex: 0 0 auto;
+
         margin: 0;
         padding: 0.7rem 0;
+
+        color: #000000 !important;
+        font-family: "Mabry Pro", Arial, sans-serif;
+        font-size: 13px;
         font-weight: 700;
-        letter-spacing: 0.02em;
+        line-height: 1.3;
+        letter-spacing: 0.025em;
+        white-space: nowrap;
       }
 
-      .marquee-item svg {
-        margin-right: 6px;
-        flex: 0 0 auto;
+      #shopify-section-{{ section.id }} .marquee-item span,
+      #shopify-section-{{ section.id }} .marquee-item p,
+      #shopify-section-{{ section.id }} .marquee-item a,
+      #shopify-section-{{ section.id }} .marquee-item strong,
+      #shopify-section-{{ section.id }} .marquee-item b {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
       }
 
-      /* 每句话后面自动加分隔点 */
-      .marquee-item::after {
-        content: "•";
+      /* Icons */
+      #shopify-section-{{ section.id }} .marquee-item svg {
         display: inline-block;
-        margin: 0 22px;
-        font-size: 14px;
-        line-height: 1;
-        opacity: 0.9;
-      }
-
-      /* 无限滚动关键帧 */
-      @keyframes marqueeScroll {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
-      }
-
-      /* 金白渐变 + 黑字 */
-      #shopify-section-{{ section.id }} .announcement-bar {
-        background: linear-gradient(
-          90deg,
-          #e3c36a 0%,
-          #f0d88f 22%,
-          #fff6df 50%,
-          #f0d88f 78%,
-          #e3c36a 100%
-        ) !important;
+        flex: 0 0 auto;
+        margin-right: 6px;
         color: #000000 !important;
-      }
-
-      #shopify-section-{{ section.id }} .announcement-bar,
-      #shopify-section-{{ section.id }} .announcement-bar .subheading,
-      #shopify-section-{{ section.id }} .announcement-bar span,
-      #shopify-section-{{ section.id }} .announcement-bar p,
-      #shopify-section-{{ section.id }} .announcement-bar .subheading span {
-        color: #000000 !important;
-      }
-
-      #shopify-section-{{ section.id }} .announcement-bar svg {
-        fill: none;
         stroke: currentColor;
-        color: #000000 !important;
       }
 
-      /* 手机稍微紧一点 */
+      /* Automatic diamond separator */
+      #shopify-section-{{ section.id }} .marquee-item::after {
+        content: "✦";
+
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 auto;
+
+        margin: 0 28px;
+
+        color: #000000;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      /* Seamless marquee loop */
+      @keyframes sensonMarquee-{{ section.id }} {
+        from {
+          transform: translate3d(0, 0, 0);
+        }
+
+        to {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      /* Mobile */
       @media screen and (max-width: 740px) {
+        #shopify-section-{{ section.id }}
         .marquee-item .subheading {
           padding: 0.6rem 0;
           font-size: 12px;
         }
 
+        #shopify-section-{{ section.id }}
         .marquee-item::after {
-          margin: 0 16px;
+          margin: 0 19px;
           font-size: 12px;
+        }
+      }
+
+      /* Accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        #shopify-section-{{ section.id }} .marquee {
+          animation: none !important;
         }
       }
     </style>
 
     <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
       <height-observer variable="announcement-bar">
-        <div class="announcement-bar" id="announcement-bar-{{ section.id }}">
-          <div class="marquee" id="marquee-{{ section.id }}">
+
+        <div
+          class="announcement-bar"
+          id="announcement-bar-{{ section.id }}"
+        >
+
+          <div
+            class="marquee"
+            id="marquee-{{ section.id }}"
+          >
+
             {%- capture marquee_content -%}
               {%- for block in section.blocks -%}
                 {%- if block.settings.text != blank -%}
-                  <span class="marquee-item" {{ block.shopify_attributes }}>
+
+                  <div
+                    class="marquee-item"
+                    {{ block.shopify_attributes }}
+                  >
                     <p class="subheading subheading-xs">
-                      {%- if block.settings.icon and block.settings.icon != 'null' -%}
-                        {%- render 'icon' with block.settings.icon, width: block.settings.icon_size -%}
+
+                      {%- if block.settings.icon != blank and block.settings.icon != 'null' -%}
+                        {%- render 'icon'
+                          with block.settings.icon,
+                          width: block.settings.icon_size
+                        -%}
                       {%- endif -%}
+
                       <span>{{ block.settings.text }}</span>
+
                     </p>
-                  </span>
+                  </div>
+
                 {%- endif -%}
               {%- endfor -%}
             {%- endcapture -%}
 
-            {{ marquee_content }}
-            {{ marquee_content }}
+            <div class="marquee-group">
+              {{ marquee_content }}
+            </div>
+
+            <div class="marquee-group" aria-hidden="true">
+              {{ marquee_content }}
+            </div>
+
           </div>
         </div>
+
       </height-observer>
     </div>
 
     <script>
       (function() {
-        const marquee = document.getElementById('marquee-{{ section.id }}');
-        if (!marquee) return;
+        function initAnnouncementBar() {
+          var marquee = document.getElementById(
+            'marquee-{{ section.id }}'
+          );
 
-        let speed = {{ section.settings.scroll_speed | default: 20 }};
-        if (speed < 5) speed = 5;
-        if (speed > 60) speed = 60;
+          if (!marquee) return;
 
-        marquee.style.animationDuration = speed + 's';
+          var bar = document.getElementById(
+            'announcement-bar-{{ section.id }}'
+          );
 
-        const bar = document.getElementById('announcement-bar-{{ section.id }}');
+          var group = marquee.querySelector('.marquee-group');
 
-        {% if section.settings.pause_on_hover %}
-        bar.addEventListener('mouseenter', () => {
-          marquee.style.animationPlayState = 'paused';
-        });
-        bar.addEventListener('mouseleave', () => {
-          marquee.style.animationPlayState = 'running';
-        });
-        {% endif %}
+          if (!bar || !group) return;
+
+          var speed = {{ section.settings.scroll_speed | default: 20 }};
+
+          speed = Math.max(5, Math.min(60, speed));
+
+          marquee.style.animationDuration = speed + 's';
+
+          {% if section.settings.pause_on_hover %}
+            if (bar.dataset.hoverBound !== 'true') {
+              bar.dataset.hoverBound = 'true';
+
+              bar.addEventListener('mouseenter', function() {
+                marquee.style.animationPlayState = 'paused';
+              });
+
+              bar.addEventListener('mouseleave', function() {
+                marquee.style.animationPlayState = 'running';
+              });
+            }
+          {% endif %}
+
+          function updateHeight() {
+            var sectionElement = document.getElementById(
+              'shopify-section-{{ section.id }}'
+            );
+
+            if (!sectionElement) return;
+
+            document.documentElement.style.setProperty(
+              '--announcement-bar-height',
+              Math.round(sectionElement.clientHeight) + 'px'
+            );
+          }
+
+          updateHeight();
+
+          window.addEventListener('resize', updateHeight);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener(
+            'DOMContentLoaded',
+            initAnnouncementBar
+          );
+        } else {
+          initAnnouncementBar();
+        }
+
+        document.addEventListener(
+          'shopify:section:load',
+          initAnnouncementBar
+        );
       })();
     </script>
 
-    <script>
-      document.documentElement.style.setProperty(
-        '--announcement-bar-height',
-        `${Math.round(document.getElementById('shopify-section-{{ section.id }}').clientHeight)}px`
-      );
-    </script>
   {%- endunless -%}
 {%- endif -%}
 
@@ -235,11 +344,26 @@
           "id": "icon",
           "label": "Icon选项",
           "options": [
-            { "value": "null", "label": "不显示 Icon" },
-            { "value": "global", "label": "global" },
-            { "value": "warranty", "label": "warranty" },
-            { "value": "package", "label": "package" },
-            { "value": "award", "label": "award" }
+            {
+              "value": "null",
+              "label": "不显示 Icon"
+            },
+            {
+              "value": "global",
+              "label": "global"
+            },
+            {
+              "value": "warranty",
+              "label": "warranty"
+            },
+            {
+              "value": "package",
+              "label": "package"
+            },
+            {
+              "value": "award",
+              "label": "award"
+            }
           ],
           "default": "null"
         },
