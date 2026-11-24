@@ -1,3 +1,4 @@
+
 {%- if section.blocks.size > 0 -%}
   {%- unless request.page_type != 'index' and section.settings.show_on_homepage_only -%}
     <style>
@@ -17,37 +18,59 @@
       {%- endif -%}
 
       /* 跑马灯容器 */
-      .announcement-bar {
+      #shopify-section-{{ section.id }} .announcement-bar {
         padding: 0;
         overflow: hidden;
         white-space: nowrap;
+
+        /* SensOn Black Friday 金底 */
+        background: #EBD391 !important;
+        background-image: none !important;
+        color: #000000 !important;
       }
 
       /* 滚动内容包装器 */
-      .marquee {
+      #shopify-section-{{ section.id }} .marquee {
         display: inline-block;
         white-space: nowrap;
         animation: marqueeScroll linear infinite;
-        /* 动画时长通过 JS 动态设置，或使用固定值；这里先用变量，后面用内联样式覆盖 */
         animation-duration: {{ section.settings.scroll_speed }}s;
       }
 
-      /* 每个消息块样式（保持原有图标+文字布局） */
-      .marquee-item {
+      /* 消息块 */
+      #shopify-section-{{ section.id }} .marquee-item {
         display: inline-flex;
         align-items: center;
-        margin-right: 60px; /* 消息之间的间隔，可自行调整 */
+        margin-right: 60px;
       }
 
-      .marquee-item .subheading {
+      #shopify-section-{{ section.id }} .marquee-item .subheading {
         display: flex;
         align-items: center;
         margin: 0;
         padding: 0.7rem 0;
+        color: #000000 !important;
       }
 
-      .marquee-item svg {
+      /* 保持文字全部为黑色 */
+      #shopify-section-{{ section.id }} .announcement-bar,
+      #shopify-section-{{ section.id }} .announcement-bar .subheading,
+      #shopify-section-{{ section.id }} .announcement-bar span,
+      #shopify-section-{{ section.id }} .announcement-bar p,
+      #shopify-section-{{ section.id }} .announcement-bar .subheading span,
+      #shopify-section-{{ section.id }} .announcement-bar strong,
+      #shopify-section-{{ section.id }} .announcement-bar b,
+      #shopify-section-{{ section.id }} .announcement-bar a {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+      }
+
+      /* Icon 统一黑色 */
+      #shopify-section-{{ section.id }} .announcement-bar svg {
         margin-right: 4px;
+        fill: none;
+        stroke: currentColor;
+        color: #000000 !important;
       }
 
       /* 无限滚动关键帧 */
@@ -55,57 +78,52 @@
         0% {
           transform: translateX(0);
         }
+
         100% {
           transform: translateX(-50%);
         }
       }
 
-      /* 微暗柔和蜜桃粉渐变 */
-      #shopify-section-{{ section.id }} .announcement-bar {
-        background: linear-gradient(
-          to right,
-          #E8A09A,
-          #ECAE8C,
-          #EBB8C4,
-          #ECAE8C,
-          #E8A09A
-        );
-        color: #FFFFFF;
-      }
-
-      #shopify-section-{{ section.id }} .announcement-bar,
-      #shopify-section-{{ section.id }} .announcement-bar .subheading,
-      #shopify-section-{{ section.id }} .announcement-bar span,
-      #shopify-section-{{ section.id }} .announcement-bar p,
-      #shopify-section-{{ section.id }} .announcement-bar .subheading span {
-        color: #FFFFFF;
-      }
-
-      #shopify-section-{{ section.id }} .announcement-bar svg {
-        fill: none;
-        stroke: currentColor;
-        color: #FFFFFF;
+      /* 减少动态效果偏好 */
+      @media (prefers-reduced-motion: reduce) {
+        #shopify-section-{{ section.id }} .marquee {
+          animation-play-state: paused;
+        }
       }
     </style>
 
     <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
       <height-observer variable="announcement-bar">
-        <div class="announcement-bar" id="announcement-bar-{{ section.id }}">
-          <div class="marquee" id="marquee-{{ section.id }}">
+        <div
+          class="announcement-bar"
+          id="announcement-bar-{{ section.id }}"
+        >
+          <div
+            class="marquee"
+            id="marquee-{{ section.id }}"
+          >
             {%- capture marquee_content -%}
               {%- for block in section.blocks -%}
                 {%- if block.settings.text != blank -%}
-                  <span class="marquee-item" {{ block.shopify_attributes }}>
+                  <span
+                    class="marquee-item"
+                    {{ block.shopify_attributes }}
+                  >
                     <p class="subheading subheading-xs">
                       {%- if block.settings.icon and block.settings.icon != 'null' -%}
-                        {%- render 'icon' with block.settings.icon, width: block.settings.icon_size -%}
+                        {%- render 'icon'
+                          with block.settings.icon,
+                          width: block.settings.icon_size
+                        -%}
                       {%- endif -%}
+
                       <span>{{ block.settings.text }}</span>
                     </p>
                   </span>
                 {%- endif -%}
               {%- endfor -%}
             {%- endcapture -%}
+
             {{ marquee_content }}
             {{ marquee_content }}
           </div>
@@ -115,50 +133,65 @@
 
     <script>
       (function() {
-        const marquee = document.getElementById('marquee-{{ section.id }}');
+        const marquee = document.getElementById(
+          'marquee-{{ section.id }}'
+        );
+
         if (!marquee) return;
 
-        // 获取所有原始内容项（注意：由于复制了一份，实际子节点是原始的两倍）
         const items = marquee.children;
+
         if (items.length === 0) return;
 
-        // 计算原始一组内容的总宽度（取前一半）
         const halfLength = items.length / 2;
+
         let originalWidth = 0;
+
         for (let i = 0; i < halfLength; i++) {
           originalWidth += items[i].offsetWidth;
-          // 加上 margin-right（每个 item 有 margin-right: 60px）
-          if (i < halfLength - 1) originalWidth += 60;
+
+          if (i < halfLength - 1) {
+            originalWidth += 60;
+          }
         }
 
-        // 获取用户设置的滚动速度（秒），速度值越小滚动越快，这里用速度值控制动画时长：总宽度 / (像素/秒)
-        // 更符合直觉：speed 秒内滚完一整份内容的距离，则动画时长 = speed 秒，但是因为动画移动了 -50%（整份内容的宽度），
-        // 所以动画时长 = speed 秒即可。为了平滑，直接使用 speed 作为动画时长。
         let speed = {{ section.settings.scroll_speed | default: 20 }};
-        // 避免过小或过大
+
         if (speed < 5) speed = 5;
         if (speed > 60) speed = 60;
+
         marquee.style.animationDuration = speed + 's';
 
-        // 如果用户想暂停悬停（可选，通常跑马灯悬停暂停体验更好，默认关闭，需要可开启）
-        const bar = document.getElementById('announcement-bar-{{ section.id }}');
+        const bar = document.getElementById(
+          'announcement-bar-{{ section.id }}'
+        );
+
         {% if section.settings.pause_on_hover %}
-        bar.addEventListener('mouseenter', () => {
-          marquee.style.animationPlayState = 'paused';
-        });
-        bar.addEventListener('mouseleave', () => {
-          marquee.style.animationPlayState = 'running';
-        });
+          bar.addEventListener('mouseenter', () => {
+            marquee.style.animationPlayState = 'paused';
+          });
+
+          bar.addEventListener('mouseleave', () => {
+            marquee.style.animationPlayState = 'running';
+          });
         {% endif %}
       })();
     </script>
 
     <script>
-      // 公告栏高度计算
-      document.documentElement.style.setProperty(
-        '--announcement-bar-height',
-        `${Math.round(document.getElementById('shopify-section-{{ section.id }}').clientHeight)}px`
-      );
+      /* 公告栏高度计算 */
+      (function() {
+        const sectionElement = document.getElementById(
+          'shopify-section-{{ section.id }}'
+        );
+
+        if (!sectionElement) return;
+
+        document.documentElement.style.setProperty(
+          '--announcement-bar-height',
+          Math.round(sectionElement.clientHeight) + 'px'
+        );
+      })();
     </script>
   {%- endunless -%}
 {%- endif -%}
@@ -222,11 +255,26 @@
           "id": "icon",
           "label": "Icon选项",
           "options": [
-            { "value": "null", "label": "不显示 Icon" },
-            { "value": "global", "label": "global" },
-            { "value": "warranty", "label": "warranty" },
-            { "value": "package", "label": "package" },
-            { "value": "award", "label": "award" }
+            {
+              "value": "null",
+              "label": "不显示 Icon"
+            },
+            {
+              "value": "global",
+              "label": "global"
+            },
+            {
+              "value": "warranty",
+              "label": "warranty"
+            },
+            {
+              "value": "package",
+              "label": "package"
+            },
+            {
+              "value": "award",
+              "label": "award"
+            }
           ],
           "default": "null"
         },
