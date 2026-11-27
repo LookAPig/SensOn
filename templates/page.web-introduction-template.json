@@ -315,6 +315,13 @@
     "web_introduction_faq_VHVabA": {
       "type": "web-introduction-faq",
       "blocks": {
+        "faq_TLQ6Bw": {
+          "type": "faq",
+          "settings": {
+            "question": "Are SensOn Plus and Premium discounted for Black Friday?",
+            "answer": "<p>Yes. From November 27 through December 6, 2026, SensOn Plus is available for <strong>$69.99 (42% off)</strong>, and SensOn Premium is available for <strong>$99.99 (58% off)</strong>.</p>"
+          }
+        },
         "faq_F3RJYD": {
           "type": "faq",
           "settings": {
@@ -359,6 +366,7 @@
         }
       },
       "block_order": [
+        "faq_TLQ6Bw",
         "faq_F3RJYD",
         "faq_YczLFb",
         "faq_jP8K9m",
