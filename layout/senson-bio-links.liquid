@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#eee8f3">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Explore SensOn AI, discover companions, and find our community.">
+    <title>{{ page_title | escape }}</title>
+    <link rel="canonical" href="{{ canonical_url | escape }}">
+    <style>
+.senson-links-body {
+  margin: 0;
+  background: #eee8f3;
+}
+
+.senson-links,
+.senson-links * {
+  box-sizing: border-box;
+}
+
+.senson-links {
+  --sl-bg: #eee8f3;
+  --sl-surface: #fcf9f6;
+  --sl-text: #34233f;
+  --sl-muted: #75697e;
+  --sl-accent: #4b3058;
+  --sl-border: #d9d0df;
+  --sl-radius: 18px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: max(34px, env(safe-area-inset-top)) 20px max(38px, env(safe-area-inset-bottom));
+  background: var(--sl-bg);
+  color: var(--sl-text);
+  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.senson-links a,
+.senson-links button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.senson-links a:focus-visible,
+.senson-links button:focus-visible {
+  outline: 3px solid var(--sl-accent);
+  outline-offset: 4px;
+}
+
+.senson-links__main {
+  width: min(100%, 470px);
+  margin-inline: auto;
+}
+
+.senson-links__profile {
+  text-align: center;
+}
+
+.senson-links__logo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 22px;
+  overflow: hidden;
+  border: 1px solid rgba(75, 48, 88, .12);
+  border-radius: 25px;
+  background: var(--sl-surface);
+  box-shadow: 0 10px 25px rgba(57, 35, 68, .07);
+}
+
+.senson-links__logo img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 118%;
+  height: 118%;
+  max-width: none;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+}
+
+.senson-links__logo-fallback {
+  color: var(--sl-accent);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 57px;
+  font-style: italic;
+  line-height: 1;
+  transform: translate(-2px, -2px);
+}
+
+.senson-links__eyebrow,
+.senson-links__section-label {
+  margin: 0;
+  color: var(--sl-muted);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  line-height: 1.5;
+}
+
+.senson-links__bio {
+  margin: 8px 0 0;
+  color: var(--sl-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.senson-links__campaign-section {
+  margin-top: 31px;
+}
+
+.senson-links__campaign {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(75, 48, 88, .10);
+  border-radius: 25px;
+  background: var(--sl-surface);
+  color: var(--sl-text);
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 14px 30px rgba(64, 42, 73, .11);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.senson-links__campaign-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  object-fit: contain;
+}
+
+.senson-links__campaign:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 17px 32px rgba(64, 42, 73, .16);
+}
+
+.senson-links__link svg {
+  width: 19px;
+  height: 19px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+  transition: transform .2s ease;
+}
+
+.senson-links__link:hover svg {
+  transform: translateX(3px);
+}
+
+.senson-links__links-section {
+  margin-top: 31px;
+}
+
+.senson-links__links-section .senson-links__section-label {
+  margin: 0 0 12px 5px;
+}
+
+.senson-links__links {
+  display: grid;
+  gap: 11px;
+}
+
+.senson-links__link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 61px;
+  padding: 15px 20px;
+  border: 1px solid var(--sl-border);
+  border-radius: var(--sl-radius);
+  background: var(--sl-surface);
+  color: var(--sl-text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.35;
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(64, 42, 73, .035);
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.senson-links__link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 20px rgba(64, 42, 73, .09);
+}
+
+.senson-links__link:active,
+.senson-links__campaign:active,
+.senson-links__social:active {
+  transform: scale(.985);
+}
+
+.senson-links__link--featured {
+  border-color: var(--sl-accent);
+  background: var(--sl-accent);
+  color: var(--sl-surface);
+}
+
+.senson-links[data-button-style="outline"] .senson-links__link:not(.senson-links__link--featured) {
+  border-color: var(--sl-accent);
+  background: transparent;
+}
+
+.senson-links[data-button-style="solid"] .senson-links__link {
+  border-color: var(--sl-accent);
+  background: var(--sl-accent);
+  color: var(--sl-surface);
+}
+
+.senson-links__footer {
+  padding: 31px 0 0;
+  text-align: center;
+}
+
+.senson-links__footer-rule {
+  height: 1px;
+  margin-bottom: 22px;
+  background: var(--sl-border);
+}
+
+.senson-links__socials {
+  display: flex;
+  justify-content: center;
+  gap: clamp(5px, 1.8vw, 11px);
+  margin-top: 15px;
+}
+
+.senson-links__social {
+  display: grid;
+  place-items: center;
+  width: clamp(34px, 9.7vw, 43px);
+  height: clamp(34px, 9.7vw, 43px);
+  flex: none;
+  border: 1px solid var(--sl-border);
+  border-radius: 14px;
+  background: rgba(252, 249, 246, .58);
+  color: var(--sl-accent);
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.senson-links__social:hover {
+  transform: translateY(-2px);
+  background: var(--sl-surface);
+}
+
+.senson-links__social svg {
+  width: 20px;
+  height: 20px;
+}
+
+.senson-links__footer-note {
+  margin: 24px 0 0;
+  color: var(--sl-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.senson-links__toast {
+  position: fixed;
+  z-index: 2;
+  right: 20px;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: 20px;
+  width: max-content;
+  max-width: calc(100vw - 40px);
+  margin-inline: auto;
+  padding: 12px 18px;
+  border-radius: 100px;
+  background: var(--sl-text);
+  color: var(--sl-surface);
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.senson-links__toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.senson-links [hidden] {
+  display: none !important;
+}
+
+@media (min-width: 700px) {
+  .senson-links {
+    padding-top: 55px;
+    padding-bottom: 55px;
+  }
+
+  .senson-links__campaign-section {
+    margin-top: 35px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .senson-links *,
+  .senson-links *::before,
+  .senson-links *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
+</style>
+    {{ content_for_header }}
+  </head>
+  <body class="senson-links-body">
+    {{ content_for_layout }}
+  </body>
+</html>
