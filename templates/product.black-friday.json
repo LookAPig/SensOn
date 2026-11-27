@@ -1083,6 +1083,20 @@
     "web_introduction_faq_dnb3eK": {
       "type": "web-introduction-faq",
       "blocks": {
+        "faq_WkKcXe": {
+          "type": "faq",
+          "settings": {
+            "question": "What is the SensOn S1 Black Friday offer?",
+            "answer": "<p>SensOn S1 is available for <strong>$159 (47% off)</strong> during the Black Friday sale from November 27 through December 6, 2026.</p>"
+          }
+        },
+        "faq_WgWyyg": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need a discount code to get the Black Friday price?",
+            "answer": "<p>No discount code is needed. The Black Friday price is automatically applied at checkout.</p>"
+          }
+        },
         "faq_eXPkgf": {
           "type": "faq",
           "settings": {
@@ -1120,6 +1134,8 @@
         }
       },
       "block_order": [
+        "faq_WkKcXe",
+        "faq_WgWyyg",
         "faq_eXPkgf",
         "faq_HC4APn",
         "faq_GDbjcV",
