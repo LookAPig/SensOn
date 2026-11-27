@@ -32,7 +32,6 @@
         },
         "yotpo_product_reviews_star_rating_Xzjcy3": {
           "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "disabled": true,
           "settings": {
             "product": "{{product}}"
           }
@@ -214,7 +213,7 @@
             "image_pc": "shopify://shop_images/PC_1260_360_0e93d2b7-ed6f-41b0-ba50-a6fe1107de29.jpg",
             "image_h5": "shopify://shop_images/H5_686_320_dca1e414-c83c-427d-b6eb-35a5a3aff66b.jpg",
             "image_alt": "",
-            "expiration_date": "2026-11-27 00:00:00",
+            "expiration_date": "2026-12-07 00:00:00",
             "expiration_behavior": "hide",
             "timer_x_h5": 4,
             "timer_y_h5": 9,
